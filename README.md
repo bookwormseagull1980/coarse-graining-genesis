@@ -129,14 +129,14 @@ Any use of this framework — in code, publications, or derivative work —
 2. **Companion papers** —
    - [I] *The spectrum of a compact internal space. I. Gauge structure and fermion content*
    - [II] *The spectrum of a compact internal space. II. Effective couplings and mass scales*
-3. **Source** — this Git repository (URL).
+3. **Source** — this Git repository: https://github.com/bookwormseagull1980/coarse-graining-genesis
 
 ```bibtex
 @misc{guo2026cg,
   author       = {Jinku Guo},
   title        = {Coarse-Graining Genesis Framework {V4.0}},
   year         = {2026},
-  howpublished = {\url{<repository-url>}},
+  howpublished = {\url{https://github.com/bookwormseagull1980/coarse-graining-genesis}},
   note         = {Companion papers: ``The spectrum of a compact internal space.
                   I. Gauge structure and fermion content'' and
                   ``II. Effective couplings and mass scales''}
