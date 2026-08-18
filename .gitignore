@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Backup files
+*.bak_*
+*.bak
+
+# LaTeX build artefacts
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex
+
+# Compiled PDFs (regenerable from the paper sources)
+*.pdf
+
+# Generated Word document (regenerable via `_docs_build/build_docx.py`)
+docs/V4_COMPLETE_GUIDE.docx
+
+# Generated figures (regenerable via `_docs_build/figures.py`; the .svg sources are tracked)
+_docs_build/figures/*.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

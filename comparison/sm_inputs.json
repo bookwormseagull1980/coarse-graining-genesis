@@ -1,0 +1,510 @@
+{
+ "note": "SM comparison values (never inputs)",
+ "parameters": {
+  "A_ckm_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.823,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "Delta2_R_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 2.105e-09,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "H0_GeV_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.44e-42,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "Lambda_QCD_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.21,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "Lambda_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 4.2791148e-84,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "M_Pl": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 2.435e+18,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "M_Z": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 91.1876,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "N_eff_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 3.044,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "Omega_DM_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.2645,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "Omega_Lambda_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.6847,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "Omega_b_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.0493,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "T_CMB_K": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 2.7255,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "T_deconf_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 270.0,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "V_us_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.2245,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "Y_p_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.245,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "a0_MOND_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.2e-10,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "alpha_inv_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 137.036,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "c_m_s_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 299792458.0,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "ckm_delta_deg_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 68.5,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "epsilon_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.4243e-16,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "eta_b_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 6.1e-10,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "eta_ckm_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.344,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "g1_MG": {
+   "note": "SM two-loop extrapolation at M_G (comparison)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.6050009139816364,
+   "writer": "comparison/sm_rge/run_rge.py"
+  },
+  "g1_MZ": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.461425,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "g1_sm_GUT": {
+   "note": "SM two-loop extrapolation at k_GUT (comparison)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.5854619306987475,
+   "writer": "comparison/sm_rge/run_rge.py"
+  },
+  "g2_MG": {
+   "note": "SM two-loop extrapolation at M_G (comparison)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.5088449671322702,
+   "writer": "comparison/sm_rge/run_rge.py"
+  },
+  "g2_MZ": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.64779,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "g2_sm_GUT": {
+   "note": "SM two-loop extrapolation at k_GUT (comparison)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.5183911298409684,
+   "writer": "comparison/sm_rge/run_rge.py"
+  },
+  "g3_MG": {
+   "note": "SM two-loop extrapolation at M_G (comparison)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.4977651062181578,
+   "writer": "comparison/sm_rge/run_rge.py"
+  },
+  "g3_MZ": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.2172,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "g3_sm_GUT": {
+   "note": "SM two-loop extrapolation at k_GUT (comparison)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.5184800043329293,
+   "writer": "comparison/sm_rge/run_rge.py"
+  },
+  "jarlskog_J_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 3.06e-05,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "lam_MZ": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.129,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "lambda_C_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.2248,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "lambda_H_MZ": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.1294,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "lambda_MG": {
+   "note": "SM two-loop extrapolation at M_G (comparison)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.006507369734404526,
+   "writer": "comparison/sm_rge/run_rge.py"
+  },
+  "lambda_sm_GUT": {
+   "note": "SM two-loop extrapolation at k_GUT (comparison)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.006278548844012353,
+   "writer": "comparison/sm_rge/run_rge.py"
+  },
+  "m_W_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 80.369,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_b_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 4.18,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_b_over_m_s_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 45.0,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_d_over_m_s_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.0505,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_e_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.511,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_glueball_0mp_ratio_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.53,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_glueball_0ppstar_ratio_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.47,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_glueball_2pp_ratio_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.41,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_glueball_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.7,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_mu_over_m_e_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 206.8,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_nu1_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.0026,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_nu2_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.0086,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_nu3_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.0502,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_p_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.938272,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_t_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 172.69,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_t_over_m_c_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 136.0,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_t_over_m_u_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 78000.0,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_tau_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.777,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_tau_over_m_mu_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 16.8,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "m_u_over_m_c_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.00184,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "one_minus_ns_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.0351,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "pmns_delta_over_pi_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.14,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "r_bound_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.036,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "rho_bar_ckm_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.157,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "s13_pmns_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.022,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "s23_pmns_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.55,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "string_tension_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.1936,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "v_HIGGS": {
+   "note": "observed EW VEV, GeV (PDG, comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 246.22,
+   "writer": "__main__"
+  },
+  "v_HIGGS_obs": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 246.22,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "yd_MZ": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 1.34e-05,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "ye_MZ": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 2.935e-06,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "yt_MG": {
+   "note": "SM two-loop extrapolation at M_G (comparison)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.36598430331137133,
+   "writer": "comparison/sm_rge/run_rge.py"
+  },
+  "yt_MZ": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.94,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "yt_sm_GUT": {
+   "note": "SM two-loop extrapolation at k_GUT (comparison)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.38585662874583543,
+   "writer": "comparison/sm_rge/run_rge.py"
+  },
+  "yu_MZ": {
+   "note": "SM measured input (comparison only)",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 6e-06,
+   "writer": "comparison/sm_rge/inputs.py"
+  }
+ },
+ "version": 1
+}
