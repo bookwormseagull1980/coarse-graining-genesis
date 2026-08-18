@@ -26,8 +26,8 @@ env/
 *.synctex.gz
 *.synctex
 
-# Compiled PDFs (regenerable from the paper sources)
-*.pdf
+# The companion-paper PDFs (final published versions) are tracked in docs/.
+# Only transient LaTeX build artefacts are excluded (see above).
 
 # Generated Word document (regenerable via `_docs_build/build_docx.py`)
 docs/V4_COMPLETE_GUIDE.docx
@@ -41,3 +41,5 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+# Word temporary lock files
+~$*
