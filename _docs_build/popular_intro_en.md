@@ -4,6 +4,14 @@
 
 ---
 
+You look up at the stars and the universe seems quiet and empty. But a physicist will tell you: inside the "empty nothingness" all around you, countless particles are popping into and out of existence every single instant, with enough energy to boil an ocean.
+
+So here is the question — **how does this frantic change manage, so reliably, to become the apple on your desk, the Moon in the sky, and that invisible "gravity" that pulls the apple to the ground?**
+
+This introduction is an attempt to answer that question. And the answer begins with a claim that sounds very grand: **spacetime does not exist, and gravity is not "already there" — both of them emerge from "change."**
+
+---
+
 **What this document is trying to do**
 
 Our two papers — *The spectrum of a compact internal space. I. Gauge structure and fermion content*, and *…II. Effective couplings and mass scales* — together with the "Coarse-Graining Genesis Framework V4.0" that carries their computation, all tell a single story: **the familiar world around us — spacetime, gravity, matter, dark energy — is not "already there"; it all emerges from something more fundamental, namely "change."**
@@ -240,6 +248,24 @@ In other words: **we no longer try to "directly construct the field" (that is co
 
 This turn is the starting point of everything that follows. It repositions the century-old difficulty of "constructing quantum field theory" from a "problem of mathematical technique" into a "problem of the starting point" — the problem is not "how to build the container," but "we should never have started from the container at all."
 
+### The Yang–Mills conjecture: where exactly is the difficulty?
+
+Yang–Mills theory is the mathematical skeleton of the strong force (QCD) in the Standard Model. The Clay Institute's million-dollar prize is really asking two very specific questions:
+
+**First, existence:** can this quantum theory, in four-dimensional spacetime, be rigorously constructed without blowing up (no infinities)?
+
+**Second, the mass gap:** why are gluons (the carriers of the strong force) forever "imprisoned" inside hadrons in experiment, so that physicists never see a free gluon? Mathematically, this means the theory's lowest excited state must have a **positive** energy (greater than zero), not a continuum starting from zero.
+
+Why does the traditional method get stuck? Because traditional quantum field theory first erects a "spacetime stage," then defines the field fluctuations on that stage. And in four-dimensional spacetime, the "amplitude" of these fluctuations oscillates violently at short distances (high energy), so that the "mass gap" — that positive number — can never be pinned down: you get either zero (massless) or infinity.
+
+**Our answer: move the question from "four-dimensional spacetime" to "a three-dimensional compact internal space (RP³)."**
+
+In a compact space, the vibrational modes are naturally discrete — like a string fixed at both ends, whose frequencies can only be the fundamental, the second harmonic, the third harmonic, … The lowest non-zero frequency is, by nature, a "gap." The mass gap `m_δ` in our framework is **precisely the lowest non-zero frequency of this RP³ "string."** It is not "pieced together" by complicated perturbative calculation; it is an **intrinsic property of the spectrum.**
+
+So rather than saying we "solved" the Yang–Mills conjecture, it is more accurate to say we **bypassed its original setup**: we do not construct fields in four-dimensional spacetime; we define physical quantities on a three-dimensional compact spectrum — and the gap is simply already there.
+
+> **In one sentence:** the difficulty of the Yang–Mills conjecture is that the "container" itself diverges; we replace the container with a compact spectrum, and the "gap" stops being a problem and becomes the starting point.
+
 ---
 
 ## 4. A Different Starting Point: From "Change," via the Spectral Sum
@@ -282,6 +308,22 @@ Traditional quantum field theory: **first build the field (container) → then p
 Our route: **change is the substance → describe change with the spectrum → dually emerge field, geometry, gauge from the spectrum → finally emerge the full physics of 4-dimensional spacetime.**
 
 This route bypasses the "measure depends on spacetime" dead end: because we never start from "fields on spacetime," but from "the spectrum of change." The spectrum needs no "spacetime background" — it needs only "change" itself.
+
+### How do physicists judge whether a theory is "rigorous"? — the Wightman axioms
+
+In mathematical physics, there is a recognized gold standard for judging whether a quantum field theory is "watertight": the **Wightman axioms**. Proposed by Wightman in the 1950s, they comprise several rules (roughly: a Hilbert space exists, a vacuum state exists, the field operators are distributions, relativistic covariance holds, locality holds, the spectrum condition holds, and so on).
+
+Any "serious" quantum field theory had better fit inside the Wightman framework. The Standard Model does — but proving rigorously that it satisfies the Wightman axioms in full is extremely hard, and no one has done it yet.
+
+**What is the relation between our framework and the Wightman axioms?**
+
+To be direct: **we do not try to "prove" that our framework satisfies the Wightman axioms.** Why? Because the Wightman axioms presuppose "a fixed four-dimensional spacetime background" (Poincaré symmetry, the vacuum, and the Hilbert space are all defined on that background). Our starting point is "spacetime does not exist" — so the starting point is different.
+
+But we did one thing: **in the "free-field" limit, our spectral-sum construction reduces to a free quantum field theory that satisfies the Wightman axioms rigorously** (this is the content of Appendix C of the paper). And in the interacting part, we switch language — using the "spectral sum" in place of the "measure," thereby bypassing the "spacetime-first" assumption on which the Wightman axioms rest.
+
+This is not to say the Wightman axioms are "wrong"; rather: **they are an excellent map, but we are sailing waters that have no map.** The only way we can earn trust is to "touch shore at the known coast" (the free field).
+
+> **In one sentence:** the Wightman axioms are the traffic rules of the standard road; we travel by water, writing our own rules — but we connect seamlessly to the road at the shore.
 
 ---
 
@@ -392,6 +434,12 @@ This means three counter-intuitive things:
 
 In plain words: **gravity is not "the curvature of space," but "the most stable component of change."** Just as temperature is "the most averaged component of molecular motion" — the hot water scalding you is the collective motion of molecules; the gravity you feel is the collective stable structure of vacuum fluctuations.
 
+**"Emergent gravity" was not our idea first.** The reader may know that the Dutch physicist Erik Verlinde proposed, around 2010, a famous view: gravity is not a fundamental force but an **entropic force** — it arises from the distribution of information on a boundary, much as the pressure of a gas arises from molecular impacts. His slogan was: "gravity is a gradient of entropy."
+
+Our "gravity = zero mode" and Verlinde's "gravity = entropy" resonate deeply — **both are the collective macroscopic behavior of microscopic degrees of freedom.** But we are more specific: Verlinde needs to assume a "holographic screen" and an information distribution on a boundary; we need no boundary — we simply pick out, directly from the **spectrum**, the "lowest-frequency, most stable" mode and identify it as gravity. Entropy, in our framework, is not the source of gravity but the **measure of the window span** (that 139.253). Gravity is the zero mode, entropy is the window capacity — two faces of one and the same spectrum.
+
+To put it in parallel: Verlinde says "gravity is like temperature"; we say "gravity is like the most stable mercury column in a thermometer" — not the average of all the molecules, but that one **most unchanging structure**.
+
 ### Gauge construction: gauge fields emerge from the spectrum
 
 Similarly, the gauge fields (the carriers of the electromagnetic, weak, and strong forces) are not "basic inputs," but **emerge** from the spectrum of the internal space — specifically, the KK zero modes of the spectrum (the constant modes on the compact space).
@@ -415,6 +463,65 @@ A striking corollary: **our framework has no "Big Bang" singularity.**
 In traditional cosmology, the universe expands and redshifts, and tracing back into the past there is a "Big Bang" starting point — a singularity of infinite density where spacetime is torn apart. But in our framework, **redshift is not "the universe expanding," but "the spectrum tilting"** — redshift is a feature of the spectrum itself, not a stretching of space.
 
 Since there is no "space expanding," there is no "starting point of expansion," and therefore **no Big Bang singularity.** The past of the universe is not a "point" but a "state" of the spectrum. The so-called "age of the universe," in the framework, is the logarithm of the window span of the spectrum, not "the time elapsed since a Big Bang."
+
+---
+
+## Don't rush to believe it: a few honest caveats
+
+A good science writer puts the objections on the table before the reader does. Here are the questions a reader is most likely to "throw at us."
+
+**Q: If spacetime doesn't exist, then what is "oscillating" in the gravitational waves that LIGO detected?**
+
+A: It is the zero mode of the vacuum-fluctuation spectrum that is oscillating. Just as a drumhead need not exist for the drum's sound (a vibrational mode) to be real — gravitational waves are not "ripples of spacetime" but "waves of the spectral zero mode." What we detect is the collective oscillation of the most stable mode in the spectrum.
+
+**Q: You say there is no Big Bang, so where does the cosmic microwave background (CMB) come from?**
+
+A: The CMB is not the "afterglow" of a Big Bang; it is the equilibrium radiation of the spectrum at the infrared end (the largest information boundary). It is a "floor," not the residue of a "history."
+
+**Q: Can this theory be falsified? If a theory explains everything, it explains nothing.**
+
+A: It can. We give concrete numerical predictions for 147 parameters (Chapter 8). If any one of them comes out wrong, beyond its stated precision, the theory collapses. It does not "say everything"; it "says a great many specific numbers, and waits to be tested."
+
+**Q: Aren't you just shoving everything you don't know into the word "spectrum," to dodge the question?**
+
+A: The spectrum is not a fig leaf — it is **computable**. Every term of the spectrum, every sum, has an explicit formula, and all of it can be run on a computer. It is hard, not vague.
+
+---
+
+## Where are we now? — a conversation with the other "theories of everything"
+
+On the frontier of physics, we are not the only ones trying to unify gravity and quantum mechanics. You have surely heard of **string theory**, **loop quantum gravity**, and the **holographic principle**. They are all big, and all famous. What is the relation between our framework and theirs? Are we a replacement, or a companion?
+
+**1. String theory: replace particles with vibrating strings**
+
+String theory says the elementary particles are not points but tiny closed or open "strings." Different vibrational modes correspond to different particles (one mode is the photon, another the graviton). Spacetime is the "stage" on which the strings exist, and it is not 4-dimensional but 10- or 11-dimensional — the extra dimensions are "compactified" (curled up), which is why we do not see them.
+
+**Our fundamental disagreement with string theory:** string theory is "**spacetime first, vibration second**" — the vibrations (strings) exist inside spacetime; we are "**change (spectrum) first, spacetime second**" — spacetime emerges out of change. So string theory is "vibration inside a container"; we are "vibration giving rise to the container." String theory must assume 10 or 11 dimensions; we derive 3+1 = 4.
+
+**But an interesting similarity:** string theory also makes heavy use of "spectra" (the vibrational frequency spectra of strings), and so do we. The difference: string theory's spectrum is the spectrum of "**strings in spacetime**"; ours is the spectrum of "**the internal compact space**" itself. We take the "internal space" that string theory needs for compactification and make it the protagonist, while the string itself is "reduced" to the more fundamental modes of change on that space.
+
+**2. Loop quantum gravity: chop spacetime into little pieces**
+
+The idea of loop quantum gravity is: do not quantize gravity as a "graviton"; quantize "space" itself. Space is not continuous but made of discrete "loops," and area and volume have minimum units. It sidesteps the problem that "spacetime curvature needs a background," because it drops the background altogether and works directly with quantized geometry.
+
+**Our kinship with loop quantum gravity:** we are both "**background-independent**" theories. Neither of us believes spacetime is pre-existing. But the divergence is this: loop quantum gravity still treats "discrete geometry" as the fundamental substance ("space is made of little loops"), whereas we treat "**the spectrum of change**" as the fundamental substance — geometry merely emerges from the spectrum; it is not primordial. In other words, loop quantum gravity says "the bricks of the world are space quanta"; we say "the bricks of the world are frequencies."
+
+**3. The holographic principle: compress the universe onto a boundary**
+
+The holographic principle comes from black-hole thermodynamics and a branch of string theory (the AdS/CFT correspondence). It says all the physical information in a spatial region can be completely encoded on the "boundary" of that region. The universe you thought was three-dimensional is really the projection of a two-dimensional "hologram."
+
+**Our resonance with the holographic principle:** our "spectrum → spacetime" is also a **duality**. The holographic principle is the duality "boundary ↔ bulk"; ours is the duality "spectrum ↔ spacetime." Both are "information before geometry." The difference: the holographic boundary is usually infinite and needs a fixed background; our spectrum is compact and needs no background. Our duality is more "thorough" — it needs no boundary at all, just a string of frequencies.
+
+**A comparison table:**
+
+| Theory | Fundamental substance | Where spacetime comes from | Dimensions |
+|--------|-----------------------|----------------------------|------------|
+| String theory | vibrating strings | pre-existing (a stage) | 10/11 (assumed) |
+| Loop quantum gravity | space quanta (loops) | quantized geometry directly | 4 (quantized) |
+| Holographic principle | fields on the boundary | projected from the boundary duality | 4 (dual) |
+| **Our framework** | **the spectrum of change** | **emerges from the spectrum** | **4 (derived)** |
+
+We do not claim the other theories are "wrong." We only say: **they all still need some pre-existing "something" (strings, loops, a boundary), whereas we have done away with that "something" too, leaving only "change itself."**
 
 ---
 
@@ -463,6 +570,8 @@ py scripts/audit_param_writers.py   # every parameter has a provenance audit, CL
 ```
 
 There are also 17 Lean 4 machine-proof files, which verify one by one, with a theorem prover, the framework's core "content identities" (the integer relations that determine the physics). That is: the key symmetry relations of the framework have not only numerical verification but also **machine-checkable formal proof.**
+
+**Why bring up code in a popular-science piece?** Because too many "beautiful theories" in the history of physics ended up stuck on paper, unable to produce concrete numbers. The 40 chain items here are **something a computer can run through in one night and then tell you "dark-energy density = 0.685."** And the Lean 4 theorem prover is a machine that checks for you whether "the logic contradicts itself." **This is not experimental verification, but it is a mathematical "structural inspection."** The numbers tell you "does it match observation"; the proofs tell you "is there a hole in the logic" — two rulers, each measuring one face.
 
 ---
 
@@ -537,6 +646,16 @@ It is not a "force," not "the curvature of space," and it needs no mysterious pa
 
 ---
 
+## What is this theory good for?
+
+To be honest, this theory does not build phones or generate electricity. It is still far from any technical application — farther than science fiction.
+
+But it offers a new **way of thinking**, a new handle different from "curved spacetime": **if gravity is emergent, then perhaps someday we could manipulate gravity by "changing the spectrum of the vacuum fluctuations."** Today this sounds like fantasy, but two hundred years ago "transmitting information with electromagnetic waves" sounded like fantasy too.
+
+More importantly, it answers the question "why still do basic science": **not to be useful immediately, but to understand what kind of world we actually stand in.** If even "spacetime" and "gravity" are not the most fundamental, then our understanding of ourselves still has an enormous, unopened space.
+
+---
+
 ## Conclusion: The Central Idea in One Sentence
 
 Compress the whole thread into one sentence:
@@ -548,6 +667,24 @@ The entire familiar universe is not an edifice "already there," but a "river of 
 The deepest, quietest stretch of this river (the zero mode of the spectrum) is what we call "gravity" — like temperature, it is not a fundamental thing, but an emergent phenomenon. And its source is the smallest, most symmetric, most unique of all changes.
 
 **Change is everything.**
+
+If change is the substance, then what are "you"? — You are not a fixed, unchanging entity; you are an **extremely complex, temporary, stable spectral structure** formed by the countless changes inside your body (heartbeat, breath, brainwaves, cell metabolism). So, **you yourself are the emergence of change.**
+
+This may be the gentlest gift this framework offers to ordinary people: you are not a tiny, lonely speck of dust in the universe; you are a single, unique wave, blooming right now in the great river of "change."
+
+---
+
+## Appendix: a tiny glossary
+
+If you forget a word later on, come back here — you will remember it at a glance.
+
+- **Spectrum:** the "frequency list" of change. Like the list of pitches of piano keys.
+- **Zero mode:** that special mode with frequency 0 — "unchanging change"; it is the essence of gravity.
+- **Window capacity:** how many elementary vibrational modes a finite space can hold at most.
+- **Heat kernel / Gaussian window:** a smooth pair of "scissors" that gently cuts off overly high-frequency vibrations, to stop the calculation from blowing up.
+- **KK zero mode:** the "constant mode" on a compact space — a vibration that does not vary with position; it is the origin of gauge fields.
+- **Duality:** two faces of one thing, seen from a different angle. For example "spectrum" and "geometry" are a pair.
+- **Emergence:** collective behavior that cannot be found microscopically but truly exists macroscopically. Like temperature relative to molecules.
 
 ---
 
