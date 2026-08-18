@@ -105,9 +105,9 @@ Our answer: **what curves is the vacuum fluctuation.**
 
 Matter (mass, energy) really does change its surroundings — but what it changes is not "spacetime" (for spacetime is not a thing at all), but the **spectral structure of the vacuum fluctuations**. Where mass gathers, the distribution of vacuum fluctuations (the spectral function of the energy-momentum tensor) changes; this "change in the fluctuation spectrum" is precisely the phenomenon Einstein observed and precisely described.
 
-He merely **misinterpreted it**: he mistook "the curvature of vacuum fluctuations" for "the curvature of spacetime." The equations are right — the phenomena they describe and the predictions they make are correct; but the ontology behind the equations — "there is a thing called spacetime, and it is being bent" — is wrong.
+If we adopt a different ontological viewpoint, the physical picture behind the equations can be another one: **what curves is, in fact, the vacuum fluctuation.** This is not to say relativity no longer works — the phenomena the equations describe and the predictions they make all still stand; rather, we gain a new understanding of the *root* of "curvature": what really "curves" is the spectral structure of the vacuum fluctuations, not the entity called "spacetime."
 
-An analogy: you see a whirlpool on a river and say "the riverbed must be dented here." But the riverbed does not exist; what actually changes is the water itself. Einstein's equations precisely describe the "whirlpool," yet attribute it to a "dented riverbed" — and the attribution is wrong. What really "curves" and "changes" is the water (vacuum fluctuations), not the riverbed (spacetime).
+An analogy: you see a whirlpool on a river and say "the riverbed must be dented here." One can also look at it another way: the riverbed does not exist at all; what actually changes is the water itself. Einstein's equations precisely describe the "whirlpool," simply attributing it to a "dented riverbed"; and we may attribute it differently — what really "curves" and "changes" is the water (vacuum fluctuations), not the riverbed (spacetime).
 
 ### The concrete manifestations of the conflict
 
