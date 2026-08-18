@@ -76,6 +76,18 @@ So the essence of temperature is this: **it lives in no single molecule; it "ari
 
 Emergence has a distinctive feature: **you cannot find it microscopically, yet macroscopically it exists truly and lawfully.** Cut open a cup of water and you will never find a "temperature" in there; but put your hand in and you will truly feel it.
 
+### Wait a moment — "emergence" is not a metaphor; it is mathematically proven
+
+You might wonder: is the claim "temperature is emergent" just a nice metaphor?
+
+**Yu Deng, a 2026 Fields Medalist, answered this question with mathematics.**
+
+In plain terms, Deng's work proves: **a room full of chaotically bouncing marbles (microscopic particles) really does "emerge" into temperature, pressure, and fluid motion (macroscopic laws).** This is not philosophical musing; it is a rigorous mathematical proof — starting from Newtonian mechanics and, through extremely intricate derivation, ending at the equations that describe the flow of a gas.
+
+This means: **"emergence" is not a vague concept but a mathematical fact that can be verified and computed.** Temperature is not a property "imposed on" molecules from outside; it is a structure that forms spontaneously from the collective motion of molecules. Gravity is the same — not a property "imposed on" the vacuum, but a structure that forms spontaneously from the collective motion of vacuum fluctuations.
+
+Deng proved that the microscopic can emerge into the macroscopic. **What our framework aims to prove is: change can emerge into spacetime.**
+
 ### Gravity emerges just like temperature
 
 Now replace "molecules" with "vacuum fluctuations" and "temperature" with "gravity" — the logic is exactly the same.
@@ -116,6 +128,22 @@ Matter (mass, energy) really does change its surroundings — but what it change
 If we adopt a different ontological viewpoint, the physical picture behind the equations can be another one: **what curves is, in fact, the vacuum fluctuation.** This is not to say relativity no longer works — the phenomena the equations describe and the predictions they make all still stand; rather, we gain a new understanding of the *root* of "curvature": what really "curves" is the spectral structure of the vacuum fluctuations, not the entity called "spacetime."
 
 An analogy: you see a whirlpool on a river and say "the riverbed must be dented here." One can also look at it another way: the riverbed does not exist at all; what actually changes is the water itself. Einstein's equations precisely describe the "whirlpool," simply attributing it to a "dented riverbed"; and we may attribute it differently — what really "curves" and "changes" is the water (vacuum fluctuations), not the riverbed (spacetime).
+
+### Space is continuous, but that does not mean it is "simple"
+
+The work of another 2026 Fields Medalist — Hong Wang — touches the essence of "space" from a completely different angle.
+
+Wang proved a problem that had troubled mathematics for a century: the **three-dimensional Kakeya conjecture**. The conjecture asks: a needle that is infinitely thin can point in every direction within a space — how small can that space be?
+
+The answer is surprising: in three dimensions, **there is a positive minimum volume**. You cannot compress "a needle that can point in every direction" down to arbitrarily small size.
+
+What does this mean? **It means "continuous space" is not a monolithic, simple concept.** At microscopic scales, the structure of continuous space can become extremely intricate, extremely "non-smooth." Wang's work reveals: **between the continuous and the discrete, there is a far richer relation than we imagined.**
+
+There is a beautiful symmetry here: **Deng studies "how a crowd of particles forms a continuous field"; Wang studies "how a wave field reveals grain-like structure."** One goes from the discrete to the continuous, the other from the continuous to the discrete — **together they tell us: the continuous and the discrete are not an either/or opposition, but two faces of one world at different scales.**
+
+Our framework goes one step further: **even "space" itself emerges from the spectrum of "change."** Wang proved that continuous space can be very complex; we say that even the concept "continuous" is itself derivative.
+
+Wang's work points, unintentionally, to a deeper question: **if "continuous space" can be this complex at the microscopic level, how can it be "fundamental"? A fundamental thing should be simple. The very complexity of space shows that it is not a source but a result — something that emerges from something simpler.** That simpler thing, in our framework, is "change."
 
 ### The concrete manifestations of the conflict
 
@@ -522,6 +550,38 @@ The holographic principle comes from black-hole thermodynamics and a branch of s
 | **Our framework** | **the spectrum of change** | **emerges from the spectrum** | **4 (derived)** |
 
 We do not claim the other theories are "wrong." We only say: **they all still need some pre-existing "something" (strings, loops, a boundary), whereas we have done away with that "something" too, leaving only "change itself."**
+
+### Coincidence or necessity? — what the 2026 Fields Medals tell us
+
+In 2026, two Chinese mathematicians received the Fields Medal at the same time.
+
+Deng's work proves: **microscopic particles can emerge into macroscopic temperature, pressure, and fluids.** Wang's work reveals: **continuous space can, at microscopic scales, show an astonishing, almost-discrete complexity.**
+
+One looks upward from below (discrete → continuous); the other looks downward from above (continuous → discrete). They are like two mirrors reflecting each other.
+
+And our framework stands at their crossing point: **if the microscopic can emerge into the macroscopic (Deng), and if the continuous can expose the complexity of the discrete (Wang), then why cannot "spacetime" itself emerge from something more fundamental — change?**
+
+Behind this there is an even grander story — **Hilbert's sixth problem**.
+
+In 1900, the mathematician David Hilbert posed 23 problems that would point the direction for all of twentieth-century mathematics. The sixth is special: it is not a concrete conjecture but a grand program — **"the axiomatisation of physics."** In plain terms: can we, as Euclid did for geometry, find a minimal set of axioms for all of physics, and then derive every physical law from them?
+
+One of its concrete versions is the axiomatisation of fluid mechanics: microscopically, a single molecule obeys Newtonian mechanics (reversible, no direction of time); macroscopically, a gas made of countless molecules exhibits temperature, pressure, and viscosity, and obeys the second law of thermodynamics (irreversible, with an arrow of time). **But the logical chain from the microscopic to the macroscopic had never been rigorously proved — it had been missing for 125 years.**
+
+Deng and his collaborators filled in that missing link: starting from Newton's hard-sphere model (microscopic), they rigorously obtained the Boltzmann equation (mesoscopic statistics), and then derived the fluid-mechanics equations (macroscopic). **This erected, between the microscopic and the macroscopic, a logically airtight bridge that was previously thought impossible.** This is the solution of the "narrow Hilbert sixth problem."
+
+A romantic way to put it: **Deng recovered the arrow of time for Newtonian mechanics.** The motion of a single molecule has no direction, but countless molecules, through statistical regularity, "grow" an irreversible arrow of time — the most striking embodiment of "emergence."
+
+Now, bring our gaze back to our own framework.
+
+Deng proved with mathematics that "emergence" is not philosophical rhetoric but a rigorous fact: **microscopic particles can emerge into macroscopic fluids, temperature, and the arrow of time.**
+
+And our framework is asking a deeper question: **if temperature is emergent, if fluids are emergent, if the arrow of time is emergent, then is "spacetime" itself also emergent from something more fundamental?**
+
+Our answer is: **yes. That more fundamental thing is "change."** We do not need to assume the "stage" of spacetime exists first — starting directly from "the spectrum of change," spacetime, gravity, gauge fields, and matter all "grow" out of "change."
+
+If Hilbert's sixth problem is "**finding axioms for the known physical world**," then our framework asks a more fundamental question: **"before the 'physical world' appears, what is the axiom?"** Our answer is: **change. The spectrum of change is the axiom, and all of physics is its corollary.**
+
+Deng put the final full stop on "how the microscopic emerges into the macroscopic"; our framework is writing the opening line of "how change emerges into spacetime." **This, in one word, is an axiom that solves everything.**
 
 ---
 
