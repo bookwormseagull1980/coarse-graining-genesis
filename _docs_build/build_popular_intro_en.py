@@ -25,7 +25,7 @@ def main():
     md = open(md_path, encoding="utf-8").read()
     B.render_md(doc, md)
 
-    out = os.path.join(B.BASE, "..", "docs", "From Change to Everything - Plain Introduction.docx")
+    out = os.path.join(B.BASE, "..", "docs", "From Change to Everything - A Popular Science Introduction.docx")
     doc.save(out)
     print("Generated:", os.path.abspath(out))
 

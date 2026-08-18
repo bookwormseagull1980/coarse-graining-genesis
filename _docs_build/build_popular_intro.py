@@ -29,7 +29,7 @@ def main():
     md = open(md_path, encoding="utf-8").read()
     B.render_md(doc, md)
 
-    out = os.path.join(B.BASE, "..", "docs", "从变化到万物_通俗导读.docx")
+    out = os.path.join(B.BASE, "..", "docs", "从变化到万物_科普导读.docx")
     doc.save(out)
     print("Generated:", os.path.abspath(out))
 

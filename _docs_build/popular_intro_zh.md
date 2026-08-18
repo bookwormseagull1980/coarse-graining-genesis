@@ -1,6 +1,6 @@
 # 从"变化"到万物
 
-## ——粗粒化创生框架（Coarse-Graining Genesis）V4.0 通俗导读
+## ——粗粒化创生框架（Coarse-Graining Genesis）V4.0 科普导读
 
 ---
 
@@ -551,4 +551,4 @@ py scripts/audit_param_writers.py   # 每个参数都有来源审计，CLEAN
 
 ---
 
-*本文档是两篇论文（I. 规范结构与费米子内容；II. 有效耦合与质量尺度）及"粗粒化创生框架 V4.0"的通俗导读，目的是帮助理解中心思想，不替代论文与代码中的严格推导。文中"引力如温度涌现""信息边界"等图景的严格形式，以论文 I 及 `scripts/reproduce_v4.py`、`scripts/audit_param_writers.py`、`lean_proofs/` 中的机器验证为准。*
+*本文档是两篇论文（I. 规范结构与费米子内容；II. 有效耦合与质量尺度）及"粗粒化创生框架 V4.0"的科普导读，目的是帮助理解中心思想，不替代论文与代码中的严格推导。文中"引力如温度涌现""信息边界"等图景的严格形式，以论文 I 及 `scripts/reproduce_v4.py`、`scripts/audit_param_writers.py`、`lean_proofs/` 中的机器验证为准。*

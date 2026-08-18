@@ -1,6 +1,6 @@
 # From "Change" to Everything
 
-## — A Plain-Language Introduction to the Coarse-Graining Genesis Framework V4.0
+## — A Popular Science Introduction to the Coarse-Graining Genesis Framework V4.0
 
 ---
 
@@ -551,4 +551,4 @@ The deepest, quietest stretch of this river (the zero mode of the spectrum) is w
 
 ---
 
-*This document is a plain-language introduction to the two papers (I. Gauge structure and fermion content; II. Effective couplings and mass scales) and the "Coarse-Graining Genesis Framework V4.0," intended to help grasp the central ideas; it does not replace the rigorous derivations in the papers and the code. The rigorous form of the "gravity-emerges-like-temperature" and "information boundary" pictures, and all numerical conclusions, are subject to the machine verification in `scripts/reproduce_v4.py`, `scripts/audit_param_writers.py`, and `lean_proofs/`, and to Paper I.*
+*This document is a popular science introduction to the two papers (I. Gauge structure and fermion content; II. Effective couplings and mass scales) and the "Coarse-Graining Genesis Framework V4.0," intended to help grasp the central ideas; it does not replace the rigorous derivations in the papers and the code. The rigorous form of the "gravity-emerges-like-temperature" and "information boundary" pictures, and all numerical conclusions, are subject to the machine verification in `scripts/reproduce_v4.py`, `scripts/audit_param_writers.py`, and `lean_proofs/`, and to Paper I.*

@@ -73,7 +73,7 @@ Both must pass before any change is considered complete. The chain reads
 | `cg_frg/` | the physics sectors — `gauge/`, `generation/`, `ewsb/`, `cosmology/`, `gravity/`, `neutrino/`, `fermion/`, `framework/`, `qcd/`, `frg/` |
 | `scripts/` | `reproduce_v4.py` (the master chain), `audit_param_writers.py`, `generate_framework_v4.py` |
 | `lean_proofs/` | 17 Lean 4 proofs (`native_decide`, core only, no mathlib) |
-| `docs/` | the two papers (PDF), `V4_LEDGER.md` (reference ledger), `V4_COMPLETE_GUIDE.docx` (complete guide), and the plain-language introductions (EN/ZH) |
+| `docs/` | the two papers (PDF), `V4_LEDGER.md` (reference ledger), `V4_COMPLETE_GUIDE.docx` (complete guide), and the popular-science introductions (EN/ZH) |
 | `_docs_build/` | documentation build toolchain (`build_docx.py`, `gen_ledger.py`, `figures.py`, source `.md`) |
 | `comparison/` | SM comparison (`sm_rge/`, `param_audit_full.py`, `sm_inputs.json`) |
 
@@ -106,18 +106,18 @@ Six documents accompany the code, ordered here from rigorous to accessible:
 | **Paper II** — *…II. Effective couplings and mass scales* | PDF | rigorous derivation of the **numbers** (window closure, 147 parameters, observation comparison) | physicists / referees |
 | `docs/V4_LEDGER.md` | Markdown | reference ledger — build instructions, the Paper-I axiomatic foundation, the full text of the source documents, the Paper-II content reference, the reproducibility record | auditors / anyone reproducing |
 | `docs/V4_COMPLETE_GUIDE.docx` | Word | lecture-style complete guide, parameter by parameter | systematic study |
-| `docs/From Change to Everything - Plain Introduction.docx` | Word | plain-language introduction (English) — the central ideas | anyone new |
-| `docs/从变化到万物_通俗导读.docx` | Word | plain-language introduction (Chinese) — the central ideas | Chinese readers |
+| `docs/From Change to Everything - A Popular Science Introduction.docx` | Word | popular-science introduction (English) — the central ideas | anyone new |
+| `docs/从变化到万物_科普导读.docx` | Word | popular-science introduction (Chinese) — the central ideas | Chinese readers |
 
 ### Suggested reading order
 
-- **Want the central idea, fast?** → read the plain-language introduction (`From Change to Everything`, or the Chinese `从变化到万物`).
+- **Want the central idea, fast?** → read the popular-science introduction (`From Change to Everything`, or the Chinese `从变化到万物`).
 - **Want the rigorous physics?** → read Paper I (structure), then Paper II (numbers).
 - **Want to reproduce or audit?** → run `py scripts/reproduce_v4.py` and read `docs/V4_LEDGER.md`.
 - **Want to study every parameter systematically?** → read `docs/V4_COMPLETE_GUIDE.docx`.
 
 The four layers — papers (rigorous) → complete guide (comprehensive) → ledger
-(reproducible) → plain introduction (accessible) — let a reader descend from
+(reproducible) → popular-science introduction (accessible) — let a reader descend from
 "what does it mean" to "how is it derived" at whatever depth they choose.
 
 ## Citation (required)
