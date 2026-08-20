@@ -159,8 +159,8 @@ The kinetic eigenvalue of the J=2 squash J(J+2) = 8 divided by the internal-spac
 | Coupling | geometric-dynamics carrier | closure state |
 |------|------|------|
 | g₂ | conformal-gauge duality (1/N_c) + EC torsion (τ²) | ✅ conservation law (Lean 21 theorems) |
-| g₁ | J=2 squash (s₀ = n_broken·τ = 2τ) | 🔶 geometric origin made explicit, field-equation proof completed |
-| g₃ | long-root bifurcation (K = J(J+2)/d = 8/3) | 🔶 geometric origin made explicit, field-equation proof completed |
+| g₁ | J=2 squash (s₀ = n_broken·τ = 2τ) | 🔶 geometric origin of kappa made explicit; s0=2tau and the sign/multiplier are kinematic INPUT, field-equation proof NOT completed |
+| g₃ | long-root bifurcation (K = J(J+2)/d = 8/3) | 🔶 geometric origin of kappa made explicit; s0=2tau and the sign/multiplier are kinematic INPUT, field-equation proof NOT completed |
 
 **Unified structure**: the corrections of the three couplings are all "discrete content (N_c, n_broken, J, d) × geometric dynamics
 (conformal-gauge duality, EC torsion, J=2 squash)", the same methodology as the three-layer skeleton of the τ theorem.

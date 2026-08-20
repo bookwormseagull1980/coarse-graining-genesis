@@ -155,7 +155,7 @@ def strip_sep(s):
 ledger = read(os.path.join(SRC, "CLOSURE_LEDGER.md"))
 ledger = ledger.replace(
     "The CKM geometric choice of V_cb/V_ub, the χSB scheme of m_p, the chiral counting of Δ²_R/T_deconf\n——all need the complete proof of the EC field equation + the J=2 squash variation.",
-    "The CKM geometric choice of V_cb/V_ub, the χSB scheme of m_p, the chiral counting of Δ²_R/T_deconf\n——all closed (the EC field equation + J=2 squash variation proof completed).",
+    "The CKM geometric choice of V_cb/V_ub, the χSB scheme of m_p, the chiral counting of Δ²_R/T_deconf\n——all need the complete proof of the EC field equation + the J=2 squash variation (tau derived; s0=2tau and the sign/multiplier assignment remain kinematic INPUT).",
 )
 
 docs_clean = {

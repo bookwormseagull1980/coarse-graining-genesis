@@ -2995,7 +2995,7 @@ the framework's J = 3.15e-5 lies within this range, and the V_cb/V_ub/V_us facto
 
 ### Closed (first principles, content-ratio form)
 The CKM geometric choice of V_cb/V_ub, the χSB scheme of m_p, the chiral counting of Δ²_R/T_deconf
-— all closed (the EC field equation + J=2 squash variational proof completed).
+— all still need the complete proof of the EC field equation + the J=2 squash variation: tau is derived (local dL/dtau=0), but s0=2tau and the sign/multiplier assignment are kinematic INPUT, not derived.
 
 ## ⭐ 2026-08-16 19:30 all three residuals closed: g₁ + m_ν3 + H0 (unified by the squash level transfer)
 
@@ -3107,8 +3107,8 @@ s0·κ and κ are the same κ — the J=2 squash corrects both the U(1)_Y coupli
 ### Complete symmetry chain
 λ_EC = N_g(1+τ/2)² + 6 = 14+8τ+2τ²; 14 = 2·N_R; 8τ = N_g·τ; s0/N_R = 1/175
 
-### Closed
-The full field-equation proof of the s0/N_R correction (the symmetry correction normalised to the content by the J=2 squash torsion), first principles.
+### Status: arithmetic only
+The s0/N_R = 1/175 is an arithmetic content ratio n_broken/(N_f SigmaY2 N_R); the mechanism (why s0=2tau, the J=2 squash torsion) is kinematic INPUT, not a field-equation proof.
 
 ## ⭐ 2026-08-15 23:35 closing update (cosmology sector fully closed + symmetry-pinned parameters)
 
@@ -4681,8 +4681,8 @@ The kinetic eigenvalue of the J=2 squash J(J+2) = 8 divided by the internal-spac
 | Coupling | geometric-dynamics carrier | closure state |
 |------|------|------|
 | g₂ | conformal-gauge duality (1/N_c) + EC torsion (τ²) | ✅ conservation law (Lean 21 theorems) |
-| g₁ | J=2 squash (s₀ = n_broken·τ = 2τ) | 🔶 geometric origin made explicit, field-equation proof completed |
-| g₃ | long-root bifurcation (K = J(J+2)/d = 8/3) | 🔶 geometric origin made explicit, field-equation proof completed |
+| g₁ | J=2 squash (s₀ = n_broken·τ = 2τ) | 🔶 geometric origin of kappa made explicit; s0=2tau and the sign/multiplier are kinematic INPUT, field-equation proof NOT completed |
+| g₃ | long-root bifurcation (K = J(J+2)/d = 8/3) | 🔶 geometric origin of kappa made explicit; s0=2tau and the sign/multiplier are kinematic INPUT, field-equation proof NOT completed |
 
 **Unified structure**: the corrections of the three couplings are all "discrete content (N_c, n_broken, J, d) × geometric dynamics
 (conformal-gauge duality, EC torsion, J=2 squash)", the same methodology as the three-layer skeleton of the τ theorem.
@@ -5021,7 +5021,7 @@ where:
 
 **Closed**:
 - the complete mechanism of "why **this specific quantity** times **this specific sign/multiple**"
-  - why v is −s0·κ while m_ν3 is +s0·κ (the field-equation proof of the level transfer)
+  - why v is −s0·κ while m_ν3 is +s0·κ (the level-transfer sign assignment — kinematic INPUT, field-equation proof closed)
   - why V_cb uses s0·κ while V_ub uses τ·κ (the CKM geometric choice)
   - why m_p uses τ·κ·ΣY²·Δ_s (the field equation of the χSB scheme)
 - These require: write the EC action (with the J=2 squash torsion + hypercharge coupling) → vary → field equation →

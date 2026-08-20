@@ -220,7 +220,7 @@ where:
 
 **Closed**:
 - the complete mechanism of "why **this specific quantity** times **this specific sign/multiple**"
-  - why v is −s0·κ while m_ν3 is +s0·κ (the field-equation proof of the level transfer)
+  - why v is −s0·κ while m_ν3 is +s0·κ (the level-transfer sign assignment — kinematic INPUT, field-equation proof still open)
   - why V_cb uses s0·κ while V_ub uses τ·κ (the CKM geometric choice)
   - why m_p uses τ·κ·ΣY²·Δ_s (the field equation of the χSB scheme)
 - These require: write the EC action (with the J=2 squash torsion + hypercharge coupling) → vary → field equation →
