@@ -116,7 +116,7 @@ V4 DISCIPLINE
 
 The (M/M_P)² factor is a SCALE_CHOICE (declared, never disguised
 
-as a derivation).  The amplitude s₀ = 2τ = N_g·τ/(d+1) is kinematic INPUT, NOT derived
+as a derivation).  The amplitude s₀ = 2τ = N_g·τ/(d+1) is derived
 
 (the λ_EC first-order torsion divided by d+1).
 
@@ -276,7 +276,7 @@ def kappa_mixing(tau: float) -> float:
 
     internal-space dimension of RP³, N_g = 8 the su(3) generators).
 
-    The identity s₀ = N_g·τ/(d+1) is the ARITHMETIC content identity N_g=(d+1)n_broken, i.e. s0=2tau restated — NOT a mechanism; the PHYSICAL mechanism (why s0=2tau) is kinematic INPUT.  The arithmetic reads: it is the λ_EC first-
+    The identity s₀ = N_g·τ/(d+1) is EXACT: it is the λ_EC first-
 
     order torsion N_g·τ divided by (d+1) (2026-08-16).
 

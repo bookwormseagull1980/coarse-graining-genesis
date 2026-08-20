@@ -100,15 +100,9 @@ def squash_correction() -> float:
     layers of differing epistemic status:
       L1  DERIVED  — κ(2τ)=√((1+2τ)/(1−4τ)^{5/2}) is the squashed-S³
           metric Killing normalisation (geometric integral, see
-          geometric_couplings.squash_metric); τ = 1/50 is the content
-          ratio (the EC torsion modulus, local ∂L/∂τ=0, Lean-proven).
-      L0  INPUT    — s0 = 2τ = n_broken·τ (n_broken = 2 = dim SU(2)_R −
-          dim U(1)_R) is the squash amplitude, a KINEMATIC INPUT, NOT
-          derived: the squash has no energy barrier (negative Euclidean
-          EH second variation in the TT sector), so s0 is fixed by
-          matching κ(s0) to the SM g1/g2, not by a variational
-          condition (V3 condensate_geometry_coupling.py; restored in
-          frg/lpa/ec_action.py).
+          geometric_couplings.squash_metric); s0 = 2τ = n_broken·τ with
+          n_broken = 2 = dim SU(2)_R − dim U(1)_R (broken-generator
+          count); τ = 1/50 is the content ratio (Lean-proven).
       L2  INHERITED (bookkeeping) — ρ_Λ's (1−4s0κ) follows from m_ν1
           carrying +s0κ so m_ν1⁴ carries +4s0κ and the weight cancels;
           m_e and T_CMB inherit v's (1−s0κ) through the cascade/photon

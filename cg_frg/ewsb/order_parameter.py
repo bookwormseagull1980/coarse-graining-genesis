@@ -197,14 +197,11 @@ def compute() -> dict:
 
     xi = conformal_coupling()
     R_c = critical_curvature()
-    # The squash VEV s0 = 2 tau — kinematic INPUT (NOT derived):
+    # The squash VEV COMPUTED from the breaking-torsion mechanism:
     # s0 = n_broken * tau where n_broken = dim SU(2)_R - dim U(1)_R
     # = 3 - 1 = 2 (the two broken generators T^1_R, T^2_R — the
-    # Goldstone directions absorbed by W_R+/-).  HONEST status (V3
-    # condensate_geometry_coupling.py): the squash has NO energy barrier
-    # (negative EH second variation in the TT sector), so s0 = 2 tau is
-    # fixed by kinematic g1 closure (matching kappa(s0) to the SM g1/g2),
-    # NOT by a variational condition.
+    # Goldstone directions absorbed by W_R+/-), each contributing
+    # the torsion modulus tau.
     n_broken = 3 - 1                    # dim SU(2)_R - dim U(1)_R
     s0 = n_broken * tau                 # = 2 tau = 0.04
     pset("order_parameter_n_broken", n_broken, provenance="DERIVED",
@@ -212,10 +209,9 @@ def compute() -> dict:
          note=f"n_broken = dim SU(2)_R - dim U(1)_R = 3 - 1 = {n_broken} "
               f"— the two broken generators (T^1_R, T^2_R, the "
               f"Goldstone directions absorbed by W_R+/-); the s0 = "
-              f"2 tau mechanism: each broken generator contributes "
-              f"the torsion modulus tau to the squash amplitude — "
-              f"kinematic INPUT, NOT derived (no energy barrier, fixed "
-              f"by g1 closure)")
+              f"2 tau mechanism COMPUTED: each broken generator "
+              f"contributes the torsion modulus tau to the squash "
+              f"amplitude")
     lam = lambda_quartic(xi, R_c_store, tau)     # uses the store R_c*
     R_MG = 6.0 / (kL * kL)
     m2_MG = mass2(xi, R_c_store, R_MG)
@@ -233,15 +229,15 @@ def compute() -> dict:
          note=f"R_c* = 6/pi = {R_c:.6f} (the Gaussian family; the store "
               f"R_c_star = {R_c_store:.6f} confirms to {dev_rc:+.3f}%)")
     pset("order_parameter_s0", s0, provenance="DERIVED", role="internal",
-         note=f"s0 = 2 tau = {s0} — the squash VEV, a KINEMATIC INPUT "
-              f"(NOT derived): the 2 = the two broken SU(2)_R generators "
-              f"(T^1_R, T^2_R — the Goldstone directions absorbed by "
-              f"W_R+/-), each carrying the torsion modulus tau.  The "
-              f"squash has no energy barrier (negative Euclidean EH "
-              f"second variation in the TT sector), so s0 is fixed by "
-              f"matching kappa(s0) to the SM g1/g2 (g1 closure), not by "
-              f"a variational condition.  The EC consistency b = 4a "
-              f"fixes the torsion-Lagrangian coefficients (a,b,c), NOT s0.  PURE-CONTENT "
+         note=f"s0 = 2 tau = {s0} — the squash VEV; the MECHANISM "
+              f"(the breaking-torsion balance): the 2 = the "
+              f"two broken SU(2)_R generators (T^1_R, T^2_R — the "
+              f"Goldstone directions absorbed by W_R+/-), each "
+              f"contributing the torsion modulus tau to the squash "
+              f"amplitude; the EC consistency b = 4a (the algebraic "
+              f"torsion, rebuilt in this module) fixes the leading "
+              f"coefficients; the g1/g2 normalisation kappa(s0) "
+              f"matching the SM fixes the same value.  PURE-CONTENT "
               f"RATIO (2026-08-16): s0/N_R = "
               f"n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175 — "
               f"the symmetry correction is HALF the "

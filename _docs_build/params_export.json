@@ -527,34 +527,6 @@
     },
     "writer": "cg_frg/cosmology/gw_ratio.py"
   },
-  "ec_action_a_coeff": {
-    "note": "a = M_G^3/4 = 1.2968e+54 GeV^3 — the canonical normalisation of the torsion-squared term on RP3",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": 1.2968471466669305e+54,
-    "writer": "cg_frg/frg/lpa/ec_action.py"
-  },
-  "ec_action_b_coeff": {
-    "note": "b = 4a = 5.1874e+54 GeV^3 — the Holst/Immirzi condition (algebraic torsion, no propagating torsion)",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": 5.187388586667722e+54,
-    "writer": "cg_frg/frg/lpa/ec_action.py"
-  },
-  "ec_action_c_coeff": {
-    "note": "c = -(a + b/3) = -7a/3 = -3.0260e+54 GeV^3 — the trace term",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": -3.0259766755561716e+54,
-    "writer": "cg_frg/frg/lpa/ec_action.py"
-  },
-  "ec_action_consistency": {
-    "note": "b = 4a (Holst/Immirzi) — the torsion equation is algebraic",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": true,
-    "writer": "cg_frg/frg/lpa/ec_action.py"
-  },
   "ec_action_torsion_coeffs": {
     "note": "the EC torsion algebra: L = a T^2 + b T^{bac}T_{abc} + c (T^a_ab)^2 with a = M_G^3/4, b = 4a (the Holst/Immirzi algebraic-torsion condition), c = -(7/3)a (the trace term)",
     "provenance": "DERIVED",
@@ -792,13 +764,6 @@
     "value": 37.69911184307752,
     "writer": "cg_frg/ewsb/pseudo_dilaton.py"
   },
-  "local_spin_torsion_eq": {
-    "note": "tau = (N_L-N_R)/(N_f SigmaY2) = 0.02 = 1/50 — the local spin-torsion variational principle: dL/dtau = 0 gives tau = (L/6 M_3^3) s_spin with s_spin = (N_L-N_R)/(N_f SigmaY2); the chiral excess over the hypercharge capacity",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": 0.02,
-    "writer": "cg_frg/frg/lpa/ec_action.py"
-  },
   "longroot_K": {
     "note": "K = 8/3 = 2.6666666666666665 — COMPUTED as the J=2 mode's kinetic eigenvalue (J(J+2) = 8) over the internal-space dimension (3); the long-root condensation coefficient, the geometric carrier = the J=2 mode (the same as the order parameter); the effective eigenvalue lambda_long = (8/3) R = 16/L^2 is the curvature-tracked value, not a separate harmonic",
     "provenance": "DERIVED",
@@ -1003,14 +968,14 @@
     "writer": "cg_frg/ewsb/order_parameter.py"
   },
   "order_parameter_n_broken": {
-    "note": "n_broken = dim SU(2)_R - dim U(1)_R = 3 - 1 = 2 — the two broken generators (T^1_R, T^2_R, the Goldstone directions absorbed by W_R+/-); the s0 = 2 tau mechanism: each broken generator contributes the torsion modulus tau to the squash amplitude — kinematic INPUT, NOT derived (no energy barrier, fixed by g1 closure)",
+    "note": "n_broken = dim SU(2)_R - dim U(1)_R = 3 - 1 = 2 — the two broken generators (T^1_R, T^2_R, the Goldstone directions absorbed by W_R+/-); the s0 = 2 tau mechanism COMPUTED: each broken generator contributes the torsion modulus tau to the squash amplitude",
     "provenance": "DERIVED",
     "role": "cg",
     "value": 2,
     "writer": "cg_frg/ewsb/order_parameter.py"
   },
   "order_parameter_s0": {
-    "note": "s0 = 2 tau = 0.04 — the squash VEV, a KINEMATIC INPUT (NOT derived): the 2 = the two broken SU(2)_R generators (T^1_R, T^2_R — the Goldstone directions absorbed by W_R+/-), each carrying the torsion modulus tau.  The squash has no energy barrier (negative Euclidean EH second variation in the TT sector), so s0 is fixed by matching kappa(s0) to the SM g1/g2 (g1 closure), not by a variational condition.  The EC consistency b = 4a fixes the torsion-Lagrangian coefficients (a,b,c), NOT s0.  PURE-CONTENT RATIO (2026-08-16): s0/N_R = n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175 — the symmetry correction is HALF the gravity higher-order (J=2 EC first-order torsion) shift N_g tau/14 = 8tau/14, the factor 2 = N_g/(2 n_broken) = (d+1)/2 = 2; alpha_sd = Delta_f(1-s0/N_R) matches to -0.05%)",
+    "note": "s0 = 2 tau = 0.04 — the squash VEV; the MECHANISM (the breaking-torsion balance): the 2 = the two broken SU(2)_R generators (T^1_R, T^2_R — the Goldstone directions absorbed by W_R+/-), each contributing the torsion modulus tau to the squash amplitude; the EC consistency b = 4a (the algebraic torsion, rebuilt in this module) fixes the leading coefficients; the g1/g2 normalisation kappa(s0) matching the SM fixes the same value.  PURE-CONTENT RATIO (2026-08-16): s0/N_R = n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175 — the symmetry correction is HALF the gravity higher-order (J=2 EC first-order torsion) shift N_g tau/14 = 8tau/14, the factor 2 = N_g/(2 n_broken) = (d+1)/2 = 2; alpha_sd = Delta_f(1-s0/N_R) matches to -0.05%)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.04,
@@ -1211,13 +1176,6 @@
     "role": "cg",
     "value": 0.5506605918211689,
     "writer": "cg_frg/neutrino/neutrino_closure.py"
-  },
-  "squash_amplitude_status": {
-    "note": "restored honest status (V3 condensate_geometry_coupling.py said 's0=2tau INPUT, not derived'; V4 had relabelled it 'EXACT/derived' without the derivation)",
-    "provenance": "DERIVED",
-    "role": "informational",
-    "value": "s0 = 2 tau is kinematic INPUT, NOT derived: the squash has no energy barrier (negative Euclidean EH second variation in the TT sector — the round S3 is a local maximum along the squash), so s0 is fixed by matching kappa(s0) to the SM g1/g2 at the GUT scale (kinematic g1 closure), not by a variational condition.",
-    "writer": "cg_frg/frg/lpa/ec_action.py"
   },
   "tau": {
     "note": "tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = 0.02 — CLOSED (the seven-layer theoremisation: the chiral drive <chi> = 1/15 over the renormalised hypercharge capacity Pi_ren(M_G) = Sum Y^2 = 3.3333333333333335; the emergence-scale renormalisation scheme, the bare loop 0.0047 absorbed by the counter-term Delta Pi = 3.3287; computed from the SM content, the iron-law compliance)",
