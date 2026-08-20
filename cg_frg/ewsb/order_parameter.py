@@ -197,13 +197,15 @@ def compute() -> dict:
 
     xi = conformal_coupling()
     R_c = critical_curvature()
-    # The squash VEV COMPUTED from the breaking-torsion mechanism:
-    # s0 = n_broken * tau where n_broken = dim SU(2)_R - dim U(1)_R
-    # = 3 - 1 = 2 (the two broken generators T^1_R, T^2_R — the
-    # Goldstone directions absorbed by W_R+/-), each contributing
-    # the torsion modulus tau.
-    n_broken = 3 - 1                    # dim SU(2)_R - dim U(1)_R
-    s0 = n_broken * tau                 # = 2 tau = 0.04
+    # The squash VEV s0 = 2 tau, DERIVED (paper 4, Appendix A + Lemma lem:chargequant):
+    # the long-root mode (the J=2 squash of the R-sector connection) has
+    # SU(2)_R weight m_R = 1, so the unbroken torus assigns it charge
+    # q = 2 m_R = 2; the squash amplitude is s0 = q * tau = 2 tau (charge
+    # times the torsion modulus tau).  The charge q = 2 is the SAME content
+    # as n_broken = dim SU(2)_R - dim U(1)_R = 2 (the two broken generators
+    # T^1_R, T^2_R absorbed as the W_R Goldstone directions).
+    n_broken = 3 - 1                    # dim SU(2)_R - dim U(1)_R = 2 = q
+    s0 = n_broken * tau                 # = q * tau = 2 tau = 0.04
     pset("order_parameter_n_broken", n_broken, provenance="DERIVED",
          role="cg",
          note=f"n_broken = dim SU(2)_R - dim U(1)_R = 3 - 1 = {n_broken} "

@@ -116,7 +116,7 @@ V4 DISCIPLINE
 
 The (M/M_P)² factor is a SCALE_CHOICE (declared, never disguised
 
-as a derivation).  The amplitude s₀ = 2τ = N_g·τ/(d+1) is derived
+as a derivation).  The amplitude s0 = 2tau = N_g*tau/(d+1) is DERIVED: s0 = q*tau with q = 2 the long-root-mode charge (paper 4 Appendix A).
 
 (the λ_EC first-order torsion divided by d+1).
 
@@ -276,7 +276,7 @@ def kappa_mixing(tau: float) -> float:
 
     internal-space dimension of RP³, N_g = 8 the su(3) generators).
 
-    The identity s₀ = N_g·τ/(d+1) is EXACT: it is the λ_EC first-
+    The identity s0 = N_g*tau/(d+1) is the ARITHMETIC restatement of s0 = q*tau = 2tau, where q = 2 is the long-root-mode charge (paper 4 Appendix A: q = 2 m_R, m_R = 1); N_g = (d+1)*n_broken (8 = 4*2) is the derived content identity.
 
     order torsion N_g·τ divided by (d+1) (2026-08-16).
 
