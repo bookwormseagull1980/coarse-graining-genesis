@@ -52,9 +52,20 @@ the final closure table from the store.
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
+
+# Force UTF-8 I/O so the closure table prints on any console code page
+# (the default GBK console of a Chinese Windows mangles the UTF-8 '—/→/±'
+# that some modules legitimately print, and the parent re-encode of a
+# captured line would otherwise raise UnicodeEncodeError).
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+os.environ.setdefault("PYTHONUTF8", "1")
 
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 _PY = sys.executable
@@ -65,19 +76,20 @@ MODULES = [
     "comparison/sm_rge/run_rge.py",
     "cg_core/spectrum_loop.py",
     "cg_core/sm_content.py",
+    "cg_core/cluster_decay.py",
     "cg_frg/frg/spectral_sum.py",
     "cg_frg/frg/endpoint_constraint.py",
     "cg_frg/ewsb/vev_closure.py",
     "cg_frg/frg/gamma_M.py",
     "cg_frg/frg/ir_flow.py",
     "cg_frg/gauge/geometric_couplings.py",
+    "comparison/crosschecks.py",
     "cg_frg/generation/window_capacity.py",
     "cg_frg/ewsb/relaxion_chain.py",
     "cg_frg/ewsb/relaxion_geo.py",
     "cg_frg/ewsb/epsilon_ratio.py",
     "cg_frg/cosmology/spectral_tilt.py",
     "cg_frg/cosmology/dark_energy.py",
-    "cg_frg/cosmology/bbn_helium.py",
     "cg_frg/cosmology/perturbation_amplitude.py",
     "cg_frg/generation/sector_alpha.py",
     "cg_frg/generation/lz_ladder.py",
@@ -99,6 +111,8 @@ MODULES = [
     "cg_frg/frg/trace_density.py",
     "cg_frg/qcd/mass_gap_scale.py",
     "cg_frg/qcd/qcd_sector.py",
+    "cg_frg/cosmology/bbn_helium.py",
+    "cg_frg/ewsb/ew_precision.py",
     "cg_frg/cosmology/gw_ratio.py",
     "cg_frg/framework/sigma_language.py",
     "cg_frg/frg/discrete_flow.py",
@@ -122,19 +136,26 @@ CLOSURES = [
     ("TT delta pole", "TT_delta_forming", True),
     ("m_nu3 (eV)", "m_nu3", 0.0502),
     ("m_nu2 (eV)", "m_nu2", 0.0086),
-    ("sin^2 theta12", "sin2_theta12", 0.30),
+    ("sin^2 theta12", "sin2_theta12", 0.303),
     ("m_t (GeV)", "m_t_pred", 172.69),
     ("m_e (MeV)", "m_e_pred", 0.511),
     ("Delta2_R", "perturbation_amplitude", 2.105e-9),
     ("m_glueball (GeV)", "m_glueball", 1.7),
     ("mass gap dE/M_G", "mass_gap_dE", None),
     ("H0 (GeV)", "H0_GEV", 1.44e-42),
+    ("M_Z (GeV)", "M_Z_pred", 91.1876),
+    ("M_W (GeV)", "M_W_pred", 80.369),
+    ("Gamma_Z (GeV)", "Gamma_Z_pred", 2.4952),
+    ("sigma_had (nb)", "sigma_had_pred", 41.481),
+    ("m_H (GeV)", "m_H_pred", 125.20),
     ("r (GW tensor ratio)", "gw_ratio", None),
     ("2L = sqrt(2pi)", "twoL_entropy_min_distance", None),
     ("alpha_up (internal)", "alpha_up", 2.456327),
     ("alpha_dn (internal)", "alpha_down", 1.903331),
     ("alpha_lp (internal)", "alpha_lepton", 1.410689),
     ("sector step Delta", "sector_alpha_delta", 0.5225),
+    ("sin^2 theta(M_Z)", "s2_thetaW_MZ", 0.23122),
+    ("m_tau (GeV)", "m_tau_pred", 1.777),
     ("order parameter lambda", "order_parameter_lambda", None),
     ("Z quantum shift", "Z_quantum_shift", None),
     ("m_WR (GeV)", "geometric_ewsb_m_WR", None),
@@ -147,7 +168,8 @@ def run_all() -> list:
     for mod in MODULES:
         print(f"\n── {mod} ──")
         r = subprocess.run([_PY, str(_PROJECT_ROOT / mod)],
-                           capture_output=True, text=True)
+                           capture_output=True, text=True,
+                           encoding="utf-8", errors="replace")
         out = (r.stdout or "") + (r.stderr or "")
         for line in out.splitlines():
             print("  " + line)

@@ -32,6 +32,69 @@ SRC = os.path.join(ROOT, "_docs_build", "merged_sources")
 BLD = os.path.join(ROOT, "_docs_build")
 
 
+def export_params() -> None:
+    """Refresh params_export.json from the live parameter store.
+
+    params_export.json is consumed by build_docx.py (the [[PARAMS:*]]
+    docx tables); it must always mirror cg_params.json.  The export
+    is regenerated here so the ledger and the docx build chain stay
+    source-driven (no manual edits survive a regeneration).
+    """
+    import json
+
+    store = json.loads(
+        open(os.path.join(ROOT, "cg_params.json"), encoding="utf-8").read())
+    out = os.path.join(BLD, "params_export.json")
+    with open(out, "w", encoding="utf-8") as f:
+        json.dump(store["parameters"], f, ensure_ascii=False, indent=2)
+    print("Refreshed:", out, f"({len(store['parameters'])} parameters)")
+
+
+def ew_precision_section() -> str:
+    """The 2026-08-19 EW precision block as a ledger section.
+
+    The merged FRAMEWORK_V4 snapshot predates the EW precision module,
+    so the sixteen parameters it publishes are collected here as an
+    explicit addition rather than retro-edited into the historical
+    source documents.
+    """
+    import json
+
+    store = json.loads(
+        open(os.path.join(ROOT, "cg_params.json"), encoding="utf-8").read())
+    p = store["parameters"]
+    keys = ["M_Z_pred", "s2_thetaW_MZ", "M_W_pred", "s2_thetaW_os",
+            "rho_param", "Gamma_Z_pred", "Gamma_had_pred", "Gamma_b_pred",
+            "Gamma_l_pred", "Gamma_inv_pred", "sigma_had_pred", "R_l_pred",
+            "R_b_pred", "m_H_pred", "m_mu_pred", "m_tau_pred"]
+    lines = [
+        "The electroweak precision block of Paper II Section 10.6 "
+        "(interface chain M_G -> M_Z) is published by "
+        "`cg_frg/ewsb/ew_precision.py`.  The merged FRAMEWORK_V4 "
+        "snapshot above predates this module, so its sixteen parameters "
+        "are collected here.  Every input is a framework-derived value; "
+        "the observed values appear only as comparison targets.  The "
+        "computation level is stated in the module docstring (M_Z "
+        "tree-level on the two-loop geometric running; M_W with the "
+        "one-loop t-b Veltman rho, Delta r_rem omitted; Gamma_Z Born "
+        "+ QCD/QED radiators; m_H tree-level).",
+        "",
+        "| Parameter | Value | Role | Note (truncated) |",
+        "|---|---|---|---|",
+    ]
+    for k in keys:
+        r = p.get(k, {})
+        val = r.get("value")
+        note = str(r.get("note", ""))
+        note = note.replace("|", "/")
+        if len(note) > 90:
+            note = note[:90] + "..."
+        if isinstance(val, float):
+            val = f"{val:.6g}"
+        lines.append(f"| `{k}` | {val} | {r.get('role', '')} | {note} |")
+    return "\n".join(lines) + "\n"
+
+
 def clean(text):
     """Word-level obsolete-annotation correction (avoiding AXIOM_PROOF_SERIES)."""
     text = text.replace("AXIOM_PROOF_SERIES", "@@@AXPROOF@@@")
@@ -139,7 +202,7 @@ header = MD_BANNER + """
 | `part1_symmetry.md` | Part 1: symmetry principles (11 chapters) |
 | `part2_params.md` | Part 2: parameter-by-parameter analysis (20 chapters) |
 | `part3_supplement.md` | Part 3: BBN + precision ledger + complete closure annotations |
-| `params_export.json` | complete export of the 147 parameters |
+| `params_export.json` | complete export of the 170 parameters |
 
 **Regeneration commands** (under `_docs_build/`):
 ```
@@ -154,6 +217,7 @@ py build_docx.py     # generate docs/V4_COMPLETE_GUIDE.docx
 sections = [
     ("1. Physical motivation and method system (Paper-4 axiomatic foundation)", intro),
     ("2. The single source of truth (FRAMEWORK_V4 full text)", docs_clean["FRAMEWORK_V4.md"]),
+    ("2.1 Electroweak precision parameters (2026-08-19 addition)", ew_precision_section()),
     ("3. The closure ledger (CLOSURE_LEDGER full text)", ledger),
     ("4. Symmetry catalogue (LOW_LEVEL_SYMMETRIES full text)", docs_clean["LOW_LEVEL_SYMMETRIES_2026-08-17.md"]),
     ("5. Symmetry emergence derivation chain (SYMMETRY_EMERGENCE full text)", docs_clean["SYMMETRY_EMERGENCE_2026-08-17.md"]),
@@ -196,4 +260,5 @@ footer = f"""
 out = body + footer
 out_path = os.path.join(DOCS, "V4_LEDGER.md")
 open(out_path, "w", encoding="utf-8").write(out)
+export_params()
 print("Generated:", out_path, f"({len(out)/1024:.1f} KB)")

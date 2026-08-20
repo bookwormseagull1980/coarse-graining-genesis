@@ -61,13 +61,18 @@ Writes: bbn_Yp, bbn_Neff, bbn_status (DERIVED — this module is
 V4 DISCIPLINE
 -------------
 The five nuclear constants of the BBN freeze-out are DERIVED FROM THE
-FRAMEWORK'S OWN CONTENT — NON-PERTURBATIVELY (no relativistic
-correction, no QCD/QED loop, no wave-function integral):
+FRAMEWORK'S OWN CONTENT:
 
   G_F   = 1/(√2 v²)           — the weak rate from the closed v
   Δm_np = (m_d − m_u) − Δ_EM  — the quark mass difference (the
           framework's down-sector mass ladder) minus the EM self-energy
-          Δ_EM = (1−1/(2π))α_em Λ_QCD.  The m_d > m_u asymmetry is the
+          Δ_EM = (1−1/(2π))α_em(0) Λ_QCD, where α_em(0) is the
+          framework's own low-energy fine-structure constant: the
+          derived α⁻¹(M_Z) = 128.208 (two-loop geometric RGE) run
+          down by the one-loop QED vacuum polarisation of the
+          framework's own content (leptons on the internal ladder
+          masses, c/b on the internal masses, u/d/s frozen at the
+          internal Λ_QCD).  The m_d > m_u asymmetry is the
           DISCRETE STRUCTURE INCREMENT of the hypercharge ladder:
           m_d/m_s ∝ (1+|Y_d|/|Y_u|)² = (3/2)² vs m_u/m_c ∝
           (1−|Y_d|/|Y_u|)² = (1/2)² — the down/up hypercharge ratio
@@ -79,7 +84,7 @@ correction, no QCD/QED loop, no wave-function integral):
   τ_n   = 2π³/(G_F²|V_ud|²(1+3g_A²)m_e⁵f) — the neutron beta decay,
           g_A = N_g·Δ_s/π = 4/π (conformal-weight form), δ_R =
           1+(1−τ)/(8π), f the phase-space integral, |V_ud| from CKM
-          unitarity — ALL non-perturbative internal
+          unitarity — ALL internal
   t_dec = t(T_BBN) − t(T_f)   — the radiation-era expansion time
           (two-region g_eff: 10.75 pre e+e- annihilation, 3.36 post)
   N_eff = 3 + √3/(2π)²        — the √3 geometry × 2π period
@@ -90,7 +95,9 @@ structure.  The framework IS non-perturbative (its baryons, string
 tension, glueballs are already non-perturbative); the BBN constants
 close through the conformal-weight form N_g·Δ_s = 2(d−1) = 4, the 2π
 Euclidean period (r = (1/2π)², sin²θ13 = (1/2π)²√3/2), and the τ
-content ratio — no QFT loop, no relativistic correction.
+content ratio.  The perturbative ingredients are the two-loop
+geometric RGE inside α⁻¹(M_Z) and the one-loop QED running inside
+α_em(0), both evaluated on the framework's own content.
 """
 
 from __future__ import annotations
@@ -105,31 +112,81 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from cg_core.params import get, set as pset  # noqa: E402
 
-# ---- INTERNAL derivation of ALL six BBN constants (2026-08-17) ----
+# ---- INTERNAL derivation of ALL six BBN constants (2026-08-17,
+#      alpha_em(0) internalised 2026-08-19) ----
 # Zero external values: every constant is computed from the framework's
-# own content (v, M_P, m_e, Λ_QCD, the mass ladder, |V_us|, α_em).
+# own content (v, M_P, m_e, Λ_QCD, the mass ladder, |V_us|, α_em(0)).
 #
 #   1. |V_ud| = √(1 − |V_us|²)          CKM unitarity (|V_us| DERIVED by
 #                                        Gatto in neutrino_closure)
 #   2. f      = ∫ F(Z,W) W p (W0−W)² dW   the β-decay phase-space integral
 #                                        (pure kinematics + Coulomb), W0=Δm/m_e
-#   3. Δ_EM   = (3/5) α_em Λ_QCD        the p−n Coulomb self-energy
-#                                        (uniform-charge-sphere, r_p=1/Λ_QCD)
+#   3. Δ_EM   = (1−1/(2π)) α_em(0) Λ_QCD  the p−n Coulomb self-energy
+#                                        (α_em(0) internal, QED-polarisation closed 2026-08-19)
 #   4. g_A    = N_g·Δ_s/π = 2(d−1)/π = 4/π   the conformal-weight form over π
 #   5. δ_R    = 1 + (1−τ)/(8π)                the τ-corrected 8π (N_g·π)
 #   6. δ_N    = √3/(3(2π)²)                   the √3 geometry × 2π period
 #
-# NON-PERTURBATIVE (2026-08-17): these are the FRAMEWORK'S OWN spectral/
-# content/2π-period structure — NOT relativistic corrections, NOT QCD loops.
-# The framework IS non-perturbative (its baryons, string tension, glueballs
-# are already non-perturbative): g_A, Δ_EM, δ_R, δ_N close through the
-# conformal-weight form (N_g·Δ_s = 2(d−1) = 4), the 2π Euclidean period,
-# and the τ content ratio — no QFT loop, no wave-function integral.
+# NON-PERTURBATIVE (2026-08-17; α_em(0) note 2026-08-19): these are the
+# FRAMEWORK'S OWN spectral/content/2π-period structure — NOT relativistic
+# corrections, NOT QCD loops.  The framework IS non-perturbative (its
+# baryons, string tension, glueballs are already non-perturbative): g_A,
+# δ_R, δ_N close through the conformal-weight form (N_g·Δ_s = 2(d−1) = 4),
+# the 2π Euclidean period, and the τ content ratio — no wave-function
+# integral.  The single perturbative ingredient is the one-loop QED
+# running inside α_em(0), evaluated on the framework's own masses and
+# its own α⁻¹(M_Z); no external fine-structure constant enters.
 
 G_EFF = 10.75         # relativistic DOF at T ~ 1 MeV (freeze-out)
 G_EFF_BBN = 3.36      # relativistic DOF after e+e- annihilation (BBN)
 T_BBN = 0.08e-3       # GeV, the deuterium-bottleneck temperature (~0.08 MeV)
-ALPHA_EM = 1.0 / 137.035999084   # the low-energy fine-structure constant (QED)
+ALPHA_EM_LEGACY = 1.0 / 137.035999084   # legacy hard-coded value; replaced by alpha_em_zero() (2026-08-19)
+
+
+def internal_M_Z() -> float:
+    """The internal Z mass: M_Z = sqrt(g2(v)^2 + g1'(v)^2) v/2 with the
+    geometric couplings g1(M_G), g2(M_G) run one-loop down to the
+    framework's own v (the same closure as geometric_couplings).  No
+    external scale enters."""
+    v = float(get("v_HIGGS"))
+    M_G = float(get("M_G"))
+    g1 = float(get("g1_MG_geo"))
+    g2 = float(get("g2_MG"))
+    L = math.log(M_G / v)
+    b1, b2 = 41.0 / 10.0, -19.0 / 6.0
+    g1v = 1.0 / math.sqrt(1.0 / g1 ** 2 + b1 / (8.0 * math.pi ** 2) * L)
+    g2v = 1.0 / math.sqrt(1.0 / g2 ** 2 + b2 / (8.0 * math.pi ** 2) * L)
+    g1p = g1v * math.sqrt(3.0 / 5.0)
+    return math.sqrt(g2v ** 2 + g1p ** 2) * v / 2.0
+
+
+def alpha_em_zero() -> float:
+    """alpha_em(0) from the framework's internal alpha^-1(M_Z).
+
+    1/alpha(0) = 1/alpha(M_Z) + (2/3pi) sum_f Q_f^2 N_cf ln(M_Z/m_f),
+    the one-loop QED vacuum polarisation of the framework's OWN
+    content: the leptons on the internal ladder masses (m_e, m_mu,
+    m_tau), the heavy quarks (c, b) on the internal masses, and the
+    light quarks (u, d, s) frozen at the internal Lambda_QCD (the
+    framework's confinement scale).  alpha^-1(M_Z) = 128.208 is the
+    framework's DERIVED value (geometric_couplings); no external
+    fine-structure constant enters.  (2026-08-19: replaces the
+    hard-coded 1/137.035999084.)
+    """
+    m_e = float(get("m_e_pred")) * 1e-3
+    m_mu = m_e * float(get("m_mu_over_m_e"))
+    a_lp = float(get("alpha_lepton"))
+    m_tau = m_mu * math.exp(2.0 * a_lp)
+    m_t = float(get("m_t_pred"))
+    m_c = m_t / float(get("m_t_over_m_c"))
+    m_b = float(get("m_b_pred"))
+    lam = float(get("qcd_Lambda_QCD"))
+    MZ = internal_M_Z()
+    s = math.log(MZ / m_e) + math.log(MZ / m_mu) + math.log(MZ / m_tau)
+    s += 3.0 * (4.0 / 9.0) * (math.log(MZ / lam) + math.log(MZ / m_c))
+    s += 3.0 * (1.0 / 9.0) * (2.0 * math.log(MZ / lam) + math.log(MZ / m_b))
+    inv0 = float(get("alpha_inv_MZ_pred")) + (2.0 / (3.0 * math.pi)) * s
+    return 1.0 / inv0
 N_G = 8.0             # colour generator count N_c² − 1
 DELTA_S = 0.5         # scalar conformal weight (d−2)/2
 TAU = 1.0 / 50.0      # the torsion parameter (N_L−N_R)/(N_f·ΣY²)
@@ -159,14 +216,17 @@ def axial_coupling() -> float:
 
 
 def em_self_energy(lambda_qcd: float) -> float:
-    """Δ_EM = (1 − 1/(2π)) α_em Λ_QCD — the p−n EM self-energy difference.
+    """Δ_EM = (1 − 1/(2π)) α_em(0) Λ_QCD — the p−n EM self-energy difference.
 
     NON-PERTURBATIVE: the QED×QCD scale αΛ_QCD (the natural electromagnetic
     self-energy scale) times the 2π-period correction (1 − 1/(2π)) — the
-    SAME 1/(2π) thread as r = (1/2π)² and sin²θ13 = (1/2π)²√3/2.  No QED
-    loop, no shape-factor integral.
+    SAME 1/(2π) thread as r = (1/2π)² and sin²θ13 = (1/2π)²√3/2.  The
+    fine-structure constant α_em(0) is the FRAMEWORK'S OWN internal value
+    (alpha_em_zero, closed 2026-08-19: internal α⁻¹(M_Z) + one-loop QED
+    polarisation of the framework's content).  No QED loop integral is
+    borrowed from an external value.
     """
-    return (1.0 - 1.0 / (2.0 * math.pi)) * ALPHA_EM * lambda_qcd
+    return (1.0 - 1.0 / (2.0 * math.pi)) * alpha_em_zero() * lambda_qcd
 
 
 def radiative_correction() -> float:
@@ -198,9 +258,10 @@ def phase_space_f(dm: float, m_e: float) -> float:
     boundary.
     """
     W0 = dm / m_e
+    alpha_em = alpha_em_zero()   # hoisted: one store read, not per-iteration
     def fermi(W):
         p = math.sqrt(W * W - 1.0)
-        eta = ALPHA_EM * W / p
+        eta = alpha_em * W / p
         return 2.0 * math.pi * eta / (1.0 - math.exp(-2.0 * math.pi * eta))
     n = 200000
     h = (W0 - 1.0) / n
@@ -325,6 +386,14 @@ def compute() -> dict:
     Y_p = r["Y_p"]
     N_eff = 3.0 * (1.0 + neff_correction())  # 3 + sqrt3/(2pi)^2
 
+    pset("alpha_em_0_pred", alpha_em_zero(),
+         provenance="DERIVED", role="internal",
+         note=f"alpha_em(0) = 1/{1.0/alpha_em_zero():.3f} (QED vacuum "
+              f"polarisation of the framework's own content: internal "
+              f"alpha^-1(M_Z)={float(get('alpha_inv_MZ_pred')):.3f} + lepton "
+              f"and quark loops on the internal masses; u,d,s frozen at "
+              f"Lambda_QCD)")
+
     pset("bbn_GF", G_F, provenance="DERIVED", role="internal",
          note=f"G_F = 1/(sqrt(2) v^2) = {G_F:.4e} GeV^-2 (the Fermi "
               f"constant from the closed v = {v:.2f} GeV)")
@@ -355,6 +424,7 @@ def compute() -> dict:
 
     return {"Y_p": Y_p, "N_eff": N_eff, "T_f": T_f, "dm_np": dm,
             "tau_n": tau_n, "t_decay": t_decay,
+            "alpha_em_0": alpha_em_zero(),
             "np_freeze": r["np_freeze"], "np_bbn": r["np_bbn"]}
 
 

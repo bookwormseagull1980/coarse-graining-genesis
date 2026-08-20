@@ -52,7 +52,7 @@ Four stages:
    - UV-IR duality: the window span
    - spectral-physical duality: the spectral-sum representation
 3. **Emergence (continuous structure)**: the gauge group SU(3)×SU(2)×U(1), geometry, entropy S = ln W = ∫γ_M.
-4. **4D physics (observable)**: 147 closed parameters, compared with the Standard-Model observations.
+4. **4D physics (observable)**: 170 closed parameters, compared with the Standard-Model observations.
 
 ### 1.4 The single dimensional anchor: G_N
 
@@ -163,8 +163,9 @@ N_g·ξ = 1  ⟺  (N_c−3)(N_c+2) = 0  ⟹  N_c = 3 (the unique positive soluti
 ```
 
 - **What it is**: the conformal coupling ξ and the gauge generator count N_g are **reciprocal**.
-- **Why it matters**: it **derives d=N_c=3 at the same time** — "the colour number emerges from conformal balance". This is the key clue to why the colour number 3 is 3.
+- **Why it matters**: it **pins d=N_c=3 in a single equation** — "the colour number emerges from conformal balance". This is the key clue to why the colour number 3 is 3.
 - **Physical reading**: conformal symmetry (ξ) ↔ gauge symmetry (N_g) are complementary; the information-conservation reading 2⁻³×2³ = 2⁰ (the d=3 special value).
+- **Status (Paper I, Prop. 4.10 / Cor. 4.11)**: the identity is **derived**, not postulated: d=3 from the (A2) carrier sphere S³, ξ=1/8 from the Yamabe coupling, N_g=8 from minimality (su(3) as the smallest simple algebra distinct from the electroweak factor); the identity follows as a corollary of those selections, and the (N_c−3)(N_c+2)=0 form is its unique-positive-solution consistency reading.
 
 ### 4.2 N_g·Δ = 2(d−1): the conformal-weight form (holds for all d)
 

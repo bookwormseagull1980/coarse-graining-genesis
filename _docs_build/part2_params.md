@@ -14,31 +14,33 @@ companion papers:
 
 # Part 2 V4 parameter-by-parameter analysis
 
-> This part analyses the 147 closed parameters one by one, in **dependency order** and by **sector**. Each physical quantity is given: **physical-quantity description, motivation principle, analytic computation formula and method**. The parameter table is generated programmatically from `cg_params.json` (DERIVED/OBSERVED annotation + derivation-chain note), with no manual transcription error.
+> This part analyses the 170 closed parameters one by one, in **dependency order** and by **sector**. Each physical quantity is given: **physical-quantity description, motivation principle, analytic computation formula and method**. The parameter table is generated programmatically from `cg_params.json` (DERIVED/OBSERVED annotation + derivation-chain note), with no manual transcription error.
 
 ---
 
-## Chapter 12 Parameter overview: 147 parameters, 10 sectors, 40 modules
+## Chapter 12 Parameter overview: 170 parameters, 10 sectors, 45 modules
 
 ### 12.1 The panorama
 
-The V4 parameter store `cg_params.json` has **147 keys**: 146 DERIVED (internally computed) + 1 OBSERVED (`G_N_PDG`, the single observational anchor). All DERIVED parameters carry provenance/writer/note (derivation chain).
+The V4 parameter store `cg_params.json` has **170 keys**: 169 DERIVED (internally computed) + 1 OBSERVED (`G_N_PDG`, the single observational anchor). All DERIVED parameters carry provenance/writer/note (derivation chain).
 
 ![Figure 4: the 40-module dependency order](figures/fig04_modules.png)
 
 ![Figure 3: the dimensional anchor chain](figures/fig03_dimensional_chain.png)
 
-### 12.2 Execution order (the 40 chain items of reproduce_v4.py)
+### 12.2 Execution order (the 45 chain items of reproduce_v4.py)
 
 ```
-init_v4 → run_rge → spectrum_loop → sm_content → spectral_sum → endpoint_constraint
-→ vev_closure → gamma_M → ir_flow → geometric_couplings → window_capacity
-→ relaxion_chain → relaxion_geo → epsilon_ratio → spectral_tilt → dark_energy
-→ bbn_helium → perturbation_amplitude → sector_alpha → lz_ladder → zk_gravitational_rg
-→ order_parameter → pseudo_dilaton → geometric_ewsb → tt_tensor → pole_analysis
-→ chi_pole_condition → newton → neutrino_closure → mass_operator_overlap → electron_mass
-→ five_items → cp_sector → trace_density → mass_gap_scale → qcd_sector → gw_ratio
-→ sigma_language → discrete_flow → gauge_group_emergence
+init_v4 → run_rge → spectrum_loop → sm_content → cluster_decay → spectral_sum
+→ endpoint_constraint → vev_closure → gamma_M → ir_flow → geometric_couplings
+→ crosschecks → window_capacity → relaxion_chain → relaxion_geo → epsilon_ratio
+→ spectral_tilt → dark_energy → perturbation_amplitude → sector_alpha → lz_ladder
+→ lz_dynamics → zk_gravitational_rg → order_parameter → pseudo_dilaton
+→ geometric_ewsb → tt_tensor → pole_analysis → chi_pole_condition → newton
+→ neutrino_closure → neutrino_mass_matrix → mass_operator_overlap → electron_mass
+→ five_items → cp_sector → trace_density → mass_gap_scale → qcd_sector
+→ bbn_helium → ew_precision → gw_ratio → sigma_language → discrete_flow
+→ gauge_group_emergence
 ```
 
 ### 12.3 Sector division
@@ -50,7 +52,7 @@ init_v4 → run_rge → spectrum_loop → sm_content → spectral_sum → endpoi
 | 2 FRG flow | spectral_sum, endpoint_constraint, gamma_M, ir_flow, trace_density, discrete_flow | kL, M_G, entropy integral, trace density |
 | 3 gauge | geometric_couplings, geometric_ewsb, gauge_group_emergence | g₁ g₂ g₃, W_R scale |
 | 4 generation | window_capacity, sector_alpha, lz_ladder | 3 generations, sector α, mass ratios |
-| 5 electroweak | vev_closure, relaxion_chain, relaxion_geo, epsilon_ratio, order_parameter, pseudo_dilaton | v, ε, order parameter, pseudo-dilaton |
+| 5 electroweak | vev_closure, relaxion_chain, relaxion_geo, epsilon_ratio, order_parameter, pseudo_dilaton, ew_precision | v, ε, order parameter, pseudo-dilaton |
 | 6 cosmology | spectral_tilt, dark_energy, bbn_helium, perturbation_amplitude, gw_ratio | n_s, Λ, H0, Ω, T_CMB |
 | 7 gravity | tt_tensor, pole_analysis, chi_pole_condition, newton, zk_gravitational_rg | G_N, Z_phys, TT pole |
 | 8 flavour/fermion | neutrino_closure, mass_operator_overlap, electron_mass | neutrino masses, m_t, m_e |
@@ -403,6 +405,12 @@ V(φ; L) = (1/2)·ξ·(R(L) − R_c)·φ² + (λ/4)·φ⁴
 
 ---
 
+### 16.7 ew_precision.py — the electroweak precision observables (the M_G → M_Z interface block)
+
+The interface chain of the framework terminates in the electroweak observables that the high-precision machines measure directly: the internal Z mass (the self-consistent fixed point of the tree-level mass formula on the two-loop geometric running), the W mass (the on-shell Sirlin relation with the one-loop t-b Veltman rho), the weak mixing angles, the rho parameter, the partial and total Z widths (Born + QCD/QED radiators), the hadronic peak cross-section, and the tree-level Higgs mass. Every input is a framework-derived value; the observed values appear only as comparison targets. The computation level is stated in the module docstring (M_Z tree-level on the two-loop running; M_W with Delta rho, Delta r_rem omitted; Gamma_Z Born + radiators; m_H tree-level).
+
+[[PARAMS:ew_precision]]
+
 ## Chapter 17 Sector 6: the cosmology sector
 
 ![Figure 9: the cosmology-sector closure (zero observational anchor)](figures/fig09_cosmology.png)
@@ -653,7 +661,7 @@ PART 3 glueball tower (two-gluon bound-state spectrum): (1/2,1/2)⊗(1/2,1/2) = 
 
 ## Appendix: full parameter-store index
 
-> The complete list of the 147 parameters by writer attribution (see `params_export.json`). The sections above show the parameter tables by module; this appendix lists the complete **sector → module → parameter** index for retrieval.
+> The complete list of the 170 parameters by writer attribution (see `params_export.json`). The sections above show the parameter tables by module; this appendix lists the complete **sector → module → parameter** index for retrieval.
 
 | Sector | module | parameter count | representative parameters |
 |---|---|---|---|
@@ -675,6 +683,7 @@ PART 3 glueball tower (two-gluon bound-state spectrum): (1/2,1/2)⊗(1/2,1/2) = 
 | 5 electroweak | epsilon_ratio | 2 | epsilon_L_over_R, phi_R3 |
 | 5 electroweak | order_parameter | 9 | order_parameter_lambda, s0 |
 | 5 electroweak | pseudo_dilaton | 3 | lambda_H_pseudo |
+| 5 electroweak | ew_precision | 16 | M_Z_pred, M_W_pred, Gamma_Z_pred, m_H_pred |
 | 6 cosmology | spectral_tilt | 1 | ns_tilt |
 | 6 cosmology | dark_energy | 4 | Lambda, Omega_Lambda, T_CMB_GeV |
 | 6 cosmology | bbn_helium | 8 | bbn_Yp, bbn_Neff |

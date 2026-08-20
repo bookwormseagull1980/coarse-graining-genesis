@@ -172,12 +172,17 @@ def compute() -> dict:
               f"spectral zero-mode IR behaviour: the Euclidean-period "
               f"acceleration c H0/(2 pi) times the 3-ball coefficient "
               f"sqrt(4/3) = 2/sqrt(3); NO dark matter, NO curved "
-              f"spacetime — the flat rotation curves are the spectral "
-              f"IR endpoint H0)")
+              f"spacetime — the rotation-curve SCALE is the spectral "
+              f"IR endpoint H0; the full rotation-curve SHAPE F(a/a0) "
+              f"is a research-roadmap item, not yet computed)")
     # The DM sector (computed): the framework's
     # dark-matter is the a0-scale IR-modified gravity regime,
-    # not a particle.  The rotation-curve shape is closed by the a0
-    # MOND transition (the computed a0 above); the effective Omega_DM
+    # not a particle.  The rotation-curve SCALE is set by the
+    # computed a0 (the MOND transition scale); the full
+    # rotation-curve SHAPE function F(a/a0) is NOT yet derived
+    # (the TT zero-mode response to a baryonic mass distribution
+    # is a research-roadmap item — see the module docstring), so
+    # no shape claim is made here.  The effective Omega_DM
     # is computed from the closure relation Omega_Lambda + Omega_DM +
     # Omega_b = 1 with the framework's Omega_Lambda and the DERIVED
     # baryon fraction; the Bullet-cluster lensing is the framework's
@@ -206,8 +211,13 @@ def compute() -> dict:
               f"framework's gravity is the transverse-traceless zero "
               f"mode (no dark-matter particle)")
     pset("dm_verdict",
-         {"rotation": "closed (the spectral zero-mode IR behaviour: "
-                      "a0 = c H0/(2 pi) sqrt(4/3), no dark matter)",
+         {"rotation_scale": "closed (the spectral zero-mode IR "
+                            "behaviour: a0 = c H0/(2 pi) sqrt(4/3), no "
+                            "dark matter)",
+          "rotation_shape": "NOT derived (F(a/a0) is a research-roadmap "
+                            "item: the TT zero-mode acceleration response "
+                            "to baryonic mass distributions is not yet "
+                            "computed)",
           "Omega_DM": Omega_DM,
           "bullet": "prediction (the spectral zero-mode lensing)"},
          provenance="DERIVED", role="informational",
@@ -215,9 +225,11 @@ def compute() -> dict:
               "transverse-traceless spectral zero mode (the TT-tower "
               "residue, linear — no curved spacetime, no self-"
               "interaction); the "
-              "flat rotation curves are the IR behaviour a0 = "
+              "rotation-curve SCALE is the IR behaviour a0 = "
               "c H0/(2 pi) sqrt(4/3) (the spectral IR endpoint H0), "
-              "needing no extra mass; Omega_DM is the flatness closure "
+              "needing no extra mass; the full rotation-curve SHAPE "
+              "F(a/a0) is NOT yet derived (research roadmap); "
+              "Omega_DM is the flatness closure "
               "residue (not a particle); the Bullet cluster is the "
               "lensing test of the spectral zero mode")
 

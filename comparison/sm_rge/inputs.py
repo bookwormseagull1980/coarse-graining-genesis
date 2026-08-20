@@ -63,9 +63,27 @@ SM_INPUTS = {
     "yu_MZ": 6.0e-6,
     "yd_MZ": 1.34e-5,
     "alpha_inv_obs": 137.036,
+    "alpha_inv_MZ_obs": 127.952,
+    "alpha_s_MZ_obs": 0.1179,
+    "tau_n_obs": 879.4,
     # -- electroweak --
     "v_HIGGS_obs": 246.22,
     "m_W_obs": 80.369,
+    # -- electroweak precision observables (PDG 2024, comparison only;
+    #    consumed by comparison/ew_precision.py as comparison targets) --
+    "G_F_obs": 1.1663788e-5,
+    "m_H_obs": 125.20,
+    "Gamma_Z_obs": 2.4952,
+    "Gamma_had_obs": 1.7444,
+    "Gamma_l_obs": 0.083966,
+    "Gamma_b_obs": 0.37705,
+    "Gamma_inv_obs": 0.4990,
+    "sigma_had_obs": 41.481,
+    "R_l_obs": 20.767,
+    "R_b_obs": 0.21629,
+    "sin2thetaW_eff_obs": 0.23153,
+    "sin2thetaW_MSbar_obs": 0.23122,
+    "rho_obs": 1.0004,
     # -- QCD --
     "m_glueball_obs": 1.7,
     "Lambda_QCD_obs": 0.210,
@@ -78,6 +96,7 @@ SM_INPUTS = {
     "m_glueball_0mp_ratio_obs": 1.53,
     # -- fermion masses / ratios --
     "m_e_obs": 0.511,
+    "m_mu_obs": 0.105658,
     "m_mu_over_m_e_obs": 206.8,
     "m_t_obs": 172.69,
     "m_b_obs": 4.18,
@@ -95,6 +114,7 @@ SM_INPUTS = {
     "pmns_delta_over_pi_obs": 1.14,
     "s23_pmns_obs": 0.55,
     "s13_pmns_obs": 0.022,
+    "s12_pmns_obs": 0.304,
     "jarlskog_J_obs": 3.06e-5,
     "ckm_delta_deg_obs": 68.5,
     "lambda_C_obs": 0.2248,

@@ -35,7 +35,7 @@ companion papers:
 | `part1_symmetry.md` | Part 1: symmetry principles (11 chapters) |
 | `part2_params.md` | Part 2: parameter-by-parameter analysis (20 chapters) |
 | `part3_supplement.md` | Part 3: BBN + precision ledger + complete closure annotations |
-| `params_export.json` | complete export of the 147 parameters |
+| `params_export.json` | complete export of the 170 parameters |
 
 **Regeneration commands** (under `_docs_build/`):
 ```
@@ -79,7 +79,7 @@ Two reinforcements (completed after the user pointed out the "missing numerical 
 | L1 | 2, π, 3/2, 1/8, √2π, √3/τ | mathematical constants | **no** | exact |
 | L2 | kL | fixed-point convention (kernel / weight / threshold 4/27) | **yes (core)** | elasticity −1 (to 4/27) → downstream exponential amplification |
 | L3 | τ=1/50 | the form of the window cancellation 2πkL⁴ | **yes** | the content ratio itself is exact; the window form is sensitive |
-| L4 | α_up/α_dn/α_lp + 147 parameters | inherit L2+L3 | **yes** | exponential amplification |
+| L4 | α_up/α_dn/α_lp + 170 parameters | inherit L2+L3 | **yes** | exponential amplification |
 
 **Not needed (exact identities, zero error)**: the content symmetries N_L=N_g=8, ΣY²=10/3, N_L−N_R=1; the 9/8 hypercharge identity; the 4/27 extremum (as a mathematical extremum); the τ=1/50 content ratio itself; the 2π period family.
 
@@ -217,12 +217,12 @@ The framework is presented as a two-paper series:
 | | Title | Role |
 |---|---|---|
 | Paper I | *The spectrum of a compact internal space. I. Gauge structure and fermion content* | structural foundation: gauge algebra, fermion content, gap structure |
-| Paper II | *The spectrum of a compact internal space. II. Effective couplings and mass scales* | numerical evaluation: window closure, 147 parameters, observation comparison |
+| Paper II | *The spectrum of a compact internal space. II. Effective couplings and mass scales* | numerical evaluation: window closure, 170 parameters, observation comparison |
 
 Paper II carries the numerical evaluation of the structural content of Paper I. Its core results:
 
 - **Window-capacity closure**: $\kL = 2.49353$, the single dimensionless number that closes the whole chain.
-- **147 parameters**: one observed anchor ($G_N$) + 146 derived quantities.
+- **170 parameters**: one observed anchor ($G_N$) + 169 derived quantities.
 - **Accuracy**: gauge couplings $<0.01\%$, EW scale $<0.01\%$, fermion mass ratios $<1\%$, cosmological fractions $<1\%$, QCD scale $\sim1\%$.
 - **Five deviations $>1\%$**, each traced to an identified source: Jarlskog $+2.95\%$ (the $|V_{ub}|$ ceiling), $m_b$ $+1.38\%$ (the $y_0=1$ anchor), $\Lambda_{\mathrm{QCD}}$ $-1.25\%$ (loop order), lightest glueball $-2.41\%$ (spectral level), $Y_p$ $+1.56\%$ (nuclear network).
 - **Theoretical sensitivity** (Paper II Appendix D): elasticity matrix, convention chain, error band — the full technical detail is recorded in §0.2 above.
@@ -240,7 +240,7 @@ Paper↔code mapping:
 | QCD + BBN (sec. 9) | `cg_frg/qcd/` |
 | Results + sensitivity (sec. 10, App. D) | `scripts/reproduce_v4.py`, `sensitivity_analysis.py`, `regime_spread.py` |
 
-> The complete Paper II content reference (per-section core content, the 147-parameter table, the precision ledger, the theoretical sensitivity) is at the end of this document, **§11. Paper 5 (Paper II) content reference**.
+> The complete Paper II content reference (per-section core content, the 170-parameter table, the precision ledger, the theoretical sensitivity) is at the end of this document, **§11. Paper 5 (Paper II) content reference**.
 
 
 ---
@@ -249,7 +249,7 @@ Paper↔code mapping:
 
 # Introduction: physical motivation, physical picture, and method system
 
-> This introduction comes from the axiomatic foundation of Paper 4 (*The spectrum of a compact internal space. I. Gauge structure and fermion content*), and is the systematic account of the **"why" and "how" behind** the V4 framework. The V4 code (147 closed parameters) is the **numerical realisation** of this axiomatic framework; Paper 4 is the **axiomatic foundation** of that realisation. The two are complementary: Paper 4 answers "why physical quantities are spectral sums, why the gauge structure is SU(3)×SU(2)×U(1), why the dimension is 4", while V4 answers "what the specific numerical values of these spectral sums are, and how far they differ from the Standard-Model observations".
+> This introduction comes from the axiomatic foundation of Paper 4 (*The spectrum of a compact internal space. I. Gauge structure and fermion content*), and is the systematic account of the **"why" and "how" behind** the V4 framework. The V4 code (170 closed parameters) is the **numerical realisation** of this axiomatic framework; Paper 4 is the **axiomatic foundation** of that realisation. The two are complementary: Paper 4 answers "why physical quantities are spectral sums, why the gauge structure is SU(3)×SU(2)×U(1), why the dimension is 4", while V4 answers "what the specific numerical values of these spectral sums are, and how far they differ from the Standard-Model observations".
 
 ---
 
@@ -375,7 +375,7 @@ The spectrum of the effective geometry = λ_l = l(l+2)/L², multiplicity d_l = (
     (3) UV-IR             e^{∫γ_M} = window span (the entropy-encoded scale duality, S = ln W)
     (4) spectral-physical spectral sum = physical content (the spectral representation of physical quantities)
 
-Entropy (S = ln W = ∫γ_M) is the physical bridge: it encodes both the UV (Gaussian window) and the IR (entropy maximum). **All four dualities are faces of the same "duality emergence"**: spectrum → duality → gauge/geometry/entropy → emergence → 4D physics. The two routes of Paper 4 (algebraic + statistical) are promoted in V4 to four dualities, each with a precise numerical closure (the Lean 21 theorems of N_g·ξ=1, the unique positive solution of d=N_c, ∫γ_M=139.253, the 147-parameter spectral sum).
+Entropy (S = ln W = ∫γ_M) is the physical bridge: it encodes both the UV (Gaussian window) and the IR (entropy maximum). **All four dualities are faces of the same "duality emergence"**: spectrum → duality → gauge/geometry/entropy → emergence → 4D physics. The two routes of Paper 4 (algebraic + statistical) are promoted in V4 to four dualities, each with a precise numerical closure (the Lean 21 theorems of N_g·ξ=1, the unique positive solution of d=N_c, ∫γ_M=139.253, the 170-parameter spectral sum).
 
 ---
 
@@ -458,10 +458,10 @@ Condensation = the coherent-state displacement of the Fock vacuum **|Ω_eff⟩ =
 | Role | axiomatic foundation | specific spectral geometry + gauge structure + numerical couplings |
 | Answers | why spectral sums, why SU(3)×SU(2)×U(1), why dimension 4 | the specific values of the spectral sums, how far from SM observations |
 | Input | the disorder axiom (unique) | G_N (the unique dimensional anchor) |
-| Output | spectral datum + formal correspondence + mass-gap parameter | 147 closed parameters (146 DERIVED + 1 OBSERVED) |
+| Output | spectral datum + formal correspondence + mass-gap parameter | 170 closed parameters (169 DERIVED + 1 OBSERVED) |
 | Honest boundary | colour algebra fixed by minimality, generation count fixed by a window convention (non-dynamical) | the numerical comparison left to a follow-up (completed by V4) |
 
-The task Paper 4 explicitly left open ("the numerical comparison is left to a follow-up paper") is exactly what the V4 code completes — **V4 is the numerical verification of Paper 4**. Together, from "one axiom" to "147 physical quantities consistent with the Standard Model", they constitute the complete narrative of the framework.
+The task Paper 4 explicitly left open ("the numerical comparison is left to a follow-up paper") is exactly what the V4 code completes — **V4 is the numerical verification of Paper 4**. Together, from "one axiom" to "170 physical quantities consistent with the Standard Model", they constitute the complete narrative of the framework.
 
 ---
 
@@ -2916,6 +2916,32 @@ py scripts/generate_framework_v4.py # regenerate this document
 - Spectral-library self-consistency: the rp3_spectrum self-test includes the Weyl-law verification (four-class DOF counts: scalar 1 / vector 2 / spinor 1 / TT 3).
 - Spectrum-to-4D tools: kk_dof_running (KK mode-count running = Weyl law), heat_kernel (Gaussian window = heat kernel, the framework's regularisation).
 - Two-end regularisation: UV Gaussian window (window capacity (kL)² + M_G) + IR entropy maximum (entropy integral ∫γ_M + H0 + neutrino floor Λ).
+
+
+---
+
+# 2.1 Electroweak precision parameters (2026-08-19 addition)
+
+The electroweak precision block of Paper II Section 10.6 (interface chain M_G -> M_Z) is published by `cg_frg/ewsb/ew_precision.py`.  The merged FRAMEWORK_V4 snapshot above predates this module, so its sixteen parameters are collected here.  Every input is a framework-derived value; the observed values appear only as comparison targets.  The computation level is stated in the module docstring (M_Z tree-level on the two-loop geometric running; M_W with the one-loop t-b Veltman rho, Delta r_rem omitted; Gamma_Z Born + QCD/QED radiators; m_H tree-level).
+
+| Parameter | Value | Role | Note (truncated) |
+|---|---|---|---|
+| `M_Z_pred` | 91.1243 | internal | M_Z = (v/2) sqrt(g2^2 + (3/5) g1^2) at the self-consistent fixed point mu = M_Z with the g... |
+| `s2_thetaW_MZ` | 0.233275 | internal | s^2(M_Z) = g'^2/(g2^2+g'^2) at the internal M_Z = 0.233275 (the MS-bar-like mixing from th... |
+| `M_W_pred` | 80.3712 | comparison | M_W = 80.3712 GeV —the on-shell Sirlin relation with Delta r = Delta alpha - (c^2/s^2) Del... |
+| `s2_thetaW_os` | 0.222083 | internal | sin^2 theta_W (on-shell) = 1 - M_W^2/M_Z^2 = 0.222083 from the internal M_Z = 91.124 and M... |
+| `rho_param` | 1.00951 | internal | rho = 1/(1 - Delta rho) = 1.009510 with the exact one-loop t-b Delta rho (Veltman) = 0.009... |
+| `Gamma_Z_pred` | 2.47976 | comparison | Gamma_Z = 2.4798 GeV —the sum of the Born partial widths with the QCD radiator alpha_s/pi ... |
+| `Gamma_had_pred` | 1.73308 | internal | Gamma_had = 1.7331 GeV (u,c,d,s,b at Born + QCD/QED radiators) |
+| `Gamma_b_pred` | 0.380822 | internal | Gamma_b = 0.3808 GeV (Born + QCD/QED radiators; the ~ -0.6% top-loop vertex correction is ... |
+| `Gamma_l_pred` | 0.249942 | internal | Gamma_l = 0.2499 GeV (e + mu + tau, Born + QED radiator) |
+| `Gamma_inv_pred` | 0.496732 | internal | Gamma_inv = 0.4967 GeV (three neutrino species, Born) |
+| `sigma_had_pred` | 41.5102 | internal | sigma_had^0 = 12 pi Gamma_e Gamma_had/(M_Z^2 Gamma_Z^2) = 41.510 nb |
+| `R_l_pred` | 20.8018 | internal | R_l = Gamma_had/Gamma_e = 20.802 (single-species leptonic definition, PDG convention) |
+| `R_b_pred` | 0.219736 | internal | R_b = Gamma_b/Gamma_had = 0.21974 |
+| `m_H_pred` | 124.983 | comparison | m_H = sqrt(2 lambda) v = 124.983 GeV (tree level with the scale-invariant geometric quarti... |
+| `m_mu_pred` | 0.105314 | internal | m_mu = m_e (m_mu/m_e) = 0.105314 GeV (the absolute muon mass from the internal ladder; fil... |
+| `m_tau_pred` | 1.77211 | internal | m_tau = m_mu e^(2 alpha_lp) = 1.772105 GeV (the absolute tau mass from the internal lepton... |
 
 
 ---
@@ -5617,13 +5643,13 @@ or introduce observational dependence; hence **keeping the status quo and report
 >
 > - Paper title: *The spectrum of a compact internal space. II. Effective couplings and mass scales*
 > - Compilation source: `arxiv-jhep-v2/` (the Paper II LaTeX source, JHEP format, 54–56 pages, 0 error / 0 undefined)
-> - Role: Paper I (Paper 4) gives the **structure** (gauge algebra, fermion content, mass-gap form); Paper II (Paper 5) gives the **numbers** (window closure, 147 parameters, comparison with observation).
+> - Role: Paper I (Paper 4) gives the **structure** (gauge algebra, fermion content, mass-gap form); Paper II (Paper 5) gives the **numbers** (window closure, 170 parameters, comparison with observation).
 
 ---
 
 ## 11.0 Paper positioning and structure overview
 
-Paper II's promise: **from one principle (the disorder axiom) + one anchor (G_N), to a 147-quantity parameter table, most falling within 1% of the observed values, and each of the 5 over-1% deviations traced to its source.**
+Paper II's promise: **from one principle (the disorder axiom) + one anchor (G_N), to a 170-quantity parameter table, most falling within 1% of the observed values, and each of the 5 over-1% deviations traced to its source.**
 
 11 main-text sections + 4 appendices; the dependency relation is an **acyclic chain** (each section reads only the numbers of the preceding sections):
 
@@ -5645,14 +5671,14 @@ Appendices:
 
 | Appendix | Title | Content |
 |---|---|---|
-| App A | The full parameter table | the complete 147-parameter table (this section 4.4 transcribes the comparable subset) |
+| App A | The full parameter table | the complete 170-parameter table (this section 4.4 transcribes the comparable subset) |
 | App B | Reproducibility | closure discipline (the derived / observed binary, no third class) |
 | App C | Key derivations | **the complete algebraic derivation of 15 closed forms** (this section 4.5 lists the derivation chain) |
 | App D | Theoretical sensitivity | elasticity matrix, convention chain, error band, RG equivalence (this section 4.6) |
 
 ---
 
-## 11.1 The single anchor and the 147-parameter structure
+## 11.1 The single anchor and the 170-parameter structure
 
 **The single dimensional anchor**: Newton's constant `G_N` (the observed value), with the identity `G_N = 1/(8π M_P²)` defining the reduced Planck mass M_P. G_N has a **dual role** in the framework:
 1. the observational anchor (the single input);
@@ -5660,7 +5686,7 @@ Appendices:
 
 **Structural numbers** (exact, not input): `2`, `π`, `3/2`, `1/8`, and the geometric factors `√(2π)`, `√(3/τ)`.
 
-**147 parameters = 1 observational anchor + 146 derived quantities**. Each derived quantity is computed by the closed form of Appendix C, not stated independently.
+**170 parameters = 1 observational anchor + 169 derived quantities**. Each derived quantity is computed by the closed form of Appendix C, not stated independently.
 
 **Closure discipline**: each quantity is either derived (computed from the preceding quantities via the derivations recorded in Appendix C), or observed (the single G_N); there is no third class. The chain is acyclic, and the table and derivations do not drift.
 

@@ -14,7 +14,7 @@ companion papers:
 
 # Introduction: physical motivation, physical picture, and method system
 
-> This introduction comes from the axiomatic foundation of Paper 4 (*The spectrum of a compact internal space. I. Gauge structure and fermion content*), and is the systematic account of the **"why" and "how" behind** the V4 framework. The V4 code (147 closed parameters) is the **numerical realisation** of this axiomatic framework; Paper 4 is the **axiomatic foundation** of that realisation. The two are complementary: Paper 4 answers "why physical quantities are spectral sums, why the gauge structure is SU(3)×SU(2)×U(1), why the dimension is 4", while V4 answers "what the specific numerical values of these spectral sums are, and how far they differ from the Standard-Model observations".
+> This introduction comes from the axiomatic foundation of Paper 4 (*The spectrum of a compact internal space. I. Gauge structure and fermion content*), and is the systematic account of the **"why" and "how" behind** the V4 framework. The V4 code (170 closed parameters) is the **numerical realisation** of this axiomatic framework; Paper 4 is the **axiomatic foundation** of that realisation. The two are complementary: Paper 4 answers "why physical quantities are spectral sums, why the gauge structure is SU(3)×SU(2)×U(1), why the dimension is 4", while V4 answers "what the specific numerical values of these spectral sums are, and how far they differ from the Standard-Model observations".
 
 ---
 
@@ -140,7 +140,7 @@ The spectrum of the effective geometry = λ_l = l(l+2)/L², multiplicity d_l = (
     (3) UV-IR             e^{∫γ_M} = window span (the entropy-encoded scale duality, S = ln W)
     (4) spectral-physical spectral sum = physical content (the spectral representation of physical quantities)
 
-Entropy (S = ln W = ∫γ_M) is the physical bridge: it encodes both the UV (Gaussian window) and the IR (entropy maximum). **All four dualities are faces of the same "duality emergence"**: spectrum → duality → gauge/geometry/entropy → emergence → 4D physics. The two routes of Paper 4 (algebraic + statistical) are promoted in V4 to four dualities, each with a precise numerical closure (the Lean 21 theorems of N_g·ξ=1, the unique positive solution of d=N_c, ∫γ_M=139.253, the 147-parameter spectral sum).
+Entropy (S = ln W = ∫γ_M) is the physical bridge: it encodes both the UV (Gaussian window) and the IR (entropy maximum). **All four dualities are faces of the same "duality emergence"**: spectrum → duality → gauge/geometry/entropy → emergence → 4D physics. The two routes of Paper 4 (algebraic + statistical) are promoted in V4 to four dualities, each with a precise numerical closure (the Lean 21 theorems of N_g·ξ=1, the unique positive solution of d=N_c, ∫γ_M=139.253, the 170-parameter spectral sum).
 
 ---
 
@@ -223,9 +223,9 @@ Condensation = the coherent-state displacement of the Fock vacuum **|Ω_eff⟩ =
 | Role | axiomatic foundation | specific spectral geometry + gauge structure + numerical couplings |
 | Answers | why spectral sums, why SU(3)×SU(2)×U(1), why dimension 4 | the specific values of the spectral sums, how far from SM observations |
 | Input | the disorder axiom (unique) | G_N (the unique dimensional anchor) |
-| Output | spectral datum + formal correspondence + mass-gap parameter | 147 closed parameters (146 DERIVED + 1 OBSERVED) |
+| Output | spectral datum + formal correspondence + mass-gap parameter | 170 closed parameters (169 DERIVED + 1 OBSERVED) |
 | Honest boundary | colour algebra fixed by minimality, generation count fixed by a window convention (non-dynamical) | the numerical comparison left to a follow-up (completed by V4) |
 
-The task Paper 4 explicitly left open ("the numerical comparison is left to a follow-up paper") is exactly what the V4 code completes — **V4 is the numerical verification of Paper 4**. Together, from "one axiom" to "147 physical quantities consistent with the Standard Model", they constitute the complete narrative of the framework.
+The task Paper 4 explicitly left open ("the numerical comparison is left to a follow-up paper") is exactly what the V4 code completes — **V4 is the numerical verification of Paper 4**. Together, from "one axiom" to "170 physical quantities consistent with the Standard Model", they constitute the complete narrative of the framework.
 
 ---

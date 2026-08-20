@@ -22,7 +22,7 @@ companion papers:
 
 **Role**: this document is the complete lecture-style guide to the Coarse-Graining Genesis (coarse-graining emergence) framework V4.0, in two parts:
 - **Part 1 "Symmetry principles"**: like a lecture, explains all the low-level symmetry laws of the framework thoroughly — motivation, physical meaning, role.
-- **Part 2 "Parameter-by-parameter analysis"**: analyses the 147 closed parameters one by one, in dependency order and by sector — physical-quantity description, motivation principle, analytic computation formula and method.
+- **Part 2 "Parameter-by-parameter analysis"**: analyses the 170 closed parameters one by one, in dependency order and by sector — physical-quantity description, motivation principle, analytic computation formula and method.
 
 **Writing discipline**: this document is "exhaustive, only-add-never-remove" — it integrates the content of `FRAMEWORK_V4.md` (the single source of truth), `CLOSURE_LEDGER.md` (the closure ledger), and all the topical documents; all numbers are generated programmatically from `cg_params.json`, with no manual transcription error.
 

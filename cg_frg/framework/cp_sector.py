@@ -118,7 +118,7 @@ def baryon_asymmetry(J: float, alpha_W: float) -> float:
     carries an α_W³ factor — the CKM three-element product equals the
     weak coupling cubed:
 
-        |V_us|·|V_cb|·|V_ub| = α_W(v)³  (−1.5%, the colour-diluted
+        |V_us|·|V_cb|·|V_ub| = α_W(v)³  (−2.5%, the colour-diluted
                                           CKM product = the weak cube)
 
     ⇒  η_B = J·α_W²/56 = (α_W³·c12c23sinδ)·α_W²/56
@@ -129,7 +129,7 @@ def baryon_asymmetry(J: float, alpha_W: float) -> float:
     (five because three CKM mixings × the two weak sphaleron
     vertices), the Jarlskog α_W³ completing 2 → 5.
 
-    THE |V_us||V_cb||V_ub| = α_W³ IDENTITY (CLOSED, −0.09%): the
+    THE |V_us||V_cb||V_ub| = α_W³ IDENTITY (CLOSED, −2.5%): the
     geometric mean of the three cross-generation CKM elements equals
     the weak coupling α_W(v) — (|V_us||V_cb||V_ub|)^{1/3} = α_W.  The
     three elements are the three cross-generation mixings (1↔2, 2↔3,
@@ -253,7 +253,7 @@ def compute() -> dict:
               f"alpha_W^5 c12 c23 sin(delta)/56 — the STANDARD sphaleron "
               f"rate (5 = 3 CKM mixings x 2 weak sphaleron vertices); "
               f"the |V_us||V_cb||V_ub| = alpha_W^3 identity is CLOSED "
-              f"(−0.09%): the three cross-generation elements' geometric "
+              f"(−2.5%): the three cross-generation elements' geometric "
               f"mean = alpha_W (the weak cube, colour-diluted)")
 
     return {"ratio": ratio, "delta_over_pi": delta_over_pi,

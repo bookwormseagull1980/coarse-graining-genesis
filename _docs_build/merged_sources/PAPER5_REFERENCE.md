@@ -4,13 +4,13 @@
 >
 > - Paper title: *The spectrum of a compact internal space. II. Effective couplings and mass scales*
 > - Compilation source: `arxiv-jhep-v2/` (the Paper II LaTeX source, JHEP format, 54–56 pages, 0 error / 0 undefined)
-> - Role: Paper I (Paper 4) gives the **structure** (gauge algebra, fermion content, mass-gap form); Paper II (Paper 5) gives the **numbers** (window closure, 147 parameters, comparison with observation).
+> - Role: Paper I (Paper 4) gives the **structure** (gauge algebra, fermion content, mass-gap form); Paper II (Paper 5) gives the **numbers** (window closure, 170 parameters, comparison with observation).
 
 ---
 
 ## 11.0 Paper positioning and structure overview
 
-Paper II's promise: **from one principle (the disorder axiom) + one anchor (G_N), to a 147-quantity parameter table, most falling within 1% of the observed values, and each of the 5 over-1% deviations traced to its source.**
+Paper II's promise: **from one principle (the disorder axiom) + one anchor (G_N), to a 170-quantity parameter table, most falling within 1% of the observed values, and each of the 5 over-1% deviations traced to its source.**
 
 11 main-text sections + 4 appendices; the dependency relation is an **acyclic chain** (each section reads only the numbers of the preceding sections):
 
@@ -32,14 +32,14 @@ Appendices:
 
 | Appendix | Title | Content |
 |---|---|---|
-| App A | The full parameter table | the complete 147-parameter table (this section 4.4 transcribes the comparable subset) |
+| App A | The full parameter table | the complete 170-parameter table (this section 4.4 transcribes the comparable subset) |
 | App B | Reproducibility | closure discipline (the derived / observed binary, no third class) |
 | App C | Key derivations | **the complete algebraic derivation of 15 closed forms** (this section 4.5 lists the derivation chain) |
 | App D | Theoretical sensitivity | elasticity matrix, convention chain, error band, RG equivalence (this section 4.6) |
 
 ---
 
-## 11.1 The single anchor and the 147-parameter structure
+## 11.1 The single anchor and the 170-parameter structure
 
 **The single dimensional anchor**: Newton's constant `G_N` (the observed value), with the identity `G_N = 1/(8π M_P²)` defining the reduced Planck mass M_P. G_N has a **dual role** in the framework:
 1. the observational anchor (the single input);
@@ -47,7 +47,7 @@ Appendices:
 
 **Structural numbers** (exact, not input): `2`, `π`, `3/2`, `1/8`, and the geometric factors `√(2π)`, `√(3/τ)`.
 
-**147 parameters = 1 observational anchor + 146 derived quantities**. Each derived quantity is computed by the closed form of Appendix C, not stated independently.
+**170 parameters = 1 observational anchor + 169 derived quantities**. Each derived quantity is computed by the closed form of Appendix C, not stated independently.
 
 **Closure discipline**: each quantity is either derived (computed from the preceding quantities via the derivations recorded in Appendix C), or observed (the single G_N); there is no third class. The chain is acyclic, and the table and derivations do not drift.
 

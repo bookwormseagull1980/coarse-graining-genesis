@@ -1,1081 +1,1243 @@
 {
- "GN_layers": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": {
-   "fermion": 180,
-   "gauge": 144,
-   "ghost": -288,
-   "scalar": 4,
-   "total": 40
+  "GN_layers": {
+    "note": "the TT layer decomposition: scalar 4 + fermion 180 + gauge 144 + ghost -288 = 40 > 0 — the positive supertrace (the graviton pole survives; rp3_spectrum degeneracies)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": {
+      "fermion": 180,
+      "gauge": 144,
+      "ghost": -288,
+      "scalar": 4,
+      "total": 40
+    },
+    "writer": "cg_frg/gravity/zk_gravitational_rg.py"
   },
-  "writer": "cg_frg/gravity/zk_gravitational_rg.py",
-  "note": "the TT layer decomposition: scalar 4 + fermion 180 + gauge 144 + ghost -288 = 40 > 0 — the positive supertrace (the graviton pole survives; rp3_spectrum degeneracies)"
- },
- "G_N_PDG": {
-  "provenance": "OBSERVED",
-  "role": "anchor",
-  "value": 6.70883e-39,
-  "writer": "cg_core.params.init_stores",
-  "note": "anchor value (observed, comparison only)"
- },
- "G_N_pred": {
-  "provenance": "DERIVED",
-  "role": "comparison",
-  "value": 1.5168575506168233e-38,
-  "writer": "cg_frg/gravity/newton.py",
-  "note": "G_N from the TT residue (prescription A): 1.516858e-38 GeV^-2 vs PDG 6.708830e-39 (+126.0987%).  G_N = 1/(8pi M_P^2) is the identity: with the anchor M_P = 1/sqrt(8pi G_N_PDG) it reproduces PDG exactly.  Z_phys(M_G) = 0.665 is the vacuum-energy mass correction (CC in the TT channel), excluded from the G_N normalisation)"
- },
- "G_N_verdict": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": "CLOSED-as-identity: G_N = 1/(8pi M_P^2) with the anchor M_P = 1/sqrt(8pi G_N_PDG) reproduces PDG exactly (0.0000%); Z_phys = 0.665 (vacuum-energy/CC in TT) is excluded from the G_N normalisation",
-  "writer": "cg_frg/gravity/newton.py",
-  "note": "G_N = 1/(8pi M_P^2) is the identity; the anchor M_P = 1/sqrt(8pi G_N_PDG) gives the exact reproduction"
- },
- "H0_GEV": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.4388498142964775e-42,
-  "writer": "cg_frg/cosmology/gw_ratio.py",
-  "note": "H0 = M_P*sqrt(pi)*e^(-int gamma_M) = 1.4388e-42 GeV (the IR endpoint of the emergence window; cross-check kL*M_G = M_P*sqrt(pi): +0.000%)"
- },
- "L_Cg": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.7724538509055159,
-  "writer": "scripts/init_v4.py",
-  "note": "L_Cg = sqrt(pi) = 1.7724538509055159 (the Gaussian endpoint: the window's characteristic length from the Gaussian normalisation int exp(-x^2) dx = sqrt(pi); computed, not an input)"
- },
- "L_Cg_star": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.7724538509055159,
-  "writer": "cg_frg/frg/endpoint_constraint.py",
-  "note": "L_Cg* = sqrt(pi) (first-principles)"
- },
- "L_Gg": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.4935343325226915,
-  "writer": "cg_frg/frg/endpoint_constraint.py",
-  "note": "L(M_G)=kL=C/M_G at L_Cg=sqrt(pi)"
- },
- "L_critical": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.7724538509055159,
-  "writer": "cg_frg/frg/endpoint_constraint.py",
-  "note": "L_c = sqrt(6/R_c) with R_c = 6/pi, so L_c = sqrt(pi) = L_Cg (first-principles)"
- },
- "Lambda": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 4.254718579276526e-84,
-  "writer": "cg_frg/cosmology/dark_energy.py",
-  "note": "Lambda = rho_Lambda/M_P^2 = 4.255e-84 GeV^2 (the FRW cosmological constant from the neutrino-mass floor; m_nu1 = 0.0026 eV DERIVED (Weinberg operator + hierarchy ratios); the Y_u = 2/3 weight is the up-quark hypercharge)"
- },
- "M_G": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.7310765000475023e+18,
-  "writer": "cg_frg/frg/endpoint_constraint.py",
-  "note": "M_G = M_P*sqrt(pi)/kL (first-principles)"
- },
- "M_P": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.435323595526305e+18,
-  "writer": "scripts/init_v4.py",
-  "note": "M_P = 1/sqrt(8 pi G_N) = 2.43532360e+18 GeV (the reduced Planck mass, the identity from the single observed anchor G_N — computed, not an input)"
- },
- "Omega_DM": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.2657026396202929,
-  "writer": "cg_frg/cosmology/gw_ratio.py",
-  "note": "Omega_DM = 1 - Omega_Lambda - Omega_b = 0.2657 (the flatness closure residue; NOT a particle — the framework's gravity is TRANSPARENT (no dark matter)"
- },
- "Omega_Lambda": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.6850442965140158,
-  "writer": "cg_frg/cosmology/dark_energy.py",
-  "note": "Omega_Lambda = rho_Lambda/(3 H0^2 M_P^2) = 0.68504 (the neutrino-mass floor)"
- },
- "Omega_b": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.04925306386569133,
-  "writer": "cg_frg/cosmology/gw_ratio.py",
-  "note": "Omega_b = eta_B n_gamma m_p / rho_crit = 0.04925 (eta_B = 6.09e-10 (Sakharov J alpha_W^2/56), m_p = 0.9382 (constituent quark 279/64 Lambda_QCD), rho_crit from the DERIVED H0; T_CMB DERIVED from the neutrino floor)"
- },
- "R_c_star": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.909859317102744,
-  "writer": "cg_frg/frg/endpoint_constraint.py",
-  "note": "R_c* = 6/pi (first-principles, the critical curvature)"
- },
- "TT_delta_forming": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": true,
-  "writer": "cg_frg/gravity/tt_tensor.py",
-  "note": "the delta-function pole criterion (slope_G < -1.5, |slope_Z| < 0.5)"
- },
- "TT_pole_verified": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": true,
-  "writer": "cg_frg/gravity/pole_analysis.py",
-  "note": "TT pole stability: positive spectral density, self-energy below the bare mass (pole_analysis)"
- },
- "TT_slope_G": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": -1.9999999999999933,
-  "writer": "cg_frg/gravity/tt_tensor.py",
-  "note": "d ln G_TT / d ln k over the IR trajectory (the k^{-2}-type pole criterion)"
- },
- "T_CMB_GeV": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.353400743797703e-13,
-  "writer": "cg_frg/cosmology/dark_energy.py",
-  "note": "T_CMB = m_nu1 r12/pi (1-tau Delta_s) = 2.7310 K (the photon floor from the lightest neutrino mass; r12 = (N_L-N_R)/SigmaY2 = 3/10 the PURE CONTENT ratio; (1-tau Delta_s) = (1-tau/2) the scalar-conformal-weight correction (Delta_s = (d-2)/2 = 1/2, the SAME Delta_s as the proton mass 31/32))"
- },
- "V_us_gatto_obs": {
-  "provenance": "DERIVED",
-  "role": "comparison",
-  "value": 0.18288054134964685,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "|V_us| from the Gatto formula with the OBSERVED m_d/m_s = 0.183 vs PDG 0.2245 (-18.5% — the Gatto verification)"
- },
- "V_us_geo": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 0.22393560298858664,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "|V_us| = sqrt(m_d/m_s) = 0.2239 (the Gatto dominant term, CLOSED); the full Gatto (delta12 = 0.2) gives 0.1820"
- },
- "Z_G_dim": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.039374130504556404,
-  "writer": "cg_frg/gravity/zk_gravitational_rg.py",
-  "note": "Z_G = (M_P/M_G)^2/(16pi) = 0.039374 — the TT kinetic coefficient at the emergence scale"
- },
- "Z_geometric_ratio": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.7108199104330504,
-  "writer": "cg_frg/gravity/zk_gravitational_rg.py",
-  "note": "Z(M_G)/Z(M_P) = 0.7108 — the geometric running Z(k) = Z_G*k/M_G across the UV window (exact on the kL-const trajectory)"
- },
- "Z_phys_MG": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.0,
-  "writer": "cg_frg/gravity/newton.py",
-  "note": "Z_phys(M_G) = lambda/(lambda+sigma) = 1.000000 (matter back-reaction tiny); the 0.665 is the vacuum-energy (CC) mass correction, excluded from the G_N normalisation"
- },
- "Z_quantum_shift": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.006150176028383747,
-  "writer": "cg_frg/gravity/zk_gravitational_rg.py",
-  "note": "the one-loop M_P shift over the M_P-M_G window = +0.6150% [NEGLIGIBLE] (Delta ln Z = +1.226268e-02; the SM content 4 scalar + 45 Weyl + 24 vector, the exact RP3 mode counting, the Veltman-type 1/(384pi^2) one-loop graviton self-energy)"
- },
- "a0_MOND": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.204369920558342e-10,
-  "writer": "cg_frg/cosmology/gw_ratio.py",
-  "note": "a0 = c H0/(2 pi) sqrt(4/3) = 1.2044e-10 m/s^2 (the transparent-gravity IR behaviour: the Euclidean-period acceleration c H0/(2 pi) times the 3-ball coefficient sqrt(4/3) = 2/sqrt(3); NO dark matter, NO curved spacetime — the flat rotation curves are the spectral IR endpoint H0)"
- },
- "alpha_down": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.9018618632255682,
-  "writer": "cg_frg/generation/sector_alpha.py",
-  "note": "alpha_dn = alpha_up - (18/17)Delta = 1.901862 (the 9/8 hypercharge ladder, step = (9/8)s, s = 16Delta/17)"
- },
- "alpha_inv_MZ_pred": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 127.62923272776327,
-  "writer": "cg_frg/gauge/geometric_couplings.py",
-  "note": "alpha^-1(M_Z) = 127.6 (one-loop: the geometric g1(M_G)=g2(k_GUT)*kappa run down and g2(M_G) both run down the SM RGE; the kappa acts at k_GUT (the isometry-breaking onset))"
- },
- "alpha_lepton": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.4114863349614586,
-  "writer": "cg_frg/generation/sector_alpha.py",
-  "note": "alpha_lp = alpha_up - 2Delta = 1.411486 (the lepton rung spans two steps exactly)"
- },
- "alpha_s_MZ_pred": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.11798585136901278,
-  "writer": "cg_frg/qcd/mass_gap_scale.py",
-  "note": "alpha_s(M_Z) = 0.1180 — the framework's QCD prediction from the common-origin g3(M_G) = 0.4978 run down FULL two-loop SM; the framework's independent QCD content is this initial condition, the running is standard SM dynamics)"
- },
- "alpha_sd": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.4883507530822218,
-  "writer": "cg_frg/generation/lz_ladder.py",
-  "note": "alpha_sd = alpha_dn - kL_CMB/6 = 1.488351 (the down first-gen step: CMB window over the so(4) 6 generators — the colour dilution).  SYMMETRY FORM (2026-08-16): alpha_sd = Delta_f(1 - s0/N_R) = (3/2)(1 - 2tau/7) = 1.491429 (the fermion conformal weight Delta_f = d/2 = 3/2 times the gravity-higher-order correction 1 - s0/N_R; s0/N_R = n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175, HALF the J=2 EC first-order torsion shift N_g tau/14 = 8tau/14, factor 2 = (d+1)/2; matches the closure to -0.05%)"
- },
- "alpha_up": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.4535343325226915,
-  "writer": "cg_frg/generation/sector_alpha.py",
-  "note": "alpha_up = kL - 2tau = 2.453534 (the window width minus the non-adiabatic torsion 2tau; kL - alpha_up = 2tau exactly)"
- },
- "bbn_GF": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.1666625480422359e-05,
-  "writer": "cg_frg/cosmology/bbn_helium.py",
-  "note": "G_F = 1/(sqrt(2) v^2) = 1.1667e-05 GeV^-2 (the Fermi constant from the closed v = 246.19 GeV)"
- },
- "bbn_Neff": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 3.043873359487886,
-  "writer": "cg_frg/cosmology/bbn_helium.py",
-  "note": "N_eff = 3 + sqrt3/(2pi)^2 = 3.0439 (non-perturbative sqrt3 geometry x 2pi period)"
- },
- "bbn_Tf": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.0007532271430990985,
-  "writer": "cg_frg/cosmology/bbn_helium.py",
-  "note": "T_f = 0.7532 MeV (Gamma_weak = H freeze-out, g_A = 4/pi)"
- },
- "bbn_Yp": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.2514419497973957,
-  "writer": "cg_frg/cosmology/bbn_helium.py",
-  "note": "Y_p = 2(np)/(1+np) = 0.2514 (all constants non-perturbative internal: g_A=4/pi, Delta_EM=(1-1/2pi)a Lambda, delta_R=1+(1-tau)/8pi)"
- },
- "bbn_dm_np": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.0012888463514182614,
-  "writer": "cg_frg/cosmology/bbn_helium.py",
-  "note": "dm_np = (m_d - m_u) - (1-1/2pi) alpha Lambda = 1.2888 MeV (non-perturbative EM self-energy)"
- },
- "bbn_status": {
-  "provenance": "DERIVED",
-  "role": "informational",
-  "value": "Y_p = 0.2514; N_eff = 3.0439 (ALL six constants NON-PERTURBATIVE internal: g_A=4/pi, Delta_EM, delta_R, delta_N, |V_ud|, f)",
-  "writer": "cg_frg/cosmology/bbn_helium.py",
-  "note": "the BBN sector: helium yield and neutrino species"
- },
- "bbn_t_decay": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 204.88571212562456,
-  "writer": "cg_frg/cosmology/bbn_helium.py",
-  "note": "t_decay = 204.9 s (the radiation-era expansion time from T_f to T_BBN)"
- },
- "bbn_tau_n": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 897.6946235802543,
-  "writer": "cg_frg/cosmology/bbn_helium.py",
-  "note": "tau_n = 897.7 s (Fermi beta decay, g_A = 4/pi, delta_R = 1+(1-tau)/8pi)"
- },
- "chi_pole_alpha": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.0,
-  "writer": "cg_frg/gravity/chi_pole_condition.py",
-  "note": "alpha = 2: the radius-modulus exponent — chi is the internal conformal factor (L(chi) = L(0)e^{chi}), so every dimension-2 geometric mass rescales as e^{-2chi} (W2: the mass dimension of m^2; not a free parameter)"
- },
- "chi_pole_crossing": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.6572248464344095,
-  "writer": "cg_frg/gravity/chi_pole_condition.py",
-  "note": "V_TT(chi)*Pi2(chi) = 1 at chi_c = 0.6572 (alpha = 2, bisection to machine precision — the ladder pole condition of the emergent graviton; x(0) = 0.1007 < 1, x(2) = 27.3 -> infinity: monotone + unbounded, Lemma 4)"
- },
- "chi_pole_robust": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": {
-   "1.0": 1.3144,
-   "1.5": 0.8763,
-   "2.0": 0.6572,
-   "2.5": 0.5258,
-   "3.0": 0.4381
+  "G_N_PDG": {
+    "note": "anchor value (observed, comparison only)",
+    "provenance": "OBSERVED",
+    "role": "anchor",
+    "value": 6.70883e-39,
+    "writer": "cg_core.params.init_stores"
   },
-  "writer": "cg_frg/gravity/chi_pole_condition.py",
-  "note": "crossing existence across alpha in [1,3] (the location shifts; the existence is alpha-independent — Lemma 4)"
- },
- "chi_pole_x0": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.100656318445256,
-  "writer": "cg_frg/gravity/chi_pole_condition.py",
-  "note": "x(0) = 0.1007 < 1 — the ladder product at chi = 0 (below the critical value; the crossing requires the chi condensation)"
- },
- "ckm_delta_direction": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 1.1967972013675403,
-  "writer": "cg_frg/framework/cp_sector.py",
-  "note": "delta_CKM = (8/7) pi / N_c = 8 pi / 21 = 68.57 deg — the COLOUR-NUMBER dilution: delta_CKM = delta_PMNS/N_c, where delta_PMNS = (n_L/n_R) pi = (8/7) pi (the lepton sector, colourless) and N_c = 3 (the quarks carry 3 colours, so their mixing phase is diluted by the colour number); the quadrant differs from the PMNS (first vs third — the 1/N_c dilution rotates the direction); the 1/N_c dilution = the internal-space-dimension dilution: the quark mixing phase is diluted by d = 3 = N_c (the RP³ dimension = the colour rank, the N_g·ξ = 1 unique solution), while the lepton mixing (colourless, no colour dimension) is undiluted)"
- },
- "cp_87_ratio": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 1.1428571428571428,
-  "writer": "cg_frg/framework/cp_sector.py",
-  "note": "n_L/n_R = 8/7 = 1.142857 — the SM left/right content ratio (8 doublets vs 7 singlets per family)"
- },
- "cp_jarlskog_magnitude": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 3.150264912189696e-05,
-  "writer": "cg_frg/framework/cp_sector.py",
-  "note": "J = |V_us||V_cb||V_ub| c12 c23 sin(delta) = 3.1503e-05 (the exact Jarlskog formula with the framework's closed |V_us|, |V_cb|, |V_ub| (Gatto geometric elements) and the DERIVED delta_CKM = 8 pi / 21 = 68.57 deg; no SM A or Wolfenstein eta/rho_bar input); the +3% vs observed is the V_ub observation spread (V_ub is the least-precise CKM element, PDG 0.00382±0.0002 = ±5% — the framework's 0.00378 is within it) — observation ceiling, not a fixable mechanism"
- },
- "cp_pmns_87_pattern": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 1.1428571428571428,
-  "writer": "cg_frg/framework/cp_sector.py",
-  "note": "delta_PMNS/pi ~ (8/7) = 1.142857 (the 8/7 content ratio n_L/n_R: 8 left doublets vs 7 right singlets per generation; the phase = (content ratio) × pi, the pi being the complex-plane half-turn of maximal CP)"
- },
- "cp_sector_status": {
-  "provenance": "DERIVED",
-  "role": "informational",
-  "value": "the 8/7 left-right content ratio (delta_PMNS ~ 1.14 pi); the CKM delta DERIVED (8 pi / 21 = 68.57 deg, the colour-number dilution); the Jarlskog magnitude closed (the exact formula); the baryogenesis eta_B = J alpha_W^2/56 (Sakharov content)",
-  "writer": "cg_frg/framework/cp_sector.py",
-  "note": "the CP sector status: the 8/7 content ratio exact, the CKM delta derived (8 pi / 21), the Jarlskog magnitude closed, the baryogenesis = J alpha_W^2/56"
- },
- "discrete_flow_beta": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.0374777173335446e+55,
-  "writer": "cg_frg/frg/discrete_flow.py",
-  "note": "beta(sigma) = -2C sigma^-3 (C < 0) — the analytic closed-form flow of the vacuum-energy profile V_eff(k) = -(C/2)(k^-2 - M_P^-2); unique global solution (Picard-Lindelof)"
- },
- "discrete_flow_gap_spectrum": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": "m_long^2(M_G) = K(R-R_c) = -2.5197 < 0 (the tachyon — the condensation trigger); m_gen^2 = g2^2<E>^2 = 6.207e+32 GeV^2 > 0 and the J=2 kinetic lambda_J = 14.1608/L^2 > 0 — the lowest excitation MASSIVE (the spectral level of the mass gap); the glueball tower ratios geometric: 0++ 1.00, 2++ 1.41, 0++* 1.50, 0-+ 1.46",
-  "writer": "cg_frg/frg/discrete_flow.py",
-  "note": "the discrete-flow mass-gap spectrum: the condensate generator mass (positive) + the positive J=2 kinetic — the gap at the spectral level; the tower ratios from the RP3 harmonic indices"
- },
- "discrete_flow_reflection_positivity": {
-  "provenance": "DERIVED",
-  "role": "informational",
-  "value": "the OS structure preserved layer by layer: each layer is a Gaussian measure (GJ87 — reflection-positive); the flow map (the analytic beta, the window projection) preserves the positivity stepwise",
-  "writer": "cg_frg/frg/discrete_flow.py",
-  "note": "the Osterwalder-Schrader reflection positivity of the discrete flow"
- },
- "discrete_flow_semigroup": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.1102230246251565e-16,
-  "writer": "cg_frg/frg/discrete_flow.py",
-  "note": "the Gaussian window semigroup T_a*T_b = T_(sqrt(a^2+b^2)) verified to 1.1e-16 across the mode grid (the unitary, irreversible partial-trace flow)"
- },
- "discrete_flow_status": {
-  "provenance": "DERIVED",
-  "role": "informational",
-  "value": "the discrete flow IS the physical RG: the Gaussian window kernel is the coarse-graining operator (not a regulator); the semigroup is verified to machine precision; the beta is the analytic closed form; the window capacity kL* = const makes the flow equidistant in log sigma; the mass-gap spectrum is the condensate + the positive J=2 kinetic; the OS structure is preserved stepwise",
-  "writer": "cg_frg/frg/discrete_flow.py",
-  "note": "the discrete flow is the physical RG structure: the window kernel is the coarse-graining operator, the semigroup machine-precision verified, the beta the analytic closed form, the gap spectrum from the condensate and the positive J=2 kinetic"
- },
- "discrete_flow_step": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 0.4010371892446762,
-  "writer": "cg_frg/frg/discrete_flow.py",
-  "note": "Delta ln sigma = 1/kL* = 0.4010 — the window-capacity step (the flow is equidistant in log sigma; the discretisation error bound 1/(kL*)^2 = 0.16, while the physical closures converge far better — the continuum limit effectively reached)"
- },
- "dm_verdict": {
-  "provenance": "DERIVED",
-  "role": "informational",
-  "value": {
-   "Omega_DM": 0.2657026396202929,
-   "bullet": "prediction (the transparent-gravity lensing)",
-   "rotation": "closed (the transparent-gravity IR behaviour: a0 = c H0/(2 pi) sqrt(4/3), no dark matter)"
+  "G_N_pred": {
+    "note": "G_N from the TT residue with Z_phys = 1.000000 (matter back-reaction tiny).  G_N = 1/(8pi Z_phys M_P^2) = 6.708830e-39 GeV^-2 vs PDG 6.708830e-39 (-0.0000%).  With Z_phys = 1 this is the identity G_N = 1/(8pi M_P^2), which reproduces PDG exactly with the anchor M_P = 1/sqrt(8pi G_N_PDG).",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 6.708829999999999e-39,
+    "writer": "cg_frg/gravity/newton.py"
   },
-  "writer": "cg_frg/cosmology/gw_ratio.py",
-  "note": "NO dark-matter particle: the framework's gravity is the TRANSPARENT spectral zero-mode (the TT-tower residue, linear — no curved spacetime, no self-interaction); the flat rotation curves are the IR behaviour a0 = c H0/(2 pi) sqrt(4/3) (the spectral IR endpoint H0), needing no extra mass; Omega_DM is the flatness closure residue (not a particle); the Bullet cluster is the lensing test of the transparent gravity"
- },
- "ec_action_torsion_coeffs": {
-  "provenance": "DERIVED",
-  "role": "informational",
-  "value": {
-   "a": 1.2968471466669305e+54,
-   "b": 5.187388586667722e+54,
-   "b_equals_4a": true,
-   "c": -3.0259766755561716e+54,
-   "torsion_algebraic": true
+  "G_N_verdict": {
+    "note": "G_N = 1/(8pi M_P^2) is the identity",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": "CLOSED-as-identity: G_N = 1/(8pi M_P^2) with the anchor M_P = 1/sqrt(8pi G_N_PDG) reproduces PDG exactly (0.0000%); Z_phys = 1 confirms the matter back-reaction is negligible in the G_N normalisation",
+    "writer": "cg_frg/gravity/newton.py"
   },
-  "writer": "cg_frg/ewsb/order_parameter.py",
-  "note": "the EC torsion algebra: L = a T^2 + b T^{bac}T_{abc} + c (T^a_ab)^2 with a = M_G^3/4, b = 4a (the Holst/Immirzi algebraic-torsion condition), c = -(7/3)a (the trace term)"
- },
- "electron_index_20": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 20.05185946223381,
-  "writer": "cg_frg/fermion/electron_mass.py",
-  "note": "tau^-1/kL = 20.0519 vs the structural 20 (the 4x5 counting) — the near-identity (0.1%) — an approximate mechanism clue"
- },
- "entropy_integral": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 139.2537061093592,
-  "writer": "cg_frg/frg/gamma_M.py",
-  "note": "integral of gamma_M = ln(M_P^2 sqrt(2pi)/sqrt(rho_Lambda)) = 139.253706 (the two-Gaussian association entropy, INTERNAL — no observed H0)"
- },
- "epsilon_L_over_R": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.4221768734404969e-16,
-  "writer": "cg_frg/ewsb/epsilon_ratio.py",
-  "note": "epsilon = (3 alpha/pi) e^{-4 pi kL} (the window-squared line; the kL-only dilaton-stop form e^{1/(2pi)} e^{-phi} with phi = 4 pi kL - ln(3 alpha/pi) + 1/(2pi) is identical) — fully internal, no carried baseline"
- },
- "epsilon_dilaton": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.4221768734404969e-16,
-  "writer": "cg_frg/ewsb/relaxion_chain.py",
-  "note": "eps = e^{1/(2pi)} e^{-phi_stop} = 1.4244e-16 (the zero-point anchored ratio)"
- },
- "eta_b": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 6.090892649634457e-10,
-  "writer": "cg_frg/framework/cp_sector.py",
-  "note": "eta_B = J alpha_W^2/56 = 6.091e-10 (the Sakharov content: J (CP violation, the derived delta_CKM = 8pi/21), alpha_W^2 = 0.03290 (the weak sphaleron rate at the EW scale, geometric RGE), 1/56 = xi/n_R (the conformal-gauge duality xi = 1/N_g = 1/8 times 1/n_R = 1/7).  The alpha_W^2 POWER is RESOLVED: J carries alpha_W^3 (|V_us||V_cb||V_ub| = alpha_W^3), so eta_B = alpha_W^5 c12 c23 sin(delta)/56 — the STANDARD sphaleron rate (5 = 3 CKM mixings x 2 weak sphaleron vertices); the |V_us||V_cb||V_ub| = alpha_W^3 identity is CLOSED (−0.09%): the three cross-generation elements' geometric mean = alpha_W (the weak cube, colour-diluted)"
- },
- "five_items_status": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": "{'ITEM 1 — 3 generations (n = {0,2,4})': 'CLOSED-formal', \"ITEM 2 — the branch choice (hypercharge B' vs C')\": 'recorded', 'ITEM 3 — 2L = sqrt(2pi)': 'CLOSED', 'ITEM 4 — the two v-paths (the factor-2 unification)': 'CLOSED', 'ITEM 5 — the m_e': 'CLOSED-near'}",
-  "writer": "cg_frg/framework/five_items.py",
-  "note": "the five items' status ledger (1: CLOSED-formal, 2: recorded, 3: CLOSED, 4: CLOSED, 5: CLOSED-near)"
- },
- "g1_MG_geo": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.6049900729523602,
-  "writer": "cg_frg/gauge/geometric_couplings.py",
-  "note": "g1(M_G) = g2(k_GUT)*kappa run down = 0.604990 (the kappa acts at the breaking scale k_GUT (g1(k_GUT)=g2(k_GUT)*kappa), then g1 runs down to M_G; the amplitude s0=2tau = N_g*tau/(d+1)"
- },
- "g2_MG": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.5088477031823814,
-  "writer": "cg_frg/gauge/geometric_couplings.py",
-  "note": "g2(M_G) = 0.508847703 — the FULL prediction: bare geometric g2 corrected by the conservation law 1/alpha_SM = 1/alpha_W + 1/N_c - tau^2*pi/2 (matches SM to +0.00066%; the law IS the error-cancellation mechanism, proven in Lean 4)"
- },
- "g2_MG_geo": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.5106008686060399,
-  "writer": "cg_frg/gauge/geometric_couplings.py",
-  "note": "bare geometric g2 = sqrt(8)(M_G/M_P)kL^-3/2 = 0.510600869 (Killing normalisation, +0.345% vs SM — the raw value BEFORE the conservation-law correction)"
- },
- "g2_conservation_lhs": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.001929848645681,
-  "writer": "cg_frg/gauge/geometric_couplings.py",
-  "note": "N_c(1/alpha_SM - 1/alpha_W + tau^2 pi/2) = 1.001929849 (dev +1.930e-03; the g2 geometric-dynamics conservation law, proven in Lean 4)"
- },
- "g2_residual_1Nc": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.333348297684509,
-  "writer": "cg_frg/gauge/geometric_couplings.py",
-  "note": "1/alpha_SM - 1/alpha_W = 1/N_c - tau^2*pi/2 (the g2 geometric-dynamics residual; conservation law N_c(...)=1 <-> N_g xi = 1)"
- },
- "g3_MG_geo": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.49775991624706845,
-  "writer": "cg_frg/gauge/geometric_couplings.py",
-  "note": "g3(M_G) = 0.497760 via common-origin g3(k_GUT)=g2(k_GUT)*(1+alpha_GUT^2/K) run down TWO-LOOP (Machacek-Vaughn/Buttazzo beta_gauge; K = 8/3 the long-root condensation coefficient — the alpha^2/K bifurcation is the CF-3 forward content)"
- },
- "g3_common_origin_pred": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.5184195044864115,
-  "writer": "cg_frg/gauge/geometric_couplings.py",
-  "note": "g3(k_GUT) = g2(k_GUT) = 0.518420 (the common-origin prediction: the colour generators share the SU(2) Killing normalisation; the bifurcation mechanism (the long-root geometric carrier) is the J=2 squash)"
- },
- "gamma_M": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.0,
-  "writer": "cg_frg/frg/gamma_M.py",
-  "note": "self-similar branch: gamma_M = 0 (trace density scales as k^4; endpoint_constraint fixed point kL* = 2.4973)"
- },
- "gamma_M_frozen": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": -0.9974676893494144,
-  "writer": "cg_frg/frg/ir_flow.py",
-  "note": "gamma_M frozen branch = -1-p = -0.997468 (ir_flow); p = ln(kL/sqrt(pi))/ln(H0/k_GUT) = -0.002532 (the endpoint match L(H0)=kL, L(k_GUT)=sqrt(pi))"
- },
- "gauge_group_emergence": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": "{'SO(4) isometry': 'SU(2)_L x SU(2)_R (6 Killing vectors of S^3, Z_2-quotiented to RP^3)', 'SU(2)_L': 'the 3 even (untwisted) generators — the weak isospin', 'SU(2)_R': 'the 3 odd (twisted) generators — broken by the geometric isometry breaking (EWSB)', 'U(1)_Y': 'the diagonal generator of the chirality layers (SU(2)_R -> U(1)_Y by the long-root condensate)', 'SU(3)_c': 'the composite of the two su(2) blocks with the long-root coupling (the A_2 root system) — the coupling is CLOSED via g3 = g2*(1+alpha_GUT^2/K)'}",
-  "writer": "cg_frg/gauge/gauge_group_emergence.py",
-  "note": "the gauge group SU(3)xSU(2)xU(1) as the isometry/twist content of RP^3 (the group structure; couplings in geometric_couplings with g3 = g2*(1+alpha_GUT^2/K) CLOSED)"
- },
- "geometric_ewsb_eps_ratio_check": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.7777210918006348e-15,
-  "writer": "cg_frg/gauge/geometric_ewsb.py",
-  "note": "m_W/m_WR = epsilon/(2 s0) = 1.778e-15 — the CLOSED identity: 1/(2 s0) = 12.5000 (s0 = 2 tau = 0.04); the exponential smallness is epsilon = v/M_G = 1.422e-16 (the dilaton-stop line, epsilon_ratio)"
- },
- "geometric_ewsb_hierarchy": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 562517936369371.94,
-  "writer": "cg_frg/gauge/geometric_ewsb.py",
-  "note": "m_WR/m_W = 5.625e+14 with m_W = g2*v/2 = 62.64 GeV — the L/R EW hierarchy"
- },
- "geometric_ewsb_m_WR": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 3.5234172043286684e+16,
-  "writer": "cg_frg/gauge/geometric_ewsb.py",
-  "note": "m_WR = g_R*s0*M_G = 3.523e+16 GeV (the Goldstone absorption — the GUT right-handed scale; the geometric VEV s0 = 2tau = 0.04)"
- },
- "geometric_ewsb_ratio_obs": {
-  "provenance": "DERIVED",
-  "role": "comparison",
-  "value": 2.2436232379342152e-15,
-  "writer": "cg_frg/gauge/geometric_ewsb.py",
-  "note": "m_W/m_WR with the weak coupling at M_Z = 2.244e-15 vs observed 2.284e-15 (-1.75% — the residual is the standard SM m_W radiative correction, m_W = g v/2 at tree level vs the measured 80.37 GeV)"
- },
- "geometric_ewsb_ratio_pred": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.2465247762094113e-15,
-  "writer": "cg_frg/gauge/geometric_ewsb.py",
-  "note": "m_W/m_WR with the weak coupling at M_Z = 2.247e-15 (m_W = g v/2 at tree level)"
- },
- "geometric_ewsb_status": {
-  "provenance": "DERIVED",
-  "role": "informational",
-  "value": "SU(2)_R -> U(1)_R Goldstones absorbed by W_R+/- (the geometric VEV s0 = 2 tau); the L/R hierarchy CLOSED: m_W/m_WR = epsilon/(2 s0) with epsilon = v/M_G (dilaton-stop) and the factor 1/(2 s0) = 12.5 exact",
-  "writer": "cg_frg/gauge/geometric_ewsb.py",
-  "note": "the geometric EWSB status: the Goldstone fate, the L/R branches of the chirality, the CLOSED hierarchy epsilon/(2 s0)"
- },
- "gw_ratio": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 0.025330295910584444,
-  "writer": "cg_frg/cosmology/gw_ratio.py",
-  "note": "r = (1/2pi)^2 = 0.02533 (the Euclidean zero-point of the tensor sector; the CMB-S4 testable prediction)"
- },
- "gw_tensor_amplitude": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 5.322175825282864e-11,
-  "writer": "cg_frg/cosmology/gw_ratio.py",
-  "note": "Delta2_t = r*Delta2_s = 5.322e-11 (r = (1/2pi)^2 x the scalar amplitude 2.101e-09)"
- },
- "ir_flow_int_gamma": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 139.2537061093592,
-  "writer": "cg_frg/frg/ir_flow.py",
-  "note": "int gamma_M d ln k = ln(M_P^2 sqrt(2pi)/sqrt(rho_Lambda)) = 139.253706 — the two-Gaussian association entropy (INTERNAL; H0 DERIVED = 1.4388e-42 GeV)"
- },
- "kL": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.4935343325226915,
-  "writer": "cg_frg/frg/endpoint_constraint.py",
-  "note": "F_MG fixed point at L_Cg=sqrt(pi) (first-principles)"
- },
- "kL_CMB": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 2.481066660860078,
-  "writer": "cg_frg/cosmology/perturbation_amplitude.py",
-  "note": "kL_CMB = kL*(1 - tau/4) = 2.4810666609 (the CMB-pivot window: the local kL reduced by the torsion quarter tau/4 = 0.005; computed, not a scale choice)"
- },
- "k_GUT": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 4.984263355588678e+16,
-  "writer": "scripts/init_v4.py",
-  "note": "k_GUT = M_P*L_Cg/L_GUT with L_GUT = sqrt(3)/tau (the J=2 isometry-breaking scale; init_v4)"
- },
- "kappa_mixing": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.1318317836812264,
-  "writer": "cg_frg/gauge/geometric_couplings.py",
-  "note": "kappa(2tau) = sqrt((1+2tau)/(1-4tau)^2.5) = 1.13183178 (the J=2 squash mixing)"
- },
- "ladder_98_identity": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 1.125,
-  "writer": "cg_frg/generation/sector_alpha.py",
-  "note": "9/8 = 1/(1-(Y_d/Y_l)^2) exact (Y_d = 1/3, Y_l = 1): the down/lepton hypercharge structure of the sector ladder"
- },
- "lambda_H_pseudo": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.12886506828539068,
-  "writer": "cg_frg/ewsb/pseudo_dilaton.py",
-  "note": "lambda_H = (12 pi + 3)/(32 pi^2) = 3(4 pi + 1)/(32 pi^2) = 0.1289 (the pseudo-dilaton identity: lambda_dil = 3 x 4 pi (3 generations x NJL bound) + sigma_SM = 3 (one unit loop per generation))"
- },
- "lambda_dil": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 37.69911184307752,
-  "writer": "cg_frg/ewsb/pseudo_dilaton.py",
-  "note": "lambda_dil = 3 x 4 pi = 12 pi = 37.6991 (the trace anomaly couples to ALL 3 generations, so the dilaton self-coupling is 3 x the single-generation NJL/BS strong-coupling bound 4 pi — DERIVED, no hardcode)"
- },
- "longroot_K": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 2.6666666666666665,
-  "writer": "cg_frg/qcd/mass_gap_scale.py",
-  "note": "K = 8/3 = 2.6666666666666665 — COMPUTED as the J=2 mode's kinetic eigenvalue (J(J+2) = 8) over the internal-space dimension (3); the long-root condensation coefficient, the geometric carrier = the J=2 mode (the same as the order parameter); the effective eigenvalue lambda_long = (8/3) R = 16/L^2 is the curvature-tracked value, not a separate harmonic"
- },
- "m_b_over_m_s": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 44.86794977784708,
-  "writer": "cg_frg/generation/lz_ladder.py",
-  "note": "e^(2 alpha_dn) = 44.87 (the 9/8 ladder alpha_dn)"
- },
- "m_b_pred": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 4.237792000302189,
-  "writer": "cg_frg/fermion/mass_operator_overlap.py",
-  "note": "m_b = (y_b/y_t) m_t = 4.238 GeV (the bottom absolute mass from the geometric-mean y_b/y_t closure); the +1.4% vs observed = m_t's +0.8% (the scale-invariant geometric overlap y_0=1, no Yukawa running) + y_b/y_t's geometric-mean first-principles value — the geometric-RGE prediction, not a fixable mechanism"
- },
- "m_e_pred": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.5103542513564916,
-  "writer": "cg_frg/fermion/electron_mass.py",
-  "note": "m_e = M_P e^(-20 kL) (1 - s0*kappa) = 0.510 MeV (the Planck-anchored exponential chain times the low-scale squash correction; exponent 20 = 4x5 structural)"
- },
- "m_glueball": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.6590414836759542,
-  "writer": "cg_frg/qcd/mass_gap_scale.py",
-  "note": "m_glueball = lambda(0++) x Lambda_QCD = 8 x Lambda_QCD = 1.66 GeV (FULL two-loop SM running + matching from the framework's common-origin g3); lambda(0++) = 2 lambda_gluon + C2(0,0) = 8 the spectral eigenvalue (two gluons l=1 Killing, lambda_gluon = (l+1)^2 = 4) — first-principles, NO empirical lattice ratio; the residual vs lattice is the TWO-LOOP Lambda_MSbar extraction (vs the standard 4-loop) — loop-order precision, not a fixable mechanism"
- },
- "m_mu_over_m_e": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 206.3556103933899,
-  "writer": "cg_frg/fermion/electron_mass.py",
-  "note": "m_mu/m_e = e^(2 alpha_lp + sqrt(2pi)) = 206.36 (the lepton LZ index plus the entropy-min distance)"
- },
- "m_nu1": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.002607415413287687,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "m_nu1 = m_nu3*r12*r23 = 0.0026 eV (DERIVED from the two hypercharge-trace ratios — matches dark_energy.py; no observed m1 enters; the 5/3-determinant cross-check m2_from_53 = 0.0089 eV sits ~2% above)"
- },
- "m_nu2": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.008691384710958958,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "m_nu2 = m_nu3*r23 = 0.0087 eV (the hypercharge-trace hierarchy, consistent with m1/m2 = 3/10)"
- },
- "m_nu3": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.05017973302502751,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "m_nu3 = v^2 (2pi)^2/k_GUT = 0.0502 eV (the Weinberg 2pi family)"
- },
- "m_p": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.9381556711818813,
-  "writer": "cg_frg/qcd/qcd_sector.py",
-  "note": "m_p = (9/2)(1-xi/4) Lambda_QCD = (279/64) x 0.2074 = 0.9382 GeV (the constituent-quark content: 3 quarks x (3/2) chiral factor x (1-xi/4) conformal correction;"
- },
- "m_s_over_m_d": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 19.622983487591103,
-  "writer": "cg_frg/generation/lz_ladder.py",
-  "note": "m_s/m_d = e^(2 alpha_sd) = 19.62 (the down first-gen colour-dilution e^(2 a_dn - kL_CMB/3))"
- },
- "m_t_over_m_c": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 135.24239203885273,
-  "writer": "cg_frg/generation/lz_ladder.py",
-  "note": "e^(2 alpha_up) = 135.2 (the internal alpha_up from sector_alpha)"
- },
- "m_t_over_m_u": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 77303.6419446479,
-  "writer": "cg_frg/generation/lz_ladder.py",
-  "note": "e^(2 alpha_up) e^(2 kL_CMB + ln4) = 77304"
- },
- "m_t_pred": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 174.08240381974227,
-  "writer": "cg_frg/fermion/mass_operator_overlap.py",
-  "note": "m_t = y_0 v/sqrt(2) = 174.1 GeV — the geometric overlap y_0 = 1.0 is SCALE-INVARIANT (the geometric RGE holds y_0 fixed; only the gauge couplings run), so m_t carries NO Yukawa running; the +0.8% vs the pole mass is the geometric-overlap PREDICTION, not a missing RGE"
- },
- "mass_gap_dE": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.163845625059378e+17,
-  "writer": "cg_frg/qcd/mass_gap_scale.py",
-  "note": "Delta E = (1/8) M_G = 2.164e+17 GeV (the condensate energy of the long-root, xi = 1/8)"
- },
- "mass_gap_m_gen": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.4914321981301484e+16,
-  "writer": "cg_frg/qcd/mass_gap_scale.py",
-  "note": "m_gen = g2 (2 tau) M_G / sqrt(2) = 2.491e+16 GeV (the SU(3) generator mass, the QCD initial condition)"
- },
- "md_over_ms_geo": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 0.05014715428586189,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "m_d/m_s = e^(-2 alpha_dn) (1+Y_d/Y_u)^2 = 0.05015 (CLOSED, the hypercharge first-generation factor)"
- },
- "mnu_ratio_12": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.3,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "m_nu1/m_nu2 = 1/Tr(Y^2) = 3/10 (the hypercharge trace)"
- },
- "mnu_ratio_23": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 0.17320508075688773,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "m_nu2/m_nu3 = 1/(sqrt(3) Tr(Y^2)) = 0.1732"
- },
- "n_generations": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 3,
-  "writer": "cg_frg/generation/window_capacity.py",
-  "note": "window-capacity theorem: spinor modes with (n+3/2) < (kL)^2 = exactly 3 (n = {0,2,4})"
- },
- "ns_tilt": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.035,
-  "writer": "cg_frg/cosmology/spectral_tilt.py",
-  "note": "1 - n_s = tau*(7/4) = 0.035 (the torsion modulus times the exact 7/4 scalar/vector window ratio)"
- },
- "order_parameter_Rc": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 1.909859317102744,
-  "writer": "cg_frg/ewsb/order_parameter.py",
-  "note": "R_c* = 6/pi = 1.909859 (the Gaussian family; the store R_c_star = 1.909859 confirms to +0.000%)"
- },
- "order_parameter_Vmin_GUT": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": -9.545296585513721e-05,
-  "writer": "cg_frg/ewsb/order_parameter.py",
-  "note": "V_min(GUT) = -xi^2(R_c-R_GUT)^2/(4 lambda) = -0.0001 — the Mexican-hat depth at the GUT onset"
- },
- "order_parameter_lambda": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 149.1452591486519,
-  "writer": "cg_frg/ewsb/order_parameter.py",
-  "note": "lambda = xi(R_c-R_GUT)/(2 tau)^2 = 149.145 — the quartic from the stationarity at the GUT onset (R_GUT = 6/L_GUT^2, L_GUT = sqrt(3)/tau = 86.603)"
- },
- "order_parameter_lambda_EC_J2": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 14.1608,
-  "writer": "cg_frg/ewsb/order_parameter.py",
-  "note": "lambda_EC*L^2 = N_g(1+tau/2)^2 + 6 = 14+8tau+2tau^2 = 14.1608 > 0 — the J=2 EC Lichnerowicz eigenvalue (the free-EC sector stable; the tachyon comes from the curvature coupling xi(R-R_c), not the free spectrum).  GRAVITY HIGHER-ORDER EFFECT (2026-08-16): the first-order torsion shift N_g*tau = 8tau, with N_g = 8 the su(3) generator count; 8tau/14 = 2*(s0/N_R) EXACTLY — the kL correction s0/N_R = n_broken*tau/N_R = 2tau/7 is HALF the J=2 EC first-order torsion shift, the factor 2 = N_g/(2*n_broken) = 8/4 (n_broken = 2 broken SU(2)_R generators) and lambda_TT = 14 = 2*N_R.  So the three deviations (alpha_sd=3/2, V_us=e^-d/2, the factor-5) share ONE root: the F_MG condition uses m2_tt = 6/L2 (zero-order Lichnerowicz) and MISSES the J=2 squash first-order torsion shift N_g*tau."
- },
- "order_parameter_mass2_MG": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": -0.11810929426989034,
-  "writer": "cg_frg/ewsb/order_parameter.py",
-  "note": "m^2(M_G) = xi(R(M_G)-R_c) = -0.118109 < 0 — the tachyon at the emergence scale (R(M_G) = 0.964985 < R_c): the condensation trigger"
- },
- "order_parameter_n_broken": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 2,
-  "writer": "cg_frg/ewsb/order_parameter.py",
-  "note": "n_broken = dim SU(2)_R - dim U(1)_R = 3 - 1 = 2 — the two broken generators (T^1_R, T^2_R, the Goldstone directions absorbed by W_R+/-); the s0 = 2 tau mechanism COMPUTED: each broken generator contributes the torsion modulus tau to the squash amplitude"
- },
- "order_parameter_s0": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.04,
-  "writer": "cg_frg/ewsb/order_parameter.py",
-  "note": "s0 = 2 tau = 0.04 — the squash VEV; the MECHANISM (the breaking-torsion balance): the 2 = the two broken SU(2)_R generators (T^1_R, T^2_R — the Goldstone directions absorbed by W_R+/-), each contributing the torsion modulus tau to the squash amplitude; the EC consistency b = 4a (the algebraic torsion, rebuilt in this module) fixes the leading coefficients; the g1/g2 normalisation kappa(s0) matching the SM fixes the same value.  PURE-CONTENT RATIO (2026-08-16): s0/N_R = n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175 — the symmetry correction is HALF the gravity higher-order (J=2 EC first-order torsion) shift N_g tau/14 = 8tau/14, the factor 2 = N_g/(2 n_broken) = (d+1)/2 = 2; alpha_sd = Delta_f(1-s0/N_R) matches to -0.05%)"
- },
- "order_parameter_xi": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 0.125,
-  "writer": "cg_frg/ewsb/order_parameter.py",
-  "note": "xi = (d-2)/(4(d-1)) = 0.125 in d = 3 — the conformal curvature coupling of the order parameter"
- },
- "perturbation_amplitude": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.1011107979433257e-09,
-  "writer": "cg_frg/cosmology/perturbation_amplitude.py",
-  "note": "Delta2_R = (1/2)(1/2pi)^2 e^(-2pi kL_CMB) (1 - tau*kappa) = 2.101e-09 (the spin-1/2 zero-point x the Euclidean suppression x the chiral-squash correction, no inflation)"
- },
- "phi_R3": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 36.64832772377779,
-  "writer": "cg_frg/ewsb/epsilon_ratio.py",
-  "note": "the dilaton stop position 4*pi*kL - ln(3*alpha/pi) + 1/(2*pi) (internal, kL-only)"
- },
- "pseudo_dilaton_beta_eff": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.2729316138950566,
-  "writer": "cg_frg/ewsb/pseudo_dilaton.py",
-  "note": "beta_eff = (3 g2^2 + g1^2 + 4 yt^2 + 2 lambda_H)/(16 pi^2) + 12 pi/(16 pi^2) = 0.2729 — the trace-anomaly coefficient with the DERIVED lambda_dil = 12 pi"
- },
- "qcd_Lambda_QCD": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.20738018545949427,
-  "writer": "cg_frg/qcd/qcd_sector.py",
-  "note": "Lambda_QCD = 0.2074 GeV — TWO-LOOP QCD running + m_t matching from the framework's common-origin g3(M_G) (mass_gap_scale); the standard Lambda_MSbar extraction)"
- },
- "qcd_deconfinement_T": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 270.24772767375873,
-  "writer": "cg_frg/qcd/qcd_sector.py",
-  "note": "T_d = (lambda_vector/N_c) Lambda_QCD = (4/3) x 0.207 = 270 MeV (lambda_vector = 4 the Killing eigenvalue, N_c = 3 the colour rank (Z_N centre breaking); self-consistent with sigma via sigma/T_d^2 = (14/pi)(9/16) = 5/2)"
- },
- "qcd_gap_lambda_l2": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.2866466172581619,
-  "writer": "cg_frg/qcd/qcd_sector.py",
-  "note": "lambda_glue = 8/L^2 = 1.286647 — the l=2 scalar mode on RP3 (the lowest glueball mode; the l=0 constant mode carries the 4D gauge fields — the KK zero modes); the topological level of the mass gap"
- },
- "qcd_glueball_tower": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": {
-   "0++": {
-    "mass_GeV": 1.6590414836759542,
-    "mode": "two-gluon (0,0) scalar, lambda=8",
-    "ratio": 1.0
-   },
-   "0++*": {
-    "mass_GeV": 2.488562225513931,
-    "mode": "conformal n=2 excitation (3/2)",
-    "ratio": 1.5
-   },
-   "0-+": {
-    "mass_GeV": 2.418447770716816,
-    "mode": "conformal n=1 excitation (sqrt(17/8))",
-    "ratio": 1.4577379737113252
-   },
-   "2++": {
-    "mass_GeV": 2.3462389667541164,
-    "mode": "two-gluon (1,1) tensor, lambda=16 (sqrt2)",
-    "ratio": 1.4142135623730951
-   }
+  "Gamma_Z_pred": {
+    "note": "Gamma_Z = 2.4798 GeV —the sum of the Born partial widths with the QCD radiator alpha_s/pi + 1.409 (alpha_s/pi)^2 (quarks) and the QED radiator 3 Q^2 alpha/(4 pi) (charged fermions); EW vertex corrections not included; the top is above threshold",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 2.479758644645362,
+    "writer": "cg_frg/ewsb/ew_precision.py"
   },
-  "writer": "cg_frg/qcd/qcd_sector.py",
-  "note": "the glueball tower: 2++/0++ = sqrt2 is GEOMETRIC (the two-gluon bound-state spectrum: 0++ = 2lambda_gluon (C2=0), 2++ = 2lambda_gluon + C2(1,1)=8 -> sqrt(16/8)=sqrt2); 0++* = 3/2 ; 0-+ = three-gluon/instanton; the absolute scale is the confinement dynamics via the PART 1 chain"
- },
- "qcd_sector_status": {
-  "provenance": "DERIVED",
-  "role": "informational",
-  "value": "PART 1: the mass-gap scale chain closed (DeltaE = (1/8)M_G -> m_gen -> Lambda_QCD ~ 0.21 GeV -> m_glueball = 1.68 GeV); PART 2: the topological gap level lambda_glue = 8/L^2 > 0; PART 3: the glueball tower 2++/0++ = sqrt2 geometric (two-gluon + SO(4) Casimir), 0++* = 3/2, 0-+ = three-gluon.  g3(M_G) is closed via the long-root correction g3 = g2(1+alpha_GUT^2/K)",
-  "writer": "cg_frg/qcd/qcd_sector.py",
-  "note": "the QCD sector status: the mass-gap scale chain, the topological gap level, the geometric two-gluon tower (2++/0++ = sqrt2); g3 = long-root closed; 0-+ = three-gluon"
- },
- "qcd_string_tension": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.19165170182359875,
-  "writer": "cg_frg/qcd/qcd_sector.py",
-  "note": "sigma = (lambda_TT/pi) Lambda_QCD^2 = (14/pi) x 0.207^2 = 0.1917 GeV^2 (lambda_TT = 14 the TT Lichnerowicz eigenvalue, pi the internal-volume factor; the area-law confinement scale from the TT spectral level)"
- },
- "relaxion_factor_two": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 1.9701034939755036,
-  "writer": "cg_frg/ewsb/relaxion_geo.py",
-  "note": "v(phi_R0)/v = 1.970 vs the structural 2.00 (-1.5% — the factor-2 anchor of the relaxion baseline)"
- },
- "relaxion_phi_stop": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 36.64832772377779,
-  "writer": "cg_frg/ewsb/relaxion_chain.py",
-  "note": "phi_stop = phi_R0 + (1/2)ln2 + (1/4)ln(7/4) - (1/4)ln(2(3/4)^3) = 36.6483 (the relaxion revision chain; phi_R0 is DERIVED from the window line phi_R3 = 4 pi kL - ln(3 alpha/pi) + 1/(2 pi), so the chain reproduces the window-squared eps)"
- },
- "rho_Lambda": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 2.5233889268202705e-47,
-  "writer": "cg_frg/cosmology/dark_energy.py",
-  "note": "rho_Lambda = Y_u m_nu1^4 = (2/3) m_nu1^4 = 2.523e-47 GeV^4 (the dark energy density = the lightest neutrino mass^4 weighted by the up-quark hypercharge Y_u = 2/3)"
- },
- "sector_alpha_delta": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.5210239987806164,
-  "writer": "cg_frg/generation/sector_alpha.py",
-  "note": "Delta = 6(1-n_s)kL_CMB = 0.521024 (the so(4) isometry's 6 generators x the tilt 1-n_s = tau*7/4 x the CMB window kL_CMB)"
- },
- "sector_alpha_s_lep": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.4903755282641096,
-  "writer": "cg_frg/generation/sector_alpha.py",
-  "note": "the lepton step s = 16Delta/17 = 0.490376 (the 9/8 ladder split with the mean step Delta)"
- },
- "sigma_C_hubble": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 6.9499956844971196e+41,
-  "writer": "cg_frg/cosmology/gw_ratio.py",
-  "note": "sigma_C = 1/H0 = 6.9500e+41 GeV^-1 — the IR window endpoint (the Hubble scale)"
- },
- "sigma_language_status": {
-  "provenance": "DERIVED",
-  "role": "informational",
-  "value": {
-   "L(k)": "kL*c = kL const — the self-similar trajectory (k*sigma(k) = c)",
-   "T_eff": "k/(2pi)",
-   "anchors": "M_P (identity) + the internal chain; H0 derived (gw_ratio); c = 1 convention",
-   "c": "unit convention (c = 1); the σ-language correlation propagation speed",
-   "sigma(k)": "c/k",
-   "sigma_C": 6.9499956844971196e+41
+  "Gamma_b_pred": {
+    "note": "Gamma_b = 0.3808 GeV (Born + QCD/QED radiators; the ~ -0.6% top-loop vertex correction is not included)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.38082151395697583,
+    "writer": "cg_frg/ewsb/ew_precision.py"
   },
-  "writer": "cg_frg/framework/sigma_language.py",
-  "note": "the sigma-language kinematics: sigma(k) = c/k, k*sigma(k) = c = 1 (the unit convention), sigma_C = c/H0 = 6.9500e+41 GeV^-1, T_eff = k/(2pi); L(k) = kL*c = 2.493534 — the window capacity constant on the self-similar trajectory; c is the unit convention, NOT a third physical input (H0 is derived, c is a unit choice); no emergent metric (the no-emergent-geometry principle)"
- },
- "sin2_theta12": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 0.29999999999999993,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "sin2(theta12) = m_nu1/m_nu2 = 0.30 (the solar, closed)"
- },
- "sin2_theta13": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 0.021936679743943206,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "sin2(theta13) = (1/2pi)^2 sqrt(3)/2 = 0.0219 (the 2pi imprint)"
- },
- "sin2_theta23": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 0.5506605918211689,
-  "writer": "cg_frg/neutrino/neutrino_closure.py",
-  "note": "sin2(theta23) = 1/2 + Tr(T3^2)/(2pi)^2 = 0.5507"
- },
- "tau": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.02,
-  "writer": "scripts/init_v4.py",
-  "note": "tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = 0.02 — CLOSED (the seven-layer theoremisation: the chiral drive <chi> = 1/15 over the renormalised hypercharge capacity Pi_ren(M_G) = Sum Y^2 = 3.3333333333333335; the emergence-scale renormalisation scheme, the bare loop 0.0047 absorbed by the counter-term Delta Pi = 3.3287; computed from the SM content, the iron-law compliance)"
- },
- "tau_delta_pi": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 3.328666666666667,
-  "writer": "scripts/init_v4.py",
-  "note": "Delta Pi = Pi_ren - Pi_bare = 3.3287 — the counter-term absorbing the bare loop (the tau theoremisation layer 6)"
- },
- "tau_pi_bare": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.004666666666666667,
-  "writer": "scripts/init_v4.py",
-  "note": "Pi_bare(M_G) = 0.0014 * Sum Y^2 = 0.004667 — the bare one-loop polarisation (the small value needing renormalisation)"
- },
- "tau_pi_ren": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 3.3333333333333335,
-  "writer": "scripts/init_v4.py",
-  "note": "Pi_ren(M_G) = Sum Y^2 = 3.3333333333333335 — the renormalised hypercharge polarisation at the emergence scale (the renormalisation scheme choice, the tau theoremisation layer 6)"
- },
- "trace_density_MG": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 8.017205181377116e-37,
-  "writer": "cg_frg/frg/trace_density.py",
-  "note": "the SM supertrace density at M_G (the five-channel sum of the improved EMT, normalised by V3/k^2)"
- },
- "twoL_entropy_min_distance": {
-  "provenance": "DERIVED",
-  "role": "cg",
-  "value": 2.5066282746310002,
-  "writer": "cg_frg/cosmology/gw_ratio.py",
-  "note": "2L = sqrt(2pi) = 2.506628 — the Gaussian entropy minimum distance (the window capacity 2L/sqrt(2pi) = 1; kL vs 2L: -0.522% — the same family)"
- },
- "v_HIGGS": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 246.18969645238943,
-  "writer": "cg_frg/ewsb/vev_closure.py",
-  "note": "v = M_G*epsilon_window = 246.19 GeV (the window-squared line eps=(3alpha/pi)e^(-4pi kL)(1 - s0*kappa(2tau)) — the J=2 squash correction s0=2tau, kappa=U(1)_Y norm; matches SM 246.22 to -0.012% — the EW-hierarchy symmetry correction, analogue of the g2 conservation law)"
- },
- "y_b_over_y_t": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 0.024343597671653887,
-  "writer": "cg_frg/fermion/mass_operator_overlap.py",
-  "note": "y_b/y_t = e^-(2 a_dn - ns_tilt (kL_CMB + 2 tau)) = 0.024344 (the down LZ double ladder e^-2 a_dn times the window-evolution factor e^{ns_tilt (kL_CMB + 2 tau)}: m_b^2 = m_s m_t e^{ns_tilt (kL_CMB + 2 tau)} — the bottom is the geometric mean of the strange and the top, dressed by the window evolution)"
- },
- "y_top_base": {
-  "provenance": "DERIVED",
-  "role": "internal",
-  "value": 1.0,
-  "writer": "cg_frg/fermion/mass_operator_overlap.py",
-  "note": "the (0,0) full overlap of the n = 0 mode (the top base)"
- }
+  "Gamma_had_pred": {
+    "note": "Gamma_had = 1.7331 GeV (u,c,d,s,b at Born + QCD/QED radiators)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.7330838165669813,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "Gamma_inv_pred": {
+    "note": "Gamma_inv = 0.4967 GeV (three neutrino species, Born)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.4967324396019001,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "Gamma_l_pred": {
+    "note": "Gamma_l = 0.2499 GeV (e + mu + tau, Born + QED radiator)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.2499423884764806,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "H0_GEV": {
+    "note": "H0 = M_P*sqrt(pi)*e^(-int gamma_M) = 1.4388e-42 GeV (the IR endpoint of the emergence window; cross-check kL*M_G = M_P*sqrt(pi): +0.000%)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.4388498142964775e-42,
+    "writer": "cg_frg/cosmology/gw_ratio.py"
+  },
+  "L_Cg": {
+    "note": "L_Cg = sqrt(pi) = 1.7724538509055159 (the Gaussian endpoint: the window's characteristic length from the Gaussian normalisation int exp(-x^2) dx = sqrt(pi); computed, not an input)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.7724538509055159,
+    "writer": "scripts/init_v4.py"
+  },
+  "L_Cg_star": {
+    "note": "L_Cg* = sqrt(pi) (first-principles)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.7724538509055159,
+    "writer": "cg_frg/frg/endpoint_constraint.py"
+  },
+  "L_Gg": {
+    "note": "L(M_G)=kL=C/M_G at L_Cg=sqrt(pi)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.4935343325226915,
+    "writer": "cg_frg/frg/endpoint_constraint.py"
+  },
+  "L_critical": {
+    "note": "L_c = sqrt(6/R_c) with R_c = 6/pi, so L_c = sqrt(pi) = L_Cg (first-principles)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.7724538509055159,
+    "writer": "cg_frg/frg/endpoint_constraint.py"
+  },
+  "Lambda": {
+    "note": "Lambda = rho_Lambda/M_P^2 = 4.255e-84 GeV^2 (the FRW cosmological constant from the neutrino-mass floor; m_nu1 = 0.0026 eV DERIVED (Weinberg operator + hierarchy ratios); the Y_u = 2/3 weight is the up-quark hypercharge)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 4.254718579276526e-84,
+    "writer": "cg_frg/cosmology/dark_energy.py"
+  },
+  "M_G": {
+    "note": "M_G = M_P*sqrt(pi)/kL (first-principles)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.7310765000475023e+18,
+    "writer": "cg_frg/frg/endpoint_constraint.py"
+  },
+  "M_P": {
+    "note": "M_P = 1/sqrt(8 pi G_N) = 2.43532360e+18 GeV (the reduced Planck mass, the identity from the single observed anchor G_N — computed, not an input)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.435323595526305e+18,
+    "writer": "scripts/init_v4.py"
+  },
+  "M_W_pred": {
+    "note": "M_W = 80.3712 GeV —the on-shell Sirlin relation with Delta r = Delta alpha - (c^2/s^2) Delta rho (the exact one-loop t-b Veltman rho); Delta r_rem omitted (see the module docstring).  Inputs all internal: M_Z = 91.124, alpha(0) = 1/137.049, alpha(M_Z)^-1 = 128.209, G_F = 1/(sqrt(2) v^2) = 1.16666255e-05",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 80.37122117213354,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "M_Z_pred": {
+    "note": "M_Z = (v/2) sqrt(g2^2 + (3/5) g1^2) at the self-consistent fixed point mu = M_Z with the geometric two-loop RGE = 91.1243 GeV (no external scale; the tree-level mass formula evaluated on the two-loop-run geometric couplings)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 91.12426592764405,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "Omega_DM": {
+    "note": "Omega_DM = 1 - Omega_Lambda - Omega_b = 0.2657 (the flatness closure residue; NOT a particle — the framework's gravity is the transverse-traceless zero mode (no dark-matter particle)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.2657026396202929,
+    "writer": "cg_frg/cosmology/gw_ratio.py"
+  },
+  "Omega_Lambda": {
+    "note": "Omega_Lambda = rho_Lambda/(3 H0^2 M_P^2) = 0.68504 (the neutrino-mass floor)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.6850442965140158,
+    "writer": "cg_frg/cosmology/dark_energy.py"
+  },
+  "Omega_b": {
+    "note": "Omega_b = eta_B n_gamma m_p / rho_crit = 0.04925 (eta_B = 6.09e-10 (Sakharov J alpha_W^2/56), m_p = 0.9382 (constituent quark 279/64 Lambda_QCD), rho_crit from the DERIVED H0; T_CMB DERIVED from the neutrino floor)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.04925306386569133,
+    "writer": "cg_frg/cosmology/gw_ratio.py"
+  },
+  "R_b_pred": {
+    "note": "R_b = Gamma_b/Gamma_had = 0.21974",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.21973635107350714,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "R_c_star": {
+    "note": "R_c* = 6/pi (first-principles, the critical curvature)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.909859317102744,
+    "writer": "cg_frg/frg/endpoint_constraint.py"
+  },
+  "R_l_pred": {
+    "note": "R_l = Gamma_had/Gamma_e = 20.802 (single-species leptonic definition, PDG convention)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 20.80179949224655,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "TT_delta_forming": {
+    "note": "the delta-function pole criterion (slope_G < -1.5, |slope_Z| < 0.5)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": true,
+    "writer": "cg_frg/gravity/tt_tensor.py"
+  },
+  "TT_pole_verified": {
+    "note": "TT pole stability: positive spectral density, self-energy below the bare mass (pole_analysis)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": true,
+    "writer": "cg_frg/gravity/pole_analysis.py"
+  },
+  "TT_slope_G": {
+    "note": "d ln G_TT / d ln k over the IR trajectory (the k^{-2}-type pole criterion)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": -1.9999999999999933,
+    "writer": "cg_frg/gravity/tt_tensor.py"
+  },
+  "T_CMB_GeV": {
+    "note": "T_CMB = m_nu1 r12/pi (1-tau Delta_s) = 2.7310 K (the photon floor from the lightest neutrino mass; r12 = (N_L-N_R)/SigmaY2 = 3/10 the PURE CONTENT ratio; (1-tau Delta_s) = (1-tau/2) the scalar-conformal-weight correction (Delta_s = (d-2)/2 = 1/2, the SAME Delta_s as the proton mass 31/32))",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.353400743797703e-13,
+    "writer": "cg_frg/cosmology/dark_energy.py"
+  },
+  "V_us_gatto_obs": {
+    "note": "|V_us| from the Gatto formula with the OBSERVED m_d/m_s = 0.183 vs PDG 0.2245 (-18.5% — the Gatto verification)",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 0.18288054134964685,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "V_us_geo": {
+    "note": "|V_us| = sqrt(m_d/m_s) = 0.2239 (the Gatto dominant term, CLOSED); the full Gatto (delta12 = 0.2) gives 0.1820",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 0.22393560298858664,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "Z_G_dim": {
+    "note": "Z_G = (M_P/M_G)^2/(16pi) = 0.039374 — the TT kinetic coefficient at the emergence scale",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.039374130504556404,
+    "writer": "cg_frg/gravity/zk_gravitational_rg.py"
+  },
+  "Z_geometric_ratio": {
+    "note": "Z(M_G)/Z(M_P) = 0.7108 — the geometric running Z(k) = Z_G*k/M_G across the UV window (exact on the kL-const trajectory)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.7108199104330504,
+    "writer": "cg_frg/gravity/zk_gravitational_rg.py"
+  },
+  "Z_phys_MG": {
+    "note": "Z_phys(M_G) = lambda/(lambda+sigma) = 1.000000 (matter back-reaction tiny)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.0,
+    "writer": "cg_frg/gravity/newton.py"
+  },
+  "Z_quantum_shift": {
+    "note": "the one-loop M_P shift over the M_P-M_G window = +0.6150% [NEGLIGIBLE] (Delta ln Z = +1.226268e-02; the SM content 4 scalar + 45 Weyl + 24 vector, the exact RP3 mode counting, the Veltman-type 1/(384pi^2) one-loop graviton self-energy)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.006150176028383747,
+    "writer": "cg_frg/gravity/zk_gravitational_rg.py"
+  },
+  "a0_MOND": {
+    "note": "a0 = c H0/(2 pi) sqrt(4/3) = 1.2044e-10 m/s^2 (the spectral zero-mode IR behaviour: the Euclidean-period acceleration c H0/(2 pi) times the 3-ball coefficient sqrt(4/3) = 2/sqrt(3); NO dark matter, NO curved spacetime — the rotation-curve SCALE is the spectral IR endpoint H0; the full rotation-curve SHAPE F(a/a0) is a research-roadmap item, not yet computed)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.204369920558342e-10,
+    "writer": "cg_frg/cosmology/gw_ratio.py"
+  },
+  "alpha_down": {
+    "note": "alpha_dn = alpha_up - (18/17)Delta = 1.901862 (the 9/8 hypercharge ladder, step = (9/8)s, s = 16Delta/17)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.9018618632255682,
+    "writer": "cg_frg/generation/sector_alpha.py"
+  },
+  "alpha_em_0_pred": {
+    "note": "alpha_em(0) = 1/137.049 (QED vacuum polarisation of the framework's own content: internal alpha^-1(M_Z)=128.209 + lepton and quark loops on the internal masses; u,d,s frozen at Lambda_QCD)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.0072966561126812995,
+    "writer": "cg_frg/cosmology/bbn_helium.py"
+  },
+  "alpha_inv_MZ_pred": {
+    "note": "alpha^-1(M_Z) = 128.21 (TWO-LOOP geometric RGE: the geometric g1(M_G)=g2(k_GUT)*kappa and g2(M_G) both run down the two-loop gauge beta functions with the geometric Yukawa y_0=1.0, the same convention as alpha_s(M_Z); the kappa acts at k_GUT (the isometry-breaking onset))",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 128.2085016245155,
+    "writer": "cg_frg/gauge/geometric_couplings.py"
+  },
+  "alpha_lepton": {
+    "note": "alpha_lp = alpha_up - 2Delta = 1.411486 (the lepton rung spans two steps exactly)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.4114863349614586,
+    "writer": "cg_frg/generation/sector_alpha.py"
+  },
+  "alpha_s_MZ_pred": {
+    "note": "alpha_s(M_Z) = 0.1180 — the framework's QCD prediction from the common-origin g3(M_G) = 0.4978 run down FULL two-loop SM; the framework's independent QCD content is this initial condition, the running is standard SM dynamics)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.11798585136901278,
+    "writer": "cg_frg/qcd/mass_gap_scale.py"
+  },
+  "alpha_sd": {
+    "note": "alpha_sd = alpha_dn - kL_CMB/6 = 1.488351 (the down first-gen step: CMB window over the so(4) 6 generators — the colour dilution).  SYMMETRY FORM (2026-08-16): alpha_sd = Delta_f(1 - s0/N_R) = (3/2)(1 - 2tau/7) = 1.491429 (the fermion conformal weight Delta_f = d/2 = 3/2 times the gravity-higher-order correction 1 - s0/N_R; s0/N_R = n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175, HALF the J=2 EC first-order torsion shift N_g tau/14 = 8tau/14, factor 2 = (d+1)/2; matches the closure to -0.05%)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.4883507530822218,
+    "writer": "cg_frg/generation/lz_ladder.py"
+  },
+  "alpha_up": {
+    "note": "alpha_up = kL - 2tau = 2.453534 (the window width minus the non-adiabatic torsion 2tau; kL - alpha_up = 2tau exactly)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.4535343325226915,
+    "writer": "cg_frg/generation/sector_alpha.py"
+  },
+  "bbn_GF": {
+    "note": "G_F = 1/(sqrt(2) v^2) = 1.1667e-05 GeV^-2 (the Fermi constant from the closed v = 246.19 GeV)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.1666625480422359e-05,
+    "writer": "cg_frg/cosmology/bbn_helium.py"
+  },
+  "bbn_Neff": {
+    "note": "N_eff = 3 + sqrt3/(2pi)^2 = 3.0439 (non-perturbative sqrt3 geometry x 2pi period)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 3.043873359487886,
+    "writer": "cg_frg/cosmology/bbn_helium.py"
+  },
+  "bbn_Tf": {
+    "note": "T_f = 0.7532 MeV (Gamma_weak = H freeze-out, g_A = 4/pi)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.0007532047463542375,
+    "writer": "cg_frg/cosmology/bbn_helium.py"
+  },
+  "bbn_Yp": {
+    "note": "Y_p = 2(np)/(1+np) = 0.2514 (all constants non-perturbative internal: g_A=4/pi, Delta_EM=(1-1/2pi)a Lambda, delta_R=1+(1-tau)/8pi)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.2513646481783959,
+    "writer": "cg_frg/cosmology/bbn_helium.py"
+  },
+  "bbn_dm_np": {
+    "note": "dm_np = (m_d - m_u) - (1-1/2pi) alpha Lambda = 1.2890 MeV (non-perturbative EM self-energy)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.0012889677957624176,
+    "writer": "cg_frg/cosmology/bbn_helium.py"
+  },
+  "bbn_status": {
+    "note": "the BBN sector: helium yield and neutrino species",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": "Y_p = 0.2514; N_eff = 3.0439 (ALL six constants NON-PERTURBATIVE internal: g_A=4/pi, Delta_EM, delta_R, delta_N, |V_ud|, f)",
+    "writer": "cg_frg/cosmology/bbn_helium.py"
+  },
+  "bbn_t_decay": {
+    "note": "t_decay = 204.9 s (the radiation-era expansion time from T_f to T_BBN)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 204.88563479330787,
+    "writer": "cg_frg/cosmology/bbn_helium.py"
+  },
+  "bbn_tau_n": {
+    "note": "tau_n = 897.1 s (Fermi beta decay, g_A = 4/pi, delta_R = 1+(1-tau)/8pi)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 897.1456583613488,
+    "writer": "cg_frg/cosmology/bbn_helium.py"
+  },
+  "chi_pole_alpha": {
+    "note": "alpha = 2: the radius-modulus exponent — chi is the internal conformal factor (L(chi) = L(0)e^{chi}), so every dimension-2 geometric mass rescales as e^{-2chi} (W2: the mass dimension of m^2; not a free parameter)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.0,
+    "writer": "cg_frg/gravity/chi_pole_condition.py"
+  },
+  "chi_pole_crossing": {
+    "note": "V_TT(chi)*Pi2(chi) = 1 at chi_c = 0.6572 (alpha = 2, bisection to machine precision — the ladder pole condition of the emergent graviton; x(0) = 0.1007 < 1, x(2) = 27.3 -> infinity: monotone + unbounded, Lemma 4)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.6572248464344095,
+    "writer": "cg_frg/gravity/chi_pole_condition.py"
+  },
+  "chi_pole_robust": {
+    "note": "crossing existence across alpha in [1,3] (the location shifts; the existence is alpha-independent — Lemma 4)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": {
+      "1.0": 1.3144,
+      "1.5": 0.8763,
+      "2.0": 0.6572,
+      "2.5": 0.5258,
+      "3.0": 0.4381
+    },
+    "writer": "cg_frg/gravity/chi_pole_condition.py"
+  },
+  "chi_pole_x0": {
+    "note": "x(0) = 0.1007 < 1 — the ladder product at chi = 0 (below the critical value; the crossing requires the chi condensation)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.100656318445256,
+    "writer": "cg_frg/gravity/chi_pole_condition.py"
+  },
+  "ckm_delta_direction": {
+    "note": "delta_CKM = (8/7) pi / N_c = 8 pi / 21 = 68.57 deg — the COLOUR-NUMBER dilution: delta_CKM = delta_PMNS/N_c, where delta_PMNS = (n_L/n_R) pi = (8/7) pi (the lepton sector, colourless) and N_c = 3 (the quarks carry 3 colours, so their mixing phase is diluted by the colour number); the quadrant differs from the PMNS (first vs third — the 1/N_c dilution rotates the direction); the 1/N_c dilution = the internal-space-dimension dilution: the quark mixing phase is diluted by d = 3 = N_c (the RP³ dimension = the colour rank, the N_g·ξ = 1 unique solution), while the lepton mixing (colourless, no colour dimension) is undiluted)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 1.1967972013675403,
+    "writer": "cg_frg/framework/cp_sector.py"
+  },
+  "cluster_bound_constant": {
+    "note": "C(d0=1.0) = e^(m_delta d0) S2(d0) = 1.650773e-01 (the uniform bound S2(d) <= C(d0) e^(-m_delta d) for d >= d0, finite for every d0 > 0)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.16507729117737943,
+    "writer": "cg_core/cluster_decay.py"
+  },
+  "cluster_bound_residual": {
+    "note": "max_d S2(d) e^(m_delta d)/C(d0) = 1.000000e+00 over d >= d0 (expect <= 1, attained at d = d0; the bound is saturated by the zero mode)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.0,
+    "writer": "cg_core/cluster_decay.py"
+  },
+  "cluster_rate_deviation": {
+    "note": "(slope + m_delta)/m_delta = -1.121e-01 (the clustering rate of the spectral-sum two-point function equals the scalar mass m_delta)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": -0.11214626444672016,
+    "writer": "cg_core/cluster_decay.py"
+  },
+  "cluster_rate_slope": {
+    "note": "d/dd log S2 = -1.112146 (finite difference over (10.0, 18.0)) vs -m_delta - 3/(2 d_mid) = -1.107143 (K1 power prefactor d^(-3/2); |dev| = 5.00e-03)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": -1.1121462644467202,
+    "writer": "cg_core/cluster_decay.py"
+  },
+  "cluster_temporal_slope": {
+    "note": "d/dtau log C(tau) = -1.000000001 (fit over tau in (10.0, 18.0), expect -m_delta = -1.000000; deviation -7.73e-10; the p=0 correlator carries no power prefactor so the rate is exact)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": -1.0000000007729324,
+    "writer": "cg_core/cluster_decay.py"
+  },
+  "cluster_zero_mode_ratio": {
+    "note": "S2(d)/Delta_m(d) at d = (10.0, 14.0, 18.0): [np.float64(1.0000000313847797), np.float64(1.0000000000105962), np.float64(1.0000000000000036)] (-> 1 from above; the l>=2 tower decays with the larger rate M2 - m_delta > 0, so the spatial exponential rate is exactly m_delta)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.0000000000000036,
+    "writer": "cg_core/cluster_decay.py"
+  },
+  "cp_87_ratio": {
+    "note": "n_L/n_R = 8/7 = 1.142857 — the SM left/right content ratio (8 doublets vs 7 singlets per family)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 1.1428571428571428,
+    "writer": "cg_frg/framework/cp_sector.py"
+  },
+  "cp_jarlskog_magnitude": {
+    "note": "J = |V_us||V_cb||V_ub| c12 c23 sin(delta) = 3.1503e-05 (the exact Jarlskog formula with the framework's closed |V_us|, |V_cb|, |V_ub| (Gatto geometric elements) and the DERIVED delta_CKM = 8 pi / 21 = 68.57 deg; no SM A or Wolfenstein eta/rho_bar input); the +3% vs observed is the V_ub observation spread (V_ub is the least-precise CKM element, PDG 0.00382±0.0002 = ±5% — the framework's 0.00378 is within it) — observation ceiling, not a fixable mechanism",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 3.150264912189696e-05,
+    "writer": "cg_frg/framework/cp_sector.py"
+  },
+  "cp_pmns_87_pattern": {
+    "note": "delta_PMNS/pi ~ (8/7) = 1.142857 (the 8/7 content ratio n_L/n_R: 8 left doublets vs 7 right singlets per generation; the phase = (content ratio) × pi, the pi being the complex-plane half-turn of maximal CP)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 1.1428571428571428,
+    "writer": "cg_frg/framework/cp_sector.py"
+  },
+  "cp_sector_status": {
+    "note": "the CP sector status: the 8/7 content ratio exact, the CKM delta derived (8 pi / 21), the Jarlskog magnitude closed, the baryogenesis = J alpha_W^2/56",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": "the 8/7 left-right content ratio (delta_PMNS ~ 1.14 pi); the CKM delta DERIVED (8 pi / 21 = 68.57 deg, the colour-number dilution); the Jarlskog magnitude closed (the exact formula); the baryogenesis eta_B = J alpha_W^2/56 (Sakharov content)",
+    "writer": "cg_frg/framework/cp_sector.py"
+  },
+  "discrete_flow_beta": {
+    "note": "beta(sigma) = -2C sigma^-3 (C < 0) — the analytic closed-form flow of the vacuum-energy profile V_eff(k) = -(C/2)(k^-2 - M_P^-2); unique global solution (Picard-Lindelof)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.0374777173335446e+55,
+    "writer": "cg_frg/frg/discrete_flow.py"
+  },
+  "discrete_flow_gap_spectrum": {
+    "note": "the discrete-flow mass-gap spectrum: the condensate generator mass (positive) + the positive J=2 kinetic — the gap at the spectral level; the tower ratios from the RP3 harmonic indices",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": "m_long^2(M_G) = K(R-R_c) = -2.5197 < 0 (the tachyon — the condensation trigger); m_gen^2 = g2^2<E>^2 = 6.207e+32 GeV^2 > 0 and the J=2 kinetic lambda_J = 14.1608/L^2 > 0 — the lowest excitation MASSIVE (the spectral level of the mass gap); the glueball tower ratios geometric: 0++ 1.00, 2++ 1.41, 0++* 1.50, 0-+ 1.46",
+    "writer": "cg_frg/frg/discrete_flow.py"
+  },
+  "discrete_flow_reflection_positivity": {
+    "note": "the Osterwalder-Schrader reflection positivity of the discrete flow",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": "the OS structure preserved layer by layer: each layer is a Gaussian measure (GJ87 — reflection-positive); the flow map (the analytic beta, the window projection) preserves the positivity stepwise",
+    "writer": "cg_frg/frg/discrete_flow.py"
+  },
+  "discrete_flow_semigroup": {
+    "note": "the Gaussian window semigroup T_a*T_b = T_(sqrt(a^2+b^2)) verified to 1.1e-16 across the mode grid (the unitary, irreversible partial-trace flow)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.1102230246251565e-16,
+    "writer": "cg_frg/frg/discrete_flow.py"
+  },
+  "discrete_flow_status": {
+    "note": "the discrete flow is the physical RG structure: the window kernel is the coarse-graining operator, the semigroup machine-precision verified, the beta the analytic closed form, the gap spectrum from the condensate and the positive J=2 kinetic",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": "the discrete flow IS the physical RG: the Gaussian window kernel is the coarse-graining operator (not a regulator); the semigroup is verified to machine precision; the beta is the analytic closed form; the window capacity kL* = const makes the flow equidistant in log sigma; the mass-gap spectrum is the condensate + the positive J=2 kinetic; the OS structure is preserved stepwise",
+    "writer": "cg_frg/frg/discrete_flow.py"
+  },
+  "discrete_flow_step": {
+    "note": "Delta ln sigma = 1/kL* = 0.4010 — the window-capacity step (the flow is equidistant in log sigma; the discretisation error bound 1/(kL*)^2 = 0.16, while the physical closures converge far better — the continuum limit effectively reached)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 0.4010371892446762,
+    "writer": "cg_frg/frg/discrete_flow.py"
+  },
+  "dm_verdict": {
+    "note": "NO dark-matter particle: the framework's gravity is the transverse-traceless spectral zero mode (the TT-tower residue, linear — no curved spacetime, no self-interaction); the rotation-curve SCALE is the IR behaviour a0 = c H0/(2 pi) sqrt(4/3) (the spectral IR endpoint H0), needing no extra mass; the full rotation-curve SHAPE F(a/a0) is NOT yet derived (research roadmap); Omega_DM is the flatness closure residue (not a particle); the Bullet cluster is the lensing test of the spectral zero mode",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": {
+      "Omega_DM": 0.2657026396202929,
+      "bullet": "prediction (the spectral zero-mode lensing)",
+      "rotation_scale": "closed (the spectral zero-mode IR behaviour: a0 = c H0/(2 pi) sqrt(4/3), no dark matter)",
+      "rotation_shape": "NOT derived (F(a/a0) is a research-roadmap item: the TT zero-mode acceleration response to baryonic mass distributions is not yet computed)"
+    },
+    "writer": "cg_frg/cosmology/gw_ratio.py"
+  },
+  "ec_action_torsion_coeffs": {
+    "note": "the EC torsion algebra: L = a T^2 + b T^{bac}T_{abc} + c (T^a_ab)^2 with a = M_G^3/4, b = 4a (the Holst/Immirzi algebraic-torsion condition), c = -(7/3)a (the trace term)",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": {
+      "a": 1.2968471466669305e+54,
+      "b": 5.187388586667722e+54,
+      "b_equals_4a": true,
+      "c": -3.0259766755561716e+54,
+      "torsion_algebraic": true
+    },
+    "writer": "cg_frg/ewsb/order_parameter.py"
+  },
+  "electron_index_20": {
+    "note": "the exact exponent 20 = (d+1)(SigmaY2 Delta_f) = 4x5 (d+1 = 4, SigmaY2 Delta_f = (10/3)(3/2) = 5); tau^-1/kL = 20.0519 is the same content ratio (the torsion inverse over the window width)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 20.05185946223381,
+    "writer": "cg_frg/fermion/electron_mass.py"
+  },
+  "entropy_integral": {
+    "note": "integral of gamma_M = ln(M_P^2 sqrt(2pi)/sqrt(rho_Lambda)) = 139.253706 (the two-Gaussian association entropy, INTERNAL — no observed H0)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 139.2537061093592,
+    "writer": "cg_frg/frg/gamma_M.py"
+  },
+  "epsilon_L_over_R": {
+    "note": "epsilon = (3 alpha/pi) e^{-4 pi kL} (the window-squared line; the kL-only dilaton-stop form e^{1/(2pi)} e^{-phi} with phi = 4 pi kL - ln(3 alpha/pi) + 1/(2pi) is identical) — fully internal, no carried baseline",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.4221768734404969e-16,
+    "writer": "cg_frg/ewsb/epsilon_ratio.py"
+  },
+  "epsilon_dilaton": {
+    "note": "eps = e^{1/(2pi)} e^{-phi_stop} = 1.4244e-16 (the zero-point anchored ratio)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.4221768734404969e-16,
+    "writer": "cg_frg/ewsb/relaxion_chain.py"
+  },
+  "eta_b": {
+    "note": "eta_B = J alpha_W^2/56 = 6.091e-10 (the Sakharov content: J (CP violation, the derived delta_CKM = 8pi/21), alpha_W^2 = 0.03290 (the weak sphaleron rate at the EW scale, geometric RGE), 1/56 = xi/n_R (the conformal-gauge duality xi = 1/N_g = 1/8 times 1/n_R = 1/7).  The alpha_W^2 POWER is RESOLVED: J carries alpha_W^3 (|V_us||V_cb||V_ub| = alpha_W^3), so eta_B = alpha_W^5 c12 c23 sin(delta)/56 — the STANDARD sphaleron rate (5 = 3 CKM mixings x 2 weak sphaleron vertices); the |V_us||V_cb||V_ub| = alpha_W^3 identity is CLOSED (−2.5%): the three cross-generation elements' geometric mean = alpha_W (the weak cube, colour-diluted)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 6.090892649634457e-10,
+    "writer": "cg_frg/framework/cp_sector.py"
+  },
+  "five_items_status": {
+    "note": "the five items' status ledger (1: CLOSED-formal, 2: recorded, 3: CLOSED, 4: CLOSED, 5: CLOSED-near)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": "{'ITEM 1 — 3 generations (n = {0,2,4})': 'CLOSED-formal', \"ITEM 2 — the branch choice (hypercharge B' vs C')\": 'recorded', 'ITEM 3 — 2L = sqrt(2pi)': 'CLOSED', 'ITEM 4 — the two v-paths (the factor-2 unification)': 'CLOSED', 'ITEM 5 — the m_e': 'CLOSED-near'}",
+    "writer": "cg_frg/framework/five_items.py"
+  },
+  "g1_MG_geo": {
+    "note": "g1(M_G) = g2(k_GUT)*kappa run down = 0.604990 (the kappa acts at the breaking scale k_GUT (g1(k_GUT)=g2(k_GUT)*kappa), then g1 runs down to M_G; the amplitude s0=2tau = N_g*tau/(d+1)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.6049900729523602,
+    "writer": "cg_frg/gauge/geometric_couplings.py"
+  },
+  "g2_MG": {
+    "note": "g2(M_G) = 0.508847703 — the FULL prediction: bare geometric g2 corrected by the conservation law 1/alpha_SM = 1/alpha_W + 1/N_c - tau^2*pi/2 (matches SM to +0.00066%; the law IS the error-cancellation mechanism, proven in Lean 4)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.5088477031823814,
+    "writer": "cg_frg/gauge/geometric_couplings.py"
+  },
+  "g2_MG_geo": {
+    "note": "bare geometric g2 = sqrt(8)(M_G/M_P)kL^-3/2 = 0.510600869 (Killing normalisation, +0.345% vs SM — the raw value BEFORE the conservation-law correction)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.5106008686060399,
+    "writer": "cg_frg/gauge/geometric_couplings.py"
+  },
+  "g2_conservation_lhs": {
+    "note": "N_c(1/alpha_SM - 1/alpha_W + tau^2 pi/2) = 1.001929849 (dev +1.930e-03; the g2 geometric-dynamics conservation law, proven in Lean 4)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.001929848645681,
+    "writer": "cg_frg/gauge/geometric_couplings.py"
+  },
+  "g2_residual_1Nc": {
+    "note": "1/alpha_SM - 1/alpha_W = 1/N_c - tau^2*pi/2 (the g2 geometric-dynamics residual; conservation law N_c(...)=1 <-> N_g xi = 1)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.333348297684509,
+    "writer": "cg_frg/gauge/geometric_couplings.py"
+  },
+  "g3_MG_geo": {
+    "note": "g3(M_G) = 0.497760 via common-origin g3(k_GUT)=g2(k_GUT)*(1+alpha_GUT^2/K) run down TWO-LOOP (Machacek-Vaughn/Buttazzo beta_gauge; K = 8/3 the long-root condensation coefficient — the alpha^2/K bifurcation is the CF-3 forward content)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.49775991624706845,
+    "writer": "cg_frg/gauge/geometric_couplings.py"
+  },
+  "g3_common_origin_pred": {
+    "note": "g3(k_GUT) = g2(k_GUT) = 0.518420 (the common-origin prediction: the colour generators share the SU(2) Killing normalisation; the bifurcation mechanism (the long-root geometric carrier) is the J=2 squash)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.5184195044864115,
+    "writer": "cg_frg/gauge/geometric_couplings.py"
+  },
+  "gamma_M": {
+    "note": "self-similar branch: gamma_M = 0 (trace density scales as k^4; endpoint_constraint fixed point kL* = 2.4973)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.0,
+    "writer": "cg_frg/frg/gamma_M.py"
+  },
+  "gamma_M_frozen": {
+    "note": "gamma_M frozen branch = -1-p = -0.997468 (ir_flow); p = ln(kL/sqrt(pi))/ln(H0/k_GUT) = -0.002532 (the endpoint match L(H0)=kL, L(k_GUT)=sqrt(pi))",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": -0.9974676893494144,
+    "writer": "cg_frg/frg/ir_flow.py"
+  },
+  "gauge_group_emergence": {
+    "note": "the gauge group SU(3)xSU(2)xU(1) as the isometry/twist content of RP^3 (the group structure; couplings in geometric_couplings with g3 = g2*(1+alpha_GUT^2/K) CLOSED)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": "{'SO(4) isometry': 'SU(2)_L x SU(2)_R (6 Killing vectors of S^3, Z_2-quotiented to RP^3)', 'SU(2)_L': 'the 3 even (untwisted) generators — the weak isospin', 'SU(2)_R': 'the 3 odd (twisted) generators — broken by the geometric isometry breaking (EWSB)', 'U(1)_Y': 'the diagonal generator of the chirality layers (SU(2)_R -> U(1)_Y by the long-root condensate)', 'SU(3)_c': 'the composite of the two su(2) blocks with the long-root coupling (the A_2 root system) — the coupling is CLOSED via g3 = g2*(1+alpha_GUT^2/K)'}",
+    "writer": "cg_frg/gauge/gauge_group_emergence.py"
+  },
+  "geometric_ewsb_eps_ratio_check": {
+    "note": "m_W/m_WR = epsilon/(2 s0) = 1.778e-15 — the CLOSED identity: 1/(2 s0) = 12.5000 (s0 = 2 tau = 0.04); the exponential smallness is epsilon = v/M_G = 1.422e-16 (the dilaton-stop line, epsilon_ratio)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.7777210918006348e-15,
+    "writer": "cg_frg/gauge/geometric_ewsb.py"
+  },
+  "geometric_ewsb_hierarchy": {
+    "note": "m_WR/m_W = 5.625e+14 with m_W = g2*v/2 = 62.64 GeV — the L/R EW hierarchy",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 562517936369371.94,
+    "writer": "cg_frg/gauge/geometric_ewsb.py"
+  },
+  "geometric_ewsb_m_WR": {
+    "note": "m_WR = g_R*s0*M_G = 3.523e+16 GeV (the Goldstone absorption — the GUT right-handed scale; the geometric VEV s0 = 2tau = 0.04)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 3.5234172043286684e+16,
+    "writer": "cg_frg/gauge/geometric_ewsb.py"
+  },
+  "geometric_ewsb_ratio_obs": {
+    "note": "m_W/m_WR with the weak coupling at M_Z = 2.244e-15 vs observed 2.284e-15 (-1.75% — the residual is the standard SM m_W radiative correction, m_W = g v/2 at tree level vs the measured 80.37 GeV)",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 2.2436232379342152e-15,
+    "writer": "cg_frg/gauge/geometric_ewsb.py"
+  },
+  "geometric_ewsb_ratio_pred": {
+    "note": "m_W/m_WR with the weak coupling at M_Z = 2.247e-15 (m_W = g v/2 at tree level)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.2465247762094113e-15,
+    "writer": "cg_frg/gauge/geometric_ewsb.py"
+  },
+  "geometric_ewsb_status": {
+    "note": "the geometric EWSB status: the Goldstone fate, the L/R branches of the chirality, the CLOSED hierarchy epsilon/(2 s0)",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": "SU(2)_R -> U(1)_R Goldstones absorbed by W_R+/- (the geometric VEV s0 = 2 tau); the L/R hierarchy CLOSED: m_W/m_WR = epsilon/(2 s0) with epsilon = v/M_G (dilaton-stop) and the factor 1/(2 s0) = 12.5 exact",
+    "writer": "cg_frg/gauge/geometric_ewsb.py"
+  },
+  "gw_ratio": {
+    "note": "r = (1/2pi)^2 = 0.02533 (the Euclidean zero-point of the tensor sector; the CMB-S4 testable prediction)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 0.025330295910584444,
+    "writer": "cg_frg/cosmology/gw_ratio.py"
+  },
+  "gw_tensor_amplitude": {
+    "note": "Delta2_t = r*Delta2_s = 5.322e-11 (r = (1/2pi)^2 x the scalar amplitude 2.101e-09)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 5.322175825282864e-11,
+    "writer": "cg_frg/cosmology/gw_ratio.py"
+  },
+  "ir_flow_int_gamma": {
+    "note": "int gamma_M d ln k = ln(M_P^2 sqrt(2pi)/sqrt(rho_Lambda)) = 139.253706 — the two-Gaussian association entropy (INTERNAL; H0 DERIVED = 1.4388e-42 GeV)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 139.2537061093592,
+    "writer": "cg_frg/frg/ir_flow.py"
+  },
+  "kL": {
+    "note": "F_MG fixed point at L_Cg=sqrt(pi) (first-principles)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.4935343325226915,
+    "writer": "cg_frg/frg/endpoint_constraint.py"
+  },
+  "kL_CMB": {
+    "note": "kL_CMB = kL*(1 - tau/4) = 2.4810666609 (the CMB-pivot window: the local kL reduced by the torsion quarter tau/4 = 0.005; computed, not a scale choice)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 2.481066660860078,
+    "writer": "cg_frg/cosmology/perturbation_amplitude.py"
+  },
+  "k_GUT": {
+    "note": "k_GUT = M_P*L_Cg/L_GUT with L_GUT = sqrt(3)/tau (the J=2 isometry-breaking scale; init_v4)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 4.984263355588678e+16,
+    "writer": "scripts/init_v4.py"
+  },
+  "kappa_mixing": {
+    "note": "kappa(2tau) = sqrt((1+2tau)/(1-4tau)^2.5) = 1.13183178 (the J=2 squash mixing)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.1318317836812264,
+    "writer": "cg_frg/gauge/geometric_couplings.py"
+  },
+  "ladder_98_identity": {
+    "note": "9/8 = 1/(1-(Y_d/Y_l)^2) exact (Y_d = 1/3, Y_l = 1): the down/lepton hypercharge structure of the sector ladder",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 1.125,
+    "writer": "cg_frg/generation/sector_alpha.py"
+  },
+  "lambda_H_pseudo": {
+    "note": "lambda_H = (12 pi + 3)/(32 pi^2) = 3(4 pi + 1)/(32 pi^2) = 0.1289 (the pseudo-dilaton identity: lambda_dil = 3 x 4 pi (3 generations x NJL bound) + sigma_SM = 3 (one unit loop per generation))",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.12886506828539068,
+    "writer": "cg_frg/ewsb/pseudo_dilaton.py"
+  },
+  "lambda_dil": {
+    "note": "lambda_dil = 3 x 4 pi = 12 pi = 37.6991 (the trace anomaly couples to ALL 3 generations, so the dilaton self-coupling is 3 x the single-generation NJL/BS strong-coupling bound 4 pi — DERIVED, no hardcode)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 37.69911184307752,
+    "writer": "cg_frg/ewsb/pseudo_dilaton.py"
+  },
+  "longroot_K": {
+    "note": "K = 8/3 = 2.6666666666666665 — COMPUTED as the J=2 mode's kinetic eigenvalue (J(J+2) = 8) over the internal-space dimension (3); the long-root condensation coefficient, the geometric carrier = the J=2 mode (the same as the order parameter); the effective eigenvalue lambda_long = (8/3) R = 16/L^2 is the curvature-tracked value, not a separate harmonic",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 2.6666666666666665,
+    "writer": "cg_frg/qcd/mass_gap_scale.py"
+  },
+  "m_H_pred": {
+    "note": "m_H = sqrt(2 lambda) v = 124.983 GeV (tree level with the scale-invariant geometric quartic lambda = 0.128865)",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 124.98344026878286,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "m_b_over_m_s": {
+    "note": "e^(2 alpha_dn) = 44.87 (the 9/8 ladder alpha_dn)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 44.86794977784708,
+    "writer": "cg_frg/generation/lz_ladder.py"
+  },
+  "m_b_pred": {
+    "note": "m_b = (y_b/y_t) m_t = 4.238 GeV (the bottom absolute mass from the geometric-mean y_b/y_t closure); the +1.4% vs observed = m_t's +0.8% (the scale-invariant geometric overlap y_0=1, no Yukawa running) + y_b/y_t's geometric-mean first-principles value — the geometric-RGE prediction, not a fixable mechanism",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 4.237792000302189,
+    "writer": "cg_frg/fermion/mass_operator_overlap.py"
+  },
+  "m_e_pred": {
+    "note": "m_e = M_P e^(-20 kL) (1 - s0*kappa) = 0.510 MeV (the Planck-anchored exponential chain times the low-scale squash correction; exponent 20 = 4x5 structural)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.5103542513564916,
+    "writer": "cg_frg/fermion/electron_mass.py"
+  },
+  "m_glueball": {
+    "note": "m_glueball = lambda(0++) x Lambda_QCD = 8 x Lambda_QCD = 1.66 GeV (FULL two-loop SM running + matching from the framework's common-origin g3); lambda(0++) = 2 lambda_gluon + C2(0,0) = 8 the spectral eigenvalue (two gluons l=1 Killing, lambda_gluon = (l+1)^2 = 4) — first-principles, NO empirical lattice ratio; the residual vs lattice is the TWO-LOOP Lambda_MSbar extraction (vs the standard 4-loop) — loop-order precision, not a fixable mechanism",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.6590414836759542,
+    "writer": "cg_frg/qcd/mass_gap_scale.py"
+  },
+  "m_mu_over_m_e": {
+    "note": "m_mu/m_e = e^(2 alpha_lp + sqrt(2pi)) = 206.36 (the lepton LZ index plus the entropy-min distance)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 206.3556103933899,
+    "writer": "cg_frg/fermion/electron_mass.py"
+  },
+  "m_mu_pred": {
+    "note": "m_mu = m_e (m_mu/m_e) = 0.105314 GeV (the absolute muon mass from the internal ladder; fills the ratio-only gap of lz_ladder)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.10531446305553036,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "m_nu1": {
+    "note": "m_nu1 = m_nu3*r12*r23 = 0.0026 eV (DERIVED from the two hypercharge-trace ratios — matches dark_energy.py; no observed m1 enters; the 5/3-determinant cross-check m2_from_53 = 0.0089 eV sits ~2% above)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.002607415413287687,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "m_nu2": {
+    "note": "m_nu2 = m_nu3*r23 = 0.0087 eV (the hypercharge-trace hierarchy, consistent with m1/m2 = 3/10)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.008691384710958958,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "m_nu3": {
+    "note": "m_nu3 = v^2 (2pi)^2/k_GUT = 0.0502 eV (the Weinberg 2pi family)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.05017973302502751,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "m_p": {
+    "note": "m_p = (9/2)(1-xi/4) Lambda_QCD = (279/64) x 0.2074 = 0.9382 GeV (the constituent-quark content: 3 quarks x (3/2) chiral factor x (1-xi/4) conformal correction;",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.9381556711818813,
+    "writer": "cg_frg/qcd/qcd_sector.py"
+  },
+  "m_s_over_m_d": {
+    "note": "m_s/m_d = e^(2 alpha_sd) = 19.62 (the down first-gen colour-dilution e^(2 a_dn - kL_CMB/3))",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 19.622983487591103,
+    "writer": "cg_frg/generation/lz_ladder.py"
+  },
+  "m_t_over_m_c": {
+    "note": "e^(2 alpha_up) = 135.2 (the internal alpha_up from sector_alpha)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 135.24239203885273,
+    "writer": "cg_frg/generation/lz_ladder.py"
+  },
+  "m_t_over_m_u": {
+    "note": "e^(2 alpha_up) e^(2 kL_CMB + ln4) = 77304",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 77303.6419446479,
+    "writer": "cg_frg/generation/lz_ladder.py"
+  },
+  "m_t_pred": {
+    "note": "m_t = y_0 v/sqrt(2) = 174.1 GeV — the geometric overlap y_0 = 1.0 is SCALE-INVARIANT (the geometric RGE holds y_0 fixed; only the gauge couplings run), so m_t carries NO Yukawa running; the +0.8% vs the pole mass is the geometric-overlap PREDICTION, not a missing RGE",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 174.08240381974227,
+    "writer": "cg_frg/fermion/mass_operator_overlap.py"
+  },
+  "m_tau_pred": {
+    "note": "m_tau = m_mu e^(2 alpha_lp) = 1.772105 GeV (the absolute tau mass from the internal lepton ladder)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.772105081689173,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "mass_gap_dE": {
+    "note": "Delta E = (1/8) M_G = 2.164e+17 GeV (the condensate energy of the long-root, xi = 1/8)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.163845625059378e+17,
+    "writer": "cg_frg/qcd/mass_gap_scale.py"
+  },
+  "mass_gap_m_gen": {
+    "note": "m_gen = g2 (2 tau) M_G / sqrt(2) = 2.491e+16 GeV (the SU(3) generator mass, the QCD initial condition)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.4914321981301484e+16,
+    "writer": "cg_frg/qcd/mass_gap_scale.py"
+  },
+  "md_over_ms_geo": {
+    "note": "m_d/m_s = e^(-2 alpha_dn) (1+Y_d/Y_u)^2 = 0.05015 (CLOSED, the hypercharge first-generation factor)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 0.05014715428586189,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "mnu_ratio_12": {
+    "note": "m_nu1/m_nu2 = 1/Tr(Y^2) = 3/10 (the hypercharge trace)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.3,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "mnu_ratio_23": {
+    "note": "m_nu2/m_nu3 = 1/(sqrt(3) Tr(Y^2)) = 0.1732",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 0.17320508075688773,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "n_generations": {
+    "note": "window-capacity theorem: spinor modes with (n+3/2) < (kL)^2 = exactly 3 (n = {0,2,4})",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 3,
+    "writer": "cg_frg/generation/window_capacity.py"
+  },
+  "ns_tilt": {
+    "note": "1 - n_s = tau*(7/4) = 0.035 (the torsion modulus times the exact 7/4 scalar/vector window ratio)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.035,
+    "writer": "cg_frg/cosmology/spectral_tilt.py"
+  },
+  "order_parameter_Rc": {
+    "note": "R_c* = 6/pi = 1.909859 (the Gaussian family; the store R_c_star = 1.909859 confirms to +0.000%)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 1.909859317102744,
+    "writer": "cg_frg/ewsb/order_parameter.py"
+  },
+  "order_parameter_Vmin_GUT": {
+    "note": "V_min(GUT) = -xi^2(R_c-R_GUT)^2/(4 lambda) = -0.0001 — the Mexican-hat depth at the GUT onset",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": -9.545296585513721e-05,
+    "writer": "cg_frg/ewsb/order_parameter.py"
+  },
+  "order_parameter_lambda": {
+    "note": "lambda = xi(R_c-R_GUT)/(2 tau)^2 = 149.145 — the quartic from the stationarity at the GUT onset (R_GUT = 6/L_GUT^2, L_GUT = sqrt(3)/tau = 86.603)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 149.1452591486519,
+    "writer": "cg_frg/ewsb/order_parameter.py"
+  },
+  "order_parameter_lambda_EC_J2": {
+    "note": "lambda_EC*L^2 = N_g(1+tau/2)^2 + 6 = 14+8tau+2tau^2 = 14.1608 > 0 — the J=2 EC Lichnerowicz eigenvalue (the free-EC sector stable; the tachyon comes from the curvature coupling xi(R-R_c), not the free spectrum).  GRAVITY HIGHER-ORDER EFFECT (2026-08-16): the first-order torsion shift N_g*tau = 8tau, with N_g = 8 the su(3) generator count; 8tau/14 = 2*(s0/N_R) EXACTLY — the kL correction s0/N_R = n_broken*tau/N_R = 2tau/7 is HALF the J=2 EC first-order torsion shift, the factor 2 = N_g/(2*n_broken) = 8/4 (n_broken = 2 broken SU(2)_R generators) and lambda_TT = 14 = 2*N_R.  So the three deviations (alpha_sd=3/2, V_us=e^-d/2, the factor-5) share ONE root: the F_MG condition uses m2_tt = 6/L2 (zero-order Lichnerowicz) and MISSES the J=2 squash first-order torsion shift N_g*tau.",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 14.1608,
+    "writer": "cg_frg/ewsb/order_parameter.py"
+  },
+  "order_parameter_mass2_MG": {
+    "note": "m^2(M_G) = xi(R(M_G)-R_c) = -0.118109 < 0 — the tachyon at the emergence scale (R(M_G) = 0.964985 < R_c): the condensation trigger",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": -0.11810929426989034,
+    "writer": "cg_frg/ewsb/order_parameter.py"
+  },
+  "order_parameter_n_broken": {
+    "note": "n_broken = dim SU(2)_R - dim U(1)_R = 3 - 1 = 2 — the two broken generators (T^1_R, T^2_R, the Goldstone directions absorbed by W_R+/-); the s0 = 2 tau mechanism COMPUTED: each broken generator contributes the torsion modulus tau to the squash amplitude",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 2,
+    "writer": "cg_frg/ewsb/order_parameter.py"
+  },
+  "order_parameter_s0": {
+    "note": "s0 = 2 tau = 0.04 — the squash VEV; the MECHANISM (the breaking-torsion balance): the 2 = the two broken SU(2)_R generators (T^1_R, T^2_R — the Goldstone directions absorbed by W_R+/-), each contributing the torsion modulus tau to the squash amplitude; the EC consistency b = 4a (the algebraic torsion, rebuilt in this module) fixes the leading coefficients; the g1/g2 normalisation kappa(s0) matching the SM fixes the same value.  PURE-CONTENT RATIO (2026-08-16): s0/N_R = n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175 — the symmetry correction is HALF the gravity higher-order (J=2 EC first-order torsion) shift N_g tau/14 = 8tau/14, the factor 2 = N_g/(2 n_broken) = (d+1)/2 = 2; alpha_sd = Delta_f(1-s0/N_R) matches to -0.05%)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.04,
+    "writer": "cg_frg/ewsb/order_parameter.py"
+  },
+  "order_parameter_xi": {
+    "note": "xi = (d-2)/(4(d-1)) = 0.125 in d = 3 — the conformal curvature coupling of the order parameter",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 0.125,
+    "writer": "cg_frg/ewsb/order_parameter.py"
+  },
+  "perturbation_amplitude": {
+    "note": "Delta2_R = (1/2)(1/2pi)^2 e^(-2pi kL_CMB) (1 - tau*kappa) = 2.101e-09 (the spin-1/2 zero-point x the Euclidean suppression x the chiral-squash correction, no inflation)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.1011107979433257e-09,
+    "writer": "cg_frg/cosmology/perturbation_amplitude.py"
+  },
+  "phi_R3": {
+    "note": "the dilaton stop position 4*pi*kL - ln(3*alpha/pi) + 1/(2*pi) (internal, kL-only)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 36.64832772377779,
+    "writer": "cg_frg/ewsb/epsilon_ratio.py"
+  },
+  "pseudo_dilaton_beta_eff": {
+    "note": "beta_eff = (3 g2^2 + g1^2 + 4 yt^2 + 2 lambda_H)/(16 pi^2) + 12 pi/(16 pi^2) = 0.2729 — the trace-anomaly coefficient with the DERIVED lambda_dil = 12 pi",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.2729316138950566,
+    "writer": "cg_frg/ewsb/pseudo_dilaton.py"
+  },
+  "qcd_Lambda_QCD": {
+    "note": "Lambda_QCD = 0.2074 GeV — TWO-LOOP QCD running + m_t matching from the framework's common-origin g3(M_G) (mass_gap_scale); the standard Lambda_MSbar extraction)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.20738018545949427,
+    "writer": "cg_frg/qcd/qcd_sector.py"
+  },
+  "qcd_deconfinement_T": {
+    "note": "T_d = (lambda_vector/N_c) Lambda_QCD = (4/3) x 0.207 = 270 MeV (lambda_vector = 4 the Killing eigenvalue, N_c = 3 the colour rank (Z_N centre breaking); self-consistent with sigma via sigma/T_d^2 = (14/pi)(9/16) = 5/2)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 270.24772767375873,
+    "writer": "cg_frg/qcd/qcd_sector.py"
+  },
+  "qcd_gap_lambda_l2": {
+    "note": "lambda_glue = 8/L^2 = 1.286647 — the l=2 scalar mode on RP3 (the lowest glueball mode; the l=0 constant mode carries the 4D gauge fields — the KK zero modes); the topological level of the mass gap",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.2866466172581619,
+    "writer": "cg_frg/qcd/qcd_sector.py"
+  },
+  "qcd_glueball_tower": {
+    "note": "the glueball tower: 2++/0++ = sqrt2 is GEOMETRIC (the two-gluon bound-state spectrum: 0++ = 2lambda_gluon (C2=0), 2++ = 2lambda_gluon + C2(1,1)=8 -> sqrt(16/8)=sqrt2); 0++* = 3/2 ; 0-+ = three-gluon/instanton; the absolute scale is the confinement dynamics via the PART 1 chain",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": {
+      "0++": {
+        "mass_GeV": 1.6590414836759542,
+        "mode": "two-gluon (0,0) scalar, lambda=8",
+        "ratio": 1.0
+      },
+      "0++*": {
+        "mass_GeV": 2.488562225513931,
+        "mode": "conformal n=2 excitation (3/2)",
+        "ratio": 1.5
+      },
+      "0-+": {
+        "mass_GeV": 2.418447770716816,
+        "mode": "conformal n=1 excitation (sqrt(17/8))",
+        "ratio": 1.4577379737113252
+      },
+      "2++": {
+        "mass_GeV": 2.3462389667541164,
+        "mode": "two-gluon (1,1) tensor, lambda=16 (sqrt2)",
+        "ratio": 1.4142135623730951
+      }
+    },
+    "writer": "cg_frg/qcd/qcd_sector.py"
+  },
+  "qcd_sector_status": {
+    "note": "the QCD sector status: the mass-gap scale chain, the topological gap level, the geometric two-gluon tower (2++/0++ = sqrt2); g3 = long-root closed; 0-+ = three-gluon",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": "PART 1: the mass-gap scale chain closed (DeltaE = (1/8)M_G -> m_gen -> Lambda_QCD ~ 0.21 GeV -> m_glueball = 1.68 GeV); PART 2: the topological gap level lambda_glue = 8/L^2 > 0; PART 3: the glueball tower 2++/0++ = sqrt2 geometric (two-gluon + SO(4) Casimir), 0++* = 3/2, 0-+ = three-gluon.  g3(M_G) is closed via the long-root correction g3 = g2(1+alpha_GUT^2/K)",
+    "writer": "cg_frg/qcd/qcd_sector.py"
+  },
+  "qcd_string_tension": {
+    "note": "sigma = (lambda_TT/pi) Lambda_QCD^2 = (14/pi) x 0.207^2 = 0.1917 GeV^2 (lambda_TT = 14 the TT Lichnerowicz eigenvalue, pi the internal-volume factor; the area-law confinement scale from the TT spectral level)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.19165170182359875,
+    "writer": "cg_frg/qcd/qcd_sector.py"
+  },
+  "relaxion_factor_two": {
+    "note": "v(phi_R0)/v = 1.970 vs the structural 2.00 (-1.5% — the factor-2 anchor of the relaxion baseline)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 1.9701034939755036,
+    "writer": "cg_frg/ewsb/relaxion_geo.py"
+  },
+  "relaxion_phi_stop": {
+    "note": "phi_stop = phi_R0 + (1/2)ln2 + (1/4)ln(7/4) - (1/4)ln(2(3/4)^3) = 36.6483 (the relaxion revision chain; phi_R0 is DERIVED from the window line phi_R3 = 4 pi kL - ln(3 alpha/pi) + 1/(2 pi), so the chain reproduces the window-squared eps)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 36.64832772377779,
+    "writer": "cg_frg/ewsb/relaxion_chain.py"
+  },
+  "rho_Lambda": {
+    "note": "rho_Lambda = Y_u m_nu1^4 = (2/3) m_nu1^4 = 2.523e-47 GeV^4 (the dark energy density = the lightest neutrino mass^4 weighted by the up-quark hypercharge Y_u = 2/3)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 2.5233889268202705e-47,
+    "writer": "cg_frg/cosmology/dark_energy.py"
+  },
+  "rho_param": {
+    "note": "rho = 1/(1 - Delta rho) = 1.009510 with the exact one-loop t-b Delta rho (Veltman) = 0.009421; the comparison target is the SM improved-Born value 1/(1 - Delta rho_SM) ~ 1.0094, NOT the PDG-fit rho_eff = 1.0004 (the after-subtraction quantity)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.009510375871435,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "s2_thetaW_MZ": {
+    "note": "s^2(M_Z) = g'^2/(g2^2+g'^2) at the internal M_Z = 0.233275 (the MS-bar-like mixing from the geometric couplings at the Z pole)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.2332747392150854,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "s2_thetaW_os": {
+    "note": "sin^2 theta_W (on-shell) = 1 - M_W^2/M_Z^2 = 0.222083 from the internal M_Z = 91.124 and M_W = 80.371",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.2220833827289203,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "sector_alpha_delta": {
+    "note": "Delta = 6(1-n_s)kL_CMB = 0.521024 (the so(4) isometry's 6 generators x the tilt 1-n_s = tau*7/4 x the CMB window kL_CMB)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.5210239987806164,
+    "writer": "cg_frg/generation/sector_alpha.py"
+  },
+  "sector_alpha_s_lep": {
+    "note": "the lepton step s = 16Delta/17 = 0.490376 (the 9/8 ladder split with the mean step Delta)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.4903755282641096,
+    "writer": "cg_frg/generation/sector_alpha.py"
+  },
+  "sigma_C_hubble": {
+    "note": "sigma_C = 1/H0 = 6.9500e+41 GeV^-1 — the IR window endpoint (the Hubble scale)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 6.9499956844971196e+41,
+    "writer": "cg_frg/cosmology/gw_ratio.py"
+  },
+  "sigma_had_pred": {
+    "note": "sigma_had^0 = 12 pi Gamma_e Gamma_had/(M_Z^2 Gamma_Z^2) = 41.510 nb",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 41.510212877206285,
+    "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "sigma_language_status": {
+    "note": "the sigma-language kinematics: sigma(k) = c/k, k*sigma(k) = c = 1 (the unit convention), sigma_C = c/H0 = 6.9500e+41 GeV^-1, T_eff = k/(2pi); L(k) = kL*c = 2.493534 — the window capacity constant on the self-similar trajectory; c is the unit convention, NOT a third physical input (H0 is derived, c is a unit choice); no emergent metric (the no-emergent-geometry principle)",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": {
+      "L(k)": "kL*c = kL const — the self-similar trajectory (k*sigma(k) = c)",
+      "T_eff": "k/(2pi)",
+      "anchors": "M_P (identity) + the internal chain; H0 derived (gw_ratio); c = 1 convention",
+      "c": "unit convention (c = 1); the σ-language correlation propagation speed",
+      "sigma(k)": "c/k",
+      "sigma_C": 6.9499956844971196e+41
+    },
+    "writer": "cg_frg/framework/sigma_language.py"
+  },
+  "sin2_theta12": {
+    "note": "sin2(theta12) = m_nu1/m_nu2 = 0.30 (the solar, closed)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 0.29999999999999993,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "sin2_theta13": {
+    "note": "sin2(theta13) = (1/2pi)^2 sqrt(3)/2 = 0.0219 (the 2pi imprint)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 0.021936679743943206,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "sin2_theta23": {
+    "note": "sin2(theta23) = 1/2 + Tr(T3^2)/(2pi)^2 = 0.5507",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 0.5506605918211689,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "tau": {
+    "note": "tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = 0.02 — CLOSED (the seven-layer theoremisation: the chiral drive <chi> = 1/15 over the renormalised hypercharge capacity Pi_ren(M_G) = Sum Y^2 = 3.3333333333333335; the emergence-scale renormalisation scheme, the bare loop 0.0047 absorbed by the counter-term Delta Pi = 3.3287; computed from the SM content, the iron-law compliance)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.02,
+    "writer": "scripts/init_v4.py"
+  },
+  "tau_delta_pi": {
+    "note": "Delta Pi = Pi_ren - Pi_bare = 3.3287 — the counter-term absorbing the bare loop (the tau theoremisation layer 6)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 3.328666666666667,
+    "writer": "scripts/init_v4.py"
+  },
+  "tau_pi_bare": {
+    "note": "Pi_bare(M_G) = 0.0014 * Sum Y^2 = 0.004667 — the bare one-loop polarisation (the small value needing renormalisation)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.004666666666666667,
+    "writer": "scripts/init_v4.py"
+  },
+  "tau_pi_ren": {
+    "note": "Pi_ren(M_G) = Sum Y^2 = 3.3333333333333335 — the renormalised hypercharge polarisation at the emergence scale (the renormalisation scheme choice, the tau theoremisation layer 6)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 3.3333333333333335,
+    "writer": "scripts/init_v4.py"
+  },
+  "trace_density_MG": {
+    "note": "the SM supertrace density at M_G (the five-channel sum of the improved EMT, normalised by V3/k^2)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 8.017205181377116e-37,
+    "writer": "cg_frg/frg/trace_density.py"
+  },
+  "twoL_entropy_min_distance": {
+    "note": "2L = sqrt(2pi) = 2.506628 — the Gaussian entropy minimum distance (the window capacity 2L/sqrt(2pi) = 1; kL vs 2L: -0.522% — the same family)",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 2.5066282746310002,
+    "writer": "cg_frg/cosmology/gw_ratio.py"
+  },
+  "v_HIGGS": {
+    "note": "v = M_G*epsilon_window = 246.19 GeV (the window-squared line eps=(3alpha/pi)e^(-4pi kL)(1 - s0*kappa(2tau)) — the J=2 squash correction s0=2tau, kappa=U(1)_Y norm; matches SM 246.22 to -0.012% — the EW-hierarchy symmetry correction, analogue of the g2 conservation law)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 246.18969645238943,
+    "writer": "cg_frg/ewsb/vev_closure.py"
+  },
+  "y_b_over_y_t": {
+    "note": "y_b/y_t = e^-(2 a_dn - ns_tilt (kL_CMB + 2 tau)) = 0.024344 (the down LZ double ladder e^-2 a_dn times the window-evolution factor e^{ns_tilt (kL_CMB + 2 tau)}: m_b^2 = m_s m_t e^{ns_tilt (kL_CMB + 2 tau)} — the bottom is the geometric mean of the strange and the top, dressed by the window evolution)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.024343597671653887,
+    "writer": "cg_frg/fermion/mass_operator_overlap.py"
+  },
+  "y_top_base": {
+    "note": "the (0,0) full overlap of the n = 0 mode (the top base)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.0,
+    "writer": "cg_frg/fermion/mass_operator_overlap.py"
+  }
 }

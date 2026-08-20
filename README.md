@@ -27,7 +27,7 @@ anchor (G_N) and all 146 remaining parameters derived internally.**
 - **[II]** *The spectrum of a compact internal space. II. Effective couplings and mass scales*
 
 Paper I gives the **structure** (gauge algebra, fermion content, mass-gap form);
-Paper II gives the **numbers** (window closure, 147 parameters, comparison with observation).
+Paper II gives the **numbers** (window closure, 170 parameters, comparison with observation).
 
 ---
 
@@ -62,7 +62,7 @@ py scripts/audit_param_writers.py   # parameter-writer audit — expect "AUDIT C
 ```
 
 Both must pass before any change is considered complete. The chain reads
-`cg_params.json` (147 parameters: 1 OBSERVED anchor + 146 DERIVED) and
+`cg_params.json` (170 parameters: 1 OBSERVED anchor + 169 DERIVED) and
 `comparison/sm_inputs.json` (the SM comparison table).
 
 ## Directory map
@@ -119,6 +119,13 @@ Six documents accompany the code, ordered here from rigorous to accessible:
 The four layers — papers (rigorous) → complete guide (comprehensive) → ledger
 (reproducible) → popular-science introduction (accessible) — let a reader descend from
 "what does it mean" to "how is it derived" at whatever depth they choose.
+
+## Research roadmap (open items, not claims)
+
+The framework makes claims only for quantities its code actually computes. The following directions are recorded as open research items, deliberately not asserted:
+
+- **Rotation-curve shape `F(a/a0)`** — the framework fixes the acceleration scale `a0 = c H0/(2π)√(4/3)` (the spectral IR endpoint) and the closure remainder `Ω_DM`, but it does **not** yet derive the full rotation-curve shape function. That would require the acceleration response of the transverse-traceless zero mode to a baryonic mass distribution (a TT-tensor problem, currently only seeded in `cg_frg/gravity/tt_tensor.py` and `newton.py`), followed by a comparison with a resolved galaxy-rotation-curve sample (e.g. SPARC). This is a research project, not a completed prediction.
+- The electroweak precision block (`cg_frg/ewsb/ew_precision.py`) is computed at the level stated in its docstring (tree-level on the two-loop running for `M_Z`; Born + one-loop ρ for `M_W`, with `Δr_rem` omitted; Born + QCD/QED radiators for `Γ_Z`; tree-level `m_H`). Promoting any of these to full one-loop EW standard is an open refinement.
 
 ## Citation (required)
 
