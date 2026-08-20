@@ -54,7 +54,7 @@ a **prediction** of the framework, not a defect.
 **4. m_glueball = −2.41% — spectral eigenvalue (first principles) + loop order**
 - m_G = λ(0⁺⁺)·Λ_QCD = 8·Λ_QCD, λ(0⁺⁺) = 2λ_gluon + C₂(0,0) = 8 is the spectral eigenvalue of the
   0⁺⁺ glueball (two gluons, l=1 Killing, λ_gluon=(l+1)²=4) — fully analogous to the string tension
-  σ=(λ_TT/π)Λ² (λ_TT=14), the deconfinement T_d=(λ_vector/N_c)Λ (λ_vector=4).
+  σ=(λ_TT/π)Λ² (λ_TT=14), the deconfinement T_d=(λ_vector/N_c)Λ(1−τκ), (λ_vector=4).
   **Zero external input** (the original 8.1 was a lattice empirical ratio, now replaced by the first-principles spectral eigenvalue 8).
 - The deviation = the −1.25% of Λ_QCD (two-loop vs four-loop) propagated.
 - **Characterisation: spectral-eigenvalue first principles + loop-order precision.**

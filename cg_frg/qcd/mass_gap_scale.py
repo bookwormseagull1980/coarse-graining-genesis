@@ -179,6 +179,10 @@ def lambda_qcd(g1_MG: float, g2_MG: float, g3_MG: float,
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
     N_g = 8.0              # su(3) gauge generators N_c^2 - 1
     a = a * (1.0 - s0 * kappa / N_g)
+    # STATUS (2026-08-20): L3 ASSERTED — Yukawa-difference factor
+    # (geometric y0=1 vs running SM yt), normalised by N_g.  The 1/N_g
+    # coefficient is stated, not reduced to a step-by-step derivation.
+    # See epsilon_ratio DERIVATION STATUS.
     c0 = 23.0 / 3.0    # b0(5) = 11 - 2*5/3
     c1 = 116.0 / 3.0   # b1(5) = 102 - 38*5/3
     return (M_Z * (c0 * a / (4.0 * math.pi)) ** (-c1 / (2.0 * c0 * c0))
@@ -237,10 +241,12 @@ def compute() -> dict:
     pset("qcd_Lambda_QCD", Lam, provenance="DERIVED", role="internal",
          note=f"Lambda_QCD(MSbar,5) = {Lam:.4f} GeV — FULL two-loop SM running "
               f"(RK4, derivatives5 — electroweak mixing + Yukawa) from the "
-              f"framework's common-origin g3(M_G) = {g3_MG:.4f}, the standard "
-              f"two-loop Lambda_MSbar extraction at M_Z; the −1.2% vs 0.21 is "
-              f"the TWO-LOOP extraction (vs the standard 4-loop) — loop-order "
-              f"precision, not a fixable mechanism")
+              f"framework's common-origin g3(M_G) = {g3_MG:.4f}, with the "
+              f"Yukawa-difference factor (1 - s0 kappa/N_g) applied at the "
+              f"extraction point (the geometric Yukawa y0 = 1 vs the running "
+              f"SM top Yukawa), the standard two-loop Lambda_MSbar extraction "
+              f"at M_Z; the −1.2% vs 0.21 is the TWO-LOOP extraction (vs the "
+              f"standard 4-loop) — loop-order precision, not a fixable mechanism")
     pset("alpha_s_MZ_pred", alpha_s_MZ, provenance="DERIVED",
          role="internal",
          note=f"alpha_s(M_Z) = {alpha_s_MZ:.4f} — the framework's QCD "

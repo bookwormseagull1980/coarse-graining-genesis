@@ -651,7 +651,7 @@ PART 3 glueball tower (two-gluon bound-state spectrum): (1/2,1/2)⊗(1/2,1/2) = 
   0⁺⁺ (0,0) λ=8/L²; 2⁺⁺ (1,1) λ=16/L² → √2; 1⁺⁻ (1,0)⊕(0,1) λ=12/L²
 ```
 
-**Confinement (spectral language)**: string tension σ = (λ_TT/π)Λ² = (14/π)Λ²; deconfinement T_d = (λ_vector/N_c)Λ = (4/3)Λ; σ/T_d² = 5/2 self-consistent.
+**Confinement (spectral language)**: string tension σ = (λ_TT/π)Λ² = (14/π)Λ²; deconfinement T_d = (λ_vector/N_c)Λ = (4/3)Λ; σ/T_d² = 126/(16π(1−τκ)²) = 2.6242 self-consistent.
 
 **χSB**: standard QCD dynamics (NJL, f_π ~ 93 MeV), not a framework prediction (QCD is vectorial, no structural chirality).
 

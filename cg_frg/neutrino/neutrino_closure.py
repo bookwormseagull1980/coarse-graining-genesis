@@ -119,6 +119,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 from cg_core.params import get, set as pset  # noqa: E402
 
 
+# STATUS (2026-08-20): L3 ASSERTED — m_nu3 (1+s0*κ) seesaw factor; the "seesaw sign reversal (EW −s0κ <-> seesaw +s0κ)" is stated bookkeeping, not reduced step-by-step.  See epsilon_ratio DERIVATION STATUS.
 def weinberg_m3(v: float, k_GUT: float) -> float:
     """m_ν3 = v²·(2π)²/k_GUT·(1 + s0·κ) — the Weinberg operator with
     the 2π family scale (eV; v and k_GUT in GeV), with the J=2 squash
@@ -213,7 +214,10 @@ def compute() -> dict:
     s13_pmns = zp2 * math.sqrt(3.0) / 2.0
 
     pset("m_nu3", m3, provenance="DERIVED", role="internal",
-         note=f"m_nu3 = v^2 (2pi)^2/k_GUT = {m3:.4f} eV (the Weinberg 2pi family)")
+         note=f"m_nu3 = v^2 (2pi)^2/k_GUT (1 + s0 kappa) = {m3:.4f} eV "
+              f"(the Weinberg 2pi family, with the seesaw level-transfer "
+              f"factor (1 + s0 kappa): the seesaw mass carries +s0 kappa "
+              f"while the electroweak scale v carries -s0 kappa)")
     pset("m_nu1", m1, provenance="DERIVED", role="internal",
          note=f"m_nu1 = m_nu3*r12*r23 = {m1:.4f} eV (DERIVED from the two "
               f"hypercharge-trace ratios — matches dark_energy.py; no "

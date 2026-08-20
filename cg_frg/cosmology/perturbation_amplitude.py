@@ -92,6 +92,9 @@ def compute() -> dict:
     # asymmetry tau x the squash normalisation kappa) — the same chiral-
     # squash content as eta_B and T_deconf.  (1 - tau·kappa) brings
     # Delta2_R to -0.19%.
+    # STATUS (2026-08-20): L3 ASSERTED — chiral-level (1-tau*kappa) factor;
+    # the 'spin-1/2 zero-point is chiral' mechanism is stated, not reduced
+    # to a step-by-step derivation.  See epsilon_ratio DERIVATION STATUS.
     s0 = 2.0 * tau
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
     D_R = r["D_R"] * (1.0 - tau * kappa)

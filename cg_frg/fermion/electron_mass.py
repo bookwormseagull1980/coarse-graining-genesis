@@ -185,6 +185,7 @@ def compute() -> dict:
     alpha_lp = get("alpha_lepton")
 
     me_raw = m_e_planck(M_P, kL)
+    # STATUS (2026-08-20): L2 INHERITED — m_e (1−s0κ) inherits v's base factor through the 4×5 cascade (m_e ∝ v_dil(e)).  See epsilon_ratio DERIVATION STATUS.
     # The low-scale squash correction (1 - s0·κ): the SAME squash
     # correction as v and T_CMB (the electron mass is a LOW-scale
     # quantity, like the EW scale and the photon floor) — the low-scale

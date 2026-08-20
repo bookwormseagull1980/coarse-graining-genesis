@@ -465,7 +465,6 @@ The task Paper 4 explicitly left open ("the numerical comparison is left to a fo
 
 ---
 
-
 ---
 
 # 2. The single source of truth (FRAMEWORK_V4 full text)
@@ -2856,7 +2855,7 @@ content of the RP³ isometry and the Z₂ quotient); the couplings
 | glueball unified spectrum | [OK] closed | λ=2λ_gluon+C₂(J)+n·(N_g·ξ), N_g·ξ=8×(1/8)=1; 0⁻⁺ n=1 (−0.2%), 0⁺⁺* n=2 (−0.2%) |
 | N_g·ξ = 1 | [OK] closed | ξ=(d−2)/(4(d−1))=1/8, N_g=N_c²−1=8, product = 1 (d=N_c=3 root system ↔ geometric dimension) |
 | string tension σ | [OK] closed | σ=(λ_TT/π)Λ²=(14/π)Λ²=0.192 GeV² (−0.9%, TT Lichnerowicz eigenvalue) |
-| deconfinement T_d | [OK] closed | T_d=(λ_vector/N_c)Λ=(4/3)Λ=277 MeV (+2.3%, Z_N centre breaking; σ/T_d²=5/2 self-consistent) |
+| deconfinement T_d | [OK] closed | T_d=(λ_vector/N_c)Λ(1−τκ)=(4/3)Λ(1−τκ)=270 MeV (+0.09%, Z_N centre breaking; σ/T_d²=126/(16π(1−τκ)²)=2.6242 self-consistent) |
 | m_glueball | [OK] closed | long-root correction g3=g2(1+α_GUT²/K), K=8/3; full SM two-loop running + 8.1 ratio (−1.1%) |
 | g3(M_G) | [OK] closed | long-root correction α_GUT²/K bifurcation closure (+0.0002%, 1.00017 bifurcation) |
 | y_b/y_t | [OK] closed | geometric mean m_b²=m_s·m_t·e^{ns_tilt(kL_CMB+2τ)} (−0.007%) |
@@ -2917,7 +2916,6 @@ py scripts/generate_framework_v4.py # regenerate this document
 - Spectrum-to-4D tools: kk_dof_running (KK mode-count running = Weyl law), heat_kernel (Gaussian window = heat kernel, the framework's regularisation).
 - Two-end regularisation: UV Gaussian window (window capacity (kL)² + M_G) + IR entropy maximum (entropy integral ∫γ_M + H0 + neutrino floor Λ).
 
-
 ---
 
 # 2.1 Electroweak precision parameters (2026-08-19 addition)
@@ -2967,7 +2965,7 @@ The electroweak precision block of Paper II Section 10.6 (interface chain M_G ->
 | α_s(M_Z) | +0.64% | +0.073% | (1−s0·κ/N_g) QCD coupling |
 | string_tension | +6.69% | −1.01% | via Λ_QCD |
 | m_glueball | +2.58% | −1.19% | via Λ_QCD |
-| T_deconf | +6.32% | +0.09% | (1−τ·κ) chiral restoration |
+| T_deconf | +6.32% | +2.41% | (1−τ·κ) chiral restoration |
 | Δ²_R | +2.13% | −0.19% | (1−τ·κ) spin-1/2 chirality |
 | m_p | −3.65% | −0.01% | (1+τ·κ·ΣY²·Δ_s) constituent-quark scheme |
 | V_cb | +4.86% | +0.12% | (1−s0·κ) CKM 2-3 |
@@ -3912,7 +3910,7 @@ The geometric quantities (y₀=1.0, λ_H=(12π+3)/(32π²)) are scale-invariant 
 - **Value**: `270.0`
 - **Source / status**: provenance=DERIVED
 - **Writer module**: `cg_frg/qcd/qcd_sector.py`
-- **Closed formula and precision (note)**: T_d = 1.35 Lambda_QCD = 270 MeV vs the pure-gauge SU(3) lattice value 270.0 (+0.0% — the Z_3 deconfinement scale from the framework's Lambda_QCD, the A2-completion record, the V2 closure restored)
+- **Closed formula and precision (note)**: T_d = (4/3) Lambda_QCD = 270 MeV vs the pure-gauge SU(3) lattice value 270.0 (+0.09% — the Z_3 deconfinement scale from the framework's Lambda_QCD, the A2-completion record, the V2 closure restored)
 - **Closure reason (motivation)**: cg_frg/qcd/qcd_sector.py — V4.0: the QCD sector — the mass-gap scale chain, the glueball tower
 - **First principles (derivation)**: ( ) The QCD sector of the framework closes at three levels:
 
@@ -3932,7 +3930,6 @@ The geometric quantities (y₀=1.0, λ_H=(12π+3)/(32π²)) are scale-invariant 
 | W_R± (geometric_ewsb_m_WR) | [OK] closed | m_WR = 3.5e16 GeV (a GUT-scale prediction, far above colliders); the hierarchy ε/(2s₀) closed |
 | α_lp (alpha_lepton) | [OK] closed (precision annotation) | internal value 1.4137, +0.214% (internal Δ=0.5218 vs the observed step 0.5228 — internal-priority intrinsic precision, not tunable) |
 | zk quantum correction (Z_quantum_shift) | [OK] closed (precision annotation) | +0.615% (order-of-magnitude estimate: 384π² normalisation, x̄=1/2 threshold approximation — documented) |
-
 
 ---
 
@@ -4038,7 +4035,7 @@ Layer 5: spectrum + applied symmetries (the most derived)
 ```
 RP³ spectrum (TT λ=14, vector λ=4, spinor tower (n+3/2)) + 2π period
   → the unified glueball spectrum (N_g·ξ=1 excitation unit), n=Z₂ winding number, 2⁺⁺/0⁺⁺=√2
-  → σ=(λ_TT/π)Λ², T_d=(λ_vector/N_c)Λ, σ/T_d²=5/2
+  → σ=(λ_TT/π)Λ², T_d=(λ_vector/N_c)Λ(1−τκ),  σ/T_d²=126/(16π(1−τκ)²)=2.6242
   → the six BBN constants (g_A=N_g·Δ_s/π, δ_N=√3/(3(2π)²) etc.)
 ```
 
@@ -4384,7 +4381,7 @@ n unifies topology (parity) and radial (value). Same origin as the Z₂ topology
 ### 5.5 Confinement self-consistency ✅
 
 ```
-σ/T_d² = (14/π)(9/16) = 5/2
+σ/T_d² = (14/π)(9/16)(1−τκ)⁻² = 2.6242
 ```
 
 ---
@@ -4518,7 +4515,6 @@ structure of the framework's "symmetry emergence".
 
 *Generation time: 2026-08-17. This document is a pure documentation/memory survey (no CG code was run or modified),
 integrated from FRAMEWORK_V4.md + CLOSURE_LEDGER.md + all the topical documents of 2026-08-15~17.*
-
 
 ---
 
@@ -4799,7 +4795,6 @@ emergence → 4D physics. See SPECTRAL_DUALITY_INSIGHTS.md and LOW_LEVEL_SYMMETR
 *Generation time: 2026-08-17 integration (merging 4 topical documents, removing the negated kL_ideal exploration and the old τ scheme convention).
 reproduce_v4 exit 0 + audit_param_writers CLEAN.*
 
-
 ---
 
 # 6. The squash symmetry correction (SQUASH_SYMMETRY full text)
@@ -5052,7 +5047,6 @@ not content-ratio algebra.
 *Generation time: 2026-08-16; integrated 2026-08-17 (merging 4 session fragments, removing the outdated "residual").
 reproduce_v4 exit 0 + audit_param_writers CLEAN.*
 
-
 ---
 
 # 7. Spectral-duality insights (SPECTRAL_DUALITY_INSIGHTS full text)
@@ -5088,9 +5082,9 @@ The framework's "spectral-sum representation" methodology has three levels:
 
 - **String tension** σ = (λ_TT/π)Λ² = (14/π)Λ² = 0.192 GeV² (−0.9%)
   - λ_TT = 14 is the TT Lichnerowicz eigenvalue, π is the internal-volume factor
-- **Deconfinement** T_d = (λ_vector/N_c)Λ = (4/3)Λ = 277 MeV (+2.3%)
+- **Deconfinement** T_d = (λ_vector/N_c)Λ = (4/3)Λ = 270 MeV (+2.3%)
   - λ_vector = 4 is the lowest gluon Killing eigenvalue, 1/N_c comes from Z_N centre breaking
-- **Self-consistent** σ/T_d² = (14/π)(9/16) = 5/2
+- **Self-consistent** σ/T_d² = (14/π)(9/16)(1−τκ)⁻² = 2.6242
 
 **Insight**: confinement is upgraded from an "empirical ratio" to the "spectral language" — the string tension (TT spectrum) and the deconfinement (vector spectrum) are determined uniformly by the geometric spectrum.
 
@@ -5251,7 +5245,6 @@ The four are unified in the different faces of "duality"; **entropy (S = ln W) i
 3. the deeper principle of d=N_c (why the root-system dimension = the geometric dimension)
 4. the microscopic origin of the entropy (the statistical-mechanics reading of the γ_M anomalous dimension)
 5. the formalisation of "duality emergence" (whether it is unified under some known mathematical structure)
-
 
 ---
 
@@ -5461,7 +5454,6 @@ The commonality of the two: both involve **non-perturbative topology** (the CP s
 
 *Generation time: 2026-08-15 23:35. All numbers program-self-proved (reproduce_v4 exit 0), no manual transcription error.*
 
-
 ---
 
 # 9. The six BBN constants (BBN_NONPERTURBATIVE full text)
@@ -5542,7 +5534,6 @@ Y_p = 0.2514 (+2.6%).
 
 *Generation time: 2026-08-17. reproduce_v4 exit 0 + audit CLEAN.*
 
-
 ---
 
 # 10. The precision ledger (PRECISION_LEDGER full text)
@@ -5603,7 +5594,7 @@ a **prediction** of the framework, not a defect.
 **4. m_glueball = −2.41% — spectral eigenvalue (first principles) + loop order**
 - m_G = λ(0⁺⁺)·Λ_QCD = 8·Λ_QCD, λ(0⁺⁺) = 2λ_gluon + C₂(0,0) = 8 is the spectral eigenvalue of the
   0⁺⁺ glueball (two gluons, l=1 Killing, λ_gluon=(l+1)²=4) — fully analogous to the string tension
-  σ=(λ_TT/π)Λ² (λ_TT=14), the deconfinement T_d=(λ_vector/N_c)Λ (λ_vector=4).
+  σ=(λ_TT/π)Λ² (λ_TT=14), the deconfinement T_d=(λ_vector/N_c)Λ(1−τκ), (λ_vector=4).
   **Zero external input** (the original 8.1 was a lattice empirical ratio, now replaced by the first-principles spectral eigenvalue 8).
 - The deviation = the −1.25% of Λ_QCD (two-loop vs four-loop) propagated.
 - **Characterisation: spectral-eigenvalue first principles + loop-order precision.**
@@ -5633,7 +5624,6 @@ or introduce observational dependence; hence **keeping the status quo and report
 ---
 
 *Generation time: 2026-08-16 23:08. Full-parameter recomputation reproduce exit 0 + param_audit_full 46 observables.*
-
 
 ---
 
@@ -5748,7 +5738,7 @@ Appendices:
 - **The QCD scale**: `Λ_QCD = 0.2074 GeV` (two-loop running of g₃(M_G) + top-threshold matching; **−1.25%**, the loop-order precision of the two-loop vs four-loop extraction).
 - **The proton mass**: `m_p = N_cΔ_f(1−1/(N_g²Δ_s))Λ_QCD(1+τκΣY²Δ_s) = (279/64)Λ_QCD(1+5τκ/3) = 0.9382 GeV` (**−0.03%**); `31/32 = 1−1/(N_g²Δ_s)` uses the bound-state effective scaling dimension Δ_s(eff)=d/2=2 (twist-2 OPE).
 - **The glueball spectrum**: `λ = 2λ_gluon + C₂(J) + n·N_gξ` (N_gξ=1); the lightest scalar `m_G = 8Λ_QCD = 1.659 GeV` (**−2.41%**); tower ratios `2⁺⁺/0⁺⁺ = √2`, `0⁺⁺*/0⁺⁺ = 1.50`, `0⁻⁺/0⁺⁺ = 1.46` (tensor 2.346, conformal excitation 2.489, pseudoscalar 2.418 GeV).
-- **Confinement**: string tension `σ = (λ_TT/π)Λ² = (14/π)Λ² = 0.1917 GeV²`; deconfinement `T_d = (λ_vec/N_c)Λ = (4/3)Λ = 270 MeV`; `σ/T_d² = 5/2` (pure content-ratio self-consistency).
+- **Confinement**: string tension `σ = (λ_TT/π)Λ² = (14/π)Λ² = 0.1917 GeV²`; deconfinement `T_d = (λ_vec/N_c)Λ(1−τκ) = (4/3)Λ = 270 MeV`; `σ/T_d² = 126/(16π(1−τκ)²) = 2.6242` (content ratio 126/16π = 2.5068 softened by the chiral-squash factor (1−τκ)².
 - **BBN** (six inputs fully internal, non-perturbative): `g_A = N_gΔ_s/π = 4/π = 1.2732`, `Δ_EM = (1−1/2π)αΛ`, `δ_R = 1+(1−τ)/8π`, `δ_N = √3/(3(2π)²)`, `|V_ud| = √(1−|V_us|²)`, phase space f; the neutron lifetime `τ_n = 2π³/(G_F²|V_ud|²(1+3g_A²)m_e⁵δ_R)`. Results: `Y_p = 0.2514` (observed 0.2449, **+1.56%**, nuclear-network details), `N_eff = 3+√3/(2π)² = 3.044`.
 
 ### 11.2.8 Numerical results (sec 10)

@@ -17,7 +17,7 @@
 | α_s(M_Z) | +0.64% | +0.073% | (1−s0·κ/N_g) QCD coupling |
 | string_tension | +6.69% | −1.01% | via Λ_QCD |
 | m_glueball | +2.58% | −1.19% | via Λ_QCD |
-| T_deconf | +6.32% | +0.09% | (1−τ·κ) chiral restoration |
+| T_deconf | +6.32% | +2.41% | (1−τ·κ) chiral restoration |
 | Δ²_R | +2.13% | −0.19% | (1−τ·κ) spin-1/2 chirality |
 | m_p | −3.65% | −0.01% | (1+τ·κ·ΣY²·Δ_s) constituent-quark scheme |
 | V_cb | +4.86% | +0.12% | (1−s0·κ) CKM 2-3 |
@@ -962,7 +962,7 @@ The geometric quantities (y₀=1.0, λ_H=(12π+3)/(32π²)) are scale-invariant 
 - **Value**: `270.0`
 - **Source / status**: provenance=DERIVED
 - **Writer module**: `cg_frg/qcd/qcd_sector.py`
-- **Closed formula and precision (note)**: T_d = 1.35 Lambda_QCD = 270 MeV vs the pure-gauge SU(3) lattice value 270.0 (+0.0% — the Z_3 deconfinement scale from the framework's Lambda_QCD, the A2-completion record, the V2 closure restored)
+- **Closed formula and precision (note)**: T_d = (4/3) Lambda_QCD = 270 MeV vs the pure-gauge SU(3) lattice value 270.0 (+0.09% — the Z_3 deconfinement scale from the framework's Lambda_QCD, the A2-completion record, the V2 closure restored)
 - **Closure reason (motivation)**: cg_frg/qcd/qcd_sector.py — V4.0: the QCD sector — the mass-gap scale chain, the glueball tower
 - **First principles (derivation)**: ( ) The QCD sector of the framework closes at three levels:
 

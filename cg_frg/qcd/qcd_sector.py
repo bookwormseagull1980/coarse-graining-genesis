@@ -117,6 +117,12 @@ def proton_mass(Lambda_QCD: float) -> float:
     the MSbar Λ_QCD (m_p −3.65%→−0.01%).  Content-ratio form — first-
     principles: ΣY² the hypercharge capacity, Δ_s = (d−2)/2 = 1/2 the
     scalar conformal weight (the SAME Δ_s as T_CMB's (1−τ·Δ_s)).
+
+    STATUS (2026-08-20): L3 ASSERTED — the coefficient 5/3 = ΣY²·Δ_s is a
+    content ratio, but the claim that the constituent-vs-MSbar scheme
+    correction equals exactly τκ·ΣY²·Δ_s is stated, not yet reduced to a
+    step-by-step derivation.  See epsilon_ratio.squash_correction
+    DERIVATION STATUS.
     The 3/2 chiral factor is therefore the FERMION conformal weight
     (not an ad-hoc 3/2); the 31/32 is the conformal-duality
     correction.  The full symmetric form is first-principles:
@@ -266,7 +272,11 @@ def compute() -> dict:
     pset("qcd_Lambda_QCD", Lam, provenance="DERIVED", role="internal",
          note=f"Lambda_QCD = {Lam:.4f} GeV — TWO-LOOP QCD running + m_t "
               f"matching from the framework's common-origin g3(M_G) "
-              f"(mass_gap_scale); the standard Lambda_MSbar extraction)")
+              f"(mass_gap_scale), with the Yukawa-difference factor "
+              f"(1 - s0 kappa/N_g) applied at the extraction point "
+              f"(the scale-invariant geometric Yukawa y0 = 1 vs the "
+              f"running SM top Yukawa in the two-loop gauge beta); the "
+              f"standard Lambda_MSbar extraction)")
     pset("qcd_gap_lambda_l2", lam_l2, provenance="DERIVED", role="internal",
          note=f"lambda_glue = 8/L^2 = {lam_l2:.6f} — the l=2 scalar mode "
               f"on RP3 (the lowest glueball mode; the l=0 constant mode "
@@ -279,7 +289,10 @@ def compute() -> dict:
     # and N_c = 3 the colour rank — the 1/N_c from the Z_N centre
     # breaking (deconfinement = Z_N breaking).  Together with the
     # string tension sigma = (14/pi) Lambda^2 this gives the self-
-    # consistent ratio sigma/T_d^2 = (14/pi)(9/16) = 5/2.
+    # consistent ratio sigma/T_d^2 = (14/pi)(9/16)(1-tau·kappa)^-2
+    # = 126/(16 pi (1-tau·kappa)^2) = 2.6242 (NOT 5/2: the content
+    # ratio 126/16pi = 2.5068 softened by the chiral-squash factor
+    # (1-tau·kappa)^2).
     T_d = (4.0 / 3.0) * Lam * 1000.0   # MeV (Lam in GeV)
     # ---- chiral x squash correction (2026-08-16) ----
     # T_deconf carries +tau·kappa (the chiral asymmetry tau x the squash
@@ -287,17 +300,23 @@ def compute() -> dict:
     # restoration (the Z_N breaking and the chiral transition are
     # linked), so the deconfinement scale inherits the chiral-squash
     # content.  (1 - tau·kappa) brings T_d to +0.09%.
+    # STATUS (2026-08-20): L3 ASSERTED — chiral-level (1−τκ) factor.  The
+    # "chiral restoration" mechanism is stated, not yet reduced to a
+    # step-by-step spectral/geometric integral.  "brings to +0.09%" is the
+    # EFFECT, not the derivation.  See epsilon_ratio.squash_correction
+    # DERIVATION STATUS for the L1/L2/L3 classification.
     tau = float(get("tau"))
     s0 = 2.0 * tau
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
     T_d = T_d * (1.0 - tau * kappa)
     pset("qcd_deconfinement_T", T_d, provenance="DERIVED",
          role="internal",
-         note=f"T_d = (lambda_vector/N_c) Lambda_QCD = (4/3) x "
-              f"{Lam:.3f} = {T_d:.0f} MeV (lambda_vector = 4 the "
+         note=f"T_d = (lambda_vector/N_c) Lambda_QCD (1 - tau*kappa) = (4/3) x "
+              f"{Lam:.3f} x (1 - tau*kappa) = {T_d:.0f} MeV (lambda_vector = 4 the "
               f"Killing eigenvalue, N_c = 3 the colour rank (Z_N centre "
-              f"breaking); self-consistent with sigma via "
-              f"sigma/T_d^2 = (14/pi)(9/16) = 5/2)")
+              f"breaking); (1 - tau*kappa) the chiral-squash correction; "
+              f"sigma/T_d^2 = (14/pi)(9/16)(1-tau kappa)^-2 = "
+              f"126/(16 pi (1-tau kappa)^2) = 2.6242)")
     # The string tension (the confinement area law, COMPUTED): the
     # Wilson-loop area law sigma = (lambda_TT/pi) * Lambda_QCD^2, with
     # lambda_TT = 14 the TT (Lichnerowicz) lowest eigenvalue and pi the
@@ -317,9 +336,14 @@ def compute() -> dict:
     # content + the conformal-coupling correction).
     m_p = proton_mass(Lam)
     pset("m_p", m_p, provenance="DERIVED", role="internal",
-         note=f"m_p = (9/2)(1-xi/4) Lambda_QCD = (279/64) x {Lam:.4f} "
-              f"= {m_p:.4f} GeV (the constituent-quark content: 3 quarks "
-              f"x (3/2) chiral factor x (1-xi/4) conformal correction;")
+         note=f"m_p = (9/2)(1-xi/4) Lambda_QCD (1 + 5 tau kappa/3) = "
+              f"(279/64) x {Lam:.4f} x (1 + 5 tau kappa/3) = {m_p:.4f} "
+              f"GeV (the constituent-quark content: 3 quarks x (3/2) "
+              f"chiral factor x (1-xi/4) conformal correction, times the "
+              f"scheme correction (1 + 5 tau kappa/3) between the "
+              f"constituent-quark scale and the MSbar scale; the 31/32 = "
+              f"1 - 1/(N_g^2 Delta_s) = 1 - xi/4 follows from N_g xi = 1 "
+              f"and N_g Delta_s = 2(d-1))")
     pset("qcd_glueball_tower", tower, provenance="DERIVED", role="internal",
          note="the glueball tower: 2++/0++ = sqrt2 is GEOMETRIC (the "
               "two-gluon bound-state spectrum: 0++ = 2lambda_gluon "

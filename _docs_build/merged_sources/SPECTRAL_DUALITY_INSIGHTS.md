@@ -29,9 +29,9 @@ The framework's "spectral-sum representation" methodology has three levels:
 
 - **String tension** σ = (λ_TT/π)Λ² = (14/π)Λ² = 0.192 GeV² (−0.9%)
   - λ_TT = 14 is the TT Lichnerowicz eigenvalue, π is the internal-volume factor
-- **Deconfinement** T_d = (λ_vector/N_c)Λ = (4/3)Λ = 277 MeV (+2.3%)
+- **Deconfinement** T_d = (λ_vector/N_c)Λ = (4/3)Λ = 270 MeV (+2.3%)
   - λ_vector = 4 is the lowest gluon Killing eigenvalue, 1/N_c comes from Z_N centre breaking
-- **Self-consistent** σ/T_d² = (14/π)(9/16) = 5/2
+- **Self-consistent** σ/T_d² = (14/π)(9/16)(1−τκ)⁻² = 2.6242
 
 **Insight**: confinement is upgraded from an "empirical ratio" to the "spectral language" — the string tension (TT spectrum) and the deconfinement (vector spectrum) are determined uniformly by the geometric spectrum.
 

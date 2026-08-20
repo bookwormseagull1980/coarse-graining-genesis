@@ -101,7 +101,7 @@ Hence `m_t = y₀·v/√2` is **first principles** (geometric overlap × EW scal
 - **Characterisation: pure loop-order precision; improvement needs the 4-loop β functions (large workload, ~1% gain).**
 
 **④ m_glueball = −2.41% — spectral eigenvalue (first principles) + loop order**
-- m_G = λ(0⁺⁺)·Λ_QCD = 8·Λ_QCD, λ(0⁺⁺) = 2λ_gluon + C₂(0,0) = 8 is the spectral eigenvalue of the 0⁺⁺ glueball (two gluons, l=1 Killing, λ_gluon=(l+1)²=4) — fully analogous to the string tension σ=(λ_TT/π)Λ² (λ_TT=14), the deconfinement T_d=(λ_vector/N_c)Λ (λ_vector=4). **Zero external input** (the original 8.1 was a lattice empirical ratio, now replaced by the first-principles spectral eigenvalue 8).
+- m_G = λ(0⁺⁺)·Λ_QCD = 8·Λ_QCD, λ(0⁺⁺) = 2λ_gluon + C₂(0,0) = 8 is the spectral eigenvalue of the 0⁺⁺ glueball (two gluons, l=1 Killing, λ_gluon=(l+1)²=4) — fully analogous to the string tension σ=(λ_TT/π)Λ² (λ_TT=14), the deconfinement T_d=(λ_vector/N_c)Λ(1−τκ), (λ_vector=4). **Zero external input** (the original 8.1 was a lattice empirical ratio, now replaced by the first-principles spectral eigenvalue 8).
 - The deviation = the −1.25% of Λ_QCD (two-loop vs four-loop) propagated.
 - **Characterisation: spectral-eigenvalue first principles + loop-order precision.**
 
@@ -126,7 +126,7 @@ None of these five deviations is a "fixable framework-mechanism defect": observa
 | glueball unified spectrum | [OK] closed | λ=2λ_gluon+C₂(J)+n·(N_g·ξ), N_g·ξ=8×(1/8)=1; 0⁻⁺ n=1 (−0.2%), 0⁺⁺* n=2 (−0.2%) |
 | N_g·ξ = 1 | [OK] closed | ξ=(d−2)/(4(d−1))=1/8, N_g=N_c²−1=8, product = 1 (d=N_c=3 root system ↔ geometric dimension) |
 | string tension σ | [OK] closed | σ=(λ_TT/π)Λ²=(14/π)Λ²=0.192 GeV² (−0.9%, TT Lichnerowicz eigenvalue) |
-| deconfinement T_d | [OK] closed | T_d=(λ_vector/N_c)Λ=(4/3)Λ=277 MeV (+2.3%, Z_N centre breaking; σ/T_d²=5/2 self-consistent) |
+| deconfinement T_d | [OK] closed | T_d=(λ_vector/N_c)Λ(1−τκ)=(4/3)Λ(1−τκ)=270 MeV (+0.09%, Z_N centre breaking; σ/T_d²=126/(16π(1−τκ)²)=2.6242 self-consistent) |
 | m_glueball | [OK] closed | long-root correction g3=g2(1+α_GUT²/K), K=8/3; full SM two-loop running + 8.1 ratio (−1.1%) |
 | g3(M_G) | [OK] closed | long-root correction α_GUT²/K bifurcation closure (+0.0002%, 1.00017 bifurcation) |
 | y_b/y_t | [OK] closed | geometric mean m_b²=m_s·m_t·e^{ns_tilt(kL_CMB+2τ)} (−0.007%) |

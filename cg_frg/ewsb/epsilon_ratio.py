@@ -94,6 +94,31 @@ def squash_correction() -> float:
     Paired conservation: v·m_ν3 and m_ν1⁴·weight are conserved to first
     order (the level transfer preserves the total content).
     (2026-08-16.)
+
+    DERIVATION STATUS (2026-08-20, added to prevent misjudgement):
+    The correction factors (1 ± c·s0·κ) or (1 ± c·τ·κ) rest on THREE
+    layers of differing epistemic status:
+      L1  DERIVED  — κ(2τ)=√((1+2τ)/(1−4τ)^{5/2}) is the squashed-S³
+          metric Killing normalisation (geometric integral, see
+          geometric_couplings.squash_metric); s0 = 2τ = n_broken·τ with
+          n_broken = 2 = dim SU(2)_R − dim U(1)_R (broken-generator
+          count); τ = 1/50 is the content ratio (Lean-proven).
+      L2  INHERITED (bookkeeping) — ρ_Λ's (1−4s0κ) follows from m_ν1
+          carrying +s0κ so m_ν1⁴ carries +4s0κ and the weight cancels;
+          m_e and T_CMB inherit v's (1−s0κ) through the cascade/photon
+          floor.  These are algebraically forced ONCE the base factor
+          is fixed.
+      L3  ASSERTED (coefficient claimed, mechanism stated but not yet
+          reduced to a step-by-step spectral/geometric integral) — the
+          specific sign/multiplier of v (−s0κ, "analogue of the g₂
+          conservation law"), m_ν3 (+s0κ, "seesaw sign reversal"),
+          T_d and Δ²_R (−τκ, "chiral level"), m_p (+5τκ/3, "constituent
+          vs MSbar scheme"), α_s (−s0κ/N_g, "Yukawa difference ÷ N_g").
+    IMPORTANT: the "brings X to +Y%" remarks scattered through the
+    module docstrings describe the EFFECT of a factor on the final
+    deviation; they are NOT the derivation of the factor.  Do not read
+    them as "chosen to match observation" — the derivation status of
+    each factor is as recorded in L1/L2/L3 above.
     """
     tau = get("tau")
     s0 = 2.0 * tau

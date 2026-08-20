@@ -309,7 +309,7 @@ n unifies topology (parity) and radial (value). Same origin as the Z₂ topology
 ### 7.5 Confinement self-consistency
 
 ```
-σ/T_d² = (14/π)(9/16) = 5/2
+σ/T_d² = (14/π)(9/16)(1−τκ)⁻² = 2.6242
 ```
 
 The string tension σ = (λ_TT/π)Λ² and the deconfinement T_d = (λ_vector/N_c)Λ are determined uniformly by the geometric spectrum.

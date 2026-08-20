@@ -80,6 +80,7 @@ def compute() -> dict:
                               # (1 - s0*kappa) squash correction)
     v = vev(M_G, eps)         # = M_G·ε (fully internal, corrected)
 
+    # STATUS (2026-08-20): L3 ASSERTED — v's (1−s0*κ) is the base factor; "analogue of the g2 conservation law" is stated, not reduced step-by-step.  See epsilon_ratio DERIVATION STATUS.
     pset("v_HIGGS", v, provenance="DERIVED", role="internal",
          note=f"v = M_G*epsilon_window = {v:.2f} GeV (the window-squared "
               f"line eps=(3alpha/pi)e^(-4pi kL)(1 - s0*kappa(2tau)) — "

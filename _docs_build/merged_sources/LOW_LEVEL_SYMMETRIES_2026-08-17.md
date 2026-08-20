@@ -98,7 +98,7 @@ Layer 5: spectrum + applied symmetries (the most derived)
 ```
 RP³ spectrum (TT λ=14, vector λ=4, spinor tower (n+3/2)) + 2π period
   → the unified glueball spectrum (N_g·ξ=1 excitation unit), n=Z₂ winding number, 2⁺⁺/0⁺⁺=√2
-  → σ=(λ_TT/π)Λ², T_d=(λ_vector/N_c)Λ, σ/T_d²=5/2
+  → σ=(λ_TT/π)Λ², T_d=(λ_vector/N_c)Λ(1−τκ),  σ/T_d²=126/(16π(1−τκ)²)=2.6242
   → the six BBN constants (g_A=N_g·Δ_s/π, δ_N=√3/(3(2π)²) etc.)
 ```
 
@@ -444,7 +444,7 @@ n unifies topology (parity) and radial (value). Same origin as the Z₂ topology
 ### 5.5 Confinement self-consistency ✅
 
 ```
-σ/T_d² = (14/π)(9/16) = 5/2
+σ/T_d² = (14/π)(9/16)(1−τκ)⁻² = 2.6242
 ```
 
 ---

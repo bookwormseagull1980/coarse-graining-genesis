@@ -109,7 +109,7 @@ Appendices:
 - **The QCD scale**: `Λ_QCD = 0.2074 GeV` (two-loop running of g₃(M_G) + top-threshold matching; **−1.25%**, the loop-order precision of the two-loop vs four-loop extraction).
 - **The proton mass**: `m_p = N_cΔ_f(1−1/(N_g²Δ_s))Λ_QCD(1+τκΣY²Δ_s) = (279/64)Λ_QCD(1+5τκ/3) = 0.9382 GeV` (**−0.03%**); `31/32 = 1−1/(N_g²Δ_s)` uses the bound-state effective scaling dimension Δ_s(eff)=d/2=2 (twist-2 OPE).
 - **The glueball spectrum**: `λ = 2λ_gluon + C₂(J) + n·N_gξ` (N_gξ=1); the lightest scalar `m_G = 8Λ_QCD = 1.659 GeV` (**−2.41%**); tower ratios `2⁺⁺/0⁺⁺ = √2`, `0⁺⁺*/0⁺⁺ = 1.50`, `0⁻⁺/0⁺⁺ = 1.46` (tensor 2.346, conformal excitation 2.489, pseudoscalar 2.418 GeV).
-- **Confinement**: string tension `σ = (λ_TT/π)Λ² = (14/π)Λ² = 0.1917 GeV²`; deconfinement `T_d = (λ_vec/N_c)Λ = (4/3)Λ = 270 MeV`; `σ/T_d² = 5/2` (pure content-ratio self-consistency).
+- **Confinement**: string tension `σ = (λ_TT/π)Λ² = (14/π)Λ² = 0.1917 GeV²`; deconfinement `T_d = (λ_vec/N_c)Λ(1−τκ) = (4/3)Λ = 270 MeV`; `σ/T_d² = 126/(16π(1−τκ)²) = 2.6242` (content ratio 126/16π = 2.5068 softened by the chiral-squash factor (1−τκ)².
 - **BBN** (six inputs fully internal, non-perturbative): `g_A = N_gΔ_s/π = 4/π = 1.2732`, `Δ_EM = (1−1/2π)αΛ`, `δ_R = 1+(1−τ)/8π`, `δ_N = √3/(3(2π)²)`, `|V_ud| = √(1−|V_us|²)`, phase space f; the neutron lifetime `τ_n = 2π³/(G_F²|V_ud|²(1+3g_A²)m_e⁵δ_R)`. Results: `Y_p = 0.2514` (observed 0.2449, **+1.56%**, nuclear-network details), `N_eff = 3+√3/(2π)² = 3.044`.
 
 ### 11.2.8 Numerical results (sec 10)

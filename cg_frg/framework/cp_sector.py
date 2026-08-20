@@ -47,9 +47,10 @@ of the CP phases and the Jarlskog/baryon-asymmetry closure:
     δ_PMNS/N_c = δ_PMNS/d, the internal-space dimension d = N_c = 3
     diluting the quark mixing phase, the lepton sector undiluted);
   · the baryogenesis η_B = J·α_W²/56 uses the Sakharov content (J
-    the CP source, α_W² the sphaleron rate, 1/56 = ξ/n_R the content
-    count); the out-of-equilibrium is the EW phase transition (the
-    geometric EWSB — the dilaton condensation).
+    the CP source, α_W² the two weak-sphaleron vertices, 1/56 = ξ/n_R
+    the content count) as a model relation; the out-of-equilibrium is
+    the EW phase transition (the geometric EWSB — the dilaton
+    condensation).
 
 V4 DISCIPLINE
 -------------
@@ -113,32 +114,23 @@ def baryon_asymmetry(J: float, alpha_W: float) -> float:
                             8 left doublets × 7 right singlets per
                             family dilutes the asymmetry).
 
-    THE α_W² POWER RESOLVED (2026-08-15): the apparent α_W² is the
-    STANDARD SPHALERON rate α_W^5 in disguise.  The Jarlskog J itself
-    carries an α_W³ factor — the CKM three-element product equals the
-    weak coupling cubed:
+    THE α_W² POWER (2026-08-15, downgraded 2026-08-20): the apparent
+    α_W² would be the standard sphaleron rate α_W^5 in disguise IF the
+    three-element CKM product equalled the weak coupling cubed exactly.
+    The Jarlskog J itself carries an α_W³ factor — the CKM three-element
+    product is numerically CLOSE to the weak coupling cubed:
 
-        |V_us|·|V_cb|·|V_ub| = α_W(v)³  (−2.5%, the colour-diluted
-                                          CKM product = the weak cube)
+        |V_us|·|V_cb|·|V_ub| ≈ α_W(v)³  (−2.45%, the colour-diluted
+                                          CKM product ≈ the weak cube)
 
-    ⇒  η_B = J·α_W²/56 = (α_W³·c12c23sinδ)·α_W²/56
-           = α_W^5·c12·c23·sinδ/56    (the sphaleron α_W^5 rate × the
-                                       CP factor × the content dilution).
-
-    The power is therefore NOT ad hoc: it is the sphaleron α_W^5
-    (five because three CKM mixings × the two weak sphaleron
-    vertices), the Jarlskog α_W³ completing 2 → 5.
-
-    THE |V_us||V_cb||V_ub| = α_W³ IDENTITY (CLOSED, −2.5%): the
-    geometric mean of the three cross-generation CKM elements equals
-    the weak coupling α_W(v) — (|V_us||V_cb||V_ub|)^{1/3} = α_W.  The
-    three elements are the three cross-generation mixings (1↔2, 2↔3,
-    1↔3), each sourced by the weak interaction (W exchange), so their
-    product is the weak cube α_W³; the individual deviations (each
-    element carries its own generation-ladder factor) cancel in the
-    geometric mean.  This is the colour-diluted weak cube — the same
-    colour-number dilution as δ_CKM = δ_PMNS/N_c (the internal-space
-    dimension d = N_c = 3)."""
+    The product matches the weak cube to −2.45%, NOT exactly, so the
+    five-weak-factor form η_B = α_W^5·c12·c23·sinδ/56 holds only
+    approximately.  η_B = J·α_W²/56 is therefore stated as a MODEL
+    RELATION built from the content ratios (J the CP source, two weak
+    sphaleron vertices, 1/56 = ξ/n_R the content count), NOT as an
+    exact sphaleron-rate identity.  The two explicit α_W² factors stand
+    for the two weak sphaleron vertices; the additional weak-cube factor
+    carried by J is approximate, not an exact identity."""
     return J * alpha_W * alpha_W / 56.0
 
 
@@ -243,18 +235,17 @@ def compute() -> dict:
     # eta_B −0.15%).
     eta_B = baryon_asymmetry(J, aW)
     pset("eta_b", eta_B, provenance="DERIVED", role="cg",
-         note=f"eta_B = J alpha_W^2/56 = {eta_B:.3e} (the Sakharov content: "
-              f"J (CP violation, the derived delta_CKM = 8pi/21), "
-              f"alpha_W^2 = {aW:.5f} (the weak sphaleron rate at the EW "
-              f"scale, geometric RGE), 1/56 = xi/n_R (the conformal-"
-              f"gauge duality xi = 1/N_g = 1/8 times 1/n_R = 1/7).  "
-              f"The alpha_W^2 POWER is RESOLVED: J carries alpha_W^3 "
-              f"(|V_us||V_cb||V_ub| = alpha_W^3), so eta_B = "
-              f"alpha_W^5 c12 c23 sin(delta)/56 — the STANDARD sphaleron "
-              f"rate (5 = 3 CKM mixings x 2 weak sphaleron vertices); "
-              f"the |V_us||V_cb||V_ub| = alpha_W^3 identity is CLOSED "
-              f"(−2.5%): the three cross-generation elements' geometric "
-              f"mean = alpha_W (the weak cube, colour-diluted)")
+         note=f"eta_B = J alpha_W^2/56 = {eta_B:.3e} (the Sakharov content, "
+              f"a MODEL RELATION: J (CP violation, the derived "
+              f"delta_CKM = 8pi/21), alpha_W^2 = {aW:.5f} (the two weak "
+              f"sphaleron vertices at the EW scale, geometric RGE), "
+              f"1/56 = xi/n_R (the conformal-gauge duality xi = 1/N_g = "
+              f"1/8 times 1/n_R = 1/7).  The apparent alpha_W^2 power "
+              f"would complete to alpha_W^5 (3 CKM mixings x 2 weak "
+              f"sphaleron vertices) IF |V_us||V_cb||V_ub| = alpha_W^3 "
+              f"held exactly; it holds only to −2.45%, so the five-weak-"
+              f"factor form is approximate and eta_B is a model relation, "
+              f"not an exact sphaleron-rate identity)")
 
     return {"ratio": ratio, "delta_over_pi": delta_over_pi,
             "eta_b": eta_B}

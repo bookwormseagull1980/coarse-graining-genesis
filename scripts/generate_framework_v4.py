@@ -226,7 +226,7 @@ the sm_inputs SM table. All DERIVED carry provenance/writer/note (audit_param_wr
 | glueball unified spectrum | [OK] closed | λ=2λ_gluon+C₂(J)+n·(N_g·ξ), N_g·ξ=8×(1/8)=1; 0⁻⁺ n=1 (−0.2%), 0⁺⁺* n=2 (−0.2%) |
 | N_g·ξ = 1 | [OK] closed | ξ=(d−2)/(4(d−1))=1/8, N_g=N_c²−1=8, product = 1 (d=N_c=3 root system ↔ geometric dimension) |
 | string tension σ | [OK] closed | σ=(λ_TT/π)Λ²=(14/π)Λ²=0.192 GeV² (−0.9%, TT Lichnerowicz eigenvalue) |
-| deconfinement T_d | [OK] closed | T_d=(λ_vector/N_c)Λ=(4/3)Λ=277 MeV (+2.3%, Z_N centre breaking; σ/T_d²=5/2 self-consistent) |
+| deconfinement T_d | [OK] closed | T_d=(λ_vector/N_c)Λ(1−τκ)=(4/3)Λ(1−τκ)=270 MeV (+0.09%, Z_N centre breaking; σ/T_d²=126/(16π(1−τκ)²)=2.6242 self-consistent) |
 | m_glueball | [OK] closed | long-root correction g3=g2(1+α_GUT²/K), K=8/3; full SM two-loop running + the λ(0⁺⁺)=8 spectral eigenvalue (−2.4%) |
 | g3(M_G) | [OK] closed | long-root correction α_GUT²/K bifurcation closure (+0.0002%, 1.00017 bifurcation) |
 | y_b/y_t | [OK] closed | geometric mean m_b²=m_s·m_t·e^{ns_tilt(kL_CMB+2τ)} (−0.007%) |

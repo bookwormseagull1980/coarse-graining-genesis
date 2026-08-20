@@ -202,7 +202,7 @@
     "writer": "cg_frg/gravity/tt_tensor.py"
   },
   "T_CMB_GeV": {
-    "note": "T_CMB = m_nu1 r12/pi (1-tau Delta_s) = 2.7310 K (the photon floor from the lightest neutrino mass; r12 = (N_L-N_R)/SigmaY2 = 3/10 the PURE CONTENT ratio; (1-tau Delta_s) = (1-tau/2) the scalar-conformal-weight correction (Delta_s = (d-2)/2 = 1/2, the SAME Delta_s as the proton mass 31/32))",
+    "note": "T_CMB = m_nu1 r12/pi (1-s0 kappa)(1-tau Delta_s) = 2.7310 K (the photon floor from the lightest neutrino mass; r12 = (N_L-N_R)/SigmaY2 = 3/10 the PURE CONTENT ratio; (1-s0 kappa) the squash level-transfer factor (the photon floor carries -s0 kappa while the seesaw mass carries +s0 kappa); (1-tau Delta_s) = (1-tau/2) the scalar-conformal-weight correction (Delta_s = (d-2)/2 = 1/2, the SAME Delta_s as the proton mass 31/32))",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 2.353400743797703e-13,
@@ -569,7 +569,7 @@
     "writer": "cg_frg/ewsb/relaxion_chain.py"
   },
   "eta_b": {
-    "note": "eta_B = J alpha_W^2/56 = 6.091e-10 (the Sakharov content: J (CP violation, the derived delta_CKM = 8pi/21), alpha_W^2 = 0.03290 (the weak sphaleron rate at the EW scale, geometric RGE), 1/56 = xi/n_R (the conformal-gauge duality xi = 1/N_g = 1/8 times 1/n_R = 1/7).  The alpha_W^2 POWER is RESOLVED: J carries alpha_W^3 (|V_us||V_cb||V_ub| = alpha_W^3), so eta_B = alpha_W^5 c12 c23 sin(delta)/56 — the STANDARD sphaleron rate (5 = 3 CKM mixings x 2 weak sphaleron vertices); the |V_us||V_cb||V_ub| = alpha_W^3 identity is CLOSED (−2.5%): the three cross-generation elements' geometric mean = alpha_W (the weak cube, colour-diluted)",
+    "note": "eta_B = J alpha_W^2/56 = 6.091e-10 (the Sakharov content, a MODEL RELATION: J (CP violation, the derived delta_CKM = 8pi/21), alpha_W^2 = 0.03290 (the two weak sphaleron vertices at the EW scale, geometric RGE), 1/56 = xi/n_R (the conformal-gauge duality xi = 1/N_g = 1/8 times 1/n_R = 1/7).  The apparent alpha_W^2 power would complete to alpha_W^5 (3 CKM mixings x 2 weak sphaleron vertices) IF |V_us||V_cb||V_ub| = alpha_W^3 held exactly; it holds only to −2.45%, so the five-weak-factor form is approximate and eta_B is a model relation, not an exact sphaleron-rate identity)",
     "provenance": "DERIVED",
     "role": "cg",
     "value": 6.090892649634457e-10,
@@ -835,14 +835,14 @@
     "writer": "cg_frg/neutrino/neutrino_closure.py"
   },
   "m_nu3": {
-    "note": "m_nu3 = v^2 (2pi)^2/k_GUT = 0.0502 eV (the Weinberg 2pi family)",
+    "note": "m_nu3 = v^2 (2pi)^2/k_GUT (1 + s0 kappa) = 0.0502 eV (the Weinberg 2pi family, with the seesaw level-transfer factor (1 + s0 kappa): the seesaw mass carries +s0 kappa while the electroweak scale v carries -s0 kappa)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.05017973302502751,
     "writer": "cg_frg/neutrino/neutrino_closure.py"
   },
   "m_p": {
-    "note": "m_p = (9/2)(1-xi/4) Lambda_QCD = (279/64) x 0.2074 = 0.9382 GeV (the constituent-quark content: 3 quarks x (3/2) chiral factor x (1-xi/4) conformal correction;",
+    "note": "m_p = (9/2)(1-xi/4) Lambda_QCD (1 + 5 tau kappa/3) = (279/64) x 0.2074 x (1 + 5 tau kappa/3) = 0.9382 GeV (the constituent-quark content: 3 quarks x (3/2) chiral factor x (1-xi/4) conformal correction, times the scheme correction (1 + 5 tau kappa/3) between the constituent-quark scale and the MSbar scale; the 31/32 = 1 - 1/(N_g^2 Delta_s) = 1 - xi/4 follows from N_g xi = 1 and N_g Delta_s = 2(d-1))",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.9381556711818813,
@@ -1010,14 +1010,14 @@
     "writer": "cg_frg/ewsb/pseudo_dilaton.py"
   },
   "qcd_Lambda_QCD": {
-    "note": "Lambda_QCD = 0.2074 GeV — TWO-LOOP QCD running + m_t matching from the framework's common-origin g3(M_G) (mass_gap_scale); the standard Lambda_MSbar extraction)",
+    "note": "Lambda_QCD = 0.2074 GeV — TWO-LOOP QCD running + m_t matching from the framework's common-origin g3(M_G) (mass_gap_scale), with the Yukawa-difference factor (1 - s0 kappa/N_g) applied at the extraction point (the scale-invariant geometric Yukawa y0 = 1 vs the running SM top Yukawa in the two-loop gauge beta); the standard Lambda_MSbar extraction)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.20738018545949427,
     "writer": "cg_frg/qcd/qcd_sector.py"
   },
   "qcd_deconfinement_T": {
-    "note": "T_d = (lambda_vector/N_c) Lambda_QCD = (4/3) x 0.207 = 270 MeV (lambda_vector = 4 the Killing eigenvalue, N_c = 3 the colour rank (Z_N centre breaking); self-consistent with sigma via sigma/T_d^2 = (14/pi)(9/16) = 5/2)",
+    "note": "T_d = (lambda_vector/N_c) Lambda_QCD (1 - tau*kappa) = (4/3) x 0.207 x (1 - tau*kappa) = 270 MeV (lambda_vector = 4 the Killing eigenvalue, N_c = 3 the colour rank (Z_N centre breaking); (1 - tau*kappa) the chiral-squash correction; sigma/T_d^2 = (14/pi)(9/16)(1-tau kappa)^-2 = 126/(16 pi (1-tau kappa)^2) = 2.6242)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 270.24772767375873,
@@ -1087,7 +1087,7 @@
     "writer": "cg_frg/ewsb/relaxion_chain.py"
   },
   "rho_Lambda": {
-    "note": "rho_Lambda = Y_u m_nu1^4 = (2/3) m_nu1^4 = 2.523e-47 GeV^4 (the dark energy density = the lightest neutrino mass^4 weighted by the up-quark hypercharge Y_u = 2/3)",
+    "note": "rho_Lambda = Y_u m_nu1^4 (1 - 4 s0 kappa) = (2/3) m_nu1^4 (1 - 4 s0 kappa) = 2.523e-47 GeV^4 (the dark energy density = the lightest neutrino mass^4 weighted by the up-quark hypercharge Y_u = 2/3, with the dark-energy weight (1 - 4 s0 kappa): the seesaw mass carries +s0 kappa so m_nu1^4 carries +4 s0 kappa, and the weight cancels it to keep rho_Lambda conserved under the J = 2 squash level transfer)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 2.5233889268202705e-47,

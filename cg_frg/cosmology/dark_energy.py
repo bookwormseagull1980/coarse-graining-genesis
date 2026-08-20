@@ -99,6 +99,7 @@ def m_nu1_derived(v: float, k_GUT: float) -> float:
     return m3 * r12 * r23
 
 
+# STATUS (2026-08-20): L2 INHERITED — ρ_Λ (1−4s0κ) is algebraically forced: m_nu1 carries +s0κ so m_nu1^4 carries +4s0κ, and the weight cancels it.  See epsilon_ratio DERIVATION STATUS.
 def rho_lambda(v: float, k_GUT: float) -> float:
     """ρ_Λ = Y_u·m_ν1⁴·(1 − 4·s0·κ) = (2/3)·m_ν1⁴·(1 − 4s0·κ) — the
     dark energy density (GeV⁴), with the dark-energy-weight symmetry
@@ -135,9 +136,14 @@ def compute() -> dict:
     Omega_lam = rho / (3.0 * H0 * H0 * M_P * M_P)
 
     pset("rho_Lambda", rho, provenance="DERIVED", role="internal",
-         note=f"rho_Lambda = Y_u m_nu1^4 = (2/3) m_nu1^4 = {rho:.3e} GeV^4 "
+         note=f"rho_Lambda = Y_u m_nu1^4 (1 - 4 s0 kappa) = "
+              f"(2/3) m_nu1^4 (1 - 4 s0 kappa) = {rho:.3e} GeV^4 "
               f"(the dark energy density = the lightest neutrino mass^4 "
-              f"weighted by the up-quark hypercharge Y_u = 2/3)")
+              f"weighted by the up-quark hypercharge Y_u = 2/3, with the "
+              f"dark-energy weight (1 - 4 s0 kappa): the seesaw mass "
+              f"carries +s0 kappa so m_nu1^4 carries +4 s0 kappa, and the "
+              f"weight cancels it to keep rho_Lambda conserved under the "
+              f"J = 2 squash level transfer)")
     pset("Lambda", lam, provenance="DERIVED", role="internal",
          note=f"Lambda = rho_Lambda/M_P^2 = {lam:.3e} GeV^2 (the FRW "
               f"cosmological constant from the neutrino-mass floor; m_nu1 = "
@@ -168,15 +174,19 @@ def compute() -> dict:
     # propagates into T_CMB at +4.9%; with it T_CMB is +0.20%
     # (2026-08-16).
     sk, _ = _squash_factors()
+    # STATUS (2026-08-20): L2 INHERITED — T_CMB (1−s0κ) inherits v's base factor through the photon floor; (1−τ·Δ_s) is the scalar-conformal-weight factor.  See epsilon_ratio DERIVATION STATUS.
     T_CMB_GeV = m_nu1 * (1.0 - sk) * r12 / math.pi * (1.0 - tau_c * Delta_s)
     T_CMB_K = T_CMB_GeV * GEV_TO_K    # GeV -> K
     pset("T_CMB_GeV", T_CMB_GeV, provenance="DERIVED", role="internal",
-         note=f"T_CMB = m_nu1 r12/pi (1-tau Delta_s) = {T_CMB_K:.4f} K (the "
-              f"photon floor from the lightest neutrino mass; r12 = "
-              f"(N_L-N_R)/SigmaY2 = 3/10 the PURE CONTENT ratio; "
-              f"(1-tau Delta_s) = (1-tau/2) the scalar-conformal-weight "
-              f"correction (Delta_s = (d-2)/2 = 1/2, the SAME Delta_s as "
-              f"the proton mass 31/32))")
+         note=f"T_CMB = m_nu1 r12/pi (1-s0 kappa)(1-tau Delta_s) = "
+              f"{T_CMB_K:.4f} K (the photon floor from the lightest "
+              f"neutrino mass; r12 = (N_L-N_R)/SigmaY2 = 3/10 the PURE "
+              f"CONTENT ratio; (1-s0 kappa) the squash level-transfer "
+              f"factor (the photon floor carries -s0 kappa while the "
+              f"seesaw mass carries +s0 kappa); (1-tau Delta_s) = "
+              f"(1-tau/2) the scalar-conformal-weight correction "
+              f"(Delta_s = (d-2)/2 = 1/2, the SAME Delta_s as the proton "
+              f"mass 31/32))")
     return {"rho_Lambda": rho, "Lambda": lam,
             "Omega_Lambda": Omega_lam,
             "m_nu1_eV": m_nu1_derived(v, k_GUT) * 1e9,
