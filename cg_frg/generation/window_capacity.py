@@ -29,16 +29,16 @@ the scale flow retains the modes with
     (n + 3/2) < (kL)²
 
 (the framework's window criterion — the scale-invariant combination
-kL at the γ_M = 0 fixed point).  With kL* = 2.4973:
+kL at the γ_M = 0 fixed point).  With kL* = 2.4935343:
 
-    (kL*)² = 6.2366,
-    n = 0 : 1.5  < 6.2366  ✓
-    n = 2 : 3.5  < 6.2366  ✓
-    n = 4 : 5.5  < 6.2366  ✓
-    n = 6 : 7.5  > 6.2366  ✗ (excluded, −20.3% above the edge)
+    (kL*)² = 6.2177,
+    n = 0 : 1.5  < 6.2177  ✓
+    n = 2 : 3.5  < 6.2177  ✓
+    n = 4 : 5.5  < 6.2177  ✓
+    n = 6 : 7.5  > 6.2177  ✗ (excluded, −20.6% above the edge)
 
 so the window contains exactly the three modes n = {0, 2, 4}: the
-three generations.  The edge of the window sits at 0.74% below
+three generations.  The edge of the window sits at 1.04% below
 2π (the Euclidean-period value of the window; the two derivations
 — the framework's (kL)² and the paper's 2π — are the same
 count).

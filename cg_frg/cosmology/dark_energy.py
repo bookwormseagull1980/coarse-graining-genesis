@@ -35,7 +35,7 @@ energy), and m_ν1 the lightest neutrino mass DERIVED from
     m1/m2 = 1/Tr(Y²) = 3/10,   m2/m3 = 1/(√3·Tr(Y²))
 
 The cosmological constant (FRW) is Λ = ρ_Λ/M_P², and the fraction is
-Ω_Λ = ρ_Λ/(3 H0² M_P²).  The framework's Λ ≈ 4.27e-84 GeV² (−0.2%).
+Ω_Λ = ρ_Λ/(3 H0² M_P²).  The framework's Λ ≈ 4.2547e-84 GeV² (−0.6%).
 The content is the neutrino-mass floor.
 
 V4 DISCIPLINE

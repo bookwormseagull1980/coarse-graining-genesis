@@ -109,8 +109,9 @@ def init() -> None:
     # docs/V4_LEDGER.md §0.2.B.  This does not affect tau = 1/50.)
     # bare_coeff = 0.0014 is the V2 one-loop legacy coefficient — the
     # bare-loop magnitude absorbed by the counter-term (layer 6), NOT a
-    # derived spectral-sum value.
-    bare_coeff = 0.0014
+    # derived spectral-sum value.  SCALE_CHOICE: it fills two
+    # informational parameters only and enters no physics closure.
+    bare_coeff = 0.0014     # SCALE_CHOICE / legacy (V2 one-loop, informational)
     SY2 = 10.0 / 3.0
     Pi_bare = bare_coeff * SY2
     dPi = SY2 - Pi_bare
@@ -163,7 +164,9 @@ def init() -> None:
                                         "comparison only)")
 
     L_Cg = math.pi ** 0.5
-    L_GUT = math.sqrt(3.0) / 0.02
+    # L_GUT = sqrt(3)/tau uses the COMPUTED tau (tau_computed, the
+    # content ratio) — no duplicated literal (was math.sqrt(3.0)/0.02).
+    L_GUT = math.sqrt(3.0) / tau_computed
     M_G_chain = get("M_P") * L_Cg / get("kL")
     k_GUT_chain = get("M_P") * L_Cg / L_GUT
     pset("k_GUT", k_GUT_chain, provenance="DERIVED",

@@ -71,10 +71,12 @@ def run_sm_table(M_Z: float, M_G: float, k_GUT: float, v: float) -> None:
     y_v = run_rge(y0, ln_mz, math.log(v))
     y_GUT_B = run_rge(y_v, math.log(v), math.log(k_GUT))
 
-    # The consistency check (the two routes must agree).
+    # The consistency check (the two routes must agree).  The
+    # threshold is 1e-12 (the docstring's stated precision); the
+    # measured agreement is ~4.5e-13 (RK4, 400 steps/decade).
     max_dev = max(abs(a - b) / max(abs(a), 1e-30)
                   for a, b in zip(y_GUT_A, y_GUT_B))
-    if max_dev > 1e-9:
+    if max_dev > 1e-12:
         raise RuntimeError(f"SM RGE routes disagree: max relative dev {max_dev}")
 
     names = ["g1_MG", "g2_MG", "g3_MG", "yt_MG", "lambda_MG"]

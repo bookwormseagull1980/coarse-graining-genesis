@@ -2177,8 +2177,8 @@ DERIVATION CHAIN
 | H0_GEV | 1.4388498143e-42 | internal | H0 = M_P*sqrt(pi)*e^(-int gamma_M) = 1.4388e-42 GeV (the IR endpoint of the emergence w… |
 | Omega_DM | 0.26570263962 | internal | Omega_DM = 1 - Omega_Lambda - Omega_b = 0.2657 (the flatness closure residue; NOT a par… |
 | Omega_b | 0.0492530638657 | internal | Omega_b = eta_B n_gamma m_p / rho_crit = 0.04925 (eta_B = 6.09e-10 (Sakharov J alpha_W^… |
-| a0_MOND | 1.20436992056e-10 | internal | a0 = c H0/(2 pi) sqrt(4/3) = 1.2044e-10 m/s^2 (the transparent-gravity IR behaviour: th… |
-| dm_verdict | {'Omega_DM': 0.2657026396202929, 'bullet': 'prediction (t… | informational | NO dark-matter particle: the framework's gravity is the TRANSPARENT spectral zero-mode … |
+| a0_MOND | 1.20436992056e-10 | internal | a0 = c H0/(2 pi) sqrt(4/3) = 1.2044e-10 m/s^2 (the acceleration-scale IR behaviour: th… |
+| dm_verdict | {'Omega_DM': 0.2657026396202929, 'bullet': 'prediction (t… | informational | AUDIT 2026-08-22 (Newtonian 1/r at all scales): the framework's gravity is the TRANSPARENT spectral zero-mode … |
 | gw_ratio | 0.0253302959106 | cg | r = (1/2pi)^2 = 0.02533 (the Euclidean zero-point of the tensor sector; the CMB-S4 test… |
 | gw_tensor_amplitude | 5.32217582528e-11 | internal | Delta2_t = r*Delta2_s = 5.322e-11 (r = (1/2pi)^2 x the scalar amplitude 2.101e-09) |
 | sigma_C_hubble | 6.9499956845e+41 | internal | sigma_C = 1/H0 = 6.9500e+41 GeV^-1 — the IR window endpoint (the Hubble scale) |

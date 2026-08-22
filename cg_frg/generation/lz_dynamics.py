@@ -166,8 +166,8 @@ def compute() -> dict:
 
 if __name__ == "__main__":
     # self-test with the framework's canonical values
-    kL, tau = 2.49732, 0.02
-    ns_tilt, kL_cmb = 0.035, 2.4848
+    kL, tau = 2.4935343325226915, 0.02
+    ns_tilt, kL_cmb = 0.035, 2.4810667
     au = alpha_up(kL, tau)
     Delta = sector_step(ns_tilt, kL_cmb)
     ad = ladder_down(au, Delta)

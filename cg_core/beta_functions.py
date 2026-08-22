@@ -122,6 +122,11 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
+# Content constants come from the single source sm_content (no duplicated
+# definitions): N_GENERATIONS = 3 (derived by window_capacity) and
+# hypercharge_sum_sq() = Sum Y^2 = 10/3 (the anomaly-free hypercharge table).
+from cg_core.sm_content import N_GENERATIONS, hypercharge_sum_sq  # noqa: E402
+
 PI = math.pi
 PI2 = 16.0 * PI ** 2
 PI4 = PI2 * PI2
@@ -179,15 +184,18 @@ PI4 = PI2 * PI2
 #   thm 18: b1 = 41/10   (82·10 = 41·20)
 #   thm 19: 3·SigmaY2 = 10  (3·10 = 10·3)
 N_C = 3.0
-N_G = 3.0
-SIGMA_Y2 = 10.0 / 3.0
+# The generation count and the hypercharge square-sum are imported from
+# sm_content (the single content source) — N_G = N_GENERATIONS = 3
+# (derived by window_capacity), Sum Y^2 = 10/3 (hypercharge_sum_sq()).
+N_G = float(N_GENERATIONS)
+SIGMA_Y2 = float(hypercharge_sum_sq())
 Y_H2 = 1.0 / 4.0
 C2_SU2 = 2.0
 C2_SU3 = N_C
 C2f_SU2 = 3.0 / 4.0    # fundamental (doublet) Casimir of SU(2)
 C2f_SU3 = 4.0 / 3.0    # fundamental (triplet) Casimir of SU(3)
-TF_SU2 = 6.0
-TF_SU3 = 6.0
+TF_SU2 = 2.0 * N_G     # N_G generations x 2 doublets (Q_L, L_L)
+TF_SU3 = 2.0 * N_G     # N_G generations x 2 (colour-triplet content)
 T_H = 0.5
 GUT = 3.0 / 5.0        # the U(1) GUT normalisation g1 = sqrt(5/3) gY
 

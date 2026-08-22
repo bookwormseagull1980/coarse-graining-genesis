@@ -30,7 +30,7 @@ emergence chain is fully determined by three geometric conditions:
 The F_MG condition is the spectral-pole condition of the spin-2
 channel of the improved energy-momentum tensor: the graviton-like
 mode becomes massless at the emergence scale M_G.  It fixes the
-dimensionless fixed point kL* = 2.4973 self-consistently.
+dimensionless fixed point kL* = 2.4935343 self-consistently.
 
 Because M_G = M_P·L_Cg/kL*, every dimensionless prediction
 (M_G/M_P, g₂) is independent of the absolute value of the Planck
@@ -63,8 +63,13 @@ WHAT THIS MODULE PUBLISHES (the main chain)
     kL          the F_MG self-consistent fixed point at L_Cg = sqrt(pi)
     L_Gg        L(M_G) = kL = C/M_G
     M_G         M_G = M_P*sqrt(pi)/kL (the emergence scale)
-    g2_MG       the Killing-normalisation SU(2) coupling at M_G
-                (+0.34% vs SM = 1/N_c - tau^2*pi/2, the conservation law)
+    g2_MG_bare_constraint
+                the BARE Killing-normalisation SU(2) coupling at M_G
+                from this constraint chain (+0.34% vs SM, pre-correction).
+                NOTE: the authoritative g2_MG (the full prediction with
+                the conservation-law correction, +0.00066%) is published
+                by geometric_couplings — this module does NOT overwrite
+                the authoritative key.
     L_critical  sqrt(pi) = L_Cg (R_c = 6/pi)
     L_Cg_star   sqrt(pi) = L_Cg (the first-principles value)
     R_c_star    6/pi (the first-principles critical curvature)
@@ -93,8 +98,8 @@ from cg_frg.frg.spectral_sum import channel_tmunu_spin2  # noqa: E402
 #   mass-weighted spectral density is y·K_TT = y(1−y)², whose
 #   maximum over y ∈ [0,1] is 4/27 at y = 1/3 (m² = k²/2).  This
 #   extremum is the normalisation at which the massless pole appears,
-#   the F_MG spectral-pole condition.  It is NOT a fitted constant:
-#   it is the value of the mass-weighted density at its maximum, the
+#   the F_MG spectral-pole condition.  The extremum is the value
+#   of the mass-weighted density at its maximum, the
 #   point where the mass fraction and the two kinetic fractions
 #   (1/3)(2/3)² balance.
 #
@@ -242,10 +247,13 @@ def compute() -> dict:
          note="L(M_G)=kL=C/M_G at L_Cg=sqrt(pi)")
     pset("M_G", M_G_pi, provenance="DERIVED",
          note="M_G = M_P*sqrt(pi)/kL (first-principles)")
-    pset("g2_MG", g2_pi, provenance="DERIVED",
-         note="g2(M_G) = sqrt(8)(M_G/M_P)kL^{-3/2} at L_Cg=sqrt(pi) "
-              "(first-principles; deviates +0.34% = 1/N_c - tau^2*pi/2, "
-              "an explained geometric-dynamics symmetry correction)")
+    pset("g2_MG_bare_constraint", g2_pi, provenance="DERIVED",
+         role="internal",
+         note="bare g2(M_G) = sqrt(8)(M_G/M_P)kL^{-3/2} at L_Cg=sqrt(pi) "
+              "(the constraint-chain value, +0.34% = 1/N_c - tau^2*pi/2 "
+              "BEFORE the conservation-law correction; the authoritative "
+              "g2_MG is published by geometric_couplings with the "
+              "correction applied)")
     pset("L_critical", math.sqrt(math.pi), provenance="DERIVED",
          note="L_c = sqrt(6/R_c) with R_c = 6/pi, so L_c = sqrt(pi) = L_Cg "
               "(first-principles)")

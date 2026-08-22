@@ -237,16 +237,16 @@ the sm_inputs SM table. All DERIVED carry provenance/writer/note (audit_param_wr
 | ε_L/ε_R hierarchy | [OK] closed | m_W/m_WR=ε/(2s₀): ×12.5 is exactly 1/(2s₀)=12.5; after SM running −0.73% |
 | kL_CMB | [OK] closed | computed as kL·(1−τ/4) (the CMB pivot-window torsion quarter correction) |
 | g₁ (CF-4) | [OK] closed | κ²(2τ)=(1+2τ)/(1−4τ)^{5/2} @k_GUT (+0.22%) |
-| PMNS large angles | [OK] closed | sin²θ12=1/3, m_ν1/m_ν2=3/10, sin²θ23=0.5507, sin²θ13=0.02194 |
+| PMNS large angles | [OK] closed | sin²θ12=3/10, m_ν1/m_ν2=3/10, sin²θ23=0.5507, sin²θ13=0.02194 |
 | zk quantum correction | [OK] closed (precision annotation) | +0.615% (order-of-magnitude estimate, 384π² normalisation, x̄=1/2 documented) |
 | W_R± | [OK] closed | m_WR=3.5e16 GeV (GUT-scale prediction) |
 | CKM δ | [OK] closed | J magnitude −1.1% closed; direction 8π/21=68.57° (+0.10%) — ÷3=÷N_c internal-space dimension dilution |
 | τ theorem | [OK] closed (scheme convention) | τ=(N_L−N_R)/(N_f·ΣY²)=1/50 seven-layer theorem |
 | baryogenesis mechanism | [OK] closed (order of magnitude) | η_B~6e-10 order (Sakharov + 8/7 phase + J) |
-| N_eff/He/D | [OK] closed | Y_p=0.2488 (+1.6%), N_eff=3.0441 |
+| N_eff/He/D | [OK] closed | Y_p=0.2514 (+2.6%), N_eff=3.0441 |
 | strong-coupling trace anomaly | [OK] closed | pseudo-dilaton consistency λ_H=(λ_dil+σ_SM)/(32π²)=0.1289 (−0.64%) |
 | long-root geometric carrier | [OK] closed | K=8/3 = J=2 kinetic / dimension; λ_long=(8/3)R=16/L² |
-| the 20-exponent mechanism | [OK] closed | 20=(d+1)(ΣY²Δ_f)=4×5 (4 cascade levels × 5 species; m_e=M_P·e^{−20kL}); τ⁻¹/kL=20.02 is an approximation (kL≈5/2) |
+| the 20-exponent mechanism | [OK] closed | 20=(d+1)(ΣY²Δ_f)=4×5 (4 cascade levels × 5 species; m_e=M_P·e^{−20kL}); τ⁻¹/kL=20.05 is an approximation (kL≈5/2) |
 | the v¹⁰ exponent | [OK] closed | MaxEnt uniform y=1 → 5 species × v² = v¹⁰ |
 
 ### Spectrum-to-4D two-end regularisation (conquered 2026-08-15)

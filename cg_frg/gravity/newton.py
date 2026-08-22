@@ -55,7 +55,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from cg_core.params import get, set as pset  # noqa: E402
+from cg_core.params import get, set as pset, compare_and_set  # noqa: E402
 
 EIGHT_PI = 8.0 * math.pi
 
@@ -87,14 +87,14 @@ def compute() -> dict:
     G_N_pred = G_N_from_Z(Z_phys, M_P)
     err = (G_N_pred / G_N_PDG - 1.0) * 100.0
 
-    pset("G_N_pred", G_N_pred, provenance="DERIVED", role="comparison",
-         note=f"G_N from the TT residue with Z_phys = {Z_phys:.6f} "
-              f"(matter back-reaction tiny).  "
-              f"G_N = 1/(8pi Z_phys M_P^2) = {G_N_pred:.6e} GeV^-2 "
-              f"vs PDG {G_N_PDG:.6e} ({err:+.4f}%).  "
-              f"With Z_phys = 1 this is the identity G_N = 1/(8pi M_P^2), "
-              f"which reproduces PDG exactly with the anchor "
-              f"M_P = 1/sqrt(8pi G_N_PDG).")
+    compare_and_set("G_N_pred", G_N_pred, G_N_PDG,
+                    note=f"G_N from the TT residue with Z_phys = {Z_phys:.6f} "
+                         f"(matter back-reaction tiny).  "
+                         f"G_N = 1/(8pi Z_phys M_P^2) = {G_N_pred:.6e} GeV^-2 "
+                         f"vs the anchor G_N_PDG ({err:+.4f}%).  "
+                         f"With Z_phys = 1 this is the identity G_N = 1/(8pi M_P^2), "
+                         f"which reproduces PDG exactly with the anchor "
+                         f"M_P = 1/sqrt(8pi G_N_PDG).")
     pset("G_N_verdict", "CLOSED-as-identity: G_N = 1/(8pi M_P^2) with "
                         "the anchor M_P = 1/sqrt(8pi G_N_PDG) reproduces "
                         "PDG exactly (0.0000%); Z_phys = 1 confirms the "

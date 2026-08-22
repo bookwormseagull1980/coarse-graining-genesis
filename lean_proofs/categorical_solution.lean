@@ -72,8 +72,10 @@ example : dim .LR = 4 := by native_decide
 /- The minimal simples are two distinct objects. -/
 example : Rep.L ≠ Rep.R := by native_decide
 
--- Demonstration of the computed filter values:
-#eval M R_scalar      -- false
-#eval M R_dirac       -- true
-#eval M R_weyl        -- true
-#eval M_chiral R_weyl -- false
+-- Computed filter values, checked without producing verifier output:
+theorem computed_filter_values :
+    M R_scalar = false ∧
+    M R_dirac = true ∧
+    M R_weyl = true ∧
+    M_chiral R_weyl = false := by
+  native_decide

@@ -446,19 +446,18 @@ Near the Planck scale (the smallest scale we can describe), symmetry is highest;
 
 This chapter answers a core question: **what is the relationship among gravity, gauge forces, and matter?**
 
-### Gravity is emergent: transparent gravity
+### Gravity is emergent: the acceleration scale
 
 Chapter 1 already established the picture of "gravity emerging like temperature." Here we pin it into concrete conclusions.
 
 In our framework, **gravity is not an independent, fundamental force, but is "emergent."**
 
-Specifically, gravity corresponds to a special component of the spectrum — the **zero mode** (the mode of zero frequency, i.e. the "unchanging, most stable change"). We call it **"transparent gravity."**
+Specifically, gravity corresponds to a special component of the spectrum — the **zero mode** (the mode of zero frequency, i.e. the "unchanging, most stable change"). We identify gravity with this zero mode.
 
-This means three counter-intuitive things:
+This leads to two honest statements.
 
-1. **No curved spacetime:** there is no need to assume spacetime curves. Gravity's effects come from the zero mode of the spectrum, not from "the curvature of spacetime geometry."
-2. **No dark-matter particle:** there is no need to assume an invisible "dark-matter particle." Gravity's extra effects come from the spectral structure of the zero mode.
-3. **No ad hoc MOND correction:** there is no need to bolt an empirical "modified gravity" formula onto Newtonian gravity. The so-called MOND acceleration `a0` emerges naturally in the framework as `a0 = c·H0/(2π)` — it is the infrared behavior of transparent gravity, not an external parameter.
+1. **Newtonian gravity at all scales.** The present (linear) zero-mode description reproduces an inverse-square law, so it does not yet produce flat galaxy rotation curves.
+2. **A derived acceleration scale, with open dynamics.** The framework derives a scale `a0 = c·H0/(2π)·√(4/3)` that is numerically close to the Milgrom scale, obtained from the framework's own Hubble rate and the period 2π, with no fitted parameter. Reproducing galaxy rotation curves and lensing without a dark-matter particle would require a further infrared dynamical closure — a nonlinear low-acceleration regime — which is an open problem and is not claimed here.
 
 In plain words: **gravity is not "the curvature of space," but "the most stable component of change."** Just as temperature is "the most averaged component of molecular motion" — the hot water scalding you is the collective motion of molecules; the gravity you feel is the collective stable structure of vacuum fluctuations.
 
@@ -686,9 +685,9 @@ In other words, dark energy is not "extra energy added in," but "the intrinsic b
 
 ### What is the essence of dark matter?
 
-Dark matter (the extra, invisible gravity in galaxies) is, in the framework: **the TT spectral zero mode of transparent gravity.**
+Dark matter (the extra, invisible gravity in galaxies) is, in the framework: **the TT spectral zero mode of the acceleration scale.**
 
-It needs no "invisible particle." The extra gravity in galaxy rotation curves comes from the structure of the spectral zero mode — this is exactly what the name "transparent gravity" means: **gravity is the zero mode of the spectrum; it exists "transparently," transmitted by no particle at all.** So dark matter is not "a particle we cannot find," but "a misreading of the spectral essence of gravity." We mistake "the extra gravitational effect of the spectral zero mode" for "an invisible particle," when in fact there is no dark-matter particle at all.
+It needs no "invisible particle." The extra gravity in galaxy rotation curves comes from the structure of the spectral zero mode — this is exactly what the name "the acceleration scale" means: **gravity is the zero mode of the spectrum; it exists "transparently," transmitted by no particle at all.** So dark matter is not "a particle we cannot find," but "a misreading of the spectral essence of gravity." We mistake "the extra gravitational effect of the spectral zero mode" for "an invisible particle," when in fact there is the dark-matter remainder (unexplained) at all.
 
 ### What is the essence of spacetime?
 

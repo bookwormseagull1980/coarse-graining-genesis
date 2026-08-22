@@ -178,7 +178,7 @@ The full field-equation proof of the s0/N_R correction (the symmetry correction 
 | Ω_b | 0.04915 | 0.04930 | −0.30% | η_B·n_γ·m_p/ρ_crit (fully internal) |
 | Ω_DM | 0.26580 | 0.26447 | +0.50% | flatness closure 1−Ω_Λ−Ω_b (not a particle) |
 | T_CMB | 2.7232 K | 2.7255 | −0.09% | m_ν1·r12/π·(1−τ·Δ_s) (neutrino photon floor) |
-| a0 | 1.206e-10 | 1.2e-10 | +0.51% | transparent-gravity IR (c·H0/2π·√4/3) |
+| a0 | 1.206e-10 | 1.2e-10 | +0.51% | acceleration-scale IR (c·H0/2π·√4/3) |
 
 **Key verification: Ω_b + Ω_DM + Ω_Λ = 1.00000 (exact flatness)** — three independent mechanisms (η_B, closure, two Gaussian entropies) sum exactly to 1, not a fit.
 
@@ -195,13 +195,13 @@ G_N → M_P → M_G → kL → ρ_Λ(Y_u·m_ν1⁴) → ∫γ_M(two Gaussian ent
 
 
 
-### 2. The transparent-gravity picture (no dark matter, no curved spacetime)
+### 2. The acceleration scale and the dark-matter remainder (RETRACTED 2026-08-22)
 
 - **The framework's gravity is "transparent"**: G_N = 1/(8π·Z_phys·M_P²), Z_phys≈1 (matter back-reaction 0.2%)
-- Gravity = the TT spectral zero mode (emerging from the spectral sum), no curved spacetime, no self-interaction, transparent
-- **No dark-matter particle**: Ω_DM = 0.266 is a flatness-closure quantity (not a particle)
-- a0 = c·H0/(2π)·√(4/3) is the IR behaviour of transparent gravity (not ad hoc MOND)
-- Rotation curves flatten automatically for a<a0 — this is the effect that GR curved spacetime needs dark matter / MOND to compensate, which the framework gives directly from first principles
+- Gravity = the TT spectral zero mode (emerging from the spectral sum), Newtonian 1/r at all scales, no self-interaction, Z_phys = 1
+- **Dark-matter remainder (unexplained)**: Ω_DM = 0.266 is a flatness-closure quantity (not a particle)
+- a0 = c·H0/(2π)·√(4/3) is a DERIVED scale reproducing the Milgrom coincidence (no MOND dynamics)
+- The present linear kernel does NOT derive flat rotation curves (F = 1); these require an additional IR dynamical closure
 
 ### 3. Symmetry-pinned parameters (2026-08-15 23:30, user "continue the assault")
 
@@ -244,7 +244,7 @@ G_N → M_P → M_G → kL → ρ_Λ(Y_u·m_ν1⁴) → ∫γ_M(two Gaussian ent
 - Geometric RGE: the geometric quantities (y₀=1.0, λ_H) are scale-invariant and do not run; only g1, g2, g3 run
 - Redshift = spectrum (T_CMB is fixed by the neutrino mass, not an evolving quantity)
 - Hierarchy-ratio correction r23 (the correction of the Gaussian-entropy minimal distance)
-- Transparent gravity (spectral zero mode, no curved spacetime)
+- The acceleration scale (spectral zero mode, Newtonian gravity at all scales)
 - Symmetry pinning (conformal weight Δ, conformal-gauge duality, d=N_c)
 
 ## ⭐ 2026-08-15 22:45 update (direction correction + cosmology sector fully closed)

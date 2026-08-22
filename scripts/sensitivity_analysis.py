@@ -32,9 +32,10 @@ three inputs/conventions that carry uncertainty:
           change of these conventions shifts kL.
     τ   — the torsion modulus τ = (N_L-N_R)/(N_f·ΣY²) = 1/50.  The
           content ratio itself is exact, but the window cancellation
-          τ = τ_bare × screening = [1/(2πkL⁴)] × [2πkL⁴/(N_fΣY²)]
-          depends on the exact form 2πkL⁴; a small deformation of
-          that form shifts τ.
+          τ = τ_bare × screening = [1/(kL)³] × [(kL)³/(N_fΣY²)]
+          depends on the exact form (kL)³ (the 3D RP3 spectral sums
+          close to (kL)³, not (kL)⁴ — audit 2026-08-18, init_v4); a
+          small deformation of that form shifts τ.
     M_P — the single observed anchor (from G_N).  Its PDG/CODATA
           relative uncertainty (~2.2e-5) is the only true experimental
           error; it propagates to every dimensionful quantity and

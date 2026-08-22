@@ -23,7 +23,10 @@ WHY THIS MODULE EXISTS (motivation)
 The electron mass is the lightest charged fermion mass.  In the
 framework it closes through the Planck-anchored exponential chain:
 
-    m_e = M_P · e^{−20·kL} = 0.497 MeV
+    m_e = M_P · e^{−20·kL}·(1 − s0·κ) = 0.510 MeV
+    (the low-scale squash correction (1−s0·κ) is the SAME factor as
+    v's; the quoted value is the V4.0 fixed-point result — run-time
+    value in cg_params.json)
 
 The power 20 = 4×5: the Yukawa cascade (4 mixing steps of the
 spectral cascade) × the 5 species of one generation (the content
@@ -84,8 +87,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from cg_core.params import get, set as pset  # noqa: E402
 
-# The cascade inputs (computed, not hardcoded).
-# Y_0 = 1 is the exact SO(4) diagonal overlap (mass_operator_overlap).
+# The cascade inputs:/n# Y_0 = 1 is the exact SO(4) diagonal overlap (mass_operator_overlap).
 Y_0 = 1.0
 
 
@@ -118,8 +120,7 @@ def m_e_planck(M_P: float, kL: float) -> float:
     """m_e = M_P·e^{−20kL} — the Planck-anchored exponential chain
 (GeV → MeV).  The exponent 20 = (d+1)·(ΣY²·Δ_f) = 4·5, with 4 = d+1
 the internal dimension plus one and 5 = ΣY²·Δ_f the hypercharge
-capacity times the fermion conformal weight, a pure content ratio,
-not an observed value."""
+capacity times the fermion conformal weight, a pure content ratio."""
     return M_P * math.exp(-20.0 * kL) * 1e3
 
 
@@ -182,7 +183,6 @@ def compute() -> dict:
     M_P = get("M_P")
     kL = get("kL")
     v = get("v_HIGGS")
-    alpha_lp = get("alpha_lepton")
 
     me_raw = m_e_planck(M_P, kL)
     # STATUS (2026-08-20): L2 INHERITED — m_e (1−s0κ) inherits v's base factor through the 4×5 cascade (m_e ∝ v_dil(e)).  See epsilon_ratio DERIVATION STATUS.
@@ -204,9 +204,11 @@ def compute() -> dict:
     # floating point, since v_dil_e is the descent-defining value).
     if abs(mc - me) / me > 1e-12:
         raise RuntimeError("electron cascade ≠ exponential chain")
-    # The muon/electron ratio: the lepton
-    # LZ index alpha_lp plus the entropy-min distance sqrt(2 pi).
-    mmu_me = math.exp(2.0 * alpha_lp + math.sqrt(2.0 * math.pi))
+    # The muon/electron ratio: published by lz_ladder (the lepton-ladder
+    # source — alpha_lepton and the Euclidean-period factor e^{sqrt(2 pi)});
+    # read the authoritative value here rather than re-publishing it
+    # (single-writer discipline, cg_core.params).
+    mmu_me = float(get("m_mu_over_m_e"))
 
     pset("m_e_pred", me, provenance="DERIVED", role="internal",
          note=f"m_e = M_P e^(-20 kL) (1 - s0*kappa) = {me:.3f} MeV (the "
@@ -221,10 +223,6 @@ def compute() -> dict:
               f"(d+1 = 4, SigmaY2 Delta_f = (10/3)(3/2) = 5); "
               f"tau^-1/kL = {idx20:.4f} is the same content ratio "
               f"(the torsion inverse over the window width)")
-    pset("m_mu_over_m_e", mmu_me, provenance="DERIVED",
-         role="internal",
-         note=f"m_mu/m_e = e^(2 alpha_lp + sqrt(2pi)) = {mmu_me:.2f} (the "
-              f"lepton LZ index plus the entropy-min distance)")
     return {"m_e": me, "m_mu/m_e": mmu_me,
             "m_e_cascade_note": mc,
             "v_dil_electron_MeV": v_dil_e * 1e3,

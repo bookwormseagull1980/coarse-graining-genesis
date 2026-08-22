@@ -24,10 +24,10 @@ emergence scale and the left-right ratio:
 
     v = M_G · ε
 
-with M_G = 1.729e18 GeV (endpoint_constraint) and ε = 1.4245e-16
-(epsilon_ratio, the dilaton-stop line):
+with M_G = 1.7310765e18 GeV (endpoint_constraint) and ε = 1.42218e-16
+(epsilon_ratio, the window-squared line with the squash correction):
 
-    v = 1.729072e18 × 1.4245e-16 = 246.27 GeV
+    v = 1.7310765e18 × 1.42218e-16 = 246.19 GeV
 
 The cross-check chain (the alternative route through the Higgs
 quartic) v = M_G·A·e^{−φ}·e^{−1/(2π)} with A = √(ξR_c/λ_H) gives
@@ -80,7 +80,9 @@ def compute() -> dict:
                               # (1 - s0*kappa) squash correction)
     v = vev(M_G, eps)         # = M_G·ε (fully internal, corrected)
 
-    # STATUS (2026-08-20): L3 ASSERTED — v's (1−s0*κ) is the base factor; "analogue of the g2 conservation law" is stated, not reduced step-by-step.  See epsilon_ratio DERIVATION STATUS.
+    # STATUS (2026-08-21): L3 DERIVED — v's (1−s0·κ) base factor is the
+    # geometric charge c=−1 (the traceless shear) of squash_level_transfer.
+    # See epsilon_ratio DERIVATION STATUS.
     pset("v_HIGGS", v, provenance="DERIVED", role="internal",
          note=f"v = M_G*epsilon_window = {v:.2f} GeV (the window-squared "
               f"line eps=(3alpha/pi)e^(-4pi kL)(1 - s0*kappa(2tau)) — "

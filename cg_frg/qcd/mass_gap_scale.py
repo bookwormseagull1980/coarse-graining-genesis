@@ -40,7 +40,7 @@ hadronic (GeV) scale:
   STEP 2 — the generator mass: the SU(3) gauge bosons acquire
     mass from the long-root condensate (Higgs-like):
 
-        m_gen = g₂(M_G)·(2τ)·M_G/√2 ≈ 1.12e17 GeV
+        m_gen = g₂(M_G)·(2τ)·M_G/√2 ≈ 2.49e16 GeV
 
     (the initial condition of the QCD running at the GUT scale).
 
@@ -179,10 +179,10 @@ def lambda_qcd(g1_MG: float, g2_MG: float, g3_MG: float,
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
     N_g = 8.0              # su(3) gauge generators N_c^2 - 1
     a = a * (1.0 - s0 * kappa / N_g)
-    # STATUS (2026-08-20): L3 ASSERTED — Yukawa-difference factor
-    # (geometric y0=1 vs running SM yt), normalised by N_g.  The 1/N_g
-    # coefficient is stated, not reduced to a step-by-step derivation.
-    # See epsilon_ratio DERIVATION STATUS.
+    # STATUS (2026-08-21): L3 DERIVED — the Yukawa-difference factor
+    # (geometric y0=1 vs running SM yt) normalised by N_g is the generator
+    # charge c=−1/N_g=−ξ of squash_level_transfer (the conformal coupling of
+    # the conformal-gauge duality N_g·ξ=1).  See epsilon_ratio DERIVATION STATUS.
     c0 = 23.0 / 3.0    # b0(5) = 11 - 2*5/3
     c1 = 116.0 / 3.0   # b1(5) = 102 - 38*5/3
     return (M_Z * (c0 * a / (4.0 * math.pi)) ** (-c1 / (2.0 * c0 * c0))

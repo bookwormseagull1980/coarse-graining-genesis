@@ -28,7 +28,7 @@ window's Euclidean period:
     Δ²_R = Δ²_0 · e^{−2π·kL_CMB}
 
     Δ²_0 = (1/2)·(1/2π)² = 1.267e-2   (the spin-1/2 zero-point)
-    e^{−2π·kL_CMB} = e^{−15.61} = 1.658e-7  (the window suppression)
+    e^{−2π·kL_CMB} = e^{−15.59} = 1.68e-7  (the window suppression)
     Δ²_R = 2.10e-9  (no inflation)
 
 THE SUPPRESSION FAMILY (the common thread 2π)
@@ -39,10 +39,10 @@ common thread is the 2π (the Euclidean period):
     ε  = e^{1/2π}   (the zero-point — the EW ratio)
     a0 = cH0/(2π)   (the IR gravity)
     2L = √(2π)      (the entropy-min distance)
-    kL ≈ √(2π)      (2.4973 vs 2.5066 — 0.37% — the window)
+    kL ≈ √(2π)      (2.4935343 vs 2.5066 — 0.52% — the window)
 
-The amplitude uses the CMB-scale window width kL_CMB = 2.4848
-(NOT the local kL = 2.4973 at M_G): the amplitude is a CMB-scale
+The amplitude uses the CMB-scale window width kL_CMB = 2.4810667
+(NOT the local kL = 2.4935343 at M_G): the amplitude is a CMB-scale
 observable, and the window evolves between M_G and the CMB.
 
 V4 DISCIPLINE
@@ -92,9 +92,10 @@ def compute() -> dict:
     # asymmetry tau x the squash normalisation kappa) — the same chiral-
     # squash content as eta_B and T_deconf.  (1 - tau·kappa) brings
     # Delta2_R to -0.19%.
-    # STATUS (2026-08-20): L3 ASSERTED — chiral-level (1-tau*kappa) factor;
-    # the 'spin-1/2 zero-point is chiral' mechanism is stated, not reduced
-    # to a step-by-step derivation.  See epsilon_ratio DERIVATION STATUS.
+    # STATUS (2026-08-21): L3 DERIVED — the chiral-level (1-tau*kappa) factor
+    # is the chiral-restoration charge c=−1/2 (τ=s0/2) of squash_level_transfer;
+    # the spin-1/2 zero-point chirality couples to the chiral asymmetry τ.
+    # See epsilon_ratio DERIVATION STATUS.
     s0 = 2.0 * tau
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
     D_R = r["D_R"] * (1.0 - tau * kappa)

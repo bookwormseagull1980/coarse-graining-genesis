@@ -27,22 +27,25 @@ single entry point.
 
 THE CHAIN (dependency order)
 ----------------------------
-1. init_v4          — the anchors + SM table (the seed chain)
-2. sm_rge           — the SM running table at the chain points
-3. spectral_sum     — the 5-channel mode sums
-4. endpoint_constraint — the F_MG fixed point + coupling closure
+1. init_v4          — the anchors + seed comparison table
+2. spectral_sum     — the 5-channel mode sums
+3. endpoint_constraint — the F_MG fixed point + coupling closure
+4. sm_rge           — the SM running table at the final chain points
 5. gamma_M / ir_flow — the entropy identity and the γ_M profile
 6. geometric_couplings — g2/g1 at M_G (the geometric couplings)
 7. window_capacity / lz_ladder — the generation sector (3 + LZ)
-8. relaxion_chain / epsilon_ratio / vev_closure — the EW scale
+8. relaxion_chain / epsilon_ratio / squash_level_transfer —
+   the EW scale and the step-by-step integralisation of the six
+   J=2 squash level-transfer coefficients (the L3 closure,
+   verification module)
 9. spectral_tilt / dark_energy / perturbation_amplitude — the
    cosmology (the CMB-window publishes kL_CMB)
 10. sector_alpha / lz_ladder — the internal sector ladder (B-level)
-11. gw_ratio / zk_gravitational_rg / order_parameter /
-    geometric_ewsb — the IR window, the Z(k) running, the
-    order parameter, the geometric EWSB (B-level)
+11. mass_operator_overlap / zk_gravitational_rg / order_parameter /
+    geometric_ewsb — the absolute Yukawa base, the Z(k) running,
+    the order parameter, the geometric EWSB (B-level)
 12. tt_tensor / pole_analysis / newton — the gravity sector
-13. neutrino_closure / mass_operator_overlap — the flavour sector
+13. neutrino_closure — the neutrino sector
 14. qcd_sector / discrete_flow — the QCD sector and the
     discrete-flow structure (B-level)
 
@@ -73,12 +76,12 @@ _PY = sys.executable
 # The module list in dependency order (each runs its own __main__).
 MODULES = [
     "scripts/init_v4.py",
-    "comparison/sm_rge/run_rge.py",
     "cg_core/spectrum_loop.py",
     "cg_core/sm_content.py",
     "cg_core/cluster_decay.py",
     "cg_frg/frg/spectral_sum.py",
     "cg_frg/frg/endpoint_constraint.py",
+    "comparison/sm_rge/run_rge.py",
     "cg_frg/ewsb/vev_closure.py",
     "cg_frg/frg/gamma_M.py",
     "cg_frg/frg/ir_flow.py",
@@ -88,12 +91,18 @@ MODULES = [
     "cg_frg/ewsb/relaxion_chain.py",
     "cg_frg/ewsb/relaxion_geo.py",
     "cg_frg/ewsb/epsilon_ratio.py",
+    # The step-by-step integralisation of the six J=2 squash level-transfer
+    # coefficients (the L3 closure, 2026-08-21): a verification module whose
+    # self-test asserts every factor (v, m_nu3, T_d, Delta2_R, m_p, alpha_s,
+    # rho_Lambda) and the conservation laws to machine precision.
+    "cg_frg/ewsb/squash_level_transfer.py",
     "cg_frg/cosmology/spectral_tilt.py",
     "cg_frg/cosmology/dark_energy.py",
     "cg_frg/cosmology/perturbation_amplitude.py",
     "cg_frg/generation/sector_alpha.py",
     "cg_frg/generation/lz_ladder.py",
     "cg_frg/generation/lz_dynamics.py",
+    "cg_frg/fermion/mass_operator_overlap.py",
     "cg_frg/gravity/zk_gravitational_rg.py",
     "cg_frg/ewsb/order_parameter.py",
     "cg_frg/ewsb/pseudo_dilaton.py",
@@ -104,7 +113,6 @@ MODULES = [
     "cg_frg/gravity/newton.py",
     "cg_frg/neutrino/neutrino_closure.py",
     "cg_frg/neutrino/neutrino_mass_matrix.py",
-    "cg_frg/fermion/mass_operator_overlap.py",
     "cg_frg/fermion/electron_mass.py",
     "cg_frg/framework/five_items.py",
     "cg_frg/framework/cp_sector.py",
@@ -113,6 +121,7 @@ MODULES = [
     "cg_frg/qcd/qcd_sector.py",
     "cg_frg/cosmology/bbn_helium.py",
     "cg_frg/ewsb/ew_precision.py",
+    "cg_frg/ewsb/ew_one_loop.py",
     "cg_frg/cosmology/gw_ratio.py",
     "cg_frg/framework/sigma_language.py",
     "cg_frg/frg/discrete_flow.py",
@@ -145,6 +154,8 @@ CLOSURES = [
     ("H0 (GeV)", "H0_GEV", 1.44e-42),
     ("M_Z (GeV)", "M_Z_pred", 91.1876),
     ("M_W (GeV)", "M_W_pred", 80.369),
+    ("M_W lead-univ (GeV)", "M_W_pred_lead1loop", 80.369),
+    ("Gamma_b 1-loop (GeV)", "Gamma_b_pred_1loop", 0.37705),
     ("Gamma_Z (GeV)", "Gamma_Z_pred", 2.4952),
     ("sigma_had (nb)", "sigma_had_pred", 41.481),
     ("m_H (GeV)", "m_H_pred", 125.20),
@@ -155,6 +166,7 @@ CLOSURES = [
     ("alpha_lp (internal)", "alpha_lepton", 1.410689),
     ("sector step Delta", "sector_alpha_delta", 0.5225),
     ("sin^2 theta(M_Z)", "s2_thetaW_MZ", 0.23122),
+    ("sin^2 theta_eff^l", "sin2_theta_eff_l_pred", 0.23153),
     ("m_tau (GeV)", "m_tau_pred", 1.777),
     ("order parameter lambda", "order_parameter_lambda", None),
     ("Z quantum shift", "Z_quantum_shift", None),

@@ -34,7 +34,7 @@ dilaton polarisation (the spectral sum over the RP³ scalar modes):
     d_l = (l+1)²  (the even-l RP³ scalars).
 
 At the pole the propagator diverges and the flow freezes — fixing
-the VEV.  The framework's anchor φ_R0 = 36.1177 (relaxion_chain)
+the VEV.  The framework's anchor φ_R0 = 36.1207 (relaxion_chain)
 is the baseline of this mechanism.
 
 THE FACTOR-2 ANCHOR (the reproducible statement)

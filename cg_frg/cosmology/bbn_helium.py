@@ -40,8 +40,8 @@ and after the neutron decay until BBN (t ≈ 200 s, τ_n = 880 s):
     (n/p)_BBN = (n/p)·exp(−t/τ_n),
     Y_p = 2·(n/p)_BBN/(1 + (n/p)_BBN).
 
-With the DERIVED constants (T_f = 0.754 MeV, Δm = 1.291 MeV,
-τ_n = 891 s, t = 205 s): Y_p = 0.2508.  The framework's v pins T_f
+With the DERIVED constants (T_f = 0.754 MeV, Δm = 1.289 MeV,
+τ_n = 897 s, t = 205 s): Y_p = 0.2514.  The framework's v pins T_f
 (the weak rate G_F = 1/(√2 v²) sets the freeze-out): the v = 246.19
 (closed) gives the standard freeze-out; the BBN observation allows
 only v ∈ [230, 270] GeV — a strong independent pinning of the
@@ -140,7 +140,6 @@ from cg_core.params import get, set as pset  # noqa: E402
 G_EFF = 10.75         # relativistic DOF at T ~ 1 MeV (freeze-out)
 G_EFF_BBN = 3.36      # relativistic DOF after e+e- annihilation (BBN)
 T_BBN = 0.08e-3       # GeV, the deuterium-bottleneck temperature (~0.08 MeV)
-ALPHA_EM_LEGACY = 1.0 / 137.035999084   # legacy hard-coded value; replaced by alpha_em_zero() (2026-08-19)
 
 
 def internal_M_Z() -> float:
@@ -189,7 +188,9 @@ def alpha_em_zero() -> float:
     return 1.0 / inv0
 N_G = 8.0             # colour generator count N_c² − 1
 DELTA_S = 0.5         # scalar conformal weight (d−2)/2
-TAU = 1.0 / 50.0      # the torsion parameter (N_L−N_R)/(N_f·ΣY²)
+# NOTE: the torsion parameter τ = (N_L−N_R)/(N_f·ΣY²) = 1/50 is the
+# framework's DERIVED content ratio (Lean-proven); the run-time value is
+# always read from the store via get("tau") — no local copy is kept.
 
 
 def ckm_vud() -> float:
@@ -234,9 +235,11 @@ def radiative_correction() -> float:
 
     NON-PERTURBATIVE: the τ-corrected (1−τ) over N_g·π = 8π — the torsion
     content ratio τ = (N_L−N_R)/(N_f·ΣY²) and the colour-generator × π
-    geometry.  No Sirlin loop integral.
+    geometry.  No Sirlin loop integral.  τ is read from the store
+    (get("tau"), the framework's single parameter source).
     """
-    return 1.0 + (1.0 - TAU) / (8.0 * math.pi)
+    tau = float(get("tau"))
+    return 1.0 + (1.0 - tau) / (8.0 * math.pi)
 
 
 def neff_correction() -> float:

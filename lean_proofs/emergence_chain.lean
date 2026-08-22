@@ -89,7 +89,7 @@ def coupling : Rank2Cartan → Nat
 theorem minimal_coupling_is_A2 (c : Rank2Cartan) :
     (∀ d : Rank2Cartan, coupling c ≤ coupling d) → c = .A2 := by
   cases c
-  · intro h
+  · intro _h
     rfl
   · intro h
     exfalso
@@ -102,7 +102,7 @@ theorem minimal_coupling_is_A2 (c : Rank2Cartan) :
 example : coupling .A2 = 1 := by native_decide
 example : coupling .B2 = 2 ∧ coupling .G2 = 3 := by native_decide
 example : (∀ d : Rank2Cartan, coupling Rank2Cartan.A2 ≤ coupling d) → Rank2Cartan.A2 = Rank2Cartan.A2 := by
-  intro h
+  intro _h
   rfl
 
 /- The T3 statement (the intersection uniqueness — the framework's chain, steps 1-4:

@@ -170,7 +170,7 @@ None of these five deviations is a "fixable framework-mechanism defect": observa
 1. **Geometric RGE**: the geometric quantities (y₀=1.0, λ_H) are scale-invariant and do not run; only g1, g2, g3 run (the SM two-loop β)
 2. **Redshift = spectrum**: T_CMB is fixed by the neutrino mass, not an evolving quantity
 3. **Hierarchy-ratio correction r23**: √(2π)→√(2π+r23) of the Gaussian-entropy minimal distance
-4. **Transparent gravity**: spectral zero mode, no curved spacetime, no dark matter
+4. **The acceleration scale**: spectral zero mode, Newtonian gravity at all scales, no dark-matter dynamics (retracted)
 5. **Symmetry pinning**: the conformal weight Δ, the conformal-gauge duality, d=N_c turn candidate-level parameters into first principles
 
 ---

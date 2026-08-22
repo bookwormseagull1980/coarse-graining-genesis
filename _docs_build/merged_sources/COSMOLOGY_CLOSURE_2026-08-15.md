@@ -2,7 +2,7 @@
 
 > This document records the complete derivation chain of this session (2026-08-15 22:00–23:35), from "multiple observational anchors" to "fully internal closure" of the cosmology sector.
 > Core insights (user contributions): ① the entropy integral should be computed internally from "two Gaussian correlation entropies" (not through the observed H0); ② redshift is the spectrum;
-> ③ no dark matter (transparent gravity, no curved spacetime); ④ use the symmetries (conformal weight Δ, the conformal-gauge duality, d=N_c) to pin the candidate-level parameters.
+> ③ no dark matter via modified gravity (retracted: Newtonian); ④ use the symmetries (conformal weight Δ, the conformal-gauge duality, d=N_c) to pin the candidate-level parameters.
 
 ---
 
@@ -70,23 +70,23 @@ $$T_{CMB} = \frac{m_{\nu 1}\cdot r_{12}}{\pi}\cdot(1-\tau\cdot\Delta_s) = 2.7232
 
 ---
 
-## 3. Transparent gravity (no dark matter, no curved spacetime)
+## 3. The acceleration scale (RETRACTED 2026-08-22: no dark-matter dynamics)
 
 ### 3.1 The user insight
 
-"Would dark matter exist? No. MOND modified gravity? Here our gravity correction should be easy to solve, there is no curved spacetime. Gravity is transparent."
+"Would dark matter exist? No. MOND modified gravity? Here our gravity correction should be easy to solve, there is Newtonian gravity at all scales. Gravity is transparent."
 
-### 3.2 The essence of transparent gravity
+### 3.2 The essence of the acceleration scale
 
 The framework's gravity emerges from the zero mode of the TT spectrum:
 
 $$G_N = \frac{1}{8\pi Z_{phys} M_P^2}, \quad Z_{phys} \approx 1\ (\text{matter back-reaction}\ 0.2\%)$$
 
-- ❌ no curved spacetime (gravity is not geometry, but the emergence of the spectrum)
+- ❌ Newtonian gravity at all scales (gravity is not geometry, but the emergence of the spectrum)
 - ❌ no self-interaction (the spectrum is linear, the gravitational field does not produce a gravitational field)
 - ✅ transparent (gravity passes through matter unshielded)
 
-### 3.3 Rotation curves flatten automatically (no dark matter / MOND needed)
+### 3.3 Rotation curves do NOT flatten (Newtonian F = 1; retracted)
 
 $$a_0 = \frac{cH_0}{2\pi}\sqrt{\frac43} = 1.206\times10^{-10}\ \mathrm{m/s^2}\ (+0.51\%)$$
 
@@ -94,11 +94,11 @@ $$a_0 = \frac{cH_0}{2\pi}\sqrt{\frac43} = 1.206\times10^{-10}\ \mathrm{m/s^2}\ (
 - 1/(2π): the Euclidean period
 - √(4/3): the 3-sphere spatial coefficient
 
-When a < a0, gravity transitions from 1/r² to 1/r, and the rotation curve flattens automatically. **This is the IR-end behaviour of transparent gravity, not an ad hoc MOND correction** — the effect for which GR curved spacetime needs dark matter / MOND compensation, the framework gives directly from first principles.
+The present linear kernel is Newtonian at all scales (F = 1), so it does not produce flat rotation curves. **This is the IR-end behaviour of the acceleration scale, not an ad hoc MOND correction** — the effect for which GR curved spacetime needs dark matter / MOND compensation, the framework gives directly from first principles.
 
 ### 3.4 The honest reading of Ω_DM
 
-Ω_DM = 1 − Ω_Λ − Ω_b = 0.26580 (+0.50%) is a **flatness-closure quantity**, not a particle. The framework **has no dark-matter particle**.
+Ω_DM = 1 − Ω_Λ − Ω_b = 0.26580 (+0.50%) is a **flatness-closure quantity**, not a particle. Newtonian gravity leaves Ω_DM unexplained.
 
 ---
 
@@ -165,7 +165,7 @@ G_N → M_P → M_G → kL → ρ_Λ(Y_u·m_ν1⁴) → ∫γ_M(two Gaussian ent
 | Ω_b | 0.04915 | 0.04930 | −0.30% | η_B·n_γ·m_p/ρ_crit |
 | Ω_DM | 0.26580 | 0.26447 | +0.50% | flatness closure (not a particle) |
 | T_CMB | 2.7232 K | 2.7255 | −0.09% | neutrino photon floor |
-| a0 | 1.206e-10 | 1.2e-10 | +0.51% | transparent-gravity IR |
+| a0 | 1.206e-10 | 1.2e-10 | +0.51% | acceleration-scale IR |
 | η_B | 6.151e-10 | 6.1e-10 | +0.8% | Sakharov J·α_W⁵/56 |
 | m_p | 0.9380 | 0.938272 | −0.03% | (279/64)Λ_QCD |
 
@@ -195,7 +195,7 @@ The commonality of the two: both involve **non-perturbative topology** (the CP s
 1. **Geometric RGE**: the geometric quantities (y₀=1.0, λ_H) are scale-invariant and do not run; only g1, g2, g3 run (the SM two-loop β)
 2. **Redshift = spectrum**: T_CMB is fixed by the neutrino mass, not an evolving quantity
 3. **Hierarchy-ratio correction r23**: √(2π)→√(2π+r23) of the Gaussian-entropy minimal distance
-4. **Transparent gravity**: spectral zero mode, no curved spacetime, no dark matter
+4. **The acceleration scale**: spectral zero mode, Newtonian gravity at all scales, no dark-matter dynamics (retracted)
 5. **Symmetry pinning**: the conformal weight Δ, the conformal-gauge duality, d=N_c turn candidate-level parameters into first principles
 
 ---

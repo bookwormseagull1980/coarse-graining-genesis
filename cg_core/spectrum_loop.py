@@ -325,7 +325,7 @@ def iter_sm_spectrum(
 
 
 def _self_test() -> None:
-    L = 2.497320997347988
+    L = 2.4935343325226915
     k = L  # a representative scale
     tau = 0.02
     modes = list(iter_sm_spectrum(L, k, tau))

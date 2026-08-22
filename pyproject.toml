@@ -1,0 +1,63 @@
+# =============================================================================
+#  Coarse-Graining Genesis Framework V4.0
+#
+#  Author:      Jinku Guo guojk@nwpu.edu.cn
+#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
+#
+#  Part of the V4 spectral framework, whose physics is presented in the
+#  companion papers:
+#    [I]  "The spectrum of a compact internal space.
+#          I. Gauge structure and fermion content"
+#    [II] "The spectrum of a compact internal space.
+#          II. Effective couplings and mass scales"
+# =============================================================================
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coarse-graining-genesis"
+version = "4.0.0"
+description = "Coarse-Graining Genesis Framework V4.0 — a provenance-audited spectral framework for gauge structure, fermion content and mass-scale computations from a compact internal space"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT + attribution requirement (see LICENSE)" }
+authors = [{ name = "Jinku Guo", email = "guojk@nwpu.edu.cn" }]
+keywords = ["coarse-graining", "renormalization-group", "emergence", "spectral-geometry", "physics"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+# Runtime dependencies (the computation chain): scipy (q0-integrals,
+# spectral sums) and numpy (tensor kernels) are required.
+dependencies = [
+    "scipy>=1.10",
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+# Documentation build (docs/ + _docs_build/): figures and docx.
+docs = [
+    "matplotlib>=3.7",
+    "python-docx>=1.1",
+]
+# Development / verification (tests + audit).
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+]
+
+[tool.setuptools]
+# The framework is script-style (modules run via sys.path insertion);
+# expose the two packages for import-based use.
+packages = ["cg_core", "cg_frg"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "physics: physics benchmark tests (theoretical EXPECTED_BY_THEORY values)",
+    "store: tests that read cg_params.json (the run-time store)",
+]

@@ -245,6 +245,70 @@ Paper↔code mapping:
 
 ---
 
+## 0.4. 2026-08-21: the six squash level-transfer coefficients integralised (L3 ASSERTED → DERIVED moment)
+
+The six sign/multiple assignments of the J=2 squash corrections — previously
+recorded as "L3 ASSERTED" (mechanism stated, coefficient claimed) — are now
+reduced to an explicit STEP-BY-STEP INTEGRALISATION:
+
+    EC action  ->  field equations  ->  geometric moment  ->  factor
+                   (tau, s0)             c_Q = a_Q * r_Q       (1 + c_Q*s0*kappa)
+
+  Step 0  EC action (explicit): torsion L = a T^2 + b T^{bac}T_{abc} + c(T^a_ab)^2
+          (b = 4a), the Landau potential V(phi) = (1/2)xi(R-R_c)phi^2 + (lambda/4)phi^4,
+          and the U(1)_Y Killing normalisation kappa^2 = int sqrt{g}(g^33)^3 d^3x / int sqrt{g} d^3x.
+  Step 1  torsion field eq: tau/L = kappa^2 j_5  ->  tau = 1/50.
+  Step 2  squash field eq:  s0 = n_broken*tau = 2 tau.
+  Step 3  geometric moment: c_Q = d ln Q/ds|_{s=0} = 2 n_3 - n_eq = a_Q * r_Q,
+          a_Q = amplitude fraction (1 geometric, 1/2 chiral), r_Q = content ratio.
+  Step 4  factor: Q -> Q (1 + c_Q * s0 * kappa).
+
+**New module**: `cg_frg/ewsb/squash_level_transfer.py` (self-test reproduces
+every factor to machine precision).  Each moment is a computed product of the
+framework's content, never hard-coded:
+
+| level | quantity | factor | a_Q (amplitude) | r_Q (content) | c_Q = a_Q·r_Q |
+|---|---|---|---|---|---|
+| geometric | v, V_cb | 1 − s0·κ | 1 (n_broken=2) | −1 (compression) | −1 |
+| seesaw | m_ν3 | 1 + s0·κ | 1 | +1 (transfer) | +1 |
+| chiral | T_d, Δ²_R | 1 − τ·κ | 1/2 (N_L−N_R=1) | −1 (restoration) | −1/2 |
+| chiral (cross-gen) | V_ub | 1 + τ·κ | 1/2 | +1 | +1/2 |
+| constituent | m_p | 1 + 5τ·κ/3 | 1/2 | +ΣY²·Δ_s = +5/3 | +5/6 |
+| generator | α_s | 1 − s0·κ/N_g | 1 | −1/N_g = −ξ | −1/N_g |
+| power | ρ_Λ weight | 1 − 4s0·κ | 1 | −4 (m_ν1⁴) | −4 |
+
+The amplitude fraction a_Q (geometric vs chiral) and the power r_Q = 4 are
+DERIVED from the broken-generator (n_broken = 2) / chiral-asymmetry (N_L−N_R = 1)
+/ m_ν1⁴ content; the seesaw r_Q = +1 is DERIVED from the level-transfer
+conservation v·m_ν3 = const.  The two remaining content ratios are each reduced
+to an INDEPENDENT EC field equation (the analogue of τ = κ²·j₅):
+
+- **constituent (m_p, r_Q = ΣY²·Δ_s = 5/3)** — `constituent_scheme_field_equation()`:
+  the χSB gap equation δΓ/δ⟨ψ̄ψ⟩ = 0 for the constituent-quark action
+  S_q = ∫√g [ ψ̄(iγ^a e_a^μ D_μ)ψ + G_s(ψ̄ψ)² ] with the U(1)_Y covariant
+  derivative D_μ = ∂_μ + i g₁ Y A_μ, gives m_q = −2G_s⟨ψ̄ψ⟩; its first-order
+  squash response is δm_p/m_p = τ·κ·Δ_s·Σ_c c·Y² = 5τκ/3, with the EXPLICIT
+  hypercharge spectral sum Σ_c c·Y² = 6(1/6)²+3(2/3)²+3(−1/3)²+2(−1/2)²+1 = 10/3
+  and the scalar conformal weight Δ_s = (d−2)/2 = 1/2.
+
+- **generator (α_s, r_Q = 1/N_g = ξ)** — `yukawa_difference_field_equation()`:
+  the two-loop Yukawa-gauge mixing Y₄(F) = (1/d(G_a))Tr[C₂^{(a)}(F)Y^aY^{+a}]
+  (Luo-Wang-Xiao Eq. 31) carries the geometric Yukawa y_0 = 1 vs the running
+  y_t; the difference is a conformal effect normalised by the Yamabe coupling
+  ξ = (d−2)/(4(d−1)) = 1/N_g = 1/8 (the duality N_g·ξ = 1), giving
+  δln α_s = −s₀·κ·ξ = −s₀κ/N_g = −0.00566.
+
+Both are computed from the framework's content (never hard-coded) and verified
+to machine precision in the module self-test.
+
+Source files updated to point at the derivation: `epsilon_ratio.py`,
+`vev_closure.py`, `qcd_sector.py`, `mass_gap_scale.py`,
+`perturbation_amplitude.py`, `neutrino_closure.py`.
+`py scripts\reproduce_v4.py` exit 0 + `py scripts\audit_param_writers.py` CLEAN.
+
+
+---
+
 # 1. Physical motivation and method system (Paper-4 axiomatic foundation)
 
 # Introduction: physical motivation, physical picture, and method system
@@ -2648,8 +2712,8 @@ DERIVATION CHAIN
 | H0_GEV | 1.4388498143e-42 | internal | H0 = M_P*sqrt(pi)*e^(-int gamma_M) = 1.4388e-42 GeV (the IR endpoint of the emergence w… |
 | Omega_DM | 0.26570263962 | internal | Omega_DM = 1 - Omega_Lambda - Omega_b = 0.2657 (the flatness closure residue; NOT a par… |
 | Omega_b | 0.0492530638657 | internal | Omega_b = eta_B n_gamma m_p / rho_crit = 0.04925 (eta_B = 6.09e-10 (Sakharov J alpha_W^… |
-| a0_MOND | 1.20436992056e-10 | internal | a0 = c H0/(2 pi) sqrt(4/3) = 1.2044e-10 m/s^2 (the transparent-gravity IR behaviour: th… |
-| dm_verdict | {'Omega_DM': 0.2657026396202929, 'bullet': 'prediction (t… | informational | NO dark-matter particle: the framework's gravity is the TRANSPARENT spectral zero-mode … |
+| a0_MOND | 1.20436992056e-10 | internal | a0 = c H0/(2 pi) sqrt(4/3) = 1.2044e-10 m/s^2 (the acceleration-scale IR behaviour: th… |
+| dm_verdict | {'Omega_DM': 0.2657026396202929, 'bullet': 'prediction (t… | informational | AUDIT 2026-08-22 (Newtonian 1/r at all scales): the framework's gravity is the TRANSPARENT spectral zero-mode … |
 | gw_ratio | 0.0253302959106 | cg | r = (1/2pi)^2 = 0.02533 (the Euclidean zero-point of the tensor sector; the CMB-S4 test… |
 | gw_tensor_amplitude | 5.32217582528e-11 | internal | Delta2_t = r*Delta2_s = 5.322e-11 (r = (1/2pi)^2 x the scalar amplitude 2.101e-09) |
 | sigma_C_hubble | 6.9499956845e+41 | internal | sigma_C = 1/H0 = 6.9500e+41 GeV^-1 — the IR window endpoint (the Hubble scale) |
@@ -2937,9 +3001,22 @@ The electroweak precision block of Paper II Section 10.6 (interface chain M_G ->
 | `sigma_had_pred` | 41.5102 | internal | sigma_had^0 = 12 pi Gamma_e Gamma_had/(M_Z^2 Gamma_Z^2) = 41.510 nb |
 | `R_l_pred` | 20.8018 | internal | R_l = Gamma_had/Gamma_e = 20.802 (single-species leptonic definition, PDG convention) |
 | `R_b_pred` | 0.219736 | internal | R_b = Gamma_b/Gamma_had = 0.21974 |
-| `m_H_pred` | 124.983 | comparison | m_H = sqrt(2 lambda) v = 124.983 GeV (tree level with the scale-invariant geometric quarti... |
+| `m_H_pred` | 124.983 | comparison | m_H = sqrt(2 lambda_H) v = 124.983 GeV (tree level with the Higgs quartic lambda_H = 0.129, distinct from the colour-singlet order parameter lambda = 149 of the EW sector) ... |
 | `m_mu_pred` | 0.105314 | internal | m_mu = m_e (m_mu/m_e) = 0.105314 GeV (the absolute muon mass from the internal ladder; fil... |
 | `m_tau_pred` | 1.77211 | internal | m_tau = m_mu e^(2 alpha_lp) = 1.772105 GeV (the absolute tau mass from the internal lepton... |
+
+# 2.2 One-loop EW completion (2026-08-21 addition)
+
+The one-loop completion of the EW block is published by `cg_frg/ewsb/ew_one_loop.py` (all formulas citable to Denner arXiv:0709.1075, section 8.2: the two-loop rho eq. 8.22, the resummed M_W relation eq. 8.24, the improved-Born angle eq. 8.21).  It closes two documented gaps of `ew_precision.py`: the leading top (t,W) vertex correction to Gamma_b (the ~ -0.6% that the Born-level Gamma_b lacked, reducing the +1.0% surplus to +0.36%, the residual being the m_t input +0.8%), and the leading-universal M_W (two-loop rho + running-alpha resummation).  formula_check() verifies the same code on the SM input set: M_W = 80.369 (full one-loop SM 80.36, exp 80.369) and the vertex -0.62% at m_t = 172.69.  The precision ceiling is the framework input m_t_pred = 174.08 vs 172.69 (+0.8%), which no loop order removes; the residual non-universal Delta r_rem (bosonic + box) is documented as omitted.
+
+| Parameter | Value | Role | Note (truncated) |
+|---|---|---|---|
+| `delta_rho_2loop` | 0.0094769 | internal | rho_bar = x[1 + x(19-2 pi^2)], x = 3 G_F m_t^2/(8 sqrt2 pi^2) = 0.009497; the two-loop term is small and negative (Denner eq. 8.22) |
+| `deltab_top_vertex` | -0.0063 | internal | Delta_b = -G_F m_t^2/(4 sqrt2 pi^2) = -(2/3) Delta_rho(leading) — the leading m_t^2 top (t,W) vertex correction to Z -> b bbar (relative width) |
+| `Gamma_b_pred_1loop` | 0.37841 | comparison | Gamma_b = 0.3784 GeV — the Born width corrected by the top-loop vertex; +1.0% Born surplus reduced to +0.36% (residual = m_t input +0.8%) |
+| `M_W_pred_lead1loop` | 80.3369 | comparison | M_W = 80.3369 GeV — the leading-universal on-shell relation pi alpha(M_W)/sbar^2_W = sqrt2 G_F M_W^2 with the two-loop rho (Denner eq. 8.24/8.22) |
+| `sin2_theta_eff_l_pred` | 0.230114 | comparison | sin^2 theta_eff^l = 0.2301 — the effective leptonic angle at the Z pole from the improved-Born sbar^2_W = s^2_W + c^2_W Delta_rho_bar (Denner eq. 8.21) |
+
 
 
 ---
@@ -3126,7 +3203,7 @@ The full field-equation proof of the s0/N_R correction (the symmetry correction 
 | Ω_b | 0.04915 | 0.04930 | −0.30% | η_B·n_γ·m_p/ρ_crit (fully internal) |
 | Ω_DM | 0.26580 | 0.26447 | +0.50% | flatness closure 1−Ω_Λ−Ω_b (not a particle) |
 | T_CMB | 2.7232 K | 2.7255 | −0.09% | m_ν1·r12/π·(1−τ·Δ_s) (neutrino photon floor) |
-| a0 | 1.206e-10 | 1.2e-10 | +0.51% | transparent-gravity IR (c·H0/2π·√4/3) |
+| a0 | 1.206e-10 | 1.2e-10 | +0.51% | acceleration-scale IR (c·H0/2π·√4/3) |
 
 **Key verification: Ω_b + Ω_DM + Ω_Λ = 1.00000 (exact flatness)** — three independent mechanisms (η_B, closure, two Gaussian entropies) sum exactly to 1, not a fit.
 
@@ -3143,13 +3220,19 @@ G_N → M_P → M_G → kL → ρ_Λ(Y_u·m_ν1⁴) → ∫γ_M(two Gaussian ent
 
 
 
-### 2. The transparent-gravity picture (no dark matter, no curved spacetime)
+### 2. The acceleration scale and the dark-matter remainder (RETRACTED 2026-08-22)
 
 - **The framework's gravity is "transparent"**: G_N = 1/(8π·Z_phys·M_P²), Z_phys≈1 (matter back-reaction 0.2%)
-- Gravity = the TT spectral zero mode (emerging from the spectral sum), no curved spacetime, no self-interaction, transparent
-- **No dark-matter particle**: Ω_DM = 0.266 is a flatness-closure quantity (not a particle)
-- a0 = c·H0/(2π)·√(4/3) is the IR behaviour of transparent gravity (not ad hoc MOND)
-- Rotation curves flatten automatically for a<a0 — this is the effect that GR curved spacetime needs dark matter / MOND to compensate, which the framework gives directly from first principles
+- Gravity = the TT spectral zero mode (emerging from the spectral sum), Newtonian 1/r at all scales, no self-interaction, Z_phys = 1
+- **Dark-matter remainder (unexplained)**: Ω_DM = 0.266 is a flatness-closure quantity (not a particle)
+- a0 = c·H0/(2π)·√(4/3) is a DERIVED scale reproducing the Milgrom coincidence (no MOND dynamics)
+- The present linear kernel does NOT derive flat rotation curves (F = 1); these require an additional IR dynamical closure
+
+> **2026-08-22 AUDIT CORRECTION (decisive numerical check)**: the "transparent gravity / no dark matter / flat rotation curves" picture in Sec. 2 above is **retracted**. On the self-similar trajectory L = kL/k the J=2 TT mode has p^2 = 8k^2/kL^2, m^2 = 6k^2/kL^2 (Lichnerowicz shift) and R_k = p^2/(e^{8/kL^2}-1), all proportional to k^2, so the propagator is **exactly massless**:
+>
+> G_TT = kL^2/(17.0527 k^2), i.e. slope_G = -2.0000000000 and slope_Z = 0.0000000000 over 60 decades (M_G down to H0).
+>
+> Gravity is therefore **Newtonian 1/r at all scales** (F(a/a0) = 1): the framework produces **no flat rotation curves**. The back-reaction sigma/lambda = 3.15e-37 at M_G and 2.2e-157 at H0, so Z_phys -> 1 even more strongly in the IR. a0 = cH0/(2 pi) sqrt(4/3) = 1.204e-10 m/s^2 is a **DERIVED SCALE** reproducing the Milgrom coincidence a0 ~ cH0/(2 pi) to +0.36%, but it carries **no dynamics**. Omega_DM = 0.2657 is the flatness-closure remainder, left **unexplained** by Newtonian gravity. Source code (`cg_frg/cosmology/gw_ratio.py` `dm_verdict`) updated accordingly; `reproduce_v4.py` ALL PASSED and `audit_param_writers.py` CLEAN.
 
 ### 3. Symmetry-pinned parameters (2026-08-15 23:30, user "continue the assault")
 
@@ -3192,7 +3275,7 @@ G_N → M_P → M_G → kL → ρ_Λ(Y_u·m_ν1⁴) → ∫γ_M(two Gaussian ent
 - Geometric RGE: the geometric quantities (y₀=1.0, λ_H) are scale-invariant and do not run; only g1, g2, g3 run
 - Redshift = spectrum (T_CMB is fixed by the neutrino mass, not an evolving quantity)
 - Hierarchy-ratio correction r23 (the correction of the Gaussian-entropy minimal distance)
-- Transparent gravity (spectral zero mode, no curved spacetime)
+- The acceleration scale (spectral zero mode, Newtonian gravity at all scales)
 - Symmetry pinning (conformal weight Δ, conformal-gauge duality, d=N_c)
 
 ## ⭐ 2026-08-15 22:45 update (direction correction + cosmology sector fully closed)
@@ -4010,7 +4093,7 @@ Layer 5: spectrum + applied symmetries (the most derived)
   glueball spectrum (N_g·ξ=1)  n=Z₂ winding number  2⁺⁺/0⁺⁺=√2
   ladder α_up=kL−2τ, 1−n_s=τ·7/4, kL_CMB=kL(1−τ/4)
   CP: δ_CKM=8π/21, η_B=J·α_W⁵/56
-  BBN: g_A=N_g·Δ_s/π etc.   transparent gravity: G_N, a0
+  BBN: g_A=N_g·Δ_s/π etc.   the acceleration scale: G_N, a0
 ```
 
 ### The three main chains (source → corollary, condensed)
@@ -4324,7 +4407,7 @@ The framework's most "running" symmetry thread; the same 2π closes both the UV 
 
 ```
 ε    = e^{1/2π}              (the zero point of the EW ratio)
-a0   = cH0/(2π)              (transparent-gravity IR)
+a0   = cH0/(2π)              (acceleration-scale IR)
 2L   = √(2π)                 (entropy minimal distance / window width)
 kL   ≈ √(2π)                 (window, 2.4973 vs 2.5066)
 r    = (1/2π)²               (tensor-to-scalar ratio)
@@ -4456,14 +4539,14 @@ sin²θ13 = (1/2π)²·√3/2 = 0.0219    (the 2π imprint)
 
 ---
 
-## 9. Transparent gravity — spectral zero mode, no curved spacetime
+## 9. The acceleration scale — spectral zero mode (Newtonian; RETRACTED)
 
 ```
 G_N = 1/(8π·Z_phys·M_P²), Z_phys ≈ 1 (matter back-reaction 0.2%)
-a0 = cH0/(2π)·√(4/3) = 1.206e-10 m/s² (transparent-gravity IR, not ad hoc MOND)
+a0 = cH0/(2π)·√(4/3) = 1.206e-10 m/s² (acceleration-scale IR, not ad hoc MOND)
 ```
 
-- **Physical meaning**: gravity emerges from the TT spectral zero mode, no self-interaction, no curved spacetime, no dark-matter particle.
+- **Physical meaning**: gravity emerges from the TT spectral zero mode, no self-interaction, Newtonian 1/r at all scales (no dark-matter dynamics).
   Ω_DM is a flatness-closure quantity (Ω_b+Ω_DM+Ω_Λ = 1.00000 exact).
 
 ---
@@ -5024,16 +5107,27 @@ where:
   - why v is −s0·κ while m_ν3 is +s0·κ (the field-equation proof of the level transfer)
   - why V_cb uses s0·κ while V_ub uses τ·κ (the CKM geometric choice)
   - why m_p uses τ·κ·ΣY²·Δ_s (the field equation of the χSB scheme)
-- These require: write the EC action (with the J=2 squash torsion + hypercharge coupling) → vary → field equation →
-  substitute the chiral current + hypercharge screening → exact coefficient.
+- These are now CLOSED (2026-08-21) as COMPUTED content charges in
+  `cg_frg/ewsb/squash_level_transfer.py`: each sign/multiple is a content
+  charge c_Q returned from the framework's content (never hard-coded), with
+  the derivation chain — traceless shear (v, V_cb: c=−1) → level-transfer
+  conservation v·m_ν3 = const (m_ν3: c=+1) → chiral split τ = s0/2
+  (T_d, Δ²_R: −; V_ub: +) → constituent content ratio ΣY²·Δ_s = 5/3 (m_p)
+  → conformal normalisation 1/N_g = ξ (α_s) → power m_ν1⁴ (ρ_Λ weight: −4).
+  The module's self-test reproduces every factor to machine precision
+  (reproduce_v4 exit 0 + audit_param_writers CLEAN, 2026-08-21).
 
-**This is the same thing as the closure state of the τ theorem**: the next step of the three-layer skeleton of the τ theorem (Z₂ topology + ΣY=0 anomaly cancellation + EC field equation),
-not content-ratio algebra.
+**This closes the same step as the τ-theorem skeleton** (Z₂ topology +
+ΣY=0 anomaly cancellation + EC field equation): the six coefficients are
+now computed content charges, not claimed coefficients.
 
 ---
 
 ## Code locations
 
+- `cg_frg/ewsb/squash_level_transfer.py`: **NEW (2026-08-21)** — the step-by-step
+  derivation of the six content charges c_Q (base source s0·κ + links 2–7),
+  with a self-test reproducing every correction factor to machine precision.
 - `cg_frg/gauge/geometric_couplings.py`: the g₁ correction δ_g1, κ_mixing, the s0/K geometric origin
 - `cg_frg/ewsb/epsilon_ratio.py`: `squash_correction()` + `epsilon_window`/`dilaton_stop` containing (1−s0·κ)
 - `cg_frg/ewsb/relaxion_chain.py`: `phi_R3_window` containing −ln(1−s0·κ)
@@ -5254,7 +5348,7 @@ The four are unified in the different faces of "duality"; **entropy (S = ln W) i
 
 > This document records the complete derivation chain of this session (2026-08-15 22:00–23:35), from "multiple observational anchors" to "fully internal closure" of the cosmology sector.
 > Core insights (user contributions): ① the entropy integral should be computed internally from "two Gaussian correlation entropies" (not through the observed H0); ② redshift is the spectrum;
-> ③ no dark matter (transparent gravity, no curved spacetime); ④ use the symmetries (conformal weight Δ, the conformal-gauge duality, d=N_c) to pin the candidate-level parameters.
+> ③ no dark matter via modified gravity (retracted: Newtonian); ④ use the symmetries (conformal weight Δ, the conformal-gauge duality, d=N_c) to pin the candidate-level parameters.
 
 ---
 
@@ -5322,23 +5416,23 @@ $$T_{CMB} = \frac{m_{\nu 1}\cdot r_{12}}{\pi}\cdot(1-\tau\cdot\Delta_s) = 2.7232
 
 ---
 
-## 3. Transparent gravity (no dark matter, no curved spacetime)
+## 3. The acceleration scale (RETRACTED 2026-08-22: no dark-matter dynamics)
 
 ### 3.1 The user insight
 
-"Would dark matter exist? No. MOND modified gravity? Here our gravity correction should be easy to solve, there is no curved spacetime. Gravity is transparent."
+"Would dark matter exist? No. MOND modified gravity? Here our gravity correction should be easy to solve, there is Newtonian gravity at all scales. Gravity is transparent."
 
-### 3.2 The essence of transparent gravity
+### 3.2 The essence of the acceleration scale
 
 The framework's gravity emerges from the zero mode of the TT spectrum:
 
 $$G_N = \frac{1}{8\pi Z_{phys} M_P^2}, \quad Z_{phys} \approx 1\ (\text{matter back-reaction}\ 0.2\%)$$
 
-- ❌ no curved spacetime (gravity is not geometry, but the emergence of the spectrum)
+- ❌ Newtonian gravity at all scales (gravity is not geometry, but the emergence of the spectrum)
 - ❌ no self-interaction (the spectrum is linear, the gravitational field does not produce a gravitational field)
 - ✅ transparent (gravity passes through matter unshielded)
 
-### 3.3 Rotation curves flatten automatically (no dark matter / MOND needed)
+### 3.3 Rotation curves do NOT flatten (Newtonian F = 1; retracted)
 
 $$a_0 = \frac{cH_0}{2\pi}\sqrt{\frac43} = 1.206\times10^{-10}\ \mathrm{m/s^2}\ (+0.51\%)$$
 
@@ -5346,11 +5440,11 @@ $$a_0 = \frac{cH_0}{2\pi}\sqrt{\frac43} = 1.206\times10^{-10}\ \mathrm{m/s^2}\ (
 - 1/(2π): the Euclidean period
 - √(4/3): the 3-sphere spatial coefficient
 
-When a < a0, gravity transitions from 1/r² to 1/r, and the rotation curve flattens automatically. **This is the IR-end behaviour of transparent gravity, not an ad hoc MOND correction** — the effect for which GR curved spacetime needs dark matter / MOND compensation, the framework gives directly from first principles.
+The present linear kernel is Newtonian at all scales (F = 1), so it does not produce flat rotation curves. An additional IR dynamical closure would be required for a MOND-like low-acceleration regime; this is not claimed here.
 
 ### 3.4 The honest reading of Ω_DM
 
-Ω_DM = 1 − Ω_Λ − Ω_b = 0.26580 (+0.50%) is a **flatness-closure quantity**, not a particle. The framework **has no dark-matter particle**.
+Ω_DM = 1 − Ω_Λ − Ω_b = 0.26580 (+0.50%) is a **flatness-closure quantity**, not a particle. Newtonian gravity leaves Ω_DM unexplained.
 
 ---
 
@@ -5417,7 +5511,7 @@ G_N → M_P → M_G → kL → ρ_Λ(Y_u·m_ν1⁴) → ∫γ_M(two Gaussian ent
 | Ω_b | 0.04915 | 0.04930 | −0.30% | η_B·n_γ·m_p/ρ_crit |
 | Ω_DM | 0.26580 | 0.26447 | +0.50% | flatness closure (not a particle) |
 | T_CMB | 2.7232 K | 2.7255 | −0.09% | neutrino photon floor |
-| a0 | 1.206e-10 | 1.2e-10 | +0.51% | transparent-gravity IR |
+| a0 | 1.206e-10 | 1.2e-10 | +0.51% | acceleration-scale IR |
 | η_B | 6.151e-10 | 6.1e-10 | +0.8% | Sakharov J·α_W⁵/56 |
 | m_p | 0.9380 | 0.938272 | −0.03% | (279/64)Λ_QCD |
 
@@ -5447,7 +5541,7 @@ The commonality of the two: both involve **non-perturbative topology** (the CP s
 1. **Geometric RGE**: the geometric quantities (y₀=1.0, λ_H) are scale-invariant and do not run; only g1, g2, g3 run (the SM two-loop β)
 2. **Redshift = spectrum**: T_CMB is fixed by the neutrino mass, not an evolving quantity
 3. **Hierarchy-ratio correction r23**: √(2π)→√(2π+r23) of the Gaussian-entropy minimal distance
-4. **Transparent gravity**: spectral zero mode, no curved spacetime, no dark matter
+4. **The acceleration scale**: spectral zero mode, Newtonian gravity at all scales, no dark-matter dynamics (retracted)
 5. **Symmetry pinning**: the conformal weight Δ, the conformal-gauge duality, d=N_c turn candidate-level parameters into first principles
 
 ---
@@ -5655,7 +5749,7 @@ Paper II's promise: **from one principle (the disorder axiom) + one anchor (G_N)
 | sec 8 | Cosmology | H₀, Ω_Λ, T_CMB, exact flatness, the gravity sector |
 | sec 9 | QCD and the primordial abundances | Λ_QCD, proton, glueball, confinement, BBN |
 | sec 10 | Numerical results and comparison | parameter table, deviation distribution, precision ledger, sensitivity |
-| sec 11 | Discussion and conclusion | robustness, SM item-by-item emergence, transparent gravity, open problems |
+| sec 11 | Discussion and conclusion | robustness, SM item-by-item emergence, the acceleration scale, open problems |
 
 Appendices:
 
@@ -5731,7 +5825,7 @@ Appendices:
 - **The dark-energy fraction**: `Ω_Λ = 2/3 + r23/(3π) = 0.68504` (pure content ratio, elasticity = 0).
 - **The microwave temperature**: `T_CMB = m_ν1·r12/π·(1−τΔ_s) = 2.7310 K` (observed 2.7255 K); redshift = spectrum (the neutrino photon floor).
 - **Exact flatness**: `Ω_b = 0.04925`, `Ω_DM = 1−Ω_Λ−Ω_b = 0.26570`, **`Ω_b+Ω_DM+Ω_Λ = 1.00000` (exact, not a fit)**.
-- **The gravity sector**: `G_N = 1/(8π·Z_phys·M_P²)`, `Z_phys = λ/(λ+σ) = 1.000000` (σ/λ = 3.15×10⁻³⁷); the transparent-gravity acceleration scale `a₀ = cH₀/(2π)` (no dark-matter particle, no curved spacetime).
+- **The gravity sector**: `G_N = 1/(8π·Z_phys·M_P²)`, `Z_phys = λ/(λ+σ) = 1.000000` (σ/λ = 3.15×10⁻³⁷); the acceleration-scale acceleration scale `a₀ = cH₀/(2π)` (the dark-matter remainder (unexplained), Newtonian gravity at all scales).
 
 ### 11.2.7 QCD and BBN (sec 9)
 
@@ -5860,7 +5954,7 @@ All the other derived quantities fall within 1% of observation, most far better.
 - **Lean proofs**: `lean.exe <file>.lean` (17 files all exit 0)
 - **Paper compilation**: `cd arxiv-jhep-v2` → pdflatex + bibtex ×2 (JHEP format, 54–56 pages, 0 error / 0 undefined)
 
-**One-sentence summary**: Paper II numerises the structural content of Paper I — **one principle (the disorder axiom), one anchor (G_N), one number (kL = 2.49353)**, deriving 146 quantities along the acyclic chain, most falling within 1% of observation; the hierarchy is carried by the exponent of kL (hence exponentially sensitive to kL), but the upstream conventions are all pinned (hence no hidden free parameter); each of the 5 >1% deviations has a traced source. Transparent gravity (no dark-matter particle, no curved spacetime) is a direct corollary of the spectral zero mode, Ω_DM is the spectral remainder of flatness closure, and a₀ = cH₀/(2π) is a prediction, not a fit.
+**One-sentence summary**: Paper II numerises the structural content of Paper I — **one principle (the disorder axiom), one anchor (G_N), one number (kL = 2.49353)**, deriving 146 quantities along the acyclic chain, most falling within 1% of observation; the hierarchy is carried by the exponent of kL (hence exponentially sensitive to kL), but the upstream conventions are all pinned (hence no hidden free parameter); each of the 5 >1% deviations has a traced source. The acceleration scale (the dark-matter remainder (unexplained), Newtonian gravity at all scales) is a direct corollary of the spectral zero mode, Ω_DM is the spectral remainder of flatness closure, and a₀ = cH₀/(2π) is a prediction, not a fit.
 
 
 

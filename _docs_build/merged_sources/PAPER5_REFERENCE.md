@@ -26,7 +26,7 @@ Paper II's promise: **from one principle (the disorder axiom) + one anchor (G_N)
 | sec 8 | Cosmology | H₀, Ω_Λ, T_CMB, exact flatness, the gravity sector |
 | sec 9 | QCD and the primordial abundances | Λ_QCD, proton, glueball, confinement, BBN |
 | sec 10 | Numerical results and comparison | parameter table, deviation distribution, precision ledger, sensitivity |
-| sec 11 | Discussion and conclusion | robustness, SM item-by-item emergence, transparent gravity, open problems |
+| sec 11 | Discussion and conclusion | robustness, SM item-by-item emergence, the acceleration scale, open problems |
 
 Appendices:
 
@@ -102,7 +102,7 @@ Appendices:
 - **The dark-energy fraction**: `Ω_Λ = 2/3 + r23/(3π) = 0.68504` (pure content ratio, elasticity = 0).
 - **The microwave temperature**: `T_CMB = m_ν1·r12/π·(1−τΔ_s) = 2.7310 K` (observed 2.7255 K); redshift = spectrum (the neutrino photon floor).
 - **Exact flatness**: `Ω_b = 0.04925`, `Ω_DM = 1−Ω_Λ−Ω_b = 0.26570`, **`Ω_b+Ω_DM+Ω_Λ = 1.00000` (exact, not a fit)**.
-- **The gravity sector**: `G_N = 1/(8π·Z_phys·M_P²)`, `Z_phys = λ/(λ+σ) = 1.000000` (σ/λ = 3.15×10⁻³⁷); the transparent-gravity acceleration scale `a₀ = cH₀/(2π)` (no dark-matter particle, no curved spacetime).
+- **The gravity sector**: `G_N = 1/(8π·Z_phys·M_P²)`, `Z_phys = λ/(λ+σ) = 1.000000` (σ/λ = 3.15×10⁻³⁷); the acceleration-scale acceleration scale `a₀ = cH₀/(2π)` (the dark-matter remainder (unexplained), Newtonian gravity at all scales).
 
 ### 11.2.7 QCD and BBN (sec 9)
 
@@ -231,4 +231,4 @@ All the other derived quantities fall within 1% of observation, most far better.
 - **Lean proofs**: `lean.exe <file>.lean` (17 files all exit 0)
 - **Paper compilation**: `cd arxiv-jhep-v2` → pdflatex + bibtex ×2 (JHEP format, 54–56 pages, 0 error / 0 undefined)
 
-**One-sentence summary**: Paper II numerises the structural content of Paper I — **one principle (the disorder axiom), one anchor (G_N), one number (kL = 2.49353)**, deriving 146 quantities along the acyclic chain, most falling within 1% of observation; the hierarchy is carried by the exponent of kL (hence exponentially sensitive to kL), but the upstream conventions are all pinned (hence no hidden free parameter); each of the 5 >1% deviations has a traced source. Transparent gravity (no dark-matter particle, no curved spacetime) is a direct corollary of the spectral zero mode, Ω_DM is the spectral remainder of flatness closure, and a₀ = cH₀/(2π) is a prediction, not a fit.
+**One-sentence summary**: Paper II numerises the structural content of Paper I — **one principle (the disorder axiom), one anchor (G_N), one number (kL = 2.49353)**, deriving 146 quantities along the acyclic chain, most falling within 1% of observation; the hierarchy is carried by the exponent of kL (hence exponentially sensitive to kL), but the upstream conventions are all pinned (hence no hidden free parameter); each of the 5 >1% deviations has a traced source. The acceleration scale (the dark-matter remainder (unexplained), Newtonian gravity at all scales) is a direct corollary of the spectral zero mode, Ω_DM is the spectral remainder of flatness closure, and a₀ = cH₀/(2π) is a prediction, not a fit.

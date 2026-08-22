@@ -27,8 +27,8 @@ operator.
   · the (0,0) SCALAR channel (the torsion singlet T_abc γ^{abc} —
     the same-SO(4) diagonal overlap): the TOP base y_0 = 1.0
     (the (0,0) diagonal overlap is EXACTLY 1 by the SO(4)
-    Clebsch-Gordan normalisation).  m_t = y_0·v/√2 = 173.7 GeV
-    (+0.56%).
+    Clebsch-Gordan normalisation).  m_t = y_0·v/√2 = 174.08 GeV
+    (+0.80%).
 
   · the DOWN-SECTOR ABSOLUTE BASE (the closure): the bottom is the
     GEOMETRIC MEAN of the strange and the top, dressed by the

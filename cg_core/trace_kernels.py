@@ -33,16 +33,22 @@ integration.
 
 THE REGULATOR (the exponential window)
 --------------------------------------
-R_k(z) = k²/(e^{z/k²} − 1)
+R_k(z) = z/(e^{z/k²} − 1)
 
-This is the standard Wetterich regulator: it suppresses the modes
-with z ≲ k² (the coarse-graining window) and vanishes for z ≫ k².
-The scale derivative ∂_t R_k (t = ln k) is computed analytically.
+This is the exponential coarse-graining window: it suppresses the
+modes with z ≲ k² (the coarse-graining window) and vanishes for
+z ≫ k², with the regulator convention R(0) = k² (finite).  The
+scale derivative ∂_t R_k (t = ln k) is computed analytically.
 The small-y and large-y branches (y = z/k²) avoid cancellation
 errors:
     y → 0 : R_k → k² − z/2,   ∂_t R_k → 2k²(1 − y²/12)
     y ≫ 1 : R_k → 0,          ∂_t R_k → 0
 The denominator z + R_k + m² is the full regulated propagator mass.
+
+NOTE (2026-08-21): an earlier version of this docstring (and of
+cg_core/frg_regulator) claimed R_k(z) = k²/(e^{z/k²}−1); that form
+diverges as k⁴/z at z → 0 and is NOT the implemented window.  The
+implemented window is z/(e^{z/k²}−1), identical in both files.
 
 THE KERNEL AND THE WEIGHTS
 --------------------------

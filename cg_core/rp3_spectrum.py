@@ -99,7 +99,7 @@ V4 DISCIPLINE
 No physics value is hard-coded: the only input is the radius L
 (a function argument or a store read).  All computations are exact
 closed forms (no numerical integration).  The module self-tests at
-the framework's fixed point L = kL = 2.49732.
+the framework's fixed point L = kL = 2.4935343.
 """
 
 from __future__ import annotations
@@ -433,7 +433,7 @@ def heat_kernel(t: float, L: float, l_max: int = 200) -> dict:
 # Self-test at the framework's fixed point.
 # ---------------------------------------------------------------------------
 def _self_test() -> None:
-    kL = 2.497320997347988  # the γ_M = 0 fixed point (endpoint_constraint)
+    kL = 2.4935343325226915  # the γ_M = 0 fixed point (endpoint_constraint)
     L = kL
     assert abs(scalar_eigenvalue(0, L) - 0.0) < 1e-12  # the zero mode
     assert abs(scalar_eigenvalue(2, L) - 8.0 / L ** 2) < 1e-12

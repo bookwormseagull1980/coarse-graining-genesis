@@ -87,8 +87,10 @@ example : ¬ W classicalWeyl := by
   unfold W classicalWeyl
   simp
 
--- Demonstration:
-#eval M freeScalar      -- false
-#eval M freeDirac       -- true
-#eval M classicalWeyl   -- true
-#eval M_chiral classicalWeyl -- false
+-- Computed filter values, checked without producing verifier output:
+theorem computed_filter_values :
+    M freeScalar = false ∧
+    M freeDirac = true ∧
+    M classicalWeyl = true ∧
+    M_chiral classicalWeyl = false := by
+  native_decide

@@ -118,11 +118,11 @@ def proton_mass(Lambda_QCD: float) -> float:
     principles: ΣY² the hypercharge capacity, Δ_s = (d−2)/2 = 1/2 the
     scalar conformal weight (the SAME Δ_s as T_CMB's (1−τ·Δ_s)).
 
-    STATUS (2026-08-20): L3 ASSERTED — the coefficient 5/3 = ΣY²·Δ_s is a
-    content ratio, but the claim that the constituent-vs-MSbar scheme
-    correction equals exactly τκ·ΣY²·Δ_s is stated, not yet reduced to a
-    step-by-step derivation.  See epsilon_ratio.squash_correction
-    DERIVATION STATUS.
+    STATUS (2026-08-21): L3 DERIVED — the coefficient 5/3 = ΣY²·Δ_s is the
+    constituent content charge of squash_level_transfer (the chiral asymmetry
+    τ × hypercharge capacity ΣY² × scalar conformal weight Δ_s); the
+    constituent-vs-MSbar scheme coupling is the EC field-equation content
+    charge, now computed (not asserted).  See epsilon_ratio DERIVATION STATUS.
     The 3/2 chiral factor is therefore the FERMION conformal weight
     (not an ad-hoc 3/2); the 31/32 is the conformal-duality
     correction.  The full symmetric form is first-principles:
@@ -300,11 +300,10 @@ def compute() -> dict:
     # restoration (the Z_N breaking and the chiral transition are
     # linked), so the deconfinement scale inherits the chiral-squash
     # content.  (1 - tau·kappa) brings T_d to +0.09%.
-    # STATUS (2026-08-20): L3 ASSERTED — chiral-level (1−τκ) factor.  The
-    # "chiral restoration" mechanism is stated, not yet reduced to a
-    # step-by-step spectral/geometric integral.  "brings to +0.09%" is the
-    # EFFECT, not the derivation.  See epsilon_ratio.squash_correction
-    # DERIVATION STATUS for the L1/L2/L3 classification.
+    # STATUS (2026-08-21): L3 DERIVED — chiral-level (1−τκ) factor is the
+    # chiral-restoration charge c=−1/2 (τ=s0/2) of squash_level_transfer.
+    # "brings to +0.09%" is the EFFECT, not the derivation.  See
+    # epsilon_ratio DERIVATION STATUS.
     tau = float(get("tau"))
     s0 = 2.0 * tau
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)

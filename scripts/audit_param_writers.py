@@ -44,8 +44,17 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 REQUIRED = ("value", "provenance", "writer", "note")
 
 
-def audit_file(path: Path, label: str) -> list:
-    """Audit one store file; return the violation strings."""
+def audit_file(path: Path, label: str,
+               check_comparison_observed: bool = False) -> list:
+    """Audit one store file; return the violation strings.
+
+    check_comparison_observed: only meaningful for cg_params.json (the
+    framework's PREDICTION store): a record with role="comparison" must
+    carry an observed target (the 'observed' field or an 'observed'
+    mention in the note).  The SM table (sm_inputs.json) is skipped for
+    this check: its records ARE the observed values themselves (SM_INPUT
+    provenance, '_obs' keys) and need no further target.
+    """
     violations = []
     if not path.exists():
         return [f"{label}: file missing ({path})"]
@@ -61,19 +70,25 @@ def audit_file(path: Path, label: str) -> list:
         prov = rec.get("provenance", "")
         if prov == "DERIVED" and not rec.get("note"):
             violations.append(f"{label}/{key}: DERIVED without a note")
-        if rec.get("role") == "comparison" and "observed" not in rec \
-                and "observed" not in str(rec.get("note", "")):
+        if check_comparison_observed and \
+                rec.get("role") == "comparison" and \
+                "observed" not in rec and \
+                "observed" not in str(rec.get("note", "")):
             # The comparison role may be carried by the note (the
             # observed field); flag only if neither exists.
-            pass
+            violations.append(
+                f"{label}/{key}: comparison role without an observed "
+                f"target or an 'observed' note")
     return violations
 
 
 def main() -> int:
     violations = []
-    for fname, label in (("cg_params.json", "cg_params"),
-                         ("comparison/sm_inputs.json", "sm_inputs")):
-        violations += audit_file(_PROJECT_ROOT / fname, label)
+    for fname, label, chk in (("cg_params.json", "cg_params", True),
+                              ("comparison/sm_inputs.json", "sm_inputs",
+                               False)):
+        violations += audit_file(_PROJECT_ROOT / fname, label,
+                                 check_comparison_observed=chk)
 
     # The writer provenance: every DERIVED must name a module.
     if _PROJECT_ROOT.joinpath("cg_params.json").exists():

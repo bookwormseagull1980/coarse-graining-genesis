@@ -59,7 +59,7 @@ consolidates the discrete flow's four structural properties:
 
   PROPERTY 3 — THE WINDOW-CAPACITY STEP (the discrete ladder)
   ------------------------------------------------------------
-  The window capacity kL* = 2.4973 is CONSTANT along the flow
+  The window capacity kL* = 2.4935343 is CONSTANT along the flow
   (the scale-invariant trajectory M·L = const): the number of
   degrees of freedom per step is fixed — the flow is equidistant
   in log σ with the step Δlnσ = 1/kL* ≈ 0.40.  The discrete-
@@ -171,10 +171,11 @@ def compute() -> dict:
 
     # PROPERTY 2 — the analytic β:
     # The vacuum-energy profile V_eff(k) = −(C/2)(k^{−2} − M_P^{−2});
-    # the coefficient C < 0 is the flow's strength (fixed by the
-    # window's spectral density — trace_density).  The FORM is
-    # structural: β(σ) = −2Cσ^{−3}.
-    C = -1.0                      # the sign (C < 0 — the forward flow)
+    # the FORM β(σ) = −2Cσ^{−3} is structural (the semigroup flow).
+    # |C| is a NORMALISATION choice (|C| = 1): it is NOT derived from
+    # trace_density and does not enter any closed physical quantity —
+    # published as SCALE_CHOICE, not DERIVED.
+    C = -1.0                      # |C| = 1: convention (SCALE_CHOICE)
     beta_MG = beta_sigma(C, 1.0 / M_G)
 
     # PROPERTY 3 — the window-capacity step:
@@ -200,11 +201,13 @@ def compute() -> dict:
          note=f"the Gaussian window semigroup T_a*T_b = T_(sqrt(a^2+b^2)) "
               f"verified to {err:.1e} across the mode grid (the unitary, "
               f"irreversible partial-trace flow)")
-    pset("discrete_flow_beta", beta_MG, provenance="DERIVED", role="internal",
-         note=f"beta(sigma) = -2C sigma^-3 (C < 0) — the analytic "
-              f"closed-form flow of the vacuum-energy profile "
-              f"V_eff(k) = -(C/2)(k^-2 - M_P^-2); unique global solution "
-              f"(Picard-Lindelof)")
+    pset("discrete_flow_beta", beta_MG, provenance="SCALE_CHOICE",
+         role="internal",
+         note=f"beta(sigma) = -2C sigma^-3 with |C| = 1 a NORMALISATION "
+              f"choice (SCALE_CHOICE, not DERIVED): the FORM is the "
+              f"analytic closed-form flow of the vacuum-energy profile "
+              f"V_eff(k) = -(C/2)(k^-2 - M_P^-2) (unique global solution, "
+              f"Picard-Lindelof); the strength enters no closed quantity")
     pset("discrete_flow_step", dln_sigma, provenance="DERIVED", role="cg",
          note=f"Delta ln sigma = 1/kL* = {dln_sigma:.4f} — the "
               f"window-capacity step (the flow is equidistant in log "

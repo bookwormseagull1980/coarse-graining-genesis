@@ -34,15 +34,15 @@ RUNG 1 — the up-sector index (the window width minus the
          non-adiabatic torsion correction):
 
     α_up = kL − 2τ
-         = 2.49732 − 0.04 = 2.45732
-    (kL = 2.4973 — the self-consistent F_MG fixed point;
+         = 2.4935343 − 0.04 = 2.453534
+    (kL = 2.4935343 — the self-consistent F_MG fixed point;
      2τ — the EC torsion's non-adiabatic correction; the LZ
      index is NOT kL: kL − α_up = 2τ exactly).
 
 RUNG 2 — the sector step (the so(4)-isometry × the tilt × the
          CMB window):
 
-    Δ = 6·(1−n_s)·kL_CMB = 6 × 0.035 × 2.4848 = 0.52181
+    Δ = 6·(1−n_s)·kL_CMB = 6 × 0.035 × 2.4810667 = 0.52102
 
     · 6      — the so(4) isometry's 6 generators (the extrusion
                 coupling — the 4D rotation group);
@@ -50,7 +50,7 @@ RUNG 2 — the sector step (the so(4)-isometry × the tilt × the
                 the closed window-evolution rate);
     · kL_CMB — the CMB-scale window width (the SCALE_CHOICE
                 published by perturbation_amplitude; the
-                closed value 2.4848).
+                closed value 2.4810667).
 
 RUNG 3 — the 9/8 hypercharge identity (the exact algebra):
 
@@ -64,8 +64,8 @@ RUNG 4 — the ladder (the two sector steps split by 9/8, with
          the mean step = Δ):
 
     step_lep = s = 16Δ/17,   step_dn = (9/8)·s = 18Δ/17
-    α_dn = α_up − (18/17)·Δ = 1.90482
-    α_lp = α_up − 2Δ         = 1.41371
+    α_dn = α_up − (18/17)·Δ = 1.901862
+    α_lp = α_up − 2Δ         = 1.411486
 
     (α_lp = α_up − 2Δ is independent of the 9/8 split — the
     lepton rung spans two steps exactly; the 9/8 identity

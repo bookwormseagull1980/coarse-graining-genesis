@@ -116,7 +116,7 @@ def compute() -> dict:
     sigma_C = horizon_sigma(H0)         # the IR horizon anchor
     T_eff_MG = eff_temperature(M_G)     # the Euclidean temperature at M_G
     # The geometry L(k) = kL·σ(k)·k = kL·c = kL — the window capacity
-    # is CONSTANT on the self-similar trajectory (L_Gg = kL = 2.4973;
+    # is CONSTANT on the self-similar trajectory (L_Gg = kL = 2.4935343;
     # k·σ(k) = c, so L = kL·c = kL exactly).
     L_const = kL * 1.0                   # L(k) = kL·c with c = 1
 

@@ -89,7 +89,7 @@ def fig1_overview():
 
     # bottom: single dimensional anchor
     box(ax, 0.25, 1.0, 2.2, 1.2, "Single dimensional anchor\nG_N (observed, comparison only)\nM_P = 1/√(8πG_N)", GOLD, fs=9.5)
-    box(ax, 3.05, 1.0, 5.1, 1.2, "Fully internal closure (zero observational anchor, except G_N)\ngeometric RGE + redshift=spectrum + transparent gravity + symmetry pinning", GREEN, fs=9.5)
+    box(ax, 3.05, 1.0, 5.1, 1.2, "Fully internal closure (zero observational anchor, except G_N)\ngeometric RGE + redshift=spectrum + acceleration scale a0 + symmetry pinning", GREEN, fs=9.5)
     box(ax, 8.75, 1.0, 2.05, 1.2, "All closed\nEC field-equation\nvariation completed", RED, fs=9.5)
     arrow(ax, 2.45, 1.6, 3.05, 1.6)
     arrow(ax, 8.15, 1.6, 8.75, 1.6)
@@ -123,7 +123,7 @@ def fig2_dependency_tree():
             "s0/N_R=1/175", "κ²(2τ)", "conservation laws\ng_2/squash/ρ_Λ"]),
         ("Layer 5 · spectrum + applied symmetries (most derived)", GRAY, [
             "glueball spectrum\nn=Z_2 winding", "ladder\nα_up=kL−2τ", "CP δ_CKM=8π/21\nη_B=α_W^5/56",
-            "BBN g_A=4/π", "transparent gravity\nG_N, a0"]),
+            "BBN g_A=4/π", "acceleration scale a0\n(derived, no dynamics)"]),
     ]
 
     # layer coordinates: top to bottom, enough spacing (labels left, boxes right, no overlap)
@@ -250,7 +250,7 @@ def fig5_two_pi():
         (4.9, 4.7, "kL ≈ √(2π)\nwindow width", GREEN),
         (8.4, 4.4, "r = (1/2π)²\ntensor-to-scalar ratio", RED),
         (10.0, 3.2, "Δ²_0=(1/2)(1/2π)²\nscalar zero point", RED),
-        (0.5, 1.0, "a0 = cH0/(2π)\ntransparent-gravity IR", PURPLE),
+        (0.5, 1.0, "a0 = cH0/(2π)\nderived scale (no dynamics)", PURPLE),
         (2.6, 0.5, "g_A = 4/π\naxial coupling", BLUE),
         (6.4, 0.5, "σ=(λ_TT/π)Λ²\nstring tension", GOLD),
         (9.0, 1.0, "sin²θ13=(1/2π)²√3/2\n2π imprint", GRAY),
@@ -384,7 +384,7 @@ def fig9_cosmology():
 
     out = [
         ("T_CMB = m_ν1·r12/π·(1−τ·Δ_s)\nneutrino photon floor (redshift=spectrum)", BLUE),
-        ("a0 = cH0/(2π)·√(4/3)\ntransparent-gravity IR (not MOND)", PURPLE),
+        ("a0 = cH0/(2π)·√(4/3)\nderived Milgrom-coincidence scale", PURPLE),
         ("η_B = J·α_W^5/56\nSakharov baryogenesis", GREEN),
         ("m_p = (279/64)Λ_QCD\nconstituent quark", GOLD),
         ("Ω_b+Ω_DM+Ω_Λ = 1.00000\nexact flatness (not a fit)", RED),

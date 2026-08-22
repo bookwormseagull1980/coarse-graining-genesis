@@ -73,7 +73,7 @@ Layer 5: spectrum + applied symmetries (the most derived)
   glueball spectrum (N_g·ξ=1)  n=Z₂ winding number  2⁺⁺/0⁺⁺=√2
   ladder α_up=kL−2τ, 1−n_s=τ·7/4, kL_CMB=kL(1−τ/4)
   CP: δ_CKM=8π/21, η_B=J·α_W⁵/56
-  BBN: g_A=N_g·Δ_s/π etc.   transparent gravity: G_N, a0
+  BBN: g_A=N_g·Δ_s/π etc.   the acceleration scale: G_N, a0
 ```
 
 ### The three main chains (source → corollary, condensed)
@@ -387,7 +387,7 @@ The framework's most "running" symmetry thread; the same 2π closes both the UV 
 
 ```
 ε    = e^{1/2π}              (the zero point of the EW ratio)
-a0   = cH0/(2π)              (transparent-gravity IR)
+a0   = cH0/(2π)              (acceleration-scale IR)
 2L   = √(2π)                 (entropy minimal distance / window width)
 kL   ≈ √(2π)                 (window, 2.4973 vs 2.5066)
 r    = (1/2π)²               (tensor-to-scalar ratio)
@@ -519,14 +519,14 @@ sin²θ13 = (1/2π)²·√3/2 = 0.0219    (the 2π imprint)
 
 ---
 
-## 9. Transparent gravity — spectral zero mode, no curved spacetime
+## 9. The acceleration scale — spectral zero mode (Newtonian; RETRACTED)
 
 ```
 G_N = 1/(8π·Z_phys·M_P²), Z_phys ≈ 1 (matter back-reaction 0.2%)
-a0 = cH0/(2π)·√(4/3) = 1.206e-10 m/s² (transparent-gravity IR, not ad hoc MOND)
+a0 = cH0/(2π)·√(4/3) = 1.206e-10 m/s² (acceleration-scale IR, not ad hoc MOND)
 ```
 
-- **Physical meaning**: gravity emerges from the TT spectral zero mode, no self-interaction, no curved spacetime, no dark-matter particle.
+- **Physical meaning**: gravity emerges from the TT spectral zero mode, no self-interaction, Newtonian 1/r at all scales (no dark-matter dynamics).
   Ω_DM is a flatness-closure quantity (Ω_b+Ω_DM+Ω_Λ = 1.00000 exact).
 
 ---

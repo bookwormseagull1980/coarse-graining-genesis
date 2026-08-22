@@ -1,5 +1,6 @@
 # Python
 __pycache__/
+.pytest_cache/
 *.py[cod]
 *$py.class
 *.egg-info/
@@ -9,6 +10,8 @@ dist/
 .venv/
 venv/
 env/
+.coverage
+htmlcov/
 
 # Backup files
 *.bak_*

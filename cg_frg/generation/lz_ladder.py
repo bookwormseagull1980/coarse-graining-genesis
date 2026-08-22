@@ -28,18 +28,18 @@ exponentially,
     m_i ∝ e^{−α·n_i},   n = {0, 2, 4},
 
 with the sector index α fixed by the internal ladder (sector_alpha):
-    α_up = kL − 2τ = 2.4573  (the window width minus the torsion),
-    m_t/m_c = e^{2α_up} = 135.9,
-    m_c/m_u = e^{2kL_cmb + ln 4} = 575.9  (the CMB-window LZ of the
+    α_up = kL − 2τ = 2.453534  (the window width minus the torsion),
+    m_t/m_c = e^{2α_up} = 135.2,
+    m_c/m_u = e^{2kL_cmb + ln 4} = 571.6  (the CMB-window LZ of the
               first-gen step, times the n = 4 → 2 label factor),
-    m_t/m_u = 78267.
+    m_t/m_u = 77304.
 
 The sector ladder (the down and lepton sectors) uses the step
-Δ = 6(1−n_s)·kL_CMB = 0.5218 with the 9/8 hypercharge identity
+Δ = 6(1−n_s)·kL_CMB = 0.52102 with the 9/8 hypercharge identity
 (1/8 of the lepton step carries the down step):
 
-    α_dn = α_up − (18/17)·Δ = 1.9048  (m_b/m_s = e^{2α_dn} = 45.1),
-    α_lp = α_up − 2Δ = 1.4110         (m_τ/m_μ = e^{2α_lp} = 16.8).
+    α_dn = α_up − (18/17)·Δ = 1.901862  (m_b/m_s = e^{2α_dn} = 44.87),
+    α_lp = α_up − 2Δ = 1.411486       (m_τ/m_μ = e^{2α_lp} = 16.8).
 
 The indices are the internal ladder (sector_alpha — no observed
 calibration).  The absolute masses are anchored internally

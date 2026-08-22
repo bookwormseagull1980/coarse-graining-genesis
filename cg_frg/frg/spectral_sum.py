@@ -332,7 +332,10 @@ def channel_tmunu_spin2(L: float, cutoff: float, tau: float,
     pi0, bd = _discrete_pi0(_kernel_tmunu_spin2, _w_tmunu_spin2,
                             L, cutoff, tau, scheme)
     return {
-        "channel": "Tmunu (spin-2)", "rp3_pi0": pi0, "flat_pi0": 0.0,
+        "channel": "Tmunu (spin-2)", "rp3_pi0": pi0,
+        "flat_pi0": {"value": 0.0,
+                     "source": "classification assertion (paper 3-1), "
+                               "NOT computed"},
         "breakdown": bd,
         "sign": "POSITIVE" if pi0 > 0 else "NEGATIVE",
         "emergence": "POSSIBLE (Pi0>0 on RP3)" if pi0 > 0 else "IMPOSSIBLE",
@@ -350,7 +353,10 @@ def channel_tmunu_spin0(L: float, cutoff: float, tau: float,
     pi0, bd = _discrete_pi0(_kernel_tmunu_spin0, _w_tmunu_spin0,
                             L, cutoff, tau, scheme)
     return {
-        "channel": "Tmunu (spin-0)", "rp3_pi0": pi0, "flat_pi0": 0.0,
+        "channel": "Tmunu (spin-0)", "rp3_pi0": pi0,
+        "flat_pi0": {"value": 0.0,
+                     "source": "classification assertion (paper 3-1), "
+                               "NOT computed"},
         "breakdown": bd,
         "sign": "POSITIVE" if pi0 > 0 else "NEGATIVE",
         "emergence": "POSSIBLE (Pi0>0 on RP3)" if pi0 > 0 else "IMPOSSIBLE",
@@ -388,7 +394,10 @@ def channel_g2(L: float, cutoff: float, tau: float,
     """G²: the gluon-condensate channel (SU(3) gluons only)."""
     pi0, bd = _discrete_pi0(_kernel_g2, _w_g2, L, cutoff, tau, scheme)
     return {
-        "channel": "G2", "rp3_pi0": pi0, "flat_pi0": 0.0,
+        "channel": "G2", "rp3_pi0": pi0,
+        "flat_pi0": {"value": 0.0,
+                     "source": "classification assertion (paper 3-1), "
+                               "NOT computed"},
         "breakdown": bd,
         "sign": "POSITIVE" if pi0 > 0 else "NEGATIVE",
         "emergence": "POSSIBLE (Pi0>0 on RP3)" if pi0 > 0 else "IMPOSSIBLE",
@@ -400,7 +409,10 @@ def channel_jmu(L: float, cutoff: float, tau: float,
     """J^μ: the conserved-current channel (fermions only)."""
     pi0, bd = _discrete_pi0(_kernel_jmu, _w_jmu, L, cutoff, tau, scheme)
     return {
-        "channel": "Jmu", "rp3_pi0": pi0, "flat_pi0": 0.0,
+        "channel": "Jmu", "rp3_pi0": pi0,
+        "flat_pi0": {"value": 0.0,
+                     "source": "classification assertion (paper 3-1), "
+                               "NOT computed"},
         "breakdown": bd,
         "sign": "POSITIVE" if pi0 > 0 else "NEGATIVE",
         "emergence": "POSSIBLE (Pi0>0 on RP3)" if pi0 > 0 else "IMPOSSIBLE",
@@ -424,7 +436,7 @@ def _self_test() -> None:
     # At the framework's reference point (L = kL, cutoff = (k/M_P)²
     # with k = M_G), the spin-2 channel must be POSITIVE (the
     # emergence channel) and the J^μ channel NEGATIVE.
-    L = 2.497320997347988
+    L = 2.4935343325226915
     tau = 0.02
     cutoff = 1.0e-2  # a representative (k/M_P)² scale
     r = compute(L, cutoff, tau)

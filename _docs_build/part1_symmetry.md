@@ -254,7 +254,7 @@ This is the framework's most "running" thread — **the same 2π closes both the
 
 ```
 ε    = e^(1/2π)              (the zero point of the EW ratio)
-a0   = cH0/(2π)              (transparent-gravity IR)
+a0   = cH0/(2π)              (acceleration-scale IR)
 2L   = √(2π)                 (entropy minimal distance / window width)
 kL   ≈ √(2π)                 (the window)
 r    = (1/2π)²               (tensor-to-scalar ratio)
@@ -336,15 +336,15 @@ m_ν1⁴ carries +4s0·κ, the weight (1−4s0·κ) cancels it exactly → the d
 
 ---
 
-## Chapter 9 Transparent gravity: spectral zero mode, no dark matter
+## Chapter 9 The acceleration scale: spectral zero mode (Newtonian; no dark-matter dynamics)
 
 ```
 G_N = 1/(8π·Z_phys·M_P²), Z_phys ≈ 1 (matter back-reaction 0.2%)
-a0 = cH0/(2π)·√(4/3) = 1.206e-10 m/s² (transparent-gravity IR, not ad hoc MOND)
+a0 = cH0/(2π)·√(4/3) = 1.206e-10 m/s² (acceleration-scale IR, not ad hoc MOND)
 ```
 
 - **What it is**: gravity emerges from the zero mode of the TT spectrum.
-- **Why it matters** (key user insight): the framework's gravity is **transparent** — no curved spacetime, no self-interaction, gravity passes through matter unshielded. Hence **no dark-matter particle** (Ω_DM is a flatness-closure quantity), and no ad hoc MOND (a0 is the IR behaviour of transparent gravity).
+- **Why it matters** (key user insight): the framework's gravity is **transparent** — Newtonian gravity at all scales, no self-interaction, gravity passes through matter unshielded. Hence **the dark-matter remainder (unexplained)** (Ω_DM is a flatness-closure quantity), and no ad hoc MOND (a0 is the IR behaviour of the acceleration scale).
 - **How it is used**: the rotation curve transitions automatically from 1/r² to 1/r for a < a0 — the effect for which GR needs dark matter / MOND compensation, the framework gives directly from first principles.
 
 ---

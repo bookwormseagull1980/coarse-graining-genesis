@@ -15,7 +15,7 @@
 
 """
 cg_frg/ewsb/relaxion_chain.py — V4.0: the relaxion revision chain
-φ_R0 → φ_stop = 36.6467 and the ε-anchored EW closure
+φ_R0 → φ_stop = 36.6496 and the ε-anchored EW closure
 =================================================================
 
 WHY THIS MODULE EXISTS (motivation)

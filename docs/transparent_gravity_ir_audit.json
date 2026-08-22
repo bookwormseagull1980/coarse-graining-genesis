@@ -1,0 +1,159 @@
+{
+  "v4_trajectory": {
+    "kL": 2.4935343325226915,
+    "M_G_GeV": 1.7310765000475023e+18,
+    "H0_GeV": 1.4388498142964775e-42,
+    "span_decades": 60.08030079564131,
+    "p2_over_k2_mean": 1.286646617258162,
+    "p2_over_k2_max_abs_dev": 4.440892098500626e-16,
+    "den_over_k2_mean": 2.7426009857200384,
+    "den_over_k2_max_abs_dev": 8.881784197001252e-16,
+    "slope_G": -1.9999999999999991,
+    "slope_Z": -4.11840159418159e-18,
+    "linear_kernel_alpha": 1.9999999999999991,
+    "acceleration_power_r": -2.000000000000001,
+    "rotation_velocity_power_r": -0.5000000000000004,
+    "F_deep_mond_possible_with_fixed_linear_kernel": false
+  },
+  "linear_kernel_map": [
+    {
+      "kernel_Kq": "q^-1",
+      "potential_phi": "r^-2.0",
+      "acceleration_a": "r^-3.0",
+      "circular_velocity_v": "r^-1.0"
+    },
+    {
+      "kernel_Kq": "q^-2",
+      "potential_phi": "r^-1.0",
+      "acceleration_a": "r^-2.0",
+      "circular_velocity_v": "r^-0.5"
+    },
+    {
+      "kernel_Kq": "q^-3",
+      "potential_phi": "log(r)",
+      "acceleration_a": "r^-1",
+      "circular_velocity_v": "r^0"
+    },
+    {
+      "kernel_Kq": "q^-4",
+      "potential_phi": "r^+1.0",
+      "acceleration_a": "r^+0.0",
+      "circular_velocity_v": "r^+0.5"
+    }
+  ],
+  "scale_law_scan": [
+    {
+      "beta": 0.25,
+      "slope_G": -0.5000970980841944,
+      "linear_kernel_alpha": 0.5000970980841944,
+      "slope_Z": -9.709808419436269e-05,
+      "acceleration_power_r": -3.4999029019158057,
+      "rotation_velocity_power_r": -1.2499514509579028,
+      "flat_rotation_linear_kernel": false
+    },
+    {
+      "beta": 0.5,
+      "slope_G": -1.0001333463476496,
+      "linear_kernel_alpha": 1.0001333463476496,
+      "slope_Z": -0.00013334634764943147,
+      "acceleration_power_r": -2.9998666536523504,
+      "rotation_velocity_power_r": -0.9999333268261752,
+      "flat_rotation_linear_kernel": false
+    },
+    {
+      "beta": 0.75,
+      "slope_G": -1.5002414930554837,
+      "linear_kernel_alpha": 1.5002414930554837,
+      "slope_Z": -0.0002414930554836466,
+      "acceleration_power_r": -2.4997585069445165,
+      "rotation_velocity_power_r": -0.7498792534722581,
+      "flat_rotation_linear_kernel": false
+    },
+    {
+      "beta": 1.0,
+      "slope_G": -1.9999999999999993,
+      "linear_kernel_alpha": 1.9999999999999993,
+      "slope_Z": -6.101542564625578e-18,
+      "acceleration_power_r": -2.000000000000001,
+      "rotation_velocity_power_r": -0.5000000000000003,
+      "flat_rotation_linear_kernel": false
+    },
+    {
+      "beta": 1.25,
+      "slope_G": -2.0030189981095576,
+      "linear_kernel_alpha": 2.0030189981095576,
+      "slope_Z": 0.496981001890442,
+      "acceleration_power_r": -1.9969810018904424,
+      "rotation_velocity_power_r": -0.4984905009452212,
+      "flat_rotation_linear_kernel": false
+    },
+    {
+      "beta": 1.5,
+      "slope_G": -2.0016162560302613,
+      "linear_kernel_alpha": 2.0016162560302613,
+      "slope_Z": 0.998383743969739,
+      "acceleration_power_r": -1.9983837439697387,
+      "rotation_velocity_power_r": -0.49919187198486936,
+      "flat_rotation_linear_kernel": false
+    },
+    {
+      "beta": 2.0,
+      "slope_G": -2.000878513797976,
+      "linear_kernel_alpha": 2.000878513797976,
+      "slope_Z": 1.9991214862020248,
+      "acceleration_power_r": -1.9991214862020241,
+      "rotation_velocity_power_r": -0.49956074310101206,
+      "flat_rotation_linear_kernel": false
+    }
+  ],
+  "p_laplacian_scan": [
+    {
+      "p": 2.0,
+      "spatial_dim": 3,
+      "acceleration_power_r": -2.0,
+      "circular_velocity_power_r": -0.5,
+      "source_mass_power": 1.0,
+      "flat_rotation": false
+    },
+    {
+      "p": 2.5,
+      "spatial_dim": 3,
+      "acceleration_power_r": -1.3333333333333333,
+      "circular_velocity_power_r": -0.16666666666666663,
+      "source_mass_power": 0.6666666666666666,
+      "flat_rotation": false
+    },
+    {
+      "p": 3.0,
+      "spatial_dim": 3,
+      "acceleration_power_r": -1.0,
+      "circular_velocity_power_r": 0.0,
+      "source_mass_power": 0.5,
+      "flat_rotation": true
+    },
+    {
+      "p": 3.5,
+      "spatial_dim": 3,
+      "acceleration_power_r": -0.8,
+      "circular_velocity_power_r": 0.09999999999999998,
+      "source_mass_power": 0.4,
+      "flat_rotation": false
+    },
+    {
+      "p": 4.0,
+      "spatial_dim": 3,
+      "acceleration_power_r": -0.6666666666666666,
+      "circular_velocity_power_r": 0.16666666666666669,
+      "source_mass_power": 0.3333333333333333,
+      "flat_rotation": false
+    }
+  ],
+  "conclusion": {
+    "present_linear_tt_kernel": "Newtonian",
+    "F_a_over_a0": "1 within the present linear TT sector",
+    "a0_status": "derived IR scale, not a rotation-curve dynamics",
+    "requires_new_closure_for_flat_rotation_curves": true,
+    "minimal_new_ir_candidate": "local scale-invariant p-Laplacian with p=3",
+    "candidate_status": "new dynamical closure, not present linear TT sector"
+  }
+}

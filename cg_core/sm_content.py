@@ -111,8 +111,8 @@ HYPERCHARGE STATISTICS (the input to τ)
 The torsion parameter τ = (N_L − N_R)/(N_f · ΣY²) uses the
 hypercharge sums:
     ΣY²  = Σ over the 15 Weyl fermions of Y² (per generation)
-    N_L − N_R = 1 (the chiral asymmetry: 9 left-ish vs 8 right-ish
-    components per generation in the Weyl counting)
+    N_L − N_R = 1 (the chiral asymmetry: 8 left vs 7 right components
+    per generation in the Weyl counting — N_LEFT = 8, N_RIGHT = 7)
 The specific values (ΣY² = 10/3 per generation, τ = 1/50) are the
 statistical content used by the EC torsion modules.
 
@@ -284,9 +284,11 @@ def tau_statistical() -> float:
     chiral asymmetry per unit hypercharge capacity of the local type
     T = {Q_L, u_R, d_R, L_L, e_R}) is established in
     tau_generation_intensive; here the statistical value is recorded.
-    The full EC-torsion field equation (why the exact coefficient is
-    1/(N_f·ΣY²) — the torsion sourced by the chiral current and
-    screened by the hypercharge polarisation) is to be completed.
+    The EC-torsion field equation (the torsion sourced by the chiral
+    current j₅ and screened by the hypercharge polarisation, giving
+    the exact coefficient 1/(N_f·ΣY²)) is CLOSED — the seven-layer
+    theoremisation (init_v4) and the explicit field equation
+    τ/L = κ²·j₅ (cg_frg/ewsb/squash_level_transfer.py, STEP 1).
     """
     n_f = N_WEYL_PER_GENERATION  # 15 Weyl fermions per generation
     return chiral_asymmetry() / (n_f * hypercharge_sum_sq())  # 1/50

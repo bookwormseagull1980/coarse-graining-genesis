@@ -28,8 +28,9 @@ by the 32 pi^2 loop factor, with the SM loop contribution,
     lambda_H = (lambda_dil + sigma_SM) / (32 pi^2)
 
 with lambda_dil the dilaton self-coupling (the trace-anomaly
-magnitude) and sigma_SM = 1.6 the SM loop contribution.  This
-module restores the consistency as a COMPUTATION in V4.
+magnitude) and sigma_SM = 3 the SM loop contribution (one unit per
+generation).  This module restores the consistency as a COMPUTATION
+in V4.
 
 THE VALUES
 ----------

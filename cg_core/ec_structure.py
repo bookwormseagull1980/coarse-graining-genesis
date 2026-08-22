@@ -41,7 +41,7 @@ modulus τ = 0.02).  The contorsion K relates the EC connection to
 the Levi-Civita one; for the totally antisymmetric torsion,
 K = (1/2)T (coefficient τ/(2L)).
 
-THE τ-THEOREM SKELETON (2026-08-15)
+THE τ-THEOREM SKELETON
 -----------------------------------
 The torsion modulus τ is NOT a free input: it is the chiral drive
 over the hypercharge polarisation (see sm_content.tau_statistical),
@@ -91,16 +91,16 @@ cancellation:
     capacity 2π kL⁴ cancels between the bare field equation and the
     hypercharge screening, leaving the pure content ratio.)
 
-THE WINDOW-CAPACITY CANCELLATION (2026-08-17; audited 2026-08-18)
+THE WINDOW-CAPACITY CANCELLATION
 -----------------------------------------------------------------
-The screening factor 2π kL⁴/(N_f·ΣY²) is the hypercharge-polarisation
-screening written as the window capacity 2π kL⁴ divided by the
-content N_f·ΣY².  The SAME window capacity 2π kL⁴ enters the bare
-field equation (τ_bare carries 1/(2π kL⁴)), so it cancels exactly
-between the bare field equation and the hypercharge screening,
-leaving the pure content ratio τ = 1/50.  The cancellation is EXACT
-and does NOT depend on the specific value of 2π kL⁴ (it drops out of
-the product), so τ = (N_L−N_R)/(N_f·ΣY²) = 1/50 stands as the exact
+The screening factor (kL)³/(N_f·ΣY²) is the hypercharge-polarisation
+screening written as the window capacity (kL)³ (the 3D RP³ spectral
+sum, Weyl law) divided by the content N_f·ΣY².  The SAME window
+capacity (kL)³ enters the bare field equation (τ_bare carries
+1/(kL)³), so it cancels exactly between the bare field equation and
+the hypercharge screening, leaving the pure content ratio τ = 1/50.
+The cancellation is EXACT and does NOT depend on the specific value
+of (kL)³ (it drops out of the product), so τ = (N_L−N_R)/(N_f·ΣY²) = 1/50 stands as the exact
 content ratio regardless.
 
 STATUS OF THE 2π kL⁴ NOTATION (audit 2026-08-18,
@@ -217,7 +217,7 @@ def ec_over_lc_ratio(tau: float) -> float:
 
 
 def _self_test() -> None:
-    L = 2.497320997347988
+    L = 2.4935343325226915
     tau = 0.02
     assert abs(scalar_curvature_LC(L) - 6.0 / L ** 2) < 1e-12
     assert abs(ec_over_lc_ratio(tau) - (1.0 - 1e-4)) < 1e-15

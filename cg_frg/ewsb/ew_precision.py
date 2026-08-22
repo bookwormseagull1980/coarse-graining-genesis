@@ -57,10 +57,11 @@ module publishes that third stage as a single output block:
               (charged fermions).
   sigma_had  —the hadronic peak cross-section 12 pi Gamma_e
               Gamma_had / (M_Z^2 Gamma_Z^2).
-  m_H        —the tree-level Higgs mass sqrt(2 lambda) v with the
-              framework's scale-invariant quartic lambda.
+  m_H        —the tree-level Higgs mass sqrt(2 lambda_H) v with the
+              framework's scale-invariant Higgs quartic lambda_H (the
+              colour-singlet order parameter lambda is distinct).
 
-LEVEL OF THE COMPUTATION (stated honestly)
+LEVEL OF THE COMPUTATION
 ------------------------------------------
   * M_Z:      tree-level mass formula with two-loop running
               couplings (the running carries the dominant radiative
@@ -99,7 +100,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from cg_core.params import get, set as pset, sm_value  # noqa: E402
+from cg_core.params import get, set as pset, sm_value, compare_and_set  # noqa: E402
 from cg_core.beta_functions import beta_gauge  # noqa: E402
 
 # 1 GeV^-2 = 0.389379 mb = 3.89379e5 nb (the standard cross-section
@@ -318,13 +319,15 @@ def compute() -> dict:
          note=f"s^2(M_Z) = g'^2/(g2^2+g'^2) at the internal M_Z = "
               f"{s2_msbar:.6f} (the MS-bar-like mixing from the geometric "
               f"couplings at the Z pole)")
-    pset("M_W_pred", M_W, provenance="DERIVED", role="comparison",
-         note=f"M_W = {M_W:.4f} GeV —the on-shell Sirlin relation with "
-              f"Delta r = Delta alpha - (c^2/s^2) Delta rho (the exact "
-              f"one-loop t-b Veltman rho); Delta r_rem omitted (see the "
-              f"module docstring).  Inputs all internal: M_Z = {M_Z:.3f}, "
-              f"alpha(0) = 1/{1.0/alpha0:.3f}, alpha(M_Z)^-1 = "
-              f"{alpha_inv_MZ:.3f}, G_F = 1/(sqrt(2) v^2) = {G_F:.8e}")
+    compare_and_set("M_W_pred", M_W, sm_value("m_W_obs"),
+                    note=f"M_W = {M_W:.4f} GeV —the on-shell Sirlin relation "
+                         f"with Delta r = Delta alpha - (c^2/s^2) Delta rho "
+                         f"(the exact one-loop t-b Veltman rho); Delta r_rem "
+                         f"omitted (see the module docstring).  Inputs all "
+                         f"internal: M_Z = {M_Z:.3f}, alpha(0) = "
+                         f"1/{1.0/alpha0:.3f}, alpha(M_Z)^-1 = "
+                         f"{alpha_inv_MZ:.3f}, G_F = 1/(sqrt(2) v^2) = "
+                         f"{G_F:.8e}")
     pset("s2_thetaW_os", s2_os, provenance="DERIVED", role="internal",
          note=f"sin^2 theta_W (on-shell) = 1 - M_W^2/M_Z^2 = {s2_os:.6f} "
               f"from the internal M_Z = {M_Z:.3f} and M_W = {M_W:.3f}")
@@ -334,12 +337,13 @@ def compute() -> dict:
               f"comparison target is the SM improved-Born value "
               f"1/(1 - Delta rho_SM) ~ 1.0094, NOT the PDG-fit "
               f"rho_eff = 1.0004 (the after-subtraction quantity)")
-    pset("Gamma_Z_pred", w["Z"], provenance="DERIVED", role="comparison",
-         note=f"Gamma_Z = {w['Z']:.4f} GeV —the sum of the Born partial "
-              f"widths with the QCD radiator alpha_s/pi + 1.409 "
-              f"(alpha_s/pi)^2 (quarks) and the QED radiator 3 Q^2 "
-              f"alpha/(4 pi) (charged fermions); EW vertex corrections "
-              f"not included; the top is above threshold")
+    compare_and_set("Gamma_Z_pred", w["Z"], sm_value("Gamma_Z_obs"),
+                    note=f"Gamma_Z = {w['Z']:.4f} GeV —the sum of the Born "
+                         f"partial widths with the QCD radiator alpha_s/pi "
+                         f"+ 1.409 (alpha_s/pi)^2 (quarks) and the QED "
+                         f"radiator 3 Q^2 alpha/(4 pi) (charged fermions); "
+                         f"EW vertex corrections not included; the top is "
+                         f"above threshold")
     pset("Gamma_had_pred", w["had"], provenance="DERIVED", role="internal",
          note=f"Gamma_had = {w['had']:.4f} GeV (u,c,d,s,b at Born + "
               f"QCD/QED radiators)")
@@ -360,9 +364,11 @@ def compute() -> dict:
               f"leptonic definition, PDG convention)")
     pset("R_b_pred", R_b, provenance="DERIVED", role="internal",
          note=f"R_b = Gamma_b/Gamma_had = {R_b:.5f}")
-    pset("m_H_pred", m_H, provenance="DERIVED", role="comparison",
-         note=f"m_H = sqrt(2 lambda) v = {m_H:.3f} GeV (tree level with "
-              f"the scale-invariant geometric quartic lambda = {lam_h:.6f})")
+    compare_and_set("m_H_pred", m_H, sm_value("m_H_obs"),
+                    note=f"m_H = sqrt(2 lambda_H) v = {m_H:.3f} GeV (tree "
+                         f"level with the Higgs quartic lambda_H = {lam_h:.6f}, "
+                         f"distinct from the colour-singlet order parameter "
+                         f"lambda = {get('order_parameter_lambda'):.3f})")
     pset("m_mu_pred", m_mu, provenance="DERIVED", role="internal",
          note=f"m_mu = m_e (m_mu/m_e) = {m_mu:.6f} GeV (the absolute muon "
               f"mass from the internal ladder; fills the ratio-only gap "
@@ -416,7 +422,8 @@ def main() -> int:
           f"   (store {float(get('alpha_inv_MZ_pred')):.4f}, "
           f"cross {r['cross_pct']:+.4f}%)")
     print(f"  s^2(M_Z) (MS-bar-like)                   = {r['s2_msbar']:.6f}"
-          f"   (obs 0.23122, {(r['s2_msbar']/0.23122-1)*100:+.3f}%)")
+          f"   (obs {sm_value('sin2thetaW_MSbar_obs'):.5f}, "
+          f"{(r['s2_msbar']/sm_value('sin2thetaW_MSbar_obs')-1)*100:+.3f}%)")
     print(f"  M_W (on-shell, Delta rho one-loop)       = {r['M_W']:.4f} GeV"
           f"   (obs {sm_value('m_W_obs'):.3f}, "
           f"{(r['M_W']/sm_value('m_W_obs')-1)*100:+.3f}%)")
@@ -451,7 +458,7 @@ def main() -> int:
     print(f"  R_b                                      = {r['R_b']:.5f}"
           f"   (obs {sm_value('R_b_obs'):.5f}, "
           f"{(r['R_b']/sm_value('R_b_obs')-1)*100:+.3f}%)")
-    print(f"  m_H (tree, sqrt(2 lambda) v)             = {r['m_H']:.3f} GeV"
+    print(f"  m_H (tree, sqrt(2 lambda_H) v)         = {r['m_H']:.3f} GeV"
           f"   (obs {sm_value('m_H_obs'):.2f}, "
           f"{(r['m_H']/sm_value('m_H_obs')-1)*100:+.3f}%)")
     print(f"  m_mu / m_tau (internal ladder)           = {r['m_mu']*1000:.2f}"

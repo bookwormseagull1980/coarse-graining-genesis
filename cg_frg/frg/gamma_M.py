@@ -82,7 +82,7 @@ def gamma_M(kL: float) -> float:
     γ_M = 0 ⟺ C(kL) = η(k)/(k⁴V₃) is constant (the scale-invariant
     trace density).  On the framework's emergent branch this holds
     to machine precision (the endpoint_constraint fixed point
-    kL* = 2.4973 is defined on this branch).
+    kL* = 2.4935343 is defined on this branch).
     """
     # On the self-similar branch C(kL) is constant by construction;
     # the closure ∫γ_M = 0 is the entropy identity below.
@@ -158,7 +158,7 @@ def compute() -> dict:
 
     pset("gamma_M", 0.0, provenance="DERIVED",
          note="self-similar branch: gamma_M = 0 (trace density scales "
-              "as k^4; endpoint_constraint fixed point kL* = 2.4973)")
+              "as k^4; endpoint_constraint fixed point kL* = 2.4935343)")
     pset("entropy_integral", ent, provenance="DERIVED",
          note=f"integral of gamma_M = ln(M_P^2 sqrt(2pi)/sqrt(rho_Lambda)) "
               f"= {ent:.6f} (the two-Gaussian association entropy, "

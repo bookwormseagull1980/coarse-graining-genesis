@@ -89,16 +89,19 @@ def compute() -> dict:
     M_G = get("M_G")
     L = kL  # the trajectory's L at k = M_G
 
-    # The matter self-energy: ρ_MG from the spin-2 channel's mode
-    # sum at the emergence scale (the spectral_sum engine), or the
-    # stored value if published.
-    rho_MG = 0.0  # the free-field value; the matter back-reaction is
-                  # published by the mode-sum engine (spectral_sum)
+    # FREE-FIELD verification only: the matter self-energy ρ_MG is not
+    # yet computed by the mode-sum engine (spectral_sum publishes the
+    # channel spectra, not ρ_MG), so the stability criteria are verified
+    # in the ρ_MG -> 0 limit.  The verdict is scoped to that limit and
+    # does NOT include the matter back-reaction.
+    rho_MG = 0.0
     sigma = self_energy_MG(rho_MG, M_P)
     s = stability(sigma, L)
     pset("TT_pole_verified", s["stable"], provenance="DERIVED",
-         note="TT pole stability: positive spectral density, self-energy "
-              "below the bare mass (pole_analysis)")
+         note="TT pole stability in the FREE-FIELD limit (rho_MG = 0): "
+              "positive spectral density, self-energy below the bare "
+              "mass; the matter back-reaction is NOT yet included "
+              "(pole_analysis)")
     return s
 
 

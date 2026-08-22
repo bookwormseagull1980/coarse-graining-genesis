@@ -43,7 +43,7 @@ module publishes the three IR anchors together:
        (the window width that resolves exactly one spectral mode
        per entropy unit — C_window = 2L/√(2π) = 1, the foundation
        of the window-capacity counting; the discriminator:
-       kL = 2.4973 vs 2L — 0.37%, the same family).
+       kL = 2.4935343 vs 2L — 0.52%, the same family).
 
   H0/σ_C — the Hubble endpoint and the IR window anchor:
 
@@ -60,8 +60,8 @@ DERIVATION CHAIN
 ----------------
 1. r = (1/2π)²: the tensor sector's zero-point is the Euclidean
    factor (1/2π)² — the same structure as the scalar's Δ²_0
-   (perturbation_amplitude); the ratio is structural (2π is
-   mathematical, not a fitted parameter).
+   (perturbation_amplitude); the ratio is structural (2π, the Euclidean
+   period).
 
 2. 2L = √(2π): for the Gaussian window W(pσ) = exp(−p²σ²/2),
    the entropy-minimum separation of two distinguishable modes is
@@ -160,33 +160,32 @@ def compute() -> dict:
     pset("sigma_C_hubble", sigma_C, provenance="DERIVED", role="internal",
          note=f"sigma_C = 1/H0 = {sigma_C:.4e} GeV^-1 — the IR window "
               f"endpoint (the Hubble scale)")
-    # The spectral zero-mode IR acceleration a0: the
-    # Euclidean-period acceleration c·H0/(2π) with the 3-ball spatial-
-    # content coefficient √(4/3) — the spectral IR endpoint (H0) gives
-    # the flat-rotation-curve scale with NO dark matter.
+    # The IR acceleration scale a0: the Euclidean-period acceleration
+    # c·H0/(2π) with the 3-ball coefficient √(4/3).  This is a DERIVED
+    # SCALE from the IR endpoint H0, reproducing the Milgrom coincidence
+    # a0 ≈ c·H0/(2π) to +0.36%.  NOTE (2026-08-22 audit): the TT
+    # propagator is massless 1/k² at ALL scales (slope_G = -2 exactly),
+    # so gravity is NEWTONIAN and a0 carries NO dynamics (F(a/a0) = 1).
     H0_s = H0 * GEV_TO_S                    # GeV -> s^-1
     a0 = C_MS * H0_s / (2.0 * math.pi)
     a0_eff = a0 * math.sqrt(4.0 / 3.0)      # 2/sqrt(3) = sqrt(4/3)
     pset("a0_MOND", a0_eff, provenance="DERIVED", role="internal",
-         note=f"a0 = c H0/(2 pi) sqrt(4/3) = {a0_eff:.4e} m/s^2 (the "
-              f"spectral zero-mode IR behaviour: the Euclidean-period "
-              f"acceleration c H0/(2 pi) times the 3-ball coefficient "
-              f"sqrt(4/3) = 2/sqrt(3); NO dark matter, NO curved "
-              f"spacetime — the rotation-curve SCALE is the spectral "
-              f"IR endpoint H0; the full rotation-curve SHAPE F(a/a0) "
-              f"is a research-roadmap item, not yet computed)")
-    # The DM sector (computed): the framework's
-    # dark-matter is the a0-scale IR-modified gravity regime,
-    # not a particle.  The rotation-curve SCALE is set by the
-    # computed a0 (the MOND transition scale); the full
-    # rotation-curve SHAPE function F(a/a0) is NOT yet derived
-    # (the TT zero-mode response to a baryonic mass distribution
-    # is a research-roadmap item — see the module docstring), so
-    # no shape claim is made here.  The effective Omega_DM
-    # is computed from the closure relation Omega_Lambda + Omega_DM +
-    # Omega_b = 1 with the framework's Omega_Lambda and the DERIVED
-    # baryon fraction; the Bullet-cluster lensing is the framework's
-    # spectral zero-mode prediction (no dark-matter particle).
+         note=f"a0 = c H0/(2 pi) sqrt(4/3) = {a0_eff:.4e} m/s^2 (a "
+              f"DERIVED SCALE from the IR endpoint H0, reproducing the "
+              f"Milgrom coincidence a0 ~ c H0/(2 pi); the TT propagator "
+              f"is massless 1/k^2 at all scales (Newtonian), so a0 "
+              f"carries NO dynamics: F(a/a0) = 1, no flat rotation curves)")
+    # The DM sector: Omega_DM = 1 - Omega_Lambda - Omega_b is the
+    # flatness-closure remainder (a NUMBER).  AUDIT (2026-08-22): the
+    # framework's gravity is the TT spectral POLE (n_grav = 0), whose
+    # propagator G_TT = kL^2/(17.05 k^2) is EXACTLY massless 1/k^2 at
+    # all scales (p^2, m^2, R_k all ∝ k^2 on L = kL/k), i.e. NEWTONIAN
+    # 1/r at all scales.  Hence F(a/a0) = 1: the framework does NOT
+    # produce flat rotation curves, and a0 is a derived NUMBER (Milgrom
+    # coincidence) with no dynamics.  The "transparent gravity / no dark
+    # matter" reading is NOT supported by the spectral structure and is
+    # retracted here; Omega_DM is left as the standard Newtonian
+    # dark-matter discrepancy.
     # Ω_b = η_B·n_γ·m_p/ρ_crit — η_B (Sakharov), m_p (constituent quark),
     # ρ_crit (H0, M_P) and T_CMB (the photon floor) are all INTERNAL.
     eta_B = float(get("eta_b"))
@@ -207,31 +206,30 @@ def compute() -> dict:
     Omega_DM = 1.0 - Omega_lam - Omega_b
     pset("Omega_DM", Omega_DM, provenance="DERIVED", role="internal",
          note=f"Omega_DM = 1 - Omega_Lambda - Omega_b = {Omega_DM:.4f} "
-              f"(the flatness closure residue; NOT a particle — the "
-              f"framework's gravity is the transverse-traceless zero "
-              f"mode (no dark-matter particle)")
+              f"(the flatness closure remainder; a NUMBER, not a "
+              f"particle species — but the framework's gravity is "
+              f"Newtonian 1/r at all scales, so this remainder is left "
+              f"UNEXPLAINED by the framework (the standard dark-matter "
+              f"discrepancy)")
     pset("dm_verdict",
-         {"rotation_scale": "closed (the spectral zero-mode IR "
-                            "behaviour: a0 = c H0/(2 pi) sqrt(4/3), no "
-                            "dark matter)",
-          "rotation_shape": "NOT derived (F(a/a0) is a research-roadmap "
-                            "item: the TT zero-mode acceleration response "
-                            "to baryonic mass distributions is not yet "
-                            "computed)",
+         {"rotation_scale": "derived SCALE only: a0 = c H0/(2 pi) "
+                            "sqrt(4/3) reproduces the Milgrom coincidence "
+                            "a0 ~ c H0/(2 pi) (+0.36%); NOT a dynamics",
+          "rotation_shape": "F(a/a0) = 1 (NEWTONIAN): the TT propagator "
+                            "is massless 1/k^2 at all scales (slope_G = "
+                            "-2.0000000000, slope_Z = 0.0000000000), so "
+                            "gravity is Newtonian 1/r at all scales — no "
+                            "flat rotation curves",
           "Omega_DM": Omega_DM,
-          "bullet": "prediction (the spectral zero-mode lensing)"},
+          "bullet": "not established (Newtonian gravity gives standard "
+                    "lensing; no spectral zero-mode lensing)"},
          provenance="DERIVED", role="informational",
-         note="NO dark-matter particle: the framework's gravity is the "
-              "transverse-traceless spectral zero mode (the TT-tower "
-              "residue, linear — no curved spacetime, no self-"
-              "interaction); the "
-              "rotation-curve SCALE is the IR behaviour a0 = "
-              "c H0/(2 pi) sqrt(4/3) (the spectral IR endpoint H0), "
-              "needing no extra mass; the full rotation-curve SHAPE "
-              "F(a/a0) is NOT yet derived (research roadmap); "
-              "Omega_DM is the flatness closure "
-              "residue (not a particle); the Bullet cluster is the "
-              "lensing test of the spectral zero mode")
+         note="AUDIT 2026-08-22: the framework's gravity is the TT "
+              "spectral POLE (n_grav = 0), massless 1/k^2 at all scales "
+              "(Newtonian).  a0 is a DERIVED scale (Milgrom coincidence) "
+              "with NO dynamics.  The 'transparent gravity / no dark "
+              "matter' reading is RETRACTED: Omega_DM is the flatness-"
+              "closure remainder, left UNEXPLAINED by Newtonian gravity.")
 
     return {"r": r, "Delta2_t": d2_t, "two_L": two_l, "H0": H0,
             "H0_alt": H0_alt, "sigma_C": sigma_C,

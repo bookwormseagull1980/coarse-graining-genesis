@@ -1,0 +1,29 @@
+# =============================================================================
+#  Coarse-Graining Genesis Framework V4.0
+#
+#  Author:      Jinku Guo guojk@nwpu.edu.cn
+#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
+#
+#  Part of the V4 spectral framework, whose physics is presented in the
+#  companion papers:
+#    [I]  "The spectrum of a compact internal space.
+#          I. Gauge structure and fermion content"
+#    [II] "The spectrum of a compact internal space.
+#          II. Effective couplings and mass scales"
+# =============================================================================
+
+# Coarse-Graining Genesis Framework V4.0 — runtime dependencies
+# (the computation chain; Python >= 3.10)
+#
+# scipy : q0-integrals (trace_kernels, spectral_sum), Bessel kernels (cluster_decay)
+# numpy : tensor kernels (cg_frg/gravity/tt_tensor)
+scipy>=1.10
+numpy>=1.24
+
+# --- optional: documentation build (_docs_build/, docs/) ---
+# matplotlib>=3.7     # figures.py, check_overlap.py
+# python-docx>=1.1    # build_docx.py, build_popular_intro*.py
+
+# --- optional: development / verification ---
+# pytest>=7.4         # tests/
+# pytest-cov>=4.1     # coverage (iron-law Tier-1)

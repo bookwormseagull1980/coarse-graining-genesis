@@ -26,10 +26,12 @@ mutually consistent at the magnitude level:
   1. THE WEINBERG OPERATOR (dimension-5): with the 2π-family
      scale M = k_GUT/(2π)²:
 
-        m_ν3 = v²·(2π)²/k_GUT = 0.048 eV
+        m_ν3 = v²·(2π)²/k_GUT·(1 + s0·κ) = 0.0502 eV
 
      (the (2π)² is the Euclidean period squared — the same thread
-     as ε = e^{1/(2π)} of the EW ratio, the 2L, the amplitude).
+     as ε = e^{1/(2π)} of the EW ratio, the 2L, the amplitude; the
+     J=2 squash seesaw factor (1+s0·κ) is the level-transfer
+     correction, 2026-08-16).
 
   2. THE 5/3 GUT RELATION (the SU(2)/U(1) balance of the content):
 
@@ -49,7 +51,7 @@ THE CKM |V_us| (Gatto × LZ hierarchy)
 The Gatto–Sartori–Tonin relation with the framework's LZ mass
 ratios (lz_ladder):
 
-    |V_us| = |√(m_d/m_s) − e^{iδ}√(m_u/m_c)| = 0.225
+    |V_us| = |√(m_d/m_s) − e^{iδ}√(m_u/m_c)| = 0.2239
 
 with m_c/m_t = e^{−2α_up}, m_u/m_c = e^{−2α_up}/4,
 m_s/m_b = e^{−2α_dn}, m_d/m_s = e^{−2α_dn}/2.
@@ -119,7 +121,10 @@ if str(_PROJECT_ROOT) not in sys.path:
 from cg_core.params import get, set as pset  # noqa: E402
 
 
-# STATUS (2026-08-20): L3 ASSERTED — m_nu3 (1+s0*κ) seesaw factor; the "seesaw sign reversal (EW −s0κ <-> seesaw +s0κ)" is stated bookkeeping, not reduced step-by-step.  See epsilon_ratio DERIVATION STATUS.
+# STATUS (2026-08-21): L3 DERIVED — m_nu3 (1+s0·κ) seesaw factor is the
+# level-transfer conservation charge c=+1 (v·m_ν3 = const) of
+# squash_level_transfer: v→(1−s0κ), M_R→(1−3s0κ) force m_ν3→(1+s0κ).
+# See epsilon_ratio DERIVATION STATUS.
 def weinberg_m3(v: float, k_GUT: float) -> float:
     """m_ν3 = v²·(2π)²/k_GUT·(1 + s0·κ) — the Weinberg operator with
     the 2π family scale (eV; v and k_GUT in GeV), with the J=2 squash

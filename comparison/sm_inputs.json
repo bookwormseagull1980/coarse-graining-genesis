@@ -576,11 +576,11 @@
    "writer": "comparison/sm_rge/inputs.py"
   },
   "v_HIGGS": {
-   "note": "observed EW VEV, GeV (PDG, comparison only)",
+   "note": "SM value for comparison only",
    "provenance": "SM_INPUT",
    "role": "comparison",
    "value": 246.22,
-   "writer": "__main__"
+   "writer": "cg_core.params.init_stores"
   },
   "v_HIGGS_obs": {
    "note": "SM measured input (comparison only)",

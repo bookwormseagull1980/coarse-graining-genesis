@@ -13,6 +13,11 @@ ROOT = Path(__file__).resolve().parent.parent
 PY = sys.executable
 
 GEV_TO_K = 1.160451812e13
+GENERATED_STORES = [
+    ROOT / "cg_params.json",
+    ROOT / "comparison" / "sm_inputs.json",
+    ROOT / "params_write_log.json",
+]
 
 # (label, cg_key, sm_key or None, factor)  factor converts cg value -> sm units
 MAPPING = [
@@ -39,6 +44,16 @@ MAPPING = [
     # --- EW ---
     ("epsilon (dilaton)",    "epsilon_dilaton",     "epsilon_obs",  1.0),
     ("v_HIGGS (GeV)",        "v_HIGGS",             "v_HIGGS_obs",  1.0),
+    ("M_Z (GeV)",            "M_Z_pred",            "M_Z",          1.0),
+    ("M_W Born+rho (GeV)",   "M_W_pred",            "m_W_obs",      1.0),
+    ("M_W lead-univ (GeV)",  "M_W_pred_lead1loop",  "m_W_obs",      1.0),
+    ("Gamma_Z (GeV)",        "Gamma_Z_pred",        "Gamma_Z_obs",  1.0),
+    ("Gamma_b Born (GeV)",   "Gamma_b_pred",        "Gamma_b_obs",  1.0),
+    ("Gamma_b 1-loop (GeV)", "Gamma_b_pred_1loop",  "Gamma_b_obs",  1.0),
+    ("sigma_had (nb)",       "sigma_had_pred",      "sigma_had_obs", 1.0),
+    ("m_H (GeV)",            "m_H_pred",            "m_H_obs",      1.0),
+    ("sin^2 thetaW(M_Z)",    "s2_thetaW_MZ",        "sin2thetaW_MSbar_obs", 1.0),
+    ("sin^2 theta_eff^l",    "sin2_theta_eff_l_pred","sin2thetaW_eff_obs", 1.0),
     # --- neutrino / PMNS ---
     ("m_nu3 (eV)",           "m_nu3",               "m_nu3_obs",    1.0),
     ("m_nu2 (eV)",           "m_nu2",               "m_nu2_obs",    1.0),
@@ -83,9 +98,21 @@ FIXED_OBS = {
 }
 
 
-def main():
+def reset_generated_stores() -> list[str]:
+    removed = []
+    for path in GENERATED_STORES:
+        if path.exists():
+            path.unlink()
+            removed.append(path.relative_to(ROOT).as_posix())
+    return removed
+
+
+def main() -> int:
     # 1. recompute the entire chain
     print("== recomputing the full chain (reproduce_v4) ==")
+    removed = reset_generated_stores()
+    if removed:
+        print("fresh store reset: " + ", ".join(removed))
     r = subprocess.run([PY, str(ROOT / "scripts" / "reproduce_v4.py")],
                        capture_output=True, text=True)
     ok = (r.returncode == 0) and ("ALL MODULES PASSED" in (r.stdout or ""))
@@ -129,7 +156,11 @@ def main():
         print(f"  {label:22s} {pred:14.6g} {obs:12g} {dev:+8.3f}%")
     print("=" * 74)
     print(f"  {n_obs} observables compared; all DERIVED (no fitting).")
+    if not ok:
+        print("\nERROR: reproduce_v4.py did not pass; the comparison table is incomplete.")
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
