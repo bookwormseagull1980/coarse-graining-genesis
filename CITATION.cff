@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: "Coarse-Graining Genesis Framework V4.0"
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+authors:
+  - family-names: Guo
+    given-names: Jinku
+    affiliation: "Northwestern Polytechnical University, Xi'an, China"
+    orcid: "https://orcid.org/0009-0000-6600-6171"
+version: "4.0.0"
+date-released: "2026-08-23"
+license: MIT
+repository-code: "https://github.com/bookwormseagull1980/coarse-graining-genesis"
+abstract: >-
+  A provenance-audited spectral framework computing gauge structure, fermion
+  content and mass scales from the Laplace and Dirac spectra of a compact
+  internal space (RP^3).
+keywords:
+  - spectral datum
+  - coarse-graining
+  - gauge structure
+  - fermion content
+  - mass scales
+preferred-citation:
+  type: article
+  title: "The spectrum of a compact internal space. II. Effective couplings and mass scales"
+  authors:
+    - family-names: Guo
+      given-names: Jinku
+  year: 2026
