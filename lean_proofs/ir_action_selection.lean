@@ -1,34 +1,23 @@
 /-
-# =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo guojk@nwpu.edu.cn
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#  DOI:         10.5281/zenodo.22067006
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-# =============================================================================
-
-Lean 4.7 core proof guard for the endpoint IR-action selection.
-
-This file proves the finite arithmetic skeleton behind the local
-endpoint response
-
-  * the minimal [1/1] spectral-quadratic ansatz for mu(s)^2 has three
-    coefficients a,b,c up to one common normalisation;
-  * the deep-IR normalisation mu ~ sqrt(s) imposes a = b;
-  * the Newtonian normalisation mu -> 1 imposes a = c;
-  * fixing the common normalisation a = 1 gives b = c = 1.
-
-The analytic derivation of the ansatz is recorded in the cosmology
-endpoint note.  Lean checks only the coefficient-selection logic, keeping
-the formalized claim exactly at the arithmetic dependency level.
+ Coarse-Graining Genesis Framework V4.0
+ 
+ Author:      Jinku Guo <guojk@nwpu.edu.cn>
+ Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
+ ORCID:       0009-0000-6600-6171
+ 
+ DOI records:
+   [Software] 10.5281/zenodo.22067006
+   [Paper I]  10.5281/zenodo.22067118
+   [Paper II] 10.5281/zenodo.22067469
+ 
+ Part of the V4 spectral framework, whose physics is presented in the
+ companion papers:
+   [I]  "The spectrum of a compact internal space.
+         I. Gauge structure and fermion content"
+        DOI: 10.5281/zenodo.22067118
+   [II] "The spectrum of a compact internal space.
+         II. Effective couplings and mass scales"
+        DOI: 10.5281/zenodo.22067469
 -/
 
 namespace CGV4

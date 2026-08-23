@@ -1,33 +1,23 @@
 /-
-# =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo guojk@nwpu.edu.cn
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#  DOI:         10.5281/zenodo.22067006
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-# =============================================================================
-
-Lean 4.7 core proof guard for the cubic endpoint acceleration closure.
-
-This file proves the discrete arithmetic core of the local acceleration
-branch:
-
-  * in three spatial dimensions, local first-gradient scale invariance
-    of int d^d x |grad Phi|^p requires p = d = 3;
-  * the same p = 3 gives the flat-rotation point-source exponent;
-  * the corresponding BTFR velocity exponent is one quarter.
-
-The analytic endpoint-action argument is recorded in the cosmology
-endpoint note.  Lean checks only the finite exponent identities, not the
-continuum variational calculus.
+ Coarse-Graining Genesis Framework V4.0
+ 
+ Author:      Jinku Guo <guojk@nwpu.edu.cn>
+ Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
+ ORCID:       0009-0000-6600-6171
+ 
+ DOI records:
+   [Software] 10.5281/zenodo.22067006
+   [Paper I]  10.5281/zenodo.22067118
+   [Paper II] 10.5281/zenodo.22067469
+ 
+ Part of the V4 spectral framework, whose physics is presented in the
+ companion papers:
+   [I]  "The spectrum of a compact internal space.
+         I. Gauge structure and fermion content"
+        DOI: 10.5281/zenodo.22067118
+   [II] "The spectrum of a compact internal space.
+         II. Effective couplings and mass scales"
+        DOI: 10.5281/zenodo.22067469
 -/
 
 namespace CGV4

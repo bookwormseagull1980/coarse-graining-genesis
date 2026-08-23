@@ -1,35 +1,23 @@
 /-
-# =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo guojk@nwpu.edu.cn
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#  DOI:         10.5281/zenodo.22067006
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-# =============================================================================
-
-Lean 4.7 proof skeleton for the endpoint-residual cosmology closure.
-
-This file formalizes the logical dependency of the V4 cosmology branch:
-
-  MaxEnt endpoint
-    -> global normal Hamiltonian endpoint balance
-    -> local endpoint residual
-    -> conserved cold source in linear cosmology
-    -> no-double-counting split with the local acceleration projection.
-
-It does not formalize tensor calculus, ADM geometry, or CAMB numerics.
-Those analytic and numerical ingredients are represented here as named
-hypotheses of the endpoint theorem.  The file checks that, once those
-hypotheses are supplied, the final closure package has no additional
-logical assumption.
+ Coarse-Graining Genesis Framework V4.0
+ 
+ Author:      Jinku Guo <guojk@nwpu.edu.cn>
+ Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
+ ORCID:       0009-0000-6600-6171
+ 
+ DOI records:
+   [Software] 10.5281/zenodo.22067006
+   [Paper I]  10.5281/zenodo.22067118
+   [Paper II] 10.5281/zenodo.22067469
+ 
+ Part of the V4 spectral framework, whose physics is presented in the
+ companion papers:
+   [I]  "The spectrum of a compact internal space.
+         I. Gauge structure and fermion content"
+        DOI: 10.5281/zenodo.22067118
+   [II] "The spectrum of a compact internal space.
+         II. Effective couplings and mass scales"
+        DOI: 10.5281/zenodo.22067469
 -/
 
 namespace CGV4
