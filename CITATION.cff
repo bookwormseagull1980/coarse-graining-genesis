@@ -11,6 +11,9 @@ version: "4.0.0"
 date-released: "2026-08-23"
 license: MIT
 repository-code: "https://github.com/bookwormseagull1980/coarse-graining-genesis"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22067006
 abstract: >-
   A provenance-audited spectral framework computing gauge structure, fermion
   content and mass scales from the Laplace and Dirac spectra of a compact

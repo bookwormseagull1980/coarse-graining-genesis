@@ -19,8 +19,9 @@ of a compact internal space (RP³) to effective couplings, mass scales, and
 comparison tables, with one observed dimensional anchor (G_N) and explicit
 provenance for every stored record.**
 
-- **Author:** Jinku Guo `<guojk@nwpu.edu.cn>`
+- **Author:** Jinku Guo `<guojk@nwpu.edu.cn>` — [ORCID: 0009-0000-6600-6171](https://orcid.org/0009-0000-6600-6171)
 - **Affiliation:** Northwestern Polytechnical University, Xi'an 710072, China
+- **Zenodo DOI:** [10.5281/zenodo.22067006](https://doi.org/10.5281/zenodo.22067006)
 
 ## Companion papers
 
@@ -192,13 +193,14 @@ Any use of this framework — in code, publications, or derivative work —
 2. **Companion papers** —
    - [I] *The spectrum of a compact internal space. I. Gauge structure and fermion content*
    - [II] *The spectrum of a compact internal space. II. Effective couplings and mass scales*
-3. **Source** — this Git repository: https://github.com/bookwormseagull1980/coarse-graining-genesis
+3. **Source** — this Git repository: https://github.com/bookwormseagull1980/coarse-graining-genesis (archived at Zenodo: https://doi.org/10.5281/zenodo.22067006)
 
 ```bibtex
 @misc{guo2026cg,
   author       = {Jinku Guo},
   title        = {Coarse-Graining Genesis Framework {V4.0}},
   year         = {2026},
+  doi          = {10.5281/zenodo.22067006},
   howpublished = {\url{https://github.com/bookwormseagull1980/coarse-graining-genesis}},
   note         = {Companion papers: ``The spectrum of a compact internal space.
                   I. Gauge structure and fermion content'' and
