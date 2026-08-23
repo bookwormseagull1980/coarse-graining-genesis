@@ -3,6 +3,8 @@
 
  Author:      Jinku Guo <guojk@nwpu.edu.cn>
  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
+ ORCID:       0009-0000-6600-6171
+ DOI:         10.5281/zenodo.22067006
 
  Part of the V4 spectral framework, whose physics is presented in the
  companion papers:
