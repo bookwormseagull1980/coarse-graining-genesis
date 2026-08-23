@@ -25,8 +25,8 @@ provenance for every stored record.**
 
 ## Companion papers
 
-- **[I]** *The spectrum of a compact internal space. I. Gauge structure and fermion content*
-- **[II]** *The spectrum of a compact internal space. II. Effective couplings and mass scales*
+- **[I]** *The spectrum of a compact internal space. I. Gauge structure and fermion content* — DOI: [10.5281/zenodo.22067118](https://doi.org/10.5281/zenodo.22067118)
+- **[II]** *The spectrum of a compact internal space. II. Effective couplings and mass scales* — DOI: [10.5281/zenodo.22067469](https://doi.org/10.5281/zenodo.22067469)
 
 Paper I gives the **structure** (gauge algebra, fermion content, mass-gap form);
 Paper II gives the **numbers** (window closure, the generated parameter
@@ -191,8 +191,8 @@ Any use of this framework — in code, publications, or derivative work —
 
 1. **Author** — Jinku Guo, Northwestern Polytechnical University, Xi'an, China;
 2. **Companion papers** —
-   - [I] *The spectrum of a compact internal space. I. Gauge structure and fermion content*
-   - [II] *The spectrum of a compact internal space. II. Effective couplings and mass scales*
+   - [I] *The spectrum of a compact internal space. I. Gauge structure and fermion content* (DOI: [10.5281/zenodo.22067118](https://doi.org/10.5281/zenodo.22067118))
+   - [II] *The spectrum of a compact internal space. II. Effective couplings and mass scales* (DOI: [10.5281/zenodo.22067469](https://doi.org/10.5281/zenodo.22067469))
 3. **Source** — this Git repository: https://github.com/bookwormseagull1980/coarse-graining-genesis (archived at Zenodo: https://doi.org/10.5281/zenodo.22067006)
 
 ```bibtex

@@ -216,10 +216,10 @@ Conversely: a 1% blur of the threshold ⟺ an 11.5% blur of y. **Conclusion (cor
 
 The framework is presented as a two-paper series:
 
-| | Title | Role |
-|---|---|---|
-| Paper I | *The spectrum of a compact internal space. I. Gauge structure and fermion content* | structural foundation: gauge algebra, fermion content, gap structure |
-| Paper II | *The spectrum of a compact internal space. II. Effective couplings and mass scales* | numerical evaluation: window closure, 170 parameters, observation comparison |
+| | Title | Role | DOI |
+|---|---|---|---|
+| Paper I | *The spectrum of a compact internal space. I. Gauge structure and fermion content* | structural foundation: gauge algebra, fermion content, gap structure | [10.5281/zenodo.22067118](https://doi.org/10.5281/zenodo.22067118) |
+| Paper II | *The spectrum of a compact internal space. II. Effective couplings and mass scales* | numerical evaluation: window closure, 170 parameters, observation comparison | [10.5281/zenodo.22067469](https://doi.org/10.5281/zenodo.22067469) |
 
 Paper II carries the numerical evaluation of the structural content of Paper I. Its core results:
 

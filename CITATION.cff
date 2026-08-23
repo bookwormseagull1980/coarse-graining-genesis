@@ -31,3 +31,13 @@ preferred-citation:
     - family-names: Guo
       given-names: Jinku
   year: 2026
+  doi: 10.5281/zenodo.22067469
+
+references:
+  - type: article
+    title: "The spectrum of a compact internal space. I. Gauge structure and fermion content"
+    authors:
+      - family-names: Guo
+        given-names: Jinku
+    year: 2026
+    doi: 10.5281/zenodo.22067118
