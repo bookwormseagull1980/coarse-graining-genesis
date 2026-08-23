@@ -78,6 +78,7 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get  # noqa: E402
+from cg_core.window_weights import scalar_vector_window_ratio  # noqa: E402
 
 ALPHA = 1.0 / (16.0 * math.pi ** 2)
 
@@ -118,7 +119,7 @@ def outputs(kL: float, tau: float, M_P: float) -> dict:
     g1 = 1.0 / math.sqrt(inv_g1_MG2)
 
     # --- fermion ladder (sector_alpha + lz_ladder) ---
-    ns_tilt = 7.0 * tau / 4.0            # 1 - n_s = τ·(7/4)
+    ns_tilt = tau * scalar_vector_window_ratio()
     kL_cmb = kL * (1.0 - tau / 4.0)      # perturbation_amplitude
     a_up = kL - 2.0 * tau
     Delta = 6.0 * ns_tilt * kL_cmb

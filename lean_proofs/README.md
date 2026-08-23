@@ -14,7 +14,7 @@ companion papers:
 
 # Lean 4 Proof Archive (V4 Framework)
 
-This directory collects all Lean 4 formal proofs of the V4 framework (17 files, all `exit 0` compiled).
+This directory collects the Lean 4 formal proof guards of the V4 framework (20 files, all expected to compile with `exit 0`).
 
 **Lean 4 path**: `lean.exe` (core, no mathlib, `by native_decide`; any Lean 4.7.0 install works)
 **Run**: `lean.exe <file>.lean`, exit 0 = all theorems pass.
@@ -22,12 +22,13 @@ This directory collects all Lean 4 formal proofs of the V4 framework (17 files, 
 
 ---
 
-## Overview: 17 files in two groups
+## Overview: 20 files in three groups
 
 | Group | Count | Serves | Dates |
 |---|---|---|---|
 | **A. V4 numerical content** | 11 | Directly verifies the coefficients/symmetries/constants of the V4 code (`cg_core`/`cg_frg` modules) | 2026-08-16 ~ 08-18 |
 | **B. Paper-4 theoretical foundation** | 6 | Axiomatic proofs (disorder axiom → gauge group → dimension 4), the "why" layer of V4 (Paper 4 is the axiomatic foundation of V4) | 2026-08-07 ~ 08-08 |
+| **C. Endpoint cosmology guards** | 3 | Finite arithmetic and logical-dependency guards for the endpoint cosmology branch | 2026-08-22 ~ 08-23 |
 
 Verification conclusion (2026-08-18): **9 group-A files are up-to-date matches**; 2 group-A files are intermediate iterations (some values superseded, see annotations); 6 group-B files are the Paper-4 final versions (non-iterative, still valid).
 
@@ -80,11 +81,12 @@ The content derivation of the two-loop top-Yukawa and Higgs-quartic β coefficie
 The content derivation of the two-loop Yukawa-gauge mixing coefficients A_i. Corresponds to `cg_core/beta_functions.py::_yukawa_gauge_mixing()`.
 - `A_i = (6/d(G_i))[C₂(Q_L)+C₂(u_R)] = (17/10, 3/2, 2)`, 6 = 2(weak contraction)×3(colour), the weak-contraction factor 2 of the u_R trace = dim SU(2).
 
-### 11. `conformal_gauge_duality.lean` (9 theorems) ✅ up-to-date (2026-08-18)
+### 11. `conformal_gauge_duality.lean` (14 theorems) ✅ up-to-date (2026-08-18)
 The first-principles content of the conformal-gauge duality N_g·ξ = 1. Corresponds to `cg_frg/ewsb/order_parameter.py` (conformal_coupling/conformal_weight/_self_test), `cg_frg/cosmology/bbn_helium.py` (g_A = N_g·Δ_s/π), `cg_frg/qcd/qcd_sector.py` (the N_g·ξ=1 unit).
 - ξ = (d−2)/(4(d−1)) = 1/8 (**Yamabe conformal coupling**, the unique coupling of Weyl-rescaling invariance — a first-principles standard result, not a framework convention)
 - N_g = N_c²−1 = 8 (the su(3) adjoint dimension)
 - Coupling form N_g·ξ = 1 ⟺ conformal-weight form N_g·Δ_s = 2(d−1) = 4, bridge Δ_s = 2ξ(d−1) (Δ_s = (d−2)/2, the Gaussian-fixed-point scaling dimension)
+- Window-weight ratio `(1+2+1+3)/(d+1)=7/4`, with numerator from `rp3_spectrum.weyl_dof()` and denominator `d+1=4`; the conformal-curvature identity `1 + ξ R_LC L² = 1 + (1/8)·6 = 7/4` is retained as a cross-check.
 - **Honest status**: N_g·ξ = 1 is not a heat-kernel/anomaly-vanishing theorem (a₁=0 gives ξ=1/6, and odd-dimensional manifolds have no trace anomaly), but the arithmetic product of two standard facts — the duality is a selection principle that fixes the colour algebra, not a derived theorem.
 
 ---
@@ -114,6 +116,28 @@ The Wightman axioms W1–W6 formal-predicate framework + the T1/T2/T4 screening 
 
 ---
 
+## C. Endpoint cosmology guards (3)
+
+### 18. `ir_cubic_closure.lean` (11 theorems) ✅ endpoint acceleration arithmetic guard
+The arithmetic skeleton of the cubic endpoint acceleration closure.
+- Proves that in three spatial dimensions, the local first-gradient scale-invariant exponent is `p=3`.
+- Proves that the same exponent is the flat-rotation point-source exponent and gives the BTFR quarter-power denominator.
+- Scope: Lean checks the finite exponent identities; continuum variational calculus is recorded analytically in `docs/COSMOLOGY_ENDPOINT_RESIDUAL.md`.
+
+### 19. `ir_action_selection.lean` (7 theorems) ✅ endpoint response arithmetic guard
+The arithmetic skeleton of the minimal spectral-quadratic Pade selection used by the local endpoint response.
+- Proves that the normalised [1/1] ansatz `mu(s)^2 = a s/(b+c s)` is fixed to `a:b:c=1:1:1` once the deep-IR and Newtonian normalisations are imposed.
+- Scope: Lean checks the coefficient-selection logic; the analytic selection argument is recorded in `docs/COSMOLOGY_ENDPOINT_RESIDUAL.md`.
+
+### 20. `endpoint_residual_cosmology.lean` (5 theorems) ✅ endpoint-cosmology logic guard
+The logical skeleton of the endpoint-residual cosmology closure used by
+`cg_frg/cosmology/endpoint_residual.py`.
+- Proves that the final closure package follows from the stated MaxEnt endpoint hypotheses: global sigma endpoint, local spatial equations, momentum constraints, visible matter conservation, Bianchi identity, no extra dark stress tensor, and a local normal residual.
+- Proves the linear cosmology closure package, the acceleration-branch package, and the no-double-counting decomposition.
+- Honest status: this file formalizes the logical dependency structure. It does not formalize tensor calculus, ADM geometry, or CAMB numerics; CAMB is only a downstream comparison propagation of fixed V4 outputs.
+
+---
+
 ## Verification summary (2026-08-18)
 
 | Status | Files | Note |
@@ -121,6 +145,6 @@ The Wightman axioms W1–W6 formal-predicate framework + the T1/T2/T4 screening 
 | ✅ up-to-date match | 9 group-A + 6 group-B | Consistent with the current code / Paper-4 final version |
 | ⚠️ intermediate iteration | `bbn_nuclear.lean`, `bbn_six_internal.lean` | Core values (g_A, Δ_EM) superseded by the non-perturbative values of `bbn_nonperturbative.lean`; but the hypercharge asymmetry 9:1, CKM unitarity, phase space, etc. remain valid |
 
-**All 17 files compile with `exit 0`** (verified one by one on 2026-08-18).
+**All 20 files are intended to compile with `exit 0`**.  The first 17 were verified one by one on 2026-08-18; the IR and endpoint-cosmology guards should be checked together with the archive verifier after edits.
 
 > Note: in group A, `bbn_nuclear` and `bbn_six_internal` are **historical iterations** of the BBN-constant internalisation (kept as a development record), physically superseded in their core values by `bbn_nonperturbative`; the remaining 9 group-A files match the current V4 code's docstrings/assertions verbatim.

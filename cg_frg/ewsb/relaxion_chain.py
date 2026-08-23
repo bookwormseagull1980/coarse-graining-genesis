@@ -41,8 +41,8 @@ EXACTLY a structural logarithm:
 
   R2  C15 (the SYMMETRIC BOX graph at q = 0 — the two propagators
       carry the SAME momentum, 1/(p²+m²)²; the box weight vs the
-      product weight gives the 7/4 — the same scalar/vector ratio
-      as the spectral tilt):
+      product weight gives the RP³ Weyl window ratio
+      (1+2+1+3)/(d+1) = 7/4 — the same ratio as the spectral tilt):
           Δφ_R2 = (1/4)·ln(7/4) = 0.13990      φ = 36.6042, v = 302.6
 
   R3  Z (the SINGLE-MODE wave-function renormalisation: the
@@ -77,10 +77,11 @@ documented gap of the constant chain).
 
 V4 DISCIPLINE
 -------------
-No hard-coded physics: every Δφ is a structural logarithm (2,
-7/4, 3/4); φ_R0 is DERIVED from the window line (φ_R0 = φ_R3 − ΣΔφ
-with φ_R3 = 4πkL − ln(3α/π) + 1/(2π)).  All outputs are DERIVED
-with notes.
+No hard-coded physics: every Δφ is a structural logarithm.  The R2
+ratio is read from cg_core.window_weights as the RP³ Weyl window ratio
+(1+2+1+3)/(d+1)=7/4, and the R3 ratio is built from m² = 3/4.  φ_R0 is DERIVED from the window
+line (φ_R0 = φ_R3 − ΣΔφ with φ_R3 = 4πkL − ln(3α/π) + 1/(2π)).
+All outputs are DERIVED with notes.
 """
 
 from __future__ import annotations
@@ -94,6 +95,7 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get, set as pset  # noqa: E402
+from cg_core.window_weights import scalar_vector_window_ratio  # noqa: E402
 
 # ξ = 1/8 (the conformal coupling in d = 3), R_c = 6/π — structural.
 XI = 1.0 / 8.0
@@ -113,8 +115,8 @@ def dphi_R1() -> float:
 def dphi_R2() -> float:
     """Δφ_R2 = (1/4)·ln(7/4) — the C15 symmetric box at q = 0
     (1/(p²+m²)²: the box weight vs the product weight; the 7/4 is
-    the scalar/vector ratio of the window)."""
-    return 0.25 * math.log(7.0 / 4.0)
+    the RP³ Weyl window ratio (1+2+1+3)/(d+1))."""
+    return 0.25 * math.log(scalar_vector_window_ratio())
 
 
 def dphi_R3() -> float:
@@ -200,7 +202,8 @@ def compute() -> dict:
     req = phi_req_ir(M_G, lam_h, v)
 
     pset("relaxion_phi_stop", phi, provenance="DERIVED",
-         note="phi_stop = phi_R0 + (1/2)ln2 + (1/4)ln(7/4) - (1/4)ln(2(3/4)^3) "
+         note="phi_stop = phi_R0 + (1/2)ln2 + (1/4)ln((1+2+1+3)/(d+1)) "
+              "- (1/4)ln(2(3/4)^3), with (1+2+1+3)/(d+1) = 7/4, "
               f"= {phi:.4f} (the relaxion revision chain; phi_R0 is DERIVED "
               f"from the window line phi_R3 = 4 pi kL - ln(3 alpha/pi) + "
               f"1/(2 pi), so the chain reproduces the window-squared eps)")

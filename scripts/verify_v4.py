@@ -174,7 +174,9 @@ def store_summary() -> str:
         "n_generations", "v_HIGGS", "M_Z_pred", "M_W_pred",
         "M_W_pred_lead1loop", "Gamma_b_pred_1loop",
         "sin2_theta_eff_l_pred", "m_H_pred",
-        "Omega_Lambda", "T_CMB_GeV", "bbn_Neff",
+        "Omega_Lambda", "Omega_Sigma", "T_CMB_GeV",
+        "T_CMB_corrected_K", "endpoint_sigma8", "endpoint_S8",
+        "bbn_Neff",
     ]
     for key in selected:
         rec = cg.get(key)

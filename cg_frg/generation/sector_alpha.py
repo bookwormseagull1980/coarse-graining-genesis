@@ -46,8 +46,8 @@ RUNG 2 — the sector step (the so(4)-isometry × the tilt × the
 
     · 6      — the so(4) isometry's 6 generators (the extrusion
                 coupling — the 4D rotation group);
-    · 1−n_s  — the spectral tilt τ·(7/4) = 0.035 (ns_tilt,
-                the closed window-evolution rate);
+    · 1−n_s  — the spectral tilt τ·[(1+2+1+3)/(d+1)] = τ·(7/4)
+                = 0.035 (ns_tilt, the closed window-evolution rate);
     · kL_CMB — the CMB-scale window width (the SCALE_CHOICE
                 published by perturbation_amplitude; the
                 closed value 2.4810667).
@@ -105,8 +105,9 @@ def sector_step(one_minus_ns: float, kL_cmb: float) -> float:
     """Δ = 6·(1−n_s)·kL_CMB — the sector ladder step.
 
     6 = the so(4) isometry's generators (the extrusion coupling);
-    1−n_s = the spectral tilt (τ·7/4 — ns_tilt, the closed
-    window-evolution rate); kL_CMB = the CMB-scale window width.
+    1−n_s = the spectral tilt (τ·[(1+2+1+3)/(d+1)] = τ·7/4 —
+    ns_tilt, the closed window-evolution rate); kL_CMB =
+    the CMB-scale window width.
     """
     return 6.0 * one_minus_ns * kL_cmb
 
@@ -156,8 +157,8 @@ def compute() -> dict:
               f"lepton rung spans two steps exactly)")
     pset("sector_alpha_delta", Delta, provenance="DERIVED",
          note=f"Delta = 6(1-n_s)kL_CMB = {Delta:.6f} (the so(4) "
-              f"isometry's 6 generators x the tilt 1-n_s = tau*7/4 x "
-              f"the CMB window kL_CMB)")
+              f"isometry's 6 generators x the tilt 1-n_s = "
+              f"tau*((1+2+1+3)/(d+1)) = tau*(7/4) x the CMB window kL_CMB)")
     pset("sector_alpha_s_lep", s_lep, provenance="DERIVED",
          note=f"the lepton step s = 16Delta/17 = {s_lep:.6f} (the 9/8 "
               f"ladder split with the mean step Delta)")

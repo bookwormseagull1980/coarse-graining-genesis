@@ -15,6 +15,20 @@
    "value": 2.105e-09,
    "writer": "comparison/sm_rge/inputs.py"
   },
+  "Delta_m21_sq_obs": {
+   "note": "observed solar neutrino mass-squared splitting, comparison only",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 7.41e-05,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
+  "Delta_m31_sq_obs": {
+   "note": "observed atmospheric neutrino mass-squared splitting, comparison only",
+   "provenance": "SM_INPUT",
+   "role": "comparison",
+   "value": 0.002511,
+   "writer": "comparison/sm_rge/inputs.py"
+  },
   "G_F_obs": {
    "note": "SM measured input (comparison only)",
    "provenance": "SM_INPUT",
@@ -138,7 +152,7 @@
    "note": "SM measured input (comparison only)",
    "provenance": "SM_INPUT",
    "role": "comparison",
-   "value": 2.7255,
+   "value": 2.72548,
    "writer": "comparison/sm_rge/inputs.py"
   },
   "T_deconf_obs": {
@@ -415,21 +429,21 @@
    "writer": "comparison/sm_rge/inputs.py"
   },
   "m_nu1_obs": {
-   "note": "SM measured input (comparison only)",
+   "note": "legacy lightest-mass placeholder; no direct measured central value",
    "provenance": "SM_INPUT",
    "role": "comparison",
    "value": 0.0026,
    "writer": "comparison/sm_rge/inputs.py"
   },
   "m_nu2_obs": {
-   "note": "SM measured input (comparison only)",
+   "note": "sqrt(Delta m21^2) proxy for legacy comparison only; not a direct measured mass",
    "provenance": "SM_INPUT",
    "role": "comparison",
    "value": 0.0086,
    "writer": "comparison/sm_rge/inputs.py"
   },
   "m_nu3_obs": {
-   "note": "SM measured input (comparison only)",
+   "note": "sqrt(Delta m31^2) proxy for legacy comparison only; not a direct measured mass",
    "provenance": "SM_INPUT",
    "role": "comparison",
    "value": 0.0502,

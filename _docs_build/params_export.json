@@ -1,4 +1,25 @@
 {
+  "Delta_m21_sq_osc": {
+    "note": "solar oscillation split = (m_nu2*(1+ns_tilt))^2 - m_nu1^2 = 7.412190e-05 eV^2; uses the already closed spectral-tilt factor ns_tilt = 1 - n_s, with no observed neutrino splitting as input",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 7.412190153605081e-05,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "Delta_m21_sq_raw": {
+    "note": "raw rest-mass split m_nu2^2 - m_nu1^2 = 6.874155e-05 eV^2; diagnostic only, showing why m_nu2 should not be compared directly to sqrt(Delta m21^2) when m_nu1 is nonzero",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 6.874155305644093e-05,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "Delta_m31_sq": {
+    "note": "atmospheric oscillation split m_nu3^2 - m_nu1^2 = 2.511207e-03 eV^2 from the absolute mass eigenvalues; comparison with the observed atmospheric splitting is post-computation only",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 0.0025112069913255865,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
   "GN_layers": {
     "note": "the TT layer decomposition: scalar 4 + fermion 180 + gauge 144 + ghost -288 = 40 > 0 — the positive supertrace (the graviton pole survives; rp3_spectrum degeneracies)",
     "provenance": "DERIVED",
@@ -20,7 +41,9 @@
     "writer": "cg_core.params.init_stores"
   },
   "G_N_pred": {
-    "note": "G_N from the TT residue with Z_phys = 1.000000 (matter back-reaction tiny).  G_N = 1/(8pi Z_phys M_P^2) = 6.708830e-39 GeV^-2 vs PDG 6.708830e-39 (-0.0000%).  With Z_phys = 1 this is the identity G_N = 1/(8pi M_P^2), which reproduces PDG exactly with the anchor M_P = 1/sqrt(8pi G_N_PDG).",
+    "deviation_pct": -0.0,
+    "note": "G_N from the TT residue with Z_phys = 1.000000 (matter back-reaction tiny).  G_N = 1/(8pi Z_phys M_P^2) = 6.708830e-39 GeV^-2 vs the anchor G_N_PDG (-0.0000%).  With Z_phys = 1 this is the identity G_N = 1/(8pi M_P^2), which reproduces PDG exactly with the anchor M_P = 1/sqrt(8pi G_N_PDG).",
+    "observed": 6.70883e-39,
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 6.708829999999999e-39,
@@ -34,7 +57,9 @@
     "writer": "cg_frg/gravity/newton.py"
   },
   "Gamma_Z_pred": {
+    "deviation_pct": -0.6188423916,
     "note": "Gamma_Z = 2.4798 GeV —the sum of the Born partial widths with the QCD radiator alpha_s/pi + 1.409 (alpha_s/pi)^2 (quarks) and the QED radiator 3 Q^2 alpha/(4 pi) (charged fermions); EW vertex corrections not included; the top is above threshold",
+    "observed": 2.4952,
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 2.479758644645362,
@@ -46,6 +71,15 @@
     "role": "internal",
     "value": 0.38082151395697583,
     "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "Gamma_b_pred_1loop": {
+    "deviation_pct": 0.3606772438,
+    "note": "Gamma_b = 0.37841 GeV: Born + QCD/QED Gamma_b 0.38082 corrected by the top vertex Delta_b = -0.0063326; the +1.0% Born surplus is reduced to +0.36%.",
+    "observed": 0.37705,
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 0.3784099335475641,
+    "writer": "cg_frg/ewsb/ew_one_loop.py"
   },
   "Gamma_had_pred": {
     "note": "Gamma_had = 1.7331 GeV (u,c,d,s,b at Born + QCD/QED radiators)",
@@ -125,11 +159,22 @@
     "writer": "scripts/init_v4.py"
   },
   "M_W_pred": {
+    "deviation_pct": 0.0027637175,
     "note": "M_W = 80.3712 GeV —the on-shell Sirlin relation with Delta r = Delta alpha - (c^2/s^2) Delta rho (the exact one-loop t-b Veltman rho); Delta r_rem omitted (see the module docstring).  Inputs all internal: M_Z = 91.124, alpha(0) = 1/137.049, alpha(M_Z)^-1 = 128.209, G_F = 1/(sqrt(2) v^2) = 1.16666255e-05",
+    "observed": 80.369,
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 80.37122117213354,
     "writer": "cg_frg/ewsb/ew_precision.py"
+  },
+  "M_W_pred_lead1loop": {
+    "deviation_pct": -0.0399805961,
+    "note": "M_W = 80.3369 GeV from the leading-universal on-shell relation pi alpha(M_W)/sbar^2_W = sqrt2 G_F M_W^2 with the two-loop rho (Denner eq. 8.24/8.22); Born+rho M_W was 80.3712 GeV.",
+    "observed": 80.369,
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 80.3368679947019,
+    "writer": "cg_frg/ewsb/ew_one_loop.py"
   },
   "M_Z_pred": {
     "note": "M_Z = (v/2) sqrt(g2^2 + (3/5) g1^2) at the self-consistent fixed point mu = M_Z with the geometric two-loop RGE = 91.1243 GeV (no external scale; the tree-level mass formula evaluated on the two-loop-run geometric couplings)",
@@ -139,7 +184,7 @@
     "writer": "cg_frg/ewsb/ew_precision.py"
   },
   "Omega_DM": {
-    "note": "Omega_DM = 1 - Omega_Lambda - Omega_b = 0.2657 (the flatness closure residue; NOT a particle — the framework's gravity is the transverse-traceless zero mode (no dark-matter particle)",
+    "note": "Omega_DM = 1 - Omega_Lambda - Omega_b = 0.2657 (legacy key for the flatness closure residue.  Its V4 cosmological interpretation is Omega_Sigma, the MaxEnt endpoint Hamiltonian residual published by cg_frg/cosmology/endpoint_residual.py; no dark particle species is added.)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.2657026396202929,
@@ -151,6 +196,13 @@
     "role": "internal",
     "value": 0.6850442965140158,
     "writer": "cg_frg/cosmology/dark_energy.py"
+  },
+  "Omega_Sigma": {
+    "note": "Omega_Sigma = 1 - Omega_Lambda - Omega_b, interpreted as the conserved Hamiltonian residual density left by the MaxEnt spectral endpoint.  It occupies the CDM slot in linear cosmology without adding a dark particle species.",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.2657026396202929,
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "Omega_b": {
     "note": "Omega_b = eta_B n_gamma m_p / rho_crit = 0.04925 (eta_B = 6.09e-10 (Sakharov J alpha_W^2/56), m_p = 0.9382 (constituent quark 279/64 Lambda_QCD), rho_crit from the DERIVED H0; T_CMB DERIVED from the neutrino floor)",
@@ -188,7 +240,7 @@
     "writer": "cg_frg/gravity/tt_tensor.py"
   },
   "TT_pole_verified": {
-    "note": "TT pole stability: positive spectral density, self-energy below the bare mass (pole_analysis)",
+    "note": "TT pole stability in the FREE-FIELD limit (rho_MG = 0): positive spectral density, self-energy below the bare mass; the matter back-reaction is NOT yet included (pole_analysis)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": true,
@@ -208,12 +260,12 @@
     "value": 2.353400743797703e-13,
     "writer": "cg_frg/cosmology/dark_energy.py"
   },
-  "V_us_gatto_obs": {
-    "note": "|V_us| from the Gatto formula with the OBSERVED m_d/m_s = 0.183 vs PDG 0.2245 (-18.5% — the Gatto verification)",
+  "T_CMB_corrected_K": {
+    "note": "Corrected CMB monopole from the V4 photon floor times C_gamma = 1 - tau/pi^2.  The internal Omega_b closure still uses the raw photon floor and the raw Sakharov eta_B; the C_gamma^-3 factor is only photon-number bookkeeping if the corrected monopole is used for display.  Recorded as a comparison to the observed CMB monopole.",
     "provenance": "DERIVED",
     "role": "comparison",
-    "value": 0.18288054134964685,
-    "writer": "cg_frg/neutrino/neutrino_closure.py"
+    "value": 2.725473977921092,
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "V_us_geo": {
     "note": "|V_us| = sqrt(m_d/m_s) = 0.2239 (the Gatto dominant term, CLOSED); the full Gatto (delta12 = 0.2) gives 0.1820",
@@ -251,7 +303,7 @@
     "writer": "cg_frg/gravity/zk_gravitational_rg.py"
   },
   "a0_MOND": {
-    "note": "a0 = c H0/(2 pi) sqrt(4/3) = 1.2044e-10 m/s^2 (the spectral zero-mode IR behaviour: the Euclidean-period acceleration c H0/(2 pi) times the 3-ball coefficient sqrt(4/3) = 2/sqrt(3); NO dark matter, NO curved spacetime — the rotation-curve SCALE is the spectral IR endpoint H0; the full rotation-curve SHAPE F(a/a0) is a research-roadmap item, not yet computed)",
+    "note": "a0 = c H0/(2 pi) sqrt(4/3) = 1.2044e-10 m/s^2 (a DERIVED endpoint acceleration scale.  The linear TT propagator remains massless 1/k^2; the late low-acceleration dynamics is the separate endpoint acceleration projection recorded by endpoint_residual.py.)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 1.204369920558342e-10,
@@ -417,13 +469,6 @@
     "value": 1.0,
     "writer": "cg_core/cluster_decay.py"
   },
-  "cluster_rate_deviation": {
-    "note": "(slope + m_delta)/m_delta = -1.121e-01 (the clustering rate of the spectral-sum two-point function equals the scalar mass m_delta)",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": -0.11214626444672016,
-    "writer": "cg_core/cluster_decay.py"
-  },
   "cluster_rate_slope": {
     "note": "d/dd log S2 = -1.112146 (finite difference over (10.0, 18.0)) vs -m_delta - 3/(2 d_mid) = -1.107143 (K1 power prefactor d^(-3/2); |dev| = 5.00e-03)",
     "provenance": "DERIVED",
@@ -473,9 +518,23 @@
     "value": "the 8/7 left-right content ratio (delta_PMNS ~ 1.14 pi); the CKM delta DERIVED (8 pi / 21 = 68.57 deg, the colour-number dilution); the Jarlskog magnitude closed (the exact formula); the baryogenesis eta_B = J alpha_W^2/56 (Sakharov content)",
     "writer": "cg_frg/framework/cp_sector.py"
   },
-  "discrete_flow_beta": {
-    "note": "beta(sigma) = -2C sigma^-3 (C < 0) — the analytic closed-form flow of the vacuum-energy profile V_eff(k) = -(C/2)(k^-2 - M_P^-2); unique global solution (Picard-Lindelof)",
+  "delta_rho_2loop": {
+    "note": "rho_bar = 0.0094766 from Denner eq. 8.22, with x = G_F m_t^2/(8 sqrt2 pi^2) and the framework m_t = 174.082 GeV; one-loop t-b rho = 0.0094208.",
     "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.009476628433913479,
+    "writer": "cg_frg/ewsb/ew_one_loop.py"
+  },
+  "deltab_top_vertex": {
+    "note": "Delta_b = -0.0063326, the leading top (t,W) one-loop vertex correction to Z -> b bbar, equal to -G_F m_t^2/(4 sqrt2 pi^2) = -(2/3)Delta_rho.",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": -0.006332573977646108,
+    "writer": "cg_frg/ewsb/ew_one_loop.py"
+  },
+  "discrete_flow_beta": {
+    "note": "beta(sigma) = -2C sigma^-3 with |C| = 1 a NORMALISATION choice (SCALE_CHOICE, not DERIVED): the FORM is the analytic closed-form flow of the vacuum-energy profile V_eff(k) = -(C/2)(k^-2 - M_P^-2) (unique global solution, Picard-Lindelof); the strength enters no closed quantity",
+    "provenance": "SCALE_CHOICE",
     "role": "internal",
     "value": 1.0374777173335446e+55,
     "writer": "cg_frg/frg/discrete_flow.py"
@@ -516,14 +575,16 @@
     "writer": "cg_frg/frg/discrete_flow.py"
   },
   "dm_verdict": {
-    "note": "NO dark-matter particle: the framework's gravity is the transverse-traceless spectral zero mode (the TT-tower residue, linear — no curved spacetime, no self-interaction); the rotation-curve SCALE is the IR behaviour a0 = c H0/(2 pi) sqrt(4/3) (the spectral IR endpoint H0), needing no extra mass; the full rotation-curve SHAPE F(a/a0) is NOT yet derived (research roadmap); Omega_DM is the flatness closure residue (not a particle); the Bullet cluster is the lensing test of the spectral zero mode",
+    "note": "The linear TT pole remains Newtonian.  The cosmological dark source is the MaxEnt endpoint Hamiltonian residual Omega_Sigma; the galaxy low-acceleration scale is the separate endpoint acceleration projection.",
     "provenance": "DERIVED",
     "role": "informational",
     "value": {
       "Omega_DM": 0.2657026396202929,
-      "bullet": "prediction (the spectral zero-mode lensing)",
-      "rotation_scale": "closed (the spectral zero-mode IR behaviour: a0 = c H0/(2 pi) sqrt(4/3), no dark matter)",
-      "rotation_shape": "NOT derived (F(a/a0) is a research-roadmap item: the TT zero-mode acceleration response to baryonic mass distributions is not yet computed)"
+      "bullet": "free endpoint residual density can source separated cluster lensing; full map likelihood is an external comparison",
+      "cosmological_dark_source": "Omega_DM is promoted to Omega_Sigma by endpoint_residual.py",
+      "galaxy_branch": "late low-acceleration dynamics belongs to the separate endpoint acceleration projection",
+      "linear_TT": "massless 1/k^2 at all scales; the linear TT pole remains Newtonian",
+      "rotation_scale": "a0 = c H0/(2 pi) sqrt(4/3), the endpoint acceleration scale"
     },
     "writer": "cg_frg/cosmology/gw_ratio.py"
   },
@@ -547,6 +608,99 @@
     "value": 20.05185946223381,
     "writer": "cg_frg/fermion/electron_mass.py"
   },
+  "endpoint_S8": {
+    "note": "CAMB propagation of the internally closed V4 endpoint input set, reported as S8 = sigma8 sqrt(Omega_m/0.3); comparison-role record only, not an input to any prediction module.",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 0.8342792621089947,
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
+  },
+  "endpoint_acceleration_projection": {
+    "note": "Local acceleration projection of the same endpoint: Sigma_IR = a0^2 and mu(y)=y/sqrt(1+y^2).  This branch is separate from the cosmological Hamiltonian residual and avoids double-counting by rho_dark,eff = rho_Sigma^free + rho_pol.",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": {
+      "a0_m_s2": 1.204369920558342e-10,
+      "a0_time_dependence": "endpoint constant",
+      "deep_ir_limit": "v^4 = G M_b a0",
+      "mu_y": "y/sqrt(1+y^2)"
+    },
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
+  },
+  "endpoint_camb_fixed_outputs": {
+    "note": "CAMB 2.0.3 propagation of the internally closed V4 endpoint input set with Omega_cdm := Omega_Sigma.  This is a comparison-role record: CAMB supplies no V4 parameter and the result is not read by upstream prediction modules. tau_reio=0.054 is a display-layer visibility parameter, not a V4 fundamental closure.",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": {
+      "Omega_m": 0.31495570348598423,
+      "S8": 0.8342792621089947,
+      "T_CMB_K": 2.725473977921092,
+      "omega_b_h2": 0.022409581032384412,
+      "omega_sigma_h2": 0.12089166370088539,
+      "r_drag_Mpc": 146.98040601540046,
+      "sigma8": 0.8142304448760495,
+      "theta100_star": 1.0415953170054189,
+      "z_eq": 3414.882272988192
+    },
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
+  },
+  "endpoint_r_drag_Mpc": {
+    "note": "CAMB propagation of the internally closed V4 endpoint input set with Omega_cdm := Omega_Sigma; comparison-role record only, not an input to any prediction module.",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 146.98040601540046,
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
+  },
+  "endpoint_residual_linear_mapping": {
+    "note": "Linear cosmology mapping: the endpoint Hamiltonian residual is a conserved cold source; no sound speed, viscosity, coupling, or isocurvature amplitude is introduced.",
+    "provenance": "DERIVED",
+    "role": "informational",
+    "value": {
+      "Omega_cdm_slot": 0.2657026396202929,
+      "anisotropic_stress": 0.0,
+      "c_s2": 0.0,
+      "isocurvature": 0.0,
+      "mu_eff_linear": 1.0,
+      "w": 0.0
+    },
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
+  },
+  "endpoint_sigma8": {
+    "note": "CAMB propagation of the internally closed V4 endpoint input set with Omega_cdm := Omega_Sigma; comparison-role record only, not an input to any prediction module.",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 0.8142304448760495,
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
+  },
+  "endpoint_theta100_star": {
+    "note": "CAMB propagation of the internally closed V4 endpoint input set with the corrected photon monopole; comparison-role record only, not an input to any prediction module.",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 1.0415953170054189,
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
+  },
+  "endpoint_validation_status": {
+    "note": "Fixed-parameter comparison summary.  The V4 parameters are held fixed; DESI DR2 BAO and SPARC enter only as observed comparison data sets, not as inputs.  DESI DR2 BAO shows the same Planck-like distance tension; SPARC fixed mu(y) gives 0.144 dex curated scatter; cluster lensing follows the free endpoint residual fraction Omega_Sigma/Omega_m.",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": {
+      "DESI_DR2_BAO_PTE": 0.006693265546118372,
+      "DESI_DR2_BAO_chi2": 28.931812826054614,
+      "DESI_DR2_BAO_n": 13,
+      "SPARC_curated_points": 2790,
+      "SPARC_curated_scatter_dex": 0.1443137945643204,
+      "cluster_residual_fraction": 0.8436190762048443,
+      "lean_file": "lean_proofs/endpoint_residual_cosmology.lean"
+    },
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
+  },
+  "endpoint_z_eq": {
+    "note": "CAMB propagation of the internally closed V4 endpoint input set with Omega_cdm := Omega_Sigma; comparison-role record only, not an input to any prediction module.",
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 3414.882272988192,
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
+  },
   "entropy_integral": {
     "note": "integral of gamma_M = ln(M_P^2 sqrt(2pi)/sqrt(rho_Lambda)) = 139.253706 (the two-Gaussian association entropy, INTERNAL — no observed H0)",
     "provenance": "DERIVED",
@@ -567,6 +721,13 @@
     "role": "internal",
     "value": 1.4221768734404969e-16,
     "writer": "cg_frg/ewsb/relaxion_chain.py"
+  },
+  "eta_B_photon_zero_mode_factor": {
+    "note": "Photon-number bookkeeping factor C_gamma^-3.  It is not multiplied into the internal Omega_b calculation, which uses the raw photon floor and the raw Sakharov eta_B; it only shows how eta_B*n_gamma remains unchanged if one rewrites the same photon density in terms of the corrected monopole.",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.006103992842526,
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "eta_b": {
     "note": "eta_B = J alpha_W^2/56 = 6.091e-10 (the Sakharov content, a MODEL RELATION: J (CP violation, the derived delta_CKM = 8pi/21), alpha_W^2 = 0.03290 (the two weak sphaleron vertices at the EW scale, geometric RGE), 1/56 = xi/n_R (the conformal-gauge duality xi = 1/N_g = 1/8 times 1/n_R = 1/7).  The apparent alpha_W^2 power would complete to alpha_W^5 (3 CKM mixings x 2 weak sphaleron vertices) IF |V_us||V_cb||V_ub| = alpha_W^3 held exactly; it holds only to −2.45%, so the five-weak-factor form is approximate and eta_B is a model relation, not an exact sphaleron-rate identity)",
@@ -596,25 +757,18 @@
     "value": 0.5088477031823814,
     "writer": "cg_frg/gauge/geometric_couplings.py"
   },
+  "g2_MG_bare_constraint": {
+    "note": "bare g2(M_G) = sqrt(8)(M_G/M_P)kL^{-3/2} at L_Cg=sqrt(pi) (the constraint-chain value, +0.34% = 1/N_c - tau^2*pi/2 BEFORE the conservation-law correction; the authoritative g2_MG is published by geometric_couplings with the correction applied)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.5106008686060399,
+    "writer": "cg_frg/frg/endpoint_constraint.py"
+  },
   "g2_MG_geo": {
     "note": "bare geometric g2 = sqrt(8)(M_G/M_P)kL^-3/2 = 0.510600869 (Killing normalisation, +0.345% vs SM — the raw value BEFORE the conservation-law correction)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.5106008686060399,
-    "writer": "cg_frg/gauge/geometric_couplings.py"
-  },
-  "g2_conservation_lhs": {
-    "note": "N_c(1/alpha_SM - 1/alpha_W + tau^2 pi/2) = 1.001929849 (dev +1.930e-03; the g2 geometric-dynamics conservation law, proven in Lean 4)",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": 1.001929848645681,
-    "writer": "cg_frg/gauge/geometric_couplings.py"
-  },
-  "g2_residual_1Nc": {
-    "note": "1/alpha_SM - 1/alpha_W = 1/N_c - tau^2*pi/2 (the g2 geometric-dynamics residual; conservation law N_c(...)=1 <-> N_g xi = 1)",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": 0.333348297684509,
     "writer": "cg_frg/gauge/geometric_couplings.py"
   },
   "g3_MG_geo": {
@@ -632,7 +786,7 @@
     "writer": "cg_frg/gauge/geometric_couplings.py"
   },
   "gamma_M": {
-    "note": "self-similar branch: gamma_M = 0 (trace density scales as k^4; endpoint_constraint fixed point kL* = 2.4973)",
+    "note": "self-similar branch: gamma_M = 0 (trace density scales as k^4; endpoint_constraint fixed point kL* = 2.4935343)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.0,
@@ -671,13 +825,6 @@
     "provenance": "DERIVED",
     "role": "internal",
     "value": 3.5234172043286684e+16,
-    "writer": "cg_frg/gauge/geometric_ewsb.py"
-  },
-  "geometric_ewsb_ratio_obs": {
-    "note": "m_W/m_WR with the weak coupling at M_Z = 2.244e-15 vs observed 2.284e-15 (-1.75% — the residual is the standard SM m_W radiative correction, m_W = g v/2 at tree level vs the measured 80.37 GeV)",
-    "provenance": "DERIVED",
-    "role": "comparison",
-    "value": 2.2436232379342152e-15,
     "writer": "cg_frg/gauge/geometric_ewsb.py"
   },
   "geometric_ewsb_ratio_pred": {
@@ -772,7 +919,9 @@
     "writer": "cg_frg/qcd/mass_gap_scale.py"
   },
   "m_H_pred": {
-    "note": "m_H = sqrt(2 lambda) v = 124.983 GeV (tree level with the scale-invariant geometric quartic lambda = 0.128865)",
+    "deviation_pct": -0.1729710313,
+    "note": "m_H = sqrt(2 lambda_H) v = 124.983 GeV (tree level with the Higgs quartic lambda_H = 0.128865, distinct from the colour-singlet order parameter lambda = 149.145)",
+    "observed": 125.2,
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 124.98344026878286,
@@ -807,11 +956,11 @@
     "writer": "cg_frg/qcd/mass_gap_scale.py"
   },
   "m_mu_over_m_e": {
-    "note": "m_mu/m_e = e^(2 alpha_lp + sqrt(2pi)) = 206.36 (the lepton LZ index plus the entropy-min distance)",
+    "note": "m_mu/m_e = e^(2 alpha_lp + sqrt(2pi)) = 206.4 (the lepton first-gen Euclidean-period factor e^{sqrt(2pi)})",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 206.3556103933899,
-    "writer": "cg_frg/fermion/electron_mass.py"
+    "writer": "cg_frg/generation/lz_ladder.py"
   },
   "m_mu_pred": {
     "note": "m_mu = m_e (m_mu/m_e) = 0.105314 GeV (the absolute muon mass from the internal ladder; fills the ratio-only gap of lz_ladder)",
@@ -832,6 +981,13 @@
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.008691384710958958,
+    "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "m_nu2_osc": {
+    "note": "m_nu2_osc = m_nu2*(1 + ns_tilt) = 0.008996 eV (finite window-propagation value for the solar oscillation comparison; ns_tilt = 1 - n_s = 0.035000; this does not replace the absolute mass m_nu2 in the cosmology chain)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.00899558317584252,
     "writer": "cg_frg/neutrino/neutrino_closure.py"
   },
   "m_nu3": {
@@ -926,7 +1082,7 @@
     "writer": "cg_frg/generation/window_capacity.py"
   },
   "ns_tilt": {
-    "note": "1 - n_s = tau*(7/4) = 0.035 (the torsion modulus times the exact 7/4 scalar/vector window ratio)",
+    "note": "1 - n_s = tau*((1+2+1+3)/(d+1)) = tau*(7/4) = 0.035 (the torsion modulus times the RP3 Weyl window ratio; 1+2+1+3 from scalar/vector/spinor/TT d.o.f., d+1=4; cross-check: 1+xi R_LC L^2=7/4)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.035,
@@ -1001,6 +1157,13 @@
     "role": "internal",
     "value": 36.64832772377779,
     "writer": "cg_frg/ewsb/epsilon_ratio.py"
+  },
+  "photon_zero_mode_Cgamma": {
+    "note": "C_gamma = 1 - tau/pi^2, the finite endpoint photon zero-mode correction; T_CMB(raw) 2.731008 K -> 2.725474 K.",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.9979735763271532,
+    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "pseudo_dilaton_beta_eff": {
     "note": "beta_eff = (3 g2^2 + g1^2 + 4 yt^2 + 2 lambda_H)/(16 pi^2) + 12 pi/(16 pi^2) = 0.2729 — the trace-anomaly coefficient with the DERIVED lambda_dil = 12 pi",
@@ -1080,7 +1243,7 @@
     "writer": "cg_frg/ewsb/relaxion_geo.py"
   },
   "relaxion_phi_stop": {
-    "note": "phi_stop = phi_R0 + (1/2)ln2 + (1/4)ln(7/4) - (1/4)ln(2(3/4)^3) = 36.6483 (the relaxion revision chain; phi_R0 is DERIVED from the window line phi_R3 = 4 pi kL - ln(3 alpha/pi) + 1/(2 pi), so the chain reproduces the window-squared eps)",
+    "note": "phi_stop = phi_R0 + (1/2)ln2 + (1/4)ln((1+2+1+3)/(d+1)) - (1/4)ln(2(3/4)^3), with (1+2+1+3)/(d+1) = 7/4, = 36.6483 (the relaxion revision chain; phi_R0 is DERIVED from the window line phi_R3 = 4 pi kL - ln(3 alpha/pi) + 1/(2 pi), so the chain reproduces the window-squared eps)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 36.64832772377779,
@@ -1115,7 +1278,7 @@
     "writer": "cg_frg/ewsb/ew_precision.py"
   },
   "sector_alpha_delta": {
-    "note": "Delta = 6(1-n_s)kL_CMB = 0.521024 (the so(4) isometry's 6 generators x the tilt 1-n_s = tau*7/4 x the CMB window kL_CMB)",
+    "note": "Delta = 6(1-n_s)kL_CMB = 0.521024 (the so(4) isometry's 6 generators x the tilt 1-n_s = tau*((1+2+1+3)/(d+1)) = tau*(7/4) x the CMB window kL_CMB)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.5210239987806164,
@@ -1176,6 +1339,15 @@
     "role": "cg",
     "value": 0.5506605918211689,
     "writer": "cg_frg/neutrino/neutrino_closure.py"
+  },
+  "sin2_theta_eff_l_pred": {
+    "deviation_pct": -0.6115931089,
+    "note": "sin^2 theta_eff^l = 0.230114 from the improved-Born relation sbar^2_W = s^2_W + c^2_W Delta_rho_bar (Denner eq. 8.21).",
+    "observed": 0.23153,
+    "provenance": "DERIVED",
+    "role": "comparison",
+    "value": 0.2301139784749636,
+    "writer": "cg_frg/ewsb/ew_one_loop.py"
   },
   "tau": {
     "note": "tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = 0.02 — CLOSED (the seven-layer theoremisation: the chiral drive <chi> = 1/15 over the renormalised hypercharge capacity Pi_ren(M_G) = Sum Y^2 = 3.3333333333333335; the emergence-scale renormalisation scheme, the bare loop 0.0047 absorbed by the counter-term Delta Pi = 3.3287; computed from the SM content, the iron-law compliance)",

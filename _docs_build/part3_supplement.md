@@ -137,7 +137,7 @@ None of these five deviations is a "fixable framework-mechanism defect": observa
 | ε_L/ε_R hierarchy | [OK] closed | m_W/m_WR=ε/(2s₀): ×12.5 is exactly 1/(2s₀)=12.5; after SM running −0.73% |
 | kL_CMB | [OK] closed | computed as kL·(1−τ/4) (the CMB pivot-window torsion quarter correction) |
 | g₁ (CF-4) | [OK] closed | κ²(2τ)=(1+2τ)/(1−4τ)^{5/2} @k_GUT (+0.22%) |
-| PMNS large angles | [OK] closed | sin²θ12=1/3, m_ν1/m_ν2=3/10, sin²θ23=0.5507, sin²θ13=0.02194 |
+| PMNS large angles | [OK] formal closure | sin²θ12=m_ν1/m_ν2=3/10, sin²θ23=0.5507, sin²θ13=0.02194; not a main precision-comparison entry |
 | zk quantum correction | [OK] closed (precision annotation) | +0.615% (order-of-magnitude estimate, 384π² normalisation, x̄=1/2 documented) |
 | W_R± | [OK] closed | m_WR=3.5e16 GeV (GUT-scale prediction) |
 | CKM δ | [OK] closed | J magnitude −1.1% closed; direction 8π/21=68.57° (+0.10%) — ÷3=÷N_c internal-space dimension dilution |
@@ -170,7 +170,7 @@ None of these five deviations is a "fixable framework-mechanism defect": observa
 1. **Geometric RGE**: the geometric quantities (y₀=1.0, λ_H) are scale-invariant and do not run; only g1, g2, g3 run (the SM two-loop β)
 2. **Redshift = spectrum**: T_CMB is fixed by the neutrino mass, not an evolving quantity
 3. **Hierarchy-ratio correction r23**: √(2π)→√(2π+r23) of the Gaussian-entropy minimal distance
-4. **The acceleration scale**: spectral zero mode, Newtonian gravity at all scales, no dark-matter dynamics (retracted)
+4. **The endpoint residual and acceleration branch**: Ω_Σ is the cold source in linear cosmology; a0 and μ(y)=y/sqrt(1+y²) define the fixed local low-acceleration response
 5. **Symmetry pinning**: the conformal weight Δ, the conformal-gauge duality, d=N_c turn candidate-level parameters into first principles
 
 ---

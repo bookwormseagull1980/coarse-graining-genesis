@@ -176,11 +176,11 @@ The full field-equation proof of the s0/N_R correction (the symmetry correction 
 | H0 | 1.4410e-42 GeV | 1.44e-42 | +0.069% | H0 = M_P·√π·e^{−∫γ_M} (two Gaussian entropies + r23) |
 | Ω_Λ | 0.68504 | 0.68470 | +0.05% | 2/3 + r23/(3π) |
 | Ω_b | 0.04915 | 0.04930 | −0.30% | η_B·n_γ·m_p/ρ_crit (fully internal) |
-| Ω_DM | 0.26580 | 0.26447 | +0.50% | flatness closure 1−Ω_Λ−Ω_b (not a particle) |
-| T_CMB | 2.7232 K | 2.7255 | −0.09% | m_ν1·r12/π·(1−τ·Δ_s) (neutrino photon floor) |
+| Ω_Σ | 0.26570 | 0.26447 | +0.46% | endpoint Hamiltonian residual 1−Ω_Λ−Ω_b (not a particle) |
+| T_CMB | 2.72547 K | 2.7255 | ~0.00% | raw photon floor 2.7310 K times C_γ=1−τ/π² |
 | a0 | 1.206e-10 | 1.2e-10 | +0.51% | acceleration-scale IR (c·H0/2π·√4/3) |
 
-**Key verification: Ω_b + Ω_DM + Ω_Λ = 1.00000 (exact flatness)** — three independent mechanisms (η_B, closure, two Gaussian entropies) sum exactly to 1, not a fit.
+**Key verification: Ω_b + Ω_Σ + Ω_Λ = 1.00000 (exact flatness)** — three independent mechanisms (η_B, closure, two Gaussian entropies) sum exactly to 1, not a fit.
 
 **The two Gaussian correlation entropies (∫γ_M internalised, direction corrected)**:
 - two Gaussians = Planck Gaussian N(0,M_P²) + vacuum-floor Gaussian N(0,√ρ_Λ)
@@ -190,18 +190,18 @@ The full field-equation proof of the s0/N_R correction (the symmetry correction 
 **Complete closure chain (zero observational anchor, except G_N)**:
 ```
 G_N → M_P → M_G → kL → ρ_Λ(Y_u·m_ν1⁴) → ∫γ_M(two Gaussian entropies + r23) → H0
-    → Ω_Λ → T_CMB(neutrino photon floor) → η_B(J·α_W⁵/56) → m_p((279/64)Λ_QCD) → Ω_b → Ω_DM
+    → Ω_Λ → T_CMB(raw photon floor + C_γ endpoint correction) → η_B(J·α_W⁵/56) → m_p((279/64)Λ_QCD) → Ω_b → Ω_Σ
 ```
 
 
 
-### 2. The acceleration scale and the dark-matter remainder (RETRACTED 2026-08-22)
+### 2. The endpoint residual and the acceleration branch (updated 2026-08-23)
 
 - **The framework's gravity is "transparent"**: G_N = 1/(8π·Z_phys·M_P²), Z_phys≈1 (matter back-reaction 0.2%)
 - Gravity = the TT spectral zero mode (emerging from the spectral sum), Newtonian 1/r at all scales, no self-interaction, Z_phys = 1
-- **Dark-matter remainder (unexplained)**: Ω_DM = 0.266 is a flatness-closure quantity (not a particle)
-- a0 = c·H0/(2π)·√(4/3) is a DERIVED scale reproducing the Milgrom coincidence (no MOND dynamics)
-- The present linear kernel does NOT derive flat rotation curves (F = 1); these require an additional IR dynamical closure
+- **Endpoint Hamiltonian residual**: Ω_Σ = 0.26570 is the flatness-closure quantity 1−Ω_Λ−Ω_b (not a particle species).
+- a0 = c·H0/(2π)·√(4/3) is a DERIVED endpoint acceleration scale.
+- The linear TT kernel fixes the Newtonian baseline.  The promoted branch separately uses Ω_Σ as the cold source in linear cosmology and Σ_IR=a0² with μ(y)=y/sqrt(1+y²) as the local low-acceleration response.
 
 ### 3. Symmetry-pinned parameters (2026-08-15 23:30, user "continue the assault")
 
@@ -244,7 +244,7 @@ G_N → M_P → M_G → kL → ρ_Λ(Y_u·m_ν1⁴) → ∫γ_M(two Gaussian ent
 - Geometric RGE: the geometric quantities (y₀=1.0, λ_H) are scale-invariant and do not run; only g1, g2, g3 run
 - Redshift = spectrum (T_CMB is fixed by the neutrino mass, not an evolving quantity)
 - Hierarchy-ratio correction r23 (the correction of the Gaussian-entropy minimal distance)
-- The acceleration scale (spectral zero mode, Newtonian gravity at all scales)
+- The endpoint residual and acceleration branch (Ω_Σ as the cold cosmology slot; a0 and μ(y)=y/sqrt(1+y²) as the local response)
 - Symmetry pinning (conformal weight Δ, conformal-gauge duality, d=N_c)
 
 ## ⭐ 2026-08-15 22:45 update (direction correction + cosmology sector fully closed)
@@ -262,11 +262,11 @@ r23 = m2/m3 = 1/(√3·Tr(Y²)) = 3/(10√3) is the hypercharge-trace hierarchy 
 | entropy_integral | 139.2522 | −0.0008% | two Gaussian entropies + r23 correction |
 | H0 | 1.4410e-42 GeV | **+0.069%** | H0 = M_P·√π·e^{−∫γ_M} |
 | Ω_Λ | 0.68504 | **+0.007%** | 2/3 + r23/(3π) |
-| T_CMB | 2.7232 K | −0.09% | m_ν1·r12/π·(1−τ/2) (photon floor) |
+| T_CMB | 2.72547 K | ~0.00% | raw photon floor 2.7310 K times C_γ=1−τ/π² |
 | η_B | 6.151e-10 | +0.8% | Sakharov J·α_W²/56 |
 | m_p | 0.9380 GeV | −0.03% | constituent quark (279/64)Λ_QCD |
 | Ω_b | 0.04915 | **+0.31%** | η_B·n_γ·m_p/ρ_crit (fully internal) |
-| Ω_DM | 0.26580 | +2.2% | closure 1−Ω_Λ−Ω_b |
+| Ω_Σ | 0.26570 | +0.46% | endpoint residual 1−Ω_Λ−Ω_b |
 | m_ν1 | 0.00248 eV | internalised | m1 = m3·r12·r23 |
 
 ### Three fixes (bugs)

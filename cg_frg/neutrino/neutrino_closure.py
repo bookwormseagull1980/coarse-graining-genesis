@@ -101,6 +101,23 @@ imprint (the SAME 2π thread as the GW ratio r = (1/2π)² and the
 perturbation Δ²_0 = (1/2)(1/2π)²), the √3/2 = sin(π/3) the
 internal-space geometry factor (the S³→RP³ Z₂-quotient projection).
 
+OSCILLATION COMPARISON LAYER
+----------------------------
+The absolute masses above are rest-mass outputs.  Oscillation
+experiments measure mass-squared splittings.  Since m_ν1 is not zero
+in this framework, comparing m_ν2 directly with sqrt(Δm²_21) is only
+a massless-floor proxy and understates the solar splitting tension.
+
+The raw rest-mass split is therefore published explicitly.  In addition,
+the code records a separate finite-window propagation diagnostic:
+
+    m_ν2^osc = m_ν2 (1 + n_s^tilt),   n_s^tilt = 1 - n_s = τ·7/4 .
+
+This uses the already closed spectral-tilt quantity and does not feed
+back into the absolute-mass, dark-energy, CMB, or mass-sum chain.  It is
+marked as an oscillation-comparison layer, not as a replacement of the
+rest spectrum.
+
 V4 DISCIPLINE
 -------------
 The closure uses the framework's internal v, k_GUT, the alpha
@@ -185,6 +202,30 @@ def ckm_vus_observed(delta_12: float = 0.2) -> float:
     raise NotImplementedError("observed-mass Gatto verification removed")
 
 
+def oscillation_splittings(m1: float, m2: float, m3: float,
+                           ns_tilt: float) -> dict:
+    """Mass-squared splittings for the neutrino oscillation comparison.
+
+    The absolute masses m1,m2,m3 remain the static eigenvalues.  The
+    optional solar comparison layer uses the finite window-propagation
+    value
+
+        m2_osc = m2 * (1 + ns_tilt),
+
+    as a diagnostic of the light-pair propagation channel, while m1 is
+    kept as the vacuum-floor state.  This is not a fitted correction:
+    ns_tilt is the independently closed spectral tilt published by
+    cg_frg/cosmology/spectral_tilt.py.  The raw split is returned so the
+    effect of the comparison layer is explicit.
+    """
+    m2_osc = m2 * (1.0 + ns_tilt)
+    dm21_raw = m2 * m2 - m1 * m1
+    dm21_osc = m2_osc * m2_osc - m1 * m1
+    dm31 = m3 * m3 - m1 * m1
+    return {"m2_osc": m2_osc, "dm21_raw": dm21_raw,
+            "dm21_osc": dm21_osc, "dm31": dm31}
+
+
 def compute() -> dict:
     """Publish the neutrino closure, the hierarchy ratios, the PMNS
     and the CKM |V_us|."""
@@ -192,6 +233,7 @@ def compute() -> dict:
     k_GUT = get("k_GUT")
     a_up = get("alpha_up")
     a_dn = get("alpha_down")
+    ns_tilt = get("ns_tilt")
 
     m3 = weinberg_m3(v, k_GUT)
     # The hierarchy ratios (the hypercharge trace) — DEFINED FIRST.
@@ -217,6 +259,7 @@ def compute() -> dict:
     s12_pmns = r12             # sin²θ12 = m1/m2 = 3/10 (the solar = mass ratio)
     s23_pmns = 0.5 + tr_t32 * zp2
     s13_pmns = zp2 * math.sqrt(3.0) / 2.0
+    osc = oscillation_splittings(m1, m2, m3, ns_tilt)
 
     pset("m_nu3", m3, provenance="DERIVED", role="internal",
          note=f"m_nu3 = v^2 (2pi)^2/k_GUT (1 + s0 kappa) = {m3:.4f} eV "
@@ -237,6 +280,29 @@ def compute() -> dict:
          note=f"m_nu1/m_nu2 = 1/Tr(Y^2) = 3/10 (the hypercharge trace)")
     pset("mnu_ratio_23", r23, provenance="DERIVED", role="cg",
          note=f"m_nu2/m_nu3 = 1/(sqrt(3) Tr(Y^2)) = {r23:.4f}")
+    pset("m_nu2_osc", osc["m2_osc"], provenance="DERIVED", role="internal",
+         note=f"m_nu2_osc = m_nu2*(1 + ns_tilt) = {osc['m2_osc']:.6f} eV "
+              f"(finite window-propagation value for the solar oscillation "
+              f"comparison; ns_tilt = 1 - n_s = {ns_tilt:.6f}; this does "
+              f"not replace the absolute mass m_nu2 in the cosmology chain)")
+    pset("Delta_m21_sq_raw", osc["dm21_raw"], provenance="DERIVED",
+         role="internal",
+         note=f"raw rest-mass split m_nu2^2 - m_nu1^2 = "
+              f"{osc['dm21_raw']:.6e} eV^2; diagnostic only, showing why "
+              f"m_nu2 should not be compared directly to sqrt(Delta m21^2) "
+              f"when m_nu1 is nonzero")
+    pset("Delta_m21_sq_osc", osc["dm21_osc"], provenance="DERIVED",
+         role="comparison",
+         note=f"solar oscillation split = (m_nu2*(1+ns_tilt))^2 - "
+              f"m_nu1^2 = {osc['dm21_osc']:.6e} eV^2; uses the already "
+              f"closed spectral-tilt factor ns_tilt = 1 - n_s, with no "
+              f"observed neutrino splitting as input")
+    pset("Delta_m31_sq", osc["dm31"], provenance="DERIVED",
+         role="comparison",
+         note=f"atmospheric oscillation split m_nu3^2 - m_nu1^2 = "
+              f"{osc['dm31']:.6e} eV^2 from the absolute mass eigenvalues; "
+              f"comparison with the observed atmospheric splitting is "
+              f"post-computation only")
     pset("sin2_theta13", s13_pmns, provenance="DERIVED", role="cg",
          note=f"sin2(theta13) = (1/2pi)^2 sqrt(3)/2 = {s13_pmns:.4f} (the "
               f"2pi imprint)")
@@ -254,6 +320,10 @@ def compute() -> dict:
     return {"m_nu3": m3, "m_nu2": m2, "m_nu1": m1, "sin2_theta12": s12,
             "r12": r12, "r23": r23, "s12_pmns": s12_pmns,
             "s23_pmns": s23_pmns, "s13_pmns": s13_pmns,
+            "m_nu2_osc": osc["m2_osc"],
+            "Delta_m21_sq_raw": osc["dm21_raw"],
+            "Delta_m21_sq_osc": osc["dm21_osc"],
+            "Delta_m31_sq": osc["dm31"],
             "sum_m_nu": m1 + m2 + m3,
             "md_ms": Vus["md_ms"], "mu_mc": Vus["mu_mc"],
             "V_us": Vus["Vus_dominant"], "V_us_full": Vus["Vus_full"],
@@ -269,6 +339,9 @@ if __name__ == "__main__":
     print(f"m_nu2 = {r['m_nu2']:.4f} eV (hypercharge trace)")
     print(f"sin^2 theta12 = m1/m2 = {r['sin2_theta12']:.2f}")
     print(f"hierarchy: m1/m2 = {r['r12']:.3f}, m2/m3 = {r['r23']:.4f}")
+    print(f"oscillation: raw Delta_m21^2 = {r['Delta_m21_sq_raw']:.6e} eV^2, "
+          f"tilt-dressed Delta_m21^2 = {r['Delta_m21_sq_osc']:.6e} eV^2, "
+          f"Delta_m31^2 = {r['Delta_m31_sq']:.6e} eV^2")
     print(f"PMNS: s12 = {r['s12_pmns']:.3f}, s23 = {r['s23_pmns']:.4f}, "
           f"s13 = {r['s13_pmns']:.4f}")
     print(f"first-gen: m_d/m_s = {r['md_ms']:.5f}, m_u/m_c = {r['mu_mc']:.6f}")

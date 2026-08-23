@@ -171,21 +171,16 @@ def compute() -> dict:
     a0_eff = a0 * math.sqrt(4.0 / 3.0)      # 2/sqrt(3) = sqrt(4/3)
     pset("a0_MOND", a0_eff, provenance="DERIVED", role="internal",
          note=f"a0 = c H0/(2 pi) sqrt(4/3) = {a0_eff:.4e} m/s^2 (a "
-              f"DERIVED SCALE from the IR endpoint H0, reproducing the "
-              f"Milgrom coincidence a0 ~ c H0/(2 pi); the TT propagator "
-              f"is massless 1/k^2 at all scales (Newtonian), so a0 "
-              f"carries NO dynamics: F(a/a0) = 1, no flat rotation curves)")
-    # The DM sector: Omega_DM = 1 - Omega_Lambda - Omega_b is the
-    # flatness-closure remainder (a NUMBER).  AUDIT (2026-08-22): the
-    # framework's gravity is the TT spectral POLE (n_grav = 0), whose
-    # propagator G_TT = kL^2/(17.05 k^2) is EXACTLY massless 1/k^2 at
-    # all scales (p^2, m^2, R_k all ∝ k^2 on L = kL/k), i.e. NEWTONIAN
-    # 1/r at all scales.  Hence F(a/a0) = 1: the framework does NOT
-    # produce flat rotation curves, and a0 is a derived NUMBER (Milgrom
-    # coincidence) with no dynamics.  The "transparent gravity / no dark
-    # matter" reading is NOT supported by the spectral structure and is
-    # retracted here; Omega_DM is left as the standard Newtonian
-    # dark-matter discrepancy.
+              f"DERIVED endpoint acceleration scale.  The linear TT "
+              f"propagator remains massless 1/k^2; the late "
+              f"low-acceleration dynamics is the separate endpoint "
+              f"acceleration projection recorded by endpoint_residual.py.)")
+    # The DM sector: Omega_DM is retained as a legacy key for readers and
+    # tables, but its physical interpretation is supplied by
+    # endpoint_residual.py as Omega_Sigma, the conserved Hamiltonian
+    # residual of the MaxEnt endpoint.  This keeps the linear TT pole
+    # Newtonian while giving the flatness residue a cold perturbation
+    # source in cosmology.
     # Ω_b = η_B·n_γ·m_p/ρ_crit — η_B (Sakharov), m_p (constituent quark),
     # ρ_crit (H0, M_P) and T_CMB (the photon floor) are all INTERNAL.
     eta_B = float(get("eta_b"))
@@ -206,30 +201,29 @@ def compute() -> dict:
     Omega_DM = 1.0 - Omega_lam - Omega_b
     pset("Omega_DM", Omega_DM, provenance="DERIVED", role="internal",
          note=f"Omega_DM = 1 - Omega_Lambda - Omega_b = {Omega_DM:.4f} "
-              f"(the flatness closure remainder; a NUMBER, not a "
-              f"particle species — but the framework's gravity is "
-              f"Newtonian 1/r at all scales, so this remainder is left "
-              f"UNEXPLAINED by the framework (the standard dark-matter "
-              f"discrepancy)")
+              f"(legacy key for the flatness closure residue.  Its V4 "
+              f"cosmological interpretation is Omega_Sigma, the MaxEnt "
+              f"endpoint Hamiltonian residual published by "
+              f"cg_frg/cosmology/endpoint_residual.py; no dark particle "
+              f"species is added.)")
     pset("dm_verdict",
-         {"rotation_scale": "derived SCALE only: a0 = c H0/(2 pi) "
-                            "sqrt(4/3) reproduces the Milgrom coincidence "
-                            "a0 ~ c H0/(2 pi) (+0.36%); NOT a dynamics",
-          "rotation_shape": "F(a/a0) = 1 (NEWTONIAN): the TT propagator "
-                            "is massless 1/k^2 at all scales (slope_G = "
-                            "-2.0000000000, slope_Z = 0.0000000000), so "
-                            "gravity is Newtonian 1/r at all scales — no "
-                            "flat rotation curves",
+         {"rotation_scale": "a0 = c H0/(2 pi) sqrt(4/3), the endpoint "
+                            "acceleration scale",
+          "linear_TT": "massless 1/k^2 at all scales; the linear TT pole "
+                       "remains Newtonian",
+          "cosmological_dark_source": "Omega_DM is promoted to "
+                                      "Omega_Sigma by endpoint_residual.py",
+          "galaxy_branch": "late low-acceleration dynamics belongs to the "
+                           "separate endpoint acceleration projection",
           "Omega_DM": Omega_DM,
-          "bullet": "not established (Newtonian gravity gives standard "
-                    "lensing; no spectral zero-mode lensing)"},
+          "bullet": "free endpoint residual density can source separated "
+                    "cluster lensing; full map likelihood is an external "
+                    "comparison"},
          provenance="DERIVED", role="informational",
-         note="AUDIT 2026-08-22: the framework's gravity is the TT "
-              "spectral POLE (n_grav = 0), massless 1/k^2 at all scales "
-              "(Newtonian).  a0 is a DERIVED scale (Milgrom coincidence) "
-              "with NO dynamics.  The 'transparent gravity / no dark "
-              "matter' reading is RETRACTED: Omega_DM is the flatness-"
-              "closure remainder, left UNEXPLAINED by Newtonian gravity.")
+         note="The linear TT pole remains Newtonian.  The cosmological "
+              "dark source is the MaxEnt endpoint Hamiltonian residual "
+              "Omega_Sigma; the galaxy low-acceleration scale is the "
+              "separate endpoint acceleration projection.")
 
     return {"r": r, "Delta2_t": d2_t, "two_L": two_l, "H0": H0,
             "H0_alt": H0_alt, "sigma_C": sigma_C,

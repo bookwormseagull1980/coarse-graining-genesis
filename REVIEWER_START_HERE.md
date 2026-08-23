@@ -49,6 +49,10 @@ The generated prediction store may also contain non-observational
 bookkeeping records such as `SCALE_CHOICE`; these are audited separately
 from observed inputs.
 
+Cosmology comparison records follow the same rule. CAMB is used only as
+a propagation tool for the fixed V4 output set, and DESI/SPARC data are
+used only after the V4 parameters have been computed.
+
 ## 2. Prediction Chain vs Comparison Files
 
 Prediction-generation files:

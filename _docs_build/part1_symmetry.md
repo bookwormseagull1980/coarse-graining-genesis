@@ -336,16 +336,17 @@ m_ν1⁴ carries +4s0·κ, the weight (1−4s0·κ) cancels it exactly → the d
 
 ---
 
-## Chapter 9 The acceleration scale: spectral zero mode (Newtonian; no dark-matter dynamics)
+## Chapter 9 The endpoint residual and the acceleration scale
 
 ```
 G_N = 1/(8π·Z_phys·M_P²), Z_phys ≈ 1 (matter back-reaction 0.2%)
-a0 = cH0/(2π)·√(4/3) = 1.206e-10 m/s² (acceleration-scale IR, not ad hoc MOND)
+a0 = cH0/(2π)·√(4/3) = 1.204e-10 m/s² (endpoint acceleration scale)
+Ω_Σ = 1 − Ω_Λ − Ω_b = 0.26570 (endpoint Hamiltonian residual)
 ```
 
 - **What it is**: gravity emerges from the zero mode of the TT spectrum.
-- **Why it matters** (key user insight): the framework's gravity is **transparent** — Newtonian gravity at all scales, no self-interaction, gravity passes through matter unshielded. Hence **the dark-matter remainder (unexplained)** (Ω_DM is a flatness-closure quantity), and no ad hoc MOND (a0 is the IR behaviour of the acceleration scale).
-- **How it is used**: the rotation curve transitions automatically from 1/r² to 1/r for a < a0 — the effect for which GR needs dark matter / MOND compensation, the framework gives directly from first principles.
+- **Why it matters**: the linear TT kernel fixes the Newtonian baseline and the gravitational normalisation, while the maximum-entropy endpoint supplies two projections: Ω_Σ as the cold source in linear cosmology, and Σ_IR=a0² as the local low-acceleration branch.
+- **How it is used**: linear cosmology uses Ω_cdm:=Ω_Σ without adding a dark particle species; the local branch uses the fixed response μ(y)=y/sqrt(1+y²).  CAMB is used only to propagate the fixed V4 output set, and SPARC/BAO/cluster residual checks are comparison diagnostics; full nonlinear structure formation and map-level lensing likelihoods remain comparison-level work beyond the deterministic chain.
 
 ---
 

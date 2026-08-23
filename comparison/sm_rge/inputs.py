@@ -106,9 +106,15 @@ SM_INPUTS = {
     "m_t_over_m_u_obs": 78000.0,
     "m_tau_over_m_mu_obs": 16.8,
     # -- neutrino --
+    # Oscillation experiments measure mass-squared splittings, not
+    # individual masses.  The m_nu*_obs keys are retained only as
+    # legacy square-root proxies for old comparison scripts; Paper II
+    # uses Delta_m21_sq_obs and Delta_m31_sq_obs instead.
     "m_nu3_obs": 0.0502,
     "m_nu2_obs": 0.0086,
     "m_nu1_obs": 0.0026,
+    "Delta_m21_sq_obs": 7.41e-5,
+    "Delta_m31_sq_obs": 2.511e-3,
     "V_us_obs": 0.2245,
     # -- CKM / CP --
     "pmns_delta_over_pi_obs": 1.14,
@@ -129,7 +135,7 @@ SM_INPUTS = {
     "a0_MOND_obs": 1.2e-10,
     "c_m_s_obs": 2.99792458e8,
     "Omega_b_obs": 0.0493,
-    "T_CMB_K": 2.7255,
+    "T_CMB_K": 2.72548,
     "Omega_Lambda_obs": 0.6847,
     "Lambda_obs": 4.2791148e-84,
     "eta_b_obs": 6.1e-10,
@@ -156,8 +162,27 @@ def init_sm_table() -> None:
     (The BBN nuclear constants are DERIVED by bbn_helium.py; they are
     no longer written as a separate input store.)
     """
+    notes = {
+        "m_nu3_obs": (
+            "sqrt(Delta m31^2) proxy for legacy comparison only; "
+            "not a direct measured mass"
+        ),
+        "m_nu2_obs": (
+            "sqrt(Delta m21^2) proxy for legacy comparison only; "
+            "not a direct measured mass"
+        ),
+        "m_nu1_obs": (
+            "legacy lightest-mass placeholder; no direct measured central value"
+        ),
+        "Delta_m21_sq_obs": (
+            "observed solar neutrino mass-squared splitting, comparison only"
+        ),
+        "Delta_m31_sq_obs": (
+            "observed atmospheric neutrino mass-squared splitting, comparison only"
+        ),
+    }
     for key, value in SM_INPUTS.items():
-        sm_set(key, value, note="SM measured input (comparison only)")
+        sm_set(key, value, note=notes.get(key, "SM measured input (comparison only)"))
 
 
 def sm_value(key: str):

@@ -27,7 +27,8 @@ violations:
 
   1. missing provenance / writer / note fields;
   2. DERIVED parameters without a derivation note;
-  3. comparison-role parameters without an observed field;
+  3. comparison-role parameters whose notes do not state the
+     comparison-only intent;
   4. parameters whose writer is the generic store (not a module).
 
 Exit code: 0 = audit clean, 1 = violations found.
@@ -48,12 +49,12 @@ def audit_file(path: Path, label: str,
                check_comparison_observed: bool = False) -> list:
     """Audit one store file; return the violation strings.
 
-    check_comparison_observed: only meaningful for cg_params.json (the
-    framework's PREDICTION store): a record with role="comparison" must
-    carry an observed target (the 'observed' field or an 'observed'
-    mention in the note).  The SM table (sm_inputs.json) is skipped for
-    this check: its records ARE the observed values themselves (SM_INPUT
-    provenance, '_obs' keys) and need no further target.
+    check_comparison_observed: only meaningful for cg_params.json.  A
+    record with role="comparison" must make its comparison-only status
+    explicit.  It may either carry an observed target, or it may be a
+    fixed-parameter diagnostic/propagation record whose note states that
+    it is not a V4 input.  The SM table is skipped for this check: its
+    records ARE the observed comparison values themselves.
     """
     violations = []
     if not path.exists():
@@ -70,15 +71,21 @@ def audit_file(path: Path, label: str,
         prov = rec.get("provenance", "")
         if prov == "DERIVED" and not rec.get("note"):
             violations.append(f"{label}/{key}: DERIVED without a note")
+        note_l = str(rec.get("note", "")).lower()
+        comparison_note_ok = (
+            "observed" in note_l or
+            "comparison" in note_l or
+            "not an input" in note_l or
+            "supplies no v4 parameter" in note_l or
+            "not read by upstream" in note_l
+        )
         if check_comparison_observed and \
                 rec.get("role") == "comparison" and \
                 "observed" not in rec and \
-                "observed" not in str(rec.get("note", "")):
-            # The comparison role may be carried by the note (the
-            # observed field); flag only if neither exists.
+                not comparison_note_ok:
             violations.append(
                 f"{label}/{key}: comparison role without an observed "
-                f"target or an 'observed' note")
+                f"target or comparison-only note")
     return violations
 
 

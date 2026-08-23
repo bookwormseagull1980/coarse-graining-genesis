@@ -12,7 +12,7 @@ Paper II carries the numerical evaluation of the structural content of Paper I. 
 - **Window-capacity closure**: $\kL = 2.49353$, the single dimensionless number that closes the whole chain.
 - **170 parameters**: one observed anchor ($G_N$) + 169 derived quantities.
 - **Accuracy**: gauge couplings $<0.01\%$, EW scale $<0.01\%$, fermion mass ratios $<1\%$, cosmological fractions $<1\%$, QCD scale $\sim1\%$.
-- **Five deviations $>1\%$**, each traced to an identified source: Jarlskog $+2.95\%$ (the $|V_{ub}|$ ceiling), $m_b$ $+1.38\%$ (the $y_0=1$ anchor), $\Lambda_{\mathrm{QCD}}$ $-1.25\%$ (loop order), lightest glueball $-2.41\%$ (spectral level), $Y_p$ $+1.56\%$ (nuclear network).
+- **Three main-table deviations $>1\%$**, each traced to an identified source: $m_b$ $+1.38\%$ (the $y_0=1$ anchor), $\Lambda_{\mathrm{QCD}}$ $-1.25\%$ (loop order), and the lightest glueball $-2.41\%$ (spectral level).  PMNS/CKM and BBN relations are kept as formal or phenomenological extensions rather than as main precision-comparison entries.
 - **Theoretical sensitivity** (Paper II Appendix D): elasticity matrix, convention chain, error band — the full technical detail is recorded in §0.2 above.
 
 Paper↔code mapping:

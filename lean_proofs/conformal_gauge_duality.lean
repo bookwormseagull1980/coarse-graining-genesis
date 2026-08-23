@@ -49,6 +49,10 @@ cross-multiplication, strictly proved by native_decide (Lean 4.7 core, no mathli
 Corresponding code:
   cg_frg/ewsb/order_parameter.py (conformal_coupling,
     conformal_weight, the N_g·ξ=1 assertion of _self_test)
+  cg_core/rp3_spectrum.py (weyl_dof: 1+2+1+3=7)
+  cg_core/window_weights.py ((1+2+1+3)/(d+1)=7/4, the RP³ Weyl
+    window-weight ratio used by ns_tilt and relaxion R2; the
+    conformal-curvature expression 1 + ξ R_LC L² is a cross-check)
   cg_frg/cosmology/bbn_helium.py (g_A = N_g·Δ_s/π = 2(d−1)/π = 4/π)
   cg_frg/qcd/qcd_sector.py (the N_g·ξ = 1 unit)
 
@@ -58,6 +62,8 @@ Content-ratio definitions (integers, for cross-multiplication):
   d = 3         internal-space dimension
   ξ = 1/8       conformal coupling (d−2)/(4(d−1)), numerator (d−2)=1, denominator 4(d−1)=8
   Δ_s = 1/2     scalar conformal weight (d−2)/2, numerator (d−2)=1, denominator 2
+  Weyl d.o.f. = scalar + vector + spinor + TT = 1 + 2 + 1 + 3 = 7
+  window/cascade denominator = d + 1 = 4
 -/
 
 -- ============ content-ratio constants (integers) ============
@@ -114,4 +120,30 @@ theorem duality_forms_equivalent : N_g * 1 = 2 * (d - 1) * 2 := by
 -- (9) d = N_c = 3: geometric dimension = colour rank (the conformal-gauge duality and the
 --     geometric-gauge duality close at d = N_c; equivalently d = rank(G)+1 = 2+1 = 3).
 theorem dimension_equals_colour_rank : d = N_c := by
+  native_decide
+
+-- (10) On the round internal S³/RP³, R_LC L² = d(d−1) = 6 for d = 3.
+theorem scalar_curvature_unit : d * (d - 1) = 6 := by
+  native_decide
+
+-- (11) The RP³ Weyl-law degree-of-freedom count:
+--      scalar + vector + spinor + TT = 1 + 2 + 1 + 3 = 7.
+theorem rp3_weyl_dof_total : 1 + 2 + 1 + 3 = 7 := by
+  native_decide
+
+-- (12) The four-level window/cascade normalisation in d=3:
+--      d + 1 = 4.
+theorem window_cascade_denominator_four : d + 1 = 4 := by
+  native_decide
+
+-- (13) The window-weight ratio used by ns_tilt and relaxion R2 is
+--      (1+2+1+3)/(d+1) = 7/4.
+--      Cross-multiplied by d+1=4: (1+2+1+3)*4 = 7*4.
+theorem rp3_weyl_window_ratio_seven_fourths : (1 + 2 + 1 + 3) * (d + 1) = 7 * 4 := by
+  native_decide
+
+-- (14) Cross-check: the conformal-curvature identity gives the same ratio:
+--      1 + ξ R_LC L² = 1 + (1/8)·6 = 7/4.
+--      Cross-multiplied by 8: 8 + 6 = 14 = (7/4)·8.
+theorem conformal_curvature_crosscheck_seven_fourths : 8 + 6 = 7 * 2 := by
   native_decide

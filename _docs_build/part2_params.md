@@ -545,19 +545,25 @@ Three prescriptions (A direct residue, B spectral sum, C flat matching) agree wi
 
 ### 19.1 neutrino_closure.py — the neutrino-sector closure + the CKM |V_us| Gatto
 
-**Motivation**: the neutrino masses are closed through three order-of-magnitude-consistent relations:
+**Motivation**: the neutrino masses are closed through the Weinberg operator
+and the hypercharge-trace hierarchy, with oscillation observables compared
+through mass-squared splittings rather than through individual neutrino
+mass proxies:
 ```
-1. Weinberg operator (dimension-5): m_ν3 = v²·(2π)²/k_GUT = 0.048 eV
-2. the 5/3 GUT relation: Tr(Y²)/Tr(T₃²) = (10/3)/2 = 5/3 (content balance)
-   m_ν1·m_ν2/m_ν3² = 5/3 → m_ν2 = √((3/5)·m_ν1·m_ν3)
-3. Gatto θ12: sin²θ12 = m_ν1/m_ν2 = 0.30 (solar, closed)
+1. Weinberg operator (dimension-5):
+   m_ν3 = v²·(2π)²/k_GUT·(1+s0·κ) = 0.0502 eV
+2. Hypercharge-trace hierarchy:
+   m_ν1/m_ν2 = 3/10,  m_ν2/m_ν3 = 3/(10√3)
+3. Oscillation comparison:
+   Δm²21 is reported as a mass-squared propagation diagnostic, not
+   by comparing m_ν2 directly with √Δm²21 while m_ν1 is nonzero.
 ```
 
 **The neutrino hierarchy (hypercharge trace)**: m_ν1/m_ν2 = 1/Tr(Y²) = 3/10, m_ν2/m_ν3 = 1/(√3·Tr(Y²)).
 
 **CKM |V_us| (Gatto × LZ hierarchy)**: |V_us| = |√(m_d/m_s) − e^(iδ)√(m_u/m_c)| = 0.225.
 
-**Mixing angles**: sin²θ12 = 1/3, sin²θ13 = (1/2π)²√3/2, sin²θ23 = 1/2 + Tr(T₃²)/(2π)².
+**Mixing angles**: sin²θ12 = m_ν1/m_ν2 = 3/10, sin²θ13 = (1/2π)²√3/2, sin²θ23 = 1/2 + Tr(T₃²)/(2π)².  They are kept as formal closure relations rather than main precision-comparison entries.
 
 [[PARAMS:neutrino_closure]]
 

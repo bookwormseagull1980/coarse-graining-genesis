@@ -16,8 +16,8 @@
 
 # V4 Verification Report
 
-Generated: 2026-08-22 15:36:42
-Python: `3.12.10`
+Generated: 2026-08-23 11:26:16
+Python: `3.12.13`
 Root: `.`
 
 ## Verdict
@@ -35,22 +35,23 @@ Removed generated stores:
 
 | step | status | seconds | command |
 |---|---:|---:|---|
-| full reproduction | PASS | 90.9 | `python scripts/reproduce_v4.py` |
-| parameter provenance audit | PASS | 0.2 | `python scripts/audit_param_writers.py` |
-| observation leakage audit | PASS | 0.6 | `python scripts/audit_observation_leakage.py` |
-| Lean source audit | PASS | 0.2 | `python scripts/audit_lean_sources.py` |
-| numeric precision audit | PASS | 0.8 | `python scripts/audit_numeric_precision.py` |
-| path portability audit | PASS | 0.2 | `python scripts/audit_path_portability.py` |
-| full comparison table | PASS | 55.3 | `python comparison/param_audit_full.py` |
-| pytest | PASS | 20.7 | `python -m pytest -q -p no:cacheprovider` |
-| numeric stability audit | PASS | 142.0 | `python scripts/audit_numeric_stability.py` |
+| full reproduction | PASS | 68.4 | `python scripts/reproduce_v4.py` |
+| parameter provenance audit | PASS | 0.4 | `python scripts/audit_param_writers.py` |
+| observation leakage audit | PASS | 2.9 | `python scripts/audit_observation_leakage.py` |
+| Lean source audit | PASS | 0.5 | `python scripts/audit_lean_sources.py` |
+| numeric precision audit | PASS | 2.9 | `python scripts/audit_numeric_precision.py` |
+| path portability audit | PASS | 0.5 | `python scripts/audit_path_portability.py` |
+| full comparison table | PASS | 76.6 | `python comparison/param_audit_full.py` |
+| pytest | PASS | 83.6 | `python -m pytest -q -p no:cacheprovider` |
+| Lean proof archive | PASS | 41.2 | `python scripts/verify_lean_archive.py --lean-exe <lean.exe>` |
+| numeric stability audit | PASS | 84.9 | `python scripts/audit_numeric_stability.py` |
 
 ### Store Summary
 
-- cg_params records: 171
+- cg_params records: 184
 - sm_inputs comparison records: 90
-- provenance: DERIVED=169, OBSERVED=1, SCALE_CHOICE=1
-- roles: anchor=1, cg=22, comparison=7, informational=9, internal=132
+- provenance: DERIVED=182, OBSERVED=1, SCALE_CHOICE=1
+- roles: anchor=1, cg=22, comparison=15, informational=11, internal=135
 
 ### Selected Closed Values
 
@@ -70,7 +71,11 @@ Removed generated stores:
 | `sin2_theta_eff_l_pred` | `0.2301139784749636` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
 | `m_H_pred` | `124.98344026878286` | DERIVED | `cg_frg/ewsb/ew_precision.py` |
 | `Omega_Lambda` | `0.6850442965140158` | DERIVED | `cg_frg/cosmology/dark_energy.py` |
+| `Omega_Sigma` | `0.2657026396202929` | DERIVED | `cg_frg/cosmology/endpoint_residual.py` |
 | `T_CMB_GeV` | `2.353400743797703e-13` | DERIVED | `cg_frg/cosmology/dark_energy.py` |
+| `T_CMB_corrected_K` | `2.725473977921092` | DERIVED | `cg_frg/cosmology/endpoint_residual.py` |
+| `endpoint_sigma8` | `0.8142304448760495` | DERIVED | `cg_frg/cosmology/endpoint_residual.py` |
+| `endpoint_S8` | `0.8342792621089947` | DERIVED | `cg_frg/cosmology/endpoint_residual.py` |
 | `bbn_Neff` | `3.043873359487886` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
 
 ## Command Output
@@ -78,26 +83,7 @@ Removed generated stores:
 ### full reproduction
 
 ```text
-onal_rg OK
-
-── cg_frg/ewsb/order_parameter.py ──
-  order_parameter conformal-gauge-duality self-test OK
-  xi = 0.125, R_c* = 6/pi = 1.909859 (store 1.909859, +0.000%)
-  s0 = 2tau = 0.04, lambda = 149.15
-  m^2(M_G) = -0.118109 < 0 (tachyon — the trigger)
-  V_min(GUT) = -0.0001
-  J=2 EC eigenvalue *L^2 = 14.1608 > 0 (stable)
-  order_parameter OK
-
-── cg_frg/ewsb/pseudo_dilaton.py ──
-  lambda_dil = 37.70
-  lambda_H   = 0.1289 (the pseudo-dilaton consistency)
-  beta_eff   = 0.2729 (pure 0.0342 + strong 0.2387)
-  pseudo_dilaton OK
-
-── cg_frg/gauge/geometric_ewsb.py ──
-  m_WR = g_R s0 M_G = 3.523e+16 GeV  (s0 = 2tau = 0.04)
-  m_W  = g2 v/2 = 62.64 GeV
+ m_W  = g2 v/2 = 62.64 GeV
   m_WR/m_W = 5.625e+14
   m_W/m_WR = epsilon/(2 s0) = 1.778e-15 — CLOSED
     1/(2 s0) = 12.5000 (exact)
@@ -246,6 +232,13 @@ onal_rg OK
   sigma_C  = 6.9500e+41 GeV^-1
   gw_ratio OK
 
+── cg_frg/cosmology/endpoint_residual.py ──
+  Omega_Sigma = 0.265702639620
+  Omega_m     = 0.314955703486
+  C_gamma     = 0.997973576327
+  T_CMB corr  = 2.725474 K
+  endpoint_residual OK
+
 ── cg_frg/framework/sigma_language.py ──
   sigma(M_G)  = 5.7768e-19 GeV^-1
   sigma_C     = c/H0 = 6.9500e+41 GeV^-1 (the IR anchor)
@@ -309,6 +302,13 @@ onal_rg OK
   sigma_had (nb)                  41.5102       41.481  +0.070%
   m_H (GeV)                       124.983        125.2  -0.173%
   r (GW tensor ratio)      0.025330295910584444         None
+  Omega_Sigma              0.2657026396202929         None
+  C_gamma                  0.9979735763271532         None
+  T_CMB corrected (K)             2.72547      2.72548  -0.000%
+  endpoint z_eq                   3414.88         3402  +0.379%
+  endpoint r_drag                  146.98       147.09  -0.075%
+  endpoint sigma8                 0.81423       0.8111  +0.386%
+  endpoint S8                    0.834279        0.832  +0.274%
   2L = sqrt(2pi)           2.5066282746310002         None
   alpha_up (internal)             2.45353      2.45633  -0.114%
   alpha_dn (internal)             1.90186      1.90333  -0.077%
@@ -346,7 +346,7 @@ OBSERVATION-LEAKAGE AUDIT CLEAN
 
 ```text
 LEAN SOURCE AUDIT CLEAN
-  files scanned: 17
+  files scanned: 20
   no sorry/admit/axiom/unsafe/opaque tokens in executable Lean code
   no interactive output commands
   no Mathlib imports
@@ -356,32 +356,34 @@ LEAN SOURCE AUDIT CLEAN
 
 ```text
 NUMERIC PRECISION AUDIT CLEAN
-  python files scanned: 84
+  python files scanned: 88
   no rounded/formatted values are written to parameter stores
   non-informational numeric records are JSON numbers, not strings
-  numeric cg_params records: 153
+  numeric cg_params records: 162
   high-fanout stored values use round-trip representations:
-    G_N_PDG: 6.70883e-39  downstream=172
-    L_Cg: 1.7724538509055159  downstream=172
-    M_P: 2.435323595526305e+18  downstream=172
-    kL: 2.4935343325226915  downstream=172
-    tau: 0.02  downstream=172
-    M_G: 1.7310765000475023e+18  downstream=134
-    v_HIGGS: 246.18969645238943  downstream=109
-    k_GUT: 4.984263355588678e+16  downstream=99
-    kL_CMB: 2.481066660860078  downstream=89
-    ns_tilt: 0.035  downstream=89
-    alpha_down: 1.9018618632255682  downstream=77
-    g1_MG_geo: 0.6049900729523602  downstream=72
-    g2_MG: 0.5088477031823814  downstream=72
-    alpha_up: 2.4535343325226915  downstream=70
-    g3_MG_geo: 0.49775991624706845  downstream=69
-    m_glueball: 1.6590414836759542  downstream=53
-    mass_gap_dE: 2.163845625059378e+17  downstream=53
-    mass_gap_m_gen: 2.4914321981301484e+16  downstream=53
-    qcd_Lambda_QCD: 0.20738018545949427  downstream=53
+    G_N_PDG: 6.70883e-39  downstream=185
+    L_Cg: 1.7724538509055159  downstream=185
+    M_P: 2.435323595526305e+18  downstream=185
+    kL: 2.4935343325226915  downstream=185
+    tau: 0.02  downstream=185
+    M_G: 1.7310765000475023e+18  downstream=147
+    v_HIGGS: 246.18969645238943  downstream=122
+    k_GUT: 4.984263355588678e+16  downstream=112
+    kL_CMB: 2.481066660860078  downstream=102
+    ns_tilt: 0.035  downstream=102
+    alpha_down: 1.9018618632255682  downstream=90
+    g1_MG_geo: 0.6049900729523602  downstream=85
+    g2_MG: 0.5088477031823814  downstream=85
+    alpha_up: 2.4535343325226915  downstream=83
+    g3_MG_geo: 0.49775991624706845  downstream=82
+    m_glueball: 1.6590414836759542  downstream=66
+    mass_gap_dE: 2.163845625059378e+17  downstream=66
+    mass_gap_m_gen: 2.4914321981301484e+16  downstream=66
+    qcd_Lambda_QCD: 0.20738018545949427  downstream=66
     alpha_lepton: 1.4114863349614586  downstream=38
     R_c_star: 1.909859317102744  downstream=36
+    entropy_integral: 139.2537061093592  downstream=35
+    md_over_ms_geo: 0.05014715428586189  downstream=35
     m_mu_over_m_e: 206.3556103933899  downstream=32
     V_us_geo: 0.22393560298858664  downstream=30
     alpha_inv_MZ_pred: 128.2085016245155  downstream=30
@@ -389,15 +391,13 @@ NUMERIC PRECISION AUDIT CLEAN
     m_b_pred: 4.237792000302189  downstream=30
     m_e_pred: 0.5103542513564916  downstream=30
     m_s_over_m_d: 19.622983487591103  downstream=30
-    m_t_over_m_c: 135.24239203885273  downstream=30
-    m_t_over_m_u: 77303.6419446479  downstream=30
 ```
 
 ### path portability audit
 
 ```text
 PATH PORTABILITY AUDIT CLEAN
-  files scanned: 25
+  files scanned: 29
   no machine-local absolute paths in reviewer-facing sources/artifacts
 ```
 
@@ -474,7 +474,20 @@ reproduce exit=0  passed=True
 ### pytest
 
 ```text
-.................................................                        [100%]
+........................................................................ [ 93%]
+.....                                                                    [100%]
+```
+
+### Lean proof archive
+
+```text
+LEAN ARCHIVE VERIFY CLEAN
+  lean source: --lean-exe
+  version: Lean (version 4.7.0, x86_64-w64-windows-gnu, commit 6fce8f7d5cd1, Release)
+  files compiled: 20
+  trust level: 0
+  strict output: yes
+  seconds: 40.4
 ```
 
 ### numeric stability audit
@@ -483,7 +496,7 @@ reproduce exit=0  passed=True
 NUMERIC STABILITY AUDIT CLEAN
   command: python scripts/reproduce_v4.py
   removed stores: cg_params.json, comparison/sm_inputs.json, params_write_log.json
-  cg_params.json: 171 stable records
+  cg_params.json: 184 stable records
   comparison/sm_inputs.json: 90 stable records
-  seconds: 141.5
+  seconds: 84.3
 ```

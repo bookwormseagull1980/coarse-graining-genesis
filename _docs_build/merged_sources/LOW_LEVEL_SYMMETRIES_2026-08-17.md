@@ -519,15 +519,16 @@ sin²θ13 = (1/2π)²·√3/2 = 0.0219    (the 2π imprint)
 
 ---
 
-## 9. The acceleration scale — spectral zero mode (Newtonian; RETRACTED)
+## 9. The endpoint residual and acceleration branch
 
 ```
 G_N = 1/(8π·Z_phys·M_P²), Z_phys ≈ 1 (matter back-reaction 0.2%)
-a0 = cH0/(2π)·√(4/3) = 1.206e-10 m/s² (acceleration-scale IR, not ad hoc MOND)
+a0 = cH0/(2π)·√(4/3) = 1.204e-10 m/s² (endpoint acceleration scale)
+Ω_Σ = 1−Ω_Λ−Ω_b = 0.26570 (endpoint Hamiltonian residual)
 ```
 
-- **Physical meaning**: gravity emerges from the TT spectral zero mode, no self-interaction, Newtonian 1/r at all scales (no dark-matter dynamics).
-  Ω_DM is a flatness-closure quantity (Ω_b+Ω_DM+Ω_Λ = 1.00000 exact).
+- **Physical meaning**: the linear TT zero mode fixes the Newtonian baseline and gravitational normalization.  The maximum-entropy endpoint supplies Ω_Σ as the cold source in linear cosmology and Σ_IR=a0² with μ(y)=y/sqrt(1+y²) as the local low-acceleration branch.
+  Ω_DM remains only a legacy comparison label; the internal relation is Ω_b+Ω_Σ+Ω_Λ = 1.00000 exact.
 
 ---
 

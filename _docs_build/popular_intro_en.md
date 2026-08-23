@@ -454,10 +454,11 @@ In our framework, **gravity is not an independent, fundamental force, but is "em
 
 Specifically, gravity corresponds to a special component of the spectrum — the **zero mode** (the mode of zero frequency, i.e. the "unchanging, most stable change"). We identify gravity with this zero mode.
 
-This leads to two honest statements.
+This leads to three honest statements.
 
-1. **Newtonian gravity at all scales.** The present (linear) zero-mode description reproduces an inverse-square law, so it does not yet produce flat galaxy rotation curves.
-2. **A derived acceleration scale, with open dynamics.** The framework derives a scale `a0 = c·H0/(2π)·√(4/3)` that is numerically close to the Milgrom scale, obtained from the framework's own Hubble rate and the period 2π, with no fitted parameter. Reproducing galaxy rotation curves and lensing without a dark-matter particle would require a further infrared dynamical closure — a nonlinear low-acceleration regime — which is an open problem and is not claimed here.
+1. **The linear gravitational baseline is Newtonian.** The present linear TT zero-mode gives an inverse-square response; it fixes the gravitational normalisation and the baseline used in linear cosmological propagation.
+2. **The endpoint residual enters linear cosmology.** The normal/Hamiltonian projection of the maximum-entropy infrared endpoint gives `Ω_Σ = 1−Ω_Λ−Ω_b`, which occupies the cold-source slot in linear cosmology. The old table label `Ω_DM` is only a comparison name, not the introduction of a new dark-matter particle.
+3. **The low-acceleration response is a local branch.** The local projection of the same endpoint gives `a0 = c·H0/(2π)·√(4/3)` and uses the fixed response `μ(y)=y/√(1+y²)`. This can be used for fixed-parameter galaxy diagnostics; full nonlinear structure formation, cluster weak-lensing likelihoods, and joint CMB/BAO/SN/RSD inference remain further tests.
 
 In plain words: **gravity is not "the curvature of space," but "the most stable component of change."** Just as temperature is "the most averaged component of molecular motion" — the hot water scalding you is the collective motion of molecules; the gravity you feel is the collective stable structure of vacuum fluctuations.
 
@@ -507,7 +508,7 @@ A: The CMB is not the "afterglow" of a Big Bang; it is the equilibrium radiation
 
 **Q: Can this theory be falsified? If a theory explains everything, it explains nothing.**
 
-A: It can. We give concrete numerical predictions for 147 parameters (Chapter 8). If any one of them comes out wrong, beyond its stated precision, the theory collapses. It does not "say everything"; it "says a great many specific numbers, and waits to be tested."
+A: It can. The current parameter store records 184 entries. Only Newton's constant is an observational anchor, one unit/scale convention is explicitly labelled, and the remaining entries carry provenance, role, and comparison status. If a key closed relation fails, or if the fixed-parameter diagnostics fail systematically, the theory collapses. It does not "say everything"; it "says a great many specific numbers, and waits to be tested."
 
 **Q: Aren't you just shoving everything you don't know into the word "spectrum," to dodge the question?**
 
@@ -588,12 +589,13 @@ Deng put the final full stop on "how the microscopic emerges into the macroscopi
 
 This chapter gives hard results. Everything before was "ideas"; here is "what came out of the computation."
 
-### One anchor, 146 derived
+### One anchor, one fixed computation chain
 
-The whole framework has **147 parameters**. Of these:
+The current V4 parameter store records **184 entries**. Of these:
 
-- **1 observational anchor:** Newton's gravitational constant `G_N` — the only quantity "borrowed" from experiment, used solely for the final comparison and never entering any computation.
-- **146 derived quantities:** everything else — gauge couplings, Yukawa couplings, the Higgs vacuum expectation value, quark/lepton masses, cosmological parameters, the QCD scale — **all derived from the internal spectrum, zero hard-coding, zero fitting.**
+- **1 observational anchor:** Newton's gravitational constant `G_N` — the only dimensionful anchor borrowed from experiment, used to set the overall scale.
+- **1 unit/scale convention:** explicitly labelled as a convention rather than disguised as a physical prediction.
+- **The remaining entries:** gauge couplings, Yukawa couplings, the Higgs vacuum expectation value, quark/lepton masses, cosmological quantities, and QCD scales, each with its provenance, role, and comparison status. The core chain is not tuned by continuous phenomenological parameters.
 
 There is no "parameter tuning." You cannot alter any internal quantity in order to match an observed value. Whatever the deviation is, it is reported as-is. This is precisely where the method is honest: it does not "fit" the data; it "predicts" the data, then lets the deviations speak for themselves.
 
@@ -613,9 +615,9 @@ This precision means: this "start from the spectrum, zero free parameters" metho
 
 ### A few striking concrete results
 
-- **Exact flatness:** `Ω_b + Ω_DM + Ω_Λ = 1.00000` — the matter density + dark-matter density + dark-energy density of the universe add up to exactly 1 (a flat universe), not fitted but an identity.
+- **Exact flatness:** `Ω_b + Ω_Σ + Ω_Λ = 1.00000` — the baryon fraction, endpoint residual, and dark-energy fraction add up to exactly 1. The old `Ω_DM` label is a comparison name; the V4 internal reading is the maximum-entropy endpoint residual `Ω_Σ`.
 - **The dark-energy density** `Ω_Λ = 2/3 + r23/(3π) = 0.68504`, consistent with observation.
-- **The Hubble constant**, the **cosmic microwave background temperature**, and the **proton mass** are all computed from internal quantities.
+- **The Hubble constant**, the **cosmic microwave background temperature**, and the **proton mass** are all computed from internal quantities. The CMB temperature first gives a raw photon floor `2.7310 K`, then the finite photon zero-mode factor `Cγ=1−τ/π²` gives `2.72547 K`.
 - **Three fermion generations:** why exactly three? It comes from the "window capacity" of the RP³ spinor spectrum — the window `(kL)²` holds exactly three spinor modes.
 - **Neutrinos, flavour mixing, CP violation:** these also emerge from the geometry of the spectrum.
 
@@ -624,13 +626,13 @@ This precision means: this "start from the spectrum, zero free parameters" metho
 All results are reproduced in one go by a master-chain script:
 
 ```powershell
-py scripts/reproduce_v4.py          # all 40 chain items pass
+py scripts/reproduce_v4.py          # the full chain passes
 py scripts/audit_param_writers.py   # every parameter has a provenance audit, CLEAN
 ```
 
 There are also 17 Lean 4 machine-proof files, which verify one by one, with a theorem prover, the framework's core "content identities" (the integer relations that determine the physics). That is: the key symmetry relations of the framework have not only numerical verification but also **machine-checkable formal proof.**
 
-**Why bring up code in a popular-science piece?** Because too many "beautiful theories" in the history of physics ended up stuck on paper, unable to produce concrete numbers. The 40 chain items here are **something a computer can run through in one night and then tell you "dark-energy density = 0.685."** And the Lean 4 theorem prover is a machine that checks for you whether "the logic contradicts itself." **This is not experimental verification, but it is a mathematical "structural inspection."** The numbers tell you "does it match observation"; the proofs tell you "is there a hole in the logic" — two rulers, each measuring one face.
+**Why bring up code in a popular-science piece?** Because too many "beautiful theories" in the history of physics ended up stuck on paper, unable to produce concrete numbers. Here the reproduction chain is **something a computer can run and then return the parameter store and comparison table.** And the Lean 4 theorem prover is a machine that checks for you whether "the logic contradicts itself." **This is not experimental verification, but it is a mathematical "structural inspection."** The numbers tell you "does it match observation"; the proofs tell you "is there a hole in the logic" — two rulers, each measuring one face.
 
 ---
 
@@ -685,9 +687,9 @@ In other words, dark energy is not "extra energy added in," but "the intrinsic b
 
 ### What is the essence of dark matter?
 
-Dark matter (the extra, invisible gravity in galaxies) is, in the framework: **the TT spectral zero mode of the acceleration scale.**
+In the framework the dark-matter problem is split into two layers. The first is the cosmological-background layer: the endpoint residual `Ω_Σ = 1−Ω_Λ−Ω_b`, propagated as a cold source in linear cosmology. The second is the galactic low-acceleration layer: the same endpoint supplies `a0`, with the fixed local response `μ(y)=y/√(1+y²)`.
 
-It needs no "invisible particle." The extra gravity in galaxy rotation curves comes from the structure of the spectral zero mode — this is exactly what the name "the acceleration scale" means: **gravity is the zero mode of the spectrum; it exists "transparently," transmitted by no particle at all.** So dark matter is not "a particle we cannot find," but "a misreading of the spectral essence of gravity." We mistake "the extra gravitational effect of the spectral zero mode" for "an invisible particle," when in fact there is the dark-matter remainder (unexplained) at all.
+So the framework does not simply say "dark matter does not exist." More carefully, it adds no dark-matter particle: the cosmological cold source is read as the maximum-entropy endpoint residual, and the galactic low-acceleration effect is read as the local projection of the same endpoint. Fixed-parameter BAO, SPARC, and cluster-residual comparison checks are now part of the V4 record, always after the internal parameters have been computed; full nonlinear structure formation, cluster weak-lensing map likelihoods, and joint cosmological fits remain further tests.
 
 ### What is the essence of spacetime?
 

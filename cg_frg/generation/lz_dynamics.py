@@ -65,8 +65,9 @@ torsion content of the two broken generators.
 
 The sector step Δ = 6(1−n_s)·kL_CMB is the sweep rate of the
 extrusion: the six so(4) generators (the extrusion coupling), the
-spectral tilt 1−n_s (the closed window-evolution rate τ·7/4), and
-the CMB window kL_CMB (the scale of the extrusion).  The 9/8 split
+spectral tilt 1−n_s (the closed window-evolution rate
+τ·[(1+2+1+3)/(d+1)]=τ·7/4), and the CMB window kL_CMB (the scale of
+the extrusion).  The 9/8 split
 is the hypercharge weight Y_d = 1/3 vs Y_l = 1 in the covariant
 derivative on RP³ shifting the LZ exponent of the down/lepton
 doublets.

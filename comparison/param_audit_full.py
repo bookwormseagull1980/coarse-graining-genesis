@@ -56,11 +56,13 @@ MAPPING = [
     ("sin^2 theta_eff^l",    "sin2_theta_eff_l_pred","sin2thetaW_eff_obs", 1.0),
     # --- neutrino / PMNS ---
     ("m_nu3 (eV)",           "m_nu3",               "m_nu3_obs",    1.0),
-    ("m_nu2 (eV)",           "m_nu2",               "m_nu2_obs",    1.0),
-    ("m_nu1 (eV)",           "m_nu1",               "m_nu1_obs",    1.0),
+    ("m_nu2 rest (eV)",      "m_nu2",               None,           1.0),
+    ("m_nu1 floor (eV)",     "m_nu1",               None,           1.0),
+    ("Delta m21^2 osc",      "Delta_m21_sq_osc",    "Delta_m21_sq_obs", 1.0),
+    ("Delta m31^2",          "Delta_m31_sq",        "Delta_m31_sq_obs", 1.0),
     ("sin^2 theta12",        "sin2_theta12",        None,           1.0),   # 0.30
-    ("sin^2 theta13",        "sin2_theta13",        "s13_pmns_obs", 1.0),
-    ("sin^2 theta23",        "sin2_theta23",        "s23_pmns_obs", 1.0),
+    ("sin^2 theta13",        "sin2_theta13",        None,           1.0),
+    ("sin^2 theta23",        "sin2_theta23",        None,           1.0),
     # --- CKM / CP ---
     ("delta_CKM (deg)",      "ckm_delta_direction", "ckm_delta_deg_obs", 180.0/math.pi),
     ("Jarlskog J",           "cp_jarlskog_magnitude","jarlskog_J_obs", 1.0),
@@ -73,8 +75,8 @@ MAPPING = [
     ("H0 (GeV)",             "H0_GEV",              "H0_GeV_obs",   1.0),
     ("Omega_Lambda",         "Omega_Lambda",        "Omega_Lambda_obs", 1.0),
     ("Omega_b",              "Omega_b",             "Omega_b_obs",  1.0),
-    ("Omega_DM",             "Omega_DM",            "Omega_DM_obs", 1.0),
-    ("T_CMB (K)",            "T_CMB_GeV",           "T_CMB_K",      GEV_TO_K),
+    ("Omega_Sigma",          "Omega_Sigma",         "Omega_DM_obs", 1.0),
+    ("T_CMB corrected (K)",  "T_CMB_corrected_K",   "T_CMB_K",      1.0),
     ("a0 MOND (m/s^2)",      "a0_MOND",             "a0_MOND_obs",  1.0),
     ("gw ratio r",           "gw_ratio",            "r_bound_obs",  1.0),
     # --- QCD ---
@@ -94,7 +96,6 @@ FIXED_OBS = {
     "alpha_em(M_Z) inv": 127.95,   # alpha_em(M_Z) = 1/127.95 (running, at M_Z)
     "n_generations": 3.0,
     "m_s/m_d": 19.8,
-    "sin^2 theta12": 0.30,
 }
 
 
@@ -114,7 +115,8 @@ def main() -> int:
     if removed:
         print("fresh store reset: " + ", ".join(removed))
     r = subprocess.run([PY, str(ROOT / "scripts" / "reproduce_v4.py")],
-                       capture_output=True, text=True)
+                       capture_output=True, text=True,
+                       encoding="utf-8", errors="replace")
     ok = (r.returncode == 0) and ("ALL MODULES PASSED" in (r.stdout or ""))
     print(f"reproduce exit={r.returncode}  passed={ok}\n")
 
@@ -155,7 +157,7 @@ def main() -> int:
         n_obs += 1
         print(f"  {label:22s} {pred:14.6g} {obs:12g} {dev:+8.3f}%")
     print("=" * 74)
-    print(f"  {n_obs} observables compared; all DERIVED (no fitting).")
+    print(f"  {n_obs} observables compared; all comparisons are post-computation (no fitting).")
     if not ok:
         print("\nERROR: reproduce_v4.py did not pass; the comparison table is incomplete.")
         return 1

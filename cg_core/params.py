@@ -51,7 +51,8 @@ DESIGN PRINCIPLES
 6.  Role classes.  Each key carries a role:
         anchor       — the dimensionful anchor (G_N, M_P)
         internal     — framework-internal derived quantity
-        comparison   — external value used only for comparison
+        comparison   — post-computation comparison or diagnostic record;
+                        never used in framework computations
         cg           — a CG-framework structural constant
         informational— a status/statement record
 7.  SM table separation.  The SM comparison values live in

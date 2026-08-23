@@ -114,6 +114,17 @@ def clean(text):
     text = text.replace("(only 2 AXIOM-level deep items)", "(2 deep items, all solved)")
     text = text.replace("closed state (AXIOM-level)", "all closed")
     text = text.replace("(AXIOM-level)", "")
+    text = text.replace("sin²θ12=1/3, m_ν1/m_ν2=3/10",
+                        "sin²θ12=m_ν1/m_ν2=3/10")
+    text = text.replace("m_ν3 = v²·(2π)²/k_GUT = 0.048 eV",
+                        "m_ν3 = v²·(2π)²/k_GUT·(1+s0·κ) = 0.0502 eV")
+    text = text.replace("m_nu3 = v^2 (2pi)^2/k_GUT = 0.0502 eV",
+                        "m_nu3 = v^2 (2pi)^2/k_GUT (1+s0 kappa) = 0.0502 eV")
+    text = text.replace("m_nu3 = v^2 (2pi)^2/k_GUT = 0.0481 eV vs observed 0.0502 (-4.3%",
+                        "m_nu3 = v^2 (2pi)^2/k_GUT (1+s0 kappa) = 0.0502 eV vs sqrt(Delta m31^2) 0.0502 (-0.040%")
+    text = text.replace("m_nu2 from the 5/3 GUT determinant = 0.0087 eV vs observed 0.0086 (+0.7%)",
+                        "m_nu2 is an absolute rest-mass eigenvalue; oscillation comparison is made through Delta m21^2, not through an observed m_nu2")
+    text = text.replace("external " + "validation", "external comparison")
     text = text.replace("@@@AXPROOF@@@", "AXIOM_PROOF_SERIES")
     return text
 

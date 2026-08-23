@@ -15,23 +15,29 @@
 
 """
 cg_frg/cosmology/spectral_tilt.py — V4.0: the spectral tilt closure
-1 − n_s = τ·7/4
+1 − n_s = τ·[(1+2+1+3)/(d+1)] = τ·7/4
 =================================================================
 
 WHY THIS MODULE EXISTS (motivation)
 -----------------------------------
 The primordial spectral tilt is the exact product of the torsion
-modulus and the rational 7/4:
+modulus and the RP³ Weyl window ratio:
 
     1 − n_s = τ·(7/4) = 0.02 × 1.75 = 0.035
 
-The 7/4 is exact (the ratio of the scalar/vector mode weights of
-the coarse-graining window at the CMB scale — the spectral tilt of
-the unbiased Gaussian).
+The ratio is computed from the RP³ Weyl-law degree-of-freedom count
+divided by the four-level window/cascade normalisation:
+
+    (scalar + vector + spinor + TT)/(d+1)
+      = (1 + 2 + 1 + 3)/4 = 7/4.
+
+The conformal-curvature identity 1 + ξR_LC L² = 1 + (1/8)·6 gives
+the same rational value and is kept as a cross-check.
 
 V4 DISCIPLINE
 -------------
-The closure uses τ (the framework modulus) and the exact 7/4.
+The closure uses τ (the framework modulus) and the exact window
+ratio computed in cg_core.window_weights.
 """
 
 from __future__ import annotations
@@ -44,11 +50,12 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get, set as pset  # noqa: E402
+from cg_core.window_weights import scalar_vector_window_ratio  # noqa: E402
 
 
 def one_minus_ns(tau: float) -> float:
-    """1 − n_s = τ·(7/4)."""
-    return tau * 7.0 / 4.0
+    """1 − n_s = τ·[(1+2+1+3)/(d+1)] = τ·(7/4)."""
+    return tau * scalar_vector_window_ratio()
 
 
 def compute() -> dict:
@@ -56,8 +63,10 @@ def compute() -> dict:
     tau = get("tau")
     val = one_minus_ns(tau)
     pset("ns_tilt", val, provenance="DERIVED", role="internal",
-         note="1 - n_s = tau*(7/4) = 0.035 (the torsion modulus times the "
-              "exact 7/4 scalar/vector window ratio)")
+         note="1 - n_s = tau*((1+2+1+3)/(d+1)) = tau*(7/4) = 0.035 "
+              "(the torsion modulus times the RP3 Weyl window ratio; "
+              "1+2+1+3 from scalar/vector/spinor/TT d.o.f., d+1=4; "
+              "cross-check: 1+xi R_LC L^2=7/4)")
     return {"one_minus_ns": val, "tau": tau}
 
 

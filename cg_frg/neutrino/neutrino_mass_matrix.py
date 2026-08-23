@@ -34,12 +34,12 @@ flavour matrix F.  The framework's two independent pieces are:
 
   (1) the PMNS mixing U — the near-tribimaximal form dressed by the
       2π imprint, with the three angles fixed by the content ratios:
-          sin²θ12 = 1/3            (the 3-generation window),
+          sin²θ12 = 3/10           (the light-pair mass ratio),
           sin²θ13 = (1/2π)²·√3/2  (the 2π imprint × the S³→RP³
                                      quotient projection),
           sin²θ23 = 1/2 + Tr(T₃²)/(2π)²   (maximal mixing + isospin),
-      (the solar angle sin²θ12 = m1/m2 = 3/10 is the ratio fixed by
-      the diagonalisation itself — see below);
+      (the solar angle is the ratio fixed by the diagonalisation
+      itself — see below);
 
   (2) the hypercharge-trace hierarchy — the eigenvalues of F are the
       inverse powers of the first non-zero hypercharge moment:
@@ -214,6 +214,8 @@ if __name__ == "__main__":
           f"vs 1/(sqrt3 Tr(Y^2))  ({r['r23_err_pct']:+.2e}%)")
     print(f"m3 = {r['m3_eV']:.4f} eV, m2 = {r['m2_eV']:.4f} eV, "
           f"m1 = {r['m1_eV']:.4f} eV")
-    # PMNS recovery: s12^2 from U
-    print(f"PMNS |U_e2|^2 = {U[0][1]**2:.4f} (s12^2 = m1/m2 = 3/10 target)")
+    # In the standard parameterisation |U_e2|^2 = c13^2 s12^2, so it is
+    # slightly below the input angle because theta13 is nonzero.
+    print(f"PMNS input s12^2 = {3.0/10.0:.4f}; "
+          f"|U_e2|^2 = c13^2 s12^2 = {U[0][1]**2:.4f}")
     print("neutrino_mass_matrix OK")

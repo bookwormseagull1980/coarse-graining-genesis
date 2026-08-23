@@ -100,9 +100,9 @@ Appendices:
 - **The two Gaussian entropies**: `ρ_Λ = Y_u·m_ν1⁴ = (2/3)m_ν1⁴`; the entropy integral `∫γ_M = ln(M_P²√(2π+r23)/√ρ_Λ) = 139.2537` (Boltzmann S = ln W, W = window span).
 - **The Hubble rate**: `H₀ = M_P√π·e^(−∫γ_M) = 1.4388×10⁻⁴² GeV = 67.4 km/s/Mpc` (**−0.08%**).
 - **The dark-energy fraction**: `Ω_Λ = 2/3 + r23/(3π) = 0.68504` (pure content ratio, elasticity = 0).
-- **The microwave temperature**: `T_CMB = m_ν1·r12/π·(1−τΔ_s) = 2.7310 K` (observed 2.7255 K); redshift = spectrum (the neutrino photon floor).
+- **The microwave temperature**: raw photon floor `T_CMB^raw = m_ν1·r12/π·(1−τΔ_s) = 2.7310 K`; finite photon zero-mode correction `C_γ=1−τ/π²` gives `T_CMB=2.72547 K` (observed 2.7255 K).
 - **Exact flatness**: `Ω_b = 0.04925`, `Ω_DM = 1−Ω_Λ−Ω_b = 0.26570`, **`Ω_b+Ω_DM+Ω_Λ = 1.00000` (exact, not a fit)**.
-- **The gravity sector**: `G_N = 1/(8π·Z_phys·M_P²)`, `Z_phys = λ/(λ+σ) = 1.000000` (σ/λ = 3.15×10⁻³⁷); the acceleration-scale acceleration scale `a₀ = cH₀/(2π)` (the dark-matter remainder (unexplained), Newtonian gravity at all scales).
+- **The gravity/cosmology endpoint sector**: `G_N = 1/(8π·Z_phys·M_P²)`, `Z_phys = λ/(λ+σ) = 1.000000` (σ/λ = 3.15×10⁻³⁷); `Ω_Σ=1−Ω_Λ−Ω_b` is the endpoint Hamiltonian residual occupying the cold cosmology slot, while `a₀=cH₀/(2π)√(4/3)` and `μ(y)=y/sqrt(1+y²)` define the fixed local low-acceleration branch.
 
 ### 11.2.7 QCD and BBN (sec 9)
 
@@ -159,7 +159,7 @@ Precision distribution: gauge couplings **<0.01%**, electroweak scale **<0.01%**
 | Hubble rate H₀ (GeV) | 1.438850×10⁻⁴² | 1.44×10⁻⁴² | −0.080% | M_P√π·e^(−∫γ_M) |
 | glueball mass (GeV) | 1.65904 | 1.71 | −2.980% | 8·Λ_QCD |
 
-Other key values (given in the main text): `g₁(M_G)=0.60499`, `g₃(M_G)=0.49776`, `α⁻¹(M_Z)=127.6`, `α_s(M_Z)=0.11799`, `Λ_QCD=0.2074 GeV`, `m_p=0.9382 GeV`, `H₀=67.4 km/s/Mpc`, `Ω_Λ=0.68504`, `Ω_b=0.04925`, `Ω_DM=0.26570`, `T_CMB=2.7310 K`, `Y_p=0.2514`, `N_eff=3.044`.
+Other key values (given in the main text): `g₁(M_G)=0.60499`, `g₃(M_G)=0.49776`, `α⁻¹(M_Z)=127.6`, `α_s(M_Z)=0.11799`, `Λ_QCD=0.2074 GeV`, `m_p=0.9382 GeV`, `H₀=67.4 km/s/Mpc`, `Ω_Λ=0.68504`, `Ω_b=0.04925`, `Ω_Σ=0.26570`, `T_CMB=2.72547 K`, `Y_p=0.2514`, `N_eff=3.044`.
 
 ---
 
@@ -231,4 +231,4 @@ All the other derived quantities fall within 1% of observation, most far better.
 - **Lean proofs**: `lean.exe <file>.lean` (17 files all exit 0)
 - **Paper compilation**: `cd arxiv-jhep-v2` → pdflatex + bibtex ×2 (JHEP format, 54–56 pages, 0 error / 0 undefined)
 
-**One-sentence summary**: Paper II numerises the structural content of Paper I — **one principle (the disorder axiom), one anchor (G_N), one number (kL = 2.49353)**, deriving 146 quantities along the acyclic chain, most falling within 1% of observation; the hierarchy is carried by the exponent of kL (hence exponentially sensitive to kL), but the upstream conventions are all pinned (hence no hidden free parameter); each of the 5 >1% deviations has a traced source. The acceleration scale (the dark-matter remainder (unexplained), Newtonian gravity at all scales) is a direct corollary of the spectral zero mode, Ω_DM is the spectral remainder of flatness closure, and a₀ = cH₀/(2π) is a prediction, not a fit.
+**One-sentence summary**: Paper II numerises the structural content of Paper I — **one anchor (G_N), one window capacity (kL = 2.49353), and a fixed closure chain** — with all entries carrying provenance, role, and comparison status; the hierarchy is carried by the exponent of kL, while the upstream conventions are pinned and audited.  In cosmology, Ω_Σ is the maximum-entropy endpoint residual occupying the cold linear slot, and a₀ with μ(y)=y/sqrt(1+y²) is the fixed local low-acceleration branch, with full nonlinear and joint-likelihood tests left to external comparison.
