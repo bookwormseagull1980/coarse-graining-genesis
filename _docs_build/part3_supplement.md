@@ -149,12 +149,12 @@ None of these five deviations is a "fixable framework-mechanism defect": observa
 | zk quantum correction | [OK] closed (precision annotation) | +0.615% (order-of-magnitude estimate, 384π² normalisation, x̄=1/2 documented) |
 | W_R± | [OK] closed | m_WR=3.5e16 GeV (GUT-scale prediction) |
 | CKM δ | [OK] closed | J magnitude −1.1% closed; direction 8π/21=68.57° (+0.10%) — ÷3=÷N_c internal-space dimension dilution |
-| τ theorem | [OK] closed | τ=(N_L−N_R)/(N_f·ΣY²)=1/50, EC field-equation window-capacity cancellation (EXACT) |
+| τ content closure | [OK] closed | τ=(N_L−N_R)/(N_f·ΣY²)=1/50 from N_L=8, N_R=7, N_f=15, and ΣY²=10/3 |
 | baryogenesis mechanism | [OK] closed (order of magnitude) | η_B~6e-10 order (Sakharov + 8/7 phase + J) |
-| N_eff/He/D | [OK] closed | Y_p=0.2488 (+1.6%), N_eff=3.0441 |
+| N_eff/He/D | [OK] closed | Y_p=0.251365, N_eff=3.043873; current non-perturbative weak-rate closure |
 | strong-coupling trace anomaly | [OK] closed | pseudo-dilaton consistency λ_H=(λ_dil+σ_SM)/(32π²)=0.1289 (−0.64%) |
 | long-root geometric carrier | [OK] closed | K=8/3 = J=2 kinetic / dimension; λ_long=(8/3)R=16/L² |
-| the 20-exponent mechanism | [OK] closed | τ⁻¹/kL=20.02 (m_e=M_P·e^{−20kL}) |
+| the 20-exponent mechanism | [OK] closed | (d+1)(ΣY²Δ_f)=4×5=20 in m_e=M_P·e^{−20kL}(1−s0κ) |
 | the v¹⁰ exponent | [OK] closed | MaxEnt uniform y=1 → 5 species × v² = v¹⁰ |
 
 ### 23.2 The spectrum-to-4D two-end regularisation

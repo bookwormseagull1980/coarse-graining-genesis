@@ -22,12 +22,12 @@
 # =============================================================================
 
 """
-Research audit: transparent-gravity infrared dynamics.
+Historical linear-sector diagnostic for infrared gravity.
 
-This script does not edit the parameter store.  It checks what the
-present linear TT propagator implies for quasi-static gravity, and it
-tests whether changing only the self-similar scale law L(k) can produce
-the extra infrared power needed for flat galaxy rotation curves.
+This read-only script checks the quasi-static scaling of the linear TT
+propagator and the effect of changing the self-similar law L(k).  Its
+result supplies the linear baseline for the nonlinear endpoint closure
+implemented in cg_frg/cosmology/endpoint_residual.py.
 
 Main facts being audited:
 
@@ -44,12 +44,11 @@ Main facts being audited:
    in the source mass.  A fixed linear propagator cannot generate that
    mass scaling.
 
-4. If one allows a new local nonlinear IR closure with static scale
-   invariance in three spatial dimensions, the deep-IR action density
-   is forced to the cubic form |grad phi|^3/a0.  This gives the
-   p-Laplacian equation with p = 3 and the baryonic Tully-Fisher law
-   v^4 = G M a0.  This is a candidate new closure, not part of the
-   present linear TT sector.
+4. The local endpoint branch uses the three-dimensional scale-invariant
+   cubic gradient closure.  Its p=3 equation gives the deep-infrared
+   point-source relation and the baryonic Tully-Fisher law v^4=GMa0.
+   The linear TT result above and this nonlinear local branch occupy
+   distinct parts of the current cosmology closure.
 """
 
 from __future__ import annotations

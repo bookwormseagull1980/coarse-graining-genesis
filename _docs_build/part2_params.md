@@ -73,7 +73,7 @@ init_v4 → run_rge → spectrum_loop → sm_content → cluster_decay → spect
 
 | Item | modules involved | proof mechanism |
 |---|---|---|
-| τ theorem (EC-torsion first principles) | sm_content / ec_structure | the window capacity 2πkL⁴ cancels exactly → τ = 1/50 EXACT |
+| τ content closure | sm_content / ec_structure | (N_L−N_R)/(N_f·ΣY²) = 1/50 |
 | s0/N_R = 1/175 field equation | squash correction system | pure content ratio, one half of the J=2 first-order torsion (factor 2=(d+1)/2) |
 | the κ² of g₁ | geometric_couplings | conformal-gauge duality N_g·ξ=1 (5/8 = ΣY²·Δ_f·ξ) |
 | the α²/K of g₃ | geometric_couplings | K = J(J+2)/d = 8/3 geometric-dynamics origin |
@@ -93,15 +93,15 @@ init_v4 → run_rge → spectrum_loop → sm_content → cluster_decay → spect
 
 **Motivation**: the V4 rebuild is a fresh start — the parameter store is created from the framework's anchor values + the SM comparison table, then the foundation chain runs in dependency order.
 
-**Anchor values** (external, comparison only):
-- M_P = 1/√(8πG_N) = 2.4353e18 GeV (the reduced Planck mass, the identity from the observed G_N)
-- tau = 0.02 (the torsion modulus, the chiral-asymmetry statistical value 1/50)
-- L_Cg = √π (the Gaussian-width endpoint geometry)
-- kL = 2.4973 (the F_MG fixed-point seed)
+**Foundation values**:
+- `G_N` is the observed dimensional anchor and fixes `M_P=1/sqrt(8πG_N)=2.4353e18 GeV`.
+- `tau=(N_L-N_R)/(N_f ΣY²)=1/50=0.02` is the chiral-content invariant.
+- `L_Cg=sqrt(π)` is the Gaussian endpoint geometry.
+- `kL=2.4973` is the numerical root seed; the endpoint constraint publishes `kL=2.49353433252`.
 
 **Key formula**: k_GUT = M_P·L_Cg/L_GUT, with L_GUT = √3/τ (the J=2 isometry-breaking scale).
 
-**The polarisation decomposition of τ** (tau_pi_bare/ren/delta_pi): the "seven-layer theorem" of τ contains the polarisation counterterm — Π_ren(M_G) = ΣY² = 10/3, Π_bare(M_G) = 0.0014·ΣY², ΔΠ = Π_ren − Π_bare = 3.3287.
+**The torsion content closure**: `N_L=8`, `N_R=7`, `N_f=15`, and `ΣY²=10/3` give `tau=(8-7)/(15*(10/3))=1/50`. The same dimensionless modulus enters the spectral shifts and squash response.
 
 [[PARAMS:init_v4.py]]
 
@@ -150,7 +150,7 @@ e_R               (1,1)_{−1}     1 Weyl
 
 (No parameters written — but the numerator and denominator of τ are computed here.)
 
-(**Closed**: τ=1/50 is obtained EXACT from the EC field equation δS/δK=0 → τ/L=κ²·j₅, the window capacity 2πkL⁴ cancels exactly — see §12.4)
+(Here τ=1/50 is the dimensionless content ratio (N_L−N_R)/(N_f·ΣY²); see §12.4.)
 
 ### 13.5 spectral_sum.py — the CGC channel spectral sums
 
@@ -179,7 +179,7 @@ M_G = C/kL*, k_GUT = C/L_GUT, L_GUT = √3/τ
 g₂ = √8·(M_G/M_P)·kL*^{−3/2}                              (Killing normalisation)
 ```
 
-The F_MG condition is the spectral-pole condition of the improved-EMT spin-2 channel: the graviton-like mode becomes massless at the emergence scale M_G, self-consistently fixing the dimensionless fixed point kL* = 2.4973.
+The F_MG condition is the spectral-pole condition of the improved-EMT spin-2 channel. It self-consistently fixes the dimensionless endpoint value `kL*=2.49353433252` and the corresponding emergence scale `M_G`.
 
 **M_P rescaling invariance**: because M_G = M_P·L_Cg/kL*, all dimensionless predictions (M_G/M_P, g₂) do not depend on the absolute value of M_P.
 
@@ -526,14 +526,25 @@ matter_is_small: Σ(M_G)/p²_min < 0.1
 
 ### 18.4 newton.py — Newton's constant (the framework's single dimensional anchor)
 
-**Motivation**: the gravitational coupling G_N is not a free parameter — it is the zero-momentum residue Z_phys of the TT propagator, divided by the Planck scale:
+**Motivation**: the gravitational coupling is the zero-momentum long-range pole residue normalised by the Planck scale:
 ```
 G_N = 1/(8π·Z_phys·M_P²)
-Z_phys = |trace_eff|/(8π·(L_Gg/L_Cg)²)
+Z_phys = λ_long/(λ_long+σ)
+λ_long = C₂(2,1)/L² = 16/L²
 ```
-Three prescriptions (A direct residue, B spectral sum, C flat matching) agree within 0.03%.
+The TT projection fixes the four-dimensional tensor channel.  Its compact
+spectral normalisation is the `(2,1)` long-root eigenvalue, while `σ` is the
+five-channel matter self-energy from the same endpoint spectral sum.  At the
+emergence scale,
+```
+σ/λ_long = 1.574174556258523e-37
+Z_phys = 1.000000  (at displayed precision)
+```
 
-**0.027% is the anchor residue**: G_N = 1/(8πM_P²) is an identity; after the anchor is updated to PDG-2024 it reproduces exactly (0.0000%). Z_phys(M_G) = 0.665 is the vacuum-energy mass correction.
+**Anchor identity**: `G_N = 1/(8πM_P²)` defines the reduced Planck anchor.
+The pole residue gives the same normalisation at the stated precision.  The
+TT propagation calculation separately uses `p_TT²=8/L²` and the full
+Lichnerowicz eigenvalue `Λ_TT=14/L²`.
 
 [[PARAMS:newton]]
 

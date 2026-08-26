@@ -87,11 +87,10 @@ THE SPECTRA (derivation of each)
   (j, j) sub-tower reproduces the single-tower λ = J(J+2)/L² + 6/L²
   with multiplicity (J+1)²; the |j_L − j_R| = 1, 2 towers are
   required by the Weyl law (the TT density is 5× the scalar
-  density).  There are NO TT zero modes: the lowest mode is
-  (j_L, j_R) = (2, 0) ⊕ (0, 2) with λ = 14/L².  This is the
-  statement n_grav = 0: the graviton is not a zero mode of the
-  internal space — it is the spectral pole of the emergent
-  propagator (tt_tensor).
+  density).  The lowest antipodally even TT harmonic is
+  (j_L,j_R)=(1,1), with λ=14/L² and positive multiplicity.  Hence the
+  internal TT spectrum has a positive lower bound; the graviton-like
+  response is carried by the spectral pole in tt_tensor.
 
 GEOMETRIC DATA
 --------------
@@ -267,8 +266,8 @@ def tt_modes(L: float, j_max: int) -> list[tuple[int, int, float, int]]:
     """The Z₂-even TT modes: j_L + j_R even, |j_L − j_R| ≤ 2,
     j_L + j_R ≥ 2, up to j_max.
 
-    Returns (j_L, j_R, λ, d).  There are no TT zero modes: the
-    lowest mode is (2, 0) ⊕ (0, 2) with λ = 14/L² (n_grav = 0).
+    Returns (j_L, j_R, λ, d).  The lowest mode is (1,1), with
+    λ=14/L²; the positive lower bound gives n_grav=0.
     """
     out = []
     for jL in range(0, j_max + 1):

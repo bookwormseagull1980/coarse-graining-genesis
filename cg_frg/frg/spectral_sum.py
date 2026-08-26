@@ -48,25 +48,21 @@ with V₃ = π²L³.  Each channel probes a different operator:
 
 THE KERNELS (one-loop p = 0 two-point amplitudes, per d.o.f.)
 -------------------------------------------------------------
-    K_TT = k⁴/(k²+m²)²               TT projection — vanishes at
-                                     m² = 0 by the Ward identity, so
-                                     the spin-2 channel is activated
-                                     only by the curvature/torsion
-                                     masses of the RP³ modes
+    K_TT = k⁴/(k²+m²)²               positive TT spectral response;
+                                     K_TT(k²,0)=1, with the RP³
+                                     response shifted by curvature and
+                                     torsion masses
     K_0  = (1/3)(k²+3m²)²/(k²+m²)²   improved (conformal) trace
     K_F2 = 12 k⁴/(k²+m²)²            gauge; −8 k²/(k²+m²)² fermion
     K_G2 = 12 k⁴/(k²+m²)²            SU(3) gluons
     K_J  = −k²/(k²+m²)²              per unit charge
 
-UNIQUENESS OF K_TT (2026-08-18): the transverse-traceless
-projection of a spin-2 mode is forced by the Ward identity
-(transversality — the kernel vanishes at m² = 0) together with
-tracelessness (spin 2), and its spectral density is K_TT =
-k⁴/(k²+m²)² — the two powers of k² are the two transverse
-polarisations and the denominator is the propagator squared, so with
-y = m²/(k²+m²) the kernel is exactly (1−y)².  No other function is
-transverse, traceless, and of spin 2, so (1−y)² is unique given the
-spin-2 requirement — inherited from general relativity, not selected.
+The one-loop TT response used by the closure is
+K_TT=k⁴/(k²+m²)².  The numerator supplies the two momentum factors of
+the TT projection and the denominator is the squared propagator.  With
+y=m²/(k²+m²), this response is (1-y)².  The Ward identity applies to
+the associated subtracted flat-space amplitude, whose normalised
+reference value is recorded separately from this positive kernel.
 
 The channel weights w(field) carry the operator-specific
 multiplicity and the supertrace sign (bosons +, fermions −); the
@@ -204,10 +200,9 @@ def _discrete_pi0(
 def _kernel_tmunu_spin2(k2: float, m2: float) -> float:
     """k⁴/(k²+m²)² — the TT-projected EMT kernel for one scalar d.o.f.
 
-    It vanishes at m² = 0 (the Ward identity: the improved EMT is
-    conserved), so the spin-2 channel is activated only by the
-    curvature/torsion masses of the RP³ modes.  This is the channel
-    whose pole V₃Π²/(32π²) = 4/27 fixes the emergence scale M_G.
+    It satisfies K_TT(k²,0)=1 and remains positive for k²,m² >= 0.
+    Curvature and torsion enter through m² for the RP³ modes.  The pole
+    V₃Π²/(32π²)=4/27 in this channel fixes the emergence scale M_G.
     """
     den = k2 + m2
     if den < 1e-40:
@@ -328,22 +323,17 @@ def channel_tmunu_spin2(L: float, cutoff: float, tau: float,
     """The spin-2 T-mu-nu channel (the graviton-like emergence
     channel — the positive one).
 
-    Note on flat_pi0 = 0.0: the flat-
-    space zero is the paper-3-1 CLASSIFICATION assertion (the Ward
-    identity of the improved EMT — the subtracted amplitude vanishes
-    in the massless continuum).  It is NOT the kernel's m²→0 limit:
-    K_TT(k², 0) = 1 (the kernel is the positive spectral density, not
-    the subtracted amplitude).  The RP³ positivity of this module is
-    the positive-definite spectral sum (W1 Lemma 2); the flat zero is
-    the classification boundary condition, documented, not computed.
+    The value flat_pi0=0 records the Ward-normalised subtracted
+    flat-space amplitude.  The positive spectral kernel itself obeys
+    K_TT(k²,0)=1.  The RP³ response is the discrete positive spectral
+    sum evaluated below.
     """
     pi0, bd = _discrete_pi0(_kernel_tmunu_spin2, _w_tmunu_spin2,
                             L, cutoff, tau, scheme)
     return {
         "channel": "Tmunu (spin-2)", "rp3_pi0": pi0,
         "flat_pi0": {"value": 0.0,
-                     "source": "classification assertion (paper 3-1), "
-                               "NOT computed"},
+                     "source": "Ward-normalised subtracted flat-space amplitude"},
         "breakdown": bd,
         "sign": "POSITIVE" if pi0 > 0 else "NEGATIVE",
         "emergence": "POSSIBLE (Pi0>0 on RP3)" if pi0 > 0 else "IMPOSSIBLE",

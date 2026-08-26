@@ -23,21 +23,19 @@
 
 """
 cg_frg/generation/window_capacity.py — V4.0: the three-generation
-count (the window-capacity theorem)
+spectral-capacity closure
 =================================================================
 
 WHY THIS MODULE EXISTS (motivation)
 -----------------------------------
-The number of fermion generations is not an input of the framework:
-it is the number of spinor modes of the internal RP³ that fit
-inside the coarse-graining window.  The Z₂-even spinor tower has
-the eigenvalues m_n = (n+3/2)/L (n = 0, 2, 4, ...); the window of
-the scale flow retains the modes with
+The generation count is the value of the spectral-capacity map on the
+Z₂-even RP³ spinor tower.  Its dimensionless Dirac positions are
+n+3/2 for n=0,2,4,..., and the closure retains the positions satisfying
 
     (n + 3/2) < (kL)²
 
-(the framework's window criterion — the scale-invariant combination
-kL at the γ_M = 0 fixed point).  With kL* = 2.4935343:
+(the capacity criterion at the γ_M=0 fixed point).  With
+kL*=2.4935343:
 
     (kL*)² = 6.2177,
     n = 0 : 1.5  < 6.2177  ✓
@@ -45,11 +43,8 @@ kL at the γ_M = 0 fixed point).  With kL* = 2.4935343:
     n = 4 : 5.5  < 6.2177  ✓
     n = 6 : 7.5  > 6.2177  ✗ (excluded, −20.6% above the edge)
 
-so the window contains exactly the three modes n = {0, 2, 4}: the
-three generations.  The edge of the window sits at 1.04% below
-2π (the Euclidean-period value of the window; the two derivations
-— the framework's (kL)² and the paper's 2π — are the same
-count).
+the map returns exactly the three positions n={0,2,4}.  Its capacity
+(kL*)²=6.2177 lies 1.04% below the Euclidean-period value 2π.
 
 The mode mass ladder of the generations is m_n ∝ e^{−α·n} with the
 extrusion order n = {0, 2, 4} (the LZ non-adiabatic squeezing of
@@ -57,9 +52,8 @@ the scale flow — see lz_ladder).
 
 V4 DISCIPLINE
 -------------
-The window criterion (n+3/2) < (kL)² is derived from the
-coarse-graining window of the scale flow; kL is read from the
-store (the endpoint_constraint fixed point).
+The capacity criterion (n+3/2)<(kL)² is the declared generation
+closure, and kL is read from the endpoint fixed point.
 """
 
 from __future__ import annotations
@@ -86,7 +80,7 @@ def mode_mass_index(n: int) -> float:
 
 
 def count_generations(kL: float) -> tuple[int, list[int], list[float]]:
-    """The generation count: the modes with (n+3/2) < (kL)².
+    """Evaluate the spectral-capacity map (n+3/2)<(kL)².
 
     Returns (count, [n...], [margin...]) where the margin is the
     fractional distance of the mode from the window edge.
@@ -109,7 +103,7 @@ def compute() -> dict:
     kL = get("kL")
     count, modes, margins = count_generations(kL)
     pset("n_generations", count, provenance="DERIVED",
-         note="window-capacity theorem: spinor modes with (n+3/2) < (kL)^2 "
+         note="spectral-capacity closure: Dirac positions with (n+3/2) < (kL)^2 "
               "= exactly 3 (n = {0,2,4})")
     return {"n_generations": count, "modes": modes, "margins": margins,
             "kL": kL, "capacity": window_boundary(kL)}

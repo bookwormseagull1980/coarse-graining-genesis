@@ -40,7 +40,7 @@ The power 20 = 4×5: the Yukawa cascade (4 mixing steps of the
 spectral cascade) × the 5 species of one generation (the content
 factor) — the same counting as the Λ density's v¹⁰ (5×2).
 
-FIRST-PRINCIPLES DERIVATION of 20 = 4×5 (2026-08-17):
+STRUCTURAL CONTENT OF 20 = 4×5:
   The factor 4 = d+1, the internal dimension d = 3 plus one — the
   four levels of the spectral cascade (the 4D counting).  The
   factor 5 = ΣY²·Δ_f, the hypercharge capacity ΣY² = 10/3 times
@@ -95,32 +95,22 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from cg_core.params import get, set as pset  # noqa: E402
 
-# The cascade inputs:/n# Y_0 = 1 is the exact SO(4) diagonal overlap (mass_operator_overlap).
+# Y_0=1 is the scalar-channel SO(4) diagonal overlap.
 Y_0 = 1.0
 
 
 def electron_overlap(kL: float) -> float:
-    """O_e = 1 − δ(kL), δ(kL) = 1/(1+kL²)·e^{−1/kL} — the explicit
-    (0,0) wave-function overlap of the electron l=0 mode with the
-    dilaton l=0 scalar, derived from the constant-mode integral
-    (2026-08-17, migrated from electron_mass_operator).
+    """Finite-window scalar-channel overlap.
 
-    THE DERIVATION (the constant-mode overlap on RP³):
-      L_mass ⊃ −∫_{RP³} d³y √g ψ̄(y) φ_dil(y) ψ(y).
-    The mode expansion ψ = Σ ψ_{l,m}(x) ⊗ χ_{l,m}(y) gives the
-    l=0 overlap
-      O_e = ∫_{RP³} d³y √g χ̄₀(y) φ_dil^{(0)}(y) χ₀(y).
-    The l=0 spinor and the l=0 dilaton are CONSTANT modes, with
-    normalisations χ₀ = 1/√(2π²a³) and φ_dil^{(0)} = v_dil/√(2π²a³),
-    so the volume integral cancels the normalisation factors:
-      O_e = 2π²a³ · (1/√(2π²a³)) · (v_dil/√(2π²a³)) · (1/√(2π²a³))
-          = v_dil/√(2π²a³),
-    i.e. O_e = 1 after normalising by v_dil/√(2π²a³) (the l=0 constant
-    modes overlap exactly, the unit (0,0) Clebsch-Gordan weight).  The small
-    deficit δ(kL) = 1/(1+kL²)·e^{−1/kL} is the finite-size back-
-    reaction: the dilaton profile is not perfectly constant, it has a
-    weak kL-dependent gradient on RP³, and δ(kL) is that gradient's
-    first correction."""
+    Let chi_0 be a normalised lowest RP3 Dirac eigenspinor and let the
+    dilaton be the scalar zero-mode profile normalised to unit amplitude.
+    The identity scalar Clebsch-Gordan channel gives the unit matrix
+    element integral chi_bar_0 phi_0 chi_0 = 1.  The electron closure
+    applies the finite-window profile
+
+        O_e = 1-delta(kL),  delta(kL)=exp(-1/kL)/(1+kL^2).
+
+    This function evaluates that declared overlap closure."""
     return 1.0 - 1.0 / (1.0 + kL ** 2) * math.exp(-1.0 / kL)
 
 
@@ -140,45 +130,15 @@ def m_e_cascade(v_dil: float, kL: float) -> float:
 
 
 def dilaton_vev_electron(M_P: float, kL: float, tau: float) -> float:
-    """v_dil(e) = M_P·e^{−20kL}·√2·(1−s0κ)/(y_0·O_e) — the dilaton
-    VEV at the electron scale, i.e. the Planck-anchored dilaton VEV
-    descended by the 20kL KK cascade.
+    """Electron-scale dilaton normalisation.
 
-    THE CASCADE ↔ EXPONENTIAL-CHAIN EQUIVALENCE (2026-08-18)
-    --------------------------------------------------------
-    This is the missing link that makes the cascade form
-        m_e = y_0·O_e·v_dil/√2
-    EXACTLY equivalent to the exponential chain
-        m_e = M_P·e^{−20kL}·(1−s0κ):
+    The definition
 
-        m_e = y_0·O_e·[M_P·e^{−20kL}·√2·(1−s0κ)/(y_0·O_e)]/√2
-            = M_P·e^{−20kL}·(1−s0κ) .
+        v_dil(e)=M_P exp(-20 kL) sqrt(2)(1-s0 kappa)/(Y_0 O_e)
 
-    The dominant content is the KK DESCENT of the dilaton VEV.  The
-    dilaton is the scalar zero mode of the trace anomaly; its VEV
-    descends from the Planck scale through the spectral cascade.  The
-    descent has d+1 = 4 levels (the internal dimension 3 plus the
-    scale-flow direction), each level acting on the complete one-
-    generation content ΣY²·Δ_f = (10/3)(3/2) = 5 species.  Each
-    (level × species) unit crosses the coarse-graining window once and
-    is suppressed by the LZ survival factor e^{−kL} (one window width
-    kL — the same window whose circumference 4πkL sets the EW
-    hierarchy ln(M_G/v) of Section epsilon_ratio).  The total descent
-    is therefore
-
-        (e^{−kL})^{4·5} = e^{−20kL},   20 = (d+1)(ΣY²·Δ_f) = 4·5 .
-
-    The O(1) prefactor √2·(1−s0κ)/(y_0·O_e) carries the normalisation
-    (√2 = the Yukawa m = y·v/√2 factor, y_0 = 1 the (0,0) seed) and
-    the two level-corrections: the finite-size back-reaction δ inside
-    O_e = 1−δ and the J=2 squash s0κ — both O(1) corrections to the
-    dominant exponential, in the SAME two-correction pattern as the
-    EW hierarchy ln(M_G/v) = 4πkL − ln(3α/π) + s0κ.
-
-    The compression is explicit: the 4 × 5 = 20 window crossings of the
-    cascade collapse into the single exponent 20kL, and the O(1) factor
-    is the residual normalisation-plus-corrections; this is the
-    equivalence the exponential chain had only stated."""
+    rewrites the electron closure equivalently as
+    m_e=Y_0 O_e v_dil(e)/sqrt(2).  The exponent is the cascade content
+    20=(d+1)(Sum Y^2 Delta_f)=4*5."""
     s0 = 2.0 * tau
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
     O_e = electron_overlap(kL)
@@ -202,14 +162,11 @@ def compute() -> dict:
     s0 = 2.0 * tau
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
     me = me_raw * (1.0 - s0 * kappa)
-    # The cascade form, at the ELECTRON-SCALE dilaton VEV (not the EW
-    # VEV v — the VEV has already descended the 20kL cascade).  This
-    # makes the cascade form EXACTLY equal to the exponential chain:
+    # The electron-scale normalisation gives the equivalent cascade form:
     #   m_e = y_0·O_e·v_dil(e)/√2 = M_P·e^{−20kL}(1−s0κ) .
     v_dil_e = dilaton_vev_electron(M_P, kL, tau)
     mc = m_e_cascade(v_dil_e, kL)
-    # The cascade ↔ exponential-chain equivalence check (exact to
-    # floating point, since v_dil_e is the descent-defining value).
+    # Algebraic equivalence check at floating-point precision.
     if abs(mc - me) / me > 1e-12:
         raise RuntimeError("electron cascade ≠ exponential chain")
     # The muon/electron ratio: published by lz_ladder (the lepton-ladder
@@ -225,12 +182,11 @@ def compute() -> dict:
     # The exponent 20 = 4×5 (structural): the 4 mixing steps of the
     # spectral cascade × the 5 species of one generation (the content
     # counting) — 20 = (d+1)(ΣY² Δ_f) = 4·5, the pure content ratio.
-    idx20 = 1.0 / float(get("tau")) / float(get("kL"))
-    pset("electron_index_20", idx20, provenance="DERIVED", role="cg",
-         note=f"the exact exponent 20 = (d+1)(SigmaY2 Delta_f) = 4x5 "
-              f"(d+1 = 4, SigmaY2 Delta_f = (10/3)(3/2) = 5); "
-              f"tau^-1/kL = {idx20:.4f} is the same content ratio "
-              f"(the torsion inverse over the window width)")
+    cascade_content = (3.0 + 1.0) * ((10.0 / 3.0) * (3.0 / 2.0))
+    pset("electron_cascade_content", cascade_content,
+         provenance="DERIVED", role="cg",
+         note="electron exponent content = (d+1)(SumY2 Delta_f) = "
+              "4*(10/3)*(3/2) = 20")
     return {"m_e": me, "m_mu/m_e": mmu_me,
             "m_e_cascade_note": mc,
             "v_dil_electron_MeV": v_dil_e * 1e3,

@@ -280,23 +280,10 @@ def tau_statistical() -> float:
     10/3 is the hypercharge capacity per generation.  Hence
     τ = 1/(15 · 10/3) = 1/50 = 0.02.
 
-    THE τ-THEOREM SKELETON (2026-08-15, first-principles form):
-    τ = ⟨χ⟩ / Π_ren, the chiral drive over the renormalised
-    hypercharge polarisation, where
-        ⟨χ⟩   = (N_L−N_R)/N_f = 1/15  (the intensive chiral drive —
-                the Z₂ source N_L−N_R=1 per unit fermion content);
-        Π_ren = ΣY² = 10/3              (the renormalised hypercharge
-                polarisation — the FIRST non-zero hypercharge moment,
-                since ΣY = 0 by the mixed-anomaly cancellation).
-    The physical reading (τ as an intensive quantity — the local
-    chiral asymmetry per unit hypercharge capacity of the local type
-    T = {Q_L, u_R, d_R, L_L, e_R}) is established in
-    tau_generation_intensive; here the statistical value is recorded.
-    The EC-torsion field equation (the torsion sourced by the chiral
-    current j₅ and screened by the hypercharge polarisation, giving
-    the exact coefficient 1/(N_f·ΣY²)) is CLOSED — the seven-layer
-    theoremisation (init_v4) and the explicit field equation
-    τ/L = κ²·j₅ (cg_frg/ewsb/squash_level_transfer.py, STEP 1).
+    Equivalently, tau is the chiral excess per Weyl degree of freedom,
+    normalised by the first non-zero hypercharge moment.  This dimensionless
+    content ratio supplies the modulus used by the homogeneous EC ansatz and
+    the squash-response chain.
     """
     n_f = N_WEYL_PER_GENERATION  # 15 Weyl fermions per generation
     return chiral_asymmetry() / (n_f * hypercharge_sum_sq())  # 1/50

@@ -15,139 +15,114 @@
 #  companion papers:
 #    [I]  "The spectrum of a compact internal space.
 #          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
 #    [II] "The spectrum of a compact internal space.
 #          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
 # =============================================================================
 
-"""Generate V4_LEDGER.md — the single .md file of the docs directory.
+"""Generate the current V4 ledger from the live parameter store.
 
-Structure: build instructions + the 2026-08-18 update/review/Paper-5 additions
-+ the Paper-4 axiomatic foundation (introduction) + the full text of the 9
-reference documents + the Paper-5 content reference + the archive index.
-All outdated annotations ("honest boundary / open / to-be-verified / AXIOM-level")
-are uniformly corrected to "closed".
-
-Everything is source-driven (no manual edits to V4_LEDGER.md survive a
-regeneration), so this script is the single source of truth.
+The generator reads current artifacts only. Historical notes and merged
+development snapshots are deliberately absent from the public ledger.
 """
-import os
-import re
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOCS = os.path.join(ROOT, "docs")
-SRC = os.path.join(ROOT, "_docs_build", "merged_sources")
-BLD = os.path.join(ROOT, "_docs_build")
+from __future__ import annotations
 
-
-def export_params() -> None:
-    """Refresh params_export.json from the live parameter store.
-
-    params_export.json is consumed by build_docx.py (the [[PARAMS:*]]
-    docx tables); it must always mirror cg_params.json.  The export
-    is regenerated here so the ledger and the docx build chain stay
-    source-driven (no manual edits survive a regeneration).
-    """
-    import json
-
-    store = json.loads(
-        open(os.path.join(ROOT, "cg_params.json"), encoding="utf-8").read())
-    out = os.path.join(BLD, "params_export.json")
-    with open(out, "w", encoding="utf-8") as f:
-        json.dump(store["parameters"], f, ensure_ascii=False, indent=2)
-    print("Refreshed:", out, f"({len(store['parameters'])} parameters)")
+import json
+from collections import Counter
+from pathlib import Path
 
 
-def ew_precision_section() -> str:
-    """The 2026-08-19 EW precision block as a ledger section.
+ROOT = Path(__file__).resolve().parent.parent
+DOCS = ROOT / "docs"
+BUILD = ROOT / "_docs_build"
+STORE = ROOT / "cg_params.json"
+REPORT = ROOT / "V4_VERIFICATION_REPORT.md"
 
-    The merged FRAMEWORK_V4 snapshot predates the EW precision module,
-    so the sixteen parameters it publishes are collected here as an
-    explicit addition rather than retro-edited into the historical
-    source documents.
-    """
-    import json
 
-    store = json.loads(
-        open(os.path.join(ROOT, "cg_params.json"), encoding="utf-8").read())
-    p = store["parameters"]
-    keys = ["M_Z_pred", "s2_thetaW_MZ", "M_W_pred", "s2_thetaW_os",
-            "rho_param", "Gamma_Z_pred", "Gamma_had_pred", "Gamma_b_pred",
-            "Gamma_l_pred", "Gamma_inv_pred", "sigma_had_pred", "R_l_pred",
-            "R_b_pred", "m_H_pred", "m_mu_pred", "m_tau_pred"]
-    lines = [
-        "The electroweak precision block of Paper II Section 10.6 "
-        "(interface chain M_G -> M_Z) is published by "
-        "`cg_frg/ewsb/ew_precision.py`.  The merged FRAMEWORK_V4 "
-        "snapshot above predates this module, so its sixteen parameters "
-        "are collected here.  Every input is a framework-derived value; "
-        "the observed values appear only as comparison targets.  The "
-        "computation level is stated in the module docstring (M_Z "
-        "tree-level on the two-loop geometric running; M_W with the "
-        "one-loop t-b Veltman rho, Delta r_rem omitted; Gamma_Z Born "
-        "+ QCD/QED radiators; m_H tree-level).",
-        "",
-        "| Parameter | Value | Role | Note (truncated) |",
-        "|---|---|---|---|",
+def load_store() -> dict:
+    with STORE.open(encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def export_params(parameters: dict) -> None:
+    target = BUILD / "params_export.json"
+    with target.open("w", encoding="utf-8") as handle:
+        json.dump(parameters, handle, ensure_ascii=False, indent=2)
+
+
+def value_text(value: object) -> str:
+    if isinstance(value, float):
+        return format(value, ".16g")
+    if isinstance(value, (dict, list)):
+        return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+    return str(value)
+
+
+def parameter_row(parameters: dict, key: str, meaning: str) -> str:
+    record = parameters[key]
+    writer = record.get("writer", "")
+    return (
+        f"| `{key}` | `{value_text(record.get('value'))}` | "
+        f"{record.get('provenance', '')} / {record.get('role', '')} | "
+        f"`{writer}` | {meaning} |"
+    )
+
+
+def verification_verdict() -> str:
+    if not REPORT.exists():
+        return "verification report pending"
+    text = REPORT.read_text(encoding="utf-8")
+    marker = "## Verdict"
+    if marker not in text:
+        return "verification report present"
+    tail = text.split(marker, 1)[1].strip().splitlines()
+    return tail[0].strip() if tail else "verification report present"
+
+
+def build() -> str:
+    store = load_store()
+    parameters = store["parameters"]
+    export_params(parameters)
+
+    provenance = Counter(r.get("provenance", "") for r in parameters.values())
+    roles = Counter(r.get("role", "") for r in parameters.values())
+    lean_count = len(list((ROOT / "lean_proofs").glob("*.lean")))
+
+    primary = [
+        ("G_N_PDG", "single observed dimensional anchor"),
+        ("M_P", "reduced Planck mass from `G_N_PDG`"),
+        ("tau", "chiral-content invariant `(8-7)/(15*(10/3))=1/50`"),
+        ("kL", "spin-2 endpoint fixed point"),
+        ("M_G", "emergence scale from the endpoint fixed point"),
+        ("lambda_long_MG", "`(2,1)` long-root eigenvalue `16/L^2` at the emergence scale"),
+        ("sigma_over_lambda_long_MG", "five-channel self-energy divided by the long-root eigenvalue"),
+        ("n_generations", "spectral-capacity map on the even RP3 Dirac tower"),
+        ("g2_MG", "screened weak coupling at the emergence scale"),
+        ("g1_MG_geo", "squashed-axis hypercharge normalisation"),
+        ("g3_MG_geo", "colour boundary coupling"),
+        ("v_HIGGS", "electroweak scale from the window-squared line"),
+        ("m_e_pred", "electron cascade closure with content exponent 20"),
+        ("m_nu3", "Weinberg scale with the squash level factor"),
+        ("Delta_m21_sq_osc", "finite-window solar propagation splitting"),
+        ("Delta_m31_sq", "atmospheric splitting of the absolute texture"),
+        ("qcd_Lambda_QCD", "two-loop colour running and threshold matching"),
     ]
-    for k in keys:
-        r = p.get(k, {})
-        val = r.get("value")
-        note = str(r.get("note", ""))
-        note = note.replace("|", "/")
-        if len(note) > 90:
-            note = note[:90] + "..."
-        if isinstance(val, float):
-            val = f"{val:.6g}"
-        lines.append(f"| `{k}` | {val} | {r.get('role', '')} | {note} |")
-    return "\n".join(lines) + "\n"
 
+    cosmology = [
+        ("H0_GEV", "entropy-endpoint Hubble rate"),
+        ("Omega_Lambda", "dark-energy content ratio"),
+        ("Omega_b", "raw photon floor, raw baryon asymmetry, and proton mass"),
+        ("Omega_Sigma", "flatness endpoint residual"),
+        ("T_CMB_corrected_K", "finite endpoint correction of the photon monopole"),
+        ("a0_MOND", "endpoint acceleration scale"),
+        ("endpoint_acceleration_projection", "normalised local endpoint response"),
+        ("endpoint_sigma8", "fixed-input Boltzmann comparison propagation"),
+        ("endpoint_S8", "fixed-input Boltzmann comparison propagation"),
+    ]
+    primary = [(k, m) for k, m in primary if k in parameters]
+    cosmology = [(k, m) for k, m in cosmology if k in parameters]
 
-def clean(text):
-    """Word-level obsolete-annotation correction (avoiding AXIOM_PROOF_SERIES)."""
-    text = text.replace("AXIOM_PROOF_SERIES", "@@@AXPROOF@@@")
-    text = text.replace("honest boundary", "closed state")
-    text = text.replace("still open", "closed")
-    text = text.replace("to-be-verified", "solved")
-    text = text.replace("colour-number dilution sketch", "colour-number dilution (closed)")
-    text = text.replace("AXIOM long-term", "solved")
-    text = text.replace("still AXIOM-level", "closed")
-    text = text.replace("field-equation proof AXIOM", "field-equation proof completed")
-    text = text.replace("mechanism to-be-verified", "mechanism closed")
-    text = text.replace("deepest principle to-be-verified", "closed")
-    text = text.replace("⚠️ candidate", "✅ closed")
-    text = text.replace("⚠️ to-be-verified", "✅ solved")
-    text = text.replace("(AXIOM-level, unified induction)", "(all closed)")
-    text = text.replace("(AXIOM-level, needs EC field-equation variation)", "")
-    text = text.replace("(only 2 AXIOM-level deep items)", "(2 deep items, all solved)")
-    text = text.replace("closed state (AXIOM-level)", "all closed")
-    text = text.replace("(AXIOM-level)", "")
-    text = text.replace("sin²θ12=1/3, m_ν1/m_ν2=3/10",
-                        "sin²θ12=m_ν1/m_ν2=3/10")
-    text = text.replace("m_ν3 = v²·(2π)²/k_GUT = 0.048 eV",
-                        "m_ν3 = v²·(2π)²/k_GUT·(1+s0·κ) = 0.0502 eV")
-    text = text.replace("m_nu3 = v^2 (2pi)^2/k_GUT = 0.0502 eV",
-                        "m_nu3 = v^2 (2pi)^2/k_GUT (1+s0 kappa) = 0.0502 eV")
-    text = text.replace("m_nu3 = v^2 (2pi)^2/k_GUT = 0.0481 eV vs observed 0.0502 (-4.3%",
-                        "m_nu3 = v^2 (2pi)^2/k_GUT (1+s0 kappa) = 0.0502 eV vs sqrt(Delta m31^2) 0.0502 (-0.040%")
-    text = text.replace("m_nu2 from the 5/3 GUT determinant = 0.0087 eV vs observed 0.0086 (+0.7%)",
-                        "m_nu2 is an absolute rest-mass eigenvalue; oscillation comparison is made through Delta m21^2, not through an observed m_nu2")
-    text = text.replace("external " + "validation", "external comparison")
-    text = text.replace("@@@AXPROOF@@@", "AXIOM_PROOF_SERIES")
-    return text
-
-
-_BANNER_RE = re.compile(r"^\s*<!--.*?-->\s*", re.DOTALL)
-
-
-def read(p):
-    text = open(p, encoding="utf-8").read()
-    # strip a leading HTML-comment banner so it does not leak into the ledger
-    return _BANNER_RE.sub("", text, count=1).lstrip("\n")
-
-
-MD_BANNER = """<!--
+    banner = """<!--
 Coarse-Graining Genesis Framework V4.0
 
 Author:      Jinku Guo <guojk@nwpu.edu.cn>
@@ -158,135 +133,122 @@ DOI records:
   [Software] 10.5281/zenodo.22067006
   [Paper I]  10.5281/zenodo.22067118
   [Paper II] 10.5281/zenodo.22067469
-
-Part of the V4 spectral framework, whose physics is presented in the
-companion papers:
-  [I]  "The spectrum of a compact internal space.
-        I. Gauge structure and fermion content"
-       DOI: 10.5281/zenodo.22067118
-  [II] "The spectrum of a compact internal space.
-        II. Effective couplings and mass scales"
-       DOI: 10.5281/zenodo.22067469
 -->
 """
 
+    lines = [
+        banner,
+        "# V4 Framework Ledger",
+        "",
+        "This ledger describes the current formal computation. It is generated from",
+        "`cg_params.json`; numerical values below therefore match the latest fresh",
+        "reproduction. The two companion papers supply the physical derivations.",
+        "",
+        "## Records",
+        "",
+        "- Software: `10.5281/zenodo.22067006`",
+        "- Paper I: `10.5281/zenodo.22067118`",
+        "- Paper II: `10.5281/zenodo.22067469`",
+        "",
+        "## Data Discipline",
+        "",
+        "The computation has four layers:",
+        "",
+        "1. `OBSERVED / anchor`: the Newton constant sets the dimensional scale.",
+        "2. Structural closure: compact RP3 spectrum, content counts, Gaussian",
+        "   heat-flow envelope, TT response, endpoint pole normalisation, and",
+        "   matching conventions.",
+        "3. `DERIVED`: values returned by the acyclic module chain.",
+        "4. `comparison`: reference observations and fixed-input propagation",
+        "   products evaluated after the internal chain.",
+        "",
+        f"Current store: {len(parameters)} records; "
+        + ", ".join(f"{k}={v}" for k, v in sorted(provenance.items())) + ".",
+        "Roles: " + ", ".join(f"{k}={v}" for k, v in sorted(roles.items())) + ".",
+        "",
+        "## Defining Closures",
+        "",
+        "- The one-loop TT spectral response is",
+        "  `K_TT(k^2,m^2)=k^4/(k^2+m^2)^2`; it satisfies",
+        "  `K_TT(k^2,0)=1`. The Ward-normalised subtracted flat amplitude is",
+        "  recorded separately.",
+        "- With `y=m^2/(k^2+m^2)`, the mass-weighted response is",
+        "  `y(1-y)^2`. Its unique interior maximum is `4/27` at `y=1/3`;",
+        "  the endpoint closure adopts this extremum as its pole normalisation.",
+        "- The torsion modulus is the dimensionless content invariant",
+        "  `tau=(N_L-N_R)/(N_f SumY2)=1/50`.",
+        "- The generation capacity is the declared map",
+        "  `n+3/2 < (kL)^2` on `n=0,2,4,...`; at the fixed point it returns",
+        "  `n=0,2,4`.",
+        "- The electron exponent is the content number",
+        "  `(d+1)(SumY2 Delta_f)=4*5=20`.",
+        "- The neutrino mass matrix assembles the prescribed hypercharge-trace",
+        "  eigenvalue texture and PMNS rotation. Diagonalisation verifies the",
+        "  assembled texture and its absolute Weinberg scale.",
+        "",
+        "## Primary Chain",
+        "",
+        "| Key | Current value | Status | Writer | Source |",
+        "|---|---:|---|---|---|",
+    ]
+    lines.extend(parameter_row(parameters, k, m) for k, m in primary)
 
-def strip_sep(s):
-    """Strip a trailing '---' separator + blank lines from an extracted section."""
-    lines = s.rstrip().split("\n")
-    while lines and (not lines[-1].strip() or lines[-1].strip() == "---"):
-        lines.pop()
-    return "\n".join(lines).rstrip() + "\n"
+    lines.extend([
+        "",
+        "## Cosmology Closure",
+        "",
+        "The entropy endpoint fixes `H0`; the neutrino floor fixes `rho_Lambda`;",
+        "their ratio gives `Omega_Lambda`. The raw photon floor, baryon asymmetry,",
+        "and proton mass give `Omega_b`, and flatness gives `Omega_Sigma`. In linear",
+        "Boltzmann propagation the residual occupies the cold-source slot. The local",
+        "endpoint projection uses `a0` and the stored `mu` response. These two",
+        "projections share the endpoint source and are evaluated in their respective",
+        "linear-cosmology and local-response branches.",
+        "",
+        "| Key | Current value | Status | Writer | Source |",
+        "|---|---:|---|---|---|",
+    ])
+    lines.extend(parameter_row(parameters, k, m) for k, m in cosmology)
+
+    lines.extend([
+        "",
+        "## Formal Verification",
+        "",
+        f"The archive contains {lean_count} current Lean files. Their finite proofs",
+        "verify the implications from the premises declared in each file. Analytic",
+        "spectral and continuum premises are supplied in the papers and source",
+        "derivations. See `lean_proofs/README.md` for the exact file-level scope.",
+        "",
+        f"Latest verification verdict: **{verification_verdict()}**.",
+        "",
+        "## Reproduction",
+        "",
+        "From the repository root:",
+        "",
+        "```text",
+        "python scripts/reproduce_v4.py",
+        "python scripts/audit_param_writers.py",
+        "python scripts/audit_observation_leakage.py",
+        "python scripts/audit_numeric_precision.py",
+        "python scripts/audit_path_portability.py",
+        "python -m pytest -q -p no:cacheprovider",
+        "python scripts/verify_lean_archive.py --lean-exe <path-to-lean.exe>",
+        "```",
+        "",
+        "`scripts/verify_v4.py` combines these checks and produces",
+        "`V4_VERIFICATION_REPORT.md`. All paths recorded in reviewer-facing",
+        "artifacts are repository-relative.",
+        "",
+    ])
+    return "\n".join(lines)
 
 
-# The precise correction of CLOSURE_LEDGER
-ledger = read(os.path.join(SRC, "CLOSURE_LEDGER.md"))
-ledger = ledger.replace(
-    "The CKM geometric choice of V_cb/V_ub, the χSB scheme of m_p, the chiral counting of Δ²_R/T_deconf\n——all need the complete proof of the EC field equation + the J=2 squash variation.",
-    "The CKM geometric choice of V_cb/V_ub, the χSB scheme of m_p, the chiral counting of Δ²_R/T_deconf\n——all closed (the EC field equation + J=2 squash variation proof completed).",
-)
+def main() -> None:
+    DOCS.mkdir(parents=True, exist_ok=True)
+    target = DOCS / "V4_LEDGER.md"
+    target.write_text(build(), encoding="utf-8")
+    print(f"Generated: {target.relative_to(ROOT)}")
 
-docs_clean = {
-    "FRAMEWORK_V4.md": clean(read(os.path.join(SRC, "FRAMEWORK_V4.md"))),
-    "LOW_LEVEL_SYMMETRIES_2026-08-17.md": clean(read(os.path.join(SRC, "LOW_LEVEL_SYMMETRIES_2026-08-17.md"))),
-    "SYMMETRY_EMERGENCE_2026-08-17.md": clean(read(os.path.join(SRC, "SYMMETRY_EMERGENCE_2026-08-17.md"))),
-    "SQUASH_SYMMETRY_2026-08-16.md": clean(read(os.path.join(SRC, "SQUASH_SYMMETRY_2026-08-16.md"))),
-    "SPECTRAL_DUALITY_INSIGHTS.md": clean(read(os.path.join(SRC, "SPECTRAL_DUALITY_INSIGHTS.md"))),
-    "COSMOLOGY_CLOSURE_2026-08-15.md": clean(read(os.path.join(SRC, "COSMOLOGY_CLOSURE_2026-08-15.md"))),
-    "BBN_NONPERTURBATIVE_2026-08-17.md": clean(read(os.path.join(SRC, "BBN_NONPERTURBATIVE_2026-08-17.md"))),
-    "PRECISION_LEDGER_2026-08-16.md": clean(read(os.path.join(SRC, "PRECISION_LEDGER_2026-08-16.md"))),
-}
 
-# The Paper-4 axiomatic foundation (introduction)
-intro = read(os.path.join(BLD, "part0_intro.md"))
-
-# The 2026-08-18 ledger additions (source-driven)
-update_0818 = strip_sep(read(os.path.join(BLD, "part0_update_2026_08_18.md")))
-audit_0818 = strip_sep(read(os.path.join(BLD, "part0_audit_2026_08_18.md")))
-paper5_summary = strip_sep(read(os.path.join(BLD, "part0_paper5_summary.md")))
-paper5_reference = strip_sep(read(os.path.join(SRC, "PAPER5_REFERENCE.md")))
-
-header = MD_BANNER + """
-# V4 Framework Reference Ledger (V4_LEDGER.md)
-
-> This document is the **only .md file** in the `docs/` directory, complementary to `V4_COMPLETE_GUIDE.docx`:
-> the .docx collects all physical information in **lecture-style exposition** (introduction + symmetry principles + parameter-by-parameter analysis + supplementary topics),
-> this .md collects content **unsuited to a lecture-style docx**: ① docx build instructions; ② the Paper-4 axiomatic foundation (physical motivation and method system);
-> ③ the full text of all original reference documents; ④ the archive index.
-> All outdated annotations ("honest boundary / open / to-be-verified / AXIOM-level") have been uniformly corrected to "closed".
-
----
-
-## 0. docx build instructions (reproducible)
-
-`V4_COMPLETE_GUIDE.docx` is generated programmatically from the assets under `_docs_build/`, with all numbers extracted from `cg_params.json`:
-
-| Asset | Role |
-|---|---|
-| `build_docx.py` | Markdown→docx converter |
-| `figures.py` | draws 10 vector figures (SVG + 300dpi PNG) |
-| `part0_cover.md` | cover + table of contents |
-| `part0_intro.md` | introduction: physical motivation and method system (Paper-4 axiomatic foundation) |
-| `part1_symmetry.md` | Part 1: symmetry principles (11 chapters) |
-| `part2_params.md` | Part 2: parameter-by-parameter analysis (20 chapters) |
-| `part3_supplement.md` | Part 3: BBN + precision ledger + complete closure annotations |
-| `params_export.json` | complete export of the 170 parameters |
-
-**Regeneration commands** (under `_docs_build/`):
-```
-py figures.py        # generate the 10 vector figures
-py build_docx.py     # generate docs/V4_COMPLETE_GUIDE.docx
-```
-
-**Usage hint**: after opening the docx, press Ctrl+A then F9 to refresh the TOC field.
-
-"""
-
-sections = [
-    ("1. Physical motivation and method system (Paper-4 axiomatic foundation)", intro),
-    ("2. The single source of truth (FRAMEWORK_V4 full text)", docs_clean["FRAMEWORK_V4.md"]),
-    ("2.1 Electroweak precision parameters (2026-08-19 addition)", ew_precision_section()),
-    ("3. The closure ledger (CLOSURE_LEDGER full text)", ledger),
-    ("4. Symmetry catalogue (LOW_LEVEL_SYMMETRIES full text)", docs_clean["LOW_LEVEL_SYMMETRIES_2026-08-17.md"]),
-    ("5. Symmetry emergence derivation chain (SYMMETRY_EMERGENCE full text)", docs_clean["SYMMETRY_EMERGENCE_2026-08-17.md"]),
-    ("6. The squash symmetry correction (SQUASH_SYMMETRY full text)", docs_clean["SQUASH_SYMMETRY_2026-08-16.md"]),
-    ("7. Spectral-duality insights (SPECTRAL_DUALITY_INSIGHTS full text)", docs_clean["SPECTRAL_DUALITY_INSIGHTS.md"]),
-    ("8. Cosmology closure (COSMOLOGY_CLOSURE full text)", docs_clean["COSMOLOGY_CLOSURE_2026-08-15.md"]),
-    ("9. The six BBN constants (BBN_NONPERTURBATIVE full text)", docs_clean["BBN_NONPERTURBATIVE_2026-08-17.md"]),
-    ("10. The precision ledger (PRECISION_LEDGER full text)", docs_clean["PRECISION_LEDGER_2026-08-16.md"]),
-]
-
-# front-matter additions (## 0.1 / ## 0.2 / ## 0.3) come right after the header
-body = header
-for sec in (update_0818, audit_0818, paper5_summary):
-    body += f"\n---\n\n{sec}\n"
-
-for title, content in sections:
-    body += f"\n---\n\n# {title}\n\n{content}\n"
-
-# Paper-5 content reference (H1 section 11)
-body += f"\n---\n\n{paper5_reference}\n"
-
-# Archive index (the ledger's regeneration inputs, now consolidated under _docs_build/)
-src_lines = []
-for f in sorted(os.listdir(SRC)):
-    if f.endswith(".md"):
-        src_lines.append(f"- `{f}`")
-
-footer = f"""
-
----
-
-## 12. Ledger source index (_docs_build/merged_sources/)
-
-> These 10 English .md files are the regeneration inputs of `gen_ledger.py` (the source documents compiled into this ledger, §1–§11).
-> The V2/V3 extraction-audit files and pre-merge topical fragments were moved out of the public tree on 2026-08-18 (their effective content is already merged into the .docx or this ledger).
-
-{chr(10).join(src_lines) if src_lines else '(source directory emptied)'}
-"""
-
-out = body + footer
-out_path = os.path.join(DOCS, "V4_LEDGER.md")
-open(out_path, "w", encoding="utf-8").write(out)
-export_params()
-print("Generated:", out_path, f"({len(out)/1024:.1f} KB)")
+if __name__ == "__main__":
+    main()

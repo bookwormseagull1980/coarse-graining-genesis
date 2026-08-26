@@ -798,7 +798,7 @@ def compute() -> dict:
     Gamma_b_corr = Gamma_b_born * (1.0 + delta_b)
 
     pset("delta_rho_2loop", d_rho_2, provenance="DERIVED", role="internal",
-         note=f"rho_bar = {d_rho_2:.7f} from Denner eq. 8.22, with "
+         note=f"Delta rho_bar = {d_rho_2:.7f} from Denner eq. 8.22, with "
               f"x = G_F m_t^2/(8 sqrt2 pi^2) and the framework m_t = "
               f"{mt:.3f} GeV; one-loop t-b rho = {d_rho_1:.7f}.")
     pset("deltab_top_vertex", delta_b, provenance="DERIVED", role="internal",

@@ -22,8 +22,8 @@
 # =============================================================================
 
 """
-cg_frg/gravity/newton.py — V4.0: Newton's constant from the TT
-residue — the framework's unique dimensional anchor
+cg_frg/gravity/newton.py — V4.0: Newton's constant from the long-range
+pole residue — the framework's unique dimensional anchor
 =================================================================
 
 WHY THIS MODULE EXISTS (motivation)
@@ -34,11 +34,17 @@ propagator on the RP³ trajectory, normalised by the Planck scale,
 
     G_N = 1 / (8π · Z_phys · M_P²) .
 
-The residue Z_phys = λ/(λ+σ) is the TT residue with the regulator
-removed, where λ = 8·M_G²/kL² is the J = 2 TT eigenvalue at the
-emergence scale and σ is the matter self-energy from the five-channel
-spectral sums.  The matter back-reaction is tiny (σ ≪ λ), so
-Z_phys ≈ 1.
+The TT projection fixes the four-dimensional tensor channel, while its
+compact spectral normalisation is supplied by the long-root coefficient.
+The J = 2 squash of the R-sector connection is
+the Spin(4) representation (j_L,j_R) = (2,1), hence
+
+    λ_long = C₂(2,1)/L² = 16/L² = 16·M_G²/kL²
+
+at the emergence scale.  The matter self-energy σ is obtained from the
+five-channel spectral sums and is tiny compared with λ_long, so
+Z_phys ≈ 1.  The TT propagation calculation retains its own kinetic and
+Lichnerowicz quantities, p_TT² = 8/L² and Λ_TT = 14/L².
 
 V4 DISCIPLINE
 -------------
@@ -68,23 +74,37 @@ from cg_core.params import get, set as pset, compare_and_set  # noqa: E402
 EIGHT_PI = 8.0 * math.pi
 
 
+def long_root_eigenvalue(L: float) -> float:
+    """The (2,1) long-root eigenvalue C2(2,1)/L^2 = 16/L^2.
+
+    The Spin(4) convention is C2(j_L,j_R) =
+    2[j_L(j_L+1)+j_R(j_R+1)].
+    """
+    j_l, j_r = 2.0, 1.0
+    c2 = 2.0 * (j_l * (j_l + 1.0) + j_r * (j_r + 1.0))
+    return c2 / (L * L)
+
+
 def G_N_from_Z(Z_phys: float, M_P: float) -> float:
     """G_N = 1/(8π·Z_phys·M_P²)."""
     return 1.0 / (EIGHT_PI * Z_phys * M_P * M_P)
 
 
 def compute() -> dict:
-    """Publish the G_N prediction from the TT residue with Z_phys ≈ 1."""
+    """Publish G_N from the long-range pole residue with Z_phys ≈ 1."""
     M_P = get("M_P")
     kL = get("kL")
     M_G = get("M_G")
     G_N_PDG = get("G_N_PDG")
 
-    # The regulator/matter decomposition of the TT residue.
-    # Z_reg(k) = λ/(λ+R_k+σ), Z_phys(k) = λ/(λ+σ) (regulator removed),
-    # with λ = 8·M_G²/kL² the J = 2 TT eigenvalue at the emergence
-    # scale and σ the matter self-energy from the five-channel sums.
-    lam = 8.0 * M_G * M_G / (kL * kL)
+    # The regulator/matter decomposition of the pole normalisation.
+    # Z_reg(k) = lambda_long/(lambda_long+R_k+sigma) and
+    # Z_phys(k) = lambda_long/(lambda_long+sigma), with lambda_long the
+    # (2,1) long-root eigenvalue.  At k=M_G, L=kL/M_G and therefore
+    # lambda_long=16*M_G^2/kL^2.  The TT propagation module separately
+    # resolves p_TT^2=8/L^2 and Lambda_TT=14/L^2.
+    L_MG = kL / M_G
+    lam = long_root_eigenvalue(L_MG)
     k2 = M_G * M_G
     arg = lam / k2
     rk = lam / (math.exp(arg) - 1.0) if arg < 100.0 else 0.0
@@ -96,7 +116,8 @@ def compute() -> dict:
     err = (G_N_pred / G_N_PDG - 1.0) * 100.0
 
     compare_and_set("G_N_pred", G_N_pred, G_N_PDG,
-                    note=f"G_N from the TT residue with Z_phys = {Z_phys:.6f} "
+                    note=f"G_N from the long-range pole residue with "
+                         f"Z_phys = {Z_phys:.6f} "
                          f"(matter back-reaction tiny).  "
                          f"G_N = 1/(8pi Z_phys M_P^2) = {G_N_pred:.6e} GeV^-2 "
                          f"vs the anchor G_N_PDG ({err:+.4f}%).  "
@@ -110,10 +131,19 @@ def compute() -> dict:
                         "normalisation",
          provenance="DERIVED",
          note="G_N = 1/(8pi M_P^2) is the identity")
+    pset("lambda_long_MG", lam, provenance="DERIVED",
+         note="lambda_long(M_G) = C2(2,1)/L_MG^2 = 16/L_MG^2, "
+              "with L_MG = kL/M_G")
+    pset("sigma_over_lambda_long_MG", sigma / lam, provenance="DERIVED",
+         note="the five-channel matter self-energy divided by the (2,1) "
+              "long-root spectral eigenvalue at M_G")
     pset("Z_phys_MG", Z_phys, provenance="DERIVED",
-         note=f"Z_phys(M_G) = lambda/(lambda+sigma) = {Z_phys:.6f} "
-              f"(matter back-reaction tiny)")
+         note=f"Z_phys(M_G) = lambda_long/(lambda_long+sigma) = "
+              f"{Z_phys:.6f}; lambda_long=C2(2,1)/L^2=16/L^2 and "
+              f"sigma/lambda_long={sigma / lam:.6e}")
     return {"G_N_pred": G_N_pred, "G_N_error_pct": err,
+            "lambda_long_MG": lam,
+            "sigma_over_lambda_long_MG": sigma / lam,
             "Z_phys_MG": Z_phys, "Z_reg_MG": Z_reg, "sigma_MG": sigma}
 
 
@@ -143,8 +173,10 @@ def _sigma_v4(k: float, kL: float, tau: float, M_P: float) -> float:
 
 if __name__ == "__main__":
     r = compute()
-    print(f"Z_phys(M_G) = {r['Z_phys_MG']:.6f} (matter back-reaction tiny; "
-          f"sigma = {r['sigma_MG']:.3e} GeV^2)")
+    print(f"lambda_long(M_G) = {r['lambda_long_MG']:.6e} GeV^2 "
+          f"(C2(2,1)/L^2 = 16/L^2)")
+    print(f"sigma/lambda_long = {r['sigma_over_lambda_long_MG']:.6e}; "
+          f"Z_phys(M_G) = {r['Z_phys_MG']:.6f}")
     print(f"G_N = {r['G_N_pred']:.6e} GeV^-2 vs PDG "
           f"({r['G_N_error_pct']:+.4f}%).  "
           f"G_N = 1/(8pi M_P^2) is the identity, reproducing PDG exactly "

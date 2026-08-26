@@ -111,9 +111,9 @@ records are identical.  It ignores `params_write_log.json` timestamps.
 |---|---|
 | `cg_core/` | parameter store, RP³ spectrum (`rp3_spectrum.py`), SM content, β-functions, EC structure |
 | `cg_frg/` | the physics sectors — `gauge/`, `generation/`, `ewsb/`, `cosmology/`, `gravity/`, `neutrino/`, `fermion/`, `framework/`, `qcd/`, `frg/` |
-| `scripts/` | `reproduce_v4.py` (the master chain), `verify_v4.py`, `verify_lean_archive.py`, `make_reviewer_dashboard.py`, `audit_param_writers.py`, `audit_observation_leakage.py`, `audit_lean_sources.py`, `generate_framework_v4.py` |
-| `lean_proofs/` | 20 Lean 4 proofs/guards (`native_decide`, core only, no mathlib) |
-| `docs/` | the two papers (PDF), `V4_LEDGER.md` (reference ledger), `COSMOLOGY_ENDPOINT_RESIDUAL.md`, `V4_COMPLETE_GUIDE.pdf` (complete guide), and the popular-science introductions (EN/ZH) |
+| `scripts/` | `reproduce_v4.py` (the master chain), `verify_v4.py`, `verify_lean_archive.py`, `make_reviewer_dashboard.py`, `audit_param_writers.py`, `audit_observation_leakage.py`, `audit_lean_sources.py` |
+| `lean_proofs/` | 18 current Lean 4 proofs/guards (`native_decide`, core only, no mathlib) |
+| `docs/` | the two papers (PDF), `V4_LEDGER.md`, the reviewer dashboard, and the popular-science introductions (EN/ZH) |
 | `_docs_build/` | documentation build toolchain (`build_docx.py`, `gen_ledger.py`, `figures.py`, source `.md`) |
 | `comparison/` | SM comparison (`sm_rge/`, `param_audit_full.py`, `sm_inputs.json`) |
 
@@ -125,7 +125,7 @@ records are identical.  It ignores `params_write_log.json` timestamps.
 
 ## Formal proofs
 
-All 20 files under `lean_proofs/` compile under the strict verifier:
+All 18 files under `lean_proofs/` compile under the strict verifier:
 
 ```powershell
 py scripts/verify_lean_archive.py
@@ -154,15 +154,14 @@ and the conformal–gauge duality.
 
 ## Documentation
 
-Six documents accompany the code, ordered here from rigorous to accessible:
+The following documents accompany the code:
 
 | Document | Format | Purpose | Best for |
 |---|---|---|---|
 | **Paper I** — *…I. Gauge structure and fermion content* | PDF | rigorous derivation of the **structure** (gauge algebra, fermion content, mass-gap form) | physicists / referees |
 | **Paper II** — *…II. Effective couplings and mass scales* | PDF | rigorous derivation of the **numbers** (window closure, stored records, observation comparison) | physicists / referees |
-| `docs/V4_LEDGER.md` | Markdown | reference ledger — build instructions, the Paper-I axiomatic foundation, the full text of the source documents, the Paper-II content reference, the reproducibility record | auditors / anyone reproducing |
-| `docs/COSMOLOGY_ENDPOINT_RESIDUAL.md` | Markdown | single formal note for the endpoint-residual cosmology branch, including fixed-V4-parameter CAMB propagation, DESI BAO/SPARC comparison checks, cluster diagnostic, and Lean scope | cosmology reviewers |
-| `docs/V4_COMPLETE_GUIDE.pdf` | PDF | lecture-style complete guide, parameter by parameter | systematic study |
+| `docs/V4_LEDGER.md` | Markdown | current source-driven ledger of inputs, closures, outputs, cosmology, and formal-verification scope | auditors / anyone reproducing |
+| `docs/reviewer_dashboard.html` | HTML | dependency graph and post-computation comparison overview | reviewers |
 | `docs/From Change to Everything - A Popular Science Introduction.docx` | Word | popular-science introduction (English) — the central ideas | anyone new |
 | `docs/从变化到万物_科普导读.docx` | Word | popular-science introduction (Chinese) — the central ideas | Chinese readers |
 
@@ -170,13 +169,13 @@ Six documents accompany the code, ordered here from rigorous to accessible:
 
 - **Want the central idea, fast?** → read the popular-science introduction (`From Change to Everything`, or the Chinese `从变化到万物`).
 - **Want the rigorous physics?** → read Paper I (structure), then Paper II (numbers).
-- **Want the cosmology branch?** → read `docs/COSMOLOGY_ENDPOINT_RESIDUAL.md`.
+- **Want the cosmology branch?** → read the cosmology section of `docs/V4_LEDGER.md` and Paper II.
 - **Want to reproduce or audit?** → run `py scripts/reproduce_v4.py` and read `docs/V4_LEDGER.md`.
-- **Want to study every parameter systematically?** → read `docs/V4_COMPLETE_GUIDE.pdf`.
+- **Want to inspect dependencies?** → open `docs/reviewer_dashboard.html`.
 
-The four layers — papers (rigorous) → complete guide (comprehensive) → ledger
-(reproducible) → popular-science introduction (accessible) — let a reader descend from
-"what does it mean" to "how is it derived" at whatever depth they choose.
+The papers give the derivations, the ledger records the current computation,
+the dashboard shows dependencies, and the popular-science introductions give
+an accessible conceptual entry point.
 
 ## Research roadmap (open items, not claims)
 

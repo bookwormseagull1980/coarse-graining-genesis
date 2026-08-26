@@ -22,23 +22,21 @@
 # =============================================================================
 
 """
-cg_frg/neutrino/neutrino_mass_matrix.py — V4.0: the neutrino mass
-matrix — the hierarchy ratios from DIAGONALISATION, not assignment
+cg_frg/neutrino/neutrino_mass_matrix.py — V4.0: neutrino texture
+assembly and diagonalisation check
 =================================================================
 
 WHY THIS MODULE EXISTS (motivation)
 -----------------------------------
-The neutrino hierarchy ratios r12 = m1/m2 and r23 = m2/m3 were
-previously assigned directly as the hypercharge-trace reciprocals
-(1/Tr(Y²), 1/(√3·Tr(Y²))).  This module promotes them to the
-eigenvalue ratios of an explicitly constructed mass matrix, so the
-hierarchy is DERIVED by diagonalisation rather than written down.
+The neutrino closure specifies two hypercharge-trace ratios,
+r12=1/Tr(Y²) and r23=1/(sqrt(3)Tr(Y²)), together with the PMNS texture.
+This module assembles the corresponding flavour-basis mass matrix and
+diagonalises it as a consistency check of the texture.
 
 THE MASS MATRIX (the framework's internal structure)
 ----------------------------------------------------
-The effective neutrino mass matrix is the Weinberg operator
-M_ν = (v²/Λ)·F with the family scale Λ = k_GUT/(2π)² and a
-flavour matrix F.  The framework's two independent pieces are:
+The effective mass matrix is M_nu=(v²/Lambda)(1+s0 kappa)F, with
+Lambda=k_GUT/(2pi)².  Its two structural pieces are:
 
   (1) the PMNS mixing U — the near-tribimaximal form dressed by the
       2π imprint, with the three angles fixed by the content ratios:
@@ -46,29 +44,22 @@ flavour matrix F.  The framework's two independent pieces are:
           sin²θ13 = (1/2π)²·√3/2  (the 2π imprint × the S³→RP³
                                      quotient projection),
           sin²θ23 = 1/2 + Tr(T₃²)/(2π)²   (maximal mixing + isospin),
-      (the solar angle is the ratio fixed by the diagonalisation
-      itself — see below);
+      these relations define the mixing texture;
 
   (2) the hypercharge-trace hierarchy — the eigenvalues of F are the
       inverse powers of the first non-zero hypercharge moment:
           λ = {1, 1/(√3·Tr(Y²)), 1/(√3·Tr(Y²)²)}  (m3 > m2 > m1).
 
-The mass matrix is then the spectral assembly
-    M_ν = U · diag(λ) · U^† · (v²/Λ),
-and the diagonalisation returns the eigenvalues (the hierarchy) and
-the mixing (the PMNS angles).  The hierarchy is therefore the
-eigenvalue structure of the hypercharge-trace flavour matrix, not a
-hand-written ratio.
-
-The solar ratio follows: sin²θ12 = m1/m2 = λ1/λ2 = 1/Tr(Y²) = 3/10,
-so the solar angle IS the mass ratio (the two-state mixing of the
-light pair), consistent with the diagonalisation.
+The spectral assembly is
+M_nu=U diag(lambda) U^dagger (v²/Lambda)(1+s0 kappa).
+Diagonalisation recovers the prescribed eigenvalues and therefore
+checks both the hierarchy ratios and the absolute scale.
 
 V4 DISCIPLINE
 -------------
-U is built from the framework's content-ratio angles; the eigenvalues
-are the hypercharge-trace powers; the hierarchy is read off the
-diagonalisation.  No observed mass enters.
+U is built from the content-ratio angles, and the eigenvalues are the
+hypercharge-trace powers.  The module reads only quantities already
+published by the closure chain.
 """
 
 from __future__ import annotations
@@ -90,8 +81,7 @@ def pmns_matrix() -> list[list[float]]:
     Standard parameterisation U = R23·R13·R12 (CP phase δ set aside:
     the phase δ_PMNS = (8/7)π enters the Jarlskog invariant, not the
     magnitudes).  The angles are the framework's content ratios:
-      s12² = m1/m2 = 3/10 (the solar angle = the mass ratio, fixed by
-             the diagonalisation — the light-pair mixing),
+      s12² = m1/m2 = 3/10 (the light-pair texture relation),
       s13² = (1/2π)²·√3/2  (the 2π imprint × the S³→RP³ quotient),
       s23² = 1/2 + Tr(T₃²)/(2π)²   (maximal mixing + isospin trace).
     """
@@ -153,8 +143,9 @@ def hierarchy_eigenvalues() -> list[float]:
             1.0 / (math.sqrt(3.0) * tr_y2 * tr_y2)]
 
 
-def build_mass_matrix(v: float, k_GUT: float) -> dict:
-    """Assemble M_ν = U·diag(λ)·U^†·(v²/Λ) and diagonalise.
+def build_mass_matrix(v: float, k_GUT: float,
+                      level_factor: float = 1.0) -> dict:
+    """Assemble and diagonalise the hypercharge-trace mass texture.
 
     Returns the eigenvalues (the hierarchy), the ratio cross-checks
     against r12 = 1/Tr(Y²) and r23 = 1/(√3 Tr(Y²)), and the PMNS
@@ -177,7 +168,7 @@ def build_mass_matrix(v: float, k_GUT: float) -> dict:
     m1, m2, m3 = ev
     # scale to physical eV via the Weinberg prefactor
     Lambda = k_GUT / (2.0 * math.pi) ** 2
-    scale = v * v / Lambda * 1e9           # GeV² → eV
+    scale = v * v / Lambda * level_factor * 1e9  # GeV² → eV
     r12_derived = m1 / m2
     r23_derived = m2 / m3
     r12_target = 1.0 / tr_y2               # 3/10
@@ -191,39 +182,42 @@ def build_mass_matrix(v: float, k_GUT: float) -> dict:
 
 
 def compute() -> dict:
-    """Publish the mass-matrix hierarchy (DERIVED by diagonalisation)."""
+    """Publish the mass-matrix assembly checks."""
     v = get("v_HIGGS")
     k_GUT = get("k_GUT")
-    r = build_mass_matrix(v, k_GUT)
+    tau = float(get("tau"))
+    s0 = 2.0 * tau
+    kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
+    r = build_mass_matrix(v, k_GUT, level_factor=1.0 + s0 * kappa)
+
+    expected = [float(get("m_nu1")), float(get("m_nu2")),
+                float(get("m_nu3"))]
+    assembled = [r["m1_eV"], r["m2_eV"], r["m3_eV"]]
+    for label, got, want in zip(("m1", "m2", "m3"), assembled, expected):
+        if abs(got / want - 1.0) > 1e-11:
+            raise RuntimeError(
+                f"neutrino texture assembly mismatch for {label}: {got} vs {want}")
+
     pset("mnu_r12_diag", r["r12_derived"], provenance="DERIVED",
-         note=f"m1/m2 from the mass-matrix diagonalisation = "
+         note=f"mass-matrix assembly recovers m1/m2 = "
               f"{r['r12_derived']:.10f} vs 1/Tr(Y^2) = {r['r12_target']:.4f} "
-              f"({r['r12_err_pct']:+.2e}%) — the hierarchy is the eigenvalue "
-              f"ratio of the hypercharge-trace flavour matrix, not an "
-              f"assignment")
+              f"({r['r12_err_pct']:+.2e}%)")
     pset("mnu_r23_diag", r["r23_derived"], provenance="DERIVED",
-         note=f"m2/m3 from the mass-matrix diagonalisation = "
+         note=f"mass-matrix assembly recovers m2/m3 = "
               f"{r['r23_derived']:.10f} vs 1/(sqrt3 Tr(Y^2)) = "
               f"{r['r23_target']:.4f} ({r['r23_err_pct']:+.2e}%)")
+    pset("mnu_matrix_scale_check", max(abs(g / w - 1.0)
+                                        for g, w in zip(assembled, expected)),
+         provenance="DERIVED", role="cg",
+         note="maximum relative residual between the assembled matrix "
+              "eigenvalues and the absolute neutrino closure")
     return r
 
 
 if __name__ == "__main__":
-    # self-test without the store (direct build)
-    tr_y2 = 10.0 / 3.0
-    lam = hierarchy_eigenvalues()
-    U = pmns_matrix()
-    r = build_mass_matrix(246.22, 1.0e16)
-    print("hierarchy eigenvalues (m3:m2:m1) = "
-          f"{lam[0]:.4f} : {lam[1]:.4f} : {lam[2]:.4f}")
-    print(f"r12 (m1/m2) derived = {r['r12_derived']:.10f}  "
-          f"vs 1/Tr(Y^2) = 3/10  ({r['r12_err_pct']:+.2e}%)")
-    print(f"r23 (m2/m3) derived = {r['r23_derived']:.10f}  "
-          f"vs 1/(sqrt3 Tr(Y^2))  ({r['r23_err_pct']:+.2e}%)")
-    print(f"m3 = {r['m3_eV']:.4f} eV, m2 = {r['m2_eV']:.4f} eV, "
-          f"m1 = {r['m1_eV']:.4f} eV")
-    # In the standard parameterisation |U_e2|^2 = c13^2 s12^2, so it is
-    # slightly below the input angle because theta13 is nonzero.
-    print(f"PMNS input s12^2 = {3.0/10.0:.4f}; "
-          f"|U_e2|^2 = c13^2 s12^2 = {U[0][1]**2:.4f}")
+    r = compute()
+    print(f"m3 = {r['m3_eV']:.6f} eV, m2 = {r['m2_eV']:.6f} eV, "
+          f"m1 = {r['m1_eV']:.6f} eV")
+    print(f"r12 = {r['r12_derived']:.10f}; "
+          f"r23 = {r['r23_derived']:.10f}")
     print("neutrino_mass_matrix OK")

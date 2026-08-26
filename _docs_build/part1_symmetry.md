@@ -124,25 +124,25 @@ N_R = 7 = N_g − 1               (right-handed component count = generators −
 - **What it is**: summing the hypercharge over the 15 Weyl fermions per generation, ΣY = 6·(1/6)+3·(2/3)+3·(−1/3)+2·(−1/2)+1·(−1) = 0.
 - **Why it matters**: it answers "why ΣY² and not ΣY" — ΣY=0 is the zero constraint of anomaly cancellation, ΣY² is the first non-zero moment, naturally becoming the normalisation choice. Previously a "scheme convention", now "the inevitability of anomaly cancellation".
 
-### 3.3 N_L − N_R = 1: chiral asymmetry = the Z₂ topological charge
+### 3.3 N_L − N_R = 1: the chiral content count
 
-- **What it is**: 8−7=1 is odd.
-- **Why it matters**: odd = the **non-trivial spin structure** of RP³ (π₁(RP³)=Z₂, winding once around the antipodal loop is an odd winding number). This is the same topology as the glueball's n mod 2 = parity = Z₂ winding number.
-- **How it is used**: it is the numerator of τ, ⟨χ⟩ = (N_L−N_R)/N_f = 1/15, the topological source of the torsion.
+- **What it is**: the selected one-generation content has eight left-handed and seven right-handed Weyl components.
+- **Geometric setting**: the non-trivial spin structure of RP³ distinguishes the two chiral lifts of the antipodal action.
+- **How it is used**: the integer difference supplies the numerator of τ, while N_f and ΣY² provide its content normalisation.
 
-### 3.4 τ = 1/50: the core dimensionless modulus (the three-layer skeleton)
+### 3.4 τ = 1/50: the dimensionless content modulus
 
 ```
 τ = (N_L−N_R)/(N_f·ΣY²) = 1/(15·10/3) = 1/50 = 0.02
 ```
 
-τ is **the single most important number** of the framework — it enters the EC torsion, the curvature correction, the generation ladder, the spectral tilt, T_CMB, kL_CMB, and almost all closures. Its three-layer first-principles skeleton:
+τ enters the EC ansatz, the curvature correction, the generation ladder, the spectral tilt, T_CMB, and the squash-response closures. Its defining content is:
 
-1. **the Z₂ topological source**: the chiral asymmetry N_L−N_R=1 is the non-trivial spin structure;
-2. **hypercharge anomaly cancellation**: ΣY=0 ⇒ the normalisation must be ΣY²;
-3. **the EC field equation**: the torsion T ~ κ²j₅, screened by the hypercharge polarisation Π=ΣY².
+1. **chiral content**: N_L−N_R=1 for the selected one-generation multiplet;
+2. **fermion count**: N_f=15 Weyl components;
+3. **quadratic hypercharge moment**: ΣY²=10/3 for the same multiplet.
 
-**Core insight**: the **tension** between the chiral asymmetry (Z₂ topology, non-zero) and the hypercharge anomaly cancellation (ΣY=0, zero) determines τ — the "non-zero chiral source" constrained by the "zero hypercharge trace".
+Together these data give τ=1/(15·10/3)=1/50. The same value is then used as the coefficient of the homogeneous antisymmetric EC ansatz and as the dimensionless squash modulus.
 
 ### 3.5 The pure content-ratio family
 
@@ -347,7 +347,8 @@ m_ν1⁴ carries +4s0·κ, the weight (1−4s0·κ) cancels it exactly → the d
 ## Chapter 9 The endpoint residual and the acceleration scale
 
 ```
-G_N = 1/(8π·Z_phys·M_P²), Z_phys ≈ 1 (matter back-reaction 0.2%)
+G_N = 1/(8π·Z_phys·M_P²), Z_phys = λ_long/(λ_long+σ) ≈ 1
+λ_long = C₂(2,1)/L² = 16/L², σ/λ_long = 1.574174556258523e-37
 a0 = cH0/(2π)·√(4/3) = 1.204e-10 m/s² (endpoint acceleration scale)
 Ω_Σ = 1 − Ω_Λ − Ω_b = 0.26570 (endpoint Hamiltonian residual)
 ```
@@ -400,16 +401,16 @@ H0 = M_P·√π·e^(−∫γ_M)
 4. **2π is the single "running quantity"**: a line independent of τ, from ε, a0, 2L, kL all the way to the GW ratio, the tensor-to-scalar ratio, the BBN constants.
 5. **The derivation tree is one-way acyclic**: τ does not back-derive N_L−N_R, d=N_c does not back-derive ξ — this is exactly the expression of the framework's "zero free parameters".
 
-### 11.2 All closed (the EC field-equation variation is completed)
+### 11.2 Principal algebraic closures
 
-The framework's symmetries are **all closed** — from the integer identities to the EC field-equation variation, each item has a first-principles proof (reproduce_v4 exit 0 + Lean 4 exit 0):
+The principal content and geometric identities are:
 
-1. **The τ theorem**: the EC field equation δS/δK = 0 → τ/L = κ²·j₅, the window capacity 2πkL⁴ **cancels exactly** between the bare field equation and the hypercharge screening, giving τ = (N_L−N_R)/(N_f·ΣY²) = 1/50 **EXACT** (ec_structure.py).
+1. **The τ content closure**: τ=(N_L−N_R)/(N_f·ΣY²)=1/50 from N_L−N_R=1, N_f=15, and ΣY²=10/3.
 2. **s0/N_R = 1/175**: the pure content ratio n_broken/(N_f·ΣY²·N_R), one half of the J=2 EC first-order torsion N_g·τ (the factor 2 = (d+1)/2, pinned).
 3. **the κ² of g₁, the α²/K of g₃**: the 5/8 = ΣY²·Δ_f·ξ of δ_g1 is the conformal-gauge duality N_g·ξ=1; K = J(J+2)/d = 8/3 is a geometric-dynamics origin (made explicit 2026-08-16); the g₂ conservation law is Lean 4 proved.
 4. **d = N_c = 3**: the unique positive solution of N_g·ξ = 1 ((N_c−3)(N_c+2)=0), the 3 positive roots of the A₂ root system = the 3 internal-space dimensions.
 5. **N_L = N_g = 8**: an integer identity (Lean 9 theorems proved, fermion_content.lean).
 
-All five are closed, none open.
+These identities provide the content ratios used by the numerical chain.
 
 ---

@@ -34,16 +34,13 @@ the SM comparison table, then the foundation modules run in
 dependency order (the SM RGE table, the spectral sums, the endpoint
 constraint) to publish the main chain.
 
-THE ANCHORS (external, observed — comparison only)
---------------------------------------------------
-M_P = 1/√(8πG_N) = 2.4353236e18 GeV  (the reduced Planck mass,
-      the identity from the observed G_N)
-tau = 0.02                           (the torsion modulus; the
-      statistical value 1/50 from the chiral asymmetry — sm_content)
-L_Cg = √π                            (the Gaussian-width endpoint
-      geometry; the closure fixes L_Cg* ≈ √π)
-kL   = 2.4973                        (the F_MG fixed-point seed; the
-      endpoint constraint converges to the self-consistent value)
+FOUNDATION VALUES
+-----------------
+G_N is the observed dimensional anchor and gives
+M_P=1/sqrt(8 pi G_N).  The structural content gives
+tau=(N_L-N_R)/(N_f SumY2)=1/50.  The Gaussian endpoint gives
+L_Cg=sqrt(pi).  The numerical root search starts at kL=2.4973 and the
+endpoint constraint publishes the self-consistent value.
 """
 
 from __future__ import annotations
@@ -83,70 +80,21 @@ def init() -> None:
                                          # comparison only)
         },
     )
-    # The IRON-LAW compliance: M_P is COMPUTED from the single
-    # observed anchor G_N via the identity M_P = 1/sqrt(8 pi G_N)
-    # (the reduced Planck mass).
+    # The observed anchor G_N fixes the reduced Planck mass through
+    # M_P=1/sqrt(8 pi G_N).
     _mp = 1.0 / math.sqrt(8.0 * math.pi * float(get("G_N_PDG")))
     pset("M_P", _mp, provenance="DERIVED",
          note=f"M_P = 1/sqrt(8 pi G_N) = {_mp:.8e} GeV (the reduced "
               f"Planck mass, the identity from the single observed "
-              f"anchor G_N — computed, not an input)")
+              f"anchor G_N)")
 
-    # The framework's internal inputs (the seed values).
-    # The IRON-LAW compliance: tau and L_Cg are COMPUTED from the
-    # axiom's content, not external inputs.
-    # tau = (N_L - N_R)/(N_f * Sum Y^2) = (8-7)/(15 * 10/3) = 1/50
-    # (the chiral drive over the hypercharge capacity per generation,
-    # the sm_content statistical value — the axiom's content ratio).
+    # The content invariant is
+    # tau=(N_L-N_R)/(N_f SumY2)=(8-7)/(15*(10/3))=1/50.
     tau_computed = (8 - 7) / (15 * (10.0 / 3.0))
-    # The seven-layer tau theoremisation (the V2 loop_normalisation
-    # record): the bare 1-loop polarisation is small (0.0014 * Sum Y^2);
-    # the RENORMALISATION CONDITION at the emergence scale sets
-    # Pi_ren(M_G) = Sum Y^2 (the hypercharge capacity — the framework's
-    # coupling convention, analogous to the SM's mu_Z scheme); the
-    # counter-term absorbs the bare loop; tau = <chi>/Pi_ren = 1/50.
-    # WINDOW-CAPACITY CANCELLATION (2026-08-17; audited 2026-08-18):
-    # the screening Pi_ren = Sum Y^2 is written as the window capacity
-    # 2 pi kL^4 divided by the content N_f Sum Y^2 (ec_structure.py).
-    # The SAME window capacity enters the bare field equation, so it
-    # cancels exactly and tau = (N_L - N_R)/(N_f Sum Y^2) = 1/50 is the
-    # exact content ratio — it does NOT depend on the specific value of
-    # 2 pi kL^4.  (Audit 2026-08-18: the earlier wording "2 pi kL^4 is
-    # the discrete spectral sum in closed form" overstates a notation;
-    # the 3D RP3 spectral sums close to (kL)^3, not (kL)^4 — see
-    # docs/V4_LEDGER.md §0.2.B.  This does not affect tau = 1/50.)
-    # bare_coeff = 0.0014 is the V2 one-loop legacy coefficient — the
-    # bare-loop magnitude absorbed by the counter-term (layer 6), NOT a
-    # derived spectral-sum value.  SCALE_CHOICE: it fills two
-    # informational parameters only and enters no physics closure.
-    bare_coeff = 0.0014     # SCALE_CHOICE / legacy (V2 one-loop, informational)
     SY2 = 10.0 / 3.0
-    Pi_bare = bare_coeff * SY2
-    dPi = SY2 - Pi_bare
     pset("tau", tau_computed, provenance="DERIVED",
          note=f"tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = "
-              f"{tau_computed} — CLOSED (the seven-layer theoremisation: "
-              f"the chiral drive <chi> = 1/15 over the renormalised "
-              f"hypercharge capacity Pi_ren(M_G) = Sum Y^2 = {SY2}; "
-              f"the emergence-scale renormalisation scheme, the bare "
-              f"loop {Pi_bare:.4f} absorbed by the counter-term "
-              f"Delta Pi = {dPi:.4f}; computed from the SM content, "
-              f"the iron-law compliance)")
-    pset("tau_pi_ren", SY2, provenance="DERIVED", role="internal",
-         note=f"Pi_ren(M_G) = Sum Y^2 = {SY2} — the renormalised "
-              f"hypercharge polarisation at the emergence scale (the "
-              f"renormalisation scheme choice, the tau theoremisation "
-              f"layer 6)")
-    # The loop-normalisation values COMPUTED: the bare loop and the
-    # counter-term (the tau theoremisation layer 6, the V2 record).
-    pset("tau_pi_bare", Pi_bare, provenance="DERIVED", role="internal",
-         note=f"Pi_bare(M_G) = 0.0014 * Sum Y^2 = {Pi_bare:.6f} — the "
-              f"bare one-loop polarisation (the small value needing "
-              f"renormalisation)")
-    pset("tau_delta_pi", dPi, provenance="DERIVED", role="internal",
-         note=f"Delta Pi = Pi_ren - Pi_bare = {dPi:.4f} — the "
-              f"counter-term absorbing the bare loop (the tau "
-              f"theoremisation layer 6)")
+              f"{tau_computed}; N_L=8, N_R=7, N_f=15, SumY2={SY2}")
     # L_Cg = sqrt(pi): the Gaussian endpoint — the window's
     # characteristic length from the Gaussian normalisation
     # integral int exp(-x^2) dx = sqrt(pi) (the unbiased measure's

@@ -1,20 +1,20 @@
 {
   "Delta_m21_sq_osc": {
-    "note": "solar oscillation split = (m_nu2*(1+ns_tilt))^2 - m_nu1^2 = 7.412190e-05 eV^2; uses the already closed spectral-tilt factor ns_tilt = 1 - n_s, with no observed neutrino splitting as input",
+    "note": "solar oscillation split = (m_nu2*(1+ns_tilt))^2 - m_nu1^2 = 7.412190e-05 eV^2; uses the already closed spectral-tilt factor ns_tilt = 1 - n_s and is reported for comparison with the measured solar split",
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 7.412190153605081e-05,
     "writer": "cg_frg/neutrino/neutrino_closure.py"
   },
   "Delta_m21_sq_raw": {
-    "note": "raw rest-mass split m_nu2^2 - m_nu1^2 = 6.874155e-05 eV^2; diagnostic only, showing why m_nu2 should not be compared directly to sqrt(Delta m21^2) when m_nu1 is nonzero",
+    "note": "raw rest-mass split m_nu2^2 - m_nu1^2 = 6.874155e-05 eV^2 from the absolute mass texture",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 6.874155305644093e-05,
     "writer": "cg_frg/neutrino/neutrino_closure.py"
   },
   "Delta_m31_sq": {
-    "note": "atmospheric oscillation split m_nu3^2 - m_nu1^2 = 2.511207e-03 eV^2 from the absolute mass eigenvalues; comparison with the observed atmospheric splitting is post-computation only",
+    "note": "atmospheric oscillation split m_nu3^2 - m_nu1^2 = 2.511207e-03 eV^2 from the absolute mass eigenvalues; reported for comparison with the measured atmospheric split",
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 0.0025112069913255865,
@@ -42,7 +42,7 @@
   },
   "G_N_pred": {
     "deviation_pct": -0.0,
-    "note": "G_N from the TT residue with Z_phys = 1.000000 (matter back-reaction tiny).  G_N = 1/(8pi Z_phys M_P^2) = 6.708830e-39 GeV^-2 vs the anchor G_N_PDG (-0.0000%).  With Z_phys = 1 this is the identity G_N = 1/(8pi M_P^2), which reproduces PDG exactly with the anchor M_P = 1/sqrt(8pi G_N_PDG).",
+    "note": "G_N from the long-range pole residue with Z_phys = 1.000000 (matter back-reaction tiny).  G_N = 1/(8pi Z_phys M_P^2) = 6.708830e-39 GeV^-2 vs the anchor G_N_PDG (-0.0000%).  With Z_phys = 1 this is the identity G_N = 1/(8pi M_P^2), which reproduces PDG exactly with the anchor M_P = 1/sqrt(8pi G_N_PDG).",
     "observed": 6.70883e-39,
     "provenance": "DERIVED",
     "role": "comparison",
@@ -152,7 +152,7 @@
     "writer": "cg_frg/frg/endpoint_constraint.py"
   },
   "M_P": {
-    "note": "M_P = 1/sqrt(8 pi G_N) = 2.43532360e+18 GeV (the reduced Planck mass, the identity from the single observed anchor G_N — computed, not an input)",
+    "note": "M_P = 1/sqrt(8 pi G_N) = 2.43532360e+18 GeV (the reduced Planck mass, the identity from the single observed anchor G_N)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 2.435323595526305e+18,
@@ -198,7 +198,7 @@
     "writer": "cg_frg/cosmology/dark_energy.py"
   },
   "Omega_Sigma": {
-    "note": "Omega_Sigma = 1 - Omega_Lambda - Omega_b, interpreted as the conserved Hamiltonian residual density left by the MaxEnt spectral endpoint.  It occupies the CDM slot in linear cosmology without adding a dark particle species.",
+    "note": "Omega_Sigma = 1 - Omega_Lambda - Omega_b, interpreted as the conserved Hamiltonian residual density left by the MaxEnt spectral endpoint.  It occupies the conserved cold-source slot in linear cosmology.",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.2657026396202929,
@@ -261,7 +261,7 @@
     "writer": "cg_frg/cosmology/dark_energy.py"
   },
   "T_CMB_corrected_K": {
-    "note": "Corrected CMB monopole from the V4 photon floor times C_gamma = 1 - tau/pi^2.  The internal Omega_b closure still uses the raw photon floor and the raw Sakharov eta_B; the C_gamma^-3 factor is only photon-number bookkeeping if the corrected monopole is used for display.  Recorded as a comparison to the observed CMB monopole.",
+    "note": "Corrected CMB monopole from the photon floor times C_gamma = 1 - tau/pi^2.  The Omega_b closure uses the raw photon floor and raw Sakharov eta_B; this record supplies the monopole comparison value.",
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 2.725473977921092,
@@ -289,7 +289,7 @@
     "writer": "cg_frg/gravity/zk_gravitational_rg.py"
   },
   "Z_phys_MG": {
-    "note": "Z_phys(M_G) = lambda/(lambda+sigma) = 1.000000 (matter back-reaction tiny)",
+    "note": "Z_phys(M_G) = lambda_long/(lambda_long+sigma) = 1.000000; lambda_long=C2(2,1)/L^2=16/L^2 and sigma/lambda_long=1.574175e-37",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 1.0,
@@ -519,7 +519,7 @@
     "writer": "cg_frg/framework/cp_sector.py"
   },
   "delta_rho_2loop": {
-    "note": "rho_bar = 0.0094766 from Denner eq. 8.22, with x = G_F m_t^2/(8 sqrt2 pi^2) and the framework m_t = 174.082 GeV; one-loop t-b rho = 0.0094208.",
+    "note": "Delta rho_bar = 0.0094766 from Denner eq. 8.22, with x = G_F m_t^2/(8 sqrt2 pi^2) and the framework m_t = 174.082 GeV; one-loop t-b rho = 0.0094208.",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.009476628433913479,
@@ -601,22 +601,22 @@
     },
     "writer": "cg_frg/ewsb/order_parameter.py"
   },
-  "electron_index_20": {
-    "note": "the exact exponent 20 = (d+1)(SigmaY2 Delta_f) = 4x5 (d+1 = 4, SigmaY2 Delta_f = (10/3)(3/2) = 5); tau^-1/kL = 20.0519 is the same content ratio (the torsion inverse over the window width)",
+  "electron_cascade_content": {
+    "note": "electron exponent content = (d+1)(SumY2 Delta_f) = 4*(10/3)*(3/2) = 20",
     "provenance": "DERIVED",
     "role": "cg",
-    "value": 20.05185946223381,
+    "value": 20.0,
     "writer": "cg_frg/fermion/electron_mass.py"
   },
   "endpoint_S8": {
-    "note": "CAMB propagation of the internally closed V4 endpoint input set, reported as S8 = sigma8 sqrt(Omega_m/0.3); comparison-role record only, not an input to any prediction module.",
+    "note": "CAMB propagation of the internally closed endpoint set, reported as S8 = sigma8 sqrt(Omega_m/0.3); downstream comparison record.",
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 0.8342792621089947,
     "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_acceleration_projection": {
-    "note": "Local acceleration projection of the same endpoint: Sigma_IR = a0^2 and mu(y)=y/sqrt(1+y^2).  This branch is separate from the cosmological Hamiltonian residual and avoids double-counting by rho_dark,eff = rho_Sigma^free + rho_pol.",
+    "note": "Local acceleration projection of the same endpoint: Sigma_IR = a0^2 and mu(y)=y/sqrt(1+y^2).  The decomposition rho_dark,eff = rho_Sigma^free + rho_pol assigns the free and polarisation contributions to their respective branches.",
     "provenance": "DERIVED",
     "role": "informational",
     "value": {
@@ -628,7 +628,7 @@
     "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_camb_fixed_outputs": {
-    "note": "CAMB 2.0.3 propagation of the internally closed V4 endpoint input set with Omega_cdm := Omega_Sigma.  This is a comparison-role record: CAMB supplies no V4 parameter and the result is not read by upstream prediction modules. tau_reio=0.054 is a display-layer visibility parameter, not a V4 fundamental closure.",
+    "note": "CAMB 2.0.3 propagation of the internally closed V4 endpoint input set with Omega_cdm := Omega_Sigma.  This is a comparison-role record evaluated after the internal closure. tau_reio=0.054 is the visibility parameter of this propagation.",
     "provenance": "DERIVED",
     "role": "comparison",
     "value": {
@@ -645,14 +645,14 @@
     "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_r_drag_Mpc": {
-    "note": "CAMB propagation of the internally closed V4 endpoint input set with Omega_cdm := Omega_Sigma; comparison-role record only, not an input to any prediction module.",
+    "note": "CAMB propagation of the internally closed endpoint set with Omega_cdm := Omega_Sigma; downstream comparison record.",
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 146.98040601540046,
     "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_residual_linear_mapping": {
-    "note": "Linear cosmology mapping: the endpoint Hamiltonian residual is a conserved cold source; no sound speed, viscosity, coupling, or isocurvature amplitude is introduced.",
+    "note": "Linear cosmology mapping: the endpoint Hamiltonian residual is a conserved cold source with w=0, c_s^2=0, zero anisotropic stress, unit linear response, and adiabatic initial data.",
     "provenance": "DERIVED",
     "role": "informational",
     "value": {
@@ -666,21 +666,21 @@
     "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_sigma8": {
-    "note": "CAMB propagation of the internally closed V4 endpoint input set with Omega_cdm := Omega_Sigma; comparison-role record only, not an input to any prediction module.",
+    "note": "CAMB propagation of the internally closed endpoint set with Omega_cdm := Omega_Sigma; downstream comparison record.",
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 0.8142304448760495,
     "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_theta100_star": {
-    "note": "CAMB propagation of the internally closed V4 endpoint input set with the corrected photon monopole; comparison-role record only, not an input to any prediction module.",
+    "note": "CAMB propagation of the internally closed endpoint set with the corrected photon monopole; downstream comparison record.",
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 1.0415953170054189,
     "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_validation_status": {
-    "note": "Fixed-parameter comparison summary.  The V4 parameters are held fixed; DESI DR2 BAO and SPARC enter only as observed comparison data sets, not as inputs.  DESI DR2 BAO shows the same Planck-like distance tension; SPARC fixed mu(y) gives 0.144 dex curated scatter; cluster lensing follows the free endpoint residual fraction Omega_Sigma/Omega_m.",
+    "note": "Fixed-parameter comparison summary against DESI DR2 BAO and SPARC.  DESI DR2 BAO shows the same Planck-like distance tension; SPARC fixed mu(y) gives 0.144 dex curated scatter; cluster lensing follows the free endpoint residual fraction Omega_Sigma/Omega_m.",
     "provenance": "DERIVED",
     "role": "comparison",
     "value": {
@@ -695,7 +695,7 @@
     "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_z_eq": {
-    "note": "CAMB propagation of the internally closed V4 endpoint input set with Omega_cdm := Omega_Sigma; comparison-role record only, not an input to any prediction module.",
+    "note": "CAMB propagation of the internally closed endpoint set with Omega_cdm := Omega_Sigma; downstream comparison record.",
     "provenance": "DERIVED",
     "role": "comparison",
     "value": 3414.882272988192,
@@ -723,7 +723,7 @@
     "writer": "cg_frg/ewsb/relaxion_chain.py"
   },
   "eta_B_photon_zero_mode_factor": {
-    "note": "Photon-number bookkeeping factor C_gamma^-3.  It is not multiplied into the internal Omega_b calculation, which uses the raw photon floor and the raw Sakharov eta_B; it only shows how eta_B*n_gamma remains unchanged if one rewrites the same photon density in terms of the corrected monopole.",
+    "note": "Photon-number bookkeeping factor C_gamma^-3.  Rewriting the raw photon density in terms of the corrected monopole preserves the product eta_B*n_gamma used by the Omega_b closure.",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 1.006103992842526,
@@ -911,6 +911,13 @@
     "value": 37.69911184307752,
     "writer": "cg_frg/ewsb/pseudo_dilaton.py"
   },
+  "lambda_long_MG": {
+    "note": "lambda_long(M_G) = C2(2,1)/L_MG^2 = 16/L_MG^2, with L_MG = kL/M_G",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 7.711197023651435e+36,
+    "writer": "cg_frg/gravity/newton.py"
+  },
   "longroot_K": {
     "note": "K = 8/3 = 2.6666666666666665 — COMPUTED as the J=2 mode's kinetic eigenvalue (J(J+2) = 8) over the internal-space dimension (3); the long-root condensation coefficient, the geometric carrier = the J=2 mode (the same as the order parameter); the effective eigenvalue lambda_long = (8/3) R = 16/L^2 is the curvature-tracked value, not a separate harmonic",
     "provenance": "DERIVED",
@@ -970,7 +977,7 @@
     "writer": "cg_frg/ewsb/ew_precision.py"
   },
   "m_nu1": {
-    "note": "m_nu1 = m_nu3*r12*r23 = 0.0026 eV (DERIVED from the two hypercharge-trace ratios — matches dark_energy.py; no observed m1 enters; the 5/3-determinant cross-check m2_from_53 = 0.0089 eV sits ~2% above)",
+    "note": "m_nu1 = m_nu3*r12*r23 = 0.0026 eV from the two hypercharge-trace ratios",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.002607415413287687,
@@ -984,7 +991,7 @@
     "writer": "cg_frg/neutrino/neutrino_closure.py"
   },
   "m_nu2_osc": {
-    "note": "m_nu2_osc = m_nu2*(1 + ns_tilt) = 0.008996 eV (finite window-propagation value for the solar oscillation comparison; ns_tilt = 1 - n_s = 0.035000; this does not replace the absolute mass m_nu2 in the cosmology chain)",
+    "note": "m_nu2_osc = m_nu2*(1 + ns_tilt) = 0.008996 eV (finite window-propagation value for the solar oscillation comparison; ns_tilt = 1 - n_s = 0.035000; the cosmology chain uses the absolute mass m_nu2)",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.00899558317584252,
@@ -1060,6 +1067,27 @@
     "value": 0.05014715428586189,
     "writer": "cg_frg/neutrino/neutrino_closure.py"
   },
+  "mnu_matrix_scale_check": {
+    "note": "maximum relative residual between the assembled matrix eigenvalues and the absolute neutrino closure",
+    "provenance": "DERIVED",
+    "role": "cg",
+    "value": 8.881784197001252e-16,
+    "writer": "cg_frg/neutrino/neutrino_mass_matrix.py"
+  },
+  "mnu_r12_diag": {
+    "note": "mass-matrix assembly recovers m1/m2 = 0.3000000000 vs 1/Tr(Y^2) = 0.3000 (+1.55e-13%)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.30000000000000043,
+    "writer": "cg_frg/neutrino/neutrino_mass_matrix.py"
+  },
+  "mnu_r23_diag": {
+    "note": "mass-matrix assembly recovers m2/m3 = 0.1732050808 vs 1/(sqrt3 Tr(Y^2)) = 0.1732 (-3.33e-14%)",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 0.17320508075688767,
+    "writer": "cg_frg/neutrino/neutrino_mass_matrix.py"
+  },
   "mnu_ratio_12": {
     "note": "m_nu1/m_nu2 = 1/Tr(Y^2) = 3/10 (the hypercharge trace)",
     "provenance": "DERIVED",
@@ -1075,7 +1103,7 @@
     "writer": "cg_frg/neutrino/neutrino_closure.py"
   },
   "n_generations": {
-    "note": "window-capacity theorem: spinor modes with (n+3/2) < (kL)^2 = exactly 3 (n = {0,2,4})",
+    "note": "spectral-capacity closure: Dirac positions with (n+3/2) < (kL)^2 = exactly 3 (n = {0,2,4})",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 3,
@@ -1319,6 +1347,13 @@
     },
     "writer": "cg_frg/framework/sigma_language.py"
   },
+  "sigma_over_lambda_long_MG": {
+    "note": "the five-channel matter self-energy divided by the (2,1) long-root spectral eigenvalue at M_G",
+    "provenance": "DERIVED",
+    "role": "internal",
+    "value": 1.574174556258523e-37,
+    "writer": "cg_frg/gravity/newton.py"
+  },
   "sin2_theta12": {
     "note": "sin2(theta12) = m_nu1/m_nu2 = 0.30 (the solar, closed)",
     "provenance": "DERIVED",
@@ -1350,31 +1385,10 @@
     "writer": "cg_frg/ewsb/ew_one_loop.py"
   },
   "tau": {
-    "note": "tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = 0.02 — CLOSED (the seven-layer theoremisation: the chiral drive <chi> = 1/15 over the renormalised hypercharge capacity Pi_ren(M_G) = Sum Y^2 = 3.3333333333333335; the emergence-scale renormalisation scheme, the bare loop 0.0047 absorbed by the counter-term Delta Pi = 3.3287; computed from the SM content, the iron-law compliance)",
+    "note": "tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = 0.02; N_L=8, N_R=7, N_f=15, SumY2=3.3333333333333335",
     "provenance": "DERIVED",
     "role": "internal",
     "value": 0.02,
-    "writer": "scripts/init_v4.py"
-  },
-  "tau_delta_pi": {
-    "note": "Delta Pi = Pi_ren - Pi_bare = 3.3287 — the counter-term absorbing the bare loop (the tau theoremisation layer 6)",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": 3.328666666666667,
-    "writer": "scripts/init_v4.py"
-  },
-  "tau_pi_bare": {
-    "note": "Pi_bare(M_G) = 0.0014 * Sum Y^2 = 0.004667 — the bare one-loop polarisation (the small value needing renormalisation)",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": 0.004666666666666667,
-    "writer": "scripts/init_v4.py"
-  },
-  "tau_pi_ren": {
-    "note": "Pi_ren(M_G) = Sum Y^2 = 3.3333333333333335 — the renormalised hypercharge polarisation at the emergence scale (the renormalisation scheme choice, the tau theoremisation layer 6)",
-    "provenance": "DERIVED",
-    "role": "internal",
-    "value": 3.3333333333333335,
     "writer": "scripts/init_v4.py"
   },
   "trace_density_MG": {

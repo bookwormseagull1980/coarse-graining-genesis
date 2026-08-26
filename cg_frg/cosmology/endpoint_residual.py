@@ -29,12 +29,10 @@ interpretation used by the cosmology sector:
     Omega_Sigma = Omega_DM = 1 - Omega_Lambda - Omega_b.
 
 It also records the fixed linear-cosmology mapping and the endpoint photon
-zero-mode correction.  For reviewer convenience it stores a few
-comparison-role records obtained after passing the internally closed V4
-input set to standard external comparison tools or public observed data
-sets.  CAMB is used only as a propagation code, while DESI and SPARC are
-used only as post-computation observed comparisons.  None of these values
-sets, fits, or calibrates a V4 parameter.
+zero-mode correction.  Records with role="comparison" are downstream
+propagations of the closed parameter set through CAMB or evaluations
+against the DESI and SPARC data sets.  The internal and comparison roles
+therefore remain explicit in the common DERIVED provenance class.
 """
 
 from __future__ import annotations
@@ -111,12 +109,10 @@ def compute() -> dict:
         provenance="DERIVED",
         role="comparison",
         note=(
-            "Corrected CMB monopole from the V4 photon floor times "
-            "C_gamma = 1 - tau/pi^2.  The internal Omega_b closure still "
-            "uses the raw photon floor and the raw Sakharov eta_B; the "
-            "C_gamma^-3 factor is only photon-number bookkeeping if the "
-            "corrected monopole is used for display.  Recorded as a "
-            "comparison to the observed CMB monopole."
+            "Corrected CMB monopole from the photon floor times "
+            "C_gamma = 1 - tau/pi^2.  The Omega_b closure uses the raw "
+            "photon floor and raw Sakharov eta_B; this record supplies the "
+            "monopole comparison value."
         ),
     )
     pset(
@@ -125,11 +121,9 @@ def compute() -> dict:
         provenance="DERIVED",
         role="internal",
         note=(
-            "Photon-number bookkeeping factor C_gamma^-3.  It is not "
-            "multiplied into the internal Omega_b calculation, which uses "
-            "the raw photon floor and the raw Sakharov eta_B; it only "
-            "shows how eta_B*n_gamma remains unchanged if one rewrites the "
-            "same photon density in terms of the corrected monopole."
+            "Photon-number bookkeeping factor C_gamma^-3.  Rewriting the "
+            "raw photon density in terms of the corrected monopole preserves "
+            "the product eta_B*n_gamma used by the Omega_b closure."
         ),
     )
     pset(
@@ -140,8 +134,8 @@ def compute() -> dict:
         note=(
             "Omega_Sigma = 1 - Omega_Lambda - Omega_b, interpreted as the "
             "conserved Hamiltonian residual density left by the MaxEnt "
-            "spectral endpoint.  It occupies the CDM slot in linear "
-            "cosmology without adding a dark particle species."
+            "spectral endpoint.  It occupies the conserved cold-source slot "
+            "in linear cosmology."
         ),
     )
     pset(
@@ -158,8 +152,8 @@ def compute() -> dict:
         role="informational",
         note=(
             "Linear cosmology mapping: the endpoint Hamiltonian residual is "
-            "a conserved cold source; no sound speed, viscosity, coupling, "
-            "or isocurvature amplitude is introduced."
+            "a conserved cold source with w=0, c_s^2=0, zero anisotropic "
+            "stress, unit linear response, and adiabatic initial data."
         ),
     )
     pset(
@@ -174,9 +168,9 @@ def compute() -> dict:
         role="informational",
         note=(
             "Local acceleration projection of the same endpoint: "
-            "Sigma_IR = a0^2 and mu(y)=y/sqrt(1+y^2).  This branch is "
-            "separate from the cosmological Hamiltonian residual and avoids "
-            "double-counting by rho_dark,eff = rho_Sigma^free + rho_pol."
+            "Sigma_IR = a0^2 and mu(y)=y/sqrt(1+y^2).  The decomposition "
+            "rho_dark,eff = rho_Sigma^free + rho_pol assigns the free and "
+            "polarisation contributions to their respective branches."
         ),
     )
     pset(
@@ -197,42 +191,32 @@ def compute() -> dict:
         note=(
             "CAMB 2.0.3 propagation of the internally closed V4 endpoint "
             "input set with Omega_cdm := Omega_Sigma.  This is a "
-            "comparison-role record: CAMB supplies no V4 parameter and "
-            "the result is not read by upstream prediction modules. "
-            "tau_reio=0.054 is a display-layer visibility parameter, not "
-            "a V4 fundamental closure."
+            "comparison-role record evaluated after the internal closure. "
+            "tau_reio=0.054 is the visibility parameter of this propagation."
         ),
     )
     # Scalar aliases keep the reproduction closure table readable.
     pset("endpoint_z_eq", 3414.882272988192, provenance="DERIVED",
          role="comparison",
-         note=("CAMB propagation of the internally closed V4 endpoint "
-               "input set with Omega_cdm := Omega_Sigma; comparison-role "
-               "record only, not an input to any prediction module."))
+         note=("CAMB propagation of the internally closed endpoint set with "
+               "Omega_cdm := Omega_Sigma; downstream comparison record."))
     pset("endpoint_r_drag_Mpc", 146.98040601540046, provenance="DERIVED",
          role="comparison",
-         note=("CAMB propagation of the internally closed V4 endpoint "
-               "input set with Omega_cdm := Omega_Sigma; comparison-role "
-               "record only, not an input to any prediction module."))
+         note=("CAMB propagation of the internally closed endpoint set with "
+               "Omega_cdm := Omega_Sigma; downstream comparison record."))
     pset("endpoint_theta100_star", 1.0415953170054189, provenance="DERIVED",
          role="comparison",
-         note=("CAMB propagation of the internally closed V4 endpoint "
-               "input set with the corrected photon monopole; "
-               "comparison-role record only, not an input to any "
-               "prediction module."))
+         note=("CAMB propagation of the internally closed endpoint set with "
+               "the corrected photon monopole; downstream comparison record."))
     pset("endpoint_sigma8", 0.8142304448760495, provenance="DERIVED",
          role="comparison",
-         note=("CAMB propagation of the internally closed V4 endpoint "
-               "input set with Omega_cdm := Omega_Sigma; comparison-role "
-               "record only, not an input to any prediction module."))
+         note=("CAMB propagation of the internally closed endpoint set with "
+               "Omega_cdm := Omega_Sigma; downstream comparison record."))
     pset("endpoint_S8", 0.8342792621089947, provenance="DERIVED",
          role="comparison",
-         note=("CAMB propagation of the internally closed V4 endpoint "
-               "input set, reported as S8 = sigma8 sqrt(Omega_m/0.3); "
-               "comparison-role record only, not an input to any "
-               "prediction module."))
-    # Legacy store key name; the role and note below define the semantics:
-    # these are post-computation comparison records, not V4 inputs.
+         note=("CAMB propagation of the internally closed endpoint set, "
+               "reported as S8 = sigma8 sqrt(Omega_m/0.3); downstream "
+               "comparison record."))
     pset(
         "endpoint_validation_status",
         {
@@ -247,9 +231,8 @@ def compute() -> dict:
         provenance="DERIVED",
         role="comparison",
         note=(
-            "Fixed-parameter comparison summary.  The V4 parameters are "
-            "held fixed; DESI DR2 BAO and SPARC enter only as observed "
-            "comparison data sets, not as inputs.  DESI DR2 BAO shows the "
+            "Fixed-parameter comparison summary against DESI DR2 BAO and "
+            "SPARC.  DESI DR2 BAO shows the "
             "same Planck-like distance tension; SPARC fixed mu(y) gives "
             "0.144 dex curated scatter; cluster lensing follows the free "
             "endpoint residual fraction Omega_Sigma/Omega_m."

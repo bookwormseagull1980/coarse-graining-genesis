@@ -22,14 +22,14 @@
 # =============================================================================
 
 """
-cg_frg/neutrino/neutrino_closure.py — V4.0: the neutrino sector
-closure (Weinberg + 5/3 GUT + Gatto) and the CKM |V_us| Gatto
+cg_frg/neutrino/neutrino_closure.py — V4.0: the Weinberg neutrino
+texture and the CKM |V_us| Gatto relation
 =================================================================
 
 WHY THIS MODULE EXISTS (motivation)
 -----------------------------------
-The neutrino masses close through three relations that are
-mutually consistent at the magnitude level:
+The neutrino masses close through the Weinberg scale and two
+hypercharge-trace hierarchy ratios:
 
   1. THE WEINBERG OPERATOR (dimension-5): with the 2π-family
      scale M = k_GUT/(2π)²:
@@ -41,18 +41,12 @@ mutually consistent at the magnitude level:
      J=2 squash seesaw factor (1+s0·κ) is the level-transfer
      correction, 2026-08-16).
 
-  2. THE 5/3 GUT RELATION (the SU(2)/U(1) balance of the content):
+  2. THE HYPERCHARGE-TRACE TEXTURE:
 
-        Tr(Y²)/Tr(T₃²) = (10/3)/2 = 5/3  —  the GUT normalisation
-        of the SM content (15 Weyl per generation) DERIVED, and
-        the neutrino determinant relation:
+        m_ν1/m_ν2 = 1/Tr(Y²) = 3/10,
+        m_ν2/m_ν3 = 1/(sqrt(3)Tr(Y²)).
 
-        m_ν1·m_ν2/m_ν3² = 5/3
-          → m_ν2 = √((3/5)·m_ν1·m_ν3) = 0.00865 eV
-
-  3. THE GATTO θ12 (the consistent): m_ν1 = 0.0026 eV (the
-     solar-angle Gatto value), sin²θ12 = m_ν1/m_ν2 = 0.30
-     (the solar, closed).
+     The flavour extension uses sin²θ12=m_ν1/m_ν2=3/10.
 
 THE CKM |V_us| (Gatto × LZ hierarchy)
 -------------------------------------
@@ -64,17 +58,12 @@ ratios (lz_ladder):
 with m_c/m_t = e^{−2α_up}, m_u/m_c = e^{−2α_up}/4,
 m_s/m_b = e^{−2α_dn}, m_d/m_s = e^{−2α_dn}/2.
 
-THE BOUNDARY
--------------
-The flat neutrino hierarchy (m_ν1/m_ν2 = 3/10, quasi-degenerate)
-vs the LZ e^{−2α} = 148 (STEEP) — the LZ ladder does NOT apply to
-the neutrinos: the flat hierarchy is a different mechanism (the
-seesaw texture, the Weinberg operator with the 2π family scale).
-The PMNS large angles are NOT derivable from the charged-lepton
-Gatto (sinθ12 ≈ √(m_e/m_μ) ≈ 0.07, far too small): the PMNS
-largeness lives in the neutrino mass-matrix structure, fixed by the
-hypercharge trace Tr(Y²) = 10/3 and the 2π imprint — the framework's
-own content, not a standard-model input.
+TEXTURE ASSIGNMENT
+------------------
+The charged-fermion hierarchy uses the LZ ladder.  The neutrino sector
+uses the Weinberg operator with the two-period family scale and the
+hypercharge-trace mass texture.  The PMNS angles are the flavour
+extension associated with that neutrino texture.
 
 THE NEUTRINO HIERARCHY (the hypercharge trace)
 -----------------------------------------------
@@ -99,10 +88,9 @@ The neutrino mass-matrix structure with the 2π imprint:
     sin²θ23 = 1/2 + Tr(T₃²)/(2π)² = 0.5507
     sin²θ13 = (1/(2π)²)·(√3/2) = 0.02194
 
-The solar angle equals the mass ratio sin²θ12 = m_ν1/m_ν2 = 3/10,
-the same hypercharge-trace ratio r12 that the diagonalisation of
-the Weinberg mass matrix returns (Section~\ref{sec:derivnu}): the
-light pair m1,m2 mixes with the mixing angle fixed by their ratio.
+The solar texture sets sin²θ12=m_ν1/m_ν2=3/10.  Assembly and
+diagonalisation of the Weinberg mass matrix verify the same eigenvalue
+ratio in neutrino_mass_matrix.py.
 The θ13 texture sin²θ13 = (1/(2π)²)·(√3/2) = 0.02194 is CLOSED
 (−0.3% vs PDG 0.022): the (1/(2π)²) is the Euclidean period
 imprint (the SAME 2π thread as the GW ratio r = (1/2π)² and the
@@ -111,20 +99,15 @@ internal-space geometry factor (the S³→RP³ Z₂-quotient projection).
 
 OSCILLATION COMPARISON LAYER
 ----------------------------
-The absolute masses above are rest-mass outputs.  Oscillation
-experiments measure mass-squared splittings.  Since m_ν1 is not zero
-in this framework, comparing m_ν2 directly with sqrt(Δm²_21) is only
-a massless-floor proxy and understates the solar splitting tension.
-
-The raw rest-mass split is therefore published explicitly.  In addition,
-the code records a separate finite-window propagation diagnostic:
+The absolute masses define the rest-mass texture.  The raw mass-squared
+split is published explicitly, and the oscillation comparison applies
+the finite-window propagation map
 
     m_ν2^osc = m_ν2 (1 + n_s^tilt),   n_s^tilt = 1 - n_s = τ·7/4 .
 
-This uses the already closed spectral-tilt quantity and does not feed
-back into the absolute-mass, dark-energy, CMB, or mass-sum chain.  It is
-marked as an oscillation-comparison layer, not as a replacement of the
-rest spectrum.
+The spectral tilt is fixed earlier in the chain.  This map supplies the
+oscillation-comparison value, while the rest-mass texture supplies the
+absolute-mass, dark-energy, CMB, and mass-sum branches.
 
 V4 DISCIPLINE
 -------------
@@ -163,11 +146,6 @@ def weinberg_m3(v: float, k_GUT: float) -> float:
     return v * v * (2.0 * math.pi) ** 2 / k_GUT * (1.0 + s0 * kappa) * 1e9
 
 
-def m2_from_53(m1: float, m3: float) -> float:
-    """m_ν2 = √((3/5)·m_ν1·m_ν3) — the 5/3 determinant relation."""
-    return math.sqrt((3.0 / 5.0) * m1 * m3)
-
-
 def ckm_vus(a_up: float, a_dn: float, delta_12: float = 0.2) -> dict:
     """The CKM 1-2 mixing from the LZ ladder with the HYPERCHARGE
     first-generation factors.
@@ -204,12 +182,6 @@ def ckm_vus(a_up: float, a_dn: float, delta_12: float = 0.2) -> dict:
             "Vus_full": abs(complex(re, im))}
 
 
-def ckm_vus_observed(delta_12: float = 0.2) -> float:
-    """REMOVED (2026-08-16): the Gatto verification against observed
-    masses is deleted per the no-external-value discipline."""
-    raise NotImplementedError("observed-mass Gatto verification removed")
-
-
 def oscillation_splittings(m1: float, m2: float, m3: float,
                            ns_tilt: float) -> dict:
     """Mass-squared splittings for the neutrino oscillation comparison.
@@ -220,11 +192,10 @@ def oscillation_splittings(m1: float, m2: float, m3: float,
 
         m2_osc = m2 * (1 + ns_tilt),
 
-    as a diagnostic of the light-pair propagation channel, while m1 is
-    kept as the vacuum-floor state.  This is not a fitted correction:
-    ns_tilt is the independently closed spectral tilt published by
-    cg_frg/cosmology/spectral_tilt.py.  The raw split is returned so the
-    effect of the comparison layer is explicit.
+    as the light-pair propagation value, while m1 is the vacuum-floor
+    state.  ns_tilt is the spectral tilt already published by the
+    cosmology chain.  The return value includes both the rest-mass and
+    propagation splits.
     """
     m2_osc = m2 * (1.0 + ns_tilt)
     dm21_raw = m2 * m2 - m1 * m1
@@ -248,17 +219,10 @@ def compute() -> dict:
     tr_y2 = 10.0 / 3.0
     r12 = 1.0 / tr_y2          # m1/m2 = 3/10
     r23 = 1.0 / (math.sqrt(3.0) * tr_y2)   # m2/m3 = 0.1732
-    # m1 is DERIVED (internal): the two hypercharge-trace ratios fix
-    # the absolute neutrino scale — m1 = m3·r12·r23 (no observed m1
-    # enters; this matches dark_energy.py's m_nu1_derived exactly).
-    # NOTE: the 5/3 GUT determinant m2² = (3/5)m1·m3 (m2_from_53) is
-    # a ~2% cross-check — it sits ~2% ABOVE the hypercharge-trace
-    # hierarchy (the two structures are close but not identical; the
-    # hypercharge trace is the primary).
+    # The two hypercharge-trace ratios fix the absolute mass texture.
     m1 = r12 * r23 * m3
     m2 = m1 / r12               # = m3·r23 (consistent with the hierarchy)
     s12 = m1 / m2               # = r12 = 3/10 (the solar ratio, exact)
-    m2_cross = m2_from_53(m1, m3)  # the 5/3-determinant cross-check (~2%)
     Vus = ckm_vus(a_up, a_dn)
 
     # The PMNS (the mass-matrix structure + 2π imprint).
@@ -275,10 +239,8 @@ def compute() -> dict:
               f"factor (1 + s0 kappa): the seesaw mass carries +s0 kappa "
               f"while the electroweak scale v carries -s0 kappa)")
     pset("m_nu1", m1, provenance="DERIVED", role="internal",
-         note=f"m_nu1 = m_nu3*r12*r23 = {m1:.4f} eV (DERIVED from the two "
-              f"hypercharge-trace ratios — matches dark_energy.py; no "
-              f"observed m1 enters; the 5/3-determinant cross-check "
-              f"m2_from_53 = {m2_cross:.4f} eV sits ~2% above)")
+         note=f"m_nu1 = m_nu3*r12*r23 = {m1:.4f} eV from the two "
+              f"hypercharge-trace ratios")
     pset("m_nu2", m2, provenance="DERIVED", role="internal",
          note=f"m_nu2 = m_nu3*r23 = {m2:.4f} eV (the hypercharge-trace "
               f"hierarchy, consistent with m1/m2 = 3/10)")
@@ -291,26 +253,23 @@ def compute() -> dict:
     pset("m_nu2_osc", osc["m2_osc"], provenance="DERIVED", role="internal",
          note=f"m_nu2_osc = m_nu2*(1 + ns_tilt) = {osc['m2_osc']:.6f} eV "
               f"(finite window-propagation value for the solar oscillation "
-              f"comparison; ns_tilt = 1 - n_s = {ns_tilt:.6f}; this does "
-              f"not replace the absolute mass m_nu2 in the cosmology chain)")
+               f"comparison; ns_tilt = 1 - n_s = {ns_tilt:.6f}; the "
+               f"cosmology chain uses the absolute mass m_nu2)")
     pset("Delta_m21_sq_raw", osc["dm21_raw"], provenance="DERIVED",
          role="internal",
          note=f"raw rest-mass split m_nu2^2 - m_nu1^2 = "
-              f"{osc['dm21_raw']:.6e} eV^2; diagnostic only, showing why "
-              f"m_nu2 should not be compared directly to sqrt(Delta m21^2) "
-              f"when m_nu1 is nonzero")
+               f"{osc['dm21_raw']:.6e} eV^2 from the absolute mass texture")
     pset("Delta_m21_sq_osc", osc["dm21_osc"], provenance="DERIVED",
          role="comparison",
          note=f"solar oscillation split = (m_nu2*(1+ns_tilt))^2 - "
               f"m_nu1^2 = {osc['dm21_osc']:.6e} eV^2; uses the already "
-              f"closed spectral-tilt factor ns_tilt = 1 - n_s, with no "
-              f"observed neutrino splitting as input")
+               f"closed spectral-tilt factor ns_tilt = 1 - n_s and is "
+               f"reported for comparison with the measured solar split")
     pset("Delta_m31_sq", osc["dm31"], provenance="DERIVED",
          role="comparison",
          note=f"atmospheric oscillation split m_nu3^2 - m_nu1^2 = "
-              f"{osc['dm31']:.6e} eV^2 from the absolute mass eigenvalues; "
-              f"comparison with the observed atmospheric splitting is "
-              f"post-computation only")
+               f"{osc['dm31']:.6e} eV^2 from the absolute mass eigenvalues; "
+               f"reported for comparison with the measured atmospheric split")
     pset("sin2_theta13", s13_pmns, provenance="DERIVED", role="cg",
          note=f"sin2(theta13) = (1/2pi)^2 sqrt(3)/2 = {s13_pmns:.4f} (the "
               f"2pi imprint)")

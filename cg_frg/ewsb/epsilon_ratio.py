@@ -103,44 +103,24 @@ def squash_correction() -> float:
     order (the level transfer preserves the total content).
     (2026-08-16.)
 
-    DERIVATION STATUS (2026-08-20; L3 CLOSED 2026-08-21):
-    The correction factors (1 ± c·s0·κ) or (1 ± c·τ·κ) rest on THREE
-    layers of differing epistemic status:
-      L1  DERIVED  — κ(2τ)=√((1+2τ)/(1−4τ)^{5/2}) is the squashed-S³
+    SOURCE OF THE CORRECTION FACTORS:
+      L1  κ(2τ)=√((1+2τ)/(1−4τ)^{5/2}) is the squashed-S³
           metric Killing normalisation (geometric integral, see
           geometric_couplings.squash_metric); s0 = 2τ = n_broken·τ with
           n_broken = 2 = dim SU(2)_R − dim U(1)_R (broken-generator
-          count); τ = 1/50 is the content ratio (Lean-proven).
-      L2  INHERITED (bookkeeping) — ρ_Λ's (1−4s0κ) follows from m_ν1
+          count); τ = 1/50 is the content ratio.
+      L2  ρ_Λ's (1−4s0κ) follows from m_ν1
           carrying +s0κ so m_ν1⁴ carries +4s0κ and the weight cancels;
           m_e and T_CMB inherit v's (1−s0κ) through the cascade/photon
-          floor.  These are algebraically forced ONCE the base factor
-          is fixed.
-      L3  DERIVED (2026-08-21, squash_level_transfer.py — the step-by-step
-          INTEGRALISATION): the specific sign/multiplier of v (−s0κ, the
+          floor.
+      L3  The specific sign and multiplier of v (−s0κ, the
           traceless shear), m_ν3 (+s0κ, the level-transfer conservation
           v·m_ν3 = const), T_d and Δ²_R (−τκ, the chiral asymmetry τ = s0/2),
           m_p (+5τκ/3 = +τκ·ΣY²·Δ_s, the constituent content ratio), α_s
           (−s0κ/N_g = −s0κ·ξ, the Yukawa-difference conformal normalisation)
-          are each a COMPUTED geometric moment c_Q = a_Q·r_Q (amplitude
-          fraction a_Q × content ratio r_Q), reduced through the chain
-          EC action → field equations (τ, s0) → moment → factor
-          (1 + c_Q·s0·κ) in cg_frg/ewsb/squash_level_transfer.py; the
-          module's self-test reproduces every factor to machine precision.
-          The base (L1), the amplitude fraction a_Q (geometric vs chiral, from
-          n_broken = 2 vs N_L−N_R = 1), the seesaw conservation and the power
-          (r_Q = 4) are DERIVED; the constituent r_Q = ΣY²·Δ_s and generator
-          r_Q = 1/N_g are each reduced to an INDEPENDENT EC field equation
-          (the analogue of τ = κ²·j₅) in squash_level_transfer:
-          constituent_scheme_field_equation (the χSB gap equation
-          δΓ/δ⟨ψ̄ψ⟩=0 → δm_p/m_p = τκ·Δ_s·Σ_c c·Y² = 5τκ/3, with the explicit
-          hypercharge spectral sum Σ_c c·Y² = 10/3) and
-          yukawa_difference_field_equation (the two-loop Yukawa-gauge mixing
-          Y₄(F) → δln α_s = −s₀κ·ξ = −s₀κ/N_g, with the Yamabe conformal
-          coupling ξ = (d−2)/(4(d−1)) = 1/8).
-    Note: the "brings X to +Y%" remarks in the module docstrings
-    describe the EFFECT of a factor on the final deviation; the
-    derivation of each factor is recorded in L1/L2/L3 above.
+          are computed moments c_Q=a_Q r_Q.  The amplitude fraction a_Q
+          comes from n_broken=2 and N_L−N_R=1.  The constituent and generator
+          ratios reduce to ΣY² Δ_s=5/3 and ξ=1/N_g=1/8, respectively.
     """
     tau = get("tau")
     s0 = 2.0 * tau

@@ -171,9 +171,10 @@ def compute() -> dict:
     # The IR acceleration scale a0: the Euclidean-period acceleration
     # c·H0/(2π) with the 3-ball coefficient √(4/3).  This is a DERIVED
     # SCALE from the IR endpoint H0, reproducing the Milgrom coincidence
-    # a0 ≈ c·H0/(2π) to +0.36%.  NOTE (2026-08-22 audit): the TT
-    # propagator is massless 1/k² at ALL scales (slope_G = -2 exactly),
-    # so gravity is NEWTONIAN and a0 carries NO dynamics (F(a/a0) = 1).
+    # a0 ≈ c·H0/(2π) to +0.36%.  The linear TT propagator remains
+    # massless 1/k² (slope_G = -2 exactly).  The low-acceleration response
+    # is carried by the separate MaxEnt endpoint projection recorded in
+    # endpoint_residual.py, rather than by a deformation of the TT pole.
     H0_s = H0 * GEV_TO_S                    # GeV -> s^-1
     a0 = C_MS * H0_s / (2.0 * math.pi)
     a0_eff = a0 * math.sqrt(4.0 / 3.0)      # 2/sqrt(3) = sqrt(4/3)

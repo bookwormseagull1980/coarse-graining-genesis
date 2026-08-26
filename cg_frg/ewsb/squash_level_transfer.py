@@ -22,29 +22,23 @@
 # =============================================================================
 
 """
-cg_frg/ewsb/squash_level_transfer.py — the STEP-BY-STEP INTEGRALISATION
-of the six J=2 squash level-transfer coefficients (2026-08-21)
+cg_frg/ewsb/squash_level_transfer.py — geometric moments of the six
+J=2 squash level-transfer coefficients
 
 =================================================================
 
 WHY THIS MODULE EXISTS (motivation)
 -----------------------------------
-The six sign/multiple assignments of the J=2 squash corrections were
-recorded as "L3 ASSERTED" (mechanism stated, coefficient claimed).
-This module turns each one into an EXPLICIT geometric moment integral,
-closing the derivation chain
+This module evaluates the six J=2 squash corrections from the content
+modulus, the broken-generator count, and explicit geometric moments:
 
-    EC action  ->  field equations  ->  geometric moment  ->  factor
-                 (tau, s0)             c_Q = a_Q * r_Q      (1 + c_Q * s0*kappa)
+    content -> (tau,s0) -> geometric moment c_Q -> (1+c_Q s0 kappa).
 
-so that every factor is a COMPUTED moment, not an asserted coefficient.
+THE DERIVATION CHAIN
+--------------------
 
-THE DERIVATION CHAIN (each link is a function below)
-----------------------------------------------------
-
-  STEP 0 — THE EINSTEIN-CARTAN ACTION (explicit)
-      The internal RP3 carries an Einstein-Cartan geometry.  The
-      relevant terms are
+  STEP 0 — GEOMETRIC INPUTS
+      The internal RP3 geometry supplies
         (i)  the torsion Lagrangian   L_tors = a T^2 + b T^{bac}T_{abc}
              + c (T^a_ab)^2,  with a = M_G^3/4, b = 4a, c = -(7/3)a
              (the Holst/Immirzi algebraic-torsion condition b = 4a);
@@ -62,18 +56,13 @@ THE DERIVATION CHAIN (each link is a function below)
       sigma_3-axis zero mode: two inverse-metric factors from the field
       strength and one from the polarisation (geometric_couplings).
 
-  STEP 1 — THE TORSION FIELD EQUATION (tau)
-      delta S/delta K = 0 sources the torsion by the chiral current,
+  STEP 1 — THE CONTENT MODULUS (tau)
+      The chiral excess and quadratic hypercharge moment give
 
-          tau/L = kappa^2 j_5 ,   j_5 = <chi>/Pi_ren = (N_L-N_R)/(N_f sum Y^2) ,
+          tau=(N_L-N_R)/(N_f sum Y^2)=1/50.
 
-      so tau = kappa^2 L j_5 = (N_L-N_R)/(N_f sum Y^2) = 1/50 (the
-      window-capacity cancellation in ec_structure; the exact content
-      ratio, Lean-proven).
-
-  STEP 2 — THE SQUASH FIELD EQUATION (s0)
-      delta S/delta phi = 0 fixes the order-parameter VEV at the
-      broken-generator content,
+  STEP 2 — THE SQUASH AMPLITUDE (s0)
+      The broken-generator content gives
 
           s0 = n_broken * tau = (dim SU(2)_R - dim U(1)_R) tau = 2 tau .
 
@@ -106,9 +95,9 @@ THE DERIVATION CHAIN (each link is a function below)
       ratio r_Q is the specific content of the operator (below).
 
   STEP 4 — THE CORRECTION FACTOR
-      Q -> Q (1 + c_Q * s0 * kappa),  with s0 kappa = N_g tau kappa/(d+1)
-      the unified source (the lambda_EC first-order torsion N_g tau divided
-      by d+1, times the U(1)_Y normalisation kappa).
+      Q -> Q (1 + c_Q * s0 * kappa),  with
+      s0 kappa = N_g tau kappa/(d+1).  This identity follows from
+      N_g=8, d=3, and s0=2 tau.
 
 THE SIX MOMENTS (each a computed product a_Q * r_Q)
 ---------------------------------------------------
@@ -121,20 +110,13 @@ THE SIX MOMENTS (each a computed product a_Q * r_Q)
   generator (a_s)   1                    -1/N_g = -xi             -1/N_g          1 - s0 kappa/N_g
   power (rho_L)     1                    -4 (m_nu1^4)             -4              1 - 4 s0 kappa
 
-STATUS
-------
-The amplitude fraction a_Q (geometric vs chiral) and the power r_Q = 4 are
-DERIVED from the broken-generator / chiral-asymmetry / m_nu1^4 content;
-the seesaw r_Q = +1 is DERIVED from the level-transfer conservation
-v m_nu3 = v^3/M_R = const; the constituent r_Q = sum Y^2 Delta_s and the
-generator r_Q = 1/N_g are the framework's separately-DERIVED content
-ratios (sum Y^2 = 10/3 anomaly-normalised, Delta_s = 1/2 conformal
-weight, N_g = 8 = N_c^2-1, xi = 1/N_g the duality).  Every moment is
-returned as a NUMBER from the framework's content, never hard-coded.
-
-V4 DISCIPLINE
--------------
-No observed value enters: every moment is a pure content ratio
+SOURCE OF THE MOMENTS
+---------------------
+The amplitude fractions follow from the broken-generator and chiral-content
+counts.  The remaining factors use the seesaw level transfer, the fourth
+power in rho_L, the hypercharge moment sum Y^2=10/3, the scalar conformal
+weight Delta_s=1/2, and N_g=8.  Thus every correction coefficient is a
+function of the internal content data
 (N_g, N_c, d, xi, Delta_s, sum Y^2, N_f, N_L-N_R, n_broken).
 """
 
@@ -221,21 +203,20 @@ def killing_normalisation(tau: float) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# STEP 1 & 2 — the field equations (tau, s0)
+# STEP 1 & 2 — content modulus and squash amplitude
 # ---------------------------------------------------------------------------
 def torsion_field_equation() -> float:
-    """tau = (N_L-N_R)/(N_f sum Y^2) = 1/50 — the EC torsion field
-    equation tau/L = kappa^2 j_5 with j_5 = <chi>/Pi_ren, the chiral
-    drive over the renormalised hypercharge polarisation (the
-    window-capacity cancellation, ec_structure)."""
+    """Return the content modulus tau=(N_L-N_R)/(N_f sum Y^2)=1/50.
+
+    The evaluated relation is the dimensionless content closure used by the
+    main chain.
+    """
     c = _content()
     return c["N_L_minus_N_R"] / (c["N_f"] * c["SigmaY2"])
 
 
 def squash_field_equation(tau: float) -> float:
-    """s0 = n_broken * tau = 2 tau — the squash VEV (the broken-generator
-    content n_broken = dim SU(2)_R - dim U(1)_R = 2, each contributing the
-    torsion modulus tau)."""
+    """Return s0=n_broken*tau=2*tau from the broken-generator count."""
     return _N_BROKEN * tau
 
 
@@ -309,8 +290,7 @@ def content_ratio(level: str) -> float:
 
 
 # ---------------------------------------------------------------------------
-# STEP 3a — the TWO remaining content ratios as independent EC field
-# equations (the analogue of tau = kappa^2 j_5)
+# STEP 3a — explicit evaluation of the two remaining content ratios
 # ---------------------------------------------------------------------------
 def hypercharge_spectral_sum() -> float:
     """Sigma Y^2 = sum_c c Y^2 = 10/3 — the hypercharge spectral sum over
@@ -339,51 +319,26 @@ def scalar_conformal_weight() -> float:
 
 def yamabe_conformal_coupling() -> float:
     """xi = (d-2)/(4(d-1)) = 1/8 = 1/N_g — the Yamabe conformal curvature
-    coupling (the UNIQUE scalar curvature coupling that keeps the scalar
-    action invariant under Weyl rescaling, d = 3)."""
+    coupling for a Weyl-covariant scalar action in d=3."""
     return (_D - 2.0) / (4.0 * (_D - 1.0))
 
 
 def constituent_scheme_field_equation() -> dict:
-    """The EC field equation for the constituent-vs-MSBAR scheme correction
-    of the proton mass:  delta m_p / m_p = tau kappa Sum Y^2 Delta_s = 5 tau kappa/3.
+    """Evaluate the constituent-sector content correction
 
-    THE CONSTITUENT-QUARK ACTION (the chiSB sector, explicit)
-    ---------------------------------------------------------
-    The proton is a bound state of constituent quarks, whose mass is
-    generated by the chiral condensate.  The relevant action is
+        delta m_p / m_p = tau kappa Sum Y^2 Delta_s = 5 tau kappa/3.
 
-        S_q[psi, psibar] = int sqrt{g} d^3x [ psibar (i gamma^a e_a^mu D_mu) psi
-                                              + G_s (psibar psi)^2 ] ,
-
-    with the U(1)_Y covariant derivative
-
-        D_mu = partial_mu + i g_1 Y A_mu
-
-    (the quark carries hypercharge Y).  The gap equation
-    delta Gamma / delta <psibar psi> = 0 gives the constituent mass
-
-        m_q = -2 G_s <psibar psi> .
-
-    THE SCHEME CORRECTION (the first-order squash response)
-    -------------------------------------------------------
-    The constituent self-energy carries the hypercharge content of the
-    quark; under the squash (chiral asymmetry tau, Killing normalisation
-    kappa) its first-order variation is the product
+    The first-order squash response is the product
 
         delta m_p / m_p = tau * kappa * Delta_s * Sum_c c Y^2 ,
 
-    i.e. the chiral asymmetry tau (the torsion source, tau = (N_L-N_R)/(N_f
-    Sum Y^2)) times the U(1)_Y Killing normalisation kappa times the scalar
-    conformal weight Delta_s = (d-2)/2 of the condensate times the
-    hypercharge spectral sum Sum Y^2 = 10/3.  The explicit integral is
+    where tau=(N_L-N_R)/(N_f Sum Y^2), kappa is the U(1)_Y Killing
+    normalisation, Delta_s=(d-2)/2, and the hypercharge spectral sum is
 
         Sum_c c Y^2 = 6(1/6)^2 + 3(2/3)^2 + 3(-1/3)^2 + 2(-1/2)^2 + 1 = 10/3 ,
 
-    so delta m_p/m_p = tau kappa (1/2)(10/3) = 5 tau kappa/3 = 0.0377...
-    (the content ratio r_Q = Sum Y^2 Delta_s = 5/3 in tau units, the SAME
-    step as the tau = kappa^2 j_5 field equation).  Sign + : the constituent
-    quark mass exceeds the MSbar mass by the condensate dressing.
+    Hence r_Q=Sum Y^2 Delta_s=5/3 and the correction is
+    delta m_p/m_p=5 tau kappa/3.
     """
     c = _content()
     src = unified_source()
@@ -398,8 +353,9 @@ def constituent_scheme_field_equation() -> dict:
 
 
 def yukawa_difference_field_equation() -> dict:
-    """The EC field equation for the Yukawa-difference conformal
-    normalisation of alpha_s:  delta ln alpha_s = -s0 kappa xi = -s0 kappa/N_g.
+    """Evaluate the generator-sector conformal correction
+
+        delta ln alpha_s = -s0 kappa xi = -s0 kappa/N_g.
 
     THE YUKAWA-GAUGE MIXING (the two-loop beta function, explicit)
     --------------------------------------------------------------
@@ -413,22 +369,13 @@ def yukawa_difference_field_equation() -> dict:
     Yukawa y_0 = 1 (the exact SO(4) diagonal overlap) differs from the
     running SM top Yukawa y_t, so the mixing over-counts the Yukawa content.
 
-    THE CONFORMAL NORMALISATION (the first-order squash response)
-    -------------------------------------------------------------
-    The Yukawa difference is a conformal effect on the internal space (the
-    Yukawa coupling is a conformal coupling of the frame), normalised by the
-    Yamabe conformal coupling xi = (d-2)/(4(d-1)) = 1/N_g = 1/8 (the duality
-    N_g xi = 1, the SAME xi that closes g1's 5/8 = Sum Y^2 Delta_f xi).  The
-    first-order correction under the squash is
+    The first-order response is normalised by the Yamabe conformal coupling
+    xi=(d-2)/(4(d-1))=1/N_g=1/8:
 
         delta ln alpha_s = -s0 * kappa * xi = -s0 kappa/N_g ,
 
-    i.e. the squash amplitude s0 = 2 tau times the U(1)_Y Killing
-    normalisation kappa times the conformal coupling xi.  The explicit
-    content is xi = (d-2)/(4(d-1)) = 1/8, so delta ln alpha_s =
-    -s0 kappa/8 = -0.00566... (the content ratio r_Q = -1/N_g = -xi, the
-    SAME step as the tau = kappa^2 j_5 field equation).  Sign - : the
-    geometric y_0 = 1 exceeds y_t(M_G), so the mixing over-counts.
+    Thus the content ratio is r_Q=-xi=-1/N_g and
+    delta ln alpha_s=-s0 kappa/N_g.
     """
     c = _content()
     src = unified_source()
@@ -524,8 +471,7 @@ def _self_test() -> None:
     assert abs(c["xi"] - 1.0 / 8.0) < tol
     assert abs(c["N_g"] - 8.0) < tol
 
-    # STEP 3a: the two remaining content ratios as independent EC field
-    # equations (the analogue of tau = kappa^2 j_5).
+    # STEP 3a: explicit evaluation of the two remaining content ratios.
     # (i) the constituent scheme -> delta m_p/m_p = tau kappa Sum Y^2 Delta_s.
     cs = constituent_scheme_field_equation()
     assert abs(cs["SigmaY2"] - hypercharge_spectral_sum()) < tol
@@ -554,7 +500,7 @@ if __name__ == "__main__":
             continue
         print(f"{k:18s} {v['a_Q']:+.6f}  {v['r_Q']:+8.4f}  "
               f"{v['c_Q']:+9.5f}  {v['factor']:.9f}")
-    print("\nSTEP 3a — the two content ratios as independent EC field equations:")
+    print("\nSTEP 3a — explicit evaluation of the two content ratios:")
     cs = constituent_scheme_field_equation()
     print(f"  constituent: delta m_p/m_p = tau*kappa*Delta_s*Sum Y^2"
           f" = {cs['correction']:.6f} = 5 tau kappa/3"

@@ -55,6 +55,15 @@ def test_rp3_tt_lowest_mode():
     assert abs(tt_eigenvalue(1, 1, L) - 14.0 / L ** 2) < 1e-12
 
 
+def test_long_root_and_tt_spectral_values_are_distinct():
+    from cg_frg.gravity.newton import long_root_eigenvalue
+
+    # The (2,1) long-root Casimir normalises the pole residue.  The TT
+    # propagation values remain p_TT^2=8/L^2 and Lambda_TT=14/L^2.
+    assert abs(long_root_eigenvalue(L) - 16.0 / L ** 2) < 1e-12
+    assert 8.0 / L ** 2 < 14.0 / L ** 2 < long_root_eigenvalue(L)
+
+
 def test_ec_structure_identities():
     from cg_core.ec_structure import (scalar_curvature_LC, ec_over_lc_ratio,
                                       torsion_squared)
@@ -84,10 +93,9 @@ def test_spectral_sum_channels_signs():
     r = compute(L, 1e-2, TAU)
     assert r["tmunu_spin2"]["rp3_pi0"] > 0.0
     assert r["tmunu_spin0"]["rp3_pi0"] > 0.0
-    # flat_pi0 carries an explicit source marker for the four
-    # classification channels (paper 3-1 assertion, NOT computed).
+    # flat_pi0 carries the Ward-normalised flat-space subtraction source.
     assert r["tmunu_spin2"]["flat_pi0"]["value"] == 0.0
-    assert "NOT computed" in r["tmunu_spin2"]["flat_pi0"]["source"]
+    assert "Ward-normalised" in r["tmunu_spin2"]["flat_pi0"]["source"]
 
 
 def test_discrete_flow_semigroup():

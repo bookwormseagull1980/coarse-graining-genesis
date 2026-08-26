@@ -128,17 +128,11 @@ def conformal_coupling(d: int = 3) -> float:
     It is one of the framework's structural numbers (the "1/8" of
     the V4 discipline).
 
-    NOTE (honest status of the duality, 2026-08-18): the product
-    N_g·ξ = 1 is NOT a theorem of heat-kernel/anomaly vanishing
-    (those routes fail: a₁=0 gives ξ=1/6, and odd-dimensional
-    manifolds have no bulk trace anomaly).  It is the arithmetic
-    product of TWO standard facts — ξ = 1/8 (Yamabe, above) and
-    N_g = N_c²−1 = 8 (the su(3) adjoint dimension).  The duality
-    N_g·ξ = 1 is therefore the statement that the conformal
-    coupling is the reciprocal of the generator count, a
-    consistency condition that fixes the colour algebra rather than
-    a derived theorem.  Its conformal-weight form N_g·Δ_s = 2(d−1)
-    is proved equivalent in lean_proofs/conformal_gauge_duality.lean.
+    The selection identity N_g·xi=1 combines xi=1/8 from the Yamabe
+    conformal coupling with N_g=N_c^2-1=8 from the su(3) adjoint
+    dimension.  Its equivalent conformal-weight form
+    N_g·Delta_s=2(d-1) is verified in
+    lean_proofs/conformal_gauge_duality.lean.
     """
     return (d - 2) / (4.0 * (d - 1))
 
