@@ -1,221 +1,348 @@
 <!--
-Coarse-Graining Genesis Framework V4.0
-
-Author:      Jinku Guo <guojk@nwpu.edu.cn>
-Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-ORCID:       0009-0000-6600-6171
-
-DOI records:
-  [Software] 10.5281/zenodo.22067006
-  [Paper I]  10.5281/zenodo.22067118
-  [Paper II] 10.5281/zenodo.22067469
-
-Part of the V4 spectral framework, whose physics is presented in the
-companion papers:
-  [I]  "The spectrum of a compact internal space.
-        I. Gauge structure and fermion content"
-       DOI: 10.5281/zenodo.22067118
-  [II] "The spectrum of a compact internal space.
-        II. Effective couplings and mass scales"
-       DOI: 10.5281/zenodo.22067469
+Coarse-Graining Genesis Framework V5.0
+Author: Jinku Guo <guojk@nwpu.edu.cn>
+Northwestern Polytechnical University, Xi'an 710072, China
+ORCID: 0009-0000-6600-6171
+References:
+DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+Full bibliography: REFERENCES.md and CITATION.cff.
 -->
 
-# Coarse-Graining Genesis Framework V4.0
+# Coarse-Graining Genesis Framework V5
 
-**A spectral framework that records a fixed computation chain from the spectrum
-of a compact internal space (RP³) to effective couplings, mass scales, and
-comparison tables, with one observed dimensional anchor (G_N) and explicit
-provenance for every stored record.**
+Version 5.0.0.
 
-- **Author:** Jinku Guo `<guojk@nwpu.edu.cn>` — [ORCID: 0009-0000-6600-6171](https://orcid.org/0009-0000-6600-6171)
-- **Affiliation:** Northwestern Polytechnical University, Xi'an 710072, China
-- **Zenodo DOI:** [10.5281/zenodo.22067006](https://doi.org/10.5281/zenodo.22067006)
+A reproducible spectral calculation of effective couplings, mass scales and
+macroscopic source responses. The calculation starts from the specified compact
+internal spectrum, finite matter content and Gaussian response domain. Newton's
+constant supplies the observed dimensional anchor; the remaining production
+inputs are the structural assumptions and matching conditions stated in the companion
+papers.
 
-## Companion papers
+Author: Jinku Guo, Northwestern Polytechnical University, Xi'an 710072, China.
+Email: guojk@nwpu.edu.cn. ORCID: [0009-0000-6600-6171](https://orcid.org/0009-0000-6600-6171).
 
-- **[I]** *The spectrum of a compact internal space. I. Gauge structure and fermion content* — DOI: [10.5281/zenodo.22067118](https://doi.org/10.5281/zenodo.22067118)
-- **[II]** *The spectrum of a compact internal space. II. Effective couplings and mass scales* — DOI: [10.5281/zenodo.22067469](https://doi.org/10.5281/zenodo.22067469)
+## Scientific references
 
-Paper I gives the **structure** (gauge algebra, fermion content, mass-gap form);
-Paper II gives the **numbers** (window closure, the generated parameter
-store, and comparison with observation).
+The framework implements the constructions listed below. Full bibliographic
+entries are given in [REFERENCES.md](REFERENCES.md).
 
----
-
-## Overview
-
-V4 records a spectral construction and its numerical consequences.  The single
-observed dimensional anchor is Newton's constant `G_N`, used to set the Planck
-scale. The generated store separates this anchor, derived framework records,
-and the declared `SCALE_CHOICE` bookkeeping record.  Standard-Model and
-cosmological central values live in the comparison store and are audited to
-stay out of prediction modules.
-
-The central symmetry identities are *content* identities (proved in Lean 4):
-
-| Symmetry | Content | Meaning |
-|---|---|---|
-| chiral content | `N_L = N_g = 8`, `N_R = 7` | left-handed fermion components = colour generators |
-| conformal–gauge duality | `N_g·ξ = 1`, `ξ = (d−2)/(4(d−1))` | fixes `d = N_c = 3` |
-| hypercharge | `ΣY = 0`, `ΣY² = 10/3` | anomaly cancellation → `τ = (N_L−N_R)/(N_f·ΣY²) = 1/50` |
-| cosmology | `Ω_b + Ω_Σ + Ω_Λ = 1.00000` | flatness closure; `Ω_Σ` is the endpoint Hamiltonian residual |
-| gravity | TT spectral zero mode (Newtonian 1/r linearly) plus endpoint acceleration projection | derived `a0` scale and fixed local low-acceleration branch |
-
-The framework is **non-perturbative** ("non-perturbative = spectral-sum
-representation"), closed by the *duality-emergence* principle (conformal↔gauge,
-geometric↔gauge, UV↔IR, spectral↔physical).
-
-## Quick start
-
-```powershell
-py scripts/reproduce_v4.py          # official chain verification — expect "ALL MODULES PASSED", exit 0
-py scripts/audit_param_writers.py   # parameter-writer audit — expect "AUDIT CLEAN"
-py scripts/audit_observation_leakage.py  # observed-value isolation audit
-py scripts/audit_lean_sources.py    # Lean proof-source hygiene audit
-py scripts/audit_numeric_precision.py  # no rounded/formatted stored numerics
-py scripts/audit_path_portability.py  # no machine-local paths in reviewer artifacts
-py scripts/verify_lean_archive.py   # if Lean 4.7 is on PATH or LEAN_EXE is set
-py scripts/validate_endpoint_cosmology.py  # optional public-data cosmology comparison
-```
-
-These checks must pass before any change is considered complete. The chain reads
-`cg_params.json` (generated by the official chain) and
-`comparison/sm_inputs.json` (the SM comparison table).
-
-For a reviewer-grade fresh rebuild and report, start with
-[`REVIEWER_START_HERE.md`](REVIEWER_START_HERE.md):
-
-```powershell
-py scripts/verify_v4.py --fresh --audit --pytest --stability --report V4_VERIFICATION_REPORT.md
-py scripts/make_reviewer_dashboard.py  # writes docs/reviewer_dashboard.html
-```
-
-Add `--lean` for strict Lean compilation when Lean 4.7 is available.  Lean is
-discovered from `PATH`, `LEAN_EXE`, or `--lean-exe` on
-`scripts/verify_lean_archive.py`.
-
-```powershell
-py scripts/verify_v4.py --fresh --audit --lean --pytest --report V4_VERIFICATION_REPORT.md
-```
-
-Without Python or Lean, Git readers can still open the committed
-`docs/reviewer_dashboard.html` and `V4_VERIFICATION_REPORT.md`.
-
-The `--stability` step saves the current generated parameter stores, reruns the
-official chain from empty stores, and checks that the regenerated parameter
-records are identical.  It ignores `params_write_log.json` timestamps.
-
-## Directory map
-
-| Directory | Contents |
+| Reference | Subject relevant to this software |
 |---|---|
-| `cg_core/` | parameter store, RP³ spectrum (`rp3_spectrum.py`), SM content, β-functions, EC structure |
-| `cg_frg/` | the physics sectors — `gauge/`, `generation/`, `ewsb/`, `cosmology/`, `gravity/`, `neutrino/`, `fermion/`, `framework/`, `qcd/`, `frg/` |
-| `scripts/` | `reproduce_v4.py` (the master chain), `verify_v4.py`, `verify_lean_archive.py`, `make_reviewer_dashboard.py`, `audit_param_writers.py`, `audit_observation_leakage.py`, `audit_lean_sources.py` |
-| `lean_proofs/` | 18 current Lean 4 proofs/guards (`native_decide`, core only, no mathlib) |
-| `docs/` | the two papers (PDF), `V4_LEDGER.md`, the reviewer dashboard, and the popular-science introductions (EN/ZH) |
-| `_docs_build/` | documentation build toolchain (`build_docx.py`, `gen_ledger.py`, `figures.py`, source `.md`) |
-| `comparison/` | SM comparison (`sm_rge/`, `param_audit_full.py`, `sm_inputs.json`) |
+| Guo (2026f) | Macroscopic gravitational source response, physical tensor spectrum and effective action |
+| Guo (2026b) | Classification of long-range correlation channels and source projections |
+| Guo (2026d) | Compact internal response space, gauge structure, matter carrier and scalar spectrum |
+| Guo (2026g) | Spectral endpoint, effective couplings, mass relations and numerical comparisons |
+| Guo (2026e) | Minimal unbiased change and the mathematical generation of the spectral structure |
+| Guo (2026h) | Coarse-grained dynamics and certification of resolved macroscopic evolution |
+| Guo (2026c, 2026a) | Generated spectral dynamics and certified spectral computation |
 
-## Dependencies
+The papers state the mathematical hypotheses and physical response definitions. This
+repository provides their numerical realizations, finite algebraic checks and
+specified source-response calculations. Each calculation identifies its source,
+normalization, units, scale and approximation.
 
-- **Python 3.10+** (tested on 3.12 and 3.13), with `numpy` and `scipy`.
-- `matplotlib` + `python-docx` — needed only to rebuild the figures and the `.docx`.
-- **Lean 4.7.0** (core, no mathlib) — needed only for `lean_proofs/`.
+## Calculation and results
 
-## Formal proofs
+The production chain evaluates the mode responses on the finite Gaussian
+response domain `R=5`, solves the endpoint, assigns the common coupling
+boundaries, integrates the scale transfers and evaluates the mass relations.
+It also computes the common cosmological budget and the macroscopic tensor
+coefficients. The generated records retain their input dependencies.
 
-All 18 files under `lean_proofs/` compile under the strict verifier:
+Joint diagnostics evaluate the geometric six-mass relation, its shared-input
+derivatives, and the correlated change of electron and electroweak scales
+with response bandwidth. The active shell support and three-position condition
+give `R_* < R <= 16/pi`, where `c(R_*)=sqrt(11/2)` and
+`R_* ~= 4.0187119842`. The ratio `v/m_e` eliminates the common Planck
+and squash factors and identifies the endpoint monotonically. The charged-lepton
+combination `m_mu^2/(m_e*m_tau)=exp(sqrt(2*pi))` also eliminates the endpoint.
+The seven correlated running masses of Huang and Zhou (2021) constrain the
+two weighted finite-matching combinations to `Delta_F=2.69537 +/- 1.48017`
+and `Delta_L=0.0112736 +/- 0.0005817`. Physical comparisons retain the
+mass schemes, scales, matching factors and their joint covariance.
+The finite one-loop lepton transfer reduces the common running path
+to one weighted integral and supports outward interval bounds. The
+remaining matching coefficients satisfy a sharp logarithmic
+flavour-spread constraint after the calculated conversion terms.
+In the generated-pole realization, the same electroweak action gives the
+independent one-loop lepton combination `Delta_L=0.009337517754`, including
+a finite weak contribution `2.348914726e-6`. Its numerical enclosure and
+perturbative order accompany the result; no reference mass fixes its inputs.
 
-```powershell
-py scripts/verify_lean_archive.py
-```
+The matter calculation includes the charged finite carrier, exact anomaly
+coefficients, complete spatial mode products, canonical vertices and family
+mixing. Conditional five-coupling flows and finite on-shell/MSbar matching use
+the actions, schemes and boundary conditions recorded with their results.
+The neutrino records identify the three static masses and distinguish their
+mass-squared differences from the additional propagation readout.
 
-This uses Lean 4.7.0 core only, compiles each file with `--trust=0`, and fails
-if any file emits warnings or interactive output.  If Lean is not on `PATH`,
-set `LEAN_EXE` or pass `--lean-exe` with your local Lean executable.  The
-companion source audit also rejects `sorry`, `admit`, explicit `axiom`,
-`unsafe`, `opaque`, Mathlib imports, and interactive output commands such as
-`#eval`.
+Electroweak partial widths use one effective neutral-current amplitude,
+with a common weak angle and normalization, heavy-top bottom-vertex
+interference, and factorized QCD and QED radiators. The partial widths
+determine the total width, branching ratios and peak cross section at
+this same approximation order.
 
-## Numeric precision discipline
+The nucleon source record combines the common proton mass, scalar-isovector
+coefficient and electromagnetic mass separation. The BBN approximation
+propagates the neutron and proton fractions with conserved total baryon
+number and evaluates helium under complete neutron capture. Renormalized
+nucleon matching accepts sourced matrix elements and quark masses in a
+common scheme and scale; continuous weak evolution and nuclear reactions
+use the explicit thermal and reaction inputs described in the ledger.
+The common chain gives a neutron-proton difference of 1.28497 MeV,
+a free lifetime of 915.54 s and a helium baryon fraction of 0.246082.
+The registered PDG 2024 lifetime is 878.4 +/- 0.5 s. The lifetime and
+helium central residuals are +4.23% and +0.44%; their common-input
+Jacobian retains the hadronic, electromagnetic and weak-rate correlations.
+The lifetime elasticity to the mass difference is -6.53633. A comparison-only
+diagnostic substitutes the registered experimental mass difference throughout
+phase space, freeze-out and decay, giving 877.58790 s and Yp=0.24071583.
+It reuses the generated baseline and records the external-input uncertainty
+separately from numerical quadrature estimates and physical approximation
+errors. The diagnostic is nested in the joint comparison response and does
+not supply production inputs.
 
-The parameter store writes Python numeric objects directly with JSON
-round-trip float representations.  `scripts/audit_numeric_precision.py` scans
-all Python sources for rounded or formatted values being written to
-`pset()`, `compare_and_set()`, or `sm_set()`, checks that non-informational
-numeric records are stored as JSON numbers rather than strings, and reports
-the highest-fanout downstream parameters with their full stored `repr()`.
+An independent lattice QCD+QED total splitting is also propagated through
+this same weak chain. Its statistical and systematic errors retain their
+published separation; finite lifetime and helium ranges follow monotone
+phase-space factors and positive survival bounds. Seven distinct mass-gap
+evaluations cover the centre and all interval endpoints. The inherited
+three-quark colour carrier has one singlet and two independent adjoint
+source channels. The actual matter vertex also couples the lowest spinor
+shell to both branches of the next shell. These finite carrier calculations
+identify the channels entering a dynamical nucleon matching; the scalar
+charge requires their constrained bound-state resolvent.
 
-They machine-check the *content* identities (integer cross-multiplication via
-`native_decide`) behind the closed parameters — e.g. the 21-theorem
-`inverse_coupling_symmetry.lean`, the 62-theorem `twoloop_yukawa_quartic.lean`,
-and the conformal–gauge duality.
+Gravity is represented by a macroscopic collective tensor field. The specified
+quadratic Fierz-Pauli action has two physical massless helicities and positive
+residue. Matching its inverse source response to the internal critical branch
+gives the critical coordinate and external momentum conversion. The common
+Einstein--scalar action supplies the nonlinear interaction and conserved
+matter coupling. Cosmological evolution and the local static equation use
+their stated background, source and boundary data.
+The internal conformal source has a canonical matter evolution with
+kinetic weight `M=exp(-3 eta)` and spatial form
+`B=exp(-eta/2) A exp(-eta/2)`. Their normalized frequencies reproduce
+the static spectral energy. The calculation transports the full canonical
+phase covariance, evaluates the causal response including its direct
+source term, and checks energy exchange with the varying source.
+Both matter quadratic forms are positive. The common covariant realization
+below supplies the collective source equation and metric constraints.
+The covariant source interface computes the Hilbert stress, internal-source
+force and their exact energy-momentum exchange. Its ADM form supplies the
+matter lapse and shift sources from the same kinetic and spatial matrices.
+A uniform compression is related to a lapse by a canonical dilation,
+including the moving-basis coupling and its primary constraint. The
+collective source equations balance the calculated matter force.
+The phase of an existing pair of equal-mass real coordinates defines a
+timelike congruence, `u_mu=-partial_mu(theta)/sqrt(X)` with
+`X=-g^ab partial_a(theta) partial_b(theta)>0`. Its time direction is
+read from the evolving matter phase. Exact polar equations give its mass-gradient
+acceleration, source exchange and radial derivative corrections. Local
+checks include homogeneous expansion and an accelerated static phase.
+The complete relative condensate potential also has a joint amplitude
+and radius minimum. With its fixed subtraction and coupling, it selects
+`L_star=sqrt(2)*Lc` and has a positive joint Hessian. The relaxed radius
+response is certified from one stationary interval and its spectral tail.
+The occupied covariant realization combines this potential with the positive
+radial kinetic term, the retained matter pair and the Einstein action.
+The collective radius is fixed algebraically by `U_eta+3T-V=0` at each
+state. Explicit nonzero occupied initial data satisfy this balance and
+the Friedmann constraint; matter, radius and geometry then evolve together.
+After eliminating the radius, lapse and shift, the scalar kinetic form is
+`K=diag(Z,M,M)+b*b^T/h` with `h=U_etaeta-9T+V`. Its positive branch has
+two unit scalar characteristic speeds and
+`c_parallel^2=h/(h+18T)>0`, together with the two Einstein tensor modes.
+The conserved matter phase charge provides the proper-time readout on
+the same solution. The stored calculation includes constraint residuals,
+propagation coefficients and operation counts for this occupied background.
+A continuous interval certificate proves the source and kinetic conditions
+for `0 <= mu*s <= 0.01`, with a squared characteristic-speed lower bound
+above `0.1918`. It uses eight spectral endpoint evaluations and an
+exit-time bound; the longer numerical trajectory is recorded separately.
+The same interval also supports a certified source-reuse calculation.
+Piecewise-linear canonical trajectories share one action and initial
+state. A positive canonical source curvature converts each bounded
+source residual into a trajectory defect, controlling the scale factor,
+internal radius and phase readout over the complete interval. Spectral
+values and derivatives are retained between accepted source refreshes.
+The calculation records source solves, residual checks, spectral work
+and outward-interval arithmetic, including the common setup.
+The same auxiliary-radius action admits nonuniform plane-symmetric initial
+data satisfying its Hamiltonian and momentum constraints. The radius is
+solved from the local source balance at every evolved state. Spatial and
+temporal refinements record the constraints, phase-clock domain and reduced
+propagation matrices. The finite numerical trajectory accompanies a local
+existence result on the positive-curvature branch. Its short-distance
+metric response has the Einstein--Poisson principal part.
+An optional effective realization uses an independent foliation field to
+place the static RMS response and the geodesic Einstein branch in one
+covariant action. Its reduced scalar action
+on a dust and constant-vacuum background has positive quadratic kinetic
+coefficients for both the total cold-source mode and the relative clock.
+Finite mode evolutions check the conserved foliation charge and the Einstein
+evolution of the total cold source. The construction uses the foliation
+formalism of Blanchet and Marsat (2011); Blanchet and Skordis (2024) provide
+a related relativistic treatment of local and cosmological responses.
+For accelerated static backgrounds, eliminating the potential gives
+`K=2 M_P^2 B^T(D L^-1 D-D)B` on supplied generated directions `B`.
+The calculation solves all source columns with one response factorization
+and reports the kinetic spectrum relative to their gradient metric.
+The independent foliation has a negative longitudinal velocity direction
+above `|grad(Phi)|/a0=sqrt((sqrt(5)-1)/2)`. A radial reduction identifies
+the corresponding shell around a spherical source. An invariant-subsystem
+realization of this effective action is tested on its generated image,
+preserving the parent action's constraints and evolution. A variational
+pullback is reduced using the constraints of the pulled-back action.
+For a native generated action,
+the physical kinetic form is obtained from that action's own constraint
+reduction, including all matter, metric and source cross terms.
+For supplied reduced matrices and a total normalized operator error bound,
+the finite kinetic certificate reports a positive lower bound, a negative
+direction, or an unresolved interval. Its record identifies the action,
+physical variation space and source map used in that calculation.
+An invertible Gaussian change within one retained span preserves its
+inertia; restriction to a generated physical subspace additionally uses
+the actual source map and evolution.
+The local nonlinear potential also drives a finite plane-symmetric material
+flow derived from the nonrelativistic source--potential action. The calculation checks mass conservation,
+energy balance with boundary work, and time-step convergence before crossing.
+The local static and material-flow calculations use this variational flux
+directly. CAMB and DESI use the stated Einstein--matter thermal background;
+the independent foliation field is not an input to either calculation.
+The local-flow checks and the independent-foliation consistency checks are
+reported separately. The latter test the action's identities and mode
+solutions, including its negative accelerated-background coefficient.
+An expanding periodic realization varies the homogeneous lapse, scale
+factor and cold displacement in the same nonrelativistic response action.
+The complete one-dimensional RMS potential is eliminated by its exact
+flux law. The resulting constrained Hamiltonian supplies the background
+feedback and a positive physical kinetic coefficient on a finite interval.
+Its homogeneous limit gives the dust--vacuum Friedmann equation; freezing
+the expansion retains the same local nonlinear constitutive law. The
+remaining spatial approximation is the displacement window, whose omitted
+force is bounded and recorded separately.
 
-## Documentation
+Scientific values, complete operator and matching evaluations, interval
+certificates and fixed-input propagation results are registered in
+`cg_params.json`. Each record retains the conditions needed to interpret
+and reproduce it. Reference observations and covariances are kept separately
+in `comparison/reference_inputs.json`.
 
-The following documents accompany the code:
+These are the two authoritative scientific stores. Calculation modules
+use the common parameter interface, with checked prediction reads and
+separate reference-data access. Solver settings are registered with their
+comparison data. Reusable calculations are read from `cg_params.json`
+after their inputs and implementation have been validated.
 
-| Document | Format | Purpose | Best for |
-|---|---|---|---|
-| **Paper I** — *…I. Gauge structure and fermion content* | PDF | rigorous derivation of the **structure** (gauge algebra, fermion content, mass-gap form) | physicists / referees |
-| **Paper II** — *…II. Effective couplings and mass scales* | PDF | rigorous derivation of the **numbers** (window closure, stored records, observation comparison) | physicists / referees |
-| `docs/V4_LEDGER.md` | Markdown | current source-driven ledger of inputs, closures, outputs, cosmology, and formal-verification scope | auditors / anyone reproducing |
-| `docs/reviewer_dashboard.html` | HTML | dependency graph and post-computation comparison overview | reviewers |
-| `docs/From Change to Everything - A Popular Science Introduction.docx` | Word | popular-science introduction (English) — the central ideas | anyone new |
-| `docs/从变化到万物_科普导读.docx` | Word | popular-science introduction (Chinese) — the central ideas | Chinese readers |
+CAMB propagates the fixed endpoint input set. The Friedmann constraint
+resolves the nonbaryonic endpoint budget into the cold component, photons
+and thermal neutrinos. The propagation and subsequent DESI BAO comparison
+retain their complete configurations and data identities. The calculated
+statistics are available in the parameter store and generated reviewer
+dashboard.
+The fixed thirteen-component DESI comparison gives `chi2=29.5088`
+and `p=0.00553993`. A common cosmological mass-normalization direction
+has distance-ratio elasticity approximately `-0.74496`. Combining that
+direction with the independent CMB temperature of Fixsen (2009) permits
+only about `0.00063` in logarithmic normalization at three standard
+deviations; the smallest linearized BAO statistic in this interval is
+`28.20`. These correlated diagnostics retain the fixed production inputs.
+Finite thermal scaling gives an exact common distance multiplier in
+the stated background approximation. At fixed drag epoch the statistic
+is at least `28.6237`; reaching the 95-percent reference level requires
+a further logarithmic drag-integral response of at least `0.00258406`.
+These bounds reuse the saved covariance projection and background data.
+Direct HYREC full radiative-transfer evolution also propagates the generated
+fine-structure constant and electron mass through the atomic rates and
+Thomson opacity at the same expansion history. It gives a drag sound horizon
+of 147.07455 Mpc and a thirteen-distance statistic of 27.1191. A finite
+electron-number bound covering all ionization changes below redshift 30
+gives a statistic range [25.7794, 28.5175] around this atomic realization.
+The higher-redshift atomic and radiative-transfer remainder is a separate
+physical uncertainty. The calculation retains solver-resource fingerprints
+and evaluates no power spectra; subsequent verification reuses its saved
+result after checking the background and atomic inputs.
 
-### Suggested reading order
+## Documentation and reproduction
 
-- **Want the central idea, fast?** → read the popular-science introduction (`From Change to Everything`, or the Chinese `从变化到万物`).
-- **Want the rigorous physics?** → read Paper I (structure), then Paper II (numbers).
-- **Want the cosmology branch?** → read the cosmology section of `docs/V4_LEDGER.md` and Paper II.
-- **Want to reproduce or audit?** → run `py scripts/reproduce_v4.py` and read `docs/V4_LEDGER.md`.
-- **Want to inspect dependencies?** → open `docs/reviewer_dashboard.html`.
+- [Scientific overview](docs/papers_overview.pdf): construction, selected results,
+  macroscopic dynamics and the interpretation of the comparisons.
+- Popular introductions: [English](docs/From%20Change%20to%20Everything%20-%20A%20Popular%20Science%20Introduction.docx)
+  and [中文](docs/从变化到万物_科普导读.docx).
+- [Framework ledger](docs/V5_LEDGER.md): spectral construction, effective
+  couplings, finite matching, thermal evolution, gravity and cosmology,
+  with their assumptions, normalizations and error controls.
+- [Reviewer guide](REVIEWER_START_HERE.md): installation, reproduction,
+  test and formal-verification commands, and the validation map.
+- [Verification report](V5_VERIFICATION_REPORT.md): executed checks and
+  their scope for the identified calculation.
+- [Reviewer dashboard](docs/reviewer_dashboard.html): stored dependencies,
+  calculated quantities and observational comparisons.
 
-The papers give the derivations, the ledger records the current computation,
-the dashboard shows dependencies, and the popular-science introductions give
-an accessible conceptual entry point.
+The source/output manifest binds the calculation and its verification
+state to the distributed files. Matching external propagation is reused
+after input and configuration validation. Spectral certification reuses
+root intervals and trajectory data where the mathematical bounds permit.
+Computational work is recorded as operation counts. Each response is bound
+to its transitive source dependencies and actual inputs. Shared numerical
+examples are evaluated once per test module; independent formulas and
+refinement calculations supply separate checks.
+The manifest contains identity and verification metadata; scientific
+inputs and calculated values are supplied by the two stores above.
 
-## Research roadmap (open items, not claims)
+The source distribution includes the verification suite. Runtime installation
+requires only the calculation dependencies. The reviewer guide distinguishes
+core algebra and isolation checks, extended numerical certification, and
+auxiliary presentation checks. Full verification is used for release;
+targeted tests cover changes to individual sectors.
 
-The framework makes claims only for quantities its code actually computes. The following directions are recorded as open research items, deliberately not asserted:
+The independent proof library *Lean Formalization of Arithmetic and Basic
+Physical Interfaces* contains the shared foundations formalized for the
+arithmetic and gauge-structure papers. It is maintained separately from V5.
+`foundations-reference.json` pins its proof sources, dependency locks and
+complete verification program. V5's optional `--foundations` check invokes that
+program and binds a newly produced proof record; it does not certify the
+numerical calculation or the full mathematical content of the papers.
+The ordinary V5 calculation and test imports do not require this library.
+See the [reviewer guide](REVIEWER_START_HERE.md) for checkout configuration.
 
-- **Nonlinear cosmological structure** — the endpoint-residual branch now fixes the
-  background/linear cold slot, the photon zero-mode correction, and the local
-  low-acceleration response used in fixed-parameter comparison checks. CAMB,
-  DESI, SPARC, and cluster entries do not supply V4 parameters: CAMB only
-  propagates the already closed V4 input set, while DESI/SPARC enter only as
-  observed comparison data. Full nonlinear structure formation, resolved
-  cluster maps, and a Boltzmann-level likelihood suite remain comparison-level
-  work beyond the deterministic reproduction chain.
-- The electroweak precision block (`cg_frg/ewsb/ew_precision.py`) is computed at the level stated in its docstring (tree-level on the two-loop running for `M_Z`; Born + one-loop ρ for `M_W`, with `Δr_rem` omitted; Born + QCD/QED radiators for `Γ_Z`; tree-level `m_H`). Promoting any of these to full one-loop EW standard is an open refinement.
+## Repository contents
 
-## Citation (required)
+| Location | Contents |
+|---|---|
+| `cg_core/` | Parameter definitions, compact spectrum, finite carriers, mode algebra, matching and beta functions |
+| `cg_frg/` | Endpoint, coupling, matter, cosmology and macroscopic gravity sectors |
+| `scripts/` | Reproduction, verification, certificates, fixed-input comparisons and dashboard generation |
+| `tests/` | Independent identities, numerical convergence and software-contract checks |
+| `lean_proofs/` | Finite integer/rational formalizations with their declared premises |
+| `foundations-reference.json` | Pinned reference to the independently maintained arithmetic and basic-physics proof library |
+| `comparison/` | Observational inputs and post-calculation comparison procedures |
+| `docs/` | Framework ledger and generated reviewer dashboard |
+| `cg_params.json` | Unified scientific records and their provenance |
+| `run_manifest.json` | Run identity, source/output fingerprints and verification state |
+| `CITATION.cff` | Software citation metadata |
+| `REFERENCES.md` | Scientific bibliography |
 
-Any use of this framework — in code, publications, or derivative work —
-**must** cite all three of the following:
+Floating-point central values, outward mathematical enclosures and model
+sensitivity have distinct meanings. The framework ledger states their
+scope. The Lean archive verifies selected finite implications; the
+companion papers give the analytic and physical arguments.
 
-1. **Author** — Jinku Guo, Northwestern Polytechnical University, Xi'an, China;
-2. **Companion papers** —
-   - [I] *The spectrum of a compact internal space. I. Gauge structure and fermion content* (DOI: [10.5281/zenodo.22067118](https://doi.org/10.5281/zenodo.22067118))
-   - [II] *The spectrum of a compact internal space. II. Effective couplings and mass scales* (DOI: [10.5281/zenodo.22067469](https://doi.org/10.5281/zenodo.22067469))
-3. **Source** — this Git repository: https://github.com/bookwormseagull1980/coarse-graining-genesis (archived at Zenodo: https://doi.org/10.5281/zenodo.22067006)
+## Citation and license
 
-```bibtex
-@misc{guo2026cg,
-  author       = {Jinku Guo},
-  title        = {Coarse-Graining Genesis Framework {V4.0}},
-  year         = {2026},
-  doi          = {10.5281/zenodo.22067006},
-  howpublished = {\url{https://github.com/bookwormseagull1980/coarse-graining-genesis}},
-  note         = {Companion papers: ``The spectrum of a compact internal space.
-                  I. Gauge structure and fermion content'' and
-                  ``II. Effective couplings and mass scales''}
-}
-```
+Cite this software as J. Guo, *Coarse-Graining Genesis Framework V5*,
+version 5.0.0 (2026), together with the applicable companion papers in
+[REFERENCES.md](REFERENCES.md). V5 has no assigned DOI. Machine-readable
+citation information is provided in [CITATION.cff](CITATION.cff).
 
-## License
+Source repository:
+[coarse-graining-genesis](https://github.com/bookwormseagull1980/coarse-graining-genesis).
 
-MIT — see [`LICENSE`](LICENSE), which carries an **additional attribution
-requirement** (cite author + papers + source).
+License and attribution terms are provided in [LICENSE](LICENSE).

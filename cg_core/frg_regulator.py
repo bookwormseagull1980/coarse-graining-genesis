@@ -1,31 +1,24 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_core/frg_regulator.py — V4.0: the FRG regulator reference
+cg_core/frg_regulator.py — V5.0: the FRG regulator reference
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The coarse-graining window can be implemented by different
 regulators.  The primary regulator of the framework is the
@@ -37,9 +30,7 @@ module is the reference implementation of both.
 
 THE REGULATORS
 --------------
-· Exponential window: R_k(z) = z/(e^{z/k²} − 1) (smooth; R(0) = k²,
-  the regulator convention — NOT k²/(e^{z/k²}−1), which diverges at
-  z → 0).
+· Exponential window: R_k(z) = z/(e^{z/k²} − 1) (smooth; R(0) = k²).
 · Litim sharp cutoff: R_k(z) = (k² − z) θ(k² − z) (the sharp
   regulator; the derivative ∂_t R_k = 2k² θ(k²−z)).
 
@@ -47,8 +38,8 @@ STATUS
 ------
 Reference module: the exponential window is the production
 regulator (trace_kernels); the Litim cutoff is the cross-check.
-Both files implement the SAME exponential window (corrected
-2026-08-21: the earlier k²/(e^{z/k²}−1) docstring form was wrong).
+Both implementations use this exponential window and its analytic
+scale derivative.
 """
 
 from __future__ import annotations
@@ -68,9 +59,7 @@ def exponential_regulator(z: float, k2: float) -> float:
     The z/(e^{z/k²}−1) form satisfies the regulator convention
     R(0) = k² (finite) and decays R → 0 for z ≫ k²; it is the SAME
     window as trace_kernels._exponential_terms (the production
-    regulator).  NOTE: an earlier docstring claimed R = k²/(e^{z/k²}−1),
-    which diverges as k⁴/z at z → 0 and is NOT the implemented window
-    — corrected 2026-08-21 (frg_regulator and trace_kernels agree).
+    regulator).
     """
     if z < 1e-10 * k2:
         # The small-y Taylor branch avoids the 0/0 limit:

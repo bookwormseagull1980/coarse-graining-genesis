@@ -1,79 +1,36 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
-"""
-cg_frg/qcd/mass_gap_scale.py — V4.0: the mass-gap scale closure
-ΔE = (1/8)·M_G → m_gen → m_glueball
-=================================================================
+"""Specified QCD scale readouts and explicit threshold-running extensions.
 
-WHY THIS MODULE EXISTS (motivation)
------------------------------------
-The mass-gap theorems prove Δ > 0; the NUMERICAL value closes the
-scale chain from the framework's emergence scale down to the
-hadronic (GeV) scale:
+The production Lambda readout starts from g3(M_G), evolves the three gauge
+couplings with fixed y0=1, applies the stated finite content factor, and
+evaluates the two-loop five-flavour Lambda formula at the internal Z scale.
+This prescription does not perform top-quark threshold matching.
 
-  STEP 1 — the condensate energy: driven by the curvature gap
-    R_c − R(M_G) with the coefficient K = 8/3
-    (the geometric carrier: the J=2 mode — the same as the order
-    parameter — with K = 8/3 = 8/3 = (the J=2 kinetic eigenvalue
-    8)/ (the internal-space dimension 3); the effective long-root
-    eigenvalue lambda_long = (8/3)·R = 16/L² is the curvature-
-    tracked value, not a separate harmonic),
+Delta E=M_G/8 and m_gen=g2*(2*tau)*M_G/sqrt(2) are parallel condensate and
+generator-scale readouts; neither is an argument of lambda_qcd. The glueball
+catalogue uses the specified linear mass readout 8*Lambda. An internal positive
+spectral gap does not identify this catalogue mass with a hadronic pole.
 
-        ΔE = (1/8)·M_G = 0.125·M_G ≈ 2.16e17 GeV
-
-    (the conformal coupling ξ = 1/8 itself — the Mexican-hat depth
-    of the long-root condensate at the emergence scale).
-
-  STEP 2 — the generator mass: the SU(3) gauge bosons acquire
-    mass from the long-root condensate (Higgs-like):
-
-        m_gen = g₂(M_G)·(2τ)·M_G/√2 ≈ 2.49e16 GeV
-
-    (the initial condition of the QCD running at the GUT scale).
-
-  STEP 3 — the glueball: the TWO-LOOP QCD running (threshold-matched
-    at m_t) from the common-origin g3(M_G) gives
-
-        Λ_QCD(MSbar,5) ≈ 0.22 GeV,   α_s(M_Z) ≈ 0.119
-        m_G = 8·Λ_QCD = λ(0⁺⁺)·Λ_QCD
-
-    — the glueball is the lightest 0⁺⁺ mode, the l=2 scalar on RP³
-    whose spectral eigenvalue is λ(0⁺⁺) = 2λ_gluon + C₂(0,0) = 8
-    (two gluons l=1 Killing, λ_gluon = (l+1)² = 4, the composite
-    (0,0) scalar C₂ = 0).  The absolute mass is m_glue = λ(0⁺⁺)·Λ_QCD,
-    the SAME spectral-language form as the string tension
-    σ = (λ_TT/π)Λ² and the deconfinement T_d = (λ_vector/N_c)Λ —
-    the glueball is the spectral eigenvalue λ(0⁺⁺) = 8 times Λ_QCD,
-    NO empirical lattice ratio.  The framework provides the initial
-    condition g3(M_G) (the common-origin coupling); the running to
-    the glueball is the established SM two-loop RG.
-
-V4 DISCIPLINE
--------------
-The chain uses M_G, R_c*, g2(M_G), τ, g3(M_G) (the framework's
-internal quantities).  The QCD running is the standard SM two-loop
-RG; the framework's independent content is the initial condition.
+run_qcd_thresholds separately evaluates a supplied pure-QCD EFT path with
+explicit heavy masses and one-loop matching; lambda_msbar_from_alpha requires
+the final fixed-flavour scheme. Physical Yukawa feedback belongs to the
+five-variable API in cg_core.gauge_running and must not also receive the
+fixed-y0 finite compensation. No observed boundary is loaded by these APIs.
 """
 
 from __future__ import annotations
@@ -87,13 +44,10 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get, set as pset  # noqa: E402
-from cg_core.beta_functions import beta_gauge  # noqa: E402
+from cg_core.gauge_running import run_geometric  # noqa: E402
 
-# The GEOMETRIC content (the framework's theorems — NOT the SM table):
-#   y_0 = 1.0        the exact SO(4) diagonal (0,0) overlap (mass_operator_overlap)
-#   lambda_H_pseudo  the pseudo-dilaton identity (12 pi + 3)/(32 pi^2)
-# These are SCALE-INVARIANT geometric quantities (the spectrum does not
-# run); the only running content is the gauge couplings g1, g2, g3.
+# Constants of the specified fixed-y0 three-gauge prescription. A finite
+# connector seed does not establish a vanishing physical Yukawa beta.
 Y0_GEOMETRIC = 1.0
 LAM_H_GEOMETRIC = (12.0 * math.pi + 3.0) / (32.0 * math.pi ** 2)
 
@@ -112,33 +66,19 @@ def generator_mass(g2: float, tau: float, M_G: float) -> float:
 
 def _run_geometric_to_MZ(g1_MG: float, g2_MG: float, g3_MG: float,
                           M_G: float, M_Z: float) -> float:
-    """The GEOMETRIC RGE: run g1, g2, g3 (the SM two-loop gauge beta
-    functions) with the geometric content held FIXED — yt = y_0 = 1.0
-    (the exact overlap) and lam = lambda_H_pseudo (the pseudo-dilaton
-    identity).  These geometric quantities do NOT run (the spectrum is
-    scale-invariant); only the gauge couplings run.  This replaces the
-    SM-table running values (yt_MG, lambda_MG) — the internal content
-    is the geometric initial condition g3(M_G) and the scale-invariant
-    geometric Yukawa/quartic.
+    """Declared three-gauge two-loop flow with the coefficient y0 fixed to 1.
 
-    Returns (g1, g2, g3) at M_Z.
+    No top threshold is applied in this production prescription. The
+    quartic does not enter this flow. Returns (g1,g2,g3) at the supplied
+    scale; it is distinct from a matched five-variable physical EFT flow.
     """
-    dt = math.log(M_Z) - math.log(M_G)
-    n = max(1, int(round(abs(dt) * 400)))
-    h = dt / n
-    g1, g2, g3 = g1_MG, g2_MG, g3_MG
-    for _ in range(n):
-        bg = beta_gauge(g1, g2, g3, Y0_GEOMETRIC)
-        g1 += h * bg[0]
-        g2 += h * bg[1]
-        g3 += h * bg[2]
-    return g1, g2, g3
+    return run_geometric((g1_MG, g2_MG, g3_MG), M_G, M_Z)
 
 
 def _run_full_sm_to_MZ(g1_MG: float, g2_MG: float, g3_MG: float,
                         M_G: float, M_Z: float) -> float:
-    """Run the GEOMETRIC RGE (g1,g2,g3 with the scale-invariant
-    geometric content y_0 = 1.0, lambda_H_pseudo) from M_G down to M_Z.
+    """Run the declared three-gauge flow with fixed coefficient y0=1
+    from M_G down to M_Z.
     Returns g3(M_Z)."""
     return _run_geometric_to_MZ(g1_MG, g2_MG, g3_MG, M_G, M_Z)[2]
 
@@ -158,10 +98,9 @@ def internal_M_Z(g1_MG: float, g2_MG: float, g3_MG: float,
 def lambda_qcd(g1_MG: float, g2_MG: float, g3_MG: float,
                M_G: float) -> tuple:
     """Lambda_QCD (MSbar, 5-flavour) from the framework's common-origin
-    g3(M_G), run down with the FULL two-loop SM beta functions (RK4,
-    derivatives5 — the electroweak-mixing and Yukawa terms are the
-    two-loop content).  The running is the standard SM dynamics; the
-    framework's independent content is the initial condition g3(M_G)
+    g3(M_G), run down with the two-loop three-gauge beta functions
+    and fixed geometric y0=1 (checked RK4, not derivatives5).
+    The framework's independent content is the initial condition g3(M_G)
     (the common-origin coupling) — the resulting alpha_s(M_Z) is the
     framework's prediction.
 
@@ -173,28 +112,88 @@ def lambda_qcd(g1_MG: float, g2_MG: float, g3_MG: float,
                        float(get("v_HIGGS")))
     g3_MZ = _run_full_sm_to_MZ(g1_MG, g2_MG, g3_MG, M_G, M_Z)
     a = g3_MZ ** 2 / (4.0 * math.pi)
-    # ---- alpha_s Yukawa-difference symmetry correction (2026-08-16) ----
-    # The geometric Yukawa y_0 = 1.0 (scale-invariant, the SO(4) diagonal
-    # overlap) differs from the SM running yt, so the two-loop gauge beta's
-    # Yukawa term shifts alpha_s by +s0·κ/N_g (N_g = 8 the gauge
-    # generators).  The correction −s0·κ/N_g brings alpha_s to −0.002% and
-    # pulls string_tension +6.7%→−0.9%, T_deconf +6.3%→+2.5%.  The ÷N_g = ξ
-    # is the conformal coupling (the conformal-gauge duality N_g·ξ = 1) —
-    # the geometric-Yukawa difference is normalised by the gauge generators,
-    # the SAME ξ that closes g1's 5/8 = ΣY²·Δ_f·ξ.
+    # The fixed-y0 prescription includes the declared finite content factor.
+    # This is not the integrated difference from a matched running Yukawa.
+    # A coupled top-sector flow must not also apply this compensation.
     tau = float(get("tau"))
     s0 = 2.0 * tau
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
-    N_g = 8.0              # su(3) gauge generators N_c^2 - 1
-    a = a * (1.0 - s0 * kappa / N_g)
-    # STATUS (2026-08-21): L3 DERIVED — the Yukawa-difference factor
-    # (geometric y0=1 vs running SM yt) normalised by N_g is the generator
-    # charge c=−1/N_g=−ξ of squash_level_transfer (the conformal coupling of
-    # the conformal-gauge duality N_g·ξ=1).  See epsilon_ratio DERIVATION STATUS.
+    a = apply_finite_content_matching(a,s0*kappa,flow_convention="fixed-y0")
     c0 = 23.0 / 3.0    # b0(5) = 11 - 2*5/3
     c1 = 116.0 / 3.0   # b1(5) = 102 - 38*5/3
     return (M_Z * (c0 * a / (4.0 * math.pi)) ** (-c1 / (2.0 * c0 * c0))
             * math.exp(-2.0 * math.pi / (c0 * a)), a)
+
+
+def apply_finite_content_matching(alpha_s, squash_response, *, flow_convention):
+    """The specified 1-s0*kappa/8 factor, exclusively for the fixed-y0 flow.
+
+    A jointly evolved physical Yukawa already enters the gauge beta. This
+    finite compensation cannot be applied to it again. Additional finite
+    EFT thresholds need their own derived matching coefficients.
+    """
+    if flow_convention != "fixed-y0":
+        raise ValueError("finite fixed-y0 compensation cannot be added to a coupled flow")
+    if not all(math.isfinite(x) for x in (alpha_s,squash_response)) or alpha_s<=0:
+        raise ValueError("positive alpha_s and finite squash response required")
+    factor=1-squash_response/8
+    if factor<=0:
+        raise ValueError("finite matching factor must be positive")
+    return alpha_s*factor
+
+
+def lambda_msbar_from_alpha(alpha_s, scale, *, n_flavours, scheme="MSbar"):
+    """Two-loop asymptotic Lambda parameter in an explicit fixed-flavour EFT.
+
+    PDG QCD review, Sec. 9.2, beta0=11-2nf/3 and beta1=102-38nf/3.
+    The caller supplies a coupling already matched to this EFT; this formula
+    does not itself decouple a heavy quark or identify a hadronic pole mass.
+    """
+    if scheme!="MSbar" or not isinstance(n_flavours,int) or not 0<=n_flavours<=6:
+        raise ValueError("MSbar and integer 0<=n_flavours<=6 required")
+    if not all(math.isfinite(x) and x>0 for x in (alpha_s,scale)):
+        raise ValueError("positive finite alpha_s and matching scale required")
+    b0,b1=11-2*n_flavours/3,102-38*n_flavours/3
+    return scale*(b0*alpha_s/(4*math.pi))**(-b1/(2*b0*b0))*math.exp(-2*math.pi/(b0*alpha_s))
+
+
+def run_qcd_thresholds(alpha_s, scale_from, scale_to, *, n_flavours,
+                       heavy_thresholds=(), rtol=2e-11, atol=2e-13):
+    """Downward pure-QCD two-loop running with explicit heavy matching scales.
+
+    At each supplied heavy mass alpha_s is continuous (one-loop matching
+    at mu=m_h); nf decreases by one. Two-loop finite decoupling constants
+    and electroweak/Yukawa terms are outside this API. A non-mass matching
+    scale requires a different, explicitly derived matching map. This
+    routine neither reads observed quark masses nor applies the fixed-y0
+    finite content compensation.
+    """
+    from scipy.integrate import solve_ivp
+    if not isinstance(n_flavours,int) or not 1<=n_flavours<=6:
+        raise ValueError("integer 1<=n_flavours<=6 required")
+    if not all(math.isfinite(x) and x>0 for x in (alpha_s,scale_from,scale_to,rtol,atol)):
+        raise ValueError("positive finite QCD inputs required")
+    if not scale_to<scale_from:
+        raise ValueError("this API performs downward EFT running")
+    thresholds=tuple(float(x) for x in heavy_thresholds)
+    path=(scale_from,*thresholds,scale_to)
+    if len(thresholds)>=n_flavours or any(not path[i]>path[i+1] for i in range(len(path)-1)):
+        raise ValueError("ordered internal heavy-mass thresholds and positive final nf required")
+    a,segments=alpha_s,[]
+    for high,low in zip(path[:-1],path[1:]):
+        b0,b1=11-2*n_flavours/3,102-38*n_flavours/3
+        def rhs(t,y):
+            return [-b0*y[0]**2/(2*math.pi)-b1*y[0]**3/(8*math.pi**2)]
+        result=solve_ivp(rhs,(math.log(high),math.log(low)),[a],method='DOP853',rtol=rtol,atol=atol,max_step=.1)
+        if not result.success or not math.isfinite(result.y[0,-1]) or result.y[0,-1]<=0:
+            raise RuntimeError("QCD running failed before the requested scale")
+        a=float(result.y[0,-1])
+        segments.append({"from":high,"to":low,"n_flavours":n_flavours,"alpha_s":a})
+        if low!=scale_to:
+            n_flavours-=1
+    return {"alpha_s":a,"scale":scale_to,"n_flavours":n_flavours,"segments":segments,
+            "scheme":"MSbar","running_order":2,"matching_order":1,
+            "finite_fixed_y0_compensation_applied":False}
 
 
 def glueball_from_Lambda(Lambda_QCD: float) -> float:
@@ -206,9 +205,8 @@ def glueball_from_Lambda(Lambda_QCD: float) -> float:
     as the string tension σ = (λ_TT/π)Λ² (λ_TT = 14) and the
     deconfinement T_d = (λ_vector/N_c)Λ (λ_vector = 4).  The absolute
     glueball mass is the spectral eigenvalue λ(0⁺⁺) = 8 times Λ_QCD
-    — first-principles, NO empirical lattice ratio (the previous 8.1
-    was the lattice 8 + 1.2% colour-magnetic correction, an external
-    input removed here)."""
+    under the declared linear catalogue readout. This assigned mass is not
+    a pole reconstructed from a colour-singlet two-point function."""
     return 8.0 * Lambda_QCD
 
 
@@ -245,32 +243,31 @@ def compute() -> dict:
               f"energy of the long-root, xi = 1/8)")
     pset("mass_gap_m_gen", mgen, provenance="DERIVED",
          note=f"m_gen = g2 (2 tau) M_G / sqrt(2) = {mgen:.3e} GeV "
-              f"(the SU(3) generator mass, the QCD initial condition)")
+               f"(the SU(3) generator-scale readout; not an input to lambda_qcd)")
     pset("qcd_Lambda_QCD", Lam, provenance="DERIVED", role="internal",
-         note=f"Lambda_QCD(MSbar,5) = {Lam:.4f} GeV — FULL two-loop SM running "
-              f"(RK4, derivatives5 — electroweak mixing + Yukawa) from the "
+         note=f"Lambda_QCD(MSbar,5) = {Lam:.4f} GeV — two-loop three-gauge running "
+              f"(checked RK4, fixed geometric y0=1) from the "
               f"framework's common-origin g3(M_G) = {g3_MG:.4f}, with the "
               f"Yukawa-difference factor (1 - s0 kappa/N_g) applied at the "
               f"extraction point (the geometric Yukawa y0 = 1 vs the running "
               f"SM top Yukawa), the standard two-loop Lambda_MSbar extraction "
-              f"at M_Z; the −1.2% vs 0.21 is the TWO-LOOP extraction (vs the "
-              f"standard 4-loop) — loop-order precision, not a fixable mechanism")
+              f"at the prescribed internal extraction scale, nf=5. Integration "
+              f"error and omitted loop-order/model corrections are distinct.")
     pset("alpha_s_MZ_pred", alpha_s_MZ, provenance="DERIVED",
          role="internal",
          note=f"alpha_s(M_Z) = {alpha_s_MZ:.4f} — the framework's QCD "
               f"prediction from the common-origin g3(M_G) = {g3_MG:.4f} "
-              f"run down FULL two-loop SM; the "
+              f"run down the two-loop three-gauge flow at fixed y0=1; the "
               f"framework's independent QCD content is this initial "
-              f"condition, the running is standard SM dynamics)")
+              f"condition together with the declared geometric flow prescription)")
     pset("m_glueball", mgl, provenance="DERIVED", role="internal",
          note=f"m_glueball = lambda(0++) x Lambda_QCD = 8 x Lambda_QCD = "
-              f"{mgl:.2f} GeV (FULL two-loop SM running + matching from "
+              f"{mgl:.2f} GeV (two-loop geometric gauge running + matching from "
               f"the framework's common-origin g3); lambda(0++) = 2 lambda_gluon "
               f"+ C2(0,0) = 8 the spectral eigenvalue (two gluons l=1 Killing, "
               f"lambda_gluon = (l+1)^2 = 4) — first-principles, NO empirical "
-              f"lattice ratio; the residual vs lattice is the TWO-LOOP "
-              f"Lambda_MSbar extraction (vs the standard 4-loop) — loop-order "
-              f"precision, not a fixable mechanism")
+              f"lattice ratio; comparison residuals include the declared "
+              f"two-loop extraction and spectral readout approximations)")
     return {"dE": dE, "dE_over_MG": dE / M_G, "m_gen": mgen,
             "m_glueball": mgl,
             "Lambda_QCD": Lam, "alpha_s_MZ": alpha_s_MZ}

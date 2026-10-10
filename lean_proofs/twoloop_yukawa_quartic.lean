@@ -1,27 +1,20 @@
 /-
- Coarse-Graining Genesis Framework V4.0
- 
- Author:      Jinku Guo <guojk@nwpu.edu.cn>
- Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
- ORCID:       0009-0000-6600-6171
- 
- DOI records:
-   [Software] 10.5281/zenodo.22067006
-   [Paper I]  10.5281/zenodo.22067118
-   [Paper II] 10.5281/zenodo.22067469
- 
- Part of the V4 spectral framework, whose physics is presented in the
- companion papers:
-   [I]  "The spectrum of a compact internal space.
-         I. Gauge structure and fermion content"
-        DOI: 10.5281/zenodo.22067118
-   [II] "The spectrum of a compact internal space.
-         II. Effective couplings and mass scales"
-        DOI: 10.5281/zenodo.22067469
+Coarse-Graining Genesis Framework V5.0
+Author: Jinku Guo <guojk@nwpu.edu.cn>
+Northwestern Polytechnical University, Xi'an 710072, China
+ORCID: 0009-0000-6600-6171
+References:
+DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+Full bibliography: REFERENCES.md and CITATION.cff.
 -/
 
 /-
-Content derivation of the two-loop top-Yukawa and Higgs-quartic β coefficients (2026-08-18)
+Content derivation of the two-loop top-Yukawa and Higgs-quartic β coefficients
 ===========================================================================================
 
 Derivation object:
@@ -260,16 +253,20 @@ theorem lam2l_g1yt4 : 16 / 2 = 8 := by
   native_decide
 
 -- (37) −9/4 = −(9/2)/2
-theorem lam2l_g24yt2 : 9 / 2 = 4 := by
-  native_decide
+--     Cross-multiply −9/(2·2) = −9/4; all denominators are nonzero.
+--     Explicit Int products retain the sign and avoid truncated Nat division.
+theorem lam2l_g24yt2 : (-9 : Int) * 4 = (-9) * (2 * 2) := by
+  decide
 
 -- (38) 63/10 = (63/5)/2
-theorem lam2l_g2g1yt2 : 63 / 2 = 31 := by
-  native_decide
+--     Cross-multiply 63/(5·2) = 63/10; all denominators are nonzero.
+theorem lam2l_g2g1yt2 : (63 : Int) * 10 = 63 * (5 * 2) := by
+  decide
 
 -- (39) −171/100 = −(171/50)/2
-theorem lam2l_g14yt2 : 171 / 2 = 85 := by
-  native_decide
+--     Cross-multiply −171/(50·2) = −171/100; all denominators are nonzero.
+theorem lam2l_g14yt2 : (-171 : Int) * 100 = (-171) * (50 * 2) := by
+  decide
 
 -- (40) 305/16 = (497/8 − 8n_g)/2, n_g = 3: 497 − 192 = 305; 305/8/2 = 305/16
 --     cross-multiplication 305·2 = ... 305/16 ⟺ 305·1 = 16·(305/16); using integers directly
@@ -335,7 +332,7 @@ theorem content_chi4 : 9 * 3 = 27 := by
 -- (54) universal two-loop number: 117/20 (λg₂²g₁², the direct Luo-Xiao Eq.10 term)
 theorem lam2l_lamg2g1 : 117 = 117 := by
   native_decide
--- ============ the electron-mass 20 = 4×5 cascade structure (the O_e equivalence core, 2026-08-18) ============
+-- ============ the electron-mass 20 = 4×5 cascade structure (the O_e equivalence) ============
 
 -- (55) 20 = (d+1)·(ΣY²·Δ_f) = 4·5: d+1 = 4 (internal dimension 3 + scale flow 1)
 --      ΣY²·Δ_f = (10/3)·(3/2) = 30/6 = 5 (hypercharge capacity × fermion conformal weight)

@@ -1,32 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/generation/window_capacity.py — V4.0: the three-generation
+cg_frg/generation/window_capacity.py — V5.0: the three-generation
 spectral-capacity closure
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The generation count is the value of the spectral-capacity map on the
 Z₂-even RP³ spinor tower.  Its dimensionless Dirac positions are
@@ -50,7 +43,7 @@ The mode mass ladder of the generations is m_n ∝ e^{−α·n} with the
 extrusion order n = {0, 2, 4} (the LZ non-adiabatic squeezing of
 the scale flow — see lz_ladder).
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 The capacity criterion (n+3/2)<(kL)² is the declared generation
 closure, and kL is read from the endpoint fixed point.
@@ -67,6 +60,7 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get, set as pset  # noqa: E402
+from cg_core.content_response import screening_compatibility
 
 
 def window_boundary(kL: float) -> float:
@@ -99,12 +93,16 @@ def count_generations(kL: float) -> tuple[int, list[int], list[float]]:
 
 
 def compute() -> dict:
-    """Publish the generation count."""
+    """Verify the endpoint platform of the independently selected copy count."""
     kL = get("kL")
     count, modes, margins = count_generations(kL)
+    selected = screening_compatibility()["generations"]
+    if count != selected:
+        raise ValueError("endpoint platform conflicts with joint screening selection")
     pset("n_generations", count, provenance="DERIVED",
-         note="spectral-capacity closure: Dirac positions with (n+3/2) < (kL)^2 "
-              "= exactly 3 (n = {0,2,4})")
+         dependencies=("kL",),
+         note="joint extensive-source/colour screening selects g=Nc=3; "
+              "the independent endpoint platform retains n={0,2,4}")
     return {"n_generations": count, "modes": modes, "margins": margins,
             "kL": kL, "capacity": window_boundary(kL)}
 

@@ -1,24 +1,17 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
@@ -27,7 +20,7 @@ J=2 squash level-transfer coefficients
 
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 This module evaluates the six J=2 squash corrections from the content
 modulus, the broken-generator count, and explicit geometric moments:
@@ -50,11 +43,12 @@ THE DERIVATION CHAIN
 
              kappa^2(s) = [V_3(s)/V_3(0)] (g^33)^3
                         = (1+s)/(1-2s)^{5/2}
-                        = int sqrt{g} (g^33)^3 d^3x / int sqrt{g} d^3x .
+                        = int sqrt{g_s} (g_s^33)^3 d^3x / int sqrt{g_0} d^3x .
 
-      The "(g^33)^3" third moment is the F^2 contraction of the
-      sigma_3-axis zero mode: two inverse-metric factors from the field
-      strength and one from the polarisation (geometric_couplings).
+      For a fixed axial Killing vector, alpha_s=(1-2s)*sigma3 has
+      internal-curvature norm ratio (1-2s)^(5/2)/(1+s); kappa is its
+      inverse square root. The external one-form kinetic norm is a
+      different contraction, evaluated by matter_matching.
 
   STEP 1 — THE CONTENT MODULUS (tau)
       The chiral excess and quadratic hypercharge moment give
@@ -189,9 +183,14 @@ def traceless_shear(s: float) -> dict:
 
 
 def killing_normalisation(tau: float) -> dict:
-    """kappa^2(s) = [V_3(s)/V_3(0)] (g^33)^3 = (1+s)/(1-2s)^{5/2}, the
-    geometric integral int sqrt{g}(g^33)^3 d^3x / int sqrt{g} d^3x
-    (geometric_couplings.squash_metric)."""
+    """The internal-curvature-preserving amplitude ratio kappa.
+
+    For the fixed axial Killing vector, alpha_s=(1-2s)*sigma3 gives the
+    internal two-form norm ratio (1-2s)^(5/2)/(1+s). kappa is its inverse
+    square root. The corresponding external one-form kinetic norm has
+    a different ratio; this function implements the declared amplitude
+    readout and does not replace a complete action/vertex matching.
+    """
     s = 2.0 * tau
     lam1 = 1.0 + s
     lam3 = 1.0 - 2.0 * s
@@ -264,8 +263,8 @@ def content_ratio(level: str) -> float:
       const forces the sign reversal).
     - chiral (T_d, Ds_R): r = -1 (chiral restoration); V_ub: r = +1
       (cross-generation).
-    - constituent (m_p): r = +sum Y^2 Delta_s = +5/3 (the constituent-vs-
-      MSbar scheme content — see constituent_scheme_field_equation below).
+    - constituent (m_p): r = +sum Y^2 Delta_s = +5/3 (the effective
+      hadronic content response evaluated below).
     - generator (a_s): r = -1/N_g = -xi (the Yukawa-difference conformal
       normalisation — see yukawa_difference_field_equation below).
     - power (rho_L): r = -4 (the m_nu1^4 dark-energy weight).
@@ -304,8 +303,8 @@ def hypercharge_spectral_sum() -> float:
         Sigma Y^2 = 6/36 + 12/9 + 3/9 + 2/4 + 1 = 1/6 + 4/3 + 1/3 + 1/2 + 1
                   = 10/3 .
 
-    It is computed here (not imported) so that the constituent scheme
-    correction is an explicit integral, not a number.
+    This finite content sum supplies the coefficient of the effective
+    constituent response.
     """
     from cg_core.sm_content import weyl_content
     return sum(c * y * y for _, _, y, c in weyl_content())
@@ -323,7 +322,7 @@ def yamabe_conformal_coupling() -> float:
     return (_D - 2.0) / (4.0 * (_D - 1.0))
 
 
-def constituent_scheme_field_equation() -> dict:
+def constituent_content_response() -> dict:
     """Evaluate the constituent-sector content correction
 
         delta m_p / m_p = tau kappa Sum Y^2 Delta_s = 5 tau kappa/3.
@@ -353,29 +352,12 @@ def constituent_scheme_field_equation() -> dict:
 
 
 def yukawa_difference_field_equation() -> dict:
-    """Evaluate the generator-sector conformal correction
+    """Evaluate the specified generator content factor 1-s0*kappa*xi.
 
-        delta ln alpha_s = -s0 kappa xi = -s0 kappa/N_g.
-
-    THE YUKAWA-GAUGE MIXING (the two-loop beta function, explicit)
-    --------------------------------------------------------------
-    The two-loop gauge beta carries the top-Yukawa term through the invariant
-
-        Y4(F) = (1/d(G_a)) Tr[C2^{(a)}(F) Y^a Y^{+a}] ,   A_i = 2 kappa Y4 / y_t^2
-
-    (Luo-Wang-Xiao, hep-ph/0211440 Eq. 31; kappa = 1/2 for Weyl fermions),
-    with the explicit trace  Tr[C2(F) Y Y+] = 6 y_t^2 [C2(Q_L) + C2(u_R)]
-    (the 6 = 2 x 3 weak-doublet x colour-triplet factor).  The geometric
-    Yukawa y_0 = 1 (the exact SO(4) diagonal overlap) differs from the
-    running SM top Yukawa y_t, so the mixing over-counts the Yukawa content.
-
-    The first-order response is normalised by the Yamabe conformal coupling
-    xi=(d-2)/(4(d-1))=1/N_g=1/8:
-
-        delta ln alpha_s = -s0 * kappa * xi = -s0 kappa/N_g ,
-
-    Thus the content ratio is r_Q=-xi=-1/N_g and
-    delta ln alpha_s=-s0 kappa/N_g.
+    xi=1/N_g is fixed by the internal content used by this readout. Calling
+    the factor a Yukawa difference identifies its assigned role; it is not
+    an integral of two independently matched physical RG trajectories.
+    The coupled-flow API must not also apply this fixed-y0 compensation.
     """
     c = _content()
     src = unified_source()
@@ -472,8 +454,8 @@ def _self_test() -> None:
     assert abs(c["N_g"] - 8.0) < tol
 
     # STEP 3a: explicit evaluation of the two remaining content ratios.
-    # (i) the constituent scheme -> delta m_p/m_p = tau kappa Sum Y^2 Delta_s.
-    cs = constituent_scheme_field_equation()
+    # (i) the hadronic content response: delta m_p/m_p = tau kappa Sum Y^2 Delta_s.
+    cs = constituent_content_response()
     assert abs(cs["SigmaY2"] - hypercharge_spectral_sum()) < tol
     assert abs(cs["r_Q_tau_units"] - 5.0 / 3.0) < tol          # 5/3
     assert abs(cs["correction"]
@@ -501,7 +483,7 @@ if __name__ == "__main__":
         print(f"{k:18s} {v['a_Q']:+.6f}  {v['r_Q']:+8.4f}  "
               f"{v['c_Q']:+9.5f}  {v['factor']:.9f}")
     print("\nSTEP 3a — explicit evaluation of the two content ratios:")
-    cs = constituent_scheme_field_equation()
+    cs = constituent_content_response()
     print(f"  constituent: delta m_p/m_p = tau*kappa*Delta_s*Sum Y^2"
           f" = {cs['correction']:.6f} = 5 tau kappa/3"
           f"  (r_Q = Sum Y^2 Delta_s = {cs['r_Q_tau_units']:.4f})")

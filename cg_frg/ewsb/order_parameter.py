@@ -1,32 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/ewsb/order_parameter.py — V4.0: the order parameter — the
+cg_frg/ewsb/order_parameter.py — V5.0: the order parameter — the
 Landau potential of the isometry-breaking condensate
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The isometry breaking SU(2)_R → U(1)_Y is driven by the J = 2
 squash mode — the order parameter φ of the RP³ geometry.  Its
@@ -81,7 +74,7 @@ Writes: order_parameter_xi, order_parameter_Rc, order_parameter_s0,
         order_parameter_Vmin_GUT, order_parameter_lambda_EC_J2
         (DERIVED — this module is their writer)
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 Every coefficient is internal (τ, R_c_star, and the structural
 ξ = 1/8, 6/π, √3/τ); no observed value enters the computation.
@@ -106,9 +99,7 @@ def conformal_coupling(d: int = 3) -> float:
     """ξ = (d−2)/(4(d−1)) — the conformal curvature coupling in d
     dimensions (= 1/8 in d = 3).
 
-    FIRST-PRINCIPLES STATUS (2026-08-18): ξ is NOT a framework
-    convention and NOT a fitted number.  It is the UNIQUE coupling
-    that makes the scalar action
+    Conformal covariance fixes ξ as the coupling that makes the scalar action
 
         S[φ] = ∫ √g [ (∇φ)² + ξ R φ² ]
 
@@ -124,9 +115,7 @@ def conformal_coupling(d: int = 3) -> float:
     Gilkey 1995, Berger–Gauduchon–Mazet 1971), identical for every
     scalar field on the round S³/RP³.  The value ξ = 1/8 in d = 3
     is therefore DERIVED from the conformal-invariance requirement
-    of the order-parameter field on the internal RP³, not imported.
-    It is one of the framework's structural numbers (the "1/8" of
-    the V4 discipline).
+    of the order-parameter field on the internal RP³.
 
     The selection identity N_g·xi=1 combines xi=1/8 from the Yamabe
     conformal coupling with N_g=N_c^2-1=8 from the su(3) adjoint
@@ -141,7 +130,7 @@ def conformal_weight(d: int = 3) -> float:
     """Δ_s = (d−2)/2 — the scalar conformal weight in d dimensions
     (= 1/2 in d = 3).
 
-    FIRST-PRINCIPLES STATUS (2026-08-18): Δ_s is the scaling
+    Δ_s is the scaling
     dimension of a free scalar at the Gaussian fixed point,
     Δ_s = (d−2)/2, the Weyl weight of the field under the same
     rescaling φ → Ω^{(2−d)/2}φ that fixes ξ.  It is related to the
@@ -199,7 +188,7 @@ def compute() -> dict:
 
     xi = conformal_coupling()
     R_c = critical_curvature()
-    # The squash VEV s0 = 2 tau, DERIVED (paper 4, Appendix A + Lemma lem:chargequant):
+    # The squash VEV s0 = 2 tau, DERIVED (Guo (2026d), Appendix A + Lemma lem:chargequant):
     # the long-root mode (the J=2 squash of the R-sector connection) has
     # SU(2)_R weight m_R = 1, so the unbroken torus assigns it charge
     # q = 2 m_R = 2; the squash amplitude is s0 = q * tau = 2 tau (charge
@@ -242,7 +231,7 @@ def compute() -> dict:
               f"torsion, rebuilt in this module) fixes the leading "
               f"coefficients; the g1/g2 normalisation kappa(s0) "
               f"matching the SM fixes the same value.  PURE-CONTENT "
-              f"RATIO (2026-08-16): s0/N_R = "
+              f"RATIO : s0/N_R = "
               f"n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175 — "
               f"the symmetry correction is HALF the "
               f"gravity higher-order (J=2 EC first-order torsion) shift "
@@ -268,7 +257,7 @@ def compute() -> dict:
               f"{lam_EC:.4f} > 0 — the J=2 EC Lichnerowicz eigenvalue "
               f"(the free-EC sector stable; the tachyon comes from the "
               f"curvature coupling xi(R-R_c), not the free spectrum).  "
-              f"GRAVITY HIGHER-ORDER EFFECT (2026-08-16): the first-order "
+              f"GRAVITY HIGHER-ORDER EFFECT : the first-order "
               f"torsion shift N_g*tau = 8tau, with N_g = 8 the su(3) "
               f"generator count; 8tau/14 = 2*(s0/N_R) EXACTLY — the kL "
               f"correction s0/N_R = n_broken*tau/N_R = 2tau/7 "
@@ -304,7 +293,7 @@ def compute() -> dict:
 
 
 def _self_test() -> None:
-    """Verify the first-principles status of ξ = 1/8 and the
+    """Verify the arithmetic relations for ξ = 1/8 and the
     conformal-gauge duality N_g·ξ = 1 (coupling form) and its
     conformal-weight form N_g·Δ_s = 2(d−1), plus their bridge
     Δ_s = 2ξ(d−1).  All are arithmetic content ratios (zero free

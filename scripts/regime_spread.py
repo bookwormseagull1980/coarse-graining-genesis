@@ -1,30 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
-"""Regime-comparison experiment: re-solve the F_MG fixed point kL with
-each regularisation scheme (gaussian vs litim) and report the spread.
-This gives an OBJECTIVE estimate of the convention blur, replacing the
-subjective priors (y -> 1.10y, p -> 1.01p) of the error-band table.
+"""Compare the declared Gaussian endpoint with the Litim response.
+
+The current Gaussian endpoint is read from the common parameter store.
+The alternative response is solved with the same matter content. The common
+readout evaluates the resulting finite change and its local derivative.
+This comparison measures dependence on the response prescription.
 """
 import sys, math
 from pathlib import Path
@@ -33,6 +28,7 @@ if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
 from cg_core.params import get
+from cg_core.joint_response import evaluate, log_jacobian
 from cg_frg.frg import endpoint_constraint as ec
 from cg_frg.frg.spectral_sum import channel_tmunu_spin2
 
@@ -52,8 +48,10 @@ def k_star(kL, tau, M_G, M_P, scheme):
         raise RuntimeError(f"no crossing for {scheme}")
     for _ in range(200):
         mid = 0.5 * (lo + hi)
+        if mid == lo or mid == hi:
+            return mid
         f = v_pi0(mid, kL, tau, M_G, M_P, scheme) - ec.CRIT
-        if (hi - lo) < 1e-15:
+        if f == 0.:
             return mid
         if flo * f < 0:
             hi = mid
@@ -64,6 +62,8 @@ def k_star(kL, tau, M_G, M_P, scheme):
 
 
 def solve_kL(scheme):
+    if scheme == "gaussian":
+        return float(get("kL"))
     M_P = get("M_P")
     tau = get("tau")
     L_Cg = get("L_Cg")
@@ -86,8 +86,12 @@ if __name__ == "__main__":
     print(f"kL(gaussian) = {kL_g:.9f}")
     print(f"kL(litim)    = {kL_l:.9f}")
     print(f"scheme spread = {spread:+.3f}%")
-    # propagate into the hierarchy (elasticities from the matrix)
-    E = {"v": -32.3, "m_e": -49.9, "rho_Lambda": -261.6}
-    print("propagation (spread of kL -> output):")
-    for q, e in E.items():
-        print(f"  {q:12s} {e * spread / 100 * 100:+.2f}%")
+    tau, M_P = float(get("tau")), float(get("M_P"))
+    gaussian = evaluate(kL_g, tau, M_P)
+    alternative = evaluate(kL_l, tau, M_P)
+    slopes = log_jacobian(kL_g, tau, M_P)
+    print("Shared readout at fixed tau and M_P:")
+    for key in ("v_HIGGS", "m_e_pred", "rho_Lambda"):
+        change = 100*(alternative[key]/gaussian[key]-1)
+        print(f"  {key:12s} change={change:+.8g}%, "
+              f"Gaussian dln/dln(c)={slopes[key][0]:+.8f}")

@@ -1,32 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/gauge/geometric_ewsb.py — V4.0: the geometric EWSB — the
+cg_frg/gauge/geometric_ewsb.py — V5.0: the geometric EWSB — the
 Goldstone fate, the L/R hierarchy, and the ε_L/ε_R connection
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The isometry breaking SU(2)_R → U(1)_R of the squashed RP³
 produces two Goldstone modes (T¹_R, T²_R).  Their fate is the
@@ -77,7 +70,7 @@ Writes: geometric_ewsb_m_WR, geometric_ewsb_hierarchy,
         geometric_ewsb_eps_ratio_check, geometric_ewsb_status
         (DERIVED — this module is their writer)
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 All inputs are internal (M_G, τ, g₂, v = M_G·ε, κ² = g₁/g₂).
 """
@@ -93,7 +86,7 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get, set as pset  # noqa: E402
-from cg_core.beta_functions import beta_gauge  # noqa: E402
+from cg_core.gauge_running import run_geometric  # noqa: E402
 
 # The geometric content (the framework's theorem — the exact SO(4)
 # diagonal overlap y_0 = 1.0) — scale-invariant, held fixed in the
@@ -106,16 +99,7 @@ def _g2_at_MZ(g2_MG: float, g1_MG: float, g3_MG: float,
     """g2(M_Z) from the GEOMETRIC RGE: run g1,g2,g3 with the geometric
     content y_0 = 1.0 held fixed, down to M_Z.  The weak coupling at
     M_Z is DERIVED from the geometric couplings."""
-    dt = math.log(M_Z) - math.log(M_G)
-    n = max(1, int(round(abs(dt) * 400)))
-    h = dt / n
-    g1, g2, g3 = g1_MG, g2_MG, g3_MG
-    for _ in range(n):
-        bg = beta_gauge(g1, g2, g3, Y0_GEOMETRIC)
-        g1 += h * bg[0]
-        g2 += h * bg[1]
-        g3 += h * bg[2]
-    return g2
+    return run_geometric((g1_MG, g2_MG, g3_MG), M_G, M_Z)[1]
 
 
 def w_R_mass(g_R: float, s0: float, M_G: float) -> float:

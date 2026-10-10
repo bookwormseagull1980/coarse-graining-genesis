@@ -1,0 +1,220 @@
+# =============================================================================
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
+# =============================================================================
+
+"""Exact finite-content responses used in Guo (2026g), Appendix C.
+
+The charged 15-component quotient is inherited from Guo (2026d). The
+screening addition and its colour normalization remain the specified
+Guo (2026g) readout. This module evaluates their joint compatibility; it
+does not infer a generation count from an endpoint already using it.
+"""
+from fractions import Fraction as Q
+import math
+
+
+CHARGED_GENERATION = (
+    ("Q_L", (3, 2), Q(1, 6), 6, 1),
+    ("u_R", (3, 1), Q(2, 3), 3, -1),
+    ("d_R", (3, 1), Q(-1, 3), 3, -1),
+    ("L_L", (1, 2), Q(-1, 2), 2, 1),
+    ("e_R", (1, 1), Q(-1), 1, -1),
+)
+
+
+def chiral_anomalies():
+    """Exact LH-minus-RH coefficients; conventional common factors omitted."""
+    rows = CHARGED_GENERATION
+    return {
+        "U1_cubed": sum(sign * n * y**3 for _, _, y, n, sign in rows),
+        "gravity_U1": sum(sign * n * y for _, _, y, n, sign in rows),
+        "SU3_squared_U1": sum(sign * rep[1] * y * Q(1, 2)
+                              for _, rep, y, _, sign in rows if rep[0] == 3),
+        "SU2_squared_U1": sum(sign * rep[0] * y * Q(1, 2)
+                              for _, rep, y, _, sign in rows if rep[1] == 2),
+        "SU3_cubed": sum(sign * rep[1]
+                         for _, rep, _, _, sign in rows if rep[0] == 3),
+        "SU2_doublet_parity": sum(rep[0] for _, rep, _, _, _ in rows
+                                   if rep[1] == 2) % 2,
+    }
+
+
+def finite_source_response():
+    """Gradient and connected Hessian of log Tr exp(u chi+vY+x.t)/15.
+
+    Weak blocks are sigma_a/2 on each left doublet and zero on right
+    singlets. Tr(t_a t_b)=number_of_doublets/2 delta_ab. Hypercharges
+    are constant within each doublet, so the mixed weak traces vanish.
+    All entries use exact rational arithmetic.
+    """
+    n = sum(row[3] for row in CHARGED_GENERATION)
+    j = sum(c * sign for _, _, _, c, sign in CHARGED_GENERATION)
+    y = sum(c * charge for _, _, charge, c, _ in CHARGED_GENERATION)
+    y2 = sum(c * charge**2 for _, _, charge, c, _ in CHARGED_GENERATION)
+    jy = sum(c * sign * charge for _, _, charge, c, sign in CHARGED_GENERATION)
+    doublets = sum(rep[0] for _, rep, _, _, sign in CHARGED_GENERATION
+                   if rep[1] == 2 and sign == 1)
+    mean_j, mean_y = Q(j, n), y / n
+    h = [[Q(0) for _ in range(5)] for _ in range(5)]
+    h[0][0] = 1 - mean_j**2
+    h[1][1] = y2 / n - mean_y**2
+    h[0][1] = h[1][0] = jy / n - mean_j * mean_y
+    for i in range(2, 5):
+        h[i][i] = Q(doublets, 2 * n)
+    return {"dimension": n, "gradient": (mean_j, mean_y, Q(0), Q(0), Q(0)),
+            "hessian": tuple(tuple(row) for row in h),
+            "hypercharge_second_moment": y2,
+            "weak_extensive_per_generation": Q(doublets, 2),
+            "tau": mean_j / (n * h[1][1])}
+
+
+def finite_source_log_partition(u=0.0, v=0.0, x=(0.0, 0.0, 0.0)):
+    """Independent finite block exponential, evaluated with log-sum-exp."""
+    if len(x) != 3 or not all(math.isfinite(z) for z in (u, v, *x)):
+        raise ValueError("finite five-coordinate source required")
+    radius = math.hypot(*x)
+    energies = []
+    for _, rep, y, n, sign in CHARGED_GENERATION:
+        base = sign * u + float(y) * v
+        if rep[1] == 2:
+            energies.extend([base + radius / 2] * rep[0])
+            energies.extend([base - radius / 2] * rep[0])
+        else:
+            energies.extend([base] * n)
+    high = max(energies)
+    return high + math.log(math.fsum(math.exp(e-high) for e in energies) / len(energies))
+
+
+def screening_compatibility(n_colours=3):
+    """Solve delta_source(g)=2/(2g), n_colours*delta_source(g)=1.
+
+    The four-doublet carrier used here is the inherited three-colour
+    carrier. A changed colour representation requires a new calculation.
+    """
+    if n_colours != 3:
+        raise ValueError("this certificate uses the inherited three-colour carrier")
+    fermion_index = finite_source_response()["weak_extensive_per_generation"]
+    g = Q(n_colours * 2, 1) / fermion_index
+    if g.denominator != 1 or g <= 0:
+        raise ValueError("no positive integral replication solves both prescriptions")
+    return {"generations": int(g), "delta_source": Q(2, 1) / (g * fermion_index),
+            "colour_residual": Q(n_colours * 2, 1) / (g * fermion_index) - 1,
+            "premises": ("fixed charged one-generation carrier",
+                         "extensive adjoint/fermion weak response ratio",
+                         "colour screening normalization Nc*delta=1")}
+
+
+def replicated_content(generations=None):
+    """Instantiate selected charged content, or an explicitly diagnostic copy count."""
+    g = screening_compatibility()["generations"] if generations is None else generations
+    if not isinstance(g, int) or isinstance(g, bool) or g < 1:
+        raise ValueError("a positive integer replication count is required")
+    return tuple((f"{name}_g{copy+1}", rep, y, n, sign)
+                 for copy in range(g) for name, rep, y, n, sign in CHARGED_GENERATION)
+
+
+def charged_source_matrices():
+    """Hermitian (chi,Y,t1,t2,t3) on the specified 15-coordinate carrier.
+
+    The basis follows CHARGED_GENERATION, with a weak doublet for each
+    colour. These are content-source matrices, not spatial kinetic terms.
+    """
+    import numpy as np
+    pauli = (np.array([[0, 1], [1, 0]]),
+             np.array([[0, -1j], [1j, 0]]), np.diag([1, -1]))
+    result = np.zeros((5, 15, 15), dtype=complex)
+    offset = 0
+    for _, rep, charge, n, sign in CHARGED_GENERATION:
+        sl = slice(offset, offset+n)
+        result[0, sl, sl] = sign*np.eye(n)
+        result[1, sl, sl] = float(charge)*np.eye(n)
+        if rep[1] == 2:
+            for a, sigma in enumerate(pauli):
+                result[a+2, sl, sl] = np.kron(np.eye(rep[0]), sigma/2)
+        offset += n
+    return result
+
+
+def log_partition_response(background, generators, source=None):
+    """Value, gradient and Kubo--Mori Hessian of log Tr exp(K+J.A)/n.
+
+    K and each A are finite Hermitian matrices. In the eigenbasis of K+J.A,
+    the connected Hessian is sum_ij L(p_i,p_j) A^a_ij A^b_ji - <A^a><A^b>,
+    with L the logarithmic mean. This Duhamel derivative accommodates
+    noncommuting sources and reduces to an ordinary connected covariance
+    for commuting generators and background. Exponential shifts and expm1 retain
+    accuracy at repeated eigenvalues and at large spectral separations.
+    """
+    import numpy as np
+    K = np.asarray(background, dtype=complex)
+    A = np.asarray(generators, dtype=complex)
+    if K.ndim != 2 or K.shape[0] != K.shape[1] or not K.shape[0]:
+        raise ValueError("background must be a nonempty square matrix")
+    n = K.shape[0]
+    if A.ndim != 3 or A.shape[1:] != (n, n) or not len(A):
+        raise ValueError("generators must have shape (sources, dimension, dimension)")
+    J = np.zeros(len(A)) if source is None else np.asarray(source, dtype=float)
+    if J.shape != (len(A),) or not all(np.isfinite(x).all() for x in (K,A,J)):
+        raise ValueError("finite matrices and one real coordinate per generator required")
+    if not np.allclose(K, K.conj().T, rtol=1e-12, atol=1e-13):
+        raise ValueError("background must be Hermitian")
+    if not np.allclose(A, A.conj().transpose(0,2,1), rtol=1e-12, atol=1e-13):
+        raise ValueError("source generators must be Hermitian")
+    energies, U = np.linalg.eigh(K+np.einsum('a,aij->ij', J,A))
+    shifted = np.exp(energies-energies[-1])
+    p = shifted/shifted.sum()
+    rotated = np.einsum('ij,ajk,kl->ail', U.conj().T,A,U)
+    gradient = np.einsum('i,aii->a',p,rotated).real
+    delta = np.abs(energies[:,None]-energies[None,:])
+    ratio = np.ones_like(delta)
+    np.divide(-np.expm1(-delta), delta, out=ratio, where=delta!=0)
+    mean = np.maximum(p[:,None],p[None,:])*ratio
+    hessian = np.einsum('ij,aij,bji->ab',mean,rotated,rotated).real
+    hessian -= np.outer(gradient,gradient)
+    return {"log_partition":float(energies[-1]+np.log(shifted.sum()/n)),
+            "gradient":gradient,"hessian":(hessian+hessian.T)/2,
+            "probabilities":p,"dimension":n,
+            "response":"connected Duhamel / Kubo-Mori finite-source Hessian"}
+
+
+def interacting_content_response(background=None, source=None):
+    """Evaluate the same five source coordinates at a supplied interaction K.
+
+    tau_response is the declared gradient/Hessian readout at this K. Its
+    zero-background value is 1/50; no invariance under arbitrary interactions
+    is imposed. The structural tau of finite_source_response stays separate.
+    """
+    import numpy as np
+    A = charged_source_matrices()
+    K = np.zeros((15,15)) if background is None else background
+    result = log_partition_response(K,A,source)
+    denominator = 15*result["hessian"][1,1]
+    result["tau_response"] = (float(result["gradient"][0]/denominator)
+                              if denominator > 0 else None)
+    return result
+
+
+def weighted_content_response(left_weight, right_weight):
+    """Positive block weights implemented as K=log(w_L)P_L+log(w_R)P_R.
+
+    A common multiplier cancels from every normalized response. Unequal
+    weights change tau: for r=w_L/w_R it is (8r-7)/(10r+40).
+    """
+    import numpy as np
+    if not all(math.isfinite(w) and w > 0 for w in (left_weight,right_weight)):
+        raise ValueError("strictly positive finite weights required")
+    chi = charged_source_matrices()[0]
+    K = (math.log(left_weight)*(np.eye(15)+chi)
+         +math.log(right_weight)*(np.eye(15)-chi))/2
+    return interacting_content_response(K)

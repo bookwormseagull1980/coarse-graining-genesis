@@ -1,29 +1,22 @@
 <!--
-Coarse-Graining Genesis Framework V4.0
-
-Author:      Jinku Guo <guojk@nwpu.edu.cn>
-Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-ORCID:       0009-0000-6600-6171
-
-DOI records:
-  [Software] 10.5281/zenodo.22067006
-  [Paper I]  10.5281/zenodo.22067118
-  [Paper II] 10.5281/zenodo.22067469
-
-Part of the V4 spectral framework, whose physics is presented in the
-companion papers:
-  [I]  "The spectrum of a compact internal space.
-        I. Gauge structure and fermion content"
-       DOI: 10.5281/zenodo.22067118
-  [II] "The spectrum of a compact internal space.
-        II. Effective couplings and mass scales"
-       DOI: 10.5281/zenodo.22067469
+Coarse-Graining Genesis Framework V5.0
+Author: Jinku Guo <guojk@nwpu.edu.cn>
+Northwestern Polytechnical University, Xi'an 710072, China
+ORCID: 0009-0000-6600-6171
+References:
+DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+Full bibliography: REFERENCES.md and CITATION.cff.
 -->
 
 # Lean 4 Proof Archive
 
-This directory contains the 18 current Lean 4 proof guards of the V4
-framework. They use the Lean 4 core library and compile with Lean 4.7.0.
+This directory contains 18 Lean 4 formalisation files for the V5 framework.
+They use the Lean core library and target Lean 4.7.0.
 
 Run one file with:
 
@@ -47,11 +40,11 @@ Lean checks the finite deductions made from them.
 
 | File | Verified content |
 |---|---|
-| `bbn_nonperturbative.lean` | Current BBN content relations: `g_A=4/pi`, electromagnetic shift, radiative factor, CKM factor, and phase-space dependencies. |
+| `bbn_nonperturbative.lean` | Rational and integer factors in the specified axial, radiative and radiation-content readouts. |
 | `conservation_spectral_origin.lean` | Factorisation `tau^2 pi/2=(2 tau^2)(2 pi)xi` with `xi=1/N_g`. |
 | `conformal_gauge_duality.lean` | Conformal-coupling arithmetic, `N_g xi=1`, and the `7/4` Weyl-content ratio. |
 | `fermion_content.lean` | Left/right Weyl counts, colour vectoriality, and the five one-generation representation classes. |
-| `hypercharge_derivation.lean` | Hypercharges obtained from the declared Yukawa and anomaly-cancellation equations. |
+| `hypercharge_derivation.lean` | Yukawa, anomaly-cancellation and quadratic-charge identities evaluated at the specified hypercharge assignment. |
 | `inverse_coupling_symmetry.lean` | Inverse-coupling closure and its content ratios. |
 | `twoloop_gauge_matrix.lean` | The nine coefficients of the two-loop gauge matrix. |
 | `twoloop_yukawa_quartic.lean` | Top-Yukawa and Higgs-quartic coefficient identities, including electron cascade content `20=4*5`. |
@@ -78,4 +71,4 @@ Lean checks the finite deductions made from them.
 
 The endpoint files formalise coefficient algebra and dependency logic. The
 continuum derivations that supply their premises are recorded in the
-cosmology section of Paper II and in the current V4 ledger.
+cosmology section of Guo (2026g) and in the V5 framework reference.

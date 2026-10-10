@@ -1,49 +1,39 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_core/beta_functions.py — V4.0: the gauge / Yukawa / Higgs
+cg_core/beta_functions.py — V5.0: the gauge / Yukawa / Higgs
 two-loop beta functions
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The framework's coupling running integrates the gauge couplings
 (g1, g2, g3) with the two-loop beta functions.
 
-CONTENT-DERIVATION STATUS (2026-08-18, closed)
+COEFFICIENT DEFINITIONS
 ----------------------------------------------
 EVERY coefficient in this module is either (a) computed from the
 framework's own content (colour number, hypercharges, Casimir and
 Dynkin indices), or (b) a documented universal two-loop number of the
 general gauge-theory evaluation by Luo-Wang-Xiao (hep-ph/0211440)
 evaluated on the SM by Luo-Xiao (hep-ph/0207271, PRL 90 011601),
-which is the peer-reviewed standard result.  The light Yukawa sector
-was corrected on 2026-08-18 after a full re-derivation against the
-authoritative Luo-Xiao SM two-loop RGE (the previous hard-coded
-coefficients were found to deviate from the standard result and were
-replaced; the gauge sector b_i/B_ij/A_i was already content-derived
-and is unchanged).
+which is the peer-reviewed standard result. The light Yukawa sector
+uses the Luo-Xiao SM two-loop equations in the same hypercharge and
+quartic normalisations as the gauge and Higgs sectors below.
 
 ONE-LOOP GAUGE COEFFICIENTS — DERIVED FROM CONTENT (Lean-proved)
 -------------------------------------------------------------------
@@ -131,9 +121,11 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 # Content constants come from the single source sm_content (no duplicated
-# definitions): N_GENERATIONS = 3 (derived by window_capacity) and
+# definitions): N_GENERATIONS = 3 (selected by joint screening) and
 # hypercharge_sum_sq() = Sum Y^2 = 10/3 (the anomaly-free hypercharge table).
-from cg_core.sm_content import N_GENERATIONS, hypercharge_sum_sq  # noqa: E402
+from cg_core.sm_content import (  # noqa: E402
+    N_C as _N_C, N_WEAK, N_GAUGE, N_GENERATIONS, hypercharge_sum_sq,
+)
 
 PI = math.pi
 PI2 = 16.0 * PI ** 2
@@ -155,14 +147,14 @@ PI4 = PI2 * PI2
 #                    L_L:2·(1/2)²  + e_R:1·(1)²  = 20/6 = 10/3)
 #   Y_H2  = 1/4     Higgs hypercharge² (Y_H = 1/2)
 #
-# THE HYPERCHARGE ASSIGNMENT IS DERIVED, NOT AN INPUT (Lean-proved):
+# HYPERCHARGE CONSISTENCY IDENTITIES (Lean-checked):
 #   Y = (1/6, 2/3, −1/3, −1/2, −1) follows uniquely from anomaly
 #   cancellation (gauge consistency) + the Yukawa structure (gauge
 #   invariance), given the fermion representations and Y_H = 1/2:
 #     (A) Yukawa:  Y_u = Y_Q+1/2,  Y_d = Y_Q−1/2,  Y_e = Y_L−1/2
 #     (B) SU(2)²U(1) anomaly:  3Y_Q + Y_L = 0  ->  Y_L = −3Y_Q
-#     (C) grav-U(1) anomaly:   6Y_Q+3Y_u+3Y_d+2Y_L+Y_e = 0
-#   (A)+(B) into (C): 3Y_Q − 1/2 = 0  ->  Y_Q = 1/6, then
+#     (C) grav-U(1) anomaly:   6Y_Q−3Y_u−3Y_d+2Y_L−Y_e = 0
+#   (A)+(B) into (C): −3Y_Q + 1/2 = 0  ->  Y_Q = 1/6, then
 #   Y_u=2/3, Y_d=−1/3, Y_L=−1/2, Y_e=−1.  Lean proof:
 #     lean_proofs/hypercharge_derivation.lean
 #   (the fermion representations are DERIVED from the minimality
@@ -191,23 +183,23 @@ PI4 = PI2 * PI2
 #   thm 17: b3 = -7      (-11·3 + 2·6 = -21 -> /3 = -7)
 #   thm 18: b1 = 41/10   (82·10 = 41·20)
 #   thm 19: 3·SigmaY2 = 10  (3·10 = 10·3)
-N_C = 3.0
+N_C = float(_N_C)
 # The generation count and the hypercharge square-sum are imported from
 # sm_content (the single content source) — N_G = N_GENERATIONS = 3
 # (derived by window_capacity), Sum Y^2 = 10/3 (hypercharge_sum_sq()).
 N_G = float(N_GENERATIONS)
 SIGMA_Y2 = float(hypercharge_sum_sq())
 Y_H2 = 1.0 / 4.0
-C2_SU2 = 2.0
+C2_SU2 = float(N_WEAK)
 C2_SU3 = N_C
-C2f_SU2 = 3.0 / 4.0    # fundamental (doublet) Casimir of SU(2)
-C2f_SU3 = 4.0 / 3.0    # fundamental (triplet) Casimir of SU(3)
+C2f_SU2 = (C2_SU2**2-1)/(2*C2_SU2)  # fundamental SU(N) Casimir
+C2f_SU3 = (N_C**2-1)/(2*N_C)
 TF_SU2 = 2.0 * N_G     # N_G generations x 2 doublets (Q_L, L_L)
 TF_SU3 = 2.0 * N_G     # N_G generations x 2 (colour-triplet content)
 T_H = 0.5
 GUT = 3.0 / 5.0        # the U(1) GUT normalisation g1 = sqrt(5/3) gY
 
-_B1 = (2.0 / 5.0) * (3.0 * SIGMA_Y2 + Y_H2)                       # 41/10
+_B1 = (2.0 / 5.0) * (N_G * SIGMA_Y2 + Y_H2)                       # 41/10
 _B2 = -(11.0 / 3.0) * C2_SU2 + (2.0 / 3.0) * TF_SU2 + (1.0 / 3.0) * T_H  # -19/6
 _B3 = -(11.0 / 3.0) * C2_SU3 + (2.0 / 3.0) * TF_SU3               # -7
 _B_GAUGE = [_B1, _B2, _B3]
@@ -298,7 +290,7 @@ _BM_GAUGE = _two_loop_gauge_matrix()
 def _yukawa_gauge_mixing() -> list[float]:
     """A_i — the two-loop Yukawa-gauge mixing coefficients, DERIVED
     from group-theory content (Luo-Wang-Xiao 2003 hep-ph/0211440,
-    Eq. (30)-(31), closed 2026-08-17).
+    Eq. (30)-(31)).
 
     The gauge beta carries the Yukawa term through the invariant
         Y4(F) = (1/d(G_a)) Tr[C2^{(a)}(F) Y^a Y^{+a}]        (Eq. 31)
@@ -327,13 +319,13 @@ def _yukawa_gauge_mixing() -> list[float]:
     """
     c2 = [
         [(3.0 / 5.0) * (1.0 / 6.0) ** 2, (3.0 / 5.0) * (2.0 / 3.0) ** 2],
-        [3.0 / 4.0, 0.0],
-        [4.0 / 3.0, 4.0 / 3.0],
+        [C2f_SU2, 0.0],
+        [C2f_SU3, C2f_SU3],
     ]
-    dg = [1.0, 3.0, 8.0]
+    dg = [float(N_GAUGE[group]) for group in ("u1", "su2", "su3")]
     A = []
     for i in range(3):
-        tr = 6.0 * (c2[i][0] + c2[i][1])
+        tr = (N_WEAK * N_C) * (c2[i][0] + c2[i][1])
         A.append(2.0 * 0.5 * tr / dg[i])
     return A
 
@@ -498,7 +490,7 @@ def beta_yt(g1: float, g2: float, g3: float, yt: float, lam: float) -> float:
 #   β_λ^(1) = 24λ² − 3λ(3g₂² + g₁'²) + (3/8)(2g₂⁴ + (g₂² + g₁'²)²)
 #             − 6 y_t⁴ + 12 λ y_t²          (g₁'² = (3/5)g₁²)
 #
-#   The Yukawa part 12λy_t² − 6y_t⁴ = 4Y2(S)λ − 4H(S) with the content
+#   The Yukawa part 12λy_t² − 6y_t⁴ = 4Y2(S)λ − 2H(S) with the content
 #   traces Y2(S) = N_c·y_t² and H(S) = N_c·y_t⁴ (colour number).
 #
 # TWO LOOP  (Luo-Xiao Eq. 10, top-only, n_g = 3, converted):
@@ -516,7 +508,7 @@ def beta_yt(g1: float, g2: float, g3: float, yt: float, lam: float) -> float:
 #   Content structure:
 #     λ³        : −312 = −78·(2³)/2        [Luo-Xiao −78 λ_LX³]
 #     λ²g²      : 36(3g₂² + 3/5 g₁²) = (54 g₂² + 54/5 g₁²)·(2²)/2
-#     λ²y_t²    : −144 = −24·Y2(S)/y_t²·4  [−24λ_LX²Y2(S), Y2(S)=3y_t²]
+#     λ²y_t²    : −144 = −24·Y2(S)/y_t²·4/2  [−24λ_LX²Y2(S), Y2(S)=3y_t²]
 #     λy_t²g²   : 10·[3(C2(Q_L)+C2(u_R))] per group  [10λ_LX Y4(S)]
 #                 = 17/2 g₁² + 45/2 g₂² + 80 g₃²
 #     λy_t⁴     : −3 = −H(S)·(1/2)·(2)     [−λ_LX H(S), H(S)=3y_t⁴]
@@ -529,7 +521,7 @@ def beta_yt(g1: float, g2: float, g3: float, yt: float, lam: float) -> float:
 #       −1677/400 = −(717/200 + (8/5)n_g)/2,
 #       −3411/2000 = −(531/1000 + (24/25)n_g)/2
 #     λg₂⁴, λg₂²g₁², λg₁⁴ : universal with n_g:
-#       −73/8 = −(313/8 − 10n_g)/2, 117/20, 1887/200 = (687/200 + 2n_g)/2
+#       −73/8 = −(313/8 − 10n_g), 117/20, 1887/200 = 687/200 + 2n_g
 #
 #   Lean 4 proof of the rational identities:
 #     lean_proofs/twoloop_yukawa_quartic.lean
@@ -539,12 +531,12 @@ def _quartic_coeffs() -> dict:
     """The Higgs-quartic one- and two-loop coefficients, evaluated on
     the SM content (N_c, Casimirs, hypercharges, n_g) plus the
     documented universal two-loop numbers (Luo-Xiao 2003)."""
-    # --- one-loop (λ|H|⁴ convention; Yukawa part 4Y2(S)λ − 4H(S)) ---
+    # --- one-loop (λ|H|⁴ convention; Yukawa part 4Y2(S)λ − 2H(S)) ---
     lam2_1l = 24.0
     lam_g2_1l = -3.0 * 3.0          # −3λ·3g₂²
     lam_g1_1l = -3.0 * GUT          # −3λ·g₁'² = −3λ·(3/5)g₁²
     g4_1l = 3.0 / 8.0               # (3/8)(2g₂⁴ + (g₂²+g₁'²)²)
-    yt4_1l = -6.0                   # −6 y_t⁴ = −4H(S)
+    yt4_1l = -6.0                   # −6 y_t⁴ = −2H(S)
     lamyt_1l = 12.0                 # 12 λ y_t² = 4Y2(S)λ
     # --- two-loop ---
     lam3 = -312.0

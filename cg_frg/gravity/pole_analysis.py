@@ -1,57 +1,46 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/gravity/pole_analysis.py — V4.0: the spectral-pole stability
-criteria
+cg_frg/gravity/pole_analysis.py — internal-mode and density comparisons
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
-The massless spin-2 pole of the emergent TT propagator is a stable
-physical pole if the spectral density is positive and the matter
-self-energy stays below the bare mass:
+The result reports three algebraic checks:
 
-    spectral_positive : p²_min = 8/L² > 0 (the first TT level — the
-                        positive spectral density of the pole)
-    pole_stable       : Σ(M_G) < m²_bare (the matter self-energy
-                        below the bare mass 14/L² — the pole is not
-                        pushed off by the matter content)
-    matter_is_small   : Σ(M_G)/p²_min < 0.1 (the self-energy is a
-                        small perturbation of the first level)
+    spectral_positive : p²_min = 8/L² > 0 (positive internal-mode label)
+    pole_stable       : Σ(M_G) < m²_bare (density readout below
+                        the implemented denominator scale 14/L²)
+    matter_is_small   : Σ(M_G)/p²_min < 0.1 (signed ratio below 0.1)
+
+These quantities describe the specified internal denominator. A tensor
+spectral calculation evaluates the connected source correlator, its
+physical critical space, momentum slope and source overlaps.
 
 THE SCALES (RP³ at the trajectory)
 ----------------------------------
     p²_min  = 8/L²   (the J = 2 Casimir momentum)
-    m²_bare = 14/L²  (p²_min + the Lichnerovich shift 6/L²)
-    Σ(M_G)  = ρ_MG/(16π²·M_P²)  (the matter self-energy from the
-              mode-sum density ρ_MG at the emergence scale)
+    m²_bare = 14/L²  (p²_min + the implemented curvature term 6/L²)
+    Σ(M_G)  = ρ_MG/(16π²·M_P²)  (the prescribed density readout)
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
-The self-energy density ρ_MG is read from the store (published by
-the mode-sum engine); the criteria are the framework's stability
-statement (no ghost, no gap, no decoherence).
+compute() evaluates the zero-density branch ρ_MG = 0. A supplied
+density enters through self_energy_MG and the same internal denominator.
 """
 
 from __future__ import annotations
@@ -68,54 +57,57 @@ from cg_core.params import get, set as pset  # noqa: E402
 
 
 def self_energy_MG(rho_MG: float, M_P: float) -> float:
-    """Σ(M_G) = ρ_MG/(16π²·M_P²) — the matter self-energy (a mass²).
+    """Σ(M_G) = ρ_MG/(16π²·M_P²), a prescribed mass² estimate.
 
-    ρ_MG is the mode-sum density of the matter content at the
-    emergence scale (units GeV⁴); the division by 16π²·M_P²
-    converts it to the mass² scale of the pole.
+    rho_MG is the supplied density (units GeV⁴); division by
+    16π²·M_P² gives mass² units. rho_MG is an explicit input to this
+    density-normalisation prescription.
     """
     return rho_MG / (16.0 * math.pi ** 2 * M_P * M_P)
 
 
 def stability(sigma_MG: float, L: float) -> dict:
-    """The three pole-stability criteria at radius L."""
+    """Evaluate the three internal-mode comparisons at L."""
+    if not math.isfinite(L) or L <= 0 or not math.isfinite(sigma_MG):
+        raise ValueError("finite sigma and positive finite L required")
     pmin = 8.0 / (L * L)
     m2b = pmin + 6.0 / (L * L)
+    domain = sigma_MG >= 0.0
     return {
         "spectral_positive": pmin > 0.0,
-        "pole_stable": sigma_MG < m2b,
-        "matter_is_small": sigma_MG / pmin < 0.1,
+        "nonnegative_prescribed_sigma": domain,
+        "pole_stable": domain and sigma_MG < m2b,
+        "matter_is_small": abs(sigma_MG) / pmin < 0.1,
         "p2_min": pmin, "m2_bare": m2b, "sigma_MG": sigma_MG,
-        "stable": pmin > 0.0 and sigma_MG < m2b and sigma_MG / pmin < 0.1,
+        "stable": domain and sigma_MG < m2b and abs(sigma_MG) / pmin < 0.1,
+        "external_pole_established": False,
     }
 
 
 def compute() -> dict:
-    """Publish the stability analysis at the fixed point."""
+    """Publish the zero-density internal-mode diagnostic."""
     kL = get("kL")
     M_P = get("M_P")
     M_G = get("M_G")
-    L = kL  # the trajectory's L at k = M_G
+    L = kL / M_G  # reciprocal GeV, matching sigma's mass-squared units
 
-    # FREE-FIELD verification only: the matter self-energy ρ_MG is not
-    # yet computed by the mode-sum engine (spectral_sum publishes the
-    # channel spectra, not ρ_MG), so the stability criteria are verified
-    # in the ρ_MG -> 0 limit.  The verdict is scoped to that limit and
-    # does NOT include the matter back-reaction.
+    # The declared branch has rho_MG=0.
     rho_MG = 0.0
     sigma = self_energy_MG(rho_MG, M_P)
     s = stability(sigma, L)
-    pset("TT_pole_verified", s["stable"], provenance="DERIVED",
-         note="TT pole stability in the FREE-FIELD limit (rho_MG = 0): "
-              "positive spectral density, self-energy below the bare "
-              "mass; the matter back-reaction is NOT yet included "
-              "(pole_analysis)")
+    pset("TT_internal_mode_checks_passed", s["stable"], provenance="DERIVED",
+         note="Internal-mode comparisons at the declared zero-density "
+              "branch rho_MG=0: positive label, positive denominator "
+              "and density ratio below the stated threshold.")
+    pset("TT_pole_verified", False, provenance="DERIVED", role="informational",
+         note="External spectral certification evaluates the physical tensor "
+              "kernel, positive momentum slope and nonzero source overlap.")
     return s
 
 
 if __name__ == "__main__":
     r = compute()
-    print(f"spectral_positive={r['spectral_positive']}, "
+    print(f"internal-mode comparisons: spectral_positive={r['spectral_positive']}, "
           f"pole_stable={r['pole_stable']}, matter_is_small={r['matter_is_small']}, "
           f"stable={r['stable']}")
     print("pole_analysis OK")

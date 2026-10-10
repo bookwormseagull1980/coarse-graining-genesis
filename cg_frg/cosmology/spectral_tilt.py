@@ -1,32 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/cosmology/spectral_tilt.py — V4.0: the spectral tilt closure
+cg_frg/cosmology/spectral_tilt.py — V5.0: the spectral tilt closure
 1 − n_s = τ·[(1+2+1+3)/(d+1)] = τ·7/4
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The primordial spectral tilt is the exact product of the torsion
 modulus and the RP³ Weyl window ratio:
@@ -42,7 +35,7 @@ divided by the four-level window/cascade normalisation:
 The conformal-curvature identity 1 + ξR_LC L² = 1 + (1/8)·6 gives
 the same rational value and is kept as a cross-check.
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 The closure uses τ (the framework modulus) and the exact window
 ratio computed in cg_core.window_weights.
@@ -71,6 +64,7 @@ def compute() -> dict:
     tau = get("tau")
     val = one_minus_ns(tau)
     pset("ns_tilt", val, provenance="DERIVED", role="internal",
+         dependencies=("tau",),
          note="1 - n_s = tau*((1+2+1+3)/(d+1)) = tau*(7/4) = 0.035 "
               "(the torsion modulus times the RP3 Weyl window ratio; "
               "1+2+1+3 from scalar/vector/spinor/TT d.o.f., d+1=4; "

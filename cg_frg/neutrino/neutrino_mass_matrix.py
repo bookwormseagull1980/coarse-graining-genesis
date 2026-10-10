@@ -1,32 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/neutrino/neutrino_mass_matrix.py — V4.0: neutrino texture
+cg_frg/neutrino/neutrino_mass_matrix.py — V5.0: neutrino texture
 assembly and diagonalisation check
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The neutrino closure specifies two hypercharge-trace ratios,
 r12=1/Tr(Y²) and r23=1/(sqrt(3)Tr(Y²)), together with the PMNS texture.
@@ -46,16 +39,16 @@ Lambda=k_GUT/(2pi)².  Its two structural pieces are:
           sin²θ23 = 1/2 + Tr(T₃²)/(2π)²   (maximal mixing + isospin),
       these relations define the mixing texture;
 
-  (2) the hypercharge-trace hierarchy — the eigenvalues of F are the
-      inverse powers of the first non-zero hypercharge moment:
-          λ = {1, 1/(√3·Tr(Y²)), 1/(√3·Tr(Y²)²)}  (m3 > m2 > m1).
+  (2) the hypercharge-trace hierarchy — in the PMNS column order
+      (nu1, nu2, nu3), the eigenvalues of F are
+          λ = {1/(√3·Tr(Y²)²), 1/(√3·Tr(Y²)), 1}  (m1 < m2 < m3).
 
 The spectral assembly is
-M_nu=U diag(lambda) U^dagger (v²/Lambda)(1+s0 kappa).
-Diagonalisation recovers the prescribed eigenvalues and therefore
-checks both the hierarchy ratios and the absolute scale.
+M_nu=U diag(lambda) U^T (v²/Lambda)(1+s0 kappa).
+This module uses the real CP-conserving texture.  Its ith PMNS column
+is paired with mi; sorting eigenvalues alone cannot verify this pairing.
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 U is built from the content-ratio angles, and the eigenvalues are the
 hypercharge-trace powers.  The module reads only quantities already
@@ -78,9 +71,10 @@ from cg_core.params import get, set as pset  # noqa: E402
 def pmns_matrix() -> list[list[float]]:
     """U — the PMNS mixing from the framework's content-ratio angles.
 
-    Standard parameterisation U = R23·R13·R12 (CP phase δ set aside:
-    the phase δ_PMNS = (8/7)π enters the Jarlskog invariant, not the
-    magnitudes).  The angles are the framework's content ratios:
+    Real CP-conserving parameterisation U = R23·R13·R12 (delta = 0).
+    Columns are ordered as (nu1, nu2, nu3).  No Dirac or Majorana
+    phases are included; a nonzero Dirac phase can also change PMNS
+    entry magnitudes.  The angles are the framework's content ratios:
       s12² = m1/m2 = 3/10 (the light-pair texture relation),
       s13² = (1/2π)²·√3/2  (the 2π imprint × the S³→RP³ quotient),
       s23² = 1/2 + Tr(T₃²)/(2π)²   (maximal mixing + isospin trace).
@@ -136,23 +130,27 @@ def eigenvalues_symmetric(M: list[list[float]]) -> list[float]:
 
 
 def hierarchy_eigenvalues() -> list[float]:
-    """λ = {1, 1/(√3·Tr(Y²)), 1/(√3·Tr(Y²)²)} — the hypercharge-trace
-    eigenvalue powers (m3 > m2 > m1, normalised to m3 = 1)."""
+    """Hypercharge-trace eigenvalues in PMNS column order (m1, m2, m3).
+
+    The dimensionless hierarchy is normalised to m3 = 1.
+    """
     tr_y2 = 10.0 / 3.0
-    return [1.0, 1.0 / (math.sqrt(3.0) * tr_y2),
-            1.0 / (math.sqrt(3.0) * tr_y2 * tr_y2)]
+    return [1.0 / (math.sqrt(3.0) * tr_y2 * tr_y2),
+            1.0 / (math.sqrt(3.0) * tr_y2), 1.0]
 
 
 def build_mass_matrix(v: float, k_GUT: float,
                       level_factor: float = 1.0) -> dict:
     """Assemble and diagonalise the hypercharge-trace mass texture.
 
-    Returns the eigenvalues (the hierarchy), the ratio cross-checks
-    against r12 = 1/Tr(Y²) and r23 = 1/(√3 Tr(Y²)), and the PMNS
-    angles recovered from U.
+    Inputs v and k_GUT are in GeV; level_factor is dimensionless.
+    Returns masses in eV and ratio cross-checks against r12 = 1/Tr(Y²)
+    and r23 = 1/(√3 Tr(Y²)).  M_flavour retains the dimensionless
+    texture F = U diag(m1/m3, m2/m3, 1) U^T; multiply it by the
+    returned m3_eV to obtain the mass matrix in eV.
     """
     tr_y2 = 10.0 / 3.0
-    lam = hierarchy_eigenvalues()          # {1, r23, r12·r23}
+    lam = hierarchy_eigenvalues()          # {r12·r23, r23, 1}
     U = pmns_matrix()
 
     def mm(A, B):
@@ -161,14 +159,14 @@ def build_mass_matrix(v: float, k_GUT: float,
 
     Ut = [[U[j][i] for j in range(3)] for i in range(3)]  # transpose
     D = [[lam[i] if i == j else 0.0 for j in range(3)] for i in range(3)]
-    M = mm(mm(U, D), Ut)                   # the flavour-basis matrix
+    M = mm(mm(U, D), Ut)                   # dimensionless flavour texture F
 
     ev = eigenvalues_symmetric(M)          # ascending {m1, m2, m3}
     ev = sorted(ev)
     m1, m2, m3 = ev
     # scale to physical eV via the Weinberg prefactor
     Lambda = k_GUT / (2.0 * math.pi) ** 2
-    scale = v * v / Lambda * level_factor * 1e9  # GeV² → eV
+    scale = v * v / Lambda * level_factor * 1e9  # GeV → eV
     r12_derived = m1 / m2
     r23_derived = m2 / m3
     r12_target = 1.0 / tr_y2               # 3/10

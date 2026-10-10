@@ -1,40 +1,35 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
 scripts/audit_numeric_stability.py -- fresh-rebuild value stability audit
 ========================================================================
 
-This audit answers the release question: if the generated stores are removed
-and the official V4 chain is rerun, do the parameter values come back exactly?
+This audit reruns the official chain in an empty temporary output directory
+and compares it with the published stores. It never deletes or overwrites
+the published stores.
 
 It compares the pre-run and post-run parameter records in:
 
   * cg_params.json
-  * comparison/sm_inputs.json
+  * comparison/reference_inputs.json
 
 The write log is intentionally excluded because its timestamps change on every
-run.  Parameter values and metadata are compared by canonical JSON.
+run. Scientific values and semantic metadata are compared by canonical JSON;
+the per-execution run_id is excluded, while source/input fingerprints remain.
 """
 
 from __future__ import annotations
@@ -43,18 +38,21 @@ import json
 import os
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 from typing import Any
 
 
 ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from cg_core.params import read_store_document
 PY = sys.executable
 STORE_PATHS = [
     ROOT / "cg_params.json",
-    ROOT / "comparison" / "sm_inputs.json",
+    ROOT / "comparison" / "reference_inputs.json",
 ]
-GENERATED_STORES = STORE_PATHS + [ROOT / "params_write_log.json"]
 
 
 def rel(path: Path) -> str:
@@ -63,19 +61,30 @@ def rel(path: Path) -> str:
 
 def load_records(path: Path) -> dict[str, Any]:
     if not path.exists():
-        raise FileNotFoundError(f"missing generated store: {rel(path)}")
-    data = json.loads(path.read_text(encoding="utf-8"))
+        raise FileNotFoundError(f"missing generated store: {path.name}")
+    if path.name == "cg_params.json":
+        data = read_store_document(source_root=path.parent)
+    elif path.name == "reference_inputs.json" and path.parent.name == "comparison":
+        data = read_store_document("references", source_root=path.parent.parent)
+    else:
+        raise ValueError("stability comparison requires a canonical scientific store")
     params = data.get("parameters", {})
     if not isinstance(params, dict):
-        raise RuntimeError(f"{rel(path)} has no object-valued 'parameters'")
+        raise RuntimeError(f"{path.name} has no object-valued 'parameters'")
     return params
 
 
-def snapshot() -> dict[str, dict[str, Any]]:
-    return {rel(path): load_records(path) for path in STORE_PATHS}
+def snapshot(root: Path = ROOT) -> dict[str, dict[str, Any]]:
+    return {name: load_records(root / name)
+            for name in ("cg_params.json", "comparison/reference_inputs.json")}
 
 
 def canonical(value: Any) -> str:
+    if isinstance(value, dict):
+        value = {key: val for key, val in value.items() if key != "run_id"}
+        if isinstance(value.get("calculation"), dict):
+            value["calculation"] = {key: val for key, val in value["calculation"].items()
+                                    if key != "run_id"}
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
@@ -101,21 +110,12 @@ def compare_records(before: dict[str, dict[str, Any]],
     return diffs
 
 
-def remove_generated_stores() -> list[str]:
-    removed: list[str] = []
-    for path in GENERATED_STORES:
-        if path.exists():
-            path.unlink()
-            removed.append(rel(path))
-    return removed
-
-
-def run_reproduce() -> subprocess.CompletedProcess[str]:
+def run_reproduce(output_dir: Path) -> subprocess.CompletedProcess[str]:
     env = os.environ.copy()
     env.setdefault("PYTHONUTF8", "1")
     env.setdefault("PYTHONIOENCODING", "utf-8")
     return subprocess.run(
-        [PY, "scripts/reproduce_v4.py"],
+        [PY, "-B", "scripts/reproduce_v5.py", "--recompute-responses", "--output-dir", str(output_dir)],
         cwd=str(ROOT),
         env=env,
         capture_output=True,
@@ -142,17 +142,16 @@ def sanitize_output(text: str) -> str:
 def main() -> int:
     t0 = time.time()
     before = snapshot()
-    removed = remove_generated_stores()
-    proc = run_reproduce()
-    output = sanitize_output(((proc.stdout or "") + (proc.stderr or "")).strip())
-    if proc.returncode != 0:
-        print("NUMERIC STABILITY AUDIT FAILED")
-        print("  command: python scripts/reproduce_v4.py")
-        print(f"  exit: {proc.returncode}")
-        print(output[-12000:] or "  (no output)")
-        return 1
-
-    after = snapshot()
+    with tempfile.TemporaryDirectory(prefix="v5-stability-") as temporary:
+        proc = run_reproduce(Path(temporary))
+        output = sanitize_output(((proc.stdout or "") + (proc.stderr or "")).strip())
+        if proc.returncode != 0:
+            print("NUMERIC STABILITY AUDIT FAILED; published stores unchanged")
+            print("  command: python scripts/reproduce_v5.py --output-dir <temporary>")
+            print(f"  exit: {proc.returncode}")
+            print(output[-12000:] or "  (no output)")
+            return 1
+        after = snapshot(Path(temporary))
     diffs = compare_records(before, after)
     if diffs:
         print("NUMERIC STABILITY AUDIT FAILED")
@@ -165,8 +164,8 @@ def main() -> int:
 
     counts = {store: len(records) for store, records in after.items()}
     print("NUMERIC STABILITY AUDIT CLEAN")
-    print("  command: python scripts/reproduce_v4.py")
-    print(f"  removed stores: {', '.join(removed) if removed else 'none'}")
+    print("  command: python scripts/reproduce_v5.py --output-dir <temporary>")
+    print("  published stores unchanged; execution run_id excluded from comparison")
     for store, count in sorted(counts.items()):
         print(f"  {store}: {count} stable records")
     print(f"  seconds: {time.time() - t0:.1f}")

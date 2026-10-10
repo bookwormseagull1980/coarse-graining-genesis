@@ -1,31 +1,24 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_core/rp3_spectrum.py — V4.0: the exact spectral theory of RP³
+cg_core/rp3_spectrum.py — V5.0: the exact spectral theory of RP³
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The internal space of the framework is RP³ = S³/Z₂, the antipodal
 quotient of the unit sphere.  Every spectral sum in the framework —
@@ -70,27 +63,17 @@ THE SPECTRA (derivation of each)
   are not closed, so the 6 isometries survive the quotient even
   though the de Rham cohomology vanishes.
 
-· Spinor (Dirac) tower: the eigenvalues of the Dirac operator on
-  RP³ with the selected spin structure are ±(n + 3/2)/L for
-  n = 0, 2, 4, ... (the Z₂-even tower), with the mode n carrying
-  the SO(4) quantum numbers (j_L, j_R) = (n/2 + 1/2, n/2) and
-  multiplicity (n+1)(n+2) (Camporesi 1990; the Dirac eigenvalue is
-  j_L + j_R + 1 = n + 3/2).  The even tower is the generation tower
-  of the framework: the light fermion modes n = {0, 2, 4} are the
-  three generations (window_capacity_closure).
+· Dirac: one selected spin lift has positive even n and negative odd
+  n, with multiplicity (n+1)(n+2) at each signed eigenvalue. D² has
+  every n. P_plus/P_minus select even/odd n as an additional source
+  prescription, not two halves of different spin structures.
 
-· TT tensor tower: the transverse-traceless symmetric tensors on
-  S³ decompose into the multi-tower harmonics (j_L, j_R) with
-  |j_L − j_R| ≤ 2, j_L + j_R ≥ 2, and the framework eigenvalue
-  convention λ = [2(j_L(j_L+1)+j_R(j_R+1)) + 6]/L² — the Casimir
-  value plus the Lichnerowicz shift 6/L² of the round S³.  The
-  (j, j) sub-tower reproduces the single-tower λ = J(J+2)/L² + 6/L²
-  with multiplicity (J+1)²; the |j_L − j_R| = 1, 2 towers are
-  required by the Weyl law (the TT density is 5× the scalar
-  density).  The lowest antipodally even TT harmonic is
-  (j_L,j_R)=(1,1), with λ=14/L² and positive multiplicity.  Hence the
-  internal TT spectrum has a positive lower bound; the graviton-like
-  response is carried by the spectral pole in tt_tensor.
+· Genuine TT: the two representations |j_L-j_R|=2, j_L+j_R even,
+  carry the positive rough operator (C2-6)/L², minimum 6/L² and
+  Weyl weight 2. The separate three-branch tensor-response catalogue
+  also contains (j,j), uses (C2+6)/L², has minimum 14/L² and weight
+  3. The response_tensor_* functions evaluate this three-branch catalogue;
+  true_tt_modes evaluates the specified transverse-tracefree operator.
 
 GEOMETRIC DATA
 --------------
@@ -101,7 +84,7 @@ GEOMETRIC DATA
   (connected); the second Stiefel-Whitney class selects the spin
   structures.
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 No physics value is hard-coded: the only input is the radius L
 (a function argument or a store read).  All computations are exact
@@ -219,8 +202,14 @@ def spinor_eigenvalue(n: int, L: float) -> float:
 
 
 def spinor_dirac_eigenvalue(n: int, L: float) -> float:
-    """The signed Dirac eigenvalue ±(n+3/2)/L (both signs are present)."""
-    return (n + 1.5) / L
+    """Selected spin lift: positive even n and negative odd n.
+
+    The opposite spin structure reverses every sign; it does not remove
+    half of the D-squared tower. Species projections are separate below.
+    """
+    if n < 0 or L <= 0:
+        raise ValueError("n must be nonnegative and L positive")
+    return (1 if n % 2 == 0 else -1) * (n + 1.5) / L
 
 
 def spinor_multiplicity(n: int) -> int:
@@ -228,9 +217,36 @@ def spinor_multiplicity(n: int) -> int:
     return (n + 1) * (n + 2)
 
 
-def spinor_quantum_numbers(n: int) -> tuple[int, int]:
-    """(j_L, j_R) = (n/2 + 1/2, n/2) — the SO(4) content of the mode."""
-    return (n // 2 + 1, n // 2)
+def spinor_quantum_numbers(n: int) -> tuple[float, float]:
+    """Positive-branch label (n/2 + 1/2, n/2), without integer rounding."""
+    if not isinstance(n, int) or n < 0:
+        raise ValueError("n must be a nonnegative integer")
+    return ((n + 1) / 2, n / 2)
+
+
+def dirac_modes(L: float, n_max: int, *, opposite_lift: bool = False):
+    """Complete signed Dirac tower for one spin lift: all n >= 0.
+
+    Returns (n, signed eigenvalue, multiplicity). Negative modes carry
+    the exchanged SU(2) labels. Each multiplicity appears once.
+    """
+    sign = -1 if opposite_lift else 1
+    return [(n, sign * spinor_dirac_eigenvalue(n, L),
+             spinor_multiplicity(n)) for n in range(n_max + 1)]
+
+
+def dirac_squared_modes(L: float, n_max: int, *, projection: str = "full"):
+    """D² full tower, or the separately specified P_plus/P_minus source.
+
+    P_plus selects even n; P_minus selects odd n. Guo (2026g) assigns
+    right species to P_plus and left species to P_minus for its trace.
+    """
+    starts = {"full": (0, 1), "P_plus": (0, 2), "P_minus": (1, 2)}
+    if projection not in starts:
+        raise ValueError("projection must be full, P_plus or P_minus")
+    start, step = starts[projection]
+    return [(n, spinor_eigenvalue(n, L), spinor_multiplicity(n))
+            for n in range(start, n_max + 1, step)]
 
 
 def spinor_modes(L: float, n_max: int) -> list[tuple[int, float, int]]:
@@ -244,14 +260,11 @@ def spinor_modes(L: float, n_max: int) -> list[tuple[int, float, int]]:
 # ---------------------------------------------------------------------------
 # TT tensor spectrum (the multi-tower).
 # ---------------------------------------------------------------------------
-def tt_eigenvalue(jL: int, jR: int, L: float) -> float:
-    """λ = [2(j_L(j_L+1)+j_R(j_R+1)) + 6]/L² — the TT harmonic.
+def response_tensor_eigenvalue(jL: int, jR: int, L: float) -> float:
+    """Three-branch response operator (C2 + 6)/L².
 
-    Derivation: the framework eigenvalue convention is the SO(4)
-    Casimir value C₂ = 2[j_L(j_L+1)+j_R(j_R+1)] per unit L², plus
-    the Lichnerowicz shift 6/L² of the round S³ (the spin-2
-    curvature term, R = 6/L² in the Lichnerowicz formula).  The
-    constraints are |j_L − j_R| ≤ 2 and j_L + j_R ≥ 2.
+    This includes the (j,j) branch and is not the genuine rough-TT
+    operator. The curvature shift is part of the declared readout.
     """
     casimir = 2.0 * (jL * (jL + 1) + jR * (jR + 1))
     return (casimir + 6.0) / (L * L)
@@ -262,12 +275,12 @@ def tt_multiplicity(jL: int, jR: int) -> int:
     return (2 * jL + 1) * (2 * jR + 1)
 
 
-def tt_modes(L: float, j_max: int) -> list[tuple[int, int, float, int]]:
-    """The Z₂-even TT modes: j_L + j_R even, |j_L − j_R| ≤ 2,
+def response_tensor_modes(L: float, j_max: int) -> list[tuple[int, int, float, int]]:
+    """Response-catalogue modes: j_L + j_R even, |j_L − j_R| ≤ 2,
     j_L + j_R ≥ 2, up to j_max.
 
     Returns (j_L, j_R, λ, d).  The lowest mode is (1,1), with
-    λ=14/L²; the positive lower bound gives n_grav=0.
+    λ=14/L². No external momentum pole is inferred from this catalogue.
     """
     out = []
     for jL in range(0, j_max + 1):
@@ -278,21 +291,40 @@ def tt_modes(L: float, j_max: int) -> list[tuple[int, int, float, int]]:
                 continue
             if (jL + jR) % 2 != 0:
                 continue
-            out.append((jL, jR, tt_eigenvalue(jL, jR, L), tt_multiplicity(jL, jR)))
+            out.append((jL, jR, response_tensor_eigenvalue(jL, jR, L), tt_multiplicity(jL, jR)))
     return out
 
 
-def tt_lowest_eigenvalue(L: float) -> float:
-    """The lowest TT eigenvalue: 14/L² — the (1,1) single-tower mode.
+def response_tensor_lowest_eigenvalue(L: float) -> float:
+    """Response-catalogue minimum 14/L², at (1,1)."""
+    return response_tensor_eigenvalue(1, 1, L)
 
-    The (j, j) sub-tower with J = 2j reproduces the single-tower
-    value λ = J(J+2)/L² + 6/L²; the lowest admissible mode is
-    (j_L, j_R) = (1, 1) with C₂ = 2[2+2] = 8 and the Lichnerovich
-    shift 6/L², giving 14/L².  This is the bare mass scale of the
-    TT propagator used by the pole analysis (pole_analysis):
-    p²_min = 8/L² (the J = 2 Casimir part) plus 6/L².
+
+def true_tt_modes(L: float, k_max: int, *, operator: str = "rough"):
+    """Guo (2026d) genuine transverse-tracefree carrier, k=2,4,... .
+
+    rough = C2 - 6; K6 = C2 + 6; K6_plus_6 = C2 + 12.
+    The two representations have |jL-jR|=2 and total multiplicity
+    2(k-1)(k+3). Their rough minimum is 6/L² and Weyl weight is 2.
     """
-    return tt_eigenvalue(1, 1, L)
+    shifts = {"rough": -6, "K6": 6, "K6_plus_6": 12}
+    if L <= 0 or operator not in shifts:
+        raise ValueError("positive L and an explicit supported operator required")
+    out = []
+    for k in range(2, k_max + 1, 2):
+        for jL, jR in (((k + 2) // 2, (k - 2) // 2),
+                       ((k - 2) // 2, (k + 2) // 2)):
+            casimir = 2 * (jL * (jL + 1) + jR * (jR + 1))
+            out.append((jL, jR, (casimir + shifts[operator]) / L**2,
+                        tt_multiplicity(jL, jR)))
+    return out
+
+
+# The short tt_* names designate the three-branch response catalogue.
+# true_tt_modes designates the transverse-tracefree carrier and operator.
+tt_eigenvalue = response_tensor_eigenvalue
+tt_modes = response_tensor_modes
+tt_lowest_eigenvalue = response_tensor_lowest_eigenvalue
 
 
 # ---------------------------------------------------------------------------
@@ -310,15 +342,10 @@ def weyl_coeff(L: float, dof: int) -> float:
 
 
 def weyl_dof() -> dict:
-    """The degrees of freedom of each RP³ field sector (the Weyl-law
-    coefficient normalisation, per physical degree of freedom):
-        scalar = 1 (one component)
-        vector = 2 (the d = 3 transverse 1-form polarisations)
-        spinor = 1 (the RP³ Majorana projection of the 2-component
-                 Dirac tower)
-        tt     = 3 (the d = 3 symmetric traceless tensor)
-    These are the geometric DOF counts read off the UV spectral
-    density — a spectral-language statement, not an input.
+    """Response-catalogue weights; key 'tt' denotes the three tensor branches.
+
+    The projected P_plus spinor weight is 1; full D² has weight 2.
+    Genuine transverse-tracefree tensors have weight 2, not 3.
     """
     return {"scalar": 1, "vector": 2, "spinor": 1, "tt": 3}
 
@@ -365,7 +392,7 @@ def kk_dof_running(E: float, L: float, l_max: int = 200) -> dict:
     spinor / TT).  Returns the per-sector mode counts and the total
     effective DOF.
 
-    NOTE (2026-08-15): this sharp-step count carries a boundary
+    NOTE : this sharp-step count carries a boundary
     oscillation (the Weyl law's subleading term converges slowly,
     ~0.3% residual).  The framework's own regulator is the SMOOTH
     Gaussian window (see heat_kernel) — the heat-kernel expansion
@@ -386,20 +413,14 @@ def heat_kernel(t: float, L: float, l_max: int = 200) -> dict:
     """The heat kernel K(t) = Σ_n d_n e^{−t λ_n} (the smooth Gaussian
     window — the framework's own regulator, NOT a sharp cutoff).
 
-    The heat kernel is the spectral sum with the Gaussian weight
-    e^{−tλ}; its small-t asymptotics is the ANALYTIC heat-kernel
-    expansion
-
-        (4πt)^{3/2} K(t) = a₀ + a₂ t + a₄ t² + …,
-        a₀ = Vol,  a₂ = Vol·R/6,  a₄ = K²·Vol/2 = π²/(2L)
-
-    (no boundary oscillation — unlike the sharp-step Weyl count,
-    which converges only as a power in 1/E with oscillating
-    subleading terms).  Returns the total K(t), the per-sector
-    heat kernels, and the analytic coefficients a₀, a₂, a₄ for
-    comparison.
+    Returns the explicit finite sum and per-sector sums of the
+    response catalogue, with a0=7 Vol. The scalar heat coefficients
+    cannot be multiplied by 7 to obtain coefficients of different
+    operators and projected carriers. Consequently a2/a4 are None
+    until separately derived; the sum itself remains available.
     """
-    R = 6.0 / (L * L)
+    if t <= 0 or L <= 0:
+        raise ValueError("t and L must be positive")
     Ktot = 0.0
     per = {}
     for kind in ("scalar", "vector", "spinor", "tt"):
@@ -430,10 +451,11 @@ def heat_kernel(t: float, L: float, l_max: int = 200) -> dict:
     # count, so the total a₀ is dof_total × Vol.
     dof_total = sum(weyl_dof().values())
     a0 = dof_total * volume(L)
-    a2 = a0 * R / 6.0
-    a4 = 0.5 * (1.0 / L ** 4) * a0
     return {"K": Ktot, "per_sector": per,
-            "a0": a0, "a2": a2, "a4": a4}
+            "a0": a0, "a2": None, "a4": None,
+            "coefficient_status": "a0 proved by sector Weyl weights; "
+                                  "a2/a4 require operator-specific derivations",
+            "carrier": "scalar + transverse vector + P_plus + three-branch tensor"}
 
 
 # ---------------------------------------------------------------------------
@@ -449,7 +471,7 @@ def _self_test() -> None:
     assert vector_multiplicity(1) == 6
     assert abs(spinor_dirac_eigenvalue(0, L) - 1.5 / L) < 1e-12
     assert spinor_multiplicity(0) == 2
-    assert spinor_quantum_numbers(2) == (2, 1)
+    assert spinor_quantum_numbers(2) == (1.5, 1)
     assert abs(tt_lowest_eigenvalue(L) - 14.0 / L ** 2) < 1e-12
     assert abs(volume(L) - math.pi ** 2 * L ** 3) < 1e-12
     assert n_killing_vectors() == 6 and h1_zero()

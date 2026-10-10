@@ -1,29 +1,22 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
 
-cg_frg/gauge/geometric_couplings.py — V4.0: the geometric gauge
+cg_frg/gauge/geometric_couplings.py — V5.0: the geometric gauge
 
 couplings g₂ and g₁ at the emergence scale
 
@@ -31,7 +24,7 @@ couplings g₂ and g₁ at the emergence scale
 
 
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 
 -----------------------------------
 
@@ -103,13 +96,13 @@ amplitude s: the U(1) normalisation is rescaled by
 
 N_g·τ/(d+1), the λ_EC first-order torsion N_g·τ divided by (d+1)).
 
-V4 DISCIPLINE
+IMPLEMENTATION
 
 -------------
 
 The (M/M_P)² factor is a SCALE_CHOICE (declared, never disguised
 
-as a derivation).  The amplitude s0 = 2tau = N_g*tau/(d+1) is DERIVED: s0 = q*tau with q = 2 the long-root-mode charge (paper 4 Appendix A).
+as a derivation).  The amplitude s0 = 2tau = N_g*tau/(d+1) is DERIVED: s0 = q*tau with q = 2 the long-root-mode charge (Guo (2026d) Appendix A).
 
 (the λ_EC first-order torsion divided by d+1).
 
@@ -139,7 +132,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from cg_core.params import get, set as pset  # noqa: E402
 
-from cg_core.beta_functions import beta_gauge  # noqa: E402
+from cg_core.gauge_running import geometric_run, common_origin  # noqa: E402
 
 
 
@@ -159,7 +152,7 @@ def g2_killing(M_G: float, M_P: float, kL: float) -> float:
 
 
 
-    GEOMETRIC CLOSED FORM (2026-08-15): the window-edge identity
+    GEOMETRIC CLOSED FORM : the window-edge identity
 
     kL·M_G = M_P·√π (0.036% cross-check) collapses this to
 
@@ -183,57 +176,23 @@ def g2_killing(M_G: float, M_P: float, kL: float) -> float:
 
 def squash_metric(tau: float) -> dict:
 
-    """The J=2 squashed S³ metric and its U(1)_Y normalisation.
+    """Axisymmetric squash and its curvature-preserving amplitude ratio.
 
+    For A=1+s, B=1-2s and a fixed axial Killing vector X, its metric dual
+    is alpha_s=B*sigma3. The curvature d(alpha_s)=B*d(sigma3) has squared
+    L2 norm ratio B^(5/2)/A. Preserving that norm gives the assigned
+    amplitude ratio kappa=sqrt(A/B^(5/2)).
 
-
-    FIRST-PRINCIPLES GEOMETRY (2026-08-17): the isometry breaking
-
-    SU(2)_R -> U(1)_R squashes the internal S³ along the σ₃ axis
-
-    (the U(1)_Y direction), giving the metric
-
-
-
-        ds² = (1+s)σ₁² + (1+s)σ₂² + (1−2s)σ₃²,   s = 2τ .
-
-
-
-    The eigenvalues are λ₁ = λ₂ = 1+s and λ₃ = 1−2s, so the volume
-
-    ratio is V₃(s)/V₃(0) = √(det g) = (1+s)√(1−2s), and the σ₃-axis
-
-    inverse metric is g³³ = 1/(1−2s).  The U(1)_Y normalisation is
-
-    the volume ratio times the third moment of the axis inverse
-
-    metric,
-
-
-
-        κ²(s) = [V₃(s)/V₃(0)]·(g³³)³ = (1+s)√(1−2s)·(1−2s)⁻³
-
-              = (1+s)/(1−2s)^{5/2} .
-
-
-
-    The third moment is the Killing normalisation of the U(1)_Y
-
-    gauge field on the squashed internal space: the F² contraction
-
-    of the σ₃-axis zero mode carries three inverse-metric factors
-
-    (two from the field strength and one from the polarisation), so
-
-    the normalisation integral is ∫√g (g³³)³ d³x, normalised to its
-
-    round value.  At s = 0 (round S³) κ² = 1, so g₁ = g₂
-
-    (unification); at s = 2τ the mixing is κ(2τ) = 1.13183.
-
+    An externally varying amplitude instead has kinetic form alpha_s,
+    whose squared L2 norm ratio is A*B^(3/2). The internal curvature
+    ratio alone does not normalize an external gauge kinetic term or
+    matter vertex. Both actual Gram contractions are available from
+    cg_core.matter_matching.axial_squash_grams.
     """
 
+    from cg_core.matter_matching import axial_squash_grams
     s = 2.0 * tau                     # the squash amplitude s₀ = n_broken·τ
+    grams = axial_squash_grams(s)
 
     lam1 = 1.0 + s                    # σ₁, σ₂ eigenvalues (1+s)
 
@@ -247,7 +206,9 @@ def squash_metric(tau: float) -> dict:
 
     return {"s": s, "kappa": math.sqrt(kappa2), "kappa2": kappa2,
 
-            "volume_ratio": vol_ratio, "g33": g33}
+            "volume_ratio": vol_ratio, "g33": g33,
+            "curvature_gram_ratio": grams["curvature_gram_ratio"],
+            "oneform_gram_ratio": grams["oneform_gram_ratio"]}
 
 
 
@@ -269,13 +230,13 @@ def kappa_mixing(tau: float) -> float:
 
     internal-space dimension of RP³, N_g = 8 the su(3) generators).
 
-    The identity s0 = N_g*tau/(d+1) is the ARITHMETIC restatement of s0 = q*tau = 2tau, where q = 2 is the long-root-mode charge (paper 4 Appendix A: q = 2 m_R, m_R = 1); N_g = (d+1)*n_broken (8 = 4*2) is the derived content identity.
+    The identity s0 = N_g*tau/(d+1) is the ARITHMETIC restatement of s0 = q*tau = 2tau, where q = 2 is the long-root-mode charge (Guo (2026d) Appendix A: q = 2 m_R, m_R = 1); N_g = (d+1)*n_broken (8 = 4*2) is the derived content identity.
 
-    order torsion N_g·τ divided by (d+1) (2026-08-16).
+    order torsion N_g·τ divided by (d+1) .
 
 
 
-    GEOMETRIC DERIVATION (2026-08-17): the value is computed from
+    GEOMETRIC DERIVATION : the value is computed from
 
     the squashed S³ metric ds² = (1+s)σ₁² + (1+s)σ₂² + (1−2s)σ₃² by
 
@@ -325,33 +286,25 @@ def compute() -> dict:
 
 
 
-    # ---- geometric-dynamics conservation law (2026-08-16, spectral-sum
+    # ---- geometric-dynamics conservation law ----
 
-    #      origin 2026-08-17) ----
-
-    # The g2 prediction is NOT a standard-QFT loop with borrowed finite
-
-    # constants; it is the discrete content ratio of the framework's own
-
-    # geometric dynamics (conformal-gauge duality + EC torsion):
+    # The g2 boundary combines the conformal content identity with EC torsion:
 
     #     1/alpha = 1/alpha_W + 1/N_c - tau^2*pi/2
 
     #     N_c(1/alpha - 1/alpha_W + tau^2 pi/2) = 1   <->   N_g xi = 1
 
-    # FIRST-PRINCIPLES (Lean 4): no SM value enters.  alpha_W = 2/kL^5
+    # alpha_W = 2/kL^5
 
     # is the window-capacity weak coupling (the framework's own content);
 
     # the 1/N_c and tau^2 pi/2 terms are the colour-number and
 
-    # EC-torsion content ratios.  The law corrects the bare geometric
-
-    # g2 (Killing normalisation, +0.345% high) to the full prediction.
+    # EC-torsion content ratios in the inverse-coupling boundary condition.
 
     #
 
-    # SPECTRAL-SUM ORIGIN OF THE TORSION TERM (2026-08-17):
+    # SPECTRAL-SUM ORIGIN OF THE TORSION TERM :
 
     #   tau^2 pi/2 = (2 tau^2) * (2 pi) * xi = 4 pi tau^2 / N_g
 
@@ -425,11 +378,9 @@ def compute() -> dict:
 
     g2_GUT = 1.0 / math.sqrt(inv_g2_GUT2)
 
-    # ---- g1 U(1)_Y normalisation correction (2026-08-16) ----
+    # ---- g1 U(1)_Y normalisation correction  ----
 
-    # The squash mixing kappa(2tau) is +0.22% high vs SM g1/g2(k_GUT).
-
-    # The correction is the FIRST-PRINCIPLES content ratio:
+    # The hypercharge boundary uses the content factor:
 
     #   delta_g1 = -tau * r23 * (SigmaY2 * Delta_f * xi)
 
@@ -443,9 +394,9 @@ def compute() -> dict:
 
     #     xi       = 1/N_g = 1/8              the conformal coupling
 
-    # (delta_g1 = -sqrt3/800; matches SM to +0.03%.)
+    # delta_g1 = -sqrt3/800.
 
-    # The factor 5/8 = SigmaY2*Delta_f*xi is FIRST-PRINCIPLES: xi =
+    # The factor 5/8 = SigmaY2*Delta_f*xi uses xi =
 
     # (d-2)/(4(d-1)) = 1/8 is the conformal coupling and N_g = 8 the
 
@@ -477,17 +428,9 @@ def compute() -> dict:
 
 
 
-    # g3 via the common-origin hypothesis (TWO-LOOP): g3(k_GUT) =
-
-    # g2(k_GUT), solved self-consistently with the two-loop gauge beta
-
-    # functions (beta_gauge, Machacek-Vaughn/Buttazzo 2013).  g1 and g2
-
-    # are the geometric values (fixed); g3 is iterated so that after the
-
-    # two-loop running M_G -> k_GUT -> M_G the couplings coincide at the
-
-    # breaking scale, UP TO the long-root bifurcation:
+    # g3 via the common-origin boundary, retaining the fixed geometric
+    # g1/g2 at M_G. The forward residual at k_GUT is solved and checked
+    # with a finer RK4 integration, including the long-root bifurcation:
 
     #
 
@@ -521,11 +464,9 @@ def compute() -> dict:
 
     # table's running yt).
 
-    yt = 1.0                   # the geometric Yukawa y_0 (scale-invariant)
-
     # The long-root condensation coefficient (geometric-dynamics origin,
 
-    # 2026-08-16): K = J(J+2)/d = 2·4/3 = 8/3, the J=2 squash's kinetic
+    # K = J(J+2)/d = 2·4/3 = 8/3, the J=2 squash's kinetic
 
     # eigenvalue J(J+2) = 8 over the internal-space dimension d = 3 (RP³).
 
@@ -535,57 +476,9 @@ def compute() -> dict:
 
     K_long = j_squash * (j_squash + 2) / d_internal   # = 8/3
 
-    g3_iter = g2              # initial guess (one-loop common-origin)
-
-    t_MG = math.log(M_G)
-
-    t_GUT = math.log(k_GUT)
-
-    n_step = 6000
-
-    for _ in range(12):
-
-        a1, a2, a3 = g1, g2, g3_iter
-
-        dt = (t_GUT - t_MG) / n_step
-
-        for _ in range(n_step):
-
-            bb = beta_gauge(a1, a2, a3, yt)
-
-            a1 += bb[0] * dt
-
-            a2 += bb[1] * dt
-
-            a3 += bb[2] * dt
-
-        g2_GUT2 = a2
-
-        # the long-root bifurcation at k_GUT (alpha^2/K correction).
-
-        a3 = g2_GUT2 * (1.0 + (g2_GUT2 ** 2 / (4.0 * math.pi)) ** 2 / K_long)
-
-        dt = (t_MG - t_GUT) / n_step
-
-        for _ in range(n_step):
-
-            bb = beta_gauge(a1, a2, a3, yt)
-
-            a1 += bb[0] * dt
-
-            a2 += bb[1] * dt
-
-            a3 += bb[2] * dt
-
-        g3_new = a3
-
-        if abs(g3_new - g3_iter) < 1e-13:
-
-            break
-
-        g3_iter = g3_new
-
-    g3_MG_geo = g3_new
+    origin = common_origin(g1, g2, M_G, k_GUT, K_long=K_long)
+    g3_MG_geo = origin["g3_initial"]
+    g2_GUT2 = origin["at_breaking"][1]
 
     pset("g3_MG_geo", g3_MG_geo, provenance="DERIVED", role="internal",
 
@@ -597,7 +490,8 @@ def compute() -> dict:
 
               f"condensation coefficient — the alpha^2/K bifurcation is the "
 
-              f"CF-3 forward content)")
+              f"CF-3 forward content; checked RK4 forward relative boundary "
+              f"residual {origin['relative_residual']:.3e})")
 
 
 
@@ -605,7 +499,9 @@ def compute() -> dict:
 
     # the SU(2) Killing normalisation, so at the breaking scale k_GUT
 
-    # the couplings coincide, g3(k_GUT) = g2(k_GUT).  g3_pred uses the
+    # leading common-origin values coincide before the finite bifurcation.
+    # The diagnostic g3_pred below is that leading value, not the final
+    # colour boundary g3(k_GUT). It uses the
 
     # framework's OWN g2 run to k_GUT (the two-loop geometric RGE,
 
@@ -627,19 +523,17 @@ def compute() -> dict:
 
          note=f"bare geometric g2 = sqrt(8)(M_G/M_P)kL^-3/2 = {g2_geo:.9f} "
 
-              f"(Killing normalisation, +0.345% vs SM — the raw value "
-
-              f"BEFORE the conservation-law correction)")
+              f"(Killing-normalised geometric boundary)")
 
     pset("g2_MG", g2, provenance="DERIVED",
 
-         note=f"g2(M_G) = {g2:.9f} — the FULL prediction: bare geometric "
+         note=f"g2(M_G) = {g2:.9f}; the geometric boundary obeys "
 
-              f"g2 corrected by the conservation law 1/alpha_SM = 1/alpha_W "
+              f"the inverse-coupling relation 1/alpha_SM = 1/alpha_W "
 
-              f"+ 1/N_c - tau^2*pi/2 (matches SM to +0.00066%; the law IS "
+              f"+ 1/N_c - tau^2*pi/2; Lean checks the associated "
 
-              f"the error-cancellation mechanism, proven in Lean 4)")
+              f"finite content and coefficient identities")
 
     pset("kappa_mixing", kappa, provenance="DERIVED",
 
@@ -659,7 +553,8 @@ def compute() -> dict:
 
          role="internal",
 
-         note=f"g3(k_GUT) = g2(k_GUT) = {g3_pred:.6f} (the common-origin "
+         note=f"leading common-origin value before finite bifurcation: "
+              f"g2(k_GUT) = {g3_pred:.6f} (the common-origin "
 
               f"prediction: the colour generators share the SU(2) Killing "
 
@@ -667,7 +562,7 @@ def compute() -> dict:
 
               f"geometric carrier) is the J=2 squash)")
 
-    # ---- fine-structure constant (COMPUTED, two-loop 2026-08-19) ----
+    # ---- fine-structure constant from two-loop running ----
     # The EW scale is INTERNAL: M_Z = sqrt(g2(v)^2 + g1'(v)^2) v/2 from
     # the framework's own v and the geometric couplings run down to v
     # (one-loop).  No external scale enters.
@@ -685,18 +580,9 @@ def compute() -> dict:
     # internal M_Z with the TWO-LOOP geometric RGE (beta_gauge with
     # the scale-invariant geometric Yukawa y_0 = 1.0) -- the SAME
     # convention as alpha_s(M_Z) and Lambda_QCD (mass_gap_scale).
-    # The previous one-loop run truncated at order g^3; the two-loop
-    # run uses the framework's own content-derived beta content.
-    from cg_core.beta_functions import beta_gauge as beta_gauge_2l  # noqa: E402
-    dt_run = math.log(MZ_int / M_G)
-    n_run = max(1, int(round(abs(dt_run) * 400)))
-    h_run = dt_run / n_run
-    g1r, g2r, g3r = g1, g2, g3_MG_geo
-    for _ in range(n_run):
-        bg = beta_gauge_2l(g1r, g2r, g3r, 1.0)
-        g1r += h_run * bg[0]
-        g2r += h_run * bg[1]
-        g3r += h_run * bg[2]
+    # The two-loop coefficients use the framework's specified matter content.
+    mz_run = geometric_run((g1, g2, g3_MG_geo), M_G, MZ_int)
+    g1r, g2r, g3r = mz_run.couplings
     g1_MZ = g1r
     g2_MZ = g2r
     alpha_inv = 4.0 * math.pi * (1.0 / g2_MZ ** 2 + 5.0 / (3.0 * g1_MZ ** 2))
@@ -708,7 +594,10 @@ def compute() -> dict:
               f"Yukawa y_0=1.0, the same convention as alpha_s(M_Z); the "
               f"kappa acts at k_GUT (the isometry-breaking onset))")
     return {"g2_MG": g2, "kappa": kappa, "g1_MG_geo": g1,
+            "g3_MG_geo": g3_MG_geo,
             "g3_common_origin_pred": g3_pred,
+            "g3_boundary_relative_residual": origin["relative_residual"],
+            "gauge_integration_error_estimate": max(mz_run.estimated_abs_error),
             "alpha_inv_MZ_pred": alpha_inv}
 
 

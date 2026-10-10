@@ -1,47 +1,26 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
-"""
-comparison/sm_rge/run_rge.py — V4.0: the SM RGE running (RK4)
-=================================================================
+"""Two-loop Standard-Model running for the reference comparison table.
 
-WHY THIS MODULE EXISTS (motivation)
------------------------------------
-The SM couplings are extrapolated from M_Z to the high scales
-(M_G, k_GUT) for the comparison table: the framework's geometric
-couplings are compared against the SM running at the same scale.
-This module integrates the two-loop SM beta functions with RK4
-(400 steps per decade) along two routes — M_Z → M_G → k_GUT and
-M_Z → v → k_GUT — which must agree to 1e-12 (a numerical
-consistency check).  The outputs are written into sm_inputs.json
-(the SM comparison table), never into the physics store.
-
-V4 DISCIPLINE
--------------
-The SM running produces comparison values only (SM_INPUT
-provenance).  The physics modules read the framework's own
-parameters; the SM table is referenced only by the comparison
-records.
+Classical fourth-order Runge--Kutta integration uses t=ln(mu), with
+400 steps per unit t. The routes M_Z -> M_G -> k_GUT and
+M_Z -> v -> k_GUT evaluate the semigroup consistency of the numerical
+flow at the same final scale. The maximum relative route difference
+must be below 1e-12. The results are written to the comparison store.
 """
 
 from __future__ import annotations
@@ -60,21 +39,16 @@ from cg_core.rk4 import rk4_integrate  # noqa: E402
 
 
 def run_rge(y0: list[float], ln_mu0: float, ln_mu1: float,
-            steps_per_decade: int = 400) -> list[float]:
-    """Integrate the couplings from μ0 to μ1 with the generic RK4
-    integrator (cg_core.rk4) over t = ln μ.
-
-    t = ln μ; the integration is over dt = ln(μ1/μ0), with
-    steps_per_decade steps per e-fold of the scale.
-    """
+            steps_per_efold: int = 400) -> list[float]:
+    """Integrate over ln(mu1/mu0) at the specified steps per unit ln(mu)."""
     dt_total = ln_mu1 - ln_mu0
-    n_steps = max(1, int(round(abs(dt_total) * steps_per_decade)))
+    n_steps = max(1, int(round(abs(dt_total) * steps_per_efold)))
     return rk4_integrate(derivatives5, y0, dt_total, n_steps)
 
 
-def run_sm_table(M_Z: float, M_G: float, k_GUT: float, v: float) -> None:
+def run_sm_table(M_Z: float, M_G: float, k_GUT: float, v: float) -> float:
     """Run the SM couplings along the two routes and write the
-    comparison/coupling-closure values to sm_inputs.json.
+    comparison/coupling-closure values to reference_inputs.json.
 
     Route A: M_Z → M_G → k_GUT.  Route B: M_Z → v → k_GUT.  The two
     routes must agree at k_GUT to 1e-12 (the consistency check).
@@ -93,9 +67,7 @@ def run_sm_table(M_Z: float, M_G: float, k_GUT: float, v: float) -> None:
     y_v = run_rge(y0, ln_mz, math.log(v))
     y_GUT_B = run_rge(y_v, math.log(v), math.log(k_GUT))
 
-    # The consistency check (the two routes must agree).  The
-    # threshold is 1e-12 (the docstring's stated precision); the
-    # measured agreement is ~4.5e-13 (RK4, 400 steps/decade).
+    # Relative semigroup defect at the common final scale.
     max_dev = max(abs(a - b) / max(abs(a), 1e-30)
                   for a, b in zip(y_GUT_A, y_GUT_B))
     if max_dev > 1e-12:
@@ -111,9 +83,7 @@ def run_sm_table(M_Z: float, M_G: float, k_GUT: float, v: float) -> None:
 
 
 if __name__ == "__main__":
-    # Smoke: run the RGE along the M_Z -> M_G -> k_GUT route using the
-    # STORE's own chain values (never placeholders — writing a stale
-    # table would corrupt every downstream closure).
+    # Compare at the generated emergence and GUT scales.
     from comparison.sm_rge.inputs import init_sm_table, sm_value
     from cg_core.params import get
 
@@ -121,7 +91,7 @@ if __name__ == "__main__":
     M_Z = sm_value("M_Z")
     M_G = get("M_G")        # the chain's own emergence scale
     k_GUT = get("k_GUT")    # the chain's own GUT scale
-    v = sm_value("v_HIGGS")  # the observed EW VEV (the route-B anchor)
+    v = sm_value("v_HIGGS_obs")  # observed VEV for the intermediate comparison scale
     dev = run_sm_table(M_Z, M_G, k_GUT, v)
     print(f"SM RGE table refreshed from the store chain "
           f"(route agreement: max rel dev {dev:.2e})")

@@ -1,40 +1,30 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/generation/sector_alpha.py — V4.0: the sector-α LADDER,
+cg_frg/generation/sector_alpha.py — V5.0: the sector-α LADDER,
 fully internal (the authoritative writer of the sector indices)
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
-The three sector LZ exponents (up / down / lepton) are NOT
-observed back-fits: they form a ladder from the framework's own
-closed quantities.  The V4 discipline (external-value discipline
-first) requires every index to be computed from internal
-quantities — no observed ratio enters the computation.  This
-module is the authoritative writer of alpha_up / alpha_down /
-alpha_lepton (lz_ladder consumes them).
+The three sector LZ exponents (up, down and lepton) form a ladder
+computed from the internal endpoint, torsion and hypercharge quantities.
+This module publishes alpha_up, alpha_down and alpha_lepton for the
+generation mass readout in lz_ladder.
 
 THE LADDER (the internal derivation chain)
 ------------------------------------------
@@ -80,7 +70,7 @@ RUNG 4 — the ladder (the two sector steps split by 9/8, with
     corrects only the down rung, from +1.69% (uniform ladder)
     to +0.08%.)
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 Every rung is internal: kL, τ, 1−n_s, kL_CMB, and the exact
 9/8 hypercharge identity.
@@ -145,7 +135,7 @@ def compute() -> dict:
     kL = float(get("kL"))
     tau = float(get("tau"))
     ns_tilt = float(get("ns_tilt"))          # = 1 − n_s = 0.035
-    kL_cmb = float(get("kL_CMB"))            # the CMB window (SCALE_CHOICE)
+    kL_cmb = float(get("kL_CMB"))            # the derived CMB response window
 
     au = alpha_up(kL, tau)
     Delta = sector_step(ns_tilt, kL_cmb)
@@ -153,24 +143,32 @@ def compute() -> dict:
     al = ladder_lepton(au, Delta)
     s_lep = 16.0 * Delta / 17.0
 
-    pset("alpha_up", au, provenance="DERIVED",
+    # Dependencies refer to the stored inputs of these calculations. Local
+    # intermediate values are not fictitious store reads, and unrelated
+    # values consumed in this module do not enter every output's parent set.
+    pset("alpha_up", au, provenance="DERIVED", dependencies=("kL", "tau"),
          note=f"alpha_up = kL - 2tau = {au:.6f} (the "
               f"window width minus the non-adiabatic torsion 2tau; "
               f"kL - alpha_up = 2tau exactly)")
     pset("alpha_down", ad, provenance="DERIVED",
+         dependencies=("kL", "tau", "ns_tilt", "kL_CMB"),
          note=f"alpha_dn = alpha_up - (18/17)Delta = {ad:.6f} ("
               f"the 9/8 hypercharge ladder, step = (9/8)s, s = 16Delta/17)")
     pset("alpha_lepton", al, provenance="DERIVED",
+         dependencies=("kL", "tau", "ns_tilt", "kL_CMB"),
          note=f"alpha_lp = alpha_up - 2Delta = {al:.6f} (the "
               f"lepton rung spans two steps exactly)")
     pset("sector_alpha_delta", Delta, provenance="DERIVED",
+         dependencies=("ns_tilt", "kL_CMB"),
          note=f"Delta = 6(1-n_s)kL_CMB = {Delta:.6f} (the so(4) "
               f"isometry's 6 generators x the tilt 1-n_s = "
               f"tau*((1+2+1+3)/(d+1)) = tau*(7/4) x the CMB window kL_CMB)")
     pset("sector_alpha_s_lep", s_lep, provenance="DERIVED",
+         dependencies=("ns_tilt", "kL_CMB"),
          note=f"the lepton step s = 16Delta/17 = {s_lep:.6f} (the 9/8 "
               f"ladder split with the mean step Delta)")
     pset("ladder_98_identity", 9.0 / 8.0, provenance="DERIVED",
+         dependencies=(),
          role="cg",
          note="9/8 = 1/(1-(Y_d/Y_l)^2) exact (Y_d = 1/3, Y_l = 1): the "
               "down/lepton hypercharge structure of the sector ladder")

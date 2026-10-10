@@ -1,15 +1,16 @@
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo guojk@nwpu.edu.cn
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 [build-system]
@@ -18,8 +19,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "coarse-graining-genesis"
-version = "4.0.0"
-description = "Coarse-Graining Genesis Framework V4.0 — a provenance-audited spectral framework for gauge structure, fermion content and mass-scale computations from a compact internal space"
+version = "5.0.0"
+description = "Coarse-Graining Genesis Framework V5.0 — spectral calculations of gauge structure, fermion content, mass scales and macroscopic response"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT + attribution requirement (see LICENSE)" }
@@ -38,26 +39,22 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# Documentation build (docs/ + _docs_build/): figures and docx.
-docs = [
-    "matplotlib>=3.7",
-    "python-docx>=1.1",
-]
-# Development / verification (tests + audit).
-dev = [
+# Verification of the calculation and its mathematical contracts.
+verification = [
     "pytest>=7.4",
-    "pytest-cov>=4.1",
+    "mpmath>=1.3",
 ]
 
-[tool.setuptools]
-# The framework is script-style (modules run via sys.path insertion);
-# expose the two packages for import-based use.
-packages = ["cg_core", "cg_frg"]
+[tool.setuptools.packages.find]
+include = ["cg_core", "cg_core.*", "cg_frg", "cg_frg.*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-q"
+addopts = "-q -p no:cacheprovider"
 markers = [
-    "physics: physics benchmark tests (theoretical EXPECTED_BY_THEORY values)",
+    "physics: declared-formula checks and numerical regressions",
     "store: tests that read cg_params.json (the run-time store)",
+    "numerical: independent quadrature, interval bounds, refinement and complete response calculations",
+    "auxiliary: presentation and reviewer-interface checks",
+    "release_audit: complete source/store audits, also executed directly by the release verifier",
 ]

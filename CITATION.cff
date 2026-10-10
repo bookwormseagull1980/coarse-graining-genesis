@@ -1,43 +1,94 @@
+# =============================================================================
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
+# =============================================================================
+
 cff-version: 1.2.0
-title: "Coarse-Graining Genesis Framework V4.0"
-message: "If you use this software, please cite it using the metadata from this file."
+title: "Coarse-Graining Genesis Framework V5.0"
+message: "Cite this software and the companion manuscripts relevant to the calculation. Full references are listed below and in REFERENCES.md."
 type: software
 authors:
   - family-names: Guo
     given-names: Jinku
     affiliation: "Northwestern Polytechnical University, Xi'an, China"
     orcid: "https://orcid.org/0009-0000-6600-6171"
-version: "4.0.0"
-date-released: "2026-08-23"
-license: MIT
+version: "5.0.0"
+notes: "License and additional attribution terms are provided in LICENSE."
 repository-code: "https://github.com/bookwormseagull1980/coarse-graining-genesis"
-identifiers:
-  - type: doi
-    value: 10.5281/zenodo.22067006
 abstract: >-
-  A provenance-audited spectral framework computing gauge structure, fermion
-  content and mass scales from the Laplace and Dirac spectra of a compact
-  internal space (RP^3).
+  Spectral calculations of effective couplings, mass scales, macroscopic
+  tensor response and cosmological observables, with parameter provenance,
+  numerical bounds and independently testable source-response relations.
 keywords:
   - spectral datum
   - coarse-graining
   - gauge structure
   - fermion content
   - mass scales
-preferred-citation:
-  type: article
-  title: "The spectrum of a compact internal space. II. Effective couplings and mass scales"
-  authors:
-    - family-names: Guo
-      given-names: Jinku
-  year: 2026
-  doi: 10.5281/zenodo.22067469
-
 references:
-  - type: article
-    title: "The spectrum of a compact internal space. I. Gauge structure and fermion content"
+  - type: unpublished
+    title: "Certified Spectral Computation for Semilinear Evolution: Finite Records and Polynomial Bit Cost"
     authors:
       - family-names: Guo
         given-names: Jinku
     year: 2026
-    doi: 10.5281/zenodo.22067118
+    notes: "Unpublished manuscript; cited as Guo (2026a)."
+  - type: unpublished
+    title: "Coarse-Graining and Long-Range Response in Generated Systems"
+    authors:
+      - family-names: Guo
+        given-names: Jinku
+    year: 2026
+    notes: "Unpublished manuscript; cited as Guo (2026b)."
+  - type: unpublished
+    title: "Dynamics of Generated Spectra from Minimal Change: Certified Function Classes and Finite Windows"
+    authors:
+      - family-names: Guo
+        given-names: Jinku
+    year: 2026
+    notes: "Unpublished manuscript; cited as Guo (2026c)."
+  - type: unpublished
+    title: "The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap"
+    authors:
+      - family-names: Guo
+        given-names: Jinku
+    year: 2026
+    notes: "Unpublished manuscript; cited as Guo (2026d)."
+  - type: unpublished
+    title: "A Spectral Construction of Natural-Number Arithmetic"
+    authors:
+      - family-names: Guo
+        given-names: Jinku
+    year: 2026
+    notes: "Unpublished manuscript; cited as Guo (2026e)."
+  - type: unpublished
+    title: "A Spectral Criterion for Emergent Gravity"
+    authors:
+      - family-names: Guo
+        given-names: Jinku
+    year: 2026
+    notes: "Unpublished manuscript; cited as Guo (2026f)."
+  - type: unpublished
+    title: "The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales"
+    authors:
+      - family-names: Guo
+        given-names: Jinku
+    year: 2026
+    notes: "Unpublished manuscript; cited as Guo (2026g)."
+  - type: unpublished
+    title: "The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation"
+    authors:
+      - family-names: Guo
+        given-names: Jinku
+    year: 2026
+    notes: "Unpublished manuscript; cited as Guo (2026h)."

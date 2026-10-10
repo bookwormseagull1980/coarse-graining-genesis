@@ -1,40 +1,32 @@
 /-
- Coarse-Graining Genesis Framework V4.0
- 
- Author:      Jinku Guo <guojk@nwpu.edu.cn>
- Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
- ORCID:       0009-0000-6600-6171
- 
- DOI records:
-   [Software] 10.5281/zenodo.22067006
-   [Paper I]  10.5281/zenodo.22067118
-   [Paper II] 10.5281/zenodo.22067469
- 
- Part of the V4 spectral framework, whose physics is presented in the
- companion papers:
-   [I]  "The spectrum of a compact internal space.
-         I. Gauge structure and fermion content"
-        DOI: 10.5281/zenodo.22067118
-   [II] "The spectrum of a compact internal space.
-         II. Effective couplings and mass scales"
-        DOI: 10.5281/zenodo.22067469
+Coarse-Graining Genesis Framework V5.0
+Author: Jinku Guo <guojk@nwpu.edu.cn>
+Northwestern Polytechnical University, Xi'an 710072, China
+ORCID: 0009-0000-6600-6171
+References:
+DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+Full bibliography: REFERENCES.md and CITATION.cff.
 -/
 
 /-
-The non-perturbative internalisation of the six BBN constants (2026-08-17, pinned)
+Content identities in the specified BBN constitutive readouts
 ==================================================================================
 
-The user's key methodological correction: the framework uses no relativistic
-correction, no loop diagrams — the framework is itself non-perturbative.
-g_A, Δ_EM, δ_R, δ_N are pinned directly by the framework's spectrum / content ratio
-/ 2π period (not QFT loop diagrams):
+The BBN implementation assigns g_A, Δ_EM, δ_R and δ_N through the
+following constitutive relations. The formal checks below concern their
+rational content factors; the hadronic assignments are stated in Guo (2026g).
 
-  g_A   = N_g·Δ_s/π      = 2(d−1)/π = 4/π = 1.273 (+0.07%)
-  Δ_EM  = (1−1/(2π))αΛ_QCD            = 1.2725 MeV (+0.19%)
-  δ_R   = 1 + (1−τ)/(8π)              = 1.0390 (−0.00%)
-  δ_N   = √3/(3(2π)²)                 = 0.01462 (N_eff=3.0439, −0.00%)
+  g_A   = N_g·Δ_s/π      = 2(d−1)/π = 4/π
+  Δ_EM  = (1−1/(2π))αΛ_QCD
+  δ_R   = 1 + (1−τ)/(8π)
+  δ_N   = √3/(3(2π)²),    N_eff = 3(1+δ_N)
 
-Core content (framework-internal quantities, first principles):
+Content identities in the specified normalisation:
   N_g·Δ_s = 2(d−1) = 4 (the conformal-weight form, d=N_c=3)
   τ = (N_L−N_R)/(N_f·ΣY²) = 1/50
   π = the internal-space geometry (the same thread as the string tension σ=(λ/π)Λ², r=(1/2π)²)

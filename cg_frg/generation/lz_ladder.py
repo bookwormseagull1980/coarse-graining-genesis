@@ -1,32 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/generation/lz_ladder.py — V4.0: the Landau-Zener generation
+cg_frg/generation/lz_ladder.py — V5.0: the Landau-Zener generation
 hierarchy
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The fermion mass ratios are the LZ ladder of the generation modes:
 the extrusion of the modes n = {0, 2, 4} (window_capacity) by the
@@ -56,7 +49,7 @@ first-principles: ×4 (up, the n=4→2 label factor ln 2²),
 e^{−kL_CMB/3} (down, the so(4) 6-generator dilution), e^{√(2π)}
 (lepton, the Euclidean period 2L = √(2π)).
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 The sector indices are the internal ladder (sector_alpha — the
 window width minus the torsion, the 9/8 hypercharge identity, the
@@ -101,24 +94,22 @@ def compute() -> dict:
     ms_md = math.exp(2.0 * alpha_sd)
 
     pset("m_t_over_m_c", mt_mc, provenance="DERIVED", role="internal",
+         dependencies=("alpha_up",),
          note=f"e^(2 alpha_up) = {mt_mc:.1f} (the internal alpha_up from "
               f"sector_alpha)")
     pset("m_b_over_m_s", mb_ms, provenance="DERIVED", role="internal",
+         dependencies=("alpha_down",),
          note=f"e^(2 alpha_dn) = {mb_ms:.2f} (the 9/8 ladder alpha_dn)")
     pset("m_t_over_m_u", mt_mu, provenance="DERIVED", role="internal",
+         dependencies=("alpha_up", "kL_CMB"),
          note=f"e^(2 alpha_up) e^(2 kL_CMB + ln4) = {mt_mu:.0f}")
     pset("alpha_sd", alpha_sd, provenance="DERIVED",
+         dependencies=("alpha_down", "kL_CMB"),
          note=f"alpha_sd = alpha_dn - kL_CMB/6 = {alpha_sd:.6f} (the down "
               f"first-gen step: CMB window over the so(4) 6 generators — "
-              f"the colour dilution).  SYMMETRY FORM (2026-08-16): "
-              f"alpha_sd = Delta_f(1 - s0/N_R) = (3/2)(1 - 2tau/7) = "
-              f"{1.5*(1-2*0.02/7):.6f} (the fermion conformal weight "
-              f"Delta_f = d/2 = 3/2 times the gravity-higher-order "
-              f"correction 1 - s0/N_R; s0/N_R = n_broken/(N_f SigmaY2 N_R) "
-              f"= 2/(15*(10/3)*7) = 1/175, HALF the J=2 EC first-order "
-              f"torsion shift N_g tau/14 = 8tau/14, factor 2 = (d+1)/2; "
-              f"matches the closure to -0.05%)")
+              f"the colour dilution)")
     pset("m_s_over_m_d", ms_md, provenance="DERIVED", role="internal",
+         dependencies=("alpha_down", "kL_CMB"),
          note=f"m_s/m_d = e^(2 alpha_sd) = {ms_md:.2f} (the down first-gen "
               f"colour-dilution e^(2 a_dn - kL_CMB/3))")
     # The lepton first-generation:
@@ -126,6 +117,7 @@ def compute() -> dict:
     # e^{sqrt(2 pi)} = the Euclidean period (2L = sqrt(2 pi)).
     mmu_me = math.exp(2.0 * al + math.sqrt(2.0 * math.pi))
     pset("m_mu_over_m_e", mmu_me, provenance="DERIVED", role="internal",
+         dependencies=("alpha_lepton",),
          note=f"m_mu/m_e = e^(2 alpha_lp + sqrt(2pi)) = {mmu_me:.1f} (the "
               f"lepton first-gen Euclidean-period factor e^{{sqrt(2pi)}})")
     return {"alpha_up": au, "alpha_down": ad, "alpha_lepton": al,

@@ -1,32 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/ewsb/ew_precision.py —V4.0: the electroweak precision
+cg_frg/ewsb/ew_precision.py —V5.0: the electroweak precision
 observables (the M_G -> M_Z interface block)
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The interface between the framework and the Standard Model is a
 boundary-condition problem, not an embedding: the spectral sums
@@ -75,27 +68,26 @@ LEVEL OF THE COMPUTATION
               couplings (the running carries the dominant radiative
               content; the genuine one-loop self-energies at the Z
               pole are not included).
-  * M_W:      Born + the one-loop rho-parameter correction.  The
-              remaining one-loop remainder Delta r_rem of the
-              on-shell scheme (bosonic + light-fermion; in the SM
-              Delta r_rem ~ +0.002, shifting M_W by ~ -0.05 GeV)
-              is NOT included: the __main__ formula check against
-              the SM input set quantifies its effect explicitly
-              (the same code gives M_W = 80.53 with the SM inputs
-              against the known full one-loop result 80.36).
-  * Gamma_Z:  Born + QCD/QED radiators.  The electroweak vertex
-              corrections (e.g. the ~ -0.6% top-loop suppression of
-              Z -> b bbar) and the fermion-mass phase-space factors
-              (O(m_f^2/M_Z^2) <= 1e-3) are not included.
+  * M_W:      Born + the running electromagnetic coupling and
+              the one-loop rho-parameter correction. The retained
+              Delta r contains these two contributions. A separate
+              comparison diagnostic evaluates the same finite-order
+              expression with the registered Standard-Model inputs.
+  * Gamma_Z:  Born + massless non-singlet QCD/QED radiators. This
+              baseline uses the running gauge-coupling angle. The
+              companion neutral-current calculation publishes the
+              common improved-Born angle and normalization, together
+              with the leading non-universal bottom interference,
+              as one consistent set of partial widths and ratios.
+              Finite fermion masses require mass-scheme matching.
   * m_H:      tree-level (no radiative shift of the quartic).
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
-Every input is a DERIVED framework value from cg_params.json.
+Production inputs are DERIVED framework values from cg_params.json.
 The observed values are read from the SM comparison store
-(sm_inputs.json) and appear only as comparison targets in the
-printout and in the reproduce closure table; they never enter a
-computation.
+(reference_inputs.json) for the comparison tables and the separate
+finite-order formula diagnostic.
 """
 
 from __future__ import annotations
@@ -109,7 +101,8 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get, set as pset, sm_value, compare_and_set  # noqa: E402
-from cg_core.beta_functions import beta_gauge  # noqa: E402
+from cg_core.gauge_running import run_geometric  # noqa: E402
+from cg_core.electroweak import neutral_current_widths, veltman_delta_rho  # noqa: E402
 
 # 1 GeV^-2 = 0.389379 mb = 3.89379e5 nb (the standard cross-section
 # conversion; 1 mb = 1e-27 cm^2).
@@ -117,23 +110,15 @@ GEV2_TO_NB = 3.89379e5
 
 
 def run_to(g1_MG: float, g2_MG: float, g3_MG: float, M_G: float,
-           mu: float, steps_per_decade: int = 400) -> tuple:
+           mu: float, steps_per_decade: int = 8) -> tuple:
     """Integrate the geometric two-loop RGE from M_G to mu.
 
-    t = ln mu, Euler steps with steps_per_decade steps per e-fold
-    (the geometric_couplings convention), with the geometric Yukawa
-    y_0 = 1.  Returns (g1, g2, g3) at mu.
+    Checked RK4 with step doubling and geometric Yukawa y_0 = 1.
+    The density argument specifies the initial steps per e-fold.
+    Returns (g1, g2, g3) at mu.
     """
-    dt = math.log(mu / M_G)
-    n = max(1, int(round(abs(dt) * steps_per_decade)))
-    h = dt / n
-    g1, g2, g3 = g1_MG, g2_MG, g3_MG
-    for _ in range(n):
-        b = beta_gauge(g1, g2, g3, 1.0)      # y_0 = 1 (geometric)
-        g1 += h * b[0]
-        g2 += h * b[1]
-        g3 += h * b[2]
-    return g1, g2, g3
+    return run_geometric((g1_MG, g2_MG, g3_MG), M_G, mu,
+                         steps_per_efold=steps_per_decade)
 
 
 def mz_formula(v: float, g1: float, g2: float) -> float:
@@ -143,7 +128,7 @@ def mz_formula(v: float, g1: float, g2: float) -> float:
 
 
 def mz_fixed_point(v: float, g1_MG: float, g2_MG: float, g3_MG: float,
-                   M_G: float) -> tuple:
+                   M_G: float, *, max_iterations: int = 40) -> tuple:
     """The self-consistent internal Z mass.
 
     Solve mu = (v/2) sqrt(g2(mu)^2 + (3/5) g1(mu)^2) with the
@@ -153,16 +138,22 @@ def mz_fixed_point(v: float, g1_MG: float, g2_MG: float, g3_MG: float,
     precision in a handful of steps.  Returns (M_Z, g1, g2, g3) at
     the fixed point.
     """
+    if not math.isfinite(v) or v <= 0:
+        raise ValueError("v must be finite and positive")
     g1v, g2v, _ = run_to(g1_MG, g2_MG, g3_MG, M_G, v)
     mu = mz_formula(v, g1v, g2v)             # the first estimate
-    for _ in range(40):
+    for _ in range(max_iterations):
         g1, g2, g3 = run_to(g1_MG, g2_MG, g3_MG, M_G, mu)
         mu_new = mz_formula(v, g1, g2)
         if abs(mu_new - mu) / mu < 1e-12:
             mu = mu_new
             break
         mu = mu_new
+    else:
+        raise RuntimeError("self-consistent M_Z iteration did not converge")
     g1, g2, g3 = run_to(g1_MG, g2_MG, g3_MG, M_G, mu)
+    if abs(mz_formula(v, g1, g2) / mu - 1.0) > 2e-12:
+        raise RuntimeError("self-consistent M_Z failed its forward residual")
     return mu, g1, g2, g3
 
 
@@ -176,13 +167,7 @@ def delta_rho(G_F: float, mt: float, mb: float) -> float:
 
     In the limit mb -> 0 this reduces to 3 G_F mt^2/(8 pi^2 sqrt(2)).
     """
-    if abs(mt - mb) < 1e-6:
-        return 3.0 * G_F * mt * mt / (8.0 * math.pi * math.pi * math.sqrt(2.0))
-    t2 = mt * mt
-    b2 = mb * mb
-    bracket = (t2 + b2 - 2.0 * t2 * b2 / (t2 - b2)
-               * math.log(t2 / b2))
-    return 3.0 * G_F * bracket / (8.0 * math.pi * math.pi * math.sqrt(2.0))
+    return veltman_delta_rho(G_F, mt, mb)
 
 
 def solve_MW(M_Z: float, alpha0: float, alpha_MZ: float, G_F: float,
@@ -193,67 +178,47 @@ def solve_MW(M_Z: float, alpha0: float, alpha_MZ: float, G_F: float,
         Delta r = Delta alpha - (c^2/s^2) Delta rho,
 
     with Delta alpha = 1 - alpha(0)/alpha(M_Z).  The remaining
-    one-loop Delta r_rem is omitted (documented).  Returns
-    (s^2, M_W).
+    one-loop Delta r_rem is omitted (documented). With x=s^2 this
+    reduces exactly to (1-x)[x*(1-Delta alpha-Delta rho)+Delta rho]=A.
+    The physical x<1/2 branch is solved algebraically and checked in
+    the original equation. ``iters`` is retained for call compatibility.
+    Returns (s^2, M_W); invalid/no-real-root inputs raise ValueError.
     """
+    if not all(math.isfinite(x) and x > 0 for x in (M_Z, alpha0, alpha_MZ, G_F)):
+        raise ValueError("M_Z, alpha0, alpha_MZ and G_F must be positive")
+    if not math.isfinite(d_rho):
+        raise ValueError("Delta rho must be finite")
     d_alpha = 1.0 - alpha0 / alpha_MZ
     A = math.pi * alpha0 / (math.sqrt(2.0) * G_F * M_Z * M_Z)
-    s2 = 0.23                                   # initial guess
-    for _ in range(iters):
-        c2 = 1.0 - s2
-        d_r = d_alpha - (c2 / s2) * d_rho
-        s2c2 = A / (1.0 - d_r)
-        s2_new = 0.5 * (1.0 - math.sqrt(max(1.0 - 4.0 * s2c2, 0.0)))
-        if abs(s2_new - s2) < 1e-13:
-            s2 = s2_new
-            break
-        s2 = s2_new
+    B = 1.0 - d_alpha - d_rho
+    linear = B - d_rho
+    disc = linear * linear - 4.0 * B * (A - d_rho)
+    if B <= 0 or disc < 0:
+        raise ValueError("M_W relation has no admissible real weak-branch root")
+    denominator = linear + math.sqrt(disc)
+    if denominator <= 0:
+        raise ValueError("M_W relation has no admissible weak-branch root")
+    s2 = 2.0 * (A - d_rho) / denominator
+    if not 0 < s2 <= 0.5:
+        raise ValueError("M_W root lies outside 0 < sin²(theta_W) <= 1/2")
+    d_r = d_alpha - (1.0 - s2) / s2 * d_rho
+    if 1.0 - d_r <= 0:
+        raise ValueError("M_W root has nonpositive Sirlin denominator")
+    rhs = A / (1.0 - d_r)
+    if abs(s2 * (1.0 - s2) - rhs) > 2e-12 * max(abs(rhs), 1e-15):
+        raise RuntimeError("M_W root failed the original equation residual")
     return s2, M_Z * math.sqrt(1.0 - s2)
 
 
 def z_widths(M_Z: float, s2_eff: float, G_F: float, alpha_MZ: float,
              alpha_s_MZ: float) -> dict:
-    """The partial Z widths at Born level with the QCD and QED
-    radiators (GeV).
+    """Born partial widths with massless QCD/QED radiators, in GeV.
 
-        Gamma_f = N_c G_F M_Z^3/(6 pi sqrt(2))
-                  (g_Vf^2 + g_Af^2) (1 + delta_QCD) (1 + 3 Q_f^2 alpha/4 pi),
-
-    g_Vf = T3_f - 2 Q_f s^2_eff, g_Af = T3_f.  The top quark is
-    above threshold and is excluded; the fermion-mass phase-space
-    factors are O(m_f^2/M_Z^2) <= 1e-3 and are not included.
+    The shared amplitude uses rho_NC=1 and no non-universal top term
+    for this baseline. Effective neutral-current production uses the
+    same function with its common rho_NC, angle and bottom interference.
     """
-    G0 = G_F * M_Z ** 3 / (6.0 * math.pi * math.sqrt(2.0))
-    d_qcd = alpha_s_MZ / math.pi + 1.409 * (alpha_s_MZ / math.pi) ** 2
-    fermions = [
-        # (name, N_c, Q, T3, is_quark)
-        ("e", 1, -1.0, -0.5, False),
-        ("mu", 1, -1.0, -0.5, False),
-        ("tau", 1, -1.0, -0.5, False),
-        ("nu_e", 1, 0.0, 0.5, False),
-        ("nu_mu", 1, 0.0, 0.5, False),
-        ("nu_tau", 1, 0.0, 0.5, False),
-        ("u", 3, 2.0 / 3.0, 0.5, True),
-        ("c", 3, 2.0 / 3.0, 0.5, True),
-        ("d", 3, -1.0 / 3.0, -0.5, True),
-        ("s", 3, -1.0 / 3.0, -0.5, True),
-        ("b", 3, -1.0 / 3.0, -0.5, True),
-    ]
-    w = {}
-    for name, Nc, Q, T3, isq in fermions:
-        gV = T3 - 2.0 * Q * s2_eff
-        gA = T3
-        wi = Nc * G0 * (gV * gV + gA * gA)
-        if isq:
-            wi *= 1.0 + d_qcd
-        if Q != 0.0:
-            wi *= 1.0 + 3.0 * Q * Q * alpha_MZ / (4.0 * math.pi)
-        w[name] = wi
-    w["l"] = w["e"] + w["mu"] + w["tau"]
-    w["nu"] = w["nu_e"] + w["nu_mu"] + w["nu_tau"]
-    w["had"] = w["u"] + w["c"] + w["d"] + w["s"] + w["b"]
-    w["Z"] = w["l"] + w["nu"] + w["had"]
-    return w
+    return neutral_current_widths(M_Z, s2_eff, G_F, alpha_MZ, alpha_s_MZ)
 
 
 def sigma_had_nb(M_Z: float, G_e: float, G_had: float, G_Z: float) -> float:
@@ -317,17 +282,29 @@ def compute() -> dict:
     m_tau = m_mu * math.exp(2.0 * al)
 
     # ---- publish (DERIVED; observed values only as comparison) ----
+    # These sets identify stored value inputs, following the actual formulas.
+    # For example, the Higgs mass does not depend on the colour-condensate
+    # quartic mentioned in its explanatory note, and lepton widths do not
+    # depend on the separately supplied strong radiator.
+    gauge_inputs = ("v_HIGGS", "g1_MG_geo", "g2_MG", "g3_MG_geo", "M_G")
+    onshell_inputs = gauge_inputs + ("alpha_em_0_pred", "alpha_inv_MZ_pred",
+                                    "m_t_pred", "m_b_pred")
+    lepton_inputs = gauge_inputs + ("alpha_inv_MZ_pred",)
+    hadron_inputs = lepton_inputs + ("alpha_s_MZ_pred",)
     pset("M_Z_pred", M_Z, provenance="DERIVED", role="internal",
+         dependencies=gauge_inputs,
          note=f"M_Z = (v/2) sqrt(g2^2 + (3/5) g1^2) at the "
               f"self-consistent fixed point mu = M_Z with the geometric "
               f"two-loop RGE = {M_Z:.4f} GeV (no external scale; the "
               f"tree-level mass formula evaluated on the two-loop-run "
               f"geometric couplings)")
     pset("s2_thetaW_MZ", s2_msbar, provenance="DERIVED", role="internal",
+         dependencies=gauge_inputs,
          note=f"s^2(M_Z) = g'^2/(g2^2+g'^2) at the internal M_Z = "
               f"{s2_msbar:.6f} (the MS-bar-like mixing from the geometric "
               f"couplings at the Z pole)")
     compare_and_set("M_W_pred", M_W, sm_value("m_W_obs"),
+                    dependencies=onshell_inputs,
                     note=f"M_W = {M_W:.4f} GeV —the on-shell Sirlin relation "
                          f"with Delta r = Delta alpha - (c^2/s^2) Delta rho "
                          f"(the exact one-loop t-b Veltman rho); Delta r_rem "
@@ -337,15 +314,18 @@ def compute() -> dict:
                          f"{alpha_inv_MZ:.3f}, G_F = 1/(sqrt(2) v^2) = "
                          f"{G_F:.8e}")
     pset("s2_thetaW_os", s2_os, provenance="DERIVED", role="internal",
+         dependencies=onshell_inputs,
          note=f"sin^2 theta_W (on-shell) = 1 - M_W^2/M_Z^2 = {s2_os:.6f} "
               f"from the internal M_Z = {M_Z:.3f} and M_W = {M_W:.3f}")
     pset("rho_param", rho, provenance="DERIVED", role="internal",
+         dependencies=("v_HIGGS", "m_t_pred", "m_b_pred"),
          note=f"rho = 1/(1 - Delta rho) = {rho:.6f} with the exact "
               f"one-loop t-b Delta rho (Veltman) = {d_rho:.6f}; the "
               f"comparison target is the SM improved-Born value "
               f"1/(1 - Delta rho_SM) ~ 1.0094, NOT the PDG-fit "
               f"rho_eff = 1.0004 (the after-subtraction quantity)")
     compare_and_set("Gamma_Z_pred", w["Z"], sm_value("Gamma_Z_obs"),
+                    dependencies=hadron_inputs,
                     note=f"Gamma_Z = {w['Z']:.4f} GeV —the sum of the Born "
                          f"partial widths with the QCD radiator alpha_s/pi "
                          f"+ 1.409 (alpha_s/pi)^2 (quarks) and the QED "
@@ -353,35 +333,44 @@ def compute() -> dict:
                          f"EW vertex corrections not included; the top is "
                          f"above threshold")
     pset("Gamma_had_pred", w["had"], provenance="DERIVED", role="internal",
+         dependencies=hadron_inputs,
          note=f"Gamma_had = {w['had']:.4f} GeV (u,c,d,s,b at Born + "
               f"QCD/QED radiators)")
     pset("Gamma_b_pred", w["b"], provenance="DERIVED", role="internal",
+         dependencies=hadron_inputs,
          note=f"Gamma_b = {w['b']:.4f} GeV (Born + QCD/QED radiators; "
-              f"the ~ -0.6% top-loop vertex correction is not included)")
+              f"the bottom vertex belongs to the effective neutral-current readout)")
     pset("Gamma_l_pred", w["l"], provenance="DERIVED", role="internal",
+         dependencies=lepton_inputs,
          note=f"Gamma_l = {w['l']:.4f} GeV (e + mu + tau, Born + QED "
               f"radiator)")
     pset("Gamma_inv_pred", w["nu"], provenance="DERIVED", role="internal",
+         dependencies=gauge_inputs,
          note=f"Gamma_inv = {w['nu']:.4f} GeV (three neutrino species, "
               f"Born)")
     pset("sigma_had_pred", sig_had, provenance="DERIVED", role="internal",
+         dependencies=hadron_inputs,
          note=f"sigma_had^0 = 12 pi Gamma_e Gamma_had/(M_Z^2 Gamma_Z^2) "
               f"= {sig_had:.3f} nb")
     pset("R_l_pred", R_l, provenance="DERIVED", role="internal",
+         dependencies=hadron_inputs,
          note=f"R_l = Gamma_had/Gamma_e = {R_l:.3f} (single-species "
               f"leptonic definition, PDG convention)")
     pset("R_b_pred", R_b, provenance="DERIVED", role="internal",
+         dependencies=hadron_inputs,
          note=f"R_b = Gamma_b/Gamma_had = {R_b:.5f}")
     compare_and_set("m_H_pred", m_H, sm_value("m_H_obs"),
+                    dependencies=("lambda_H_pseudo", "v_HIGGS"),
                     note=f"m_H = sqrt(2 lambda_H) v = {m_H:.3f} GeV (tree "
                          f"level with the Higgs quartic lambda_H = {lam_h:.6f}, "
                          f"distinct from the colour-singlet order parameter "
                          f"lambda = {get('order_parameter_lambda'):.3f})")
     pset("m_mu_pred", m_mu, provenance="DERIVED", role="internal",
+         dependencies=("m_e_pred", "m_mu_over_m_e"),
          note=f"m_mu = m_e (m_mu/m_e) = {m_mu:.6f} GeV (the absolute muon "
-              f"mass from the internal ladder; fills the ratio-only gap "
-              f"of lz_ladder)")
+              f"mass from the internal ladder)")
     pset("m_tau_pred", m_tau, provenance="DERIVED", role="internal",
+         dependencies=("m_e_pred", "m_mu_over_m_e", "alpha_lepton"),
          note=f"m_tau = m_mu e^(2 alpha_lp) = {m_tau:.6f} GeV (the "
               f"absolute tau mass from the internal lepton ladder)")
 
@@ -396,15 +385,11 @@ def compute() -> dict:
 
 
 def formula_check() -> dict:
-    """The formula check: run the same M_W machinery on the SM input
-    set (comparison only) to quantify the omitted Delta r_rem.
+    """Evaluate the retained M_W formula with registered comparison inputs.
 
-    With the SM inputs (M_Z = 91.1876, G_F = 1.1663788e-5,
-    alpha(0)^-1 = 137.036, alpha(M_Z)^-1 = 127.952, m_t = 172.69,
-    m_b = 4.18) the same code returns M_W ~ 80.53 GeV, against the
-    known full one-loop SM result ~ 80.36 GeV; the +0.17 GeV is
-    exactly the omitted Delta r_rem.  This is a verification of the
-    formulas, not a physics output.
+    The diagnostic uses the same electromagnetic running and top-bottom
+    contribution to Delta rho as the production calculation. Its inputs
+    and output remain in the isolated comparison calculation.
     """
     M_Z = sm_value("M_Z")
     G_F = sm_value("G_F_obs")
@@ -414,14 +399,13 @@ def formula_check() -> dict:
     mb = sm_value("m_b_obs")
     d_rho = delta_rho(G_F, mt, mb)
     s2, M_W = solve_MW(M_Z, alpha0, alpha_MZ, G_F, d_rho)
-    return {"M_W": M_W, "s2": s2, "d_rho": d_rho,
-            "full_one_loop_SM": 80.36}
+    return {"M_W": M_W, "s2": s2, "d_rho": d_rho}
 
 
 def main() -> int:
     r = compute()
     print("=" * 72)
-    print("  V4 ELECTROWEAK PRECISION OBSERVABLES (M_G -> M_Z block)")
+    print("  V5 ELECTROWEAK PRECISION OBSERVABLES (M_G -> M_Z block)")
     print("=" * 72)
     print(f"  internal M_Z (self-consistent two-loop) = {r['M_Z']:.4f} GeV"
           f"   (obs {sm_value('M_Z'):.4f}, "
@@ -471,14 +455,11 @@ def main() -> int:
           f"{(r['m_H']/sm_value('m_H_obs')-1)*100:+.3f}%)")
     print(f"  m_mu / m_tau (internal ladder)           = {r['m_mu']*1000:.2f}"
           f" MeV / {r['m_tau']:.4f} GeV"
-          f"   (obs 105.66 MeV / {sm_value('m_tau_obs'):.3f} GeV)")
+          f"   (obs {1000*sm_value('m_mu_obs'):.2f} MeV / {sm_value('m_tau_obs'):.3f} GeV)")
     fc = formula_check()
     print("-" * 72)
     print(f"  formula check (SM inputs, Delta r_rem omitted): "
           f"M_W = {fc['M_W']:.3f} GeV")
-    print(f"    (the known full one-loop SM result is ~{fc['full_one_loop_SM']:.2f}"
-          f" GeV; the +{fc['M_W']-fc['full_one_loop_SM']:.2f} GeV is the "
-          f"omitted Delta r_rem)")
     print("ew_precision OK")
     return 0
 

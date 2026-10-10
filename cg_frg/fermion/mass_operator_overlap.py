@@ -1,42 +1,33 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/fermion/mass_operator_overlap.py — V4.0: the mass-operator
-overlap (the absolute Yukawa from the geometry)
+cg_frg/fermion/mass_operator_overlap.py — V5.0: finite connector seed
+and the specified absolute mass readout
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
-The fermion masses are m_f = y_f(M_G)·v/√2.  The absolute Yukawa
-y_f(M_G) is the overlap of the fermion mode with the mass
-operator.
+The mass readout is m_f = y_f·v/√2. The unit top seed is evaluated
+on the actual finite elementary connector and a normalized pair.
 
-  · the (0,0) SCALAR channel (the torsion singlet T_abc γ^{abc} —
-    the same-SO(4) diagonal overlap): the TOP base y_0 = 1.0
-    (the (0,0) diagonal overlap is EXACTLY 1 by the SO(4)
-    Clebsch-Gordan normalisation).  m_t = y_0·v/√2 = 174.08 GeV
-    (+0.80%).
+  · the angular (0,0) singlet factor and the specified unit
+    elementary connector give y_0=1. This finite pairing does not
+    determine the reduced spatial torsion matrix element, the
+    physical kinetic normalization, or a running Yukawa boundary.
 
   · the DOWN-SECTOR ABSOLUTE BASE (the closure): the bottom is the
     GEOMETRIC MEAN of the strange and the top, dressed by the
@@ -49,7 +40,7 @@ operator.
     1−n_s the spectral tilt, kL_CMB the CMB window, 2τ the EC
     torsion correction — all internal.
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 m_t uses the framework's own v (vev_closure); y_b/y_t is the down
 LZ double ladder times the window-evolution factor — all internal
@@ -67,49 +58,47 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get, set as pset  # noqa: E402
+from cg_core.finite_connector import elementary_connector  # noqa: E402
+from cg_core.modal_algebra import clebsch_gordan  # noqa: E402
+import numpy as np  # noqa: E402
 
-# The top base y_0 = 1 — the EXPLICIT wave-function matrix element
-# (2026-08-17, migrated from the electron_mass_channel_confirm record).
-# The mass operator is the (0,0) scalar of SO(4) (the torsion singlet
-# T_abc γ^abc).  A generation mode n carries the SO(4) content
-# (j_L, j_R) = ((n+1)/2, n/2) (rp3_spectrum.spinor_quantum_numbers);
-# the top is n = 0, (j_L, j_R) = (1/2, 0).  The matrix element of the
-# (0,0) scalar between a mode and itself is the product of the two
-# SU(2) Clebsch-Gordan coefficients for the scalar channel:
-#
-#   y_0 = <(j_L,j_R)| (0,0) |(j_L,j_R)> = C(j_L,0,j_L)·C(j_R,0,j_R)
-#
-# where C(j,0,j) = 1 is the SU(2) CG coefficient of the scalar
-# channel — the scalar couples j⊗0 = j with the unique coefficient 1
-# (the (0,0) representation is the identity, and its CG coefficient
-# with itself is exactly one).  Hence y_0 = 1·1 = 1, the EXPLICIT
-# matrix element, not a bare assignment.
+
+def finite_connector_pairing(H, left, right) -> complex:
+    """Full 16-dimensional pairing with caller-supplied states, without projection."""
+    operator = elementary_connector(H)["operator"]
+    left, right = np.asarray(left, dtype=complex), np.asarray(right, dtype=complex)
+    if left.shape != (16,) or right.shape != (16,) or not (
+            np.all(np.isfinite(left)) and np.all(np.isfinite(right))):
+        raise ValueError("finite full-carrier states of length 16 required")
+    return complex(np.vdot(left, operator @ right))
 
 
 def cg_scalar_channel(j: float) -> float:
     """C(j,0,j) = 1 — the SU(2) Clebsch-Gordan coefficient of the
     scalar (j2 = 0) channel: the identity couples j⊗0 = j uniquely,
     with coefficient 1."""
-    return 1.0
+    return clebsch_gordan(j, j, 0, 0, j, j)
 
 
 def mass_operator_matrix_element(jL: float, jR: float) -> float:
-    """⟨(jL,jR)|T_abc γ^abc|(jL,jR)⟩ = C(jL,0,jL)·C(jR,0,jR) = 1.
+    """Specified unit finite seed times its angular singlet coefficients.
 
-    The mass operator is the (0,0) scalar of SO(4) (the torsion
-    singlet); its matrix element between a generation mode (jL,jR)
-    and itself is the product of the two SU(2) scalar-channel CG
-    coefficients C(j,0,j) = 1."""
-    return cg_scalar_channel(jL) * cg_scalar_channel(jR)
+    This readout evaluates the normalized finite connector pairing and
+    the two angular singlet coefficients. Spatial operator matching and
+    external kinetic normalization are specified separately.
+    """
+    left, right = np.eye(16)[0], np.eye(16)[8]
+    seed = finite_connector_pairing([0, 1], left, right)
+    return float(seed.real) * cg_scalar_channel(jL) * cg_scalar_channel(jR)
 
 
-# The top base: n = 0, (j_L, j_R) = (1/2, 0) — the explicit matrix
-# element y_0 = C(1/2,0,1/2)·C(0,0,0) = 1·1 = 1.
+# The normalized finite seed and angular singlet factor; held fixed by the
+# present production boundary prescription, not by a zero physical beta function.
 Y_0 = mass_operator_matrix_element(0.5, 0.0)
 
 
 def top_mass(v: float) -> float:
-    """m_t = y_0·v/√2 — the top mass from the (0,0) overlap."""
+    """m_t = y_0·v/√2 in the specified finite-seed mass readout."""
     return Y_0 * v / math.sqrt(2.0)
 
 
@@ -140,14 +129,15 @@ def compute() -> dict:
     yb_yt = math.exp(-(2.0 * a_dn - ns_tilt * (kL_CMB + 2.0 * tau)))
 
     pset("y_top_base", Y_0, provenance="DERIVED",
-         note="the (0,0) full overlap of the n = 0 mode (the top base)")
+         dependencies=(),
+         note="normalized finite elementary-connector pairing times angular singlet coefficients")
     pset("m_t_pred", mt, provenance="DERIVED", role="internal",
-         note=f"m_t = y_0 v/sqrt(2) = {mt:.1f} GeV — the geometric overlap "
-              f"y_0 = 1.0 is SCALE-INVARIANT (the geometric RGE holds y_0 "
-              f"fixed; only the gauge couplings run), so m_t carries NO "
-              f"Yukawa running; the +0.8% vs the pole mass is the "
-              f"geometric-overlap PREDICTION, not a missing RGE")
+         dependencies=("v_HIGGS",),
+         note=f"m_t = y_0 v/sqrt(2) = {mt:.1f} GeV with the fixed unit finite seed. "
+              "Physical Yukawa running and pole matching require an explicit "
+              "renormalized spatial vertex and kinetic normalization.")
     pset("y_b_over_y_t", yb_yt, provenance="DERIVED", role="internal",
+         dependencies=("alpha_down", "ns_tilt", "kL_CMB", "tau"),
          note=f"y_b/y_t = e^-(2 a_dn - ns_tilt (kL_CMB + 2 tau)) = "
               f"{yb_yt:.6f} (the down LZ double ladder e^-2 a_dn "
               f"times the window-evolution factor "
@@ -158,12 +148,9 @@ def compute() -> dict:
     # The bottom absolute mass (the y_b/y_t cascade): m_b = y_b v/sqrt(2).
     m_b = yb_yt * mt
     pset("m_b_pred", m_b, provenance="DERIVED", role="internal",
-         note=f"m_b = (y_b/y_t) m_t = {m_b:.3f} GeV (the bottom absolute "
-              f"mass from the geometric-mean y_b/y_t closure); the +1.4% "
-              f"vs observed = m_t's +0.8% (the scale-invariant geometric "
-              f"overlap y_0=1, no Yukawa running) + y_b/y_t's geometric-mean "
-              f"first-principles value — the geometric-RGE prediction, not "
-              f"a fixable mechanism")
+         dependencies=("v_HIGGS", "alpha_down", "ns_tilt", "kL_CMB", "tau"),
+         note=f"m_b = (y_b/y_t) m_t = {m_b:.3f} GeV in the specified "
+              "geometric-mean window readout, using the same finite top seed.")
     return {"m_t": mt, "y_0": Y_0,
             "y_b_over_y_t": yb_yt,
             "m_b": m_b}

@@ -1,44 +1,32 @@
 /-
- Coarse-Graining Genesis Framework V4.0
- 
- Author:      Jinku Guo <guojk@nwpu.edu.cn>
- Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
- ORCID:       0009-0000-6600-6171
- 
- DOI records:
-   [Software] 10.5281/zenodo.22067006
-   [Paper I]  10.5281/zenodo.22067118
-   [Paper II] 10.5281/zenodo.22067469
- 
- Part of the V4 spectral framework, whose physics is presented in the
- companion papers:
-   [I]  "The spectrum of a compact internal space.
-         I. Gauge structure and fermion content"
-        DOI: 10.5281/zenodo.22067118
-   [II] "The spectrum of a compact internal space.
-         II. Effective couplings and mass scales"
-        DOI: 10.5281/zenodo.22067469
+Coarse-Graining Genesis Framework V5.0
+Author: Jinku Guo <guojk@nwpu.edu.cn>
+Northwestern Polytechnical University, Xi'an 710072, China
+ORCID: 0009-0000-6600-6171
+References:
+DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+Full bibliography: REFERENCES.md and CITATION.cff.
 -/
 
 /-
-The first-principles content of the conformal-gauge duality N_g·ξ = 1 (Lean 4 formalisation)
+Content identities for the conformal-gauge relation N_g·ξ = 1 (Lean 4 formalisation)
 ===========================================================================================
 
-Proof object (2026-08-18): the [content-ratio algebra] of N_g·ξ = 1 — namely
+Proof object: the content-ratio algebra of N_g·ξ = 1, namely
 the equivalence between this duality (the conformal-coupling form) and its
 conformal-weight form N_g·Δ_s = 2(d−1).
 
-Honest status (the 2026-08-18 verification conclusion):
-  N_g·ξ = 1 is NOT a theorem derived from "the heat-kernel coefficient a₁
-  vanishing" or "the odd-dimensional Weyl/trace-anomaly vanishing" — these
-  routes are mathematically invalid (a₁=0 gives ξ=1/6, not 1/8; odd-dimensional
-  manifolds have no bulk trace anomaly). It is simply the arithmetic product of
-  two [standard facts]:
+The identity is the arithmetic product of two standard quantities:
     (i)  ξ = (d−2)/(4(d−1)) = 1/8 — the Yamabe conformal coupling (a standard
          spectral-geometry result: the unique coupling for which the scalar action
          S=∫√g[(∇φ)²+ξRφ²] is invariant under the Weyl rescaling
          g→Ω²g, φ→Ω^{(2−d)/2}φ, the coefficient of the Yamabe operator
-         Δ+ξR), valid from first principles;
+         Δ+ξR);
     (ii) N_g = N_c²−1 = 8 — the dimension of the su(3) adjoint representation
          (standard group theory).
   Their product: 8·(1/8) = 1.

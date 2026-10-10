@@ -1,41 +1,35 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/ewsb/epsilon_ratio.py — V4.0: the electroweak scale ratio
+cg_frg/ewsb/epsilon_ratio.py — V5.0: the electroweak scale ratio
 ε_L/ε_R
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The electroweak breaking scale is set by the ratio ε of the
 left-right hierarchy: the EW scale v = M_G·ε with ε ≈ 1.4e-16.
-The framework produces ε by two independent lines that agree at
-the 0.3% level:
+The current implementation evaluates two algebraically identical
+parameterizations of the specified corrected window readout. They are
+an internal identity check, not independent physical evidence:
 
   LINE 1 — the window-squared channel (the dynamical line):
       ε = (3α/π)·e^{−4πkL},   α = 1/16π²
-      = 1.4204e-16  (observed 1.4243e-16, −0.27%)
+    Both current functions include the common factor (1-s0*kappa).
     The mechanism: the J=2 squash bifurcation contributes 3α/2; the
     mode crosses the coarse-graining window TWICE (creation and
     stabilisation), each crossing contributing e^{−2πkL} (the same
@@ -44,10 +38,10 @@ the 0.3% level:
 
   LINE 2 — the dilaton-stop line (the zero-point line):
       ε = e^{1/(2π)}·e^{−φ_R3},   φ_R3 = 4πkL − ln(3α/π) + 1/(2π)
-      = 1.4245e-16  (0.02%)
     The 1/(2π) is the Euclidean zero-point (the causal-horizon
     temperature T_eff = k/(2π)); φ_R3 is the dilaton stop position.
-    The two lines imply the same φ_R3 to 0.3% (the mutual check).
+    The current stop also includes -log(1-s0*kappa), so substitution
+    cancels the zero-point factor and reproduces LINE 1 exactly.
 
 THE WINDOW-SQUARED MECHANISM (why e^{−4πkL})
 --------------------------------------------
@@ -57,7 +51,7 @@ created at the window edge and stabilised there, each with the
 LZ survival e^{−2πkL} — the same exponential that governs Δ²_s
 (perturbation_amplitude: D0·e^{−2πkL_CMB}).
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 The ε closure uses only internal quantities (kL, α = 1/16π²).
 """
@@ -101,7 +95,6 @@ def squash_correction() -> float:
       · power level (ρ_Λ): −4s0·κ (4 = m_ν1⁴, the dark-energy weight).
     Paired conservation: v·m_ν3 and m_ν1⁴·weight are conserved to first
     order (the level transfer preserves the total content).
-    (2026-08-16.)
 
     SOURCE OF THE CORRECTION FACTORS:
       L1  κ(2τ)=√((1+2τ)/(1−4τ)^{5/2}) is the squashed-S³
@@ -163,18 +156,17 @@ def compute() -> dict:
     """Publish the two ε lines and their comparison."""
     kL = get("kL")
     ew = epsilon_window(kL)
-    # The dilaton-stop line: φ = 4πkL − ln(3α/π) + 1/(2π) is fixed
-    # by kL alone (the internal stop position — no carried baseline).
+    # The dilaton stop includes the same -ln(1-s0*kappa) squash term
+    # as the window-squared expression, using the common kL and tau.
     ed = epsilon_dilaton(kL)
 
     pset("epsilon_L_over_R", ed, provenance="DERIVED",
-         note="epsilon = (3 alpha/pi) e^{-4 pi kL} (the window-squared "
-              "line; the kL-only dilaton-stop form e^{1/(2pi)} e^{-phi} "
-              "with phi = 4 pi kL - ln(3 alpha/pi) + 1/(2pi) is identical) "
-              "— fully internal, no carried baseline")
+         note="epsilon = (3 alpha/pi) e^{-4 pi kL} (1-s0*kappa), "
+              "with alpha=1/(16 pi^2), s0=2 tau and kappa=kappa(2 tau); "
+              "the dilaton-stop form e^{1/(2pi)} e^{-phi} is identical")
     pset("phi_R3", dilaton_stop(kL), provenance="DERIVED",
          note="the dilaton stop position 4*pi*kL - ln(3*alpha/pi) + "
-              "1/(2*pi) (internal, kL-only)")
+              "1/(2*pi) - ln(1-s0*kappa), with s0=2 tau")
     return {"epsilon_window": ew, "epsilon_dilaton": ed,
             "phi_R3": dilaton_stop(kL)}
 

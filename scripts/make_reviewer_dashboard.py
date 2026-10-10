@@ -1,24 +1,17 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
@@ -36,9 +29,6 @@ import argparse
 import ast
 import html
 import json
-import os
-import re
-import subprocess
 import sys
 import time
 from collections import Counter, defaultdict
@@ -47,6 +37,12 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from cg_core.release import PUBLICATION_NOTICE, publication_metadata
+from cg_core.params import resolved_records, read_store_document
+from scripts.verify_v5 import verification_state
+
 PY = sys.executable
 DEFAULT_OUTPUT = ROOT / "docs" / "reviewer_dashboard.html"
 SCAN_DIRS = ("cg_core", "cg_frg", "scripts", "comparison")
@@ -54,12 +50,17 @@ SOURCE_CALLS = {"get", "sm_value", "get_observed"}
 WRITE_CALLS = {"pset", "sm_set", "compare_and_set"}
 SELECTED_KEYS = [
     "G_N_PDG", "kL", "M_G", "g2_MG", "g1_MG_geo", "g3_MG_geo",
-    "n_generations", "v_HIGGS", "M_Z_pred", "M_W_pred",
+    "n_generations", "v_HIGGS", "M_Z_pred",
     "M_W_pred_lead1loop", "Gamma_b_pred_1loop", "sin2_theta_eff_l_pred",
+    "rho_NC_leading", "sin2_theta_eff_b_pred", "Gamma_l_pred_lead1loop",
+    "Gamma_inv_pred_lead1loop", "Gamma_had_pred_lead1loop", "Gamma_Z_pred_lead1loop",
+    "R_b_pred_lead1loop", "R_l_pred_lead1loop", "sigma_had_pred_lead1loop",
     "m_H_pred",
     "m_t_pred", "m_e_pred", "Omega_Lambda", "Omega_Sigma",
     "T_CMB_GeV", "T_CMB_corrected_K", "endpoint_sigma8",
     "endpoint_S8", "bbn_Neff",
+    "chi_pole_crossing", "external_tensor_Z", "external_tensor_residue",
+    "external_tensor_G", "external_tensor_Pi_critical", "external_tensor_chi_slope",
 ]
 GROUP_ORDER = [
     "scripts", "core", "frg", "gauge", "generation", "ewsb", "fermion",
@@ -87,6 +88,10 @@ SECTOR_LABELS = {
 def load_json(path: Path, default: Any) -> Any:
     if not path.exists():
         return default
+    if path == ROOT / "cg_params.json":
+        return read_store_document(source_root=ROOT)
+    if path == ROOT / "comparison" / "reference_inputs.json":
+        return read_store_document("references", source_root=ROOT)
     return json.loads(path.read_text(encoding="utf-8"))
 
 
@@ -104,64 +109,6 @@ def format_value(value: Any) -> str:
     if isinstance(value, dict):
         return json.dumps(value, ensure_ascii=False, sort_keys=True)
     return str(value)
-
-
-def display_path(path_text: str) -> str:
-    path = Path(path_text)
-    try:
-        return path.resolve().relative_to(ROOT.resolve()).as_posix()
-    except (OSError, ValueError):
-        pass
-    if path_text == PY:
-        return "python"
-    return path_text
-
-
-def display_command(command: list[str]) -> str:
-    parts = []
-    for index, item in enumerate(command):
-        if index == 0 and item == PY:
-            parts.append("python")
-        else:
-            parts.append(display_path(item))
-    return " ".join(parts)
-
-
-def sanitize_output(text: str) -> str:
-    out = text
-    for needle in {
-        str(ROOT),
-        str(ROOT).replace("\\", "/"),
-        str(ROOT).replace("\\", "\\\\"),
-    }:
-        out = out.replace(needle, ".")
-    for needle in {PY, PY.replace("\\", "/"), PY.replace("\\", "\\\\")}:
-        out = out.replace(needle, "python")
-    out = out.replace(".\\.deps", ".deps")
-    return out
-
-
-def run_check(label: str, command: list[str],
-              display_cmd: str | None = None) -> dict[str, Any]:
-    t0 = time.time()
-    proc = subprocess.run(
-        command,
-        cwd=str(ROOT),
-        env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-    )
-    output = sanitize_output((proc.stdout or "") + (proc.stderr or ""))
-    return {
-        "label": label,
-        "ok": proc.returncode == 0,
-        "returncode": proc.returncode,
-        "seconds": round(time.time() - t0, 2),
-        "command": display_cmd or display_command(command),
-        "output": output.strip(),
-    }
 
 
 def call_name(node: ast.AST) -> str | None:
@@ -225,7 +172,7 @@ def scan_sources() -> dict[str, dict[str, list[str]]]:
 
 
 def parse_reproduce_modules() -> list[str]:
-    path = ROOT / "scripts" / "reproduce_v4.py"
+    path = ROOT / "scripts" / "reproduce_v5.py"
     if not path.exists():
         return []
     tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
@@ -347,23 +294,12 @@ def build_anchor_tree(module_rows: list[dict[str, Any]],
     }
 
 
-def verification_verdict() -> str:
-    report = ROOT / "V4_VERIFICATION_REPORT.md"
-    if not report.exists():
-        return "not generated"
-    text = report.read_text(encoding="utf-8", errors="ignore")
-    if re.search(r"\nPASS\n", text):
-        return "PASS"
-    if re.search(r"\nFAIL\n", text):
-        return "FAIL"
-    return "present"
-
-
 def build_data() -> dict[str, Any]:
     cg_store = load_json(ROOT / "cg_params.json", {"parameters": {}})
-    sm_store = load_json(ROOT / "comparison" / "sm_inputs.json", {"parameters": {}})
-    write_log = load_json(ROOT / "params_write_log.json", [])
-    cg_params = cg_store.get("parameters", {})
+    sm_store = load_json(ROOT / "comparison" / "reference_inputs.json", {"parameters": {}})
+    manifest = load_json(ROOT / "run_manifest.json", {})
+    cg_params = resolved_records(cg_store.get("parameters", {}))
+    verified = verification_state(ROOT, manifest=manifest)
     sm_params = sm_store.get("parameters", {})
 
     provenance = Counter(
@@ -398,6 +334,8 @@ def build_data() -> dict[str, Any]:
         if isinstance(rec, dict):
             selected.append({
                 "key": key,
+                "label": (rec.get("quantity_definition") or {}).get("object", key),
+                "unit": (rec.get("quantity_definition") or {}).get("unit", ""),
                 "value": format_value(rec.get("value")),
                 "provenance": rec.get("provenance", ""),
                 "role": rec.get("role", ""),
@@ -422,17 +360,8 @@ def build_data() -> dict[str, Any]:
     edges = dependency_edges(scans, cg_params)
     anchor_tree = build_anchor_tree(module_rows, cg_params)
     audit_results = [
-        run_check("parameter provenance", [PY, "scripts/audit_param_writers.py"],
-                  "python scripts/audit_param_writers.py"),
-        run_check("observation leakage", [PY, "scripts/audit_observation_leakage.py"],
-                  "python scripts/audit_observation_leakage.py"),
-        run_check("Lean source hygiene", [PY, "scripts/audit_lean_sources.py"],
-                  "python scripts/audit_lean_sources.py"),
-        run_check("numeric precision", [PY, "scripts/audit_numeric_precision.py"],
-                  "python scripts/audit_numeric_precision.py"),
-        run_check("path portability", [PY, "scripts/audit_path_portability.py"],
-                  "python scripts/audit_path_portability.py"),
-    ]
+        {**item, "command": item.get("cmd", ""), "output": item.get("output", item.get("summary", ""))}
+        for item in verified["checks"]]
 
     params_table = []
     for key, rec in sorted(cg_params.items()):
@@ -457,11 +386,13 @@ def build_data() -> dict[str, Any]:
 
     return {
         "generated_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "publication": publication_metadata(),
         "root": ".",
+        "run_id": manifest.get("run_id", "unidentified"),
         "counts": {
             "cg_params": len(cg_params),
-            "sm_inputs": len(sm_params),
-            "write_log": len(write_log),
+            "reference_inputs": len(sm_params),
+            "parameter_records": len(cg_params) + len(sm_params),
             "observed_anchors": len(observed_anchors),
             "scale_choices": len(scale_choices),
             "modules": len(modules),
@@ -479,7 +410,8 @@ def build_data() -> dict[str, Any]:
         "params": params_table,
         "writers": writer_rows,
         "audit_results": audit_results,
-        "verification_verdict": verification_verdict(),
+        "verification_verdict": verified["status"],
+        "not_executed": verified["not_executed"],
     }
 
 
@@ -490,37 +422,26 @@ def esc(text: Any) -> str:
 def dashboard_html(data: dict[str, Any]) -> str:
     payload = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     observed = data["observed_anchors"][0]["key"] if data["observed_anchors"] else "none"
-    audit_ok = all(item["ok"] for item in data["audit_results"])
-    status_word = "PASS" if audit_ok else "CHECK"
+    audit_ok = all(item["ok"] for item in data["audit_results"]
+                   if item.get("required", True))
+    current_verified = audit_ok and data["verification_verdict"] == "PASS"
+    status_word = "PASS" if current_verified else "CHECK"
+    leakage_ok = any(item["label"] in {"observation leakage", "observation leakage audit"} and item["ok"]
+                     for item in data["audit_results"])
+    omitted = ""
+    if data.get("not_executed"):
+        omitted = "<p>Not executed in this verification: " + "; ".join(
+            esc(item) for item in data["not_executed"]) + ".</p>"
+    publication_notice = "\n".join(PUBLICATION_NOTICE)
     return f"""<!--
-# =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
-# =============================================================================
+{publication_notice}
 -->
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>V4 Reviewer Dashboard</title>
+<title>V5 Reviewer Dashboard</title>
 <style>
 :root {{
   color-scheme: light dark;
@@ -889,17 +810,17 @@ pre {{
 <main>
   <header>
     <div>
-      <h1>V4 Reviewer Dashboard</h1>
+      <h1>V5 Reviewer Dashboard</h1>
       <p>External input boundary, prediction/comparison separation, and dependency evidence generated from the current repository stores.</p>
     </div>
-    <div class="stamp">Generated {esc(data["generated_at"])}<br>Status <strong class="{'ok' if audit_ok else 'bad'}">{status_word}</strong></div>
+    <div class="stamp">Generated {esc(data["generated_at"])}<br>Run <code>{esc(data["run_id"])}</code><br>Status <strong class="{'ok' if current_verified else 'bad'}">{status_word}</strong></div>
   </header>
 
   <div class="grid stats">
     <div class="stat"><div class="label">Allowed observed anchor</div><div class="value">{esc(data["counts"]["observed_anchors"])}</div><div><code>{esc(observed)}</code></div></div>
     <div class="stat"><div class="label">Prediction records</div><div class="value">{esc(data["counts"]["cg_params"])}</div><div class="label">from <code>cg_params.json</code></div></div>
-    <div class="stat"><div class="label">Comparison records</div><div class="value">{esc(data["counts"]["sm_inputs"])}</div><div class="label">quarantined to <code>comparison/</code></div></div>
-    <div class="stat"><div class="label">Observed leakage audit</div><div class="value {'ok' if audit_ok else 'bad'}">{status_word}</div><div class="label">0 prediction-context violations expected</div></div>
+    <div class="stat"><div class="label">Reference records</div><div class="value">{esc(data["counts"]["reference_inputs"])}</div><div class="label">registered in <code>comparison/reference_inputs.json</code></div></div>
+    <div class="stat"><div class="label">Observation leakage audit</div><div class="value {'ok' if leakage_ok else 'bad'}">{'PASS' if leakage_ok else 'CHECK'}</div><div class="label">observed-reference access in prediction code</div></div>
   </div>
 
   <section>
@@ -909,10 +830,10 @@ pre {{
         <div class="lane">
           <div class="box green"><strong>Allowed external input</strong><code>{esc(observed)}</code><br><span class="label">sets the dimensional Planck scale</span></div>
           <div class="arrow">-></div>
-          <div class="box blue"><strong>Prediction chain</strong><code>scripts/reproduce_v4.py</code><br><code>cg_core/</code> + <code>cg_frg/</code></div>
+          <div class="box blue"><strong>Prediction chain</strong><code>scripts/reproduce_v5.py</code><br><code>cg_core/</code> + <code>cg_frg/</code></div>
         </div>
         <div class="lane" style="margin-top:12px">
-          <div class="box gray"><strong>Observed SM values</strong><code>comparison/sm_inputs.json</code><br><span class="label">central values and bounds for comparison</span></div>
+          <div class="box gray"><strong>Reference data and comparison settings</strong><code>comparison/reference_inputs.json</code><br><span class="label">observations, covariances and declared comparison conventions</span></div>
           <div class="arrow">-></div>
           <div class="box gray"><strong>Post-prediction comparison</strong><code>comparison/param_audit_full.py</code><br><span class="label">deviation table only</span></div>
         </div>
@@ -933,7 +854,7 @@ pre {{
         <code>{esc(observed)}</code>
         <div class="label">the only observed dimensional anchor in the prediction store</div>
       </div>
-      <p>Each branch is a reproducible sector in <code>scripts/reproduce_v4.py</code>. Leaves are the actual parameter records written into <code>cg_params.json</code>, not a hand-picked illustration.</p>
+      <p>Each branch is a reproducible sector in <code>scripts/reproduce_v5.py</code>. Leaves are the actual parameter records written into <code>cg_params.json</code>, not a hand-picked illustration.</p>
     </div>
     <div id="treeSpine" class="tree-spine"></div>
     <div class="controls">
@@ -948,20 +869,20 @@ pre {{
   <section>
     <h2>3. Fresh rebuild verification path</h2>
     <div class="timeline">
-      <div class="step">delete<br><code>cg_params.json</code></div>
-      <div class="step">delete<br><code>sm_inputs.json</code></div>
-      <div class="step">delete<br><code>params_write_log.json</code></div>
-      <div class="step pass">run<br><code>reproduce_v4.py</code></div>
-      <div class="step audit">audit<br>provenance</div>
-      <div class="step audit">audit<br>observation leakage</div>
-      <div class="step pass">compare + test<br><code>PASS</code></div>
+      <div class="step">initialize<br>empty temporary stores</div>
+      <div class="step pass">calculate<br><code>reproduce_v5.py</code></div>
+      <div class="step audit">audit<br>provenance and inputs</div>
+      <div class="step audit">evaluate<br>response checks</div>
+      <div class="step pass">publish<br>after successful calculation</div>
+      <div class="step audit">verify<br>comparisons and selected suites</div>
     </div>
-    <p style="margin-top:12px">Latest report verdict detected in this checkout: <strong>{esc(data["verification_verdict"])}</strong>. Regenerate with <code>py scripts/verify_v4.py --fresh --audit --pytest --stability --report V4_VERIFICATION_REPORT.md</code>. Add <code>--lean</code> when Lean 4.7 is available.</p>
+    <p style="margin-top:12px">Verification state for the current run: <strong>{esc(data["verification_verdict"])}</strong>. A displayed PASS requires the recorded verification state to identify this run and its source, input and output fingerprints to match. The page reads completed checks without rerunning the audits. Reproduce and verify with <code>py scripts/verify_v5.py --fresh --audit --pytest</code>; include <code>--lean</code> to compile the Lean archive. Use <code>--no-reproduce --pytest --test-scope core</code> for the core checks of an unchanged recorded run. An independent full-chain determinism check is available with <code>--stability</code>. The report lists the checks actually executed.</p>
+    {omitted}
   </section>
 
   <section>
     <h2>4. Prediction chain modules</h2>
-    <p>The strip follows the module order in <code>scripts/reproduce_v4.py</code>. Each tile shows static reads and writes found in source.</p>
+    <p>The strip follows the module order in <code>scripts/reproduce_v5.py</code>. Each tile shows static reads and writes found in source.</p>
     <div id="moduleStrip" class="module-strip"></div>
     <div class="controls">
       <label for="moduleSelect">Inspect module</label>
@@ -1213,8 +1134,8 @@ function renderTables() {{
   bars("writerBars", DATA.writers.map(w => ({{writer: w.writer, count: w.count}})), "");
 
   const selected = document.getElementById("selectedTable");
-  selected.innerHTML = `<thead><tr><th>key</th><th>value</th><th>provenance</th><th>writer</th></tr></thead><tbody>${{
-    DATA.selected.map(r => `<tr><td><code>${{r.key}}</code></td><td class="num">${{r.value}}</td><td><span class="pill good">${{r.provenance}}</span></td><td>${{r.writer}}</td></tr>`).join("")
+  selected.innerHTML = `<thead><tr><th>quantity</th><th>value</th><th>unit</th><th>provenance</th><th>writer</th></tr></thead><tbody>${{
+    DATA.selected.map(r => `<tr><td>${{r.label}}<br><code>${{r.key}}</code></td><td class="num">${{r.value}}</td><td>${{r.unit}}</td><td><span class="pill good">${{r.provenance}}</span></td><td>${{r.writer}}</td></tr>`).join("")
   }}</tbody>`;
 }}
 
@@ -1240,7 +1161,7 @@ function renderAudits() {{
     const card = el("div", {{"class": "box"}});
     card.appendChild(el("h3", {{text: a.label}}));
     card.appendChild(el("div", {{"class": a.ok ? "ok" : "bad", text: a.ok ? "PASS" : "FAIL"}}));
-    card.appendChild(el("p", {{"class": "label", text: `${{a.seconds}}s, exit ${{a.returncode}}`}}));
+    card.appendChild(el("p", {{"class": "label", text: `exit ${{a.returncode}}`}}));
     card.appendChild(el("pre", {{text: a.output || "(no output)"}}));
     root.appendChild(card);
   }});
@@ -1268,7 +1189,7 @@ renderAudits();
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate the V4 reviewer dashboard HTML.")
+    parser = argparse.ArgumentParser(description="Generate the V5 reviewer dashboard HTML.")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT,
                         help="output HTML path")
     args = parser.parse_args()

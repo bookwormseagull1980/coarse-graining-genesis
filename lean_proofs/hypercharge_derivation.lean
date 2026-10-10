@@ -1,55 +1,44 @@
 /-
- Coarse-Graining Genesis Framework V4.0
- 
- Author:      Jinku Guo <guojk@nwpu.edu.cn>
- Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
- ORCID:       0009-0000-6600-6171
- 
- DOI records:
-   [Software] 10.5281/zenodo.22067006
-   [Paper I]  10.5281/zenodo.22067118
-   [Paper II] 10.5281/zenodo.22067469
- 
- Part of the V4 spectral framework, whose physics is presented in the
- companion papers:
-   [I]  "The spectrum of a compact internal space.
-         I. Gauge structure and fermion content"
-        DOI: 10.5281/zenodo.22067118
-   [II] "The spectrum of a compact internal space.
-         II. Effective couplings and mass scales"
-        DOI: 10.5281/zenodo.22067469
+Coarse-Graining Genesis Framework V5.0
+Author: Jinku Guo <guojk@nwpu.edu.cn>
+Northwestern Polytechnical University, Xi'an 710072, China
+ORCID: 0009-0000-6600-6171
+References:
+DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+Full bibliography: REFERENCES.md and CITATION.cff.
 -/
 
 /-
 First-principles derivation of the hypercharge assignment Y = (1/6, 2/3, −1/3, −1/2, −1)
 ======================================================================================
 
-Derivation object (2026-08-17 user challenge: "is the hypercharge assignment
-unjustified? It should be obtainable from the gauge input"):
+For the specified fermion representations and Higgs normalisation, Yukawa
+gauge invariance and anomaly cancellation fix the hypercharge assignment.
+This file checks the resulting rational identities at that assignment.
 
-  The hypercharge assignment is not a free input — it is uniquely determined
-  (up to an overall normalisation fixed by the gravitational-U(1) anomaly
-  cancellation ΣY = 0) from [anomaly cancellation (gauge consistency)] +
-  [Yukawa coupling structure (gauge invariance)].
-
-Inputs (two more fundamental ones):
-  1. the fermion representations (phenomenological input, honestly annotated in Paper 4-2 prop:chiraldet):
-       Q_L(3,2), u_R(3̄,1), d_R(3̄,1), L_L(1,2), e_R(1,1)
+Representation and normalisation data:
+  1. the fermion representations supplied by Guo (2026d), in physical chirality notation:
+       Q_L(3,2), u_R(3,1), d_R(3,1), L_L(1,2), e_R(1,1)
   2. the Higgs H(1,2), hypercharge Y_H = 1/2 (normalisation convention)
 
-Constraints (theorems, not inputs):
+Consistency conditions:
   (A) Yukawa gauge invariance (H has Y=1/2):
-        y_u Q_L H u_R  →  Y_u = Y_Q + 1/2
-        y_d Q_L H† d_R →  Y_d = Y_Q − 1/2
-        y_e L_L H† e_R →  Y_e = Y_L − 1/2
+        bar(Q_L) tilde(H) u_R  →  Y_u = Y_Q + 1/2
+        bar(Q_L) H d_R         →  Y_d = Y_Q − 1/2
+        bar(L_L) H e_R         →  Y_e = Y_L − 1/2
   (B) SU(2)²·U(1) anomaly cancellation (the colour triplet Q_L contributes 3 doublets):
         3Y_Q + Y_L = 0   →   Y_L = −3Y_Q
   (C) gravitational-U(1) anomaly cancellation (ΣY = 0, weight = Weyl component count):
-        6Y_Q + 3Y_u + 3Y_d + 2Y_L + Y_e = 0
+        6Y_Q − 3Y_u − 3Y_d + 2Y_L − Y_e = 0
 
 Substitute (A)(B) into (C):
-  6Y_Q + 3(Y_Q+1/2) + 3(Y_Q−1/2) + 2(−3Y_Q) + (−3Y_Q−1/2)
-  = 3Y_Q − 1/2 = 0   ⟹   Y_Q = 1/6
+  6Y_Q − 3(Y_Q+1/2) − 3(Y_Q−1/2) + 2(−3Y_Q) − (−3Y_Q−1/2)
+  = −3Y_Q + 1/2 = 0   ⟹   Y_Q = 1/6
 
 Hence the unique solution:
   Y_Q = 1/6,  Y_u = 2/3,  Y_d = −1/3,  Y_L = −1/2,  Y_e = −1
@@ -89,13 +78,13 @@ theorem anomaly_su2_u1 : 3 * Q + L = 0 := by
   native_decide
 
 -- (5) gravitational-U(1) anomaly cancellation (with colour×weak weights):
---     6Y_Q + 3Y_u + 3Y_d + 2Y_L + Y_e = 0  ⟺  6Q + 3u + 3d + 2L + e = 0
---     6·1 + 3·4 + 3·(−2) + 2·(−3) + (−6) = 6 + 12 − 6 − 6 − 6 = 0
-theorem anomaly_grav_u1 : 6 * Q + 3 * u + 3 * d + 2 * L + e = 0 := by
+--     6Y_Q − 3Y_u − 3Y_d + 2Y_L − Y_e = 0  ⟺  6Q − 3u − 3d + 2L − e = 0
+--     6·1 − 3·4 − 3·(−2) + 2·(−3) − (−6) = 6 − 12 + 6 − 6 + 6 = 0
+theorem anomaly_grav_u1 : 6 * Q - 3 * u - 3 * d + 2 * L - e = 0 := by
   native_decide
 
 -- (6) the core uniqueness derivation: substitute Yukawa (A) + SU(2)²U(1) (B) into the gravitational anomaly (C):
---     6Y_Q + 3(Y_Q+1/2) + 3(Y_Q−1/2) + 2(−3Y_Q) + (−3Y_Q−1/2) = 3Y_Q − 1/2
+--     6Y_Q − 3(Y_Q+1/2) − 3(Y_Q−1/2) + 2(−3Y_Q) − (−3Y_Q−1/2) = −3Y_Q + 1/2
 --     set = 0: 3Y_Q = 1/2  ⟹  Y_Q = 1/6
 --     integer form (×2 to eliminate 1/2): 6Y_Q = 1
 --     verified with Q = 6Y_Q: Q = 1 (i.e. 6·(1/6) = 1)

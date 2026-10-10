@@ -1,52 +1,30 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
-"""
-comparison/crosschecks.py ? V4.0: independent cross-checks of the
-framework's internal closures against the SM comparison store
-=================================================================
+"""Compare the finite-response endpoint with the weak-coupling relation.
 
-WHY THIS MODULE EXISTS (motivation)
------------------------------------
-Two of the framework's closures admit an independent cross-check
-against the SM comparison values (comparison only; the SM values
-never enter the framework computation):
+The production endpoint solves the specified R=5 response equation.
+The comparison inverts
 
-  kL CROSS-CHECK (2026-08-19, implemented from the paper's claim):
-  ---------------------------------------------------------------
-  The gauge-coupling conservation law
-      1/alpha_SM = 1/alpha_W + 1/N_c - tau^2 pi/2 ,  alpha_W = 2/kL^5
-  is INVERTED at the SM comparison coupling g2(M_G) = 0.508844967
-  (sm_inputs.json, comparison only) to give an independent
-  determination of the window capacity kL.  The framework's F_MG
-  spectral-pole fixed point is kL = 2.49353; the inverted value is
-  kL_cross = 2.49371, a deviation of +0.0072%.  This is the
-  quantitative implementation of the cross-validation quoted in the
-  paper; the deviation is reported at full precision.  The
-  cross-check is non-circular: the F_MG closure fixes kL from the
-  spin-2 spectral-pole condition alone, while the conservation law
-  fixes kL from the SM weak coupling through the window-capacity
-  form alpha_W = 2/kL^5.
+    1/alpha_SM = 1/alpha_W + 1/N_c - tau^2*pi/2,
+    alpha_W = 2/(kL)^5,
+
+at the independently extrapolated comparison coupling g2(M_G). The
+reported difference compares these two determinations of kL. The
+comparison coupling is read after the production endpoint is computed.
 """
 
 from __future__ import annotations
@@ -79,7 +57,7 @@ def main() -> int:
     g2_sm = float(sm_value("g2_MG"))
     kL_cross = kL_from_conservation_law(g2_sm, tau)
     dev = (kL_cross / kL - 1.0) * 100.0
-    print(f"kL (F_MG spectral-pole fixed point)        = {kL:.9f}")
+    print(f"kL (R=5 finite-response endpoint)          = {kL:.9f}")
     print(f"kL (conservation law at SM g2_MG = {g2_sm:.9f}) = {kL_cross:.9f}")
     print(f"cross-check deviation                      = {dev:+.4f}%")
     assert abs(kL_cross - kL) / kL < 1e-3, "kL cross-check outside 0.1%"

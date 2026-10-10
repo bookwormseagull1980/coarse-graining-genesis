@@ -1,32 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/cosmology/dark_energy.py — V4.0: the dark energy closure
+cg_frg/cosmology/dark_energy.py — V5.0: the dark energy closure
 ρ_Λ = Y_u·m_ν1⁴  (the neutrino-mass floor)
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The dark energy density is set by the LIGHTEST NEUTRINO mass — the
 neutrino is the lightest fermion and its mass sets the vacuum-energy
@@ -46,7 +39,7 @@ The cosmological constant (FRW) is Λ = ρ_Λ/M_P², and the fraction is
 Ω_Λ = ρ_Λ/(3 H0² M_P²).  The framework's Λ ≈ 4.2547e-84 GeV² (−0.6%).
 The content is the neutrino-mass floor.
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 The closure uses the internal v, k_GUT, M_P and the neutrino
 hierarchy ratios (Tr(Y²) = 10/3 — the SM content).  The Y_u = 2/3
@@ -77,8 +70,7 @@ GEV_TO_K = 1.160451812e13
 
 def _squash_factors() -> tuple:
     """s0·κ and (1−s0·κ) — the J=2 squash amplitude × U(1)_Y
-    normalisation (the SAME κ as g1 = g2·κ, epsilon_ratio.squash_correction).
-    2026-08-16: the seesaw-scale and dark-energy-weight corrections."""
+    normalisation (the same κ as g1 = g2·κ, epsilon_ratio.squash_correction)."""
     tau = float(get("tau"))
     s0 = 2.0 * tau
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
@@ -91,8 +83,7 @@ def m_nu3_weinberg(v: float, k_GUT: float) -> float:
 
     The +s0·κ correction (the squash level transfer: EW scale v takes
     −s0·κ, the seesaw mass takes +s0·κ — the SAME s0·κ as v's
-    (1−s0·κ) in epsilon_ratio) brings m_ν3 to 0.0502 eV and
-    Δm²_31 to 0.00251 (SM, −0.2%) — 2026-08-16.
+    (1−s0·κ) in epsilon_ratio).
     """
     sk, _ = _squash_factors()
     return v * v * (2.0 * math.pi) ** 2 / k_GUT * (1.0 + sk)
@@ -107,7 +98,7 @@ def m_nu1_derived(v: float, k_GUT: float) -> float:
     return m3 * r12 * r23
 
 
-# STATUS (2026-08-20): L2 INHERITED — ρ_Λ (1−4s0κ) is algebraically forced: m_nu1 carries +s0κ so m_nu1^4 carries +4s0κ, and the weight cancels it.  See epsilon_ratio DERIVATION STATUS.
+# ρ_Λ (1−4s0κ) is algebraically forced: m_nu1 carries +s0κ so m_nu1^4 carries +4s0κ, and the weight cancels it.  See epsilon_ratio SOURCE OF THE CORRECTION FACTORS.
 def rho_lambda(v: float, k_GUT: float) -> float:
     """ρ_Λ = Y_u·m_ν1⁴·(1 − 4·s0·κ) = (2/3)·m_ν1⁴·(1 − 4s0·κ) — the
     dark energy density (GeV⁴), with the dark-energy-weight symmetry
@@ -117,9 +108,7 @@ def rho_lambda(v: float, k_GUT: float) -> float:
     corrections: m_ν1 carries +s0·κ (Weinberg), so m_ν1⁴ carries
     +4s0·κ, and the weight (1 − 4s0·κ) cancels it to order s0²·κ² —
     the dark-energy density is conserved under the J=2 squash level
-    transfer (EW −s0·κ ↔ seesaw +s0·κ).  Together with m_ν3's +s0·κ,
-    this brings m_ν3 to −0.04%, Δm²_31 to −0.23% and H0 to −0.08%
-    (2026-08-16).
+    transfer (EW −s0·κ ↔ seesaw +s0·κ).
     """
     sk, _ = _squash_factors()
     return Y_U * m_nu1_derived(v, k_GUT) ** 4 * (1.0 - 4.0 * sk)
@@ -180,9 +169,9 @@ def compute() -> dict:
     # (like the EW scale) carries −s0·κ, while the seesaw mass carries
     # +s0·κ (the level transfer).  Without it the Weinberg +s0·κ
     # propagates into T_CMB at +4.9%; with it T_CMB is +0.20%
-    # (2026-08-16).
+    # .
     sk, _ = _squash_factors()
-    # STATUS (2026-08-20): L2 INHERITED — T_CMB (1−s0κ) inherits v's base factor through the photon floor; (1−τ·Δ_s) is the scalar-conformal-weight factor.  See epsilon_ratio DERIVATION STATUS.
+    # T_CMB (1−s0κ) inherits v's base factor through the photon floor; (1−τ·Δ_s) is the scalar-conformal-weight factor.  See epsilon_ratio SOURCE OF THE CORRECTION FACTORS.
     T_CMB_GeV = m_nu1 * (1.0 - sk) * r12 / math.pi * (1.0 - tau_c * Delta_s)
     T_CMB_K = T_CMB_GeV * GEV_TO_K    # GeV -> K
     pset("T_CMB_GeV", T_CMB_GeV, provenance="DERIVED", role="internal",

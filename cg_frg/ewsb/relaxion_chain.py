@@ -1,95 +1,62 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/ewsb/relaxion_chain.py — V4.0: the relaxion revision chain
-φ_R0 → φ_stop = 36.6496 and the ε-anchored EW closure
+cg_frg/ewsb/relaxion_chain.py — V5.0: structural dilaton shifts
+The window stop position and the electroweak hierarchy
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
-The electroweak scale is fixed by the dilaton-stop position φ_stop
-through the order-parameter relation
+The generated window defines the dilaton-stop position and scale ratio:
 
-    v² = ξ R_c M_G² e^{−2φ}/λ_H        (ξ = 1/8, R_c = 6/π)
+    φ_stop = 4πkL − ln(3α/π) + 1/(2π) − ln(1 − s0·κ),
+    ε = e^{1/(2π)} e^{−φ_stop},       v = M_G·ε,
 
-The relaxion revision chain pushes the constant-chain to its
-limit.  Each revision step has a first-principles basis and is
-EXACTLY a structural logarithm:
+with α = 1/(16π²), s0 = 2τ and κ = κ(2τ).  The bare-condensate
+coordinate is φ_R0 = φ_stop − Δφ_R1 − Δφ_R2 − Δφ_R3.  Its three
+structural shifts are:
 
-  R0  baseline        φ = 36.1207          v = 482.8 GeV
-      (DERIVED from the window line: φ_R0 = φ_R3(window) − ΣΔφ,
-       φ_R3 = 4πkL − ln(3α/π) + 1/(2π) — no carried value)
+  R1  Collective-mode normalisation √4 = 2:
+          Δφ_R1 = (1/2)·ln 2.
 
-  R1  N = 1 (the COMPOSITE picture: the Higgs IS the pseudo-
-      dilaton; the bound-state wave-function normalisation
-      reduces the 4 basic components to 1 collective mode —
-      the normalisation √4 = 2):
-          Δφ_R1 = (1/2)·ln 2 = 0.34657        φ = 36.4643, v = 348.0
+  R2  Symmetric box at q = 0, with the common propagator momentum
+      1/(p²+m²)² and RP³ Weyl window ratio (1+2+1+3)/(d+1) = 7/4:
+          Δφ_R2 = (1/4)·ln(7/4).
 
-  R2  C15 (the SYMMETRIC BOX graph at q = 0 — the two propagators
-      carry the SAME momentum, 1/(p²+m²)²; the box weight vs the
-      product weight gives the RP³ Weyl window ratio
-      (1+2+1+3)/(d+1) = 7/4 — the same ratio as the spectral tilt):
-          Δφ_R2 = (1/4)·ln(7/4) = 0.13990      φ = 36.6042, v = 302.6
+  R3  Single-mode wave-function factor Z = 2·(3/4)³, where
+      m² = 6/8 = 3/4 is the Lichnerowicz-to-Casimir ratio:
+          Δφ_R3 = −(1/4)·ln Z.
 
-  R3  Z (the SINGLE-MODE wave-function renormalisation: the
-      Lichnerowicz-to-Casimir ratio m² = 6/8 = 3/4,
-      Z = 2·(m²)³ = 0.84375; the VEV scales as √Z, so
-      Δφ = −(1/2)·ln√Z = −(1/4)·ln Z):
-          Δφ_R3 = −(1/4)·ln(2·(3/4)³) = 0.04247  φ = 36.6496, v = 284.5
+ORDER-PARAMETER COMPARISON
+--------------------------
+The same stop coordinate also enters the specified condensate relation
 
-  FINAL: φ_stop = 36.6496.
+    v_chain² = ξ R_c M_G² e^{−2φ_stop}/λ_H,
+    φ_req = (1/2)·ln(ξ R_c M_G²/(λ_H v²)),
 
-THE EPSILON RESOLUTION (the actual v closure)
----------------------------------------------
-The direct v closure does NOT come from the constant chain (the
-residual 1.18× is the bound-state extrapolation domain): the
-ε-anchored value
+where ξ = 1/8, R_c = 6/π and v is the generated electroweak scale.
+The returned values evaluate this condensate relation and the window
+hierarchy at the same stored inputs.
 
-    ε = e^{1/(2π)}·e^{−φ_stop} = 1.4203e-16,   v = M_G·ε = 245.6 GeV
-
-closes v (the zero-point e^{1/(2π)} = the causal-horizon
-temperature factor).  This module publishes φ_stop (the input of
-the epsilon closure) and the constant-chain value (v = 284.5 GeV).
-
-THE IR ANCHOR
+IMPLEMENTATION
 -------------
-The rescaling endpoint must match the IR mass parameter
-m²(M_Z) = λ_H v² (the direct observation):
-
-    φ_req = (1/2)·ln(ξ R_c M_G²/(λ_H v²)) = 36.8197
-
-(the constant chain's target; the residual 0.173 to φ_stop is the
-documented gap of the constant chain).
-
-V4 DISCIPLINE
--------------
-No hard-coded physics: every Δφ is a structural logarithm.  The R2
-ratio is read from cg_core.window_weights as the RP³ Weyl window ratio
-(1+2+1+3)/(d+1)=7/4, and the R3 ratio is built from m² = 3/4.  φ_R0 is DERIVED from the window
-line (φ_R0 = φ_R3 − ΣΔφ with φ_R3 = 4πkL − ln(3α/π) + 1/(2π)).
-All outputs are DERIVED with notes.
+The R2 ratio uses the common RP³ window-weight function.  The stop
+position and bare-condensate coordinate use the stored endpoint and
+torsion response.  Published quantities use the unified parameter interface.
 """
 
 from __future__ import annotations
@@ -143,9 +110,9 @@ def phi_R3_window(kL: float) -> float:
     """φ_R3 = 4πkL − ln(3α/π) + 1/(2π) − ln(1 − s0·κ(2τ)) — the
     dilaton-stop position implied by the window-squared line, with the
     J=2 squash correction (s0 = 2τ the amplitude, κ the U(1)_Y
-    normalisation — the SAME κ as g1 = g2·κ; 2026-08-16).
+    normalisation — the SAME κ as g1 = g2·κ).
 
-    THE EW-HIERARCHY GEOMETRY (2026-08-16): because v = M_G·ε with
+    THE EW-HIERARCHY GEOMETRY : because v = M_G·ε with
     ε = e^{1/(2π)}·e^{−φ_stop} and φ_stop = φ_R3, the EW hierarchy
     is the EXACT structural logarithm
 
@@ -166,20 +133,19 @@ def phi_R3_window(kL: float) -> float:
 
 
 def phi_R0_derived(kL: float) -> float:
-    """φ_R0 = φ_R3(window) − Δφ_R1 − Δφ_R2 − Δφ_R3 — the bare-condensate
-    baseline, DERIVED from the window line (no carried value).  The
-    relaxion chain's structural revisions are fixed; the baseline is
-    fixed by requiring the chain to reproduce the window-squared ε."""
+    """Bare-condensate coordinate φ_R0 = φ_R3(window) − ΣΔφ_Ri.
+
+    The structural shifts reconstruct the window-squared scale ratio.
+    """
     return phi_R3_window(kL) - dphi_R1() - dphi_R2() - dphi_R3()
 
 
-# The bare-condensate baseline (DERIVED from the window line, not a
-# carried value).
+# Bare-condensate coordinate derived from the window stop.
 PHI_R0 = phi_R0_derived(float(get("kL")))
 
 
 def phi_stop() -> float:
-    """φ_stop = φ_R0 + Δφ_R1 + Δφ_R2 + Δφ_R3 = 36.6496."""
+    """φ_stop = φ_R0 + Δφ_R1 + Δφ_R2 + Δφ_R3."""
     return PHI_R0 + dphi_R1() + dphi_R2() + dphi_R3()
 
 
@@ -194,7 +160,7 @@ def phi_req_ir(M_G: float, lam_h: float, v: float) -> float:
 
 
 def v_from_phi(phi: float, M_G: float, lam_h: float) -> float:
-    """v² = ξ R_c M_G² e^{−2φ}/λ_H — the constant chain."""
+    """v² = ξ R_c M_G² e^{−2φ}/λ_H — the condensate relation."""
     return math.sqrt(XI * R_C * M_G ** 2 * math.exp(-2.0 * phi) / lam_h)
 
 
@@ -212,12 +178,12 @@ def compute() -> dict:
     pset("relaxion_phi_stop", phi, provenance="DERIVED",
          note="phi_stop = phi_R0 + (1/2)ln2 + (1/4)ln((1+2+1+3)/(d+1)) "
               "- (1/4)ln(2(3/4)^3), with (1+2+1+3)/(d+1) = 7/4, "
-              f"= {phi:.4f} (the relaxion revision chain; phi_R0 is DERIVED "
-              f"from the window line phi_R3 = 4 pi kL - ln(3 alpha/pi) + "
-              f"1/(2 pi), so the chain reproduces the window-squared eps)")
+               f"= {phi:.4f}; phi_R0 follows from the window stop "
+               f"4 pi kL - ln(3 alpha/pi) + 1/(2 pi) - ln(1-s0*kappa), "
+               f"with s0=2 tau and alpha=1/(16 pi^2)")
     pset("epsilon_dilaton", eps, provenance="DERIVED",
-         note="eps = e^{1/(2pi)} e^{-phi_stop} = 1.4244e-16 (the zero-point "
-              "anchored ratio)")
+          note=f"eps = e^{{1/(2pi)}} e^{{-phi_stop}} = {eps:.12e} "
+               "(the zero-point anchored ratio)")
     return {"phi_stop": phi, "dphi_R1": dphi_R1(), "dphi_R2": dphi_R2(),
             "dphi_R3": dphi_R3(), "epsilon": eps, "v_anchor": v_anchor,
             "v_chain": v_chain, "phi_req_IR": req}
@@ -229,5 +195,5 @@ if __name__ == "__main__":
           f"R3={r['dphi_R3']:.5f}")
     print(f"phi_stop = {r['phi_stop']:.4f}  (req_IR = {r['phi_req_IR']:.4f})")
     print(f"eps = {r['epsilon']:.5e}  v = M_G*eps = {r['v_anchor']:.2f} GeV")
-    print(f"constant chain: v = {r['v_chain']:.1f} GeV")
+    print(f"condensate relation: v = {r['v_chain']:.1f} GeV")
     print("relaxion_chain OK")

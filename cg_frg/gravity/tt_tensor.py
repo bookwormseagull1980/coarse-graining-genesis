@@ -1,58 +1,51 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/gravity/tt_tensor.py — V4.0: the TT propagator and the
-spectral-pole identity G_TT ∝ k^{-2}
+cg_frg/gravity/tt_tensor.py — V5.0: an internal-mode trajectory
+diagnostic with G_TT ∝ k^{-2}
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
-The emergent graviton is the spectral pole of the transverse-
-traceless (TT) propagator of the improved energy-momentum tensor.
-On the framework's self-similar trajectory L(k) = kL/k (γ_M = 0),
-the J = 2 TT mode has
+This module evaluates a regulated internal-mode denominator along
+the framework's self-similar trajectory L(k) = kL/k (γ_M = 0).
+For the J = 2 mode, the implemented quantities are
 
     p²  = J(J+2)/L² = 8·k²/kL²   (the spatial eigenvalue)
-    m²  = 6/L² = 6·k²/kL²        (the Lichnerovich shift)
+    m²  = 6/L² = 6·k²/kL²        (the implemented curvature term)
     R_k = p²/(e^{p²/k²}−1)       (the exponential window)
     G_TT = 1/(p² + R_k + m²)
 
-The tracker evaluates G_TT and the residue Z = p²·G_TT across an
-IR range of k; the delta criterion decides whether the pole
-survives:
+The tracker evaluates G_TT and the dimensionless product Z = p²·G_TT
+over a finite range of RG scales k. The delta_forming flag checks
+the following trajectory slopes:
 
-    slope_G = d ln G_TT / d ln k  < −1.5   (G_TT grows as k^α with
-                                           α < −1.5 — the k^{-2}-type
-                                           pole approaching a delta)
-    |slope_Z| < 0.5                        (the residue Z = p²·G_TT is
-                                           k-independent — the
-                                           massless-pole structure)
+    slope_G = d ln G_TT / d ln k < −1.5
+    |slope_Z| < 0.5
 
-n_grav = 0: the lowest TT eigenvalue on RP³ is 14/L² > 0 (no TT
-zero mode); the graviton is the spectral pole, not a zero mode.
+Here p², m² and R_k all scale as k², so G_TT ∝ k^{-2} and constant
+Z follow from the specified trajectory. The response variable here is the
+RG scale k; an external spectral calculation uses Q² on a fixed background.
 
-V4 DISCIPLINE
+n_grav = 0 records the absence of an internal zero mode in this
+implemented denominator: its lowest unregulated value is 14/L² > 0.
+The external tensor channel uses its sourced propagation operator.
+
+IMPLEMENTATION
 -------------
 The module is a pure engine: the input is the trajectory
 (kL, the k range); no physics value is hard-coded.  numpy is used
@@ -75,7 +68,7 @@ from cg_core.params import get, set as pset  # noqa: E402
 
 
 def tt_mode_propagator(k: float, J: int, L: float) -> dict:
-    """G_TT and the residue Z for one TT mode (J ≥ 2) at scale k.
+    """G_TT and the product Z = p²·G_TT for one mode (J ≥ 2) at scale k.
 
     p² = J(J+2)/L², m² = 6/L², R_k = p²/(e^{p²/k²}−1), G_TT =
     1/(p²+R_k+m²), Z = p²·G_TT.  For p²/k² ≳ 100 the regulator is
@@ -99,8 +92,7 @@ def tt_mode_propagator(k: float, J: int, L: float) -> dict:
 def tt_tracker(k_vals, kL_const: float) -> dict:
     """Track the lowest TT mode (J = 2) along L(k) = kL_const/k.
 
-    Returns G_TT and Z per k — the power laws decide whether a
-    delta-function pole develops at p² = 0 as k → 0.
+    Returns G_TT and Z per k and their trajectory power laws.
     """
     kv = np.asarray(k_vals, dtype=np.float64)
     n = len(kv)
@@ -115,10 +107,11 @@ def tt_tracker(k_vals, kL_const: float) -> dict:
 
 
 def analyze_delta(tracker: dict) -> dict:
-    """The delta-function criterion: slope_G < −1.5, |slope_Z| < 0.5.
+    """Trajectory criterion: slope_G < −1.5, |slope_Z| < 0.5.
 
     The slopes are the log-log power laws of G_TT and Z across the
-    IR range (numpy polyfit, full precision).
+    sampled range (numpy polyfit, full precision). The retained key
+    delta_forming records satisfaction of these two scale conditions.
     """
     k = tracker["k_vals"]
     G = tracker["G_TT"]
@@ -141,20 +134,17 @@ def analyze_delta(tracker: dict) -> dict:
 
 
 def compute() -> dict:
-    """Publish the pole identity at the fixed point."""
+    """Publish the fixed-trajectory scale diagnostics."""
     kL = get("kL")
-    # The IR range: from M_G down to M_G/30 (the pole develops as
-    # k → 0 on the trajectory).
+    # Sample the trajectory with k in [M_G/30,M_G] and L=kL/k.
     M_G = get("M_G")
     k_vals = np.geomspace(M_G / 30.0, M_G, 60)
     tracker = tt_tracker(k_vals, kL)
     crit = analyze_delta(tracker)
     pset("TT_slope_G", crit["slope_G"], provenance="DERIVED",
-         note="d ln G_TT / d ln k over the IR trajectory (the k^{-2}-type "
-              "pole criterion)")
+         note="d ln G_TT / d ln k over the fixed trajectory L=kL/k")
     pset("TT_delta_forming", crit["delta_forming"], provenance="DERIVED",
-         note="the delta-function pole criterion (slope_G < -1.5, "
-              "|slope_Z| < 0.5)")
+         note="Trajectory scaling criterion: slope_G < -1.5 and |slope_Z| < 0.5")
     return {"criterion": crit, "n_grav": 0, "slope_G": crit["slope_G"],
             "slope_Z": crit["slope_Z"], "delta_forming": crit["delta_forming"]}
 
@@ -163,6 +153,6 @@ if __name__ == "__main__":
     r = compute()
     c = r["criterion"]
     print(f"slope_G = {c['slope_G']:.3f}, slope_Z = {c['slope_Z']:.4f}, "
-          f"delta pole: {c['delta_forming']}")
-    print(f"n_grav = {r['n_grav']} (no TT zero mode; the pole is spectral)")
+          f"trajectory scaling criterion: {c['delta_forming']}")
+    print(f"n_grav = {r['n_grav']} (no internal zero mode in this denominator)")
     print("tt_tensor OK")

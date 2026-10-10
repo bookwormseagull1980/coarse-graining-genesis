@@ -1,31 +1,24 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/ewsb/vev_closure.py — V4.0: the electroweak VEV closure
+cg_frg/ewsb/vev_closure.py — V5.0: the electroweak VEV closure
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The electroweak vacuum expectation value is the product of the
 emergence scale and the left-right ratio:
@@ -42,7 +35,7 @@ quartic) v = M_G·A·e^{−φ}·e^{−1/(2π)} with A = √(ξR_c/λ_H) gives
 243.2 GeV (0.988×, less precise — the λ_H ambiguity); it is a
 cross-check only, not the closure.
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 The closure v = M_G·ε uses only internal quantities (M_G from the
 endpoint chain, ε from the framework's two lines).
@@ -59,6 +52,7 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get, set as pset  # noqa: E402
+from cg_core.quantities import QuantityDefinition  # noqa: E402
 from cg_frg.ewsb.epsilon_ratio import epsilon_window  # noqa: E402
 
 
@@ -81,22 +75,32 @@ def cross_check_vev(M_G: float, phi_R3: float) -> float:
 
 def compute() -> dict:
     """Publish the VEV closure (ε already carries the J=2 squash
-    correction, 2026-08-16)."""
+    correction)."""
     M_G = get("M_G")
     kL = get("kL")
     eps = epsilon_window(kL)  # the window-squared line (includes the
                               # (1 - s0*kappa) squash correction)
     v = vev(M_G, eps)         # = M_G·ε (fully internal, corrected)
 
-    # STATUS (2026-08-21): L3 DERIVED — v's (1−s0·κ) base factor is the
+    # v's (1−s0·κ) base factor is the
     # geometric charge c=−1 (the traceless shear) of squash_level_transfer.
-    # See epsilon_ratio DERIVATION STATUS.
+    # See epsilon_ratio SOURCE OF THE CORRECTION FACTORS.
     pset("v_HIGGS", v, provenance="DERIVED", role="internal",
+         dependencies=("M_G", "kL", "tau"),
+         definition=QuantityDefinition(
+             object="electroweak hierarchy VEV", unit="GeV",
+             carrier="retained projected compact-space matter content",
+             operator="window-squared hierarchy readout",
+             source="emergence scale and the torsion-dependent squash response",
+             projection="inherited fixed matter projection and response domain",
+             normalization="v=M_G[3/(16*pi^3)]exp(-4*pi*kL)(1-2*tau*kappa)",
+             scheme="declared electroweak hierarchy closure",
+             order="specified multiplicative squash correction",
+             assumptions=("M_G and kL belong to the same endpoint branch",
+                          "positive squash-corrected hierarchy branch")),
          note=f"v = M_G*epsilon_window = {v:.2f} GeV (the window-squared "
               f"line eps=(3alpha/pi)e^(-4pi kL)(1 - s0*kappa(2tau)) — "
-              f"the J=2 squash correction s0=2tau, kappa=U(1)_Y norm; "
-              f"matches SM 246.22 to -0.012% — the EW-hierarchy symmetry "
-              f"correction, analogue of the g2 conservation law)")
+              f"the J=2 squash correction s0=2tau, kappa=U(1)_Y norm)")
     return {"v": v, "M_G": M_G, "epsilon": eps}
 
 

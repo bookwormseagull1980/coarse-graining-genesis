@@ -1,0 +1,4 @@
+# Source and scientific-store fingerprints use LF line endings on every platform.
+* text=auto eol=lf
+*.docx binary
+*.pdf binary

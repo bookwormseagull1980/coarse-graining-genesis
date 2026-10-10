@@ -1,30 +1,23 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """Unit tests: the content source (sm_content) and the β-functions.
 
-Theoretical reference values are marked EXPECTED_BY_THEORY — analytic
-results of the framework's content derivation, not observed inputs.
+The reference counts and coefficients follow from the specified matter
+content and hypercharge normalization.
 """
 import math
 
@@ -36,13 +29,13 @@ import pytest
 # ---------------------------------------------------------------------------
 def test_generation_count_is_three():
     from cg_core.sm_content import N_GENERATIONS
-    assert N_GENERATIONS == 3          # EXPECTED_BY_THEORY (window_capacity)
+    assert N_GENERATIONS == 3          # joint extensive-source/colour screening
 
 
 def test_weyl_content_counts():
     from cg_core.sm_content import (N_LEFT, N_RIGHT, N_WEYL_TOTAL,
                                     N_GAUGE_TOTAL, SCALAR_DOF)
-    # EXPECTED_BY_THEORY: 8 left vs 7 right per generation (15 Weyl),
+    # 8 left and 7 right per generation (15 Weyl),
     # 45 total, 12 gauge, 4 Higgs real dof.
     assert N_LEFT == 8
     assert N_RIGHT == 7
@@ -54,13 +47,13 @@ def test_weyl_content_counts():
 
 def test_hypercharge_square_sum():
     from cg_core.sm_content import hypercharge_sum_sq
-    # EXPECTED_BY_THEORY: Sum Y^2 = 10/3 per generation.
+    # Sum Y^2 = 10/3 per generation.
     assert abs(hypercharge_sum_sq() - 10.0 / 3.0) < 1e-12
 
 
 def test_chiral_asymmetry():
     from cg_core.sm_content import chiral_asymmetry
-    # EXPECTED_BY_THEORY: N_L - N_R = 1 (the chiral drive of tau).
+    # N_L - N_R = 1 (the chiral drive of tau).
     assert chiral_asymmetry() == 1
 
 
@@ -69,7 +62,7 @@ def test_chiral_asymmetry():
 # ---------------------------------------------------------------------------
 def test_one_loop_gauge_coefficients():
     from cg_core.beta_functions import _B_GAUGE
-    # EXPECTED_BY_THEORY (Buttazzo GUT-normalised, derived from content):
+    # GUT-normalized one-loop coefficients for the specified matter content:
     #   b1 = 41/10,  b2 = -19/6,  b3 = -7
     assert abs(_B_GAUGE[0] - 41.0 / 10.0) < 1e-12
     assert abs(_B_GAUGE[1] + 19.0 / 6.0) < 1e-12
@@ -77,12 +70,12 @@ def test_one_loop_gauge_coefficients():
 
 
 def test_content_constants_come_from_sm_content():
-    """N_G / SumY2 are imported from sm_content (single source, 2026-08-21)."""
+    """N_G and SumY2 use the common matter-content definitions."""
     from cg_core import beta_functions as bf
     from cg_core.sm_content import N_GENERATIONS, hypercharge_sum_sq
     assert bf.N_G == float(N_GENERATIONS)
     assert bf.SIGMA_Y2 == float(hypercharge_sum_sq())
-    assert bf.TF_SU2 == 2.0 * bf.N_G      # EXPECTED_BY_THEORY: 3 gen x 2 doublets
+    assert bf.TF_SU2 == 2.0 * bf.N_G      # Dynkin-index sum: 2 per generation.
     assert bf.TF_SU3 == 2.0 * bf.N_G
 
 

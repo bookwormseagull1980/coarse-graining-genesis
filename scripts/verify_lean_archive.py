@@ -1,24 +1,17 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
@@ -51,6 +44,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 LEAN_ROOT = ROOT / "lean_proofs"
 DEFAULT_EXPECT_VERSION = "4.7.0"
+KEY_PROOFS = ("fermion_content.lean", "twoloop_gauge_matrix.lean",
+              "twoloop_yukawa_quartic.lean", "endpoint_residual_cosmology.lean")
 
 
 def rel(path: Path) -> str:
@@ -98,6 +93,8 @@ def main() -> int:
                         help="warn instead of fail if the Lean version differs")
     parser.add_argument("--allow-output", action="store_true",
                         help="allow warnings or #eval output from successful files")
+    parser.add_argument("--key-only", action="store_true",
+                        help="compile the selected matter, two-loop and cold-source proofs")
     args = parser.parse_args()
 
     lean, lean_source, searched = find_lean(args.lean_exe)
@@ -126,7 +123,12 @@ def main() -> int:
         if not args.allow_version_mismatch:
             return 1
 
-    files = sorted(LEAN_ROOT.glob("*.lean"))
+    files = ([LEAN_ROOT / name for name in KEY_PROOFS] if args.key_only
+             else sorted(LEAN_ROOT.glob("*.lean")))
+    missing = [rel(file) for file in files if not file.is_file()]
+    if missing:
+        print("LEAN ARCHIVE VERIFY FAILED: missing selected proofs", missing)
+        return 1
     if not files:
         print("LEAN ARCHIVE VERIFY FAILED")
         print(f"  no Lean files found under {LEAN_ROOT}")
@@ -165,6 +167,7 @@ def main() -> int:
     print(f"  lean source: {lean_source}")
     print(f"  version: {version_text or '(unknown)'}")
     print(f"  files compiled: {len(files)}")
+    print(f"  scope: {'key proofs' if args.key_only else 'complete archive'}")
     print(f"  trust level: 0")
     print(f"  strict output: {'no' if args.allow_output else 'yes'}")
     print(f"  seconds: {time.time() - t0:.1f}")

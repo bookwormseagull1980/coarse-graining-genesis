@@ -1,23 +1,16 @@
 /-
- Coarse-Graining Genesis Framework V4.0
- 
- Author:      Jinku Guo <guojk@nwpu.edu.cn>
- Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
- ORCID:       0009-0000-6600-6171
- 
- DOI records:
-   [Software] 10.5281/zenodo.22067006
-   [Paper I]  10.5281/zenodo.22067118
-   [Paper II] 10.5281/zenodo.22067469
- 
- Part of the V4 spectral framework, whose physics is presented in the
- companion papers:
-   [I]  "The spectrum of a compact internal space.
-         I. Gauge structure and fermion content"
-        DOI: 10.5281/zenodo.22067118
-   [II] "The spectrum of a compact internal space.
-         II. Effective couplings and mass scales"
-        DOI: 10.5281/zenodo.22067469
+Coarse-Graining Genesis Framework V5.0
+Author: Jinku Guo <guojk@nwpu.edu.cn>
+Northwestern Polytechnical University, Xi'an 710072, China
+ORCID: 0009-0000-6600-6171
+References:
+DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+Full bibliography: REFERENCES.md and CITATION.cff.
 -/
 
 /-!
@@ -28,7 +21,7 @@ dim(n) = n+1 for the label n = 2j.  Machine-checked — for the INFINITE family:
 the minimal non-trivial dimension is 2, attained uniquely at n = 1 (j = 1/2).
 This is the formal content of "1/2 is the smallest change" (the minimality over all
 n ∈ Nat, not just a finite skeleton).
-Core Lean, no mathlib.  2026-08-08
+Core Lean, no mathlib.
 -/
 
 -- the dimension of the simple object with label n = 2j (the classification, cited):

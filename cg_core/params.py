@@ -1,31 +1,24 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_core/params.py — V4.0: the framework's single parameter store
+cg_core/params.py — V5.0: the framework's single parameter store
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 Every module of the framework computes derived quantities that other
 modules consume.  The derived values must be stored once, in a single
@@ -44,12 +37,12 @@ DESIGN PRINCIPLES
     so a crash never leaves a half-written store.
 3.  Strict load.  A missing parameter file is an error (fail fast),
     not a silent re-creation with defaults.
-4.  Write log.  Every set() records (key, value, writer, timestamp) in
-    params_write_log.json — an audit trail of who published what.
+4.  Publication provenance. Each stored record identifies its writer,
+    calculation run, source fingerprint and declared dependencies.
 5.  Provenance classes.  Every value carries a class:
-        OBSERVED     — an external measured value (PDG/SM), for
-                        comparison only (never used in computations)
-        SM_INPUT     — an SM value used as a comparison reference
+        OBSERVED     — a measured value, admitted to predictions only
+                        in the explicitly declared dimensional-anchor role
+        SM_INPUT     — an isolated comparison reference or convention
         INPUT        — a framework-internal input value
         DERIVED      — computed by a module (with a derivation note)
         SCALE_CHOICE — a normalisation/convention choice (e.g. the
@@ -63,12 +56,12 @@ DESIGN PRINCIPLES
                         never used in framework computations
         cg           — a CG-framework structural constant
         informational— a status/statement record
-7.  SM table separation.  The SM comparison values live in
-    sm_inputs.json (managed by sm_set()), not in the physics store —
-    so the comparison table can never pollute or back-calibrate the
-    framework's own parameters.
+7.  Reference-data separation. Observations, comparison covariances and
+    propagation conventions are registered in comparison/reference_inputs.json
+    through sm_set()/sm_value(). Generated values use get()/set()/record().
+    The prediction guard enforces the separation of their computational roles.
 
-V4 DISCIPLINE (this module)
+IMPLEMENTATION (this module)
 ---------------------------
 - No physics value is hard-coded here: the file store is the only
   source of values.  Only structural numbers (2, π) may appear in
@@ -80,29 +73,220 @@ V4 DISCIPLINE (this module)
 
 from __future__ import annotations
 
+import hashlib
 import json
-import logging
 import math
 import os
 import sys
 import tempfile
-import time
+import uuid
+from contextlib import contextmanager
+from contextvars import ContextVar
+from collections.abc import Mapping
+from copy import deepcopy
 from pathlib import Path
-
-logger = logging.getLogger(__name__)
+from cg_core.quantities import readout_definition
+from cg_core.release import publication_metadata
 
 # ---------------------------------------------------------------------------
-# Project root: the V4.0 directory (this file is cg_core/params.py).
+# Project root containing the parameter store and source packages.
 # ---------------------------------------------------------------------------
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-# The store files: the physics store and the SM comparison table.
-# (The BBN nuclear constants — dm_np, T_f, tau_n, t_decay, N_eff —
-# are DERIVED by cg_frg/cosmology/bbn_helium.py since 2026-08-17;
-# the former nuclear_inputs.json store is removed.)
-_PARAM_FILE = _PROJECT_ROOT / "cg_params.json"
-_SM_FILE = _PROJECT_ROOT / "comparison" / "sm_inputs.json"
-_LOG_FILE = _PROJECT_ROOT / "params_write_log.json"
+# The two stores: generated scientific records and isolated reference data.
+# The BBN quantities dm_np, T_f, tau_n, t_decay and N_eff are computed
+# by cg_frg/cosmology/bbn_helium.py from the declared hadronic inputs.
+_STORE_ROOT = Path(os.environ.get("V5_OUTPUT_DIR", str(_PROJECT_ROOT))).resolve()
+_PARAM_FILE = _STORE_ROOT / "cg_params.json"
+_SM_FILE = _STORE_ROOT / "comparison" / "reference_inputs.json"
+_READ_INPUTS: dict[str, str] = {}
+_PREDICTION_ONLY = ContextVar("v5_prediction_inputs_only", default=False)
+_ACTIVE_INPUTS = ContextVar("v5_active_inputs", default=None)
+
+
+@contextmanager
+def input_scope():
+    """Collect the precise reads of one evaluation without another evaluation's reads."""
+    reads = {}
+    token = _ACTIVE_INPUTS.set(reads)
+    try:
+        yield reads
+    finally:
+        _ACTIVE_INPUTS.reset(token)
+
+
+def resolve_value(value, records, trail=()):
+    """Resolve explicit parameter projections for a read-only display or calculation."""
+    if isinstance(value, dict):
+        if "$ref" in value:
+            if value.keys() - {"$ref", "path"}:
+                raise ValueError("a parameter reference cannot also contain a value")
+            key = value["$ref"]
+            if key in trail:
+                raise ValueError("cyclic parameter reference: " + " -> ".join((*trail, key)))
+            rec = records[key]
+            result = resolve_value(rec.get("reference", rec.get("value")), records, (*trail, key))
+            for component in value.get("path", []):
+                result = result[component]
+            return result
+        return {key: resolve_value(item, records, trail) for key, item in value.items()}
+    if isinstance(value, list):
+        return [resolve_value(item, records, trail) for item in value]
+    return value
+
+
+def resolved_records(records):
+    """Materialize projections in memory; the store retains a single source value."""
+    return {key: {**rec, "value": resolve_value(rec.get("reference", rec.get("value")), records, (key,))}
+            for key, rec in records.items()}
+
+
+def _track_input(key, value):
+    digest = value_fingerprint(value)
+    _READ_INPUTS[key] = digest
+    active = _ACTIVE_INPUTS.get()
+    if active is not None:
+        active[key] = digest
+
+
+def _checked_value(value, records, trail):
+    if isinstance(value, dict):
+        if "$ref" in value:
+            if value.keys() - {"$ref", "path"}:
+                raise ValueError("a parameter reference cannot also contain a value")
+            result = _checked_record(value["$ref"], records, trail)["value"]
+            for component in value.get("path", []):
+                result = result[component]
+            return result
+        return {name: _checked_value(item, records, trail)
+                for name, item in value.items()}
+    if isinstance(value, list):
+        return [_checked_value(item, records, trail) for item in value]
+    return value
+
+
+def _checked_record(key, records, trail=()):
+    if key in trail:
+        raise ValueError("cyclic parameter reference")
+    rec = records[key]
+    if rec.get("provenance") == _PENDING:
+        raise KeyError(f"parameter '{key}' is unavailable: {rec.get('note', '')}")
+    if rec.get("provenance") in (_OBSERVED, _SM_INPUT) and rec.get("role") != _ROLE_ANCHOR:
+        raise ValueError(f"comparison-only measurement cannot be a prediction input: {key}")
+    if (_PREDICTION_ONLY.get() and rec.get("role") == _ROLE_COMPARISON
+            and rec.get("comparison_kind") != "observed_target"):
+        raise ValueError(f"downstream comparison diagnostic cannot be a prediction input: {key}")
+
+    value = _checked_value(rec.get("reference", rec.get("value")), records, (*trail, key))
+    if value is None:
+        raise KeyError(f"parameter '{key}' has no available value")
+    _track_input(key, value)
+    return {**deepcopy(rec), "value": value}
+
+
+class PredictionRecords(Mapping):
+    """A snapshot whose every value read enforces the production input contract."""
+    def __init__(self, records):
+        self._records = deepcopy(records)
+
+    def __getitem__(self, key):
+        return _checked_record(key, self._records)
+
+    def __iter__(self):
+        return iter(self._records)
+
+    def __len__(self):
+        return len(self._records)
+
+
+def published_record(key, source_root=None):
+    """Read completed comparison evidence from the declared reference store."""
+    if _PREDICTION_ONLY.get():
+        raise ValueError("published comparison access inside a prediction calculation")
+    root = Path(source_root or os.environ.get("V5_REFERENCE_DIR", str(_PROJECT_ROOT)))
+    records = _load_store(root / "cg_params.json")["parameters"]
+    return deepcopy(resolve_value(records[key].get("reference", records[key].get("value")), records, (key,)))
+
+
+def published_sm_value(key, source_root=None):
+    """Read identified observations for comparison, including an empty-store rebuild."""
+    if _PREDICTION_ONLY.get():
+        raise ValueError("observational data access inside a prediction calculation")
+    root = Path(source_root or os.environ.get("V5_REFERENCE_DIR", str(_PROJECT_ROOT)))
+    return deepcopy(_load_store(root / "comparison" / "reference_inputs.json")["parameters"][key]["value"])
+
+
+@contextmanager
+def prediction_inputs_only():
+    """Reject observed-reference access within a declared prediction calculation.
+
+    The dimensional anchor remains available through get(). A computed
+    value published beside an observed target remains a computed value;
+    a downstream comparison diagnostic is not a prediction input.
+    """
+    token = _PREDICTION_ONLY.set(True)
+    try:
+        yield
+    finally:
+        _PREDICTION_ONLY.reset(token)
+
+
+def store_root() -> Path:
+    """Current run's data directory; source code remains in the project."""
+    return _STORE_ROOT
+
+
+def read_store_document(store="parameters", *, source_root=None) -> dict:
+    """Read one canonical store for verification, reporting or reconstruction.
+
+    Calculation modules use get()/PredictionRecords for checked physical
+    values. This document interface retains the metadata needed by audits;
+    it accepts a store identity and a run directory, never a sidecar file.
+    """
+    paths = {"parameters": Path("cg_params.json"),
+             "references": Path("comparison") / "reference_inputs.json"}
+    if store not in paths:
+        raise ValueError("unknown store identity")
+    if _PREDICTION_ONLY.get():
+        raise ValueError("document access inside a prediction calculation; use checked values")
+    root = Path(source_root) if source_root is not None else _STORE_ROOT
+    return _load_store(root / paths[store])
+
+
+def value_fingerprint(value) -> str:
+    encoded = json.dumps(value, sort_keys=True, separators=(",", ":"),
+                         ensure_ascii=False, allow_nan=False).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _metadata(writer: str, *, comparison_kind: str | None = None,
+              dependencies=None, definition=None,
+              evidence_kind="computation under declared definitions") -> dict:
+    source = (_PROJECT_ROOT / writer).resolve()
+    result = {
+        "run_id": os.environ.get("V5_RUN_ID", "direct-module-run"),
+        "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest()
+        if source.is_file() else None,
+        "module_read_inputs": dict(sorted((_ACTIVE_INPUTS.get() if _ACTIVE_INPUTS.get() is not None else _READ_INPUTS).items())),
+        "dependency_scope": "reads in this process before publication",
+        "evidence_kind": evidence_kind,
+        "quantity_definition": definition.as_record() if definition is not None else None,
+    }
+    if comparison_kind:
+        result["comparison_kind"] = comparison_kind
+    if dependencies is not None:
+        records = _read_params()
+        direct = {}
+        for key in dependencies:
+            if key not in _READ_INPUTS:
+                raise ValueError(f"declared dependency was not read: {key}")
+            fingerprint = value_fingerprint(resolve_value(records[key].get("reference", records[key].get("value")), records, (key,)))
+            if fingerprint != _READ_INPUTS[key]:
+                raise ValueError(f"declared input changed before publication: {key}")
+            direct[key] = fingerprint
+        result["direct_inputs"] = dict(sorted(direct.items()))
+        result["dependency_scope"] = "explicit direct inputs, checked against reads"
+    return result
 
 # Provenance classes (see the module docstring).
 _OBSERVED = "OBSERVED"
@@ -122,7 +306,6 @@ _ROLE_CG = "cg"
 _ROLE_INFO = "informational"
 _ROLES = (_ROLE_ANCHOR, _ROLE_INTERNAL, _ROLE_COMPARISON, _ROLE_CG, _ROLE_INFO)
 
-_LOG_MAX_ENTRIES = 2000  # write-log cap (keeps the audit file bounded)
 
 
 # ---------------------------------------------------------------------------
@@ -193,17 +376,34 @@ def _save_store(path: Path, data: dict) -> None:
     The atomic write guarantees the store is never observed in a
     half-written state, even if the process dies mid-save.
     """
-    fd, tmp = tempfile.mkstemp(dir=str(path.parent), suffix=".tmp")
+    data["publication"] = publication_metadata()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(data, ensure_ascii=False, indent=1, sort_keys=True,
+                         allow_nan=False).encode("utf-8")
+    write_bytes_atomic(path, payload)
+
+
+def write_bytes_atomic(path: Path, payload: bytes) -> None:
+    """One exclusive temporary-file attempt; permission errors fail immediately."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.parent / ("." + path.name + "." + uuid.uuid4().hex + ".tmp")
+    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
     try:
-        with os.fdopen(fd, "w", encoding="utf-8") as fh:
-            json.dump(data, fh, ensure_ascii=False, indent=1, sort_keys=True)
+        with os.fdopen(fd, "wb") as fh:
+            fh.write(payload)
         os.replace(tmp, str(path))
     except BaseException:
         try:
-            os.unlink(tmp)
+            tmp.unlink()
         except OSError:
             pass
         raise
+
+
+def write_json_atomic(path: Path, data: dict) -> None:
+    """Publish current machine-readable records with a complete-file replacement."""
+    _save_store(Path(path), data)
 
 
 def _read_params() -> dict:
@@ -222,7 +422,7 @@ def _read_sm() -> dict:
 def has(key: str) -> bool:
     """True if the key exists in the store (with a value)."""
     p = _read_params()
-    return key in p and "value" in p[key]
+    return key in p and ("value" in p[key] or "reference" in p[key])
 
 
 def get(key: str):
@@ -233,12 +433,12 @@ def get(key: str):
     it depends on must never silently proceed with a None.
     """
     p = _read_params()
-    if key not in p or "value" not in p[key]:
+    if key not in p:
         raise KeyError(
             f"parameter '{key}' not in store (provenance: "
             f"{p.get(key, {}).get('provenance', 'absent')})"
         )
-    return p[key]["value"]
+    return _checked_record(key, p)["value"]
 
 
 def get_observed(key: str):
@@ -247,12 +447,50 @@ def get_observed(key: str):
     Observed values must never enter computations; this accessor
     makes the intent explicit at the call site.
     """
+    if _PREDICTION_ONLY.get():
+        raise ValueError("observed-reference access inside a prediction calculation")
     p = _read_params()
     if key not in p or "value" not in p[key]:
         raise KeyError(f"observed parameter '{key}' not in store")
     if p[key].get("provenance") not in (_OBSERVED, _SM_INPUT):
         raise KeyError(f"'{key}' is not an observed parameter")
     return p[key]["value"]
+
+
+def _invalidate_missing_projections(records, changed_key, writer):
+    """Publish unavailable projections with the same atomic source replacement."""
+    dependents = {}
+    for alias, rec in records.items():
+        ref = rec.get("reference")
+        if isinstance(ref, dict) and "$ref" in ref:
+            dependents.setdefault(ref["$ref"], []).append(alias)
+    pending, visited = [changed_key], {changed_key}
+    for source_key in pending:
+        for alias in dependents.get(source_key, ()):
+            if alias in visited:
+                continue
+            visited.add(alias)
+            pending.append(alias)
+            rec = records[alias]
+            try:
+                unavailable = resolve_value(rec["reference"], records, (alias,)) is None
+            except (KeyError, IndexError, TypeError):
+                unavailable = True
+            if not unavailable:
+                continue
+            source = records[source_key]
+            source_value = resolve_value(source.get("reference", source.get("value")),
+                                         records, (source_key,))
+            inputs = {source_key: value_fingerprint(source_value)}
+            records[alias] = {
+                "value": None, "provenance": _PENDING, "role": _ROLE_INFO,
+                "note": f"Projection unavailable in the current {source_key} record.",
+                "writer": writer,
+                **_metadata(writer, definition=readout_definition(alias),
+                            evidence_kind="availability of a canonical-record projection"),
+                "direct_inputs": inputs, "module_read_inputs": inputs,
+                "dependency_scope": "current source inspected during atomic publication",
+            }
 
 
 def record(
@@ -262,30 +500,39 @@ def record(
     provenance: str = _DERIVED,
     role: str = _ROLE_INTERNAL,
     note: str = "",
+    dependencies=None,
+    definition=None,
+    evidence_kind: str = "computation under declared definitions",
+    calculation: dict | None = None,
 ) -> None:
-    """Register a key/value without saving (use set() to persist).
-
-    record() is the in-memory variant used by modules that assemble a
-    batch of outputs before a single save.
-    """
+    """Publish immediately, including this module's read-input fingerprints."""
     if provenance not in _PROVENANCES:
         raise ValueError(f"unknown provenance '{provenance}'")
     if role not in _ROLES:
         raise ValueError(f"unknown role '{role}'")
     p = _read_params()
+    writer = _writer()
+    if definition is None:
+        definition = readout_definition(key)
     p[key] = {
         "value": value,
         "provenance": provenance,
         "role": role,
         "note": note,
-        "writer": _writer(),
+        "writer": writer,
+        **_metadata(writer, comparison_kind="diagnostic"
+                    if role == _ROLE_COMPARISON else None,
+                    dependencies=dependencies, definition=definition,
+                    evidence_kind=evidence_kind),
     }
+    if calculation is not None:
+        p[key]["calculation"] = deepcopy(calculation)
+    _invalidate_missing_projections(p, key, writer)
     # Update the store immediately so that a later save() of another
     # module does not drop this record.
     data = _load_store(_PARAM_FILE)
     data["parameters"] = p
     _save_store(_PARAM_FILE, data)
-    _log(key, value, provenance, _writer())
 
 
 def set(
@@ -295,6 +542,10 @@ def set(
     provenance: str = _DERIVED,
     role: str = _ROLE_INTERNAL,
     note: str = "",
+    dependencies=None,
+    definition=None,
+    evidence_kind: str = "computation under declared definitions",
+    calculation: dict | None = None,
 ) -> None:
     """Publish a derived (or input) value to the store and persist it.
 
@@ -302,7 +553,26 @@ def set(
     DERIVED (a computed quantity); observed/SM values should use
     compare_and_set() or sm_set() so the comparison intent is explicit.
     """
-    record(key, value, provenance=provenance, role=role, note=note)
+    record(key, value, provenance=provenance, role=role, note=note,
+           dependencies=dependencies, definition=definition, evidence_kind=evidence_kind,
+           calculation=calculation)
+
+
+def record_alias(key, source_key, path=(), *, role="comparison", note=""):
+    """Publish a named projection without duplicating the source's numerical value."""
+    source_value = get(source_key)
+    for component in path:
+        source_value = source_value[component]
+    writer = _writer()
+    data = _load_store(_PARAM_FILE)
+    data["parameters"][key] = {
+        "reference": {"$ref": source_key, "path": list(path)},
+        "provenance": _DERIVED, "role": role, "note": note, "writer": writer,
+        **_metadata(writer, comparison_kind="diagnostic" if role == _ROLE_COMPARISON else None,
+                    dependencies=[source_key], definition=readout_definition(key),
+                    evidence_kind="projection of a canonical computed record"),
+    }
+    _save_store(_PARAM_FILE, data)
 
 
 def compare_and_set(
@@ -312,6 +582,9 @@ def compare_and_set(
     *,
     role: str = _ROLE_COMPARISON,
     note: str = "",
+    dependencies=None,
+    definition=None,
+    evidence_kind: str = "computation under declared definitions",
 ) -> float:
     """Publish a computed value together with its observed comparison.
 
@@ -330,6 +603,9 @@ def compare_and_set(
     else:
         dev = (value - observed) / observed * 100.0
     p = _read_params()
+    writer = _writer()
+    if definition is None:
+        definition = readout_definition(key)
     p[key] = {
         "value": value,
         "observed": observed,
@@ -337,46 +613,53 @@ def compare_and_set(
         "provenance": _DERIVED,
         "role": role,
         "note": note,
-        "writer": _writer(),
+        "writer": writer,
+        **_metadata(writer, comparison_kind="observed_target",
+                    dependencies=dependencies, definition=definition,
+                    evidence_kind=evidence_kind),
     }
     data = _load_store(_PARAM_FILE)
     data["parameters"] = p
     _save_store(_PARAM_FILE, data)
-    _log(key, value, _DERIVED, _writer())
     return dev
 
 
-def sm_set(key: str, value, *, note: str = "") -> None:
-    """Write an SM comparison value into the SEPARATE sm_inputs.json.
+def sm_set(key: str, value, *, note: str = "", comparison_kind="observed_target") -> None:
+    """Register a reference value or convention in the comparison store.
 
     The SM table is deliberately isolated from the physics store:
     nothing in the physics store may be read from the SM table as an
     input, so the comparison values can never back-calibrate the
     framework.
     """
+    if comparison_kind not in ("observed_target", "declared_convention"):
+        raise ValueError("unknown reference-data kind")
     data = _load_store(_SM_FILE)
+    writer = _writer()
     data["parameters"][key] = {
         "value": value,
         "provenance": _SM_INPUT,
         "role": _ROLE_COMPARISON,
         "note": note,
-        "writer": _writer(),
+        "writer": writer,
+        **_metadata(writer, comparison_kind=comparison_kind),
     }
     _save_store(_SM_FILE, data)
-    _log(key, value, _SM_INPUT, _writer())
 
 
 def sm_value(key: str):
-    """Read an SM comparison value (never used as a computation input)."""
+    """Read an isolated reference for the comparison stage."""
+    if _PREDICTION_ONLY.get():
+        raise ValueError("reference-data access inside a prediction calculation")
     sm = _read_sm()
     if key not in sm or "value" not in sm[key]:
-        raise KeyError(f"SM value '{key}' not in sm_inputs.json")
+        raise KeyError(f"SM value '{key}' not in reference_inputs.json")
     return sm[key]["value"]
 
 
 def all_records() -> dict:
     """The full parameter record (for audits and reports)."""
-    return _read_params()
+    return resolved_records(_read_params())
 
 
 def save() -> None:
@@ -385,38 +668,6 @@ def save() -> None:
     # and for callers that prefer an explicit flush.
     data = _load_store(_PARAM_FILE)
     _save_store(_PARAM_FILE, data)
-
-
-def _log(key: str, value, provenance: str, writer: str) -> None:
-    """Append an audit entry to the write log (bounded).
-
-    The log is the human-readable audit trail of every publication.
-    It is capped to _LOG_MAX_ENTRIES so that long runs do not grow it
-    without bound; the cap drops the oldest entries.
-    """
-    try:
-        entries = []
-        if _LOG_FILE.exists():
-            with open(_LOG_FILE, "r", encoding="utf-8") as fh:
-                entries = json.load(fh)
-        if not isinstance(entries, list):
-            entries = []
-        entries.append(
-            {
-                "t": time.strftime("%Y-%m-%d %H:%M:%S"),
-                "key": key,
-                "value": value,
-                "provenance": provenance,
-                "writer": writer,
-            }
-        )
-        entries = entries[-_LOG_MAX_ENTRIES:]
-        with open(_LOG_FILE, "w", encoding="utf-8") as fh:
-            json.dump(entries, fh, ensure_ascii=False, indent=1)
-    except OSError:
-        # The log is best-effort: a failure to log must never break
-        # the publication itself.
-        logger.warning("failed to append write-log entry for '%s'", key)
 
 
 # ---------------------------------------------------------------------------
@@ -432,8 +683,7 @@ def init_stores(
     M_P) and the informational records.  sm_values: the SM comparison
     table.  All are written with OBSERVED / SM_INPUT provenance.  This
     entry point is idempotent: it refuses to overwrite existing
-    records.  (The BBN nuclear constants are DERIVED by bbn_helium.py;
-    the former nuclear_values store is removed since 2026-08-17.)
+    records. The BBN quantities are computed by bbn_helium.py.
     """
     if not _PARAM_FILE.exists():
         data = {"version": 1, "parameters": {}}
@@ -443,12 +693,19 @@ def init_stores(
                     "value": v,
                     "provenance": _OBSERVED,
                     "role": _ROLE_ANCHOR,
-                    "note": "anchor value (observed, comparison only)",
-                    "writer": "cg_core.params.init_stores",
+                    "note": "declared observed dimensional anchor",
+                    "writer": "cg_core/params.py",
+                    **_metadata("cg_core/params.py", definition=readout_definition(k),
+                                evidence_kind="declared external dimensional anchor"),
+                    # An initial external anchor has no in-store parent.
+                    # Its source is identified by the physical definition;
+                    # initialization does not read a not-yet-created store.
+                    "direct_inputs": {},
+                    "dependency_scope": "external anchor; no in-store inputs",
                 }
         _save_store(_PARAM_FILE, data)
     if not _SM_FILE.exists():
-        data = {"version": 1, "note": "SM comparison values (never inputs)", "parameters": {}}
+        data = {"version": 1, "note": "Reference data for comparisons; isolated from generated predictions", "parameters": {}}
         if sm_values:
             for k, v in sm_values.items():
                 data["parameters"][k] = {
@@ -456,14 +713,14 @@ def init_stores(
                     "provenance": _SM_INPUT,
                     "role": _ROLE_COMPARISON,
                     "note": "SM value for comparison only",
-                    "writer": "cg_core.params.init_stores",
+                    "writer": "cg_core/params.py",
+                    **_metadata("cg_core/params.py", comparison_kind="observed_target"),
                 }
         _save_store(_SM_FILE, data)
 
 
 if __name__ == "__main__":
     # Smoke test: the store system must be self-consistent and exit 0.
-    logging.basicConfig(level=logging.WARNING, format="%(levelname)s: %(message)s")
     print("params.py smoke test")
     print(f"  project root : {_PROJECT_ROOT}")
     print(f"  param file   : {_PARAM_FILE} (exists: {_PARAM_FILE.exists()})")

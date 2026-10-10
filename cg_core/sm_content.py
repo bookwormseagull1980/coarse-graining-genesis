@@ -1,32 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_core/sm_content.py — V4.0: the Standard Model field content and
+cg_core/sm_content.py — V5.0: the Standard Model field content and
 hypercharge statistics
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 Every spectral sum of the framework weights the RP³ modes by the
 field content: the FRG trace density counts bosons with +1 and
@@ -46,25 +39,28 @@ emergence (spectrum → duality → gauge/geometry/entropy → emergence
                                       generator count, ξ = 1/8, N_g = 8);
   (2) geometric-gauge  d = N_c = 3    (the internal-space dimension =
                                       the colour rank, d = rank(G)+1);
-  (3) UV-IR            e^{∫γ_M} = window span (the entropy-encoded
+  (3) UV-IR            e^S = window span (the entropy-encoded
                                       scale duality, S = ln W);
   (4) spectral-physical spectral sum = physical content (the spectral
                                       representation of the SM).
-The entropy (S = ln W = ∫γ_M) is the physical bridge: it encodes the
-UV (Gaussian window) and the IR (maximum-entropy) together.
+The endpoint entropy S = ln W relates the UV Gaussian window to the
+specified IR readout. The scale-dependent trajectory is supplied by
+the separately declared evolution law.
 
-THE FIELD CONTENT — DERIVED, NOT AN INPUT (2026-08-17)
+FIELD CONTENT FROM THE MINIMAL REPRESENTATIONS
 ------------------------------------------------------
-One generation (15 left-handed Weyl fermions, charge convention
+One charged-response generation (15 Weyl components, charge convention
 Q = T₃ + Y):
     Q_L = (u_L, d_L)  (3, 2)_{1/6}   6 Weyl (3 colours × 2)
     u_R               (3, 1)_{2/3}   3 Weyl
     d_R               (3, 1)_{−1/3}  3 Weyl
     L_L = (ν_L, e_L)  (1, 2)_{−1/2}  2 Weyl
     e_R               (1, 1)_{−1}    1 Weyl
-    — 15 Weyl per generation; 45 for three generations (the
-      generation count is the window-capacity theorem of the
-      framework, not an input here).
+    — 15 Weyl per generation; 45 after the joint screening selection.
+      The upstream 16-component joint module and its charged 15-component
+      quotient are distinct: the neutral right singlet is not counted
+      in this charged-response trace. The endpoint window verifies
+      the selected copy count; its capacity alone does not select it.
 Gauge: 12 (8 gluons + 3 W + 1 B).  Scalar: one complex doublet
 (4 real DOF).
 
@@ -94,7 +90,7 @@ over B2/G2, and RP³ over other spherical quotients):
      e_L → e_R (colour 1), while ν_L has no light right partner
      (Majorana).  Hence 2 left doublets + 3 right singlets.
 
-     THE UNIQUENESS (2026-08-17, why exactly these five, no others):
+     MINIMAL REPRESENTATION CONTENT:
      the chiral clause (A2) fixes the left sector as the single
      semispinor (1/2,0), an SU(2)_L doublet — no other left
      representation is selected.  The colour assignment has exactly
@@ -124,7 +120,7 @@ hypercharge sums:
 The specific values (ΣY² = 10/3 per generation, τ = 1/50) are the
 statistical content used by the EC torsion modules.
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 The five fermion representations are DERIVED from the framework's
 minimality principle (colour = the minimal non-trivial
@@ -132,11 +128,11 @@ representation 3), the chiral clause (A2 → SU(2)_L doublet), and
 colour vectoriality (anomaly cancellation); the hypercharge
 assignment is DERIVED from anomaly cancellation + the Yukawa
 structure (Lean hypercharge_derivation.lean).  The generation
-count n_g = 3 is DERIVED from the window-capacity theorem (the
-spinor modes with (n+3/2) < (kL)² — window_capacity.py), and the
-absence of a light ν_R follows from the Yukawa mirror of the
-minimal combination (the neutral ν_L acquires no right singlet,
-Majorana) — no content datum remains external.
+count n_g = 3 follows from the joint extensive-source and colour
+screening prescriptions implemented in content_response. The endpoint
+then verifies the platform (n+3/2)<(kL)² in window_capacity. The
+charged-response quotient and its source normalization are inherited
+inputs, not rederived merely from this numerical table.
 """
 
 from __future__ import annotations
@@ -148,50 +144,51 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
+from cg_core.content_response import (
+    CHARGED_GENERATION, chiral_anomalies, finite_source_response,
+    screening_compatibility,
+)
+
 # ---------------------------------------------------------------------------
 # The one-generation Weyl content: (name, (SU(3), SU(2)), Y, components).
 # ---------------------------------------------------------------------------
-# DERIVED (2026-08-17): the five representations follow from minimality
+# The five representations follow from the stated minimality conditions
 # (colour = minimal non-trivial rep 3), chirality (A2 -> SU(2)_L doublet),
 # and colour vectoriality (anomaly cancellation).  The content counting is
 # proved in Lean: lean_proofs/fermion_content.lean
 # (key symmetry: N_L = 8 = N_g = N_c²−1; N_R = 7 = N_g−1).
 # components counts the Weyl fermions: colour × weak-doublet members
 # (for Q_L: 3 × 2 = 6; for singlets: 3 or 1).
-_ONE_GENERATION = [
-    ("Q_L", (3, 2), 1.0 / 6.0, 6),
-    ("u_R", (3, 1), 2.0 / 3.0, 3),
-    ("d_R", (3, 1), -1.0 / 3.0, 3),
-    ("L_L", (1, 2), -1.0 / 2.0, 2),
-    ("e_R", (1, 1), -1.0, 1),
-]
+_ONE_GENERATION = [(name, rep, float(y), n)
+                   for name, rep, y, n, _ in CHARGED_GENERATION]
 
-N_GENERATIONS = 3  # the generation count (derived by window_capacity)
+N_C, N_WEAK = next(rep for name, rep, _, _, _ in CHARGED_GENERATION
+                   if name == "Q_L")
+N_GENERATIONS = screening_compatibility(N_C)["generations"]
+# Joint screening selects the replication count before endpoint evaluation.
+# window_capacity then verifies its compatibility with the selected branch.
 
 N_WEYL_PER_GENERATION = sum(c for _, _, _, c in _ONE_GENERATION)  # 15
 N_WEYL_TOTAL = N_WEYL_PER_GENERATION * N_GENERATIONS  # 45
 
-N_GAUGE = {"su3": 8, "su2": 3, "u1": 1}  # 8 + 3 + 1
+N_GAUGE = {"su3": N_C**2-1, "su2": N_WEAK**2-1, "u1": 1}
 N_GAUGE_TOTAL = sum(N_GAUGE.values())  # 12
-SCALAR_DOF = 4  # the complex Higgs doublet
+SCALAR_DOF = 2 * N_WEAK  # real components of the complex Higgs doublet
 
-# THE DEEP SYMMETRY N_L = N_g (2026-08-17, proved in Lean
-# AXIOM_PROOF_SERIES/fermion_content.lean): the LEFT-handed Weyl
+# The identity N_L = N_g (verified in lean_proofs/fermion_content.lean):
+# the left-handed Weyl
 # components per generation equal the COLOUR generator count, and the
 # RIGHT-handed components are one less:
 #
 #   N_L = Q_L + L_L = 3·2 + 1·2 = 6 + 2 = 8  =  N_g = N_c² − 1 = 8
 #   N_R = u_R + d_R + e_R = 3 + 3 + 1 = 7    =  N_g − 1
 #
-# The fermion content is therefore DETERMINED BY THE GAUGE STRUCTURE
-# (N_L = N_g), not an independent input: the chiral carrier sits in
-# the same 8-fold content as the colour adjoint.  This is the deeper
-# statement behind the older chiral content table (N_L = 8, N_R = 7,
-# N_f = 15, ΣY² = 10/3 — recorded in FRAMEWORK_V4.md / CLOSURE_LEDGER.md
-# under the tau-theorem and r12 = (N_L−N_R)/ΣY²).
-N_LEFT = 8          # Q_L (3×2) + L_L (1×2) = 6 + 2
-N_RIGHT = 7         # u_R (3) + d_R (3) + e_R (1) = 3 + 3 + 1
-N_G_COLOR = 8       # N_g = N_c² − 1 = 3² − 1 (the su(3) generators)
+# The specified minimal representations give N_L = 8, N_R = 7,
+# N_f = 15 and ΣY² = 10/3. These counts enter the torsion readout
+# and the neutrino ratio r12 = (N_L−N_R)/ΣY².
+N_LEFT = sum(n for _, _, _, n, sign in CHARGED_GENERATION if sign == 1)
+N_RIGHT = sum(n for _, _, _, n, sign in CHARGED_GENERATION if sign == -1)
+N_G_COLOR = N_GAUGE["su3"]
 
 
 def weyl_content() -> list[tuple[str, tuple[int, int], float, int]]:
@@ -208,14 +205,14 @@ def hypercharge_sum_sq() -> float:
       = 6/36 + 12/9 + 3/9 + 2/4 + 1
       = 1/6 + 4/3 + 1/3 + 1/2 + 1 = 10/3.
 
-    THE FIRST NON-ZERO HYPERCHARGE MOMENT (2026-08-15): the
+    THE FIRST NON-ZERO HYPERCHARGE MOMENT : the
     hypercharge TRACE vanishes, ΣY = 0 (the gravitational mixed
     anomaly cancels — the U(1)_Y is anomaly-free), so ΣY² = 10/3 is
     the FIRST non-zero hypercharge moment and therefore the natural
     normalisation of the torsion parameter τ (the τ-theorem layer: a
     vanishing ΣY cannot normalise, so the framework uses ΣY²).
 
-    WINDOW-CAPACITY GEOMETRY (2026-08-16): kL²/ΣY² = sqrt(N_R/2) =
+    WINDOW-CAPACITY GEOMETRY : kL²/ΣY² = sqrt(N_R/2) =
     sqrt(7/2) to +0.009% — the window capacity over the hypercharge
     capacity equals the right-singlet half-count sqrt(N_R/2).
     """
@@ -223,18 +220,18 @@ def hypercharge_sum_sq() -> float:
 
 
 def hypercharge_sum() -> float:
-    """ΣY per generation — the hypercharge trace = 0.
+    """Ordinary unsigned hypercharge trace ΣY = 0 for this content.
 
     Derivation: 6·(1/6) + 3·(2/3) + 3·(−1/3) + 2·(−1/2) + 1·(−1)
-    = 1 + 2 − 1 − 1 − 1 = 0.  The vanishing trace is the
-    gravitational mixed-anomaly cancellation (Tr Y = 0), which makes
-    ΣY² the first non-zero hypercharge moment (the τ-theorem).
+    = 1 + 2 − 1 − 1 − 1 = 0. The gravitational mixed anomaly instead
+    uses the LH-minus-RH trace, checked exactly by chiral_anomalies().
+    Both vanish here but they are different trace operations.
     """
     return sum(c * y for _, _, y, c in _ONE_GENERATION)
 
 
 def hypercharge_sum_cube() -> float:
-    """ΣY³ per generation = −4/9 (the hypercharge cubic anomaly, non-zero).
+    """Unsigned ordinary third moment ΣY³ = −4/9, not a chiral anomaly.
 
     Derivation: 6·(1/6)³ + 3·(2/3)³ + 3·(−1/3)³ + 2·(−1/2)³ + 1·(−1)³
     = 1/36 + 8/9 − 1/9 − 1/4 − 1 = −4/9.
@@ -250,7 +247,7 @@ def chiral_asymmetry() -> int:
     3 + 3 + 1 = 7; the difference is 1.  This is the chiral
     asymmetry that sources the torsion parameter τ.
 
-    THE DEEP SYMMETRY N_L = N_g (2026-08-17): the LEFT-handed
+    THE CONTENT IDENTITY N_L = N_g: the LEFT-handed
     component count per generation is EXACTLY the colour generator
     count — N_L = 8 = N_g = N_c² − 1 — and the right-handed count is
     one less, N_R = 7 = N_g − 1.  The fermion content is thus
@@ -258,7 +255,7 @@ def chiral_asymmetry() -> int:
     same 8-fold content as the colour adjoint), not an independent
     datum.  Lean: AXIOM_PROOF_SERIES/fermion_content.lean (9 theorems).
 
-    THE Z₂ TOPOLOGY (2026-08-15): N_L − N_R = 1 is ODD, the
+    THE Z₂ TOPOLOGY : N_L − N_R = 1 is ODD, the
     non-trivial element of π₁(RP³) = Z₂ (the antipodal loop winds
     once).  RP³ = S³/Z₂ has TWO spin structures (H¹(RP³, Z₂) = Z₂):
     the trivial one (even winding, P=+) and the non-trivial one (odd
@@ -295,9 +292,11 @@ def _self_test() -> None:
     assert abs(hypercharge_sum_sq() - 10.0 / 3.0) < 1e-12
     assert abs(hypercharge_sum()) < 1e-15           # ΣY = 0 (anomaly)
     assert abs(hypercharge_sum_cube() + 4.0 / 9.0) < 1e-12  # ΣY³ = -4/9
+    assert all(value == 0 for value in chiral_anomalies().values())
+    assert abs(float(finite_source_response()["tau"]) - tau_statistical()) < 1e-15
     assert chiral_asymmetry() == 1
     assert abs(tau_statistical() - 0.02) < 1e-15
-    # The deep symmetry N_L = N_g (2026-08-17): left-handed content =
+    # The content identity N_L = N_g: left-handed content =
     # colour generators, right-handed = N_g − 1.
     assert N_LEFT == N_G_COLOR == 8, "N_L = N_g = 8 (deep symmetry)"
     assert N_RIGHT == N_G_COLOR - 1 == 7, "N_R = N_g − 1 = 7"

@@ -1,23 +1,16 @@
 /-
- Coarse-Graining Genesis Framework V4.0
- 
- Author:      Jinku Guo <guojk@nwpu.edu.cn>
- Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
- ORCID:       0009-0000-6600-6171
- 
- DOI records:
-   [Software] 10.5281/zenodo.22067006
-   [Paper I]  10.5281/zenodo.22067118
-   [Paper II] 10.5281/zenodo.22067469
- 
- Part of the V4 spectral framework, whose physics is presented in the
- companion papers:
-   [I]  "The spectrum of a compact internal space.
-         I. Gauge structure and fermion content"
-        DOI: 10.5281/zenodo.22067118
-   [II] "The spectrum of a compact internal space.
-         II. Effective couplings and mass scales"
-        DOI: 10.5281/zenodo.22067469
+Coarse-Graining Genesis Framework V5.0
+Author: Jinku Guo <guojk@nwpu.edu.cn>
+Northwestern Polytechnical University, Xi'an 710072, China
+ORCID: 0009-0000-6600-6171
+References:
+DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+Full bibliography: REFERENCES.md and CITATION.cff.
 -/
 
 /-!
@@ -31,9 +24,9 @@ The geometric identification (the Gaussian level sets = S³; the radial directio
 (6) The T3 chain — the provable core: the rank-2 Cartan minimal-coupling lemma
 (|b| = 1 → A₂ — the "why SU(3)" part) — machine-checked.
 The rest of the chain (RP³ → SU(2)_L×U(1)_R → SU(3) → G_SM) is the framework's
-cited derivation (steps 1-4) — stated but NOT machine-proven here (honest).
+cited derivation (steps 1-4) — represented by the stated hypothesis interface.
 
-Core Lean, no mathlib.  2026-08-07 · Lean 4.7.0
+Core Lean, no mathlib.  Lean 4.7.0
 -/
 
 -- ============ (5) the σ-fiber decomposition (S-3 skeleton) ============
@@ -115,6 +108,6 @@ example : (∀ d : Rank2Cartan, coupling Rank2Cartan.A2 ≤ coupling d) → Rank
 
 /- The T3 statement (the intersection uniqueness — the framework's chain, steps 1-4:
    RP³ → SU(2)_L×U(1)_R → SU(3) → G_SM = SU(3)×SU(2)×U(1)).
-   This is the framework's cited derivation — NOT machine-proven here (honest);
+   This is the framework's cited derivation — represented by an explicit hypothesis;
    the A₂ minimality lemma above machine-checks one component of the chain
    (the "why SU(3)": rank-2, minimal coupling |b| = 1 → A₂). -/

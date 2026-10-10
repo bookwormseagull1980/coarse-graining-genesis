@@ -1,48 +1,42 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/frg/discrete_flow.py — V4.0: the discrete RG flow — the
+cg_frg/frg/discrete_flow.py — V5.0: the discrete RG flow — the
 window-kernel semigroup, the analytic β, and the mass-gap spectrum
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
-The framework's RG is a DISCRETE flow: the coarse-graining window
+The framework uses a discrete resolution sampling: the window
 W(p, σ) = exp(−p²σ²/2) slides from σ₀ = 1/M_P to σ_C = 1/H0,
-integrating out modes above k = 1/σ at each step.  The window
-kernel is NOT a regulator — it IS the physical coarse-graining
-operation on the RP³ harmonic tower (the finite-dimensional
-quantum mechanics of the window-projected modes).  This module
+attenuates modes above k = 1/σ. The amplitude multiplier alone
+does not integrate a path-integral measure or choose real-time
+dynamics. An effective-action regulator is a separate object. This module
 consolidates the discrete flow's four structural properties:
 
-  PROPERTY 1 — THE SEMIGROUP (the flow is unitary + irreversible)
+  PROPERTY 1 — THE RESOLUTION SEMIGROUP
   ----------------------------------------------------------------
-  Each step is a partial trace (a Gaussian convolution of the
-  path-integral measure): T_σ = exp(−σ²Δ/2).  The flow is a
+  The field-amplitude filter is T_σ = exp(−σ²Δ/2). This is a
+  contraction, not unitary evolution or a state-level partial trace.
+  For finite positive width it is injective; its inverse becomes
+  unbounded on an infinite tower. The family is a
   SEMI-group (not a group): the forward direction σ₀ → σ_C
   (σ increasing — more modes integrated out) is canonical; the
-  reverse is not reconstructible without the full UV theory.
+  reverse reconstruction is unstable at finite precision.
   The Gaussian family composes quadratically — two successive
   slides of widths σa, σb equal the single slide at the composed
   width:
@@ -61,19 +55,18 @@ consolidates the discrete flow's four structural properties:
 
       β(σ) = dσ/dt = −2C·σ^{−3}     (C < 0 — the forward flow)
 
-  — analytic → Picard–Lindelöf: the flow has a unique global
-  solution σ(t); the β is NOT an input, it is the derived flow
-  of the window's vacuum-energy profile.
+  This is a specified resolution parametrisation, not a physical-time
+  law deduced from that potential. For C<0 and sigma(0)>0 it has the
+  explicit forward-global solution sigma(t)^4=sigma(0)^4-8Ct.
+  A potential by itself does not choose a mobility or physical clock.
 
   PROPERTY 3 — THE WINDOW-CAPACITY STEP (the discrete ladder)
   ------------------------------------------------------------
   The window capacity kL* = 2.4935343 is CONSTANT along the flow
   (the scale-invariant trajectory M·L = const): the number of
-  degrees of freedom per step is fixed — the flow is equidistant
-  in log σ with the step Δlnσ = 1/kL* ≈ 0.40.  The discrete-
-  to-continuum discretisation error is bounded by 1/(kL*)² ≈
-  16%, while the physical closures converge far better (the g₂
-  closure 0.036% — the continuum limit is effectively reached).
+  retained capacity is fixed. The step Δlnσ = 1/kL* is a specified
+  sampling convention. Its square is not an error bound: a convergence
+  bound needs the actual update, method, stability and derivative data.
 
   PROPERTY 4 — THE MASS-GAP SPECTRUM
   ------------------------------------
@@ -88,19 +81,22 @@ consolidates the discrete flow's four structural properties:
   · the condensate ⟨E⟩ = s₀·M_G/√2 (s₀ = 2τ) gives the generator
     mass m_gen = g₂·⟨E⟩ — the QCD initial condition
     (mass_gap_scale): m_gen² = g₂²⟨E⟩² > 0;
-  · the J = 2 kinetic eigenvalue λ_J = 14.1608/L² > 0 (the
-    free-EC sector — order_parameter): the lowest excitation is
-    MASSIVE — the spectral level of the mass gap;
-  · the glueball tower ratios are geometric (the RP³ harmonic
-    indices — qcd_sector): 0⁺⁺ 1.00, 2⁺⁺ 1.41, 0⁺⁺* 1.47,
-    0⁻⁺ 1.53.
+  · the assigned J = 2 effective-directory coefficient
+    (14+8tau+2tau²)/L² is positive; it is not the genuine rough-TT
+    eigenvalue or a proof of a particular observable's lowest mass;
+  · the assigned glueball catalogue ratios are 1, sqrt(2), 3/2
+    and sqrt(17/8). Their use as physical channels requires the
+    source and two-body matching stated in the QCD calculation.
 
   REFLECTION POSITIVITY (the OS structure)
   ----------------------------------------
-  Each layer is a Gaussian measure (GJ87 — reflection-positive);
-  the flow map (the analytic β, the window projection) preserves
-  the positivity stepwise: the discrete flow carries the
-  Osterwalder–Schrader structure layer by layer.
+  Gaussianity alone does not imply reflection positivity. The finite
+  free-carrier example below uses A>=0, m>0 and
+  C(t)=exp(-|t|sqrt(A+m^2))/(2sqrt(A+m^2)). Same-time filtering B
+  yields B C(t) B*, whose reflected quadratic form is a squared norm.
+  Its assumptions do not establish interacting or gravitational OS
+  positivity. A separate random-phase average is a CPTP state channel;
+  its difference-of-eigenvalues multiplier is not the amplitude filter.
 
 PARAMETERS
 ----------
@@ -111,7 +107,7 @@ Writes: discrete_flow_semigroup, discrete_flow_beta,
         discrete_flow_reflection_positivity, discrete_flow_status
         (DERIVED — this module is their writer)
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 No observed value enters the computation: the semigroup check is
 numerical (the Gaussian kernel), the β is the analytic closed
@@ -144,9 +140,8 @@ def semigroup_check(sigma_a: float, sigma_b: float) -> float:
 
     W(Δ,σa)·W(Δ,σb) = W(Δ,√(σa²+σb²)) — two successive window
     slides compose quadratically (the exact Gaussian identity).
-    The composition is always an increase (√(σa²+σb²) > σa, σb):
-    the flow is a one-way semigroup — the irreversibility of the
-    coarse-graining.
+    The widths compose by adding their squares. This checks the
+    multiplier identity, not a Hilbert-space partial trace or dynamics.
     """
     err = 0.0
     for i in range(201):
@@ -158,9 +153,37 @@ def semigroup_check(sigma_a: float, sigma_b: float) -> float:
 
 
 def beta_sigma(C: float, sigma: float) -> float:
-    """β(σ) = −2C·σ^{−3} — the analytic closed-form β of the
-    window's vacuum-energy profile (C < 0 — the forward flow)."""
+    """Specified resolution speed; no physical clock or mobility is inferred."""
+    if not math.isfinite(C) or not math.isfinite(sigma) or sigma <= 0:
+        raise ValueError("finite C and positive finite sigma required")
     return -2.0 * C * sigma ** -3
+
+
+def resolution_width(C: float, sigma0: float, time: float) -> float:
+    """Exact forward solution for the declared C<0 resolution convention."""
+    if not all(math.isfinite(v) for v in (C, sigma0, time)) or C >= 0 or sigma0 <= 0 or time < 0:
+        raise ValueError("C<0, sigma0>0 and forward time>=0 required")
+    return (sigma0**4-8*C*time)**0.25
+
+
+def free_carrier_checks() -> dict:
+    """Actual finite scalar free example; no interacting reconstruction claim."""
+    import numpy as np
+    from cg_core.free_covariance import gaussian_phase_channel, reflection_gram
+    # Constant scalar mode plus one direction in the l=2 eigenspace, L=1.
+    # This probes the full free covariance; it is not a claim that the
+    # two-dimensional selection closes under interacting mode multiplication.
+    A = np.diag([0., 8.])
+    B = np.diag(np.exp(-0.15*np.array([0., 8.])))
+    probes = np.array([[1., 1.], [1., -1.]])/math.sqrt(2.)
+    gram = reflection_gram(A, math.sqrt(3.)/2., [0.2, 0.7], probes, B)
+    rho = np.array([[0.5, 0.5j], [-0.5j, 0.5]])
+    state = gaussian_phase_channel(rho, A, 0.3)
+    return {"free_reflection_gram_min": float(np.linalg.eigvalsh(gram).min()),
+            "phase_state_min": float(np.linalg.eigvalsh(state).min()),
+            "phase_trace_error": float(abs(np.trace(state)-np.trace(rho))),
+            "mass_squared": 0.75, "internal_eigenvalues": [0., 8.],
+            "interacting_reflection_positivity_established": False}
 
 
 def compute() -> dict:
@@ -178,8 +201,8 @@ def compute() -> dict:
     err = semigroup_check(1.0, 0.7)
 
     # PROPERTY 2 — the analytic β:
-    # The vacuum-energy profile V_eff(k) = −(C/2)(k^{−2} − M_P^{−2});
-    # the FORM β(σ) = −2Cσ^{−3} is structural (the semigroup flow).
+    # A declared resolution speed, separate from physical time or a derived
+    # mobility. The potential alone does not determine this speed.
     # |C| is a NORMALISATION choice (|C| = 1): it is NOT derived from
     # trace_density and does not enter any closed physical quantity —
     # published as SCALE_CHOICE, not DERIVED.
@@ -189,7 +212,8 @@ def compute() -> dict:
     # PROPERTY 3 — the window-capacity step:
     dln_sigma = 1.0 / kL          # Δlnσ = 1/kL* ≈ 0.40
     N_steps = math.log(sigma_C * M_P) / dln_sigma   # σ₀=1/M_P → σ_C
-    discr_err = 1.0 / (kL * kL)   # the naive discretisation bound
+    step_squared = dln_sigma * dln_sigma
+    free_checks = free_carrier_checks()
 
     # PROPERTY 4 — the gap spectrum:
     R_MG = 6.0 / (kL * kL)
@@ -207,59 +231,45 @@ def compute() -> dict:
     pset("discrete_flow_semigroup", err, provenance="DERIVED",
          role="internal",
          note=f"the Gaussian window semigroup T_a*T_b = T_(sqrt(a^2+b^2)) "
-              f"verified to {err:.1e} across the mode grid (the unitary, "
-              f"irreversible partial-trace flow)")
+              f"verified to {err:.1e} across the mode grid; "
+              f"a resolution multiplier identity")
     pset("discrete_flow_beta", beta_MG, provenance="SCALE_CHOICE",
          role="internal",
          note=f"beta(sigma) = -2C sigma^-3 with |C| = 1 a NORMALISATION "
-              f"choice (SCALE_CHOICE, not DERIVED): the FORM is the "
-              f"analytic closed-form flow of the vacuum-energy profile "
-              f"V_eff(k) = -(C/2)(k^-2 - M_P^-2) (unique global solution, "
-              f"Picard-Lindelof); the strength enters no closed quantity")
+              f"choice; sigma(t)^4=sigma(0)^4-8Ct for forward t and C<0. "
+              f"This resolution parametrisation supplies no physical clock.")
     pset("discrete_flow_step", dln_sigma, provenance="DERIVED", role="cg",
          note=f"Delta ln sigma = 1/kL* = {dln_sigma:.4f} — the "
-              f"window-capacity step (the flow is equidistant in log "
-              f"sigma; the discretisation error bound 1/(kL*)^2 = "
-              f"{discr_err:.2f}, while the physical closures converge "
-              f"far better — the continuum limit effectively reached)")
+              f"specified sampling in log sigma; its square "
+              f"{step_squared:.2f} is not a certified discretisation error")
     pset("discrete_flow_gap_spectrum",
          f"m_long^2(M_G) = K(R-R_c) = {m2_long:.4f} < 0 (the tachyon — "
          f"the condensation trigger); m_gen^2 = g2^2<E>^2 = "
          f"{m_gen_sq:.3e} GeV^2 > 0 and the J=2 kinetic lambda_J = "
-         f"{lam_J2:.4f}/L^2 > 0 — the lowest excitation MASSIVE (the "
-         f"spectral level of the mass gap); the glueball tower ratios "
-         f"geometric: " + ", ".join(f"{k} {v:.2f}" for k, v in tower.items()),
+         f"{lam_J2:.4f}/L^2 > 0 in the assigned effective directory; "
+         f"the prescribed glueball catalogue ratios: " + ", ".join(f"{k} {v:.2f}" for k, v in tower.items()),
          provenance="DERIVED", role="internal",
-         note="the discrete-flow mass-gap spectrum: the condensate "
-              "generator mass (positive) + the positive J=2 kinetic — "
-              "the gap at the spectral level; the tower ratios from the "
-              "RP3 harmonic indices")
+         note="Positive assigned coefficients and prescribed QCD catalogue; "
+              "no source-resolved mass gap or external tensor pole is inferred.")
     pset("discrete_flow_reflection_positivity",
-         "the OS structure preserved layer by layer: each layer is a "
-         "Gaussian measure (GJ87 — reflection-positive); the flow map "
-         "(the analytic beta, the window projection) preserves the "
-         "positivity stepwise",
+         free_checks,
          provenance="DERIVED", role="informational",
-         note="the Osterwalder-Schrader reflection positivity of the "
-              "discrete flow")
+         note="Finite free scalar covariance and same-time filtered reflection "
+              "Gram; random-phase average is a separate CPTP state map. "
+              "Neither establishes interacting or gravitational OS positivity.")
     pset("discrete_flow_status",
-         "the discrete flow IS the physical RG: the Gaussian window "
-         "kernel is the coarse-graining operator (not a regulator); "
-         "the semigroup is verified to machine precision; the beta is "
-         "the analytic closed form; the window capacity kL* = const "
-         "makes the flow equidistant in log sigma; the mass-gap "
-         "spectrum is the condensate + the positive J=2 kinetic; the "
-         "OS structure is preserved stepwise",
+         "Gaussian resolution semigroup with specified logarithmic sampling "
+         "and resolution speed; assigned positive excitation catalogue; "
+         "explicit finite free reflection-positive covariance. Physical "
+         "time evolution and an interacting functional RG are separate inputs.",
          provenance="DERIVED", role="informational",
-         note="the discrete flow is the physical RG structure: the "
-              "window kernel is the coarse-graining operator, the "
-              "semigroup machine-precision verified, the beta the "
-              "analytic closed form, the gap spectrum from the "
-              "condensate and the positive J=2 kinetic")
+         note="The multiplier, state channel, free covariance and assigned "
+              "excitation catalogue have distinct definitions.")
 
     return {"semigroup_err": err, "beta_MG": beta_MG, "dln_sigma": dln_sigma,
-            "N_steps": N_steps, "discr_err": discr_err, "m2_long": m2_long,
-            "m_gen_sq": m_gen_sq, "lambda_J2": lam_J2, "tower": tower}
+            "N_steps": N_steps, "step_squared": step_squared, "m2_long": m2_long,
+            "m_gen_sq": m_gen_sq, "lambda_J2": lam_J2, "tower": tower,
+            "free_carrier_checks": free_checks}
 
 
 if __name__ == "__main__":

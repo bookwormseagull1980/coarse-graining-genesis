@@ -1,32 +1,25 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/cosmology/gw_ratio.py — V4.0: the GW ratio, the 2π-window
+cg_frg/cosmology/gw_ratio.py — V5.0: the GW ratio, the 2π-window
 IR anchors (2L, σ_C) and the Hubble-scale closure
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The IR end of the framework's window is anchored by the same 2π
 family that closes the UV: the tensor-to-scalar ratio, the
@@ -55,14 +48,13 @@ module publishes the three IR anchors together:
 
   H0/σ_C — the Hubble endpoint and the IR window anchor:
 
-        H0   = M_P·√π·e^{−∫γ_M} = 1.4393e-42 GeV
-             = kL·M_G·e^{−∫γ_M} (the two forms agree 0.036% —
+        H0   = M_P·√π·e^{−S_endpoint} = 1.4393e-42 GeV
+             = kL·M_G·e^{−S_endpoint} (the two forms agree algebraically —
              the anchor-chain cross-check kL·M_G = M_P·√π)
         σ_C  = 1/H0 = 6.948e41 GeV⁻¹   (the IR window endpoint)
 
-       (∫γ_M = 139.253 — the entropy integral, gamma_M/ir_flow:
-       the emergence window's total entropy accumulation from M_G
-       to H0.)
+       (S_endpoint is the prescribed endpoint entropy span from gamma_M;
+       it is not the computed integral of a gamma(k) profile.)
 
 DERIVATION CHAIN
 ----------------
@@ -77,10 +69,10 @@ DERIVATION CHAIN
    are quantised in units of 1/L, so the window width satisfies
    2L·k = √(2π) — the Gaussian normalisation ∫exp(−x²/2)dx.
 
-3. H0 = M_P·√π·e^{−∫γ_M}: the IR end of the emergence window —
+3. H0 = M_P·√π·e^{−S_endpoint}: the IR end of the emergence window —
    the Planck anchor M_P × the Gaussian-width endpoint √π (L_Cg)
-   × the entropy suppression e^{−∫γ_M}.  The identity
-   kL·M_G = M_P·√π (0.036%) is the anchor chain's cross-check.
+   × the entropy suppression e^{−S_endpoint}.  The identity
+   kL·M_G = M_P·√π is the anchor chain's cross-check.
 
 PARAMETERS
 ----------
@@ -89,10 +81,10 @@ Writes: gw_ratio, gw_tensor_amplitude, twoL_entropy_min_distance,
         H0_GEV, sigma_C_hubble, gw_status (DERIVED — this module
         is their writer)
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 Every quantity is computed from internal anchors (M_P, M_G, kL,
-∫γ_M) and the structural 2π.
+S_endpoint) and the structural 2π.
 """
 
 from __future__ import annotations
@@ -125,7 +117,7 @@ def two_L() -> float:
 
 
 def hubble(M_P: float, L_Cg: float, entropy_int: float) -> float:
-    """H0 = M_P·√π·e^{−∫γ_M} — the Hubble endpoint of the window.
+    """H0 = M_P·√π·e^{−S_endpoint} — the Hubble endpoint of the window.
 
     The Planck anchor × the Gaussian-width endpoint √π (L_Cg) ×
     the entropy suppression of the emergence window.
@@ -139,7 +131,7 @@ def compute() -> dict:
     M_G = float(get("M_G"))
     kL = float(get("kL"))
     L_Cg = float(get("L_Cg"))               # √π (the Gaussian endpoint)
-    ent = float(get("entropy_integral"))    # ∫γ_M = 139.253 (ir_flow)
+    ent = float(get("entropy_integral"))    # prescribed endpoint entropy span (gamma_M)
     d2_s = float(get("perturbation_amplitude"))  # 2.100e-9 (A-level)
 
     r = gw_ratio()
@@ -162,17 +154,20 @@ def compute() -> dict:
               f"minimum distance (the window capacity 2L/sqrt(2pi) = 1; "
               f"kL vs 2L: {discr:+.3f}% — the same family)")
     pset("H0_GEV", H0, provenance="DERIVED", role="internal",
-         note=f"H0 = M_P*sqrt(pi)*e^(-int gamma_M) = {H0:.4e} GeV (the IR "
+         note=f"H0 = M_P*sqrt(pi)*e^(-S_endpoint) = {H0:.4e} GeV (the IR "
               f"endpoint of the emergence window; cross-check "
               f"kL*M_G = M_P*sqrt(pi): {cross:+.3f}%)")
     pset("sigma_C_hubble", sigma_C, provenance="DERIVED", role="internal",
          note=f"sigma_C = 1/H0 = {sigma_C:.4e} GeV^-1 — the IR window "
               f"endpoint (the Hubble scale)")
     # The IR acceleration scale a0: the Euclidean-period acceleration
-    # c·H0/(2π) with the 3-ball coefficient √(4/3).  This is a DERIVED
+    # c·H0/(2π) with the compact-source RMS angular factor √(4/3).
+    # Independent uniform S² factors on the pure product occupation orbit
+    # have covariance (2/15) I_10 and total angular variance 4/3, as
+    # evaluated exactly by gravity.angular_covariance. This is a DERIVED
     # SCALE from the IR endpoint H0, reproducing the Milgrom coincidence
-    # a0 ≈ c·H0/(2π) to +0.36%.  The linear TT propagator remains
-    # massless 1/k² (slope_G = -2 exactly).  The low-acceleration response
+    # a0 ≈ c·H0/(2π) to +0.36%. The internal TT diagnostic is
+    # characterized only by its internal k^-2 trajectory slope.  The low-acceleration response
     # is carried by the separate MaxEnt endpoint projection recorded in
     # endpoint_residual.py, rather than by a deformation of the TT pole.
     H0_s = H0 * GEV_TO_S                    # GeV -> s^-1
@@ -181,15 +176,11 @@ def compute() -> dict:
     pset("a0_MOND", a0_eff, provenance="DERIVED", role="internal",
          note=f"a0 = c H0/(2 pi) sqrt(4/3) = {a0_eff:.4e} m/s^2 (a "
               f"DERIVED endpoint acceleration scale.  The linear TT "
-              f"propagator remains massless 1/k^2; the late "
+              f"diagnostic has internal k^-2 scaling, not a verified external pole; the late "
               f"low-acceleration dynamics is the separate endpoint "
               f"acceleration projection recorded by endpoint_residual.py.)")
-    # The DM sector: Omega_DM is retained as a legacy key for readers and
-    # tables, but its physical interpretation is supplied by
-    # endpoint_residual.py as Omega_Sigma, the conserved Hamiltonian
-    # residual of the MaxEnt endpoint.  This keeps the linear TT pole
-    # Newtonian while giving the flatness residue a cold perturbation
-    # source in cosmology.
+    # The endpoint nonbaryonic budget is resolved into photon, neutrino and
+    # cold-source components by the common-action Friedmann constraint.
     # Ω_b = η_B·n_γ·m_p/ρ_crit — η_B (Sakharov), m_p (constituent quark),
     # ρ_crit (H0, M_P) and T_CMB (the photon floor) are all INTERNAL.
     eta_B = float(get("eta_b"))
@@ -210,29 +201,24 @@ def compute() -> dict:
     Omega_DM = 1.0 - Omega_lam - Omega_b
     pset("Omega_DM", Omega_DM, provenance="DERIVED", role="internal",
          note=f"Omega_DM = 1 - Omega_Lambda - Omega_b = {Omega_DM:.4f} "
-              f"(legacy key for the flatness closure residue.  Its V4 "
-              f"cosmological interpretation is Omega_Sigma, the MaxEnt "
-              f"endpoint Hamiltonian residual published by "
-              f"cg_frg/cosmology/endpoint_residual.py; no dark particle "
-              f"species is added.)")
+              f"(endpoint nonbaryonic residual budget, also denoted Omega_Sigma; "
+              f"its common-action decomposition supplies photons, neutrinos and the cold source)")
     pset("dm_verdict",
          {"rotation_scale": "a0 = c H0/(2 pi) sqrt(4/3), the endpoint "
                             "acceleration scale",
-          "linear_TT": "massless 1/k^2 at all scales; the linear TT pole "
-                       "remains Newtonian",
-          "cosmological_dark_source": "Omega_DM is promoted to "
-                                      "Omega_Sigma by endpoint_residual.py",
+          "linear_TT": "internal k^-2 trajectory diagnostic; an external "
+                       "positive spectral pole is not established",
+          "cosmological_dark_source": "the common-action constraint resolves "
+                                      "Omega_Sigma into radiation, neutrinos and Omega_Sigma_cold",
           "galaxy_branch": "late low-acceleration dynamics belongs to the "
                            "separate endpoint acceleration projection",
           "Omega_DM": Omega_DM,
-          "bullet": "free endpoint residual density can source separated "
-                    "cluster lensing; full map likelihood is an external "
-                    "comparison"},
+          "bullet": "a relativistic lensing model and source evolution are "
+                    "not computed by this endpoint decomposition"},
          provenance="DERIVED", role="informational",
-         note="The linear TT pole remains Newtonian.  The cosmological "
-              "dark source is the MaxEnt endpoint Hamiltonian residual "
-              "Omega_Sigma; the galaxy low-acceleration scale is the "
-              "separate endpoint acceleration projection.")
+         note="The cosmological cold source follows from the complete common-action "
+              "Hamiltonian budget. The local low-acceleration scale follows from "
+              "the specified compact-source covariance and endpoint RMS response.")
 
     return {"r": r, "Delta2_t": d2_t, "two_L": two_l, "H0": H0,
             "H0_alt": H0_alt, "sigma_C": sigma_C,

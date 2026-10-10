@@ -1,31 +1,24 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """Isolation tests: pure-geometry modules depend only on their inputs.
 
 These modules take (L, tau, ...) as explicit arguments (no store
 reads); the tests verify exact closed-form identities at the
-framework's fixed point (EXPECTED_BY_THEORY).
+framework's fixed point.
 """
 import math
 
@@ -38,7 +31,7 @@ TAU = 0.02                  # the torsion content ratio
 def test_rp3_scalar_spectrum():
     from cg_core.rp3_spectrum import (scalar_eigenvalue, scalar_multiplicity,
                                       vector_eigenvalue, spinor_dirac_eigenvalue)
-    # EXPECTED_BY_THEORY: l=0 zero mode; l=2 gives 8/L^2 with
+    # l=0 zero mode; l=2 gives 8/L^2 with
     # multiplicity 9; the l=1 Killing vector 4/L^2 (6 modes).
     assert abs(scalar_eigenvalue(0, L)) < 1e-12
     assert abs(scalar_eigenvalue(2, L) - 8.0 / L ** 2) < 1e-12
@@ -47,19 +40,19 @@ def test_rp3_scalar_spectrum():
     assert abs(spinor_dirac_eigenvalue(0, L) - 1.5 / L) < 1e-12
 
 
-def test_rp3_tt_lowest_mode():
-    from cg_core.rp3_spectrum import tt_lowest_eigenvalue, tt_eigenvalue
-    # EXPECTED_BY_THEORY: the lowest TT mode is (jL,jR)=(1,1) with
-    # lambda = 14/L^2 (the Lichnerowicz-shifted Casimir).
-    assert abs(tt_lowest_eigenvalue(L) - 14.0 / L ** 2) < 1e-12
-    assert abs(tt_eigenvalue(1, 1, L) - 14.0 / L ** 2) < 1e-12
+def test_rp3_response_tensor_and_true_tt_minima():
+    from cg_core.rp3_spectrum import response_tensor_lowest_eigenvalue, true_tt_modes
+    # The response tensor uses C2+6; the transverse-tracefree rough
+    # operator uses C2-6 on its specified carrier.
+    assert abs(response_tensor_lowest_eigenvalue(L) - 14.0 / L ** 2) < 1e-12
+    assert abs(min(row[2] for row in true_tt_modes(L, 2)) - 6/L**2) < 1e-12
 
 
 def test_long_root_and_tt_spectral_values_are_distinct():
     from cg_frg.gravity.newton import long_root_eigenvalue
 
-    # The (2,1) long-root Casimir normalises the pole residue.  The TT
-    # propagation values remain p_TT^2=8/L^2 and Lambda_TT=14/L^2.
+    # The long-root readout and the compact response use their specified
+    # spectral coefficients.
     assert abs(long_root_eigenvalue(L) - 16.0 / L ** 2) < 1e-12
     assert 8.0 / L ** 2 < 14.0 / L ** 2 < long_root_eigenvalue(L)
 
@@ -67,7 +60,7 @@ def test_long_root_and_tt_spectral_values_are_distinct():
 def test_ec_structure_identities():
     from cg_core.ec_structure import (scalar_curvature_LC, ec_over_lc_ratio,
                                       torsion_squared)
-    # EXPECTED_BY_THEORY: R_LC = 6/L^2; the EC/Lichnerowicz ratio
+    # R_LC = 6/L^2; the EC/Lichnerowicz ratio
     # (1 - tau^2/4); torsion-squared = 6 (tau/L)^2.
     assert abs(scalar_curvature_LC(L) - 6.0 / L ** 2) < 1e-12
     assert abs(ec_over_lc_ratio(TAU) - (1.0 - 1e-4)) < 1e-15
@@ -80,7 +73,7 @@ def test_squash_metric_first_principles():
     s0 = 2.0 * TAU
     m = squash_metric(TAU)
     assert abs(m["s"] - s0) < 1e-15
-    kappa2_exp = (1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5   # EXPECTED_BY_THEORY
+    kappa2_exp = (1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5
     assert abs(m["kappa2"] - kappa2_exp) < 1e-12
     assert abs(m["kappa"] - math.sqrt(kappa2_exp)) < 1e-12
     # kappa(2tau) = 1.131832...

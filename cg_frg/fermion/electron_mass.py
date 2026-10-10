@@ -1,39 +1,32 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/fermion/electron_mass.py — V4.0: the absolute electron mass
+cg_frg/fermion/electron_mass.py — V5.0: the absolute electron mass
 closure
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The electron mass is the lightest charged fermion mass.  In the
 framework it closes through the Planck-anchored exponential chain:
 
     m_e = M_P · e^{−20·kL}·(1 − s0·κ) = 0.510 MeV
     (the low-scale squash correction (1−s0·κ) is the SAME factor as
-    v's; the quoted value is the V4.0 fixed-point result — run-time
+    v's; the quoted value is the V5.0 fixed-point result — run-time
     value in cg_params.json)
 
 The power 20 = 4×5: the Yukawa cascade (4 mixing steps of the
@@ -75,7 +68,7 @@ i.e. the exponent 20 = (d+1)·(ΣY²·Δ_f) = 4·5 is the product of
 the four cascade levels and the five-species content, each species
 carrying one window-width suppression e^{−kL} per level.
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 The closure uses M_P and kL (the framework's internal quantities).
 The cascade inputs y_0/O_e are the framework's derived values
@@ -94,6 +87,7 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get, set as pset  # noqa: E402
+from cg_core.quantities import QuantityDefinition  # noqa: E402
 
 # Y_0=1 is the scalar-channel SO(4) diagonal overlap.
 Y_0 = 1.0
@@ -150,14 +144,13 @@ def compute() -> dict:
     """Publish the electron mass closure and the muon/electron ratio."""
     M_P = get("M_P")
     kL = get("kL")
-    v = get("v_HIGGS")
 
     me_raw = m_e_planck(M_P, kL)
-    # STATUS (2026-08-20): L2 INHERITED — m_e (1−s0κ) inherits v's base factor through the 4×5 cascade (m_e ∝ v_dil(e)).  See epsilon_ratio DERIVATION STATUS.
+    # m_e (1−s0κ) inherits v's base factor through the 4×5 cascade (m_e ∝ v_dil(e)).  See epsilon_ratio SOURCE OF THE CORRECTION FACTORS.
     # The low-scale squash correction (1 - s0·κ): the SAME squash
     # correction as v and T_CMB (the electron mass is a LOW-scale
     # quantity, like the EW scale and the photon floor) — the low-scale
-    # branch carries −s0·κ, the seesaw carries +s0·κ (2026-08-16).
+    # branch carries −s0·κ, the seesaw carries +s0·κ .
     tau = float(get("tau"))
     s0 = 2.0 * tau
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
@@ -176,6 +169,18 @@ def compute() -> dict:
     mmu_me = float(get("m_mu_over_m_e"))
 
     pset("m_e_pred", me, provenance="DERIVED", role="internal",
+         dependencies=("M_P", "kL", "tau"),
+         definition=QuantityDefinition(
+             object="electron mass closure", unit="MeV",
+             carrier="charged-lepton branch of the retained matter content",
+             operator="Planck-anchored exponential cascade readout",
+             source="dimensional Planck anchor, endpoint and torsion response",
+             projection="inherited fixed matter projection and response domain",
+             normalization="m_e=1000*M_P[GeV]exp(-20*kL)(1-2*tau*kappa)",
+             scheme="declared low-scale charged-lepton mass readout",
+             order="specified exponential cascade with multiplicative squash correction",
+             assumptions=("cascade exponent 20=(d+1)(SumY2*Delta_f)",
+                          "positive squash-corrected mass branch")),
          note=f"m_e = M_P e^(-20 kL) (1 - s0*kappa) = {me:.3f} MeV (the "
               f"Planck-anchored exponential chain times the low-scale "
               f"squash correction; exponent 20 = 4x5 structural)")
@@ -194,7 +199,7 @@ def compute() -> dict:
             "cascade": "m_e = y_0 O_e v_dil(e)/sqrt(2) ≡ M_P e^{-20kL}(1-s0k) "
                        "— the cascade form at the electron-scale dilaton VEV "
                        "v_dil(e) = M_P e^{-20kL} sqrt2 (1-s0k)/(y0 O_e), the "
-                       "4x5 cascade compressed (exact, 2026-08-18)"}
+                       "4x5 cascade compressed (exact)"}
 
 
 if __name__ == "__main__":

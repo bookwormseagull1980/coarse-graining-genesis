@@ -1,33 +1,26 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-#  Coarse-Graining Genesis Framework V4.0
-#
-#  Author:      Jinku Guo <guojk@nwpu.edu.cn>
-#  Affiliation: Northwestern Polytechnical University, Xi'an 710072, China
-#  ORCID:       0009-0000-6600-6171
-#
-#  DOI records:
-#    [Software] 10.5281/zenodo.22067006
-#    [Paper I]  10.5281/zenodo.22067118
-#    [Paper II] 10.5281/zenodo.22067469
-#
-#  Part of the V4 spectral framework, whose physics is presented in the
-#  companion papers:
-#    [I]  "The spectrum of a compact internal space.
-#          I. Gauge structure and fermion content"
-#         DOI: 10.5281/zenodo.22067118
-#    [II] "The spectrum of a compact internal space.
-#          II. Effective couplings and mass scales"
-#         DOI: 10.5281/zenodo.22067469
+# Coarse-Graining Genesis Framework V5.0
+# Author: Jinku Guo <guojk@nwpu.edu.cn>
+# Northwestern Polytechnical University, Xi'an 710072, China
+# ORCID: 0009-0000-6600-6171
+# References:
+# DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
+# DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
+# DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+# DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
+# DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
+# DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+# Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
 """
-cg_frg/ewsb/relaxion_geo.py — V4.0: the relaxion geometry — the
+cg_frg/ewsb/relaxion_geo.py — V5.0: the relaxion geometry — the
 dilaton pole barrier on the internal RP³ and the φ_R0 factor-2
 anchor
 =================================================================
 
-WHY THIS MODULE EXISTS (motivation)
+PURPOSE
 -----------------------------------
 The electroweak scale is fixed by the dilaton-stop position: the
 dilaton field φ rolls along the cosmological flow until it hits
@@ -41,22 +34,21 @@ dilaton polarisation (the spectral sum over the RP³ scalar modes):
     Π_φ(k) = Σ_l d_l/(λ_l + V''(k)) ,   λ_l = l(l+2)/kL² ,
     d_l = (l+1)²  (the even-l RP³ scalars).
 
-At the pole the propagator diverges and the flow freezes — fixing
-the VEV.  The framework's anchor φ_R0 = 36.1207 (relaxion_chain)
-is the baseline of this mechanism.
+At the pole the propagator diverges and the flow freezes.  The
+bare-condensate coordinate φ_R0 is obtained from the window stop by
+subtracting the three structural logarithmic shifts.
 
-THE FACTOR-2 ANCHOR (the reproducible statement)
-------------------------------------------------
-The baseline stop gives v_pred = 492.1 GeV = 2.00 × v — the
-factor 2 is a STRUCTURAL prediction (not an artefact).  With the
-V4 parameters:
+CONDENSATE NORMALISATION
+-----------------------
+The computed ratio
 
-    v(φ_R0) = √(ξ R_c M_G² e^{−2φ_R0}/λ_H) = 2.02 × v
+    v(φ_R0)/v = √(ξ R_c M_G² e^{−2φ_R0}/λ_H)/v
 
-— the module verifies this factor-2 anchor live (it is the
-reproducible content of the baseline).
+is compared with the structural factor 2.  Both scales use the same
+generated parameters; the ratio and its central difference from 2 are
+evaluated with the current stored inputs.
 
-V4 DISCIPLINE
+IMPLEMENTATION
 -------------
 The pole-condition structure (the RP³ dilaton polarisation) is
 implemented in full; the factor-2 anchor is verified with the
@@ -139,5 +131,5 @@ if __name__ == "__main__":
           f"{fa['dev_factor']:+.1f}%)")
     print(f"pole function x(M_G) = {r['pole_function_at_MG']:.4f} "
           f"(the reference point of the mechanism)")
-    print(f"phi_R0 = {r['phi_R0']:.4f} (the baseline of the revision chain)")
+    print(f"phi_R0 = {r['phi_R0']:.4f} (the bare-condensate coordinate)")
     print("relaxion_geo OK")
