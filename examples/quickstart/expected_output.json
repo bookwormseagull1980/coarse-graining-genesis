@@ -1,0 +1,25 @@
+{
+  "heat_time": 0.125,
+  "mode_capacity": 35,
+  "radius": 1.0,
+  "scalar_heat_kernel": 5.55559167974,
+  "scalar_modes": [
+    {
+      "eigenvalue": 0.0,
+      "label": 0,
+      "multiplicity": 1
+    },
+    {
+      "eigenvalue": 8.0,
+      "label": 2,
+      "multiplicity": 9
+    },
+    {
+      "eigenvalue": 24.0,
+      "label": 4,
+      "multiplicity": 25
+    }
+  ],
+  "space": "RP3",
+  "volume": 9.869604401089
+}
