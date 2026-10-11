@@ -319,19 +319,19 @@ result after checking the background and atomic inputs.
 
 ### Quick start
 
-The following checks use the recorded V5 inputs and do not require CAMB or the
-optional Lean foundations checkout:
+The following core checks do not require CAMB or the optional Lean foundations
+checkout:
 
 ```powershell
 py -m pip install -r requirements.txt
 py -m pip install "pytest>=7.4" "mpmath>=1.3"
-py scripts/verify_v5.py --no-reproduce --pytest --test-scope core
+py -m pytest -q -m "not numerical and not auxiliary" -p no:cacheprovider
 ```
 
 For a full release verification, including fresh reproduction and audits, use
 the command in [REVIEWER_START_HERE.md](REVIEWER_START_HERE.md). The CI workflow
-runs the core suite on every push and pull request; it is a reproducibility
-smoke check, not a substitute for the full release verification.
+runs the core suite on every push and pull request; it is a public regression
+check, not a substitute for the full release verification.
 
 - [Scientific overview](docs/papers_overview.pdf): construction, selected results,
   macroscopic dynamics and the interpretation of the comparisons.
