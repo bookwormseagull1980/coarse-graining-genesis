@@ -15,17 +15,62 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 # Coarse-Graining Genesis Framework V5
 
-Version 5.0.0.
+Version 5.0.1.
 
-A reproducible spectral calculation of effective couplings, mass scales and
-macroscopic source responses. The calculation starts from the specified compact
-internal spectrum, finite matter content and Gaussian response domain. Newton's
-constant supplies the observed dimensional anchor; the remaining production
-inputs are the structural assumptions and matching conditions stated in the companion
-papers.
+[![CI](https://github.com/bookwormseagull1980/coarse-graining-genesis/actions/workflows/ci.yml/badge.svg)](https://github.com/bookwormseagull1980/coarse-graining-genesis/actions/workflows/ci.yml)
+[![Concept DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22067005.svg)](https://doi.org/10.5281/zenodo.22067005)
+
+The canonical DOI for the V5 release series is
+[10.5281/zenodo.22067005](https://doi.org/10.5281/zenodo.22067005).
+It resolves to the latest published version; the Git tag identifies the exact
+source revision used for a calculation.
+
+An auditable spectral-to-physics calculation chain. V5 carries one provenance
+record from a compact internal spectrum and finite response domain through
+effective couplings, matter scales, macroscopic tensor response and cosmological
+observables. Every reported quantity is bound to its source, normalization,
+units, approximation and comparison data, while interval certificates and
+independent regression checks make the published calculation reproducible.
+The physical interpretation and analytic hypotheses are stated in the companion
+papers; this repository makes their finite computational realization inspectable.
 
 Author: Jinku Guo, Northwestern Polytechnical University, Xi'an 710072, China.
 Email: guojk@nwpu.edu.cn. ORCID: [0009-0000-6600-6171](https://orcid.org/0009-0000-6600-6171).
+
+## What is distinctive
+
+V5 is not a collection of unrelated sector calculations. Its central object is
+a provenance-preserving map from one finite spectral source record to successive
+response layers: effective couplings, matter scales, macroscopic tensor response
+and cosmological observables. The same source ledger, normalizations and matching
+relations are carried through the chain, so a reader can inspect where a result
+is generated, where a comparison enters, and where an approximation begins.
+
+This makes the release a concrete test of a broader physical question: how much
+of a macroscopic description can be inherited from a common spectral source
+without silently replacing generated quantities by sector-by-sector fits. The
+software does not replace the analytic proofs or the observational papers. It
+provides the finite, executable and audit-ready realization needed to examine
+that claim.
+
+## Numerical evidence in the release
+
+The V5 records expose the numbers rather than hiding them behind a model label:
+
+- one finite Gaussian response domain, `R=5`, with the certified active-window
+  threshold `R_* ~= 4.0187119842`;
+- a common source and matching ledger for the endpoint, effective couplings,
+  mass scales, tensor response and cosmological propagation;
+- generated neutron--proton difference `1.28497 MeV`, free lifetime `915.54 s`
+  and helium baryon fraction `Yp=0.246082`;
+- fixed-input DESI comparison `chi2=29.5088`, `p=0.00553993`, and the direct
+  HYREC realization `r_d=147.07455 Mpc`, `chi2=27.1191`.
+
+These are calculated records, not independently fitted observational inputs.
+Reference observations and covariance matrices remain in a separate comparison
+store, and no hidden comparison value is written back into the production
+parameters. Every number above can be traced to its source, units and stated
+approximation through `cg_params.json` and the verification report.
 
 ## Scientific references
 
@@ -272,6 +317,22 @@ result after checking the background and atomic inputs.
 
 ## Documentation and reproduction
 
+### Quick start
+
+The following checks use the recorded V5 inputs and do not require CAMB or the
+optional Lean foundations checkout:
+
+```powershell
+py -m pip install -r requirements.txt
+py -m pip install "pytest>=7.4" "mpmath>=1.3"
+py scripts/verify_v5.py --no-reproduce --pytest --test-scope core
+```
+
+For a full release verification, including fresh reproduction and audits, use
+the command in [REVIEWER_START_HERE.md](REVIEWER_START_HERE.md). The CI workflow
+runs the core suite on every push and pull request; it is a reproducibility
+smoke check, not a substitute for the full release verification.
+
 - [Scientific overview](docs/papers_overview.pdf): construction, selected results,
   macroscopic dynamics and the interpretation of the comparisons.
 - Popular introductions: [English](docs/From%20Change%20to%20Everything%20-%20A%20Popular%20Science%20Introduction.docx)
@@ -338,8 +399,10 @@ companion papers give the analytic and physical arguments.
 ## Citation and license
 
 Cite this software as J. Guo, *Coarse-Graining Genesis Framework V5*,
-version 5.0.0 (2026), together with the applicable companion papers in
-[REFERENCES.md](REFERENCES.md). V5 has no assigned DOI. Machine-readable
+version 5.0.1 (2026), together with the applicable companion papers in
+[REFERENCES.md](REFERENCES.md). The version-series DOI is
+[10.5281/zenodo.22067005](https://doi.org/10.5281/zenodo.22067005); use the
+Git tag `v5.0.1` to identify this exact source revision. Machine-readable
 citation information is provided in [CITATION.cff](CITATION.cff).
 
 Source repository:

@@ -19,13 +19,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "coarse-graining-genesis"
-version = "5.0.0"
-description = "Coarse-Graining Genesis Framework V5.0 — spectral calculations of gauge structure, fermion content, mass scales and macroscopic response"
+version = "5.0.1"
+description = "Coarse-Graining Genesis Framework V5.0.1 — an auditable spectral source-to-observable calculation chain across couplings, matter, gravity and cosmology"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT + attribution requirement (see LICENSE)" }
 authors = [{ name = "Jinku Guo", email = "guojk@nwpu.edu.cn" }]
-keywords = ["coarse-graining", "renormalization-group", "emergence", "spectral-geometry", "physics"]
+keywords = ["coarse-graining", "spectral-geometry", "mathematical-physics", "computational-physics", "cosmology", "reproducible-research"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Intended Audience :: Science/Research",
