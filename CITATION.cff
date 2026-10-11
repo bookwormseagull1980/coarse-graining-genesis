@@ -11,13 +11,25 @@ date-released: 2026-10-10
 license: "MIT"
 type: software
 repository-code: "https://github.com/bookwormseagull1980/coarse-graining-genesis"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22067005"
+    description: "Zenodo DOI for the V5 version series"
 abstract: >-
-  Spectral calculations of effective couplings, mass scales, macroscopic
-  tensor response and cosmological observables, with parameter provenance,
-  numerical bounds and independently testable source-response relations.
+  An auditable spectral-to-physics calculation chain that carries one finite
+  source record through effective couplings, matter scales, macroscopic tensor
+  response and cosmological observables. The V5 release keeps generated
+  quantities, comparison data, normalizations and approximations distinct while
+  providing provenance-preserving response maps, interval certificates,
+  fixed-input propagation and independent regression checks.
 keywords:
   - spectral datum
   - coarse-graining
   - gauge structure
   - fermion content
   - mass scales
+  - mathematical physics
+  - computational physics
+  - spectral geometry
+  - cosmology
+  - reproducible research

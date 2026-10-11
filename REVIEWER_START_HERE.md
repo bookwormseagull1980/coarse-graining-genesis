@@ -16,8 +16,10 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 # Reviewer start here
 
 This guide describes the reproduction and verification of Coarse-Graining
-Genesis Framework V5, version 5.0.0. The software citation is in
-`CITATION.cff`; [REFERENCES.md](REFERENCES.md) provides the full author–year
+Genesis Framework V5, version 5.0.1. The software citation is in
+`CITATION.cff`; the V5 version-series DOI is
+[10.5281/zenodo.22067005](https://doi.org/10.5281/zenodo.22067005), and
+[REFERENCES.md](REFERENCES.md) provides the full author–year
 bibliography for the cited manuscripts.
 
 ## Inputs and scientific definitions
