@@ -25,15 +25,16 @@ and independent regression checks for the published calculation records.
 ## Verification
 
 From a clean checkout, install the runtime and verification dependencies and
-run:
+run the quickstart followed by the public core test suite:
 
 ```text
+py examples/quickstart/run_example.py
 py -m pip install -r requirements.txt
 py -m pip install "pytest>=7.4" "mpmath>=1.3"
-py scripts/verify_v5.py --no-reproduce --pytest --test-scope core
+py -m pytest -q -m "not numerical and not auxiliary" -p no:cacheprovider
 ```
 
-The public GitHub Actions workflow runs the same core verification command on
+The public GitHub Actions workflow runs the same core test suite on
 pushes and pull requests. The full release check is documented in
 `REVIEWER_START_HERE.md` and includes fresh reproduction, source audits and
 the optional Lean archive checks.
