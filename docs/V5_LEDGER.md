@@ -176,6 +176,36 @@ g=3 before an endpoint is evaluated. `sm_content.N_GENERATIONS` and the
 production field instantiation use this result. `window_capacity.compute`
 then checks the endpoint platform for that selected content.
 
+The missing coordinate in this quotient is not discarded from the joint
+matter carrier. It is the right-handed neutral singlet `nu_R`, the explicit
+neutral coordinate of `finite_connector.elementary_connector`. The complete
+carrier therefore has capacities `8_L+8_R`; only the charged trace has
+`8_L+7_R`. The two levels serve different observables:
+
+- `chiral_center_response(neutral_right_weight=1)` evaluates the complete
+  center channel and gives zero bias, unit susceptibility, and unit restoring
+  Hessian at zero external drive;
+- `chiral_center_response(neutral_right_weight=0)` evaluates the charged
+  quotient and recovers bias `1/15`, susceptibility `224/225`, and restoring
+  Hessian `225/224`;
+- eliminating the neutral line in an operator response requires the Schur or
+  full solve in `finite_connector.source_response`. The quotient bias is a
+  projection defect and is not identified with a fundamental asymmetry of the
+  complete carrier.
+
+For an external center drive `h(L)=a(L/L0)^(-alpha)`, the exact response is
+`m=tanh(h+h0)`, where `h0=(1/2)log(N_L/N_R)`. Since `tanh` is one-Lipschitz,
+the complete carrier satisfies
+
+    integral_1^infinity m(x)^2 dx/x <= a^2/(2 alpha).
+
+The charged quotient instead has the persistent zero-drive tail `m0=1/15`;
+its infinite logarithmic-scale energy diverges, although every declared
+finite window has the explicit bound returned by
+`chiral_center_power_law_screening`. This distinction prevents a finite
+charged-window certificate from being reported as complete-carrier
+restoration.
+
 For a supplied Hermitian interaction/background K,
 `log_partition_response(K,A,J)` evaluates `log Tr exp(K+sum J_a A_a)/n`,
 its gradient and the connected Duhamel/Kubo--Mori Hessian. In the energy

@@ -24,6 +24,7 @@ import numpy as np
 import pytest
 
 from cg_core.content_response import (
+    chiral_center_power_law_screening, chiral_center_response,
     finite_source_response, interacting_content_response,
     log_partition_response, weighted_content_response,
 )
@@ -161,6 +162,55 @@ def test_content_hessian_zero_common_and_unequal_weights():
     changed=weighted_content_response(r,1)
     assert changed['tau_response']==pytest.approx((8*r-7)/(10*r+40),rel=2e-14)
     assert np.linalg.eigvalsh(changed['hessian']).min()>-1e-13
+
+
+def test_complete_and_quotient_chiral_center_responses():
+    complete = chiral_center_response()
+    assert complete['left_capacity'] == 8
+    assert complete['right_capacity'] == 8
+    assert complete['bias'] == 0
+    assert complete['susceptibility'] == 1
+    assert complete['restoring_hessian'] == 1
+    assert not complete['elimination_feedback_required']
+
+    quotient = chiral_center_response(neutral_right_weight=0)
+    exact = finite_source_response()
+    assert quotient['right_capacity'] == 7
+    assert quotient['bias'] == pytest.approx(1/15, abs=2e-16)
+    assert quotient['susceptibility'] == pytest.approx(224/225, abs=2e-16)
+    assert quotient['restoring_hessian'] == pytest.approx(225/224, abs=2e-16)
+    assert quotient['bias'] == pytest.approx(float(exact['gradient'][0]))
+    assert quotient['susceptibility'] == pytest.approx(float(exact['hessian'][0][0]))
+    assert quotient['removed_coordinate'] == 'nu_R'
+    assert quotient['elimination_feedback_required']
+
+
+def test_center_drive_derivative_and_scale_screening():
+    drive = 0.37
+    step = 1e-6
+    middle = chiral_center_response(drive)
+    derivative = (
+        chiral_center_response(drive + step)['bias']
+        - chiral_center_response(drive - step)['bias']
+    ) / (2 * step)
+    # The source argument is log(wL/wR)=2h, hence dm/dlog(r)=chi/2.
+    assert derivative == pytest.approx(middle['susceptibility']/2, rel=2e-10)
+
+    full = chiral_center_power_law_screening(.4, .3)
+    assert full['infinite_scale_restoration']
+    assert full['energy_upper_bound'] == pytest.approx(.4**2/(2*.3))
+
+    quotient = chiral_center_power_law_screening(
+        0, .3, neutral_right_weight=0
+    )
+    assert math.isinf(quotient['energy_upper_bound'])
+    assert quotient['persistent_projection_defect']
+
+    finite = chiral_center_power_law_screening(
+        0, .3, scale_ratio=32, neutral_right_weight=0
+    )
+    assert finite['zero_drive_exact_energy'] == pytest.approx(math.log(32)/225)
+    assert finite['energy_upper_bound'] == pytest.approx(math.log(32)/225)
 
 
 def test_actual_overlap_and_general_basis_covariance():

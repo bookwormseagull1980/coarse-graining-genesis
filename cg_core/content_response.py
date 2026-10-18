@@ -32,6 +32,15 @@ CHARGED_GENERATION = (
     ("e_R", (1, 1), Q(-1), 1, -1),
 )
 
+# The upstream joint carrier also contains the gauge-neutral right singlet.
+# It may be omitted from charged gauge traces, but not from a chiral-capacity
+# response or from an odd Higgs connector without retaining the elimination
+# feedback.  The coordinate is the neutral right line identified explicitly
+# by ``finite_connector.elementary_connector``.
+FULL_GENERATION = CHARGED_GENERATION + (
+    ("nu_R", (1, 1), Q(0), 1, -1),
+)
+
 
 def chiral_anomalies():
     """Exact LH-minus-RH coefficients; conventional common factors omitted."""
@@ -77,6 +86,111 @@ def finite_source_response():
             "hypercharge_second_moment": y2,
             "weak_extensive_per_generation": Q(doublets, 2),
             "tau": mean_j / (n * h[1][1])}
+
+
+def chiral_center_response(log_left_right_ratio=0.0, *, neutral_right_weight=1.0):
+    """Exact center response before and after neutral-right elimination.
+
+    ``neutral_right_weight=1`` is the complete 16-coordinate carrier and
+    ``neutral_right_weight=0`` is the charged 15-coordinate quotient.  Values
+    between zero and one describe an explicitly retained effective weight;
+    they are not silently identified with an exact Schur elimination.
+
+    The source coordinate is half the logarithm of the left/right weight
+    ratio, so differentiation with respect to that coordinate gives the
+    connected center susceptibility.
+    """
+    if not math.isfinite(log_left_right_ratio):
+        raise ValueError("a finite logarithmic left/right ratio is required")
+    if not (math.isfinite(neutral_right_weight) and neutral_right_weight >= 0.0):
+        raise ValueError("the neutral-right weight must be finite and nonnegative")
+    left_capacity = 8.0
+    charged_right_capacity = 7.0
+    right_capacity = charged_right_capacity + neutral_right_weight
+    external_drive = 0.5 * log_left_right_ratio
+    content_drive = 0.5 * math.log(left_capacity / right_capacity)
+    total_drive = external_drive + content_drive
+    bias = math.tanh(total_drive)
+    susceptibility = 1.0 - bias * bias
+    return {
+        "left_capacity": left_capacity,
+        "charged_right_capacity": charged_right_capacity,
+        "neutral_right_weight": neutral_right_weight,
+        "right_capacity": right_capacity,
+        "total_capacity": left_capacity + right_capacity,
+        "external_drive": external_drive,
+        "content_drive": content_drive,
+        "total_drive": total_drive,
+        "bias": bias,
+        "susceptibility": susceptibility,
+        "restoring_hessian": 1.0 / susceptibility,
+        "complete_carrier": neutral_right_weight == 1.0,
+        "charged_quotient": neutral_right_weight == 0.0,
+        "removed_coordinate": None if neutral_right_weight == 1.0 else "nu_R",
+        "elimination_feedback_required": neutral_right_weight != 1.0,
+    }
+
+
+def chiral_center_power_law_screening(
+    amplitude,
+    exponent,
+    *,
+    scale_ratio=math.inf,
+    neutral_right_weight=1.0,
+):
+    """Certified logarithmic-scale energy bound for a decaying center drive.
+
+    For x=L/L0>=1, the external drive is h(x)=amplitude*x**(-exponent).
+    Since tanh is one-Lipschitz, with m0 the zero-drive content bias,
+
+        |m(x)| <= |m0| + |amplitude| x**(-exponent).
+
+    Integration against dx/x gives the returned finite-window bound.  On the
+    infinite scale interval it is finite exactly in the balanced carrier
+    covered here (m0=0); a nonzero quotient bias leaves a nonintegrable
+    constant tail and is reported as such.
+    """
+    if not (math.isfinite(amplitude) and math.isfinite(exponent) and exponent > 0.0):
+        raise ValueError("finite amplitude and positive finite exponent required")
+    if not (math.isinf(scale_ratio) or
+            (math.isfinite(scale_ratio) and scale_ratio >= 1.0)):
+        raise ValueError("scale_ratio must lie in [1,infinity]")
+    source = chiral_center_response(
+        0.0, neutral_right_weight=neutral_right_weight
+    )
+    baseline = abs(float(source["bias"]))
+    magnitude = abs(float(amplitude))
+    if math.isinf(scale_ratio):
+        uniformly_integrable = baseline == 0.0
+        upper_bound = magnitude * magnitude / (2.0 * exponent) if uniformly_integrable else math.inf
+        zero_drive_energy = 0.0 if uniformly_integrable else math.inf
+    else:
+        log_span = math.log(scale_ratio)
+        first_tail = (1.0 - scale_ratio ** (-exponent)) / exponent
+        second_tail = (1.0 - scale_ratio ** (-2.0 * exponent)) / (2.0 * exponent)
+        upper_bound = (
+            baseline * baseline * log_span
+            + 2.0 * baseline * magnitude * first_tail
+            + magnitude * magnitude * second_tail
+        )
+        zero_drive_energy = baseline * baseline * log_span
+        uniformly_integrable = True
+    return {
+        "amplitude": float(amplitude),
+        "exponent": float(exponent),
+        "scale_ratio": float(scale_ratio),
+        "neutral_right_weight": float(neutral_right_weight),
+        "baseline_bias": float(source["bias"]),
+        "energy_upper_bound": upper_bound,
+        "zero_drive_exact_energy": zero_drive_energy,
+        "uniformly_integrable_on_declared_interval": uniformly_integrable,
+        "infinite_scale_restoration": math.isinf(scale_ratio) and baseline == 0.0,
+        "persistent_projection_defect": math.isinf(scale_ratio) and baseline != 0.0,
+        "scope": (
+            "complete-carrier chiral response; a neutral-state quotient must "
+            "retain its Schur or threshold feedback separately"
+        ),
+    }
 
 
 def finite_source_log_partition(u=0.0, v=0.0, x=(0.0, 0.0, 0.0)):
