@@ -120,8 +120,8 @@
   }
  },
  "output_sha256": {
-  "cg_params.json": "1e2cff9f663e0af4f292557084d819647a3c04f97e60dbafe43624e3b42bfdd2",
-  "comparison/reference_inputs.json": "724e803c77f9b5973c596eb52a886f0a5e939b5f9f730bd585d0976543be758e"
+  "cg_params.json": "5ae00a0d90cd053ce2feea025cd6cf74ad8024e31692ef1f456db1bfee4eb09b",
+  "comparison/reference_inputs.json": "43a2a71a3b4ec494685b4cfcaf82cf08aa9847ca1070497e12760eb3fba48a97"
  },
  "publication": {
   "author": "Jinku Guo",
@@ -187,7 +187,7 @@
   "version": "5.0.0"
  },
  "python": "3.12.14",
- "run_id": "20261018T030034Z-560e6b40",
+ "run_id": "20261018T030855Z-69c18be4",
  "scope": "declared framework; input-bound external comparisons carry separate status",
  "solver_execution_identity": {
   "CAMB": {
@@ -336,7 +336,7 @@
   "scientific_value_reads": "read the scientific stores; the manifest only validates their identity"
  },
  "verification": {
-  "binding_sha256": "b1656a1b001743c2c429e3dbfd9564f9857cf90aa47aaa70d6f73e65ab654af6",
+  "binding_sha256": "445d497b6bbd2e965b657188c9bd6fe30cc14a589867dabf1b7355ab759d5594",
   "checks": [
    {
     "cmd": "verify existing run identity and fingerprints",
@@ -403,14 +403,6 @@
     "summary": "Full suite: 597 passed; 5 deselected; 10 subtests passed."
    },
    {
-    "cmd": "python scripts/audit_numeric_stability.py",
-    "label": "numeric stability audit",
-    "ok": true,
-    "required": true,
-    "returncode": 0,
-    "summary": "Completed the declared check successfully."
-   },
-   {
     "cmd": "verify existing run identity and fingerprints",
     "label": "run identity after verification",
     "ok": true,
@@ -422,13 +414,14 @@
   "not_executed": [
    "Full reproduction during this verification invocation (--no-reproduce).",
    "Lean archive compilation (source audit alone is not compilation).",
-   "Lean Formalization of Arithmetic and Basic Physical Interfaces compilation and axiom audit (enable with --foundations)."
+   "Lean Formalization of Arithmetic and Basic Physical Interfaces compilation and axiom audit (enable with --foundations).",
+   "Isolated full-chain numeric stability rerun (enable with --stability)."
   ],
-  "run_id": "20261018T030034Z-560e6b40",
+  "run_id": "20261018T030855Z-69c18be4",
   "status": "PASS"
  },
  "verification_source_sha256": {
-  "foundations-reference.json": "ea61aa66951ae8a7c49ac8e04331a32384e599cc39534eeba384cce93455ec39",
+  "foundations-reference.json": "0d771044a5fad3341c5742b0d36ab1417cf942f388741aa6c0a7b94043d5f2ae",
   "lean_proofs/bbn_nonperturbative.lean": "926b279922d26b03e020081cc57c2633369140e1c5657fd6076a6754e03a71cf",
   "lean_proofs/categorical_solution.lean": "ee05a64e6678dde23e116c93de4ffaa5ea769b92793a441fab9c7e64f958dc56",
   "lean_proofs/conformal_gauge_duality.lean": "ddc04fbf27143f466efa9d29f0cb2add0dab0dc514ae7dcd25fffc2f88fd1a37",

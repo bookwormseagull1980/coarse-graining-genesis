@@ -17,7 +17,7 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 # V5 Verification Report
 
-Generated: 2026-10-18 11:04:55
+Generated: 2026-10-18 11:17:22
 Python: `3.12.14`
 Root: `.`
 
@@ -34,6 +34,7 @@ a proof-library result does not certify a numerical run or the entire manuscript
 - Full reproduction during this verification invocation (--no-reproduce).
 - Lean archive compilation (source audit alone is not compilation).
 - Lean Formalization of Arithmetic and Basic Physical Interfaces compilation and axiom audit (enable with --foundations).
+- Isolated full-chain numeric stability rerun (enable with --stability).
 
 No PASS claim is made for these omitted checks.
 
@@ -49,14 +50,13 @@ No PASS claim is made for these omitted checks.
 | path portability audit | PASS | `python scripts/audit_path_portability.py` |
 | full comparison table | PASS | `python comparison/param_audit_full.py` |
 | pytest | PASS | `python -B -m pytest -q -m 'not release_audit' -p no:cacheprovider --basetemp <temporary>` |
-| numeric stability audit | PASS | `python scripts/audit_numeric_stability.py` |
 | run identity after verification | PASS | `verify existing run identity and fingerprints` |
 
 Full Python test results: 597 passed, 5 deselected, 10 subtests passed.
 The complete release audits are executed in the steps above;
 their duplicate test wrappers are deselected.
 
-Run identity: `20261018T030034Z-560e6b40`.
+Run identity: `20261018T030855Z-69c18be4`.
 Bound calculation sources: 119; verification sources: 47; outputs: 2; reference identities: 99; solver execution identities: 2.
 
 ### Store Summary
