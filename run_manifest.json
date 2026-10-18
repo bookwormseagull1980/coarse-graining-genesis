@@ -120,8 +120,8 @@
   }
  },
  "output_sha256": {
-  "cg_params.json": "4a4241afae370a81f660ddb809ddbc0b4d7877eca64467012ceee9a03608475b",
-  "comparison/reference_inputs.json": "a4c5eb87bcd84d7b22ca9a82fac9fe797bd3095242b500c7b049f6324cfcde2f"
+  "cg_params.json": "91ebd548283ff6d224ed2d6ae35a149f5aac49d27ea4d2da648426c6b14e7f9a",
+  "comparison/reference_inputs.json": "bd77065ae671013fe411e443a4a7625fc17b7227ebfc56e7328888406f9f8f2b"
  },
  "publication": {
   "author": "Jinku Guo",
@@ -186,8 +186,8 @@
   "software": "Coarse-Graining Genesis Framework V5.0",
   "version": "5.0.0"
  },
- "python": "3.12.10",
- "run_id": "20261018T011955Z-546661b7",
+ "python": "3.12.14",
+ "run_id": "20261018T025105Z-ad1c83f8",
  "scope": "declared framework; input-bound external comparisons carry separate status",
  "solver_execution_identity": {
   "CAMB": {
@@ -208,7 +208,7 @@
   "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
   "cg_core/beta_functions.py": "cb2745287271a835d50a388b7e179e01021ba037d68d9334de09cf9f67376074",
   "cg_core/cluster_decay.py": "6e59bdd94851de723bda9253d66f601acc93c018bf7d1a5dae1cb23832916002",
-  "cg_core/content_response.py": "8e313264da8fee48977e0068289c4fd9ee32529b99caac1581c761a62ccb0500",
+  "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
   "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
   "cg_core/electroweak.py": "aedbaa8ccca0be0d34affae8d437ff52a636882bd24f78d839235b864d7791c1",
   "cg_core/finite_connector.py": "0ee4dd39efada86c55c4750498c8147b092f2f68cf2f0b58f6d0871f08c5a1be",
@@ -220,7 +220,7 @@
   "cg_core/modal_algebra.py": "0f1346d1d52ea7606626f816417f1d356704d7f82b9d2e80fea44c6b5d4d3452",
   "cg_core/native_matter_matching.py": "010e92c592822de98f5ff5a2b69b45485d3761236d1d037e26658745e1833164",
   "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-  "cg_core/quantities.py": "db003219020eb51feb6f584564f3220889556dac466e73cf8f997ef88d13a8b1",
+  "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
   "cg_core/rational_interval.py": "2841773858c2a21c544e3434ef8f73605e73be0703324183b0f6919b4fe162a6",
   "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
   "cg_core/rk4.py": "445a577b4c1949b04d41acdcf53983c22464c75447dce468fcd7df6c5c69cca8",
@@ -234,7 +234,7 @@
   "cg_frg/axiom/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
   "cg_frg/cosmology/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
   "cg_frg/cosmology/bbn_helium.py": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
-  "cg_frg/cosmology/camb_interface.py": "fae61c9750f0c5a761801654d3bce6db20c9c269fc328f6ba1eb6dbde85905df",
+  "cg_frg/cosmology/camb_interface.py": "9ff3c8ec8cd4a79e0de65650b8cfef564ec726e7eb9a0e5a07e539b01aa05169",
   "cg_frg/cosmology/cold_source.py": "b7ac85a40ee584c7380be61711becc2d5f64af1f4df93c4a2332fdc4f088c7aa",
   "cg_frg/cosmology/dark_energy.py": "ec4506653bd5d7600646777d9b14ef23240edf2ed6db0f9ccfc9794b9913b9c7",
   "cg_frg/cosmology/endpoint_residual.py": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
@@ -260,7 +260,7 @@
   "cg_frg/framework/five_items.py": "089422314c01a29ed451efd47c51921ce30f2e4a6282614e9a77ca6fedf44fc6",
   "cg_frg/framework/sigma_language.py": "67c3966d41da736b38158da4ae05e1e65d1f5a317b74d6ac49cb5736a35ed3b3",
   "cg_frg/frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-  "cg_frg/frg/discrete_flow.py": "b63cb48c5131628ca8d09cc20d8a7477c8e678a6a77c597cc947337d44e06057",
+  "cg_frg/frg/discrete_flow.py": "e5a69ceda38cbc90aa7a25e8a6067a73d3bce6ddce29ee297777d529bbe14212",
   "cg_frg/frg/endpoint_constraint.py": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
   "cg_frg/frg/gamma_M.py": "2cf3089aa056e1b4322ae129b4f305f288c9ab7ecc51372bfee1c887f7490789",
   "cg_frg/frg/ir/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
@@ -294,7 +294,8 @@
   "cg_frg/neutrino/neutrino_closure.py": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
   "cg_frg/neutrino/neutrino_mass_matrix.py": "09deed3761c2fe699c3ad15e566c937f247231792079399c3f5947ede7f35062",
   "cg_frg/neutrino/propagation.py": "6c906e2cdea9a4e9b19adc7af837f49dea50b76d125217944cc7e9267fa8c8d0",
-  "cg_frg/qcd/mass_gap_scale.py": "d8c1635bb87c252760f476f6ab93543a11e1ce66938a01115484f3806e5396ac",
+  "cg_frg/qcd/generated_yang_mills.py": "2b905d98d88dbea33412380328f35c93dd5a202cde900a90ec4bfcb361301a64",
+  "cg_frg/qcd/mass_gap_scale.py": "bc41a9cb5088575bd897ba592614755c4a0ac0b6fd9ed094d8bd67316f6ad5e3",
   "cg_frg/qcd/qcd_sector.py": "e4738a4af65843b0ab7552e715b38f63aa91f4124967374cee5c54d6683e1ac7",
   "comparison/crosschecks.py": "51468181e8a6f79f390d25485df9d046eaf265071d3a32a6f2f8dbbbfd372c84",
   "comparison/param_audit_full.py": "60c716d365f0bda1d2922c757bcbf946b40997b56da74cb4a0d58b7d0c31f421",
@@ -312,7 +313,7 @@
   "scripts/certify_spectral_inputs.py": "4fbdaf31762683a9d69c4597855273da912e855e760852064b6b0405bdfc33a7",
   "scripts/evaluate_joint_extensions.py": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
   "scripts/init_v5.py": "7446b818ede7161b92b4c9dabd81a59035532408f3be9e8a2c9ba8c2f0d5af5f",
-  "scripts/make_reviewer_dashboard.py": "b474cee1d7446dae6e92fdc6844804703fe6cea55ffb97824ec2b1b14b8ac4a0",
+  "scripts/make_reviewer_dashboard.py": "c925da0d6d2ac3e1e72725859bb3e251f9aff5a74da6e76720ed63eea5a7503e",
   "scripts/regime_spread.py": "c0c6a8cea30a5125e7f208c2b4e0413d20ba76e11325f33953735cdc87ee33a1",
   "scripts/reproduce_v5.py": "4407b355352efe9ea4d4d18ebffc0aa3b48ff68cf43b8ad7af9de9c2be335daf",
   "scripts/run_bao_comparison.py": "62da16ee26b8937889b2c4b5cdaeaa7e876e809e6367e8a357ebcc29ecf96a3e",
@@ -322,7 +323,7 @@
   "scripts/validate_endpoint_cosmology.py": "ab97aa105fbf3aad8d8e558ab097d2a81a7399c9ccffa236862faf7b231d4519",
   "scripts/verify_foundations.py": "7bfcded56b207d94e1644805a82ed67cf77fde668e067424b5479c54abc1c4b8",
   "scripts/verify_lean_archive.py": "50888adc603e0ab99f6461e2464378595f660943d20a71a46bdb11ad0edffbf8",
-  "scripts/verify_v5.py": "dee64f6739402dce53f16cfe1131b09cea90c5a8e5dc660ba9c7740e0283c3fc"
+  "scripts/verify_v5.py": "a0f8540491eae166aac69e2754aa7eae21eb8a4fb6a9a5c62c6a6ed0f299aa26"
  },
  "status": "complete computational run",
  "storage_contract": {
@@ -335,7 +336,7 @@
   "scientific_value_reads": "read the scientific stores; the manifest only validates their identity"
  },
  "verification": {
-  "binding_sha256": "de3e63aec451cb25d744a254b61982698520795c28c159bddd3cd857c1b981aa",
+  "binding_sha256": "283c4dc9fe35305d21924c4f9c8c17c8cfe3feb1c0b73fff297d88df12ebad5b",
   "checks": [
    {
     "cmd": "python -B scripts/reproduce_v5.py",
@@ -407,7 +408,15 @@
     "ok": true,
     "required": true,
     "returncode": 0,
-    "summary": "Full suite: 583 passed; 5 deselected; 10 subtests passed."
+    "summary": "Full suite: 597 passed; 5 deselected; 10 subtests passed."
+   },
+   {
+    "cmd": "python scripts/audit_numeric_stability.py",
+    "label": "numeric stability audit",
+    "ok": true,
+    "required": true,
+    "returncode": 0,
+    "summary": "Completed the declared check successfully."
    },
    {
     "cmd": "verify existing run identity and fingerprints",
@@ -420,10 +429,9 @@
   ],
   "not_executed": [
    "Lean archive compilation (source audit alone is not compilation).",
-   "Lean Formalization of Arithmetic and Basic Physical Interfaces compilation and axiom audit (enable with --foundations).",
-   "Isolated full-chain numeric stability rerun (enable with --stability)."
+   "Lean Formalization of Arithmetic and Basic Physical Interfaces compilation and axiom audit (enable with --foundations)."
   ],
-  "run_id": "20261018T011955Z-546661b7",
+  "run_id": "20261018T025105Z-ad1c83f8",
   "status": "PASS"
  },
  "verification_source_sha256": {
@@ -446,20 +454,20 @@
   "lean_proofs/twoloop_yukawa_quartic.lean": "3ede0ca3d5bf825a50994bd64ea5432a16edd3efa66e3de261ed3bd755e3d9da",
   "lean_proofs/wightman_frame.lean": "60fffaaae15297a93ccf3dc897e232f1118f1d7f8298271ceec1ca8041f20ff3",
   "lean_proofs/yukawa_gauge_mixing.lean": "2a6453a225e48903c09eee3c024267fa8f6ae9a880c4d731ff939d657462f797",
-  "pyproject.toml": "3cca54fe9c37951d13532317180bb3cd313cbe4c5c0612d1af58a533e7147b40",
-  "requirements.txt": "18fdb08d9353f789f94db84678fab392ca12445f382ac13fc71dbc696332df7e",
+  "pyproject.toml": "718c2b38dc52d77b262aa825412ca2e21d8be5085fabc3dcebde4079860292ea",
+  "requirements.txt": "c712e8946d47bda76f5293a67632a9abbcddab27ea4e55b23355fc89175c8ae6",
   "tests/conftest.py": "186264358121c3a84eae779279b81322f092054093961706f39583252159a290",
   "tests/test_audit.py": "05c1570ea40b8e5232be48fac6def482cfb6a44738e760cdc042b7eea12bcc78",
   "tests/test_content_and_beta.py": "838d5b9e52549bf5c019702d079ffca17a662592ee9d21154fecdbd8a35d5599",
   "tests/test_external_tensor.py": "464598ea04d8b4dbebb0d2af5db73badd97303810be0500fc8d35dab8b7abd91",
   "tests/test_foundations_integration.py": "efec6148ba00302c85e7a55c382cc68c00011d8bfebc5961be18c5eeac11ef2c",
   "tests/test_free_covariance.py": "3fc9661bc7cf7ea9f28e07f914acfbfac828dd74be57113f513e3292e91328e2",
-  "tests/test_generated_ym_gap.py": "de631c64d3451d21f8ec2495e92e90799cb6e9fc1d910a0b43833c931f232071",
+  "tests/test_generated_ym_gap.py": "bc253d564e0169b19f690c6d4578e01a920b0819cf6374f09a6322819a952b52",
   "tests/test_geometry_isolation.py": "7fc24cb121dee1f2a28002bf958b09db9bd811a29bf080bd9ec9074b831c8a83",
   "tests/test_gravity_diagnostics.py": "067e69f01bdeebf3241c6abff71611f96be4bbb271d49e08e1b73a5e32f11abe",
   "tests/test_gravity_extensions.py": "e55bb840af734109cfab7802ed1c04eb58f3f38ee3e43977df1644a52f86a69c",
   "tests/test_joint_response.py": "db315dabbdd749883963e5201993fce7eb5217221df6e2479a5f835c262856d0",
-  "tests/test_matter_extensions.py": "5a04ba0172aee4490920935879e88f8ffe7b0c5bc2bc08554803e018ff1a45aa",
+  "tests/test_matter_extensions.py": "eb8e1876e7ba6ed3715b1b9f4aa955d194fdac8dee86cd9ec45fefc51ab24364",
   "tests/test_matter_source_response.py": "00e6f110f3bb2c04f39ef2da231096f7a3b2c63629848b7757372dd5b8f88cd3",
   "tests/test_native_matter_matching.py": "580c294acc36f9fe81ef1f63d33aba2a133b3e4bd464e5f6dfda02d755124aa8",
   "tests/test_native_operations.py": "76e0ccd099a6583dad7a89aea09884ea569b081e0feed9bfa25f59cf842426e4",

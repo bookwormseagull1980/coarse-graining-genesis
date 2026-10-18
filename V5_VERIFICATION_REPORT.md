@@ -17,8 +17,8 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 # V5 Verification Report
 
-Generated: 2026-10-18 09:22:30
-Python: `3.12.10`
+Generated: 2026-10-18 10:54:31
+Python: `3.12.14`
 Root: `.`
 
 ## Verdict
@@ -33,7 +33,6 @@ a proof-library result does not certify a numerical run or the entire manuscript
 
 - Lean archive compilation (source audit alone is not compilation).
 - Lean Formalization of Arithmetic and Basic Physical Interfaces compilation and axiom audit (enable with --foundations).
-- Isolated full-chain numeric stability rerun (enable with --stability).
 
 No PASS claim is made for these omitted checks.
 
@@ -50,16 +49,17 @@ No PASS claim is made for these omitted checks.
 | path portability audit | PASS | `python scripts/audit_path_portability.py` |
 | full comparison table | PASS | `python comparison/param_audit_full.py` |
 | pytest | PASS | `python -B -m pytest -q -m 'not release_audit' -p no:cacheprovider --basetemp <temporary>` |
+| numeric stability audit | PASS | `python scripts/audit_numeric_stability.py` |
 | run identity after verification | PASS | `verify existing run identity and fingerprints` |
 
-Full Python test results: 583 passed, 5 deselected, 10 subtests passed.
+Full Python test results: 597 passed, 5 deselected, 10 subtests passed.
 The complete release audits are executed in the steps above;
 their duplicate test wrappers are deselected.
 
 Audits executed once during reproduction and reused after current-run fingerprint validation: parameter provenance audit, observation leakage audit.
 
-Run identity: `20261018T011955Z-546661b7`.
-Bound calculation sources: 118; verification sources: 47; outputs: 2; reference identities: 99; solver execution identities: 2.
+Run identity: `20261018T025105Z-ad1c83f8`.
+Bound calculation sources: 119; verification sources: 47; outputs: 2; reference identities: 99; solver execution identities: 2.
 
 ### Store Summary
 
@@ -67,7 +67,7 @@ Bound calculation sources: 118; verification sources: 47; outputs: 2; reference 
 - Isolated reference records: 99
 - provenance: DERIVED=237, OBSERVED=1, PENDING=2, SCALE_CHOICE=1
 - roles: anchor=1, cg=23, comparison=49, informational=21, internal=147
-- declared physical definitions: 120
+- declared physical definitions: 122
 - declared direct-input sets: 122
 
 ### Selected Closed Values
@@ -79,6 +79,7 @@ Bound calculation sources: 118; verification sources: 47; outputs: 2; reference 
 | `g2_MG` | `0.5088477031823814` | DERIVED | `cg_frg/gauge/geometric_couplings.py` |
 | `g1_MG_geo` | `0.6049900729523602` | DERIVED | `cg_frg/gauge/geometric_couplings.py` |
 | `g3_MG_geo` | `0.4977601563548794` | DERIVED | `cg_frg/gauge/geometric_couplings.py` |
+| `generated_ym_gap_mass` | `5.940431067579812e+19` | DERIVED | `cg_frg/qcd/mass_gap_scale.py` |
 | `n_generations` | `3` | DERIVED | `cg_frg/generation/window_capacity.py` |
 | `v_HIGGS` | `246.18969645238943` | DERIVED | `cg_frg/ewsb/vev_closure.py` |
 | `M_Z_pred` | `91.12483998892056` | DERIVED | `cg_frg/ewsb/ew_precision.py` |
@@ -102,6 +103,20 @@ Bound calculation sources: 118; verification sources: 47; outputs: 2; reference 
 | `bbn_tau_n` | `915.5435125712569` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
 | `bbn_Yp` | `0.2460823786548142` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
 | `bbn_Neff` | `3.043873359487886` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
+
+## Generated Yang--Mills Theorem Certificate
+
+The computed operator is the orthogonal direct sum of the normalized radial intensity block and the complete positive-odd coclosed colour-connection tower.  The value below is the minimum of their spectral bottoms.
+
+- response coordinate: `10977.110765427919`
+- radial mass squared: `7527.411368214042`
+- coclosed-connection bottom: `1177.6151927757944`
+- complete Yang--Mills gap squared: `1177.6151927757944`
+- controlling block: `coclosed_colour_connection`
+- interval lower bound: `1177.6151927757928`
+- first coclosed total multiplicity: `48`
+- radial/scalar semigroup residual: `0.0`
+- scale-transport ratio spread: `0.0`
 
 ## Exact affine certificates
 
@@ -168,8 +183,8 @@ enter the causal response, including the direct second source variation.
 - source-charge relative residual: 1.91480936223e-16
 - causal-equation relative residual: 1.90973710345e-16
 - response cutoff comparison: 7.04460217705e-16
-- maximum canonical-form residual: 5.38626232194e-15
-- maximum source-work balance residual: 1.16573417586e-14
+- maximum canonical-form residual: 5.41611936844e-15
+- maximum source-work balance residual: 3.31679128607e-15
 - dominant operation counts: {'causal_entry_divisions': 1192464, 'dense_liouvillian_factorizations': 0, 'exact_segment_propagators': 6, 'nonzero_source_diagonalizations': 2, 'nonzero_source_mode_diagonalizations': 2, 'phase_response_basis_transforms': 0, 'reference_mode_diagonalizations': 2, 'retained_phase_dimensions': [140, 336]}
 
 The exact finite source protocol has positive matter kinetic and spatial forms.
@@ -192,11 +207,11 @@ finite internal matter coupled to an external metric and scalar compression sour
 S_m=-integral sqrt(-g) [g^{mu nu} partial_mu(phi)^dagger M partial_nu(phi)+phi^dagger B phi]/2
 nabla_mu T^mu_nu=Re(E_phi^dagger partial_nu phi)+Q_a partial_nu eta^a
 
-- stress-divergence residual: 3.46944695195e-17
-- normal stress / lapse-source residual: 0
-- momentum stress / shift-source residual: 3.68807269888e-17
-- source-work charge residual: 2.3966823025e-16
-- Legendre-transform residual: -4.4408920985e-16
+- stress-divergence residual: 7.2858385991e-17
+- normal stress / lapse-source residual: 2.22044604925e-16
+- momentum stress / shift-source residual: 2.70972469321e-17
+- source-work charge residual: 1.38777878078e-16
+- Legendre-transform residual: 0
 - dominant operation counts: {'common_source_diagonalizations': 1, 'exponential_frechet_divided_difference_matrices': 2, 'external_metric_inversions': 1, 'finite_difference_derivatives': 0, 'source_frechet_directions_per_matrix': 3, 'spatial_metric_inversions': 1}
 
 The source and matter equations enter the total covariant conservation law.
@@ -321,7 +336,7 @@ from the production mass readouts.
 ## Continuous thermal evolution
 
 same specified weak inputs; static-nucleon rates and instantaneous neutrino decoupling
-- final neutron fraction = 0.1933481805061133
+- final neutron fraction = 0.1933481805061228
 - final neutrino temperature = 0.000490656518982094 GeV
 - EOS evaluations / requests = 75 / 205
 - weak-rate evaluations / requests = 125 / 205

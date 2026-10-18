@@ -127,6 +127,19 @@ the actions, schemes and boundary conditions recorded with their results.
 The neutrino records identify the three static masses and distinguish their
 mass-squared differences from the additional propagation readout.
 
+The colour sector now publishes the full generated Yang--Mills theorem
+certificate.  The unique condensed conformal response fixes the radial
+intensity block, while the generated projective geometry supplies the complete
+positive-odd coclosed colour-connection tower.  Their orthogonal direct sum has
+the strictly positive bottom
+`Delta_YM^2=min(m_rad^2,m_perp,1^2)`.  V5 evaluates the radial mass by two
+independent routes, verifies the radial/constant-mode semigroup intertwiner,
+checks higher coclosed shells against the degree-one bottom, and supplies an
+outward interval lower bound.  The dimensionless bottom is then transported
+covariantly to every positive generated scale.  The endpoint generator scale,
+QCD scale and scalar glueball catalogue are the corresponding scale and
+composite-state readouts of this same generated colour sector.
+
 Electroweak partial widths use one effective neutral-current amplitude,
 with a common weak angle and normalization, heavy-top bottom-vertex
 interference, and factorized QCD and QED radiators. The partial widths
@@ -319,19 +332,26 @@ result after checking the background and atomic inputs.
 
 ### Quick start
 
-The following checks use the recorded V5 inputs and do not require CAMB or the
-optional Lean foundations checkout:
+Run the self-contained spectral smoke test first:
+
+```powershell
+py examples/quickstart/run_example.py
+```
+
+It generates a three-shell scalar record on the `RP3` carrier and checks the
+stored output values. The example completes without optional cosmology
+solvers. Then run the core regression suite:
 
 ```powershell
 py -m pip install -r requirements.txt
 py -m pip install "pytest>=7.4" "mpmath>=1.3"
-py scripts/verify_v5.py --no-reproduce --pytest --test-scope core
+py -m pytest -q -m "not numerical and not auxiliary" -p no:cacheprovider
 ```
 
 For a full release verification, including fresh reproduction and audits, use
 the command in [REVIEWER_START_HERE.md](REVIEWER_START_HERE.md). The CI workflow
-runs the core suite on every push and pull request; it is a reproducibility
-smoke check, not a substitute for the full release verification.
+runs the core suite on every push and pull request; it is a public regression
+check, not a substitute for the full release verification.
 
 - [Scientific overview](docs/papers_overview.pdf): construction, selected results,
   macroscopic dynamics and the interpretation of the comparisons.

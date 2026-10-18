@@ -16,7 +16,7 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 # V5 Framework Ledger
 
 This document specifies the physical objects, numerical methods and
-certification used by Coarse-Graining Genesis Framework V5, version 5.0.0.
+certification used by Coarse-Graining Genesis Framework V5, version 5.0.1.
 The companion papers in [REFERENCES.md](../REFERENCES.md) supply the
 derivations. The [reviewer guide](../REVIEWER_START_HERE.md) provides
 execution commands and the validation map.
@@ -342,6 +342,52 @@ mass-error bounds from verified two-sided bounds for nu, kappa and Z on
 the supplied scale path. These functions and the radius specify the native
 radial response. The window VEV, effective Higgs mass and QCD catalogue
 use their respective definitions in Guo (2026g).
+
+### Generated Yang--Mills operator and spectral bottom
+
+`cg_frg.qcd.generated_yang_mills` evaluates the Yang--Mills theorem of
+Guo (2026d) with the structural constants fixed by the source construction:
+the critical radius is `sqrt(pi)`, the colour adjoint Casimir and algebra
+dimension are 3 and 8, and the long-root carrier has dimension 15.  These
+quantities are constants of the public calculation rather than fitting
+arguments.  At an endpoint-scaled radius `L>sqrt(pi)`, the generated
+adjoint feedback and long-root drive determine one positive coordinate `z`
+through the complete conformal equation `H(z)=drive`.
+
+The mass operator preserves two orthogonal response sectors.  The first is
+the normalized radial intensity.  Its mass squared is calculated once from
+the Hessian in the intensity coordinate and independently from the constant
+mode of the complete scalar tower:
+
+    m_rad^2 = 4 q (kappa^2 H'(z))/(2N/q)
+            = z [4 z H'(z)]/(2N),    N=15*8=120.
+
+The program evaluates both expressions separately, transports their common
+one-dimensional heat semigroup through the normalized radial-to-constant
+unitary, and records the residuals.  The score variance is likewise summed
+from the 120 coefficient contributions before normalization.
+
+The second sector is the complete coclosed colour connection on the generated
+projective three-space.  Its positive odd shells have
+
+    m_perp,l^2 = [(l+1)^2 + 2z/3]/L^2,    l=1,3,5,... .
+
+The degree-one shell is therefore the bottom of the entire tower; its real
+multiplicity is `8*[2*1*(1+2)]=48`.  Source-carrier grading makes the radial
+and coclosed sectors orthogonal.  The full generated Yang--Mills spectral
+bottom is consequently
+
+    Delta_YM^2 = min{m_rad^2, m_perp,1^2} > 0.
+
+The stored theorem certificate includes the two blocks, the zero cross-block
+norm, the controlling block and the complete lower bound.  A separate
+high-precision interval path brackets the monotone response root, propagates
+the enclosure through both masses and records a strictly positive outward
+lower bound.  Scale transport preserves `sqrt(Delta_YM^2)` and assigns
+`m_YM(s)=s sqrt(Delta_YM^2)` at every positive generated scale.  The endpoint
+generator coordinate, the QCD running scale and the glueball catalogue then
+resolve complementary scale and composite-state information within this same
+gapped colour sector.
 
 For the joint amplitude--radius variation, keep the same relative
 potential, subtraction and coupling g at every radius. Put y=E²,

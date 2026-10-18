@@ -657,7 +657,17 @@ def late_ionization_drag_capacity(*, redshift_max, cosmology, components, atomic
             or min(cosmology['H0'], components['baryon'], components['cdm'],
                    components['photon'], *atomic.values()) <= 0):
         raise ValueError("positive background and atomic inputs and a finite nonnegative cutoff required")
-    q = iv.mpf
+    def q(value):
+        # Exact integers and decimal strings remain exact.  A Python float is
+        # a binary datum, so first enclose that datum between its adjacent
+        # representable values before applying interval arithmetic.
+        if isinstance(value, (int, str)):
+            return iv.mpf(value)
+        number = float(value)
+        return iv.mpf([
+            repr(math.nextafter(number, -math.inf)),
+            repr(math.nextafter(number, math.inf)),
+        ])
     h0 = q(cosmology['H0'])*1000/q(atomic['Mpc_m'])
     baryon_density = 3*h0**2/(8*iv.pi*q(atomic['G_SI']))*q(components['baryon'])
     hydrogen = baryon_density*(1-q(cosmology['YHe']))/q(atomic['hydrogen_mass_kg'])

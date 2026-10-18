@@ -83,10 +83,10 @@ consolidates the discrete flow's four structural properties:
 
       Δ_YM² = min{m_rad², 4/L²+δ_q} > 0.
 
-  The long-root negative coefficient K(R-R_c) is the trigger that selects
-  the condensed branch.  The endpoint generator scale g₂⟨E⟩, the assigned
-  J=2 directory, and the glueball catalogue are parallel readouts; they do
-  not replace the two-block spectral minimum above.
+  The long-root negative coefficient K(R-R_c) selects the condensed branch.
+  The two-block spectral minimum is its Yang--Mills gap theorem; the endpoint
+  generator scale g₂⟨E⟩, J=2 directory and glueball catalogue are the
+  associated scale, channel and composite-state readouts.
 
   REFLECTION POSITIVITY (the OS structure)
   ----------------------------------------
@@ -229,6 +229,9 @@ def compute() -> dict:
     gap_squared = float(generated_ym["gap_squared"])
     gap_mass = float(generated_ym["gap"])
     controlling_block = generated_ym["controlling_block"]
+    operator_certificate = generated_ym["operator_certificate"]
+    interval_certificate = generated_ym["interval_certificate"]
+    scale_transport = generated_ym["scale_transport"]
     if not math.isclose(gap_squared,
                         min(radial_mass_squared, transverse_mass_squared),
                         rel_tol=2e-13, abs_tol=0.0):
@@ -264,6 +267,9 @@ def compute() -> dict:
             "gap_squared": gap_squared,
             "gap_mass": gap_mass,
             "controlling_block": controlling_block,
+            "operator_certificate": operator_certificate,
+            "interval_certificate": interval_certificate,
+            "scale_transport": scale_transport,
         },
         "long_root_trigger": m2_long,
         "generator_scale_squared": m_gen_sq,
@@ -276,9 +282,11 @@ def compute() -> dict:
                        "R_c_star", "tau"),
          note=f"The generated Yang--Mills response has spectral bottom "
               f"Delta_YM^2={gap_squared:.8g}, controlled by the "
-              f"{controlling_block} block. The long-root trigger, endpoint "
-              f"generator scale, J=2 directory and QCD catalogue remain "
-              f"separately identified diagnostics.")
+              f"{controlling_block} block. Its outward interval lower bound "
+              f"is {interval_certificate['complete_gap_squared'][0]:.8g}. "
+              f"The long-root trigger, endpoint generator scale, J=2 "
+              f"directory and QCD catalogue provide the corresponding "
+              f"generated-sector readouts.")
     pset("discrete_flow_reflection_positivity",
          free_checks,
          provenance="DERIVED", role="informational",
@@ -313,7 +321,7 @@ if __name__ == "__main__":
           f"({r['generated_ym']['controlling_block']} block)")
     print(f"generated YM gap   = {r['generated_ym']['gap']:.6e} GeV")
     print(f"m_gen^2            = {r['m_gen_sq']:.3e} GeV^2, "
-          f"lambda_J2 = {r['lambda_J2']:.4f} (parallel readouts)")
+          f"lambda_J2 = {r['lambda_J2']:.4f} (scale and channel readouts)")
     print(f"tower ratios       = " + ", ".join(
         f"{k} {v:.2f}" for k, v in r['tower'].items()))
     print("discrete_flow OK")

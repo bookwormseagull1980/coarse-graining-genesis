@@ -32,17 +32,18 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Physics",
 ]
 # Runtime dependencies (the computation chain): scipy (q0-integrals,
-# spectral sums) and numpy (tensor kernels) are required.
+# spectral sums), numpy (tensor kernels), and mpmath (outward interval
+# certificates for generated spectral roots) are required.
 dependencies = [
     "scipy>=1.10",
     "numpy>=1.24",
+    "mpmath>=1.3",
 ]
 
 [project.optional-dependencies]
 # Verification of the calculation and its mathematical contracts.
 verification = [
     "pytest>=7.4",
-    "mpmath>=1.3",
 ]
 
 [tool.setuptools.packages.find]

@@ -313,6 +313,14 @@ def readout_definition(key):
          ("g_A=4/pi", "scalar-isovector coefficient one", "delta_R=1+(1-tau)/(8 pi)",
           "light-quark vacuum-polarization masses frozen at Lambda_QCD")),
         ({
+            "generated_ym_mass_gap": (
+                "generated Yang--Mills operator and mass-gap certificate",
+                "dimensionless squared spectrum; GeV for the transported gap",
+                "Delta_YM^2=min{m_rad^2, inf_l m_perp,l^2}, with the unique "
+                "positive conformal response and positive odd coclosed tower"),
+            "generated_ym_gap_mass": (
+                "generated Yang--Mills mass gap in the emergence mass unit", "GeV",
+                "M_G sqrt(Delta_YM^2)"),
             "qcd_Lambda_QCD": ("five-flavour QCD scale from the specified extraction", "GeV",
                                "two-loop Lambda_MSbar(alpha_s, internal M_Z, nf=5)"),
             "m_p": ("constituent proton mass readout", "GeV", "(279/64) Lambda_QCD (1+5 tau kappa/3)"),

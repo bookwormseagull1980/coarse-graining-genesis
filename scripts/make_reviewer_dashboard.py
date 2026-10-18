@@ -50,6 +50,7 @@ SOURCE_CALLS = {"get", "sm_value", "get_observed"}
 WRITE_CALLS = {"pset", "sm_set", "compare_and_set"}
 SELECTED_KEYS = [
     "G_N_PDG", "kL", "M_G", "g2_MG", "g1_MG_geo", "g3_MG_geo",
+    "generated_ym_gap_mass",
     "n_generations", "v_HIGGS", "M_Z_pred",
     "M_W_pred_lead1loop", "Gamma_b_pred_1loop", "sin2_theta_eff_l_pred",
     "rho_NC_leading", "sin2_theta_eff_b_pred", "Gamma_l_pred_lead1loop",

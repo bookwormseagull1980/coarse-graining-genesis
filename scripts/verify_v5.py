@@ -549,6 +549,7 @@ def store_summary() -> str:
     ]
     selected = [
         "kL", "M_G", "g2_MG", "g1_MG_geo", "g3_MG_geo",
+        "generated_ym_gap_mass",
         "n_generations", "v_HIGGS", "M_Z_pred", "M_W_pred",
         "M_W_pred_lead1loop", "Gamma_b_pred_1loop",
         "Gamma_had_pred_lead1loop", "Gamma_Z_pred_lead1loop",
@@ -630,6 +631,31 @@ def report_text(results: list[dict], not_executed: list[str]) -> str:
     lines.append(store_summary())
 
     records = read_store_document("parameters", source_root=ROOT).get("parameters", {})
+    ym_record = records.get("generated_ym_mass_gap", {})
+    ym = ym_record.get("value", {}) if isinstance(ym_record, dict) else {}
+    if isinstance(ym, dict) and ym:
+        interval = ym.get("interval_certificate", {})
+        operator = ym.get("operator_certificate", {})
+        transport = ym.get("scale_transport", {})
+        lines += [
+            "## Generated Yang--Mills Theorem Certificate",
+            "",
+            "The computed operator is the orthogonal direct sum of the normalized "
+            "radial intensity block and the complete positive-odd coclosed colour-"
+            "connection tower.  The value below is the minimum of their spectral "
+            "bottoms.",
+            "",
+            f"- response coordinate: `{ym.get('response_coordinate')}`",
+            f"- radial mass squared: `{ym.get('radial_mass_squared')}`",
+            f"- coclosed-connection bottom: `{ym.get('transverse_mass_squared')}`",
+            f"- complete Yang--Mills gap squared: `{ym.get('gap_squared')}`",
+            f"- controlling block: `{ym.get('controlling_block')}`",
+            f"- interval lower bound: `{(interval.get('complete_gap_squared') or [None])[0]}`",
+            f"- first coclosed total multiplicity: `{operator.get('coclosed_first_total_multiplicity')}`",
+            f"- radial/scalar semigroup residual: `{ym.get('radial_intertwining_residual')}`",
+            f"- scale-transport ratio spread: `{transport.get('ratio_spread')}`",
+            "",
+        ]
     if "response_validation" in records:
         extension = response_bundle(records)
         affine = extension.get("exact_affine_certificates", {})
