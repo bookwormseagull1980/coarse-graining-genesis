@@ -120,8 +120,8 @@
   }
  },
  "output_sha256": {
-  "cg_params.json": "91ebd548283ff6d224ed2d6ae35a149f5aac49d27ea4d2da648426c6b14e7f9a",
-  "comparison/reference_inputs.json": "bd77065ae671013fe411e443a4a7625fc17b7227ebfc56e7328888406f9f8f2b"
+  "cg_params.json": "1e2cff9f663e0af4f292557084d819647a3c04f97e60dbafe43624e3b42bfdd2",
+  "comparison/reference_inputs.json": "724e803c77f9b5973c596eb52a886f0a5e939b5f9f730bd585d0976543be758e"
  },
  "publication": {
   "author": "Jinku Guo",
@@ -187,7 +187,7 @@
   "version": "5.0.0"
  },
  "python": "3.12.14",
- "run_id": "20261018T025105Z-ad1c83f8",
+ "run_id": "20261018T030034Z-560e6b40",
  "scope": "declared framework; input-bound external comparisons carry separate status",
  "solver_execution_identity": {
   "CAMB": {
@@ -234,7 +234,7 @@
   "cg_frg/axiom/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
   "cg_frg/cosmology/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
   "cg_frg/cosmology/bbn_helium.py": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
-  "cg_frg/cosmology/camb_interface.py": "9ff3c8ec8cd4a79e0de65650b8cfef564ec726e7eb9a0e5a07e539b01aa05169",
+  "cg_frg/cosmology/camb_interface.py": "3c5627161b03e24e024134a90e4415c6c56732efbfd7917afaea75e16309da18",
   "cg_frg/cosmology/cold_source.py": "b7ac85a40ee584c7380be61711becc2d5f64af1f4df93c4a2332fdc4f088c7aa",
   "cg_frg/cosmology/dark_energy.py": "ec4506653bd5d7600646777d9b14ef23240edf2ed6db0f9ccfc9794b9913b9c7",
   "cg_frg/cosmology/endpoint_residual.py": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
@@ -294,7 +294,7 @@
   "cg_frg/neutrino/neutrino_closure.py": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
   "cg_frg/neutrino/neutrino_mass_matrix.py": "09deed3761c2fe699c3ad15e566c937f247231792079399c3f5947ede7f35062",
   "cg_frg/neutrino/propagation.py": "6c906e2cdea9a4e9b19adc7af837f49dea50b76d125217944cc7e9267fa8c8d0",
-  "cg_frg/qcd/generated_yang_mills.py": "2b905d98d88dbea33412380328f35c93dd5a202cde900a90ec4bfcb361301a64",
+  "cg_frg/qcd/generated_yang_mills.py": "70ce6f8701af0f0c5251d9d76f60e5ba912099b0d5a429f43894b4ae66d8af3a",
   "cg_frg/qcd/mass_gap_scale.py": "bc41a9cb5088575bd897ba592614755c4a0ac0b6fd9ed094d8bd67316f6ad5e3",
   "cg_frg/qcd/qcd_sector.py": "e4738a4af65843b0ab7552e715b38f63aa91f4124967374cee5c54d6683e1ac7",
   "comparison/crosschecks.py": "51468181e8a6f79f390d25485df9d046eaf265071d3a32a6f2f8dbbbfd372c84",
@@ -336,16 +336,8 @@
   "scientific_value_reads": "read the scientific stores; the manifest only validates their identity"
  },
  "verification": {
-  "binding_sha256": "283c4dc9fe35305d21924c4f9c8c17c8cfe3feb1c0b73fff297d88df12ebad5b",
+  "binding_sha256": "b1656a1b001743c2c429e3dbfd9564f9857cf90aa47aaa70d6f73e65ab654af6",
   "checks": [
-   {
-    "cmd": "python -B scripts/reproduce_v5.py",
-    "label": "full reproduction",
-    "ok": true,
-    "required": true,
-    "returncode": 0,
-    "summary": "Completed the declared check successfully."
-   },
    {
     "cmd": "verify existing run identity and fingerprints",
     "label": "current run manifest",
@@ -360,7 +352,7 @@
     "ok": true,
     "required": true,
     "returncode": 0,
-    "summary": "Executed once during this invocation's reproduction; reused after run, source, reference and output fingerprints were verified."
+    "summary": "Completed the declared check successfully."
    },
    {
     "cmd": "python scripts/audit_observation_leakage.py",
@@ -368,7 +360,7 @@
     "ok": true,
     "required": true,
     "returncode": 0,
-    "summary": "Executed once during this invocation's reproduction; reused after run, source, reference and output fingerprints were verified."
+    "summary": "Completed the declared check successfully."
    },
    {
     "cmd": "python scripts/audit_lean_sources.py",
@@ -428,10 +420,11 @@
    }
   ],
   "not_executed": [
+   "Full reproduction during this verification invocation (--no-reproduce).",
    "Lean archive compilation (source audit alone is not compilation).",
    "Lean Formalization of Arithmetic and Basic Physical Interfaces compilation and axiom audit (enable with --foundations)."
   ],
-  "run_id": "20261018T025105Z-ad1c83f8",
+  "run_id": "20261018T030034Z-560e6b40",
   "status": "PASS"
  },
  "verification_source_sha256": {

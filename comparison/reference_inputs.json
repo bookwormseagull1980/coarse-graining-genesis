@@ -10,7 +10,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.823,
    "writer": "comparison/sm_rge/inputs.py"
@@ -24,7 +24,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": {
     "kind": "declared propagation convention",
@@ -43,7 +43,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": {
     "citation": "D. J. Fixsen, Astrophys. J. 707 (2009) 916, doi:10.1088/0004-637X/707/2/916",
@@ -69,7 +69,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
    "value": {
     "covariance": [
@@ -355,7 +355,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 2.105e-09,
    "writer": "comparison/sm_rge/inputs.py"
@@ -369,7 +369,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 7.41e-05,
    "writer": "comparison/sm_rge/inputs.py"
@@ -383,7 +383,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.002511,
    "writer": "comparison/sm_rge/inputs.py"
@@ -397,7 +397,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.1663788e-05,
    "writer": "comparison/sm_rge/inputs.py"
@@ -411,7 +411,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 2.4952,
    "writer": "comparison/sm_rge/inputs.py"
@@ -425,7 +425,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.37705,
    "writer": "comparison/sm_rge/inputs.py"
@@ -439,7 +439,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.7444,
    "writer": "comparison/sm_rge/inputs.py"
@@ -453,7 +453,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.499,
    "writer": "comparison/sm_rge/inputs.py"
@@ -467,7 +467,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.083966,
    "writer": "comparison/sm_rge/inputs.py"
@@ -481,7 +481,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.44e-42,
    "writer": "comparison/sm_rge/inputs.py"
@@ -495,7 +495,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.21,
    "writer": "comparison/sm_rge/inputs.py"
@@ -509,7 +509,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 4.2791148e-84,
    "writer": "comparison/sm_rge/inputs.py"
@@ -523,7 +523,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 2.435e+18,
    "writer": "comparison/sm_rge/inputs.py"
@@ -537,7 +537,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 91.1876,
    "writer": "comparison/sm_rge/inputs.py"
@@ -551,7 +551,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 3.044,
    "writer": "comparison/sm_rge/inputs.py"
@@ -565,7 +565,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.2645,
    "writer": "comparison/sm_rge/inputs.py"
@@ -579,7 +579,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.6847,
    "writer": "comparison/sm_rge/inputs.py"
@@ -593,7 +593,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.0493,
    "writer": "comparison/sm_rge/inputs.py"
@@ -607,7 +607,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.21629,
    "writer": "comparison/sm_rge/inputs.py"
@@ -621,7 +621,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 20.767,
    "writer": "comparison/sm_rge/inputs.py"
@@ -643,7 +643,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
    "value": {
     "identity": "SPARC mass models, Lelli et al. (2016), Zenodo record 16284118",
@@ -31182,7 +31182,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 2.72548,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31196,7 +31196,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 270.0,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31210,7 +31210,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.2245,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31224,7 +31224,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.245,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31238,7 +31238,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.2e-10,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31252,7 +31252,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 127.952,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31266,7 +31266,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 137.036,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31280,7 +31280,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.1179,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31294,7 +31294,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 299792458.0,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31308,7 +31308,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": {
     "alpha_zero": 0.0072973525692838015,
@@ -31331,7 +31331,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 68.5,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31345,7 +31345,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.00129333236,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31359,7 +31359,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 4.6e-10,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31373,7 +31373,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.4243e-16,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31387,7 +31387,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 6.1e-10,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31401,7 +31401,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.344,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31418,7 +31418,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "d0d75e7ab56e3bcaa78a43e98509126f549ffa7117f336f116755e6bb6202f55",
    "value": 0.6050009139816364,
    "writer": "comparison/sm_rge/run_rge.py"
@@ -31432,7 +31432,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.461425,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31449,7 +31449,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "d0d75e7ab56e3bcaa78a43e98509126f549ffa7117f336f116755e6bb6202f55",
    "value": 0.5854619306987475,
    "writer": "comparison/sm_rge/run_rge.py"
@@ -31466,7 +31466,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "d0d75e7ab56e3bcaa78a43e98509126f549ffa7117f336f116755e6bb6202f55",
    "value": 0.5088449671322702,
    "writer": "comparison/sm_rge/run_rge.py"
@@ -31480,7 +31480,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.64779,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31497,7 +31497,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "d0d75e7ab56e3bcaa78a43e98509126f549ffa7117f336f116755e6bb6202f55",
    "value": 0.5183911298409684,
    "writer": "comparison/sm_rge/run_rge.py"
@@ -31514,7 +31514,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "d0d75e7ab56e3bcaa78a43e98509126f549ffa7117f336f116755e6bb6202f55",
    "value": 0.4977651062181578,
    "writer": "comparison/sm_rge/run_rge.py"
@@ -31528,7 +31528,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.2172,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31545,7 +31545,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "d0d75e7ab56e3bcaa78a43e98509126f549ffa7117f336f116755e6bb6202f55",
    "value": 0.5184800043329293,
    "writer": "comparison/sm_rge/run_rge.py"
@@ -31559,7 +31559,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 3.06e-05,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31573,7 +31573,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.129,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31587,7 +31587,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.2248,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31601,7 +31601,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.1294,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31618,7 +31618,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "d0d75e7ab56e3bcaa78a43e98509126f549ffa7117f336f116755e6bb6202f55",
    "value": 0.006507369734404526,
    "writer": "comparison/sm_rge/run_rge.py"
@@ -31635,7 +31635,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "d0d75e7ab56e3bcaa78a43e98509126f549ffa7117f336f116755e6bb6202f55",
    "value": 0.006278548844012353,
    "writer": "comparison/sm_rge/run_rge.py"
@@ -31649,7 +31649,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 125.2,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31663,7 +31663,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 80.369,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31677,7 +31677,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 4.18,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31691,7 +31691,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 45.0,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31705,7 +31705,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.0505,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31719,7 +31719,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.511,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31733,7 +31733,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.53,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31747,7 +31747,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.47,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31761,7 +31761,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.41,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31775,7 +31775,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.7,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31789,7 +31789,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.105658,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31803,7 +31803,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 206.8,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31817,7 +31817,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.938272,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31831,7 +31831,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 172.69,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31845,7 +31845,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 136.0,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31859,7 +31859,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 78000.0,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31873,7 +31873,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.777,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31887,7 +31887,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 16.8,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31901,7 +31901,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.00184,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31915,7 +31915,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": {
     "citation": "S. Borsanyi et al., Ab initio calculation of the neutron-proton mass difference, Science 347 (2015) 1452-1455, doi:10.1126/science.1257050, arXiv:1406.4088v2, Table 1 and Supplementary Sections 10.3, 12",
@@ -31951,7 +31951,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.0351,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31965,7 +31965,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.14,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31979,7 +31979,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.036,
    "writer": "comparison/sm_rge/inputs.py"
@@ -31993,7 +31993,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.157,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32007,7 +32007,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.0004,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32021,7 +32021,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": {
     "additional_running_masses_GeV": {
@@ -32142,7 +32142,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.304,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32156,7 +32156,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.022,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32170,7 +32170,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.55,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32184,7 +32184,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 41.481,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32198,7 +32198,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.23122,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32212,7 +32212,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.23153,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32226,7 +32226,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.1936,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32240,7 +32240,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 878.4,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32254,7 +32254,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.5,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32268,7 +32268,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
    "value": 246.22,
    "writer": "cg_core/params.py"
@@ -32282,7 +32282,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 246.22,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32296,7 +32296,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 1.34e-05,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32310,7 +32310,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 2.935e-06,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32327,7 +32327,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "d0d75e7ab56e3bcaa78a43e98509126f549ffa7117f336f116755e6bb6202f55",
    "value": 0.36598430331137133,
    "writer": "comparison/sm_rge/run_rge.py"
@@ -32341,7 +32341,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 0.94,
    "writer": "comparison/sm_rge/inputs.py"
@@ -32358,7 +32358,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "d0d75e7ab56e3bcaa78a43e98509126f549ffa7117f336f116755e6bb6202f55",
    "value": 0.38585662874583543,
    "writer": "comparison/sm_rge/run_rge.py"
@@ -32372,7 +32372,7 @@
    "provenance": "SM_INPUT",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T025105Z-ad1c83f8",
+   "run_id": "20261018T030034Z-560e6b40",
    "source_sha256": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
    "value": 6e-06,
    "writer": "comparison/sm_rge/inputs.py"

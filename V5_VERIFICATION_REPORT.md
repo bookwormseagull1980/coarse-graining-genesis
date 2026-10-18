@@ -17,7 +17,7 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 # V5 Verification Report
 
-Generated: 2026-10-18 10:54:31
+Generated: 2026-10-18 11:04:55
 Python: `3.12.14`
 Root: `.`
 
@@ -31,6 +31,7 @@ a proof-library result does not certify a numerical run or the entire manuscript
 
 ## Not Executed
 
+- Full reproduction during this verification invocation (--no-reproduce).
 - Lean archive compilation (source audit alone is not compilation).
 - Lean Formalization of Arithmetic and Basic Physical Interfaces compilation and axiom audit (enable with --foundations).
 
@@ -40,7 +41,6 @@ No PASS claim is made for these omitted checks.
 
 | step | status | command |
 |---|---:|---|
-| full reproduction | PASS | `python -B scripts/reproduce_v5.py` |
 | current run manifest | PASS | `verify existing run identity and fingerprints` |
 | parameter provenance audit | PASS | `python scripts/audit_param_writers.py` |
 | observation leakage audit | PASS | `python scripts/audit_observation_leakage.py` |
@@ -56,9 +56,7 @@ Full Python test results: 597 passed, 5 deselected, 10 subtests passed.
 The complete release audits are executed in the steps above;
 their duplicate test wrappers are deselected.
 
-Audits executed once during reproduction and reused after current-run fingerprint validation: parameter provenance audit, observation leakage audit.
-
-Run identity: `20261018T025105Z-ad1c83f8`.
+Run identity: `20261018T030034Z-560e6b40`.
 Bound calculation sources: 119; verification sources: 47; outputs: 2; reference identities: 99; solver execution identities: 2.
 
 ### Store Summary
