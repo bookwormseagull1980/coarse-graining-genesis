@@ -84,7 +84,7 @@ theorem fermion_content : 2 * 10 * 9 = 15 * 3 * 4 := by
 theorem tau_denominator : 15 * 10 = 50 * 3 := by
   native_decide
 
--- (7) the numerator of τ: N_L − N_R = 1 (chiral asymmetry)
+-- (7) the numerator of τ: N_L − N_R = 1 (charged-quotient index)
 theorem tau_numerator : N_L - N_R = 1 := by
   native_decide
 

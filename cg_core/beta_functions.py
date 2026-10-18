@@ -46,7 +46,9 @@ proved in Lean 4:
     b3_beta_content (thm 17), b1_fermion_hypercharge (thm 19).
 The content ratios themselves are proved in the same file
 (N_g=N_c^2-1, conformal-gauge duality N_g·ξ=1, ΣY²·Δ_f=5,
-N_f=2ΣY²Δ_f²=15, τ=(N_L−N_R)/(N_fΣY²)=1/50).
+N_f=2ΣY²Δ_f²=15 and the charged-quotient response modulus
+τ=(N_L−N_R)/(N_fΣY²)=1/50). The neutral right coordinate completes
+the 8+8 carrier and is absent from this gauge-active trace.
 
 TWO-LOOP GAUGE MATRIX — DERIVED FROM CONTENT (Lean-proved)
 ----------------------------------------------------------

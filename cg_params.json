@@ -39,7 +39,7 @@
     "unit": "eV^2"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 7.412190153605081e-05,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -80,7 +80,7 @@
     "unit": "eV^2"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 6.874155305644093e-05,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -122,7 +122,7 @@
     "unit": "eV^2"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.0025112069913255865,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -139,7 +139,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "83c4303a866589f976f3401e9e1b10a36ec4c5dc668b89825c600c5c5dc94306",
    "value": {
     "fermion": 180,
@@ -174,7 +174,7 @@
     "unit": "GeV^-2"
    },
    "role": "anchor",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
    "value": 6.70883e-39,
    "writer": "cg_core/params.py"
@@ -192,7 +192,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "43c972bc96dc4d19beda5f48ea6e6e5dc5de711911f21030b6b90602ff0b365f",
    "value": "GN is the dimensionful anchor; G_read is the prescribed finite-domain combined response.",
    "writer": "cg_frg/gravity/newton.py"
@@ -249,7 +249,7 @@
     "unit": "GeV"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 2.4798392472172406,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -298,7 +298,7 @@
     "unit": "GeV"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 2.5063559621245686,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -352,7 +352,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 0.38083608013531245,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -397,7 +397,7 @@
     "unit": "GeV"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 0.38040730308009635,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -451,7 +451,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 1.7331502439058435,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -500,7 +500,7 @@
     "unit": "GeV"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 1.7520580283558593,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -552,7 +552,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 0.49674182755093454,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -596,7 +596,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 0.5014943027195322,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -649,7 +649,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 0.24994717576046271,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -694,7 +694,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 0.25280363104917714,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -730,7 +730,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13274d50c5727663cd3aebba2d69156f15a2a89b04d4a34d916345b319f9fddc",
    "value": 1.4388498142964775e-42,
    "writer": "cg_frg/cosmology/gw_ratio.py"
@@ -762,8 +762,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "7446b818ede7161b92b4c9dabd81a59035532408f3be9e8a2c9ba8c2f0d5af5f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "ca96609eb0fe7af15bcedb87ab04a5aaf282e72910c6c1af1a14763d9cd74a2a",
    "value": 1.7724538509055159,
    "writer": "scripts/init_v5.py"
   },
@@ -780,7 +780,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
    "value": 1.7724538509055159,
    "writer": "cg_frg/frg/endpoint_constraint.py"
@@ -798,7 +798,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
    "value": 2.4935343325226915,
    "writer": "cg_frg/frg/endpoint_constraint.py"
@@ -816,7 +816,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
    "value": 1.7724538509055159,
    "writer": "cg_frg/frg/endpoint_constraint.py"
@@ -852,7 +852,7 @@
     "unit": "GeV^2"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "ec4506653bd5d7600646777d9b14ef23240edf2ed6db0f9ccfc9794b9913b9c7",
    "value": 4.254718579276526e-84,
    "writer": "cg_frg/cosmology/dark_energy.py"
@@ -888,7 +888,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
    "value": 1.7310765000475023e+18,
    "writer": "cg_frg/frg/endpoint_constraint.py"
@@ -921,8 +921,8 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "7446b818ede7161b92b4c9dabd81a59035532408f3be9e8a2c9ba8c2f0d5af5f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "ca96609eb0fe7af15bcedb87ab04a5aaf282e72910c6c1af1a14763d9cd74a2a",
    "value": 2.435323595526305e+18,
    "writer": "scripts/init_v5.py"
   },
@@ -978,7 +978,7 @@
     "unit": "GeV"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 80.37174514486661,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -1026,7 +1026,7 @@
     "unit": "GeV"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 80.33739698310175,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -1076,7 +1076,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 91.12483998892056,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -1116,7 +1116,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13274d50c5727663cd3aebba2d69156f15a2a89b04d4a34d916345b319f9fddc",
    "value": 0.2655475114476184,
    "writer": "cg_frg/cosmology/gw_ratio.py"
@@ -1152,7 +1152,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "ec4506653bd5d7600646777d9b14ef23240edf2ed6db0f9ccfc9794b9913b9c7",
    "value": 0.6850442965140158,
    "writer": "cg_frg/cosmology/dark_energy.py"
@@ -1187,8 +1187,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": 0.2655475114476184,
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
@@ -1245,8 +1245,8 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "Omega_b": {
@@ -1283,7 +1283,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13274d50c5727663cd3aebba2d69156f15a2a89b04d4a34d916345b319f9fddc",
    "value": 0.049408192038365814,
    "writer": "cg_frg/cosmology/gw_ratio.py"
@@ -1337,7 +1337,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 0.2197363335777842,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -1387,7 +1387,7 @@
     "unit": "1"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 0.2171202648105626,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -1405,7 +1405,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
    "value": 1.909859317102744,
    "writer": "cg_frg/frg/endpoint_constraint.py"
@@ -1459,7 +1459,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 20.80219836810812,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -1509,7 +1509,7 @@
     "unit": "1"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 20.791529232604695,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -1525,7 +1525,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e10f4a946ce71f87327b09f0b588b19ba24a0ba9e0a3187d5f17e100d4320ed9",
    "value": true,
    "writer": "cg_frg/gravity/tt_tensor.py"
@@ -1542,7 +1542,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a56ea0a5fc6122225f30e689bfe212f9429923fe4eac8187abd01757f009173e",
    "value": true,
    "writer": "cg_frg/gravity/pole_analysis.py"
@@ -1559,7 +1559,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a56ea0a5fc6122225f30e689bfe212f9429923fe4eac8187abd01757f009173e",
    "value": false,
    "writer": "cg_frg/gravity/pole_analysis.py"
@@ -1575,7 +1575,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e10f4a946ce71f87327b09f0b588b19ba24a0ba9e0a3187d5f17e100d4320ed9",
    "value": -1.9999999999999933,
    "writer": "cg_frg/gravity/tt_tensor.py"
@@ -1611,7 +1611,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "ec4506653bd5d7600646777d9b14ef23240edf2ed6db0f9ccfc9794b9913b9c7",
    "value": 2.353400743797703e-13,
    "writer": "cg_frg/cosmology/dark_energy.py"
@@ -1647,8 +1647,8 @@
     "unit": "K"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": 2.725473977921092,
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
@@ -1670,7 +1670,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.22393560298858664,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -1687,7 +1687,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "83c4303a866589f976f3401e9e1b10a36ec4c5dc668b89825c600c5c5dc94306",
    "value": 0.039374130504556404,
    "writer": "cg_frg/gravity/zk_gravitational_rg.py"
@@ -1704,7 +1704,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "83c4303a866589f976f3401e9e1b10a36ec4c5dc668b89825c600c5c5dc94306",
    "value": 0.7108199104330504,
    "writer": "cg_frg/gravity/zk_gravitational_rg.py"
@@ -1721,7 +1721,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "83c4303a866589f976f3401e9e1b10a36ec4c5dc668b89825c600c5c5dc94306",
    "value": 0.004926459501327888,
    "writer": "cg_frg/gravity/zk_gravitational_rg.py"
@@ -1757,7 +1757,7 @@
     "unit": "m s^-2"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13274d50c5727663cd3aebba2d69156f15a2a89b04d4a34d916345b319f9fddc",
    "value": 1.204369920558342e-10,
    "writer": "cg_frg/cosmology/gw_ratio.py"
@@ -1796,7 +1796,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "d969b434eae93ebe311aba7618e35c13cdba156c7ad039915d57052676285d06",
    "value": 1.9018618632255682,
    "writer": "cg_frg/generation/sector_alpha.py"
@@ -1847,8 +1847,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": 0.007296803471151167,
    "writer": "cg_frg/cosmology/bbn_helium.py"
   },
@@ -1867,8 +1867,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "275e61772f20985613ed2533da89f66f8b324f57884dee9534d5f4a9b1ccd64c",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
    "value": 128.20705760852226,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
@@ -1906,7 +1906,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "d969b434eae93ebe311aba7618e35c13cdba156c7ad039915d57052676285d06",
    "value": 1.4114863349614586,
    "writer": "cg_frg/generation/sector_alpha.py"
@@ -1929,7 +1929,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "bc41a9cb5088575bd897ba592614755c4a0ac0b6fd9ed094d8bd67316f6ad5e3",
    "value": 0.11804137738139295,
    "writer": "cg_frg/qcd/mass_gap_scale.py"
@@ -1966,7 +1966,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "40fbf06062d8eecb6866c521100667109c29b4c0ca0d57f18a092fc611212c01",
    "value": 1.4883507530822218,
    "writer": "cg_frg/generation/lz_ladder.py"
@@ -2003,7 +2003,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "d969b434eae93ebe311aba7618e35c13cdba156c7ad039915d57052676285d06",
    "value": 2.4535343325226915,
    "writer": "cg_frg/generation/sector_alpha.py"
@@ -2054,8 +2054,8 @@
     "unit": "GeV^-2"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": 1.1666625480422359e-05,
    "writer": "cg_frg/cosmology/bbn_helium.py"
   },
@@ -2105,8 +2105,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": 3.043873359487886,
    "writer": "cg_frg/cosmology/bbn_helium.py"
   },
@@ -2156,8 +2156,8 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": 0.0007539433936255217,
    "writer": "cg_frg/cosmology/bbn_helium.py"
   },
@@ -2207,8 +2207,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": 0.2460823786548142,
    "writer": "cg_frg/cosmology/bbn_helium.py"
   },
@@ -2261,8 +2261,8 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": 0.0012849675512388058,
    "writer": "cg_frg/cosmology/bbn_helium.py"
   },
@@ -2328,8 +2328,8 @@
     "unit": "GeV for masses; dimensionless coefficients"
    },
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": {
     "alpha_em_0": 0.007296803471151167,
     "isovector": {
@@ -2439,8 +2439,8 @@
     "unit": "mixed output units; dimensionless logarithmic derivatives"
    },
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": {
     "fixed_thermal_inputs": {
      "capture_radiation_dof": 3.36,
@@ -2660,7 +2660,7 @@
      "derivative_integrand_evaluations": 576,
      "derivative_interval_evaluations": 16,
      "derivative_splitting_ratio": 4.244350917260486,
-     "estimated_abs_error": 1.4648585482076346e-12,
+     "estimated_abs_error": 1.4648518943727742e-12,
      "integrand_evaluations": 1143,
      "method": "adaptive Gauss-Kronrod on normalized Coulomb-regular phase space",
      "reused_center_subintervals": 14,
@@ -2708,8 +2708,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": "Y_p = 0.2461; N_eff = 3.0439 (internal constitutive inputs: g_A=4/pi, Delta_EM, delta_R, delta_N, |V_ud|, f)",
    "writer": "cg_frg/cosmology/bbn_helium.py"
   },
@@ -2759,8 +2759,8 @@
     "unit": "s"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": 204.88818158896476,
    "writer": "cg_frg/cosmology/bbn_helium.py"
   },
@@ -2810,8 +2810,8 @@
     "unit": "s"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
    "value": 915.5435125712569,
    "writer": "cg_frg/cosmology/bbn_helium.py"
   },
@@ -2828,7 +2828,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "c13aefa6dd9baf0baed314c9c2c41e9e6c495a750bc370c081f866c12110b783",
    "value": {
     "coordinate": "delta=chi_c-chi",
@@ -2851,7 +2851,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "c13aefa6dd9baf0baed314c9c2c41e9e6c495a750bc370c081f866c12110b783",
    "value": 2.0,
    "writer": "cg_frg/gravity/chi_pole_condition.py"
@@ -2869,7 +2869,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "c13aefa6dd9baf0baed314c9c2c41e9e6c495a750bc370c081f866c12110b783",
    "value": 0.6572248464344095,
    "writer": "cg_frg/gravity/chi_pole_condition.py"
@@ -2887,7 +2887,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "c13aefa6dd9baf0baed314c9c2c41e9e6c495a750bc370c081f866c12110b783",
    "value": {
     "1.0": 1.3144,
@@ -2911,7 +2911,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "c13aefa6dd9baf0baed314c9c2c41e9e6c495a750bc370c081f866c12110b783",
    "value": 0.100656318445256,
    "writer": "cg_frg/gravity/chi_pole_condition.py"
@@ -2928,8 +2928,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "d5c25d4a7e2244f16ddfbf5b85a28c0d2fbc0b699498ab60fc78e29691fe2ba1",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "79ba63f171ab3608698c36c09601126d7cc2a5e6050ef928cfd18c9d94b3af83",
    "value": 1.1967972013675403,
    "writer": "cg_frg/framework/cp_sector.py"
   },
@@ -2941,7 +2941,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "6e59bdd94851de723bda9253d66f601acc93c018bf7d1a5dae1cb23832916002",
    "value": 0.16507729117737943,
    "writer": "cg_core/cluster_decay.py"
@@ -2954,7 +2954,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "6e59bdd94851de723bda9253d66f601acc93c018bf7d1a5dae1cb23832916002",
    "value": 1.0,
    "writer": "cg_core/cluster_decay.py"
@@ -2967,7 +2967,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "6e59bdd94851de723bda9253d66f601acc93c018bf7d1a5dae1cb23832916002",
    "value": -1.1121462644467202,
    "writer": "cg_core/cluster_decay.py"
@@ -2980,7 +2980,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "6e59bdd94851de723bda9253d66f601acc93c018bf7d1a5dae1cb23832916002",
    "value": -1.0000000007729324,
    "writer": "cg_core/cluster_decay.py"
@@ -2993,7 +2993,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "6e59bdd94851de723bda9253d66f601acc93c018bf7d1a5dae1cb23832916002",
    "value": 1.0000000000000036,
    "writer": "cg_core/cluster_decay.py"
@@ -3010,8 +3010,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "d5c25d4a7e2244f16ddfbf5b85a28c0d2fbc0b699498ab60fc78e29691fe2ba1",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "79ba63f171ab3608698c36c09601126d7cc2a5e6050ef928cfd18c9d94b3af83",
    "value": 1.1428571428571428,
    "writer": "cg_frg/framework/cp_sector.py"
   },
@@ -3027,8 +3027,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "d5c25d4a7e2244f16ddfbf5b85a28c0d2fbc0b699498ab60fc78e29691fe2ba1",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "79ba63f171ab3608698c36c09601126d7cc2a5e6050ef928cfd18c9d94b3af83",
    "value": 3.150264912189696e-05,
    "writer": "cg_frg/framework/cp_sector.py"
   },
@@ -3044,8 +3044,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "d5c25d4a7e2244f16ddfbf5b85a28c0d2fbc0b699498ab60fc78e29691fe2ba1",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "79ba63f171ab3608698c36c09601126d7cc2a5e6050ef928cfd18c9d94b3af83",
    "value": 1.1428571428571428,
    "writer": "cg_frg/framework/cp_sector.py"
   },
@@ -3061,8 +3061,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "d5c25d4a7e2244f16ddfbf5b85a28c0d2fbc0b699498ab60fc78e29691fe2ba1",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "79ba63f171ab3608698c36c09601126d7cc2a5e6050ef928cfd18c9d94b3af83",
    "value": "the 8/7 left-right content ratio (delta_PMNS ~ 1.14 pi); the CKM delta DERIVED (8 pi / 21 = 68.57 deg, the colour-number dilution); the Jarlskog magnitude closed at retained leading-angle order; the baryogenesis eta_B = J alpha_W^2/56 (Sakharov content)",
    "writer": "cg_frg/framework/cp_sector.py"
   },
@@ -3100,7 +3100,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 0.009476628433913479,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -3141,7 +3141,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": -0.01448455408633162,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -3164,7 +3164,7 @@
    "provenance": "SCALE_CHOICE",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e5a69ceda38cbc90aa7a25e8a6067a73d3bce6ddce29ee297777d529bbe14212",
    "value": 1.0374777173335446e+55,
    "writer": "cg_frg/frg/discrete_flow.py"
@@ -3194,7 +3194,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e5a69ceda38cbc90aa7a25e8a6067a73d3bce6ddce29ee297777d529bbe14212",
    "value": {
     "generated_yang_mills": {
@@ -3308,7 +3308,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e5a69ceda38cbc90aa7a25e8a6067a73d3bce6ddce29ee297777d529bbe14212",
    "value": {
     "free_reflection_gram_min": 0.0012644539340557134,
@@ -3341,7 +3341,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e5a69ceda38cbc90aa7a25e8a6067a73d3bce6ddce29ee297777d529bbe14212",
    "value": 1.1102230246251565e-16,
    "writer": "cg_frg/frg/discrete_flow.py"
@@ -3364,7 +3364,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e5a69ceda38cbc90aa7a25e8a6067a73d3bce6ddce29ee297777d529bbe14212",
    "value": "Gaussian resolution semigroup with specified logarithmic sampling and resolution speed; generated condensed Yang--Mills spectrum with radial and coclosed-connection blocks; explicit finite free reflection-positive covariance.",
    "writer": "cg_frg/frg/discrete_flow.py"
@@ -3387,7 +3387,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e5a69ceda38cbc90aa7a25e8a6067a73d3bce6ddce29ee297777d529bbe14212",
    "value": 0.4010371892446762,
    "writer": "cg_frg/frg/discrete_flow.py"
@@ -3411,7 +3411,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13274d50c5727663cd3aebba2d69156f15a2a89b04d4a34d916345b319f9fddc",
    "value": {
     "Omega_DM": 0.2655475114476184,
@@ -3436,7 +3436,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
    "value": {
     "a": 1.2968471466669305e+54,
@@ -3460,7 +3460,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "250f73eba502dd2bc33719f5841d9921c81d1b9774eedf72e30fe2d116ba6743",
    "value": 20.0,
    "writer": "cg_frg/fermion/electron_mass.py"
@@ -3506,8 +3506,8 @@
     "unit": "1"
    },
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": null,
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
@@ -3523,12 +3523,12 @@
     "eta_b": "b3651beafe967a773f1c143adae7481edf0f744ecc5ee1e1c2eb23147f4b7639",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
    },
-   "note": "Local acceleration projection of the same endpoint: Sigma_IR = a0^2 and the specified RMS readout mu(y)=sqrt(Z_IR)=y/sqrt(1+y^2), where Z_IR is the variance ratio or normalized susceptibility.  In the local identity rho_dark,eff = rho_Sigma^free + rho_pol, rho_Sigma^free is given source data and rho_pol follows from the solution Phi. No evolution or averaging relation to homogeneous rho_Sigma is implemented here.",
+   "note": "Local acceleration projection of the same endpoint: Sigma_IR = a0^2 and the specified RMS readout mu(y)=sqrt(Z_IR)=y/sqrt(1+y^2), where Z_IR is the variance ratio or normalized susceptibility.  In the local identity rho_dark,eff = rho_Sigma^free + rho_pol, rho_Sigma^free is closed-state interface data and rho_pol follows from the solution Phi. No evolution or averaging relation to homogeneous rho_Sigma is implemented here.",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": {
     "a0_m_s2": 1.204369920558342e-10,
     "a0_time_dependence": "endpoint constant",
@@ -3541,7 +3541,7 @@
    "comparison_kind": "diagnostic",
    "dependency_scope": "explicit direct inputs, checked against reads",
    "direct_inputs": {
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b"
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a"
    },
    "evidence_kind": "projection of a canonical computed record",
    "module_read_inputs": {
@@ -3552,7 +3552,7 @@
     "a0_MOND": "d72469131c91dcdcf30af0baa8abd7831e249308756434539f4ba2fa4cdc215f",
     "bbn_Neff": "bc05cbb770a8c41dd39af887c2ba40ad3ba457628acf933a272b43074524485e",
     "bbn_Yp": "9b6c81080f556b534328344b53cd78c2fdb62b9df1c41aeabe54fdd5d7424496",
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b",
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a",
     "endpoint_camb_record": "7de24364842d8ad628e1e82f55d394c5adaf0b2260fcc70fb5f1d56ee31c5fa8",
     "eta_b": "b3651beafe967a773f1c143adae7481edf0f744ecc5ee1e1c2eb23147f4b7639",
     "m_nu1": "30c5f6efb16d0473eff5b464cbcc2618730c742c838b08f718b2f6141fbb0d54",
@@ -3572,15 +3572,15 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_bao_chi2": {
    "comparison_kind": "diagnostic",
    "dependency_scope": "explicit direct inputs, checked against reads",
    "direct_inputs": {
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b"
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a"
    },
    "evidence_kind": "projection of a canonical computed record",
    "module_read_inputs": {
@@ -3591,7 +3591,7 @@
     "a0_MOND": "d72469131c91dcdcf30af0baa8abd7831e249308756434539f4ba2fa4cdc215f",
     "bbn_Neff": "bc05cbb770a8c41dd39af887c2ba40ad3ba457628acf933a272b43074524485e",
     "bbn_Yp": "9b6c81080f556b534328344b53cd78c2fdb62b9df1c41aeabe54fdd5d7424496",
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b",
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a",
     "endpoint_camb_record": "7de24364842d8ad628e1e82f55d394c5adaf0b2260fcc70fb5f1d56ee31c5fa8",
     "eta_b": "b3651beafe967a773f1c143adae7481edf0f744ecc5ee1e1c2eb23147f4b7639",
     "m_nu1": "30c5f6efb16d0473eff5b464cbcc2618730c742c838b08f718b2f6141fbb0d54",
@@ -3611,15 +3611,15 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_bao_n": {
    "comparison_kind": "diagnostic",
    "dependency_scope": "explicit direct inputs, checked against reads",
    "direct_inputs": {
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b"
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a"
    },
    "evidence_kind": "projection of a canonical computed record",
    "module_read_inputs": {
@@ -3630,7 +3630,7 @@
     "a0_MOND": "d72469131c91dcdcf30af0baa8abd7831e249308756434539f4ba2fa4cdc215f",
     "bbn_Neff": "bc05cbb770a8c41dd39af887c2ba40ad3ba457628acf933a272b43074524485e",
     "bbn_Yp": "9b6c81080f556b534328344b53cd78c2fdb62b9df1c41aeabe54fdd5d7424496",
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b",
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a",
     "endpoint_camb_record": "7de24364842d8ad628e1e82f55d394c5adaf0b2260fcc70fb5f1d56ee31c5fa8",
     "eta_b": "b3651beafe967a773f1c143adae7481edf0f744ecc5ee1e1c2eb23147f4b7639",
     "m_nu1": "30c5f6efb16d0473eff5b464cbcc2618730c742c838b08f718b2f6141fbb0d54",
@@ -3650,8 +3650,8 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_bao_record": {
@@ -3682,8 +3682,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": {
     "background_distances_sha256": "aa49f1f6660cbef2d0ca816de3fa097ed0f70952cc10c4e62385d89a9094b8ae",
     "background_response_sha256": "b165c3f5f4ca42682adbe48714e672509373a560e901fef6f5908fd2e674c90e",
@@ -3698,7 +3698,7 @@
     "fresh_run": true,
     "identity": "fixed-parameter-DESI-DR2",
     "n_data": 13,
-    "pte": 0.005539933055639767,
+    "pte": 0.0055399330556397675,
     "rows": [
      {
       "diagonal_pull": 1.4885308525017247,
@@ -3844,8 +3844,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": {
     "atomic_physics": {
      "constant_convention": "standard atomic constants compiled into CAMB and its recombination model",
@@ -5498,8 +5498,8 @@
     ]
    },
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_r_drag_Mpc": {
@@ -5554,8 +5554,8 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_residual_linear_mapping": {
@@ -5582,8 +5582,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": {
     "Omega_cdm_slot_key": "Omega_Sigma_cold",
     "Omega_endpoint_residual_key": "Omega_Sigma",
@@ -5636,8 +5636,8 @@
     "unit": "1"
    },
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": null,
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
@@ -5656,7 +5656,7 @@
     "a0_MOND": "d72469131c91dcdcf30af0baa8abd7831e249308756434539f4ba2fa4cdc215f",
     "bbn_Neff": "bc05cbb770a8c41dd39af887c2ba40ad3ba457628acf933a272b43074524485e",
     "bbn_Yp": "9b6c81080f556b534328344b53cd78c2fdb62b9df1c41aeabe54fdd5d7424496",
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b",
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a",
     "endpoint_camb_record": "7de24364842d8ad628e1e82f55d394c5adaf0b2260fcc70fb5f1d56ee31c5fa8",
     "endpoint_sparc_record": "6a5e516b4a273c04655d296d47e7313fa045443f55e6c3682f6e64345daa6dda",
     "eta_b": "b3651beafe967a773f1c143adae7481edf0f744ecc5ee1e1c2eb23147f4b7639",
@@ -5678,8 +5678,8 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_sparc_curated_scatter_dex": {
@@ -5697,7 +5697,7 @@
     "a0_MOND": "d72469131c91dcdcf30af0baa8abd7831e249308756434539f4ba2fa4cdc215f",
     "bbn_Neff": "bc05cbb770a8c41dd39af887c2ba40ad3ba457628acf933a272b43074524485e",
     "bbn_Yp": "9b6c81080f556b534328344b53cd78c2fdb62b9df1c41aeabe54fdd5d7424496",
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b",
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a",
     "endpoint_camb_record": "7de24364842d8ad628e1e82f55d394c5adaf0b2260fcc70fb5f1d56ee31c5fa8",
     "endpoint_sparc_record": "6a5e516b4a273c04655d296d47e7313fa045443f55e6c3682f6e64345daa6dda",
     "eta_b": "b3651beafe967a773f1c143adae7481edf0f744ecc5ee1e1c2eb23147f4b7639",
@@ -5719,8 +5719,8 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_sparc_record": {
@@ -5738,7 +5738,7 @@
     "a0_MOND": "d72469131c91dcdcf30af0baa8abd7831e249308756434539f4ba2fa4cdc215f",
     "bbn_Neff": "bc05cbb770a8c41dd39af887c2ba40ad3ba457628acf933a272b43074524485e",
     "bbn_Yp": "9b6c81080f556b534328344b53cd78c2fdb62b9df1c41aeabe54fdd5d7424496",
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b",
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a",
     "endpoint_camb_record": "7de24364842d8ad628e1e82f55d394c5adaf0b2260fcc70fb5f1d56ee31c5fa8",
     "eta_b": "b3651beafe967a773f1c143adae7481edf0f744ecc5ee1e1c2eb23147f4b7639",
     "m_nu1": "30c5f6efb16d0473eff5b464cbcc2618730c742c838b08f718b2f6141fbb0d54",
@@ -5752,8 +5752,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": {
     "all_points": {
      "mean_log10g_resid_dex": 0.024963868329558866,
@@ -5843,8 +5843,8 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_tensor_ntrun": {
@@ -5900,8 +5900,8 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_theta100_star": {
@@ -5956,8 +5956,8 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "endpoint_validation_status": {
@@ -5972,7 +5972,7 @@
     "a0_MOND": "d72469131c91dcdcf30af0baa8abd7831e249308756434539f4ba2fa4cdc215f",
     "bbn_Neff": "bc05cbb770a8c41dd39af887c2ba40ad3ba457628acf933a272b43074524485e",
     "bbn_Yp": "9b6c81080f556b534328344b53cd78c2fdb62b9df1c41aeabe54fdd5d7424496",
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b",
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a",
     "endpoint_camb_record": "7de24364842d8ad628e1e82f55d394c5adaf0b2260fcc70fb5f1d56ee31c5fa8",
     "endpoint_sparc_record": "6a5e516b4a273c04655d296d47e7313fa045443f55e6c3682f6e64345daa6dda",
     "eta_b": "b3651beafe967a773f1c143adae7481edf0f744ecc5ee1e1c2eb23147f4b7639",
@@ -5987,8 +5987,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": {
     "SPARC_status": "current_inputs_match",
     "comparison_records": [
@@ -6055,8 +6055,8 @@
     ]
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
   "entropy_integral": {
@@ -6074,7 +6074,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "2cf3089aa056e1b4322ae129b4f305f288c9ab7ecc51372bfee1c887f7490789",
    "value": 139.2537061093592,
    "writer": "cg_frg/frg/gamma_M.py"
@@ -6090,8 +6090,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "507f2b077c5405dc07923ca64c8fd4e837158c6d0645348751030686b85da59d",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "6ac47d403708be2f3b514311e10d20ca743ac055b3cd9db5ffd26b5161fee470",
    "value": 1.4221768734404969e-16,
    "writer": "cg_frg/ewsb/epsilon_ratio.py"
   },
@@ -6108,7 +6108,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e1b592ea7fc2f37ced45051f8d3ae328fc78c5d5d0e93fdae90d5acde59e1872",
    "value": 1.4221768734404969e-16,
    "writer": "cg_frg/ewsb/relaxion_chain.py"
@@ -6143,8 +6143,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": 1.006103992842526,
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
@@ -6179,8 +6179,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": 6.128229610820763e-10,
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
@@ -6201,8 +6201,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "d5c25d4a7e2244f16ddfbf5b85a28c0d2fbc0b699498ab60fc78e29691fe2ba1",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "79ba63f171ab3608698c36c09601126d7cc2a5e6050ef928cfd18c9d94b3af83",
    "value": 6.091049885913678e-10,
    "writer": "cg_frg/framework/cp_sector.py"
   },
@@ -6227,7 +6227,7 @@
     "carrier": "macroscopic collective metric tensor, linearized on Minkowski background",
     "error_kind": "algebraic evaluation of stored inputs",
     "normalization": "Z=M_P^2; q^2=Q^2/M_P^2",
-    "object": "external static Newton coefficient",
+    "object": "static Newton coefficient of the common metric sector",
     "operator": "complete conserved-source exchange",
     "order": "quadratic action and leading conserved-source exchange",
     "projection": "static energy monopoles",
@@ -6237,8 +6237,8 @@
     "unit": "GeV^-2"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "56fbfe1a31ef29a3a20f1dacee14049694578e087d298b304dc36f8e2b2fcc28",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "2ffd47d990361de55d8ea9ff0889bd525a027e79d0880afd9fff20aa916c5113",
    "value": 6.708829999999999e-39,
    "writer": "cg_frg/gravity/external_tensor.py"
   },
@@ -6274,8 +6274,8 @@
     "unit": "dimensionless"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "56fbfe1a31ef29a3a20f1dacee14049694578e087d298b304dc36f8e2b2fcc28",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "2ffd47d990361de55d8ea9ff0889bd525a027e79d0880afd9fff20aa916c5113",
    "value": 0.33070529938137455,
    "writer": "cg_frg/gravity/external_tensor.py"
   },
@@ -6299,7 +6299,7 @@
     "carrier": "macroscopic collective metric tensor, linearized on Minkowski background",
     "error_kind": "algebraic evaluation of stored inputs",
     "normalization": "Z=M_P^2; q^2=Q^2/M_P^2",
-    "object": "external tensor kinetic coefficient",
+    "object": "noncompact metric tensor kinetic coefficient",
     "operator": "Z Q^2 I_2",
     "order": "quadratic action and leading conserved-source exchange",
     "projection": "two physical helicities",
@@ -6309,8 +6309,8 @@
     "unit": "GeV^2"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "56fbfe1a31ef29a3a20f1dacee14049694578e087d298b304dc36f8e2b2fcc28",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "2ffd47d990361de55d8ea9ff0889bd525a027e79d0880afd9fff20aa916c5113",
    "value": 5.930801014927169e+36,
    "writer": "cg_frg/gravity/external_tensor.py"
   },
@@ -6336,7 +6336,7 @@
     "carrier": "macroscopic collective metric tensor, linearized on Minkowski background",
     "error_kind": "algebraic evaluation of stored inputs",
     "normalization": "Z=M_P^2; q^2=Q^2/M_P^2",
-    "object": "external momentum conversion slope",
+    "object": "noncompact momentum conversion slope",
     "operator": "-dchi/d(Q^2/M_P^2) at Q^2=0",
     "order": "quadratic action and leading conserved-source exchange",
     "projection": "matched scalar inverse response",
@@ -6346,8 +6346,8 @@
     "unit": "dimensionless"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "56fbfe1a31ef29a3a20f1dacee14049694578e087d298b304dc36f8e2b2fcc28",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "2ffd47d990361de55d8ea9ff0889bd525a027e79d0880afd9fff20aa916c5113",
    "value": 0.10815712905822625,
    "writer": "cg_frg/gravity/external_tensor.py"
   },
@@ -6372,7 +6372,7 @@
     "carrier": "macroscopic collective metric tensor, linearized on Minkowski background",
     "error_kind": "algebraic evaluation of stored inputs",
     "normalization": "Z=M_P^2; q^2=Q^2/M_P^2",
-    "object": "external helicity pole residue",
+    "object": "noncompact metric helicity pole residue",
     "operator": "lim Q^2 C_hel(Q^2)",
     "order": "quadratic action and leading conserved-source exchange",
     "projection": "two physical helicities",
@@ -6382,8 +6382,8 @@
     "unit": "GeV^-2"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "56fbfe1a31ef29a3a20f1dacee14049694578e087d298b304dc36f8e2b2fcc28",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "2ffd47d990361de55d8ea9ff0889bd525a027e79d0880afd9fff20aa916c5113",
    "value": 1.6861128833746247e-37,
    "writer": "cg_frg/gravity/external_tensor.py"
   },
@@ -6399,12 +6399,12 @@
     "chi_pole_crossing": "932347029a23363e122d8e650fb9cba9fe9f59fefcf9171532b157b2e26dc583",
     "external_tensor_Z": "bac82092bdf3f1ba6c3f3cae01009cb31c99a16a8a849ca0e2a62531b72d9392"
    },
-   "note": "Physical realization and matching scope of the external tensor coefficients; the helicity pole follows from the specified quadratic gauge action.",
+   "note": "Physical realization and matching scope of the historically named external_tensor coefficients; they belong to the common noncompact metric sector, and the helicity pole follows from the specified quadratic gauge action.",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "56fbfe1a31ef29a3a20f1dacee14049694578e087d298b304dc36f8e2b2fcc28",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "2ffd47d990361de55d8ea9ff0889bd525a027e79d0880afd9fff20aa916c5113",
    "value": {
     "approximation_order": "classical effective action and its linear response on a specified solution",
     "background_equations": "3*M_star^2*H^2=rho+rho_Lambda; -2*M_star^2*H_dot=rho+p",
@@ -6457,7 +6457,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "089422314c01a29ed451efd47c51921ce30f2e4a6282614e9a77ca6fedf44fc6",
    "value": {
     "checked_relations": 4,
@@ -6522,8 +6522,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "275e61772f20985613ed2533da89f66f8b324f57884dee9534d5f4a9b1ccd64c",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
    "value": 0.6049900729523602,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
@@ -6541,8 +6541,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "275e61772f20985613ed2533da89f66f8b324f57884dee9534d5f4a9b1ccd64c",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
    "value": 0.5088477031823814,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
@@ -6559,7 +6559,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
    "value": 0.5106008686060399,
    "writer": "cg_frg/frg/endpoint_constraint.py"
@@ -6578,8 +6578,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "275e61772f20985613ed2533da89f66f8b324f57884dee9534d5f4a9b1ccd64c",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
    "value": 0.5106008686060399,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
@@ -6597,8 +6597,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "275e61772f20985613ed2533da89f66f8b324f57884dee9534d5f4a9b1ccd64c",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
    "value": 0.4977601563548794,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
@@ -6616,8 +6616,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "275e61772f20985613ed2533da89f66f8b324f57884dee9534d5f4a9b1ccd64c",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
    "value": 0.5184195497773932,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
@@ -6636,7 +6636,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "2cf3089aa056e1b4322ae129b4f305f288c9ab7ecc51372bfee1c887f7490789",
    "value": 0.0,
    "writer": "cg_frg/frg/gamma_M.py"
@@ -6655,7 +6655,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "17d80ac6964e71a06ab2339974cda5c75f46d0a11a0b0be680c9ca8bb5ad0b19",
    "value": -0.9974676893494144,
    "writer": "cg_frg/frg/ir_flow.py"
@@ -6668,7 +6668,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "366318ec432e99c0f56dfb27fb22918556fe7bda493d6eadfe7661872e8b7e41",
    "value": "{'SO(4) isometry': 'SU(2)_L x SU(2)_R (6 Killing vectors of S^3, Z_2-quotiented to RP^3)', 'SU(2)_L': 'the 3 even (untwisted) generators — the weak isospin', 'SU(2)_R': 'the 3 odd (twisted) generators — broken by the geometric isometry breaking (EWSB)', 'U(1)_Y': 'the diagonal generator of the chirality layers (SU(2)_R -> U(1)_Y by the long-root condensate)', 'SU(3)_c': 'the composite of the two su(2) blocks with the long-root coupling (the A_2 root system) — the coupling is CLOSED via g3 = g2*(1+alpha_GUT^2/K)'}",
    "writer": "cg_frg/gauge/gauge_group_emergence.py"
@@ -6712,7 +6712,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "bc41a9cb5088575bd897ba592614755c4a0ac0b6fd9ed094d8bd67316f6ad5e3",
    "value": 5.940431067579812e+19,
    "writer": "cg_frg/qcd/mass_gap_scale.py"
@@ -6756,7 +6756,7 @@
     "unit": "dimensionless squared spectrum; GeV for the transported gap"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "bc41a9cb5088575bd897ba592614755c4a0ac0b6fd9ed094d8bd67316f6ad5e3",
    "value": {
     "L": 2.4935343325226915,
@@ -6903,7 +6903,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "8c7822c1269773d9e8324bafda11bd31723855ad96266a4c4d3b743e72875ba6",
    "value": 1.7777210918006348e-15,
    "writer": "cg_frg/gauge/geometric_ewsb.py"
@@ -6925,7 +6925,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "8c7822c1269773d9e8324bafda11bd31723855ad96266a4c4d3b743e72875ba6",
    "value": 562517936369371.94,
    "writer": "cg_frg/gauge/geometric_ewsb.py"
@@ -6947,7 +6947,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "8c7822c1269773d9e8324bafda11bd31723855ad96266a4c4d3b743e72875ba6",
    "value": 3.5234172043286684e+16,
    "writer": "cg_frg/gauge/geometric_ewsb.py"
@@ -6969,7 +6969,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "8c7822c1269773d9e8324bafda11bd31723855ad96266a4c4d3b743e72875ba6",
    "value": 2.2465392745677726e-15,
    "writer": "cg_frg/gauge/geometric_ewsb.py"
@@ -6991,7 +6991,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "8c7822c1269773d9e8324bafda11bd31723855ad96266a4c4d3b743e72875ba6",
    "value": "SU(2)_R -> U(1)_R Goldstones absorbed by W_R+/- (the geometric VEV s0 = 2 tau); the L/R hierarchy CLOSED: m_W/m_WR = epsilon/(2 s0) with epsilon = v/M_G (dilaton-stop) and the factor 1/(2 s0) = 12.5 exact",
    "writer": "cg_frg/gauge/geometric_ewsb.py"
@@ -7010,7 +7010,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "43c972bc96dc4d19beda5f48ea6e6e5dc5de711911f21030b6b90602ff0b365f",
    "value": 5.832003901712302e-37,
    "writer": "cg_frg/gravity/newton.py"
@@ -7029,7 +7029,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "43c972bc96dc4d19beda5f48ea6e6e5dc5de711911f21030b6b90602ff0b365f",
    "value": 0.011503473099581185,
    "writer": "cg_frg/gravity/newton.py"
@@ -7048,7 +7048,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a515c9acd68cb67c2a1427b1f44e98b903f99b67a778cd97ff881bb2378bb808",
    "value": -3.929898369955552e+75,
    "writer": "cg_frg/frg/trace_density.py"
@@ -7067,7 +7067,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "43c972bc96dc4d19beda5f48ea6e6e5dc5de711911f21030b6b90602ff0b365f",
    "value": 85.93026804543122,
    "writer": "cg_frg/gravity/newton.py"
@@ -7086,7 +7086,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "43c972bc96dc4d19beda5f48ea6e6e5dc5de711911f21030b6b90602ff0b365f",
    "value": {
     "G_anchor": 6.708829999999999e-39,
@@ -7142,7 +7142,7 @@
     "unit": "1"
    },
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13274d50c5727663cd3aebba2d69156f15a2a89b04d4a34d916345b319f9fddc",
    "value": 0.025330295910584444,
    "writer": "cg_frg/cosmology/gw_ratio.py"
@@ -7177,7 +7177,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13274d50c5727663cd3aebba2d69156f15a2a89b04d4a34d916345b319f9fddc",
    "value": 5.322175825282864e-11,
    "writer": "cg_frg/cosmology/gw_ratio.py"
@@ -7196,7 +7196,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "17d80ac6964e71a06ab2339974cda5c75f46d0a11a0b0be680c9ca8bb5ad0b19",
    "value": 139.2537061093592,
    "writer": "cg_frg/frg/ir_flow.py"
@@ -7229,7 +7229,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
    "value": 2.4935343325226915,
    "writer": "cg_frg/frg/endpoint_constraint.py"
@@ -7265,8 +7265,8 @@
     "unit": "1"
    },
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "d54b790cdada5863f3fbde756a77eb89af6155f72e9419c0d255c23c25d96596",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "7e2f87b892d7de2ad80c78a21b14ce59c11a954d6fe79b47c05fc7c9924ef7e7",
    "value": 2.481066660860078,
    "writer": "cg_frg/cosmology/perturbation_amplitude.py"
   },
@@ -7305,8 +7305,8 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "7446b818ede7161b92b4c9dabd81a59035532408f3be9e8a2c9ba8c2f0d5af5f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "ca96609eb0fe7af15bcedb87ab04a5aaf282e72910c6c1af1a14763d9cd74a2a",
    "value": 4.984263355588678e+16,
    "writer": "scripts/init_v5.py"
   },
@@ -7324,8 +7324,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "275e61772f20985613ed2533da89f66f8b324f57884dee9534d5f4a9b1ccd64c",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
    "value": 1.1318317836812264,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
@@ -7358,7 +7358,7 @@
     "unit": "1"
    },
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "d969b434eae93ebe311aba7618e35c13cdba156c7ad039915d57052676285d06",
    "value": 1.125,
    "writer": "cg_frg/generation/sector_alpha.py"
@@ -7391,7 +7391,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "985af8d9a4852c2ce3c561f02c7c6f3c4f02ffea22bf6994fb99da7753933618",
    "value": 0.12886506828539068,
    "writer": "cg_frg/ewsb/pseudo_dilaton.py"
@@ -7424,7 +7424,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "985af8d9a4852c2ce3c561f02c7c6f3c4f02ffea22bf6994fb99da7753933618",
    "value": 37.69911184307752,
    "writer": "cg_frg/ewsb/pseudo_dilaton.py"
@@ -7447,7 +7447,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "bc41a9cb5088575bd897ba592614755c4a0ac0b6fd9ed094d8bd67316f6ad5e3",
    "value": 2.6666666666666665,
    "writer": "cg_frg/qcd/mass_gap_scale.py"
@@ -7498,7 +7498,7 @@
     "unit": "GeV"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 124.98344026878286,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -7534,7 +7534,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "40fbf06062d8eecb6866c521100667109c29b4c0ca0d57f18a092fc611212c01",
    "value": 44.86794977784708,
    "writer": "cg_frg/generation/lz_ladder.py"
@@ -7576,7 +7576,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "4fdb96ad896fa9c78e2c0aee0ed64482eb74d89ce3362bf71137aac3430457e7",
    "value": 4.237792000302189,
    "writer": "cg_frg/fermion/mass_operator_overlap.py"
@@ -7615,7 +7615,7 @@
     "unit": "MeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "250f73eba502dd2bc33719f5841d9921c81d1b9774eedf72e30fe2d116ba6743",
    "value": 0.5103542513564916,
    "writer": "cg_frg/fermion/electron_mass.py"
@@ -7654,7 +7654,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "bc41a9cb5088575bd897ba592614755c4a0ac0b6fd9ed094d8bd67316f6ad5e3",
    "value": 1.6642238631694293,
    "writer": "cg_frg/qcd/mass_gap_scale.py"
@@ -7690,7 +7690,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "40fbf06062d8eecb6866c521100667109c29b4c0ca0d57f18a092fc611212c01",
    "value": 206.3556103933899,
    "writer": "cg_frg/generation/lz_ladder.py"
@@ -7739,7 +7739,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 0.10531446305553036,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -7780,7 +7780,7 @@
     "unit": "eV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.002607415413287687,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -7821,7 +7821,7 @@
     "unit": "eV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.008691384710958958,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -7864,7 +7864,7 @@
     "unit": "eV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.00899558317584252,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -7905,7 +7905,7 @@
     "unit": "eV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.05017973302502751,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -7945,7 +7945,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e4738a4af65843b0ab7552e715b38f63aa91f4124967374cee5c54d6683e1ac7",
    "value": 0.9410862059273102,
    "writer": "cg_frg/qcd/qcd_sector.py"
@@ -7982,7 +7982,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "40fbf06062d8eecb6866c521100667109c29b4c0ca0d57f18a092fc611212c01",
    "value": 19.622983487591103,
    "writer": "cg_frg/generation/lz_ladder.py"
@@ -8018,7 +8018,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "40fbf06062d8eecb6866c521100667109c29b4c0ca0d57f18a092fc611212c01",
    "value": 135.24239203885273,
    "writer": "cg_frg/generation/lz_ladder.py"
@@ -8055,7 +8055,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "40fbf06062d8eecb6866c521100667109c29b4c0ca0d57f18a092fc611212c01",
    "value": 77303.6419446479,
    "writer": "cg_frg/generation/lz_ladder.py"
@@ -8093,7 +8093,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "4fdb96ad896fa9c78e2c0aee0ed64482eb74d89ce3362bf71137aac3430457e7",
    "value": 174.08240381974227,
    "writer": "cg_frg/fermion/mass_operator_overlap.py"
@@ -8143,7 +8143,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 1.772105081689173,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -8166,7 +8166,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "bc41a9cb5088575bd897ba592614755c4a0ac0b6fd9ed094d8bd67316f6ad5e3",
    "value": 2.163845625059378e+17,
    "writer": "cg_frg/qcd/mass_gap_scale.py"
@@ -8189,7 +8189,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "bc41a9cb5088575bd897ba592614755c4a0ac0b6fd9ed094d8bd67316f6ad5e3",
    "value": 2.4914321981301484e+16,
    "writer": "cg_frg/qcd/mass_gap_scale.py"
@@ -8227,7 +8227,7 @@
     "unit": "dimensionless"
    },
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.05014715428586189,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -8247,7 +8247,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "09deed3761c2fe699c3ad15e566c937f247231792079399c3f5947ede7f35062",
    "value": 5.551115123125783e-16,
    "writer": "cg_frg/neutrino/neutrino_mass_matrix.py"
@@ -8267,7 +8267,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "09deed3761c2fe699c3ad15e566c937f247231792079399c3f5947ede7f35062",
    "value": 0.30000000000000016,
    "writer": "cg_frg/neutrino/neutrino_mass_matrix.py"
@@ -8287,7 +8287,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "09deed3761c2fe699c3ad15e566c937f247231792079399c3f5947ede7f35062",
    "value": 0.17320508075688765,
    "writer": "cg_frg/neutrino/neutrino_mass_matrix.py"
@@ -8324,7 +8324,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.3,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -8361,7 +8361,7 @@
     "unit": "1"
    },
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.17320508075688773,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -8395,7 +8395,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a555ee64f258a62ff66bf48e6c2beddd75678fecfecabc22f3f77fe340c3406a",
    "value": 3,
    "writer": "cg_frg/generation/window_capacity.py"
@@ -8428,7 +8428,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "66841b06f0d59628533b95977245a162562a0d30d19e503399920d2f9ef0edc6",
    "value": 0.035,
    "writer": "cg_frg/cosmology/spectral_tilt.py"
@@ -8446,7 +8446,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
    "value": 1.909859317102744,
    "writer": "cg_frg/ewsb/order_parameter.py"
@@ -8464,7 +8464,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
    "value": -9.545296585513721e-05,
    "writer": "cg_frg/ewsb/order_parameter.py"
@@ -8482,7 +8482,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
    "value": 149.1452591486519,
    "writer": "cg_frg/ewsb/order_parameter.py"
@@ -8500,7 +8500,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
    "value": 14.1608,
    "writer": "cg_frg/ewsb/order_parameter.py"
@@ -8518,7 +8518,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
    "value": -0.11810929426989034,
    "writer": "cg_frg/ewsb/order_parameter.py"
@@ -8536,7 +8536,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
    "value": 2,
    "writer": "cg_frg/ewsb/order_parameter.py"
@@ -8554,7 +8554,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
    "value": 0.04,
    "writer": "cg_frg/ewsb/order_parameter.py"
@@ -8572,7 +8572,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
    "value": 0.125,
    "writer": "cg_frg/ewsb/order_parameter.py"
@@ -8607,8 +8607,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "d54b790cdada5863f3fbde756a77eb89af6155f72e9419c0d255c23c25d96596",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "7e2f87b892d7de2ad80c78a21b14ce59c11a954d6fe79b47c05fc7c9924ef7e7",
    "value": 2.1011107979433257e-09,
    "writer": "cg_frg/cosmology/perturbation_amplitude.py"
   },
@@ -8623,8 +8623,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "507f2b077c5405dc07923ca64c8fd4e837158c6d0645348751030686b85da59d",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "6ac47d403708be2f3b514311e10d20ca743ac055b3cd9db5ffd26b5161fee470",
    "value": 36.64832772377779,
    "writer": "cg_frg/ewsb/epsilon_ratio.py"
   },
@@ -8658,8 +8658,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
    "value": 0.9979735763271532,
    "writer": "cg_frg/cosmology/endpoint_residual.py"
   },
@@ -8695,7 +8695,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "985af8d9a4852c2ce3c561f02c7c6f3c4f02ffea22bf6994fb99da7753933618",
    "value": 0.2729316138950566,
    "writer": "cg_frg/ewsb/pseudo_dilaton.py"
@@ -8731,7 +8731,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e4738a4af65843b0ab7552e715b38f63aa91f4124967374cee5c54d6683e1ac7",
    "value": 0.20802798289617866,
    "writer": "cg_frg/qcd/qcd_sector.py"
@@ -8767,7 +8767,7 @@
     "unit": "MeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e4738a4af65843b0ab7552e715b38f63aa91f4124967374cee5c54d6683e1ac7",
    "value": 271.0919056499185,
    "writer": "cg_frg/qcd/qcd_sector.py"
@@ -8787,7 +8787,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e4738a4af65843b0ab7552e715b38f63aa91f4124967374cee5c54d6683e1ac7",
    "value": 1.2866466172581619,
    "writer": "cg_frg/qcd/qcd_sector.py"
@@ -8807,7 +8807,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e4738a4af65843b0ab7552e715b38f63aa91f4124967374cee5c54d6683e1ac7",
    "value": {
     "0++": {
@@ -8848,7 +8848,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e4738a4af65843b0ab7552e715b38f63aa91f4124967374cee5c54d6683e1ac7",
    "value": {
     "candidate_rule": "8 I + 2(C_left + C_right)",
@@ -8917,7 +8917,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e4738a4af65843b0ab7552e715b38f63aa91f4124967374cee5c54d6683e1ac7",
    "value": {
     "candidate_carrier_verified": true,
@@ -8959,7 +8959,7 @@
     "unit": "GeV^2"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e4738a4af65843b0ab7552e715b38f63aa91f4124967374cee5c54d6683e1ac7",
    "value": 0.1928509040335463,
    "writer": "cg_frg/qcd/qcd_sector.py"
@@ -8977,7 +8977,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "19e1591b82ab7932f57a11fe613aa6da2110bf34d3cbf8ec85c2786786cfbaa2",
    "value": 1.9701034939755036,
    "writer": "cg_frg/ewsb/relaxion_geo.py"
@@ -8995,7 +8995,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "e1b592ea7fc2f37ced45051f8d3ae328fc78c5d5d0e93fdae90d5acde59e1872",
    "value": 36.64832772377779,
    "writer": "cg_frg/ewsb/relaxion_chain.py"
@@ -9003,21 +9003,21 @@
   "response_bandwidth_response": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/beta_functions.py": "cb2745287271a835d50a388b7e179e01021ba037d68d9334de09cf9f67376074",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/beta_functions.py": "67bac7caea9fe66b7b017b7e82970275f07d364c52e807babf7203d309aed9f0",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/gauge_running.py": "2f745799d7ef8caddf031386c3bd1eb53dc5d3d544faf6a38d3d37099e375d60",
      "cg_core/joint_response.py": "19f63a68d9fcf0e7ba68c6dd5ed7b4b896dcb3de06f8979509fac7646ba042f8",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/rational_interval.py": "2841773858c2a21c544e3434ef8f73605e73be0703324183b0f6919b4fe162a6",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rk4.py": "445a577b4c1949b04d41acdcf53983c22464c75447dce468fcd7df6c5c69cca8",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/source_response.py": "fdb6bcf70997b88fd9f87a7effe6fde38ef317645f98b94023e1026122a2f13f",
      "cg_core/spectrum_loop.py": "b476261e725dda37f169a3c24697442398c01d4df947c29755457e408e58b0e8",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
@@ -9045,7 +9045,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "all_bandwidth_certificate": {
@@ -9234,16 +9234,16 @@
   "response_complex_mixing": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
      "cg_frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/neutrino/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
@@ -9281,7 +9281,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "ckm_J_exact": 3.150263685493681e-05,
@@ -9400,21 +9400,21 @@
   "response_endpoint_source_response": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/beta_functions.py": "cb2745287271a835d50a388b7e179e01021ba037d68d9334de09cf9f67376074",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/beta_functions.py": "67bac7caea9fe66b7b017b7e82970275f07d364c52e807babf7203d309aed9f0",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/gauge_running.py": "2f745799d7ef8caddf031386c3bd1eb53dc5d3d544faf6a38d3d37099e375d60",
      "cg_core/joint_response.py": "19f63a68d9fcf0e7ba68c6dd5ed7b4b896dcb3de06f8979509fac7646ba042f8",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/rational_interval.py": "2841773858c2a21c544e3434ef8f73605e73be0703324183b0f6919b4fe162a6",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rk4.py": "445a577b4c1949b04d41acdcf53983c22464c75447dce468fcd7df6c5c69cca8",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/source_response.py": "fdb6bcf70997b88fd9f87a7effe6fde38ef317645f98b94023e1026122a2f13f",
      "cg_core/spectrum_loop.py": "b476261e725dda37f169a3c24697442398c01d4df947c29755457e408e58b0e8",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
@@ -9442,7 +9442,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "checks": [
@@ -9505,21 +9505,21 @@
   "response_exact_affine_certificates": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/beta_functions.py": "cb2745287271a835d50a388b7e179e01021ba037d68d9334de09cf9f67376074",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/beta_functions.py": "67bac7caea9fe66b7b017b7e82970275f07d364c52e807babf7203d309aed9f0",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/gauge_running.py": "2f745799d7ef8caddf031386c3bd1eb53dc5d3d544faf6a38d3d37099e375d60",
      "cg_core/joint_response.py": "19f63a68d9fcf0e7ba68c6dd5ed7b4b896dcb3de06f8979509fac7646ba042f8",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/rational_interval.py": "2841773858c2a21c544e3434ef8f73605e73be0703324183b0f6919b4fe162a6",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rk4.py": "445a577b4c1949b04d41acdcf53983c22464c75447dce468fcd7df6c5c69cca8",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/source_response.py": "fdb6bcf70997b88fd9f87a7effe6fde38ef317645f98b94023e1026122a2f13f",
      "cg_core/spectrum_loop.py": "b476261e725dda37f169a3c24697442398c01d4df947c29755457e408e58b0e8",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
@@ -9543,7 +9543,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "coefficient_convention": "rational strings; no floating-point zero threshold",
@@ -9720,21 +9720,21 @@
   "response_external_gauge_tensor": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T062959Z-9ffa111c",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/beta_functions.py": "cb2745287271a835d50a388b7e179e01021ba037d68d9334de09cf9f67376074",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/beta_functions.py": "67bac7caea9fe66b7b017b7e82970275f07d364c52e807babf7203d309aed9f0",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/gauge_running.py": "2f745799d7ef8caddf031386c3bd1eb53dc5d3d544faf6a38d3d37099e375d60",
      "cg_core/joint_response.py": "19f63a68d9fcf0e7ba68c6dd5ed7b4b896dcb3de06f8979509fac7646ba042f8",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/rational_interval.py": "2841773858c2a21c544e3434ef8f73605e73be0703324183b0f6919b4fe162a6",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rk4.py": "445a577b4c1949b04d41acdcf53983c22464c75447dce468fcd7df6c5c69cca8",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/source_response.py": "fdb6bcf70997b88fd9f87a7effe6fde38ef317645f98b94023e1026122a2f13f",
      "cg_core/spectrum_loop.py": "b476261e725dda37f169a3c24697442398c01d4df947c29755457e408e58b0e8",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
@@ -9747,7 +9747,7 @@
      "cg_frg/generation/spectral_certificate.py": "68ce7b47ce719d43d9f9fb12d1232ec4a7094d27ce2f6a4e3c0ed4a6713643b5",
      "cg_frg/gravity/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/gravity/chi_pole_condition.py": "c13aefa6dd9baf0baed314c9c2c41e9e6c495a750bc370c081f866c12110b783",
-     "cg_frg/gravity/external_tensor.py": "56fbfe1a31ef29a3a20f1dacee14049694578e087d298b304dc36f8e2b2fcc28",
+     "cg_frg/gravity/external_tensor.py": "2ffd47d990361de55d8ea9ff0889bd525a027e79d0880afd9fff20aa916c5113",
      "cg_frg/gravity/nonlinear_tensor.py": "a601c079a340bc07f4b9167e9a8198fc627e5dc51d386a351b69b4dfdc3e5bab",
      "scripts/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "scripts/evaluate_joint_extensions.py": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb"
@@ -9788,7 +9788,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "action": "macroscopic Einstein--matter action; Phi couples to total conserved matter T",
@@ -9841,7 +9841,7 @@
       -2,
       2
      ],
-     "physical_variable": "external Euclidean Q^2 on a fixed background",
+     "physical_variable": "noncompact Euclidean Q^2 on a fixed background",
      "residue": [
       [
        "1/5930801014927169994609946953025000000",
@@ -9909,25 +9909,25 @@
   "response_finite_matter_source": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/modal_algebra.py": "0f1346d1d52ea7606626f816417f1d356704d7f82b9d2e80fea44c6b5d4d3452",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/rational_interval.py": "2841773858c2a21c544e3434ef8f73605e73be0703324183b0f6919b4fe162a6",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
      "cg_frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/ewsb/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/ewsb/native_condensate.py": "d9155b59d40e3002c73e09d1cf8bc550cdd9c0dc398d96f5cc3cc38d89acb240",
      "cg_frg/gravity/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/gravity/local_response.py": "86f151ff8f8d8ee9b5abe150cc2dd4b7177072c5bcf4ba6afa1825ccd97cc805",
-     "cg_frg/gravity/matter_source_response.py": "1193dd5cf3e09525657ad80387258048237119ef84fac1b4eae685365b89bf95",
+     "cg_frg/gravity/matter_source_response.py": "aaa2a10f90b59884eeb9fc73834f54f89661c52be91c16d9235d3f3d5be063fa",
      "scripts/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "scripts/evaluate_joint_extensions.py": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb"
     }
@@ -9941,7 +9941,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "additive_matter_residual": 2.6645352591003757e-15,
@@ -10248,9 +10248,9 @@
       ]
      },
      "external_gravitational_kernel_computed": false,
-     "final_covariance_minimum_eigenvalue": -1.4269168195964145e-15,
-     "final_covariance_scale": 3.7845267839665486,
-     "final_degenerate_position_coherence_norm": 0.007843934513839898,
+     "final_covariance_minimum_eigenvalue": -1.1552669837602748e-15,
+     "final_covariance_scale": 3.7845267839665455,
+     "final_degenerate_position_coherence_norm": 0.007843934513840247,
      "finite_source_continuum_limit_certified": false,
      "finite_source_protocol": {
       "dimensionless_amplitudes": [
@@ -10281,23 +10281,23 @@
      "frequency_unit_definition": "smallest retained matter frequency; in the declared reciprocal radius unit",
      "initial_phase_covariance": "W_qq=H^(-1/2) N H^(-1/2); W_pp=H^(1/2) N H^(1/2); W_qp=0",
      "instantaneous_normal_operator": "M^(-1/2) B M^(-1/2)=exp(eta) A exp(eta)",
-     "maximum_canonical_form_residual": 5.416119368443012e-15,
-     "maximum_constant_source_energy_residual": 1.0070827589803573e-15,
-     "maximum_energy_balance_residual": 3.316791286067655e-15,
+     "maximum_canonical_form_residual": 5.386262321942439e-15,
+     "maximum_constant_source_energy_residual": 2.685554023947621e-15,
+     "maximum_energy_balance_residual": 1.1657341758564144e-14,
      "passed": true,
      "response_relative_cutoff_residual": 7.044602177050564e-16,
      "scope": "finite canonical internal conformal matter source; occupied classical ensemble",
      "segment_energies": [
       5.240192892455751,
       5.3803066156996895,
-      5.291591451328467,
-      5.321710589122359
+      5.291591451328456,
+      5.321710589122351
      ],
      "source_state": "the same stationary occupations, connection and three compression profiles as the internal energy calculation",
      "source_work": [
       0.14011372324393678,
-      -0.08871516437121714,
-      0.030119137793892362
+      -0.08871516437122016,
+      0.03011913779389573
      ],
      "static_charge_relative_residual": 1.9148093622294087e-16,
      "summed_frequency_response": {
@@ -10450,7 +10450,7 @@
      "reused_finite_energy_values": 12,
      "source_directions": 3
     },
-    "finite_source_relative_residual": 2.2590803922022148e-08,
+    "finite_source_relative_residual": 2.1968219756941523e-08,
     "inputs": {
      "carrier": "unitary weak doublet with scalar kinetic operator",
      "check_maximum_scalar_spin": 3,
@@ -10519,24 +10519,24 @@
       "spatial_metric_inversions": 1
      },
      "external_gravitational_kernel_computed": false,
-     "legendre_residual": 0.0,
+     "legendre_residual": -4.440892098500626e-16,
      "matter_equation_contribution": [
-      -0.06253309596632665,
-      -0.3296845448435168,
-      0.024629658024480586,
-      0.07068484744752641
+      -0.06253309596632667,
+      -0.32968454484351706,
+      0.024629658024480618,
+      0.07068484744752651
      ],
-     "maximum_ward_residual": 7.28583859910259e-17,
+     "maximum_ward_residual": 3.469446951953614e-17,
      "momentum_density": [
-      -0.022698548015356725,
-      -0.020365287042078968,
+      -0.02269854801535673,
+      -0.020365287042078958,
       0.019497080057456463
      ],
-     "momentum_stress_residual": 2.7097246932071044e-17,
+     "momentum_stress_residual": 3.6880726988814706e-17,
      "native_carrier_dimension": 70,
-     "normal_energy": 1.2326590489154685,
-     "normal_hamiltonian_density": 1.7129678125766143,
-     "normal_stress_residual": 2.220446049250313e-16,
+     "normal_energy": 1.2326590489154692,
+     "normal_hamiltonian_density": 1.7129678125766155,
+     "normal_stress_residual": 0.0,
      "passed": true,
      "polar_source_congruence": {
       "case_count": 3,
@@ -11548,61 +11548,61 @@
       "scope": "native scalar phase congruence, source exchange and quantum-pressure corrections",
       "verification_inputs": "dimensionless local jets; reference mass from the retained native mode"
      },
-     "relative_ward_residual": 1.681989964559025e-16,
-     "scope": "finite internal matter coupled to an external metric and scalar compression sources",
+     "relative_ward_residual": 8.009476021709635e-17,
+     "scope": "finite internal matter coupled dynamically to the common noncompact metric and scalar-compression sectors",
      "source_action_supplied": false,
      "source_equations": [
-      1.1459276837945656,
-      0.7322590488196213,
-      0.054747656472708316
+      1.1459276837945669,
+      0.7322590488196223,
+      0.05474765647270812
      ],
      "source_equations_required_for_total_conservation": "E_a_generated+Q_a=0",
      "source_exchange_contribution": [
-      0.04282055080111493,
-      -0.029623507067960225,
-      0.06926139068856901,
-      0.021829724492904677
+      0.042820550801114965,
+      -0.029623507067960263,
+      0.06926139068856912,
+      0.021829724492904694
      ],
      "source_exchange_identity": "nabla_mu T^mu_nu=Re(E_phi^dagger partial_nu phi)+Q_a partial_nu eta^a",
-     "source_work_charge_residual": 1.3877787807814457e-16,
+     "source_work_charge_residual": 2.396682302503803e-16,
      "stress_divergence": [
-      -0.019712545165211683,
-      -0.3593080519114771,
-      0.09389104871304962,
-      0.0925145719404311
+      -0.019712545165211676,
+      -0.35930805191147736,
+      0.09389104871304972,
+      0.0925145719404312
      ],
      "stress_tensor": [
       [
-       1.8839474671139416,
-       -0.19960715128756162,
-       0.10637324845176899,
-       -0.0868228886316135
+       1.8839474671139427,
+       -0.19960715128756173,
+       0.10637324845176904,
+       -0.08682288863161355
       ],
       [
-       -0.19960715128756162,
-       -1.4988775235275429,
-       -0.0882711897917493,
-       -0.007885357586514881
+       -0.19960715128756173,
+       -1.4988775235275438,
+       -0.08827118979174936,
+       -0.007885357586514886
       ],
       [
-       0.10637324845176899,
-       -0.0882711897917493,
-       -1.4236943137527458,
-       -0.07972318043632677
+       0.10637324845176904,
+       -0.08827118979174936,
+       -1.4236943137527467,
+       -0.07972318043632681
       ],
       [
-       -0.0868228886316135,
-       -0.007885357586514881,
-       -0.07972318043632677,
-       -1.3361671911461122
+       -0.08682288863161355,
+       -0.007885357586514886,
+       -0.07972318043632681,
+       -1.3361671911461128
       ]
      ],
      "uniform_dilation": {
-      "dilation_generator": 0.24280422924818637,
+      "dilation_generator": 0.24280422924818634,
       "energy_residual": 0.0,
-      "lapse_energy": 1.242611653075004,
-      "moving_hamiltonian": 1.2476700745176745,
-      "native_energy": 1.242611653075004,
+      "lapse_energy": 1.2426116530750042,
+      "moving_hamiltonian": 1.2476700745176748,
+      "native_energy": 1.2426116530750042,
       "null_residual": 0.0,
       "rank_basis": "Gram matrix of the full-row-rank block [I,psi_real]",
       "velocity_hessian_dimension": 141,
@@ -12090,22 +12090,22 @@
   "response_free_covariance": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T022048Z-a68b6c54",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/beta_functions.py": "cb2745287271a835d50a388b7e179e01021ba037d68d9334de09cf9f67376074",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/beta_functions.py": "67bac7caea9fe66b7b017b7e82970275f07d364c52e807babf7203d309aed9f0",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/free_covariance.py": "81989a253b87f30396a83b8a119d4702a3e88a58916a590b2179521c0b6887b9",
      "cg_core/gauge_running.py": "2f745799d7ef8caddf031386c3bd1eb53dc5d3d544faf6a38d3d37099e375d60",
      "cg_core/joint_response.py": "19f63a68d9fcf0e7ba68c6dd5ed7b4b896dcb3de06f8979509fac7646ba042f8",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/rational_interval.py": "2841773858c2a21c544e3434ef8f73605e73be0703324183b0f6919b4fe162a6",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rk4.py": "445a577b4c1949b04d41acdcf53983c22464c75447dce468fcd7df6c5c69cca8",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/source_response.py": "fdb6bcf70997b88fd9f87a7effe6fde38ef317645f98b94023e1026122a2f13f",
      "cg_core/spectrum_loop.py": "b476261e725dda37f169a3c24697442398c01d4df947c29755457e408e58b0e8",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
@@ -12130,7 +12130,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "free_reflection_gram_min": 0.0012644539340557134,
@@ -12159,12 +12159,12 @@
      "tau_n_obs": "121f9d029549cbeac31d3c792598a6ac4f19d99aa1b958d504719170d89651f7",
      "tau_n_obs_sigma": "d2cbad71ff333de67d07ec676e352ab7f38248eb69c942950157220607c55e84"
     },
-    "run_id": "20261018T030034Z-560e6b40",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/beta_functions.py": "cb2745287271a835d50a388b7e179e01021ba037d68d9334de09cf9f67376074",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/beta_functions.py": "67bac7caea9fe66b7b017b7e82970275f07d364c52e807babf7203d309aed9f0",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/finite_connector.py": "0ee4dd39efada86c55c4750498c8147b092f2f68cf2f0b58f6d0871f08c5a1be",
      "cg_core/gauge_running.py": "2f745799d7ef8caddf031386c3bd1eb53dc5d3d544faf6a38d3d37099e375d60",
      "cg_core/joint_response.py": "19f63a68d9fcf0e7ba68c6dd5ed7b4b896dcb3de06f8979509fac7646ba042f8",
@@ -12172,18 +12172,18 @@
      "cg_core/modal_algebra.py": "0f1346d1d52ea7606626f816417f1d356704d7f82b9d2e80fea44c6b5d4d3452",
      "cg_core/native_matter_matching.py": "010e92c592822de98f5ff5a2b69b45485d3761236d1d037e26658745e1833164",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rk4.py": "445a577b4c1949b04d41acdcf53983c22464c75447dce468fcd7df6c5c69cca8",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
      "cg_frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/cosmology/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_frg/cosmology/bbn_helium.py": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+     "cg_frg/cosmology/bbn_helium.py": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
      "cg_frg/cosmology/camb_interface.py": "3c5627161b03e24e024134a90e4415c6c56732efbfd7917afaea75e16309da18",
      "cg_frg/cosmology/cold_source.py": "b7ac85a40ee584c7380be61711becc2d5f64af1f4df93c4a2332fdc4f088c7aa",
-     "cg_frg/cosmology/endpoint_residual.py": "e6f61e7f02d5c8b1bb3e6fc01e8e6d84f5b852640b730b0c45ccc5a2aa735f2a",
+     "cg_frg/cosmology/endpoint_residual.py": "717bc85865d676ca31bfe31401706aaaac354bba9ed3dfa42c248fe5f2832dea",
      "cg_frg/cosmology/reaction_network.py": "3014d15c2a49806d134929eec5672db7e18c6f5e35acde1ea43d94db678841ad",
      "cg_frg/cosmology/thermal_weak.py": "bdf315fbce4dbb94fce417c91342a6414cf334587fa5169f42ba85495487d8ba",
      "cg_frg/generation/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
@@ -12215,10 +12215,10 @@
     "alpha_up": "41a4ee3cd3a0350ff80a7748b3ae28425b8c5e513b9b09c0c18632bd65ef84dd",
     "bbn_Yp": "9b6c81080f556b534328344b53cd78c2fdb62b9df1c41aeabe54fdd5d7424496",
     "bbn_dm_np": "b7d488060ced1e38adc48e446b35243ed1ee6022fc3531ea8cdbc5dfce4f9e55",
-    "bbn_joint_response": "7ada85c449ae0dd64e414af0247023156a580efc2e4b3168bfe1a08a7699ddc4",
+    "bbn_joint_response": "62369164cb576227d52a6083fd6a559094c5c023080caf9ea721ca2d9546e615",
     "bbn_tau_n": "98e286852cd0e2a8fe9abc484fd7fcfd70e5d360e92e119a38b5977fa9a6c39f",
     "cp_jarlskog_magnitude": "d859a054409554dcc5e377638e2742885ab410137f1b01fd2d4cedf02dddb1f8",
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b",
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a",
     "endpoint_camb_record": "7de24364842d8ad628e1e82f55d394c5adaf0b2260fcc70fb5f1d56ee31c5fa8",
     "eta_B_photon_zero_mode_factor": "07148b09c833b9488e5ccb1b85abde9c5ae0b6256d1fa7bcecf051a7a326173e",
     "eta_b": "b3651beafe967a773f1c143adae7481edf0f744ecc5ee1e1c2eb23147f4b7639",
@@ -12261,10 +12261,10 @@
     "alpha_up": "41a4ee3cd3a0350ff80a7748b3ae28425b8c5e513b9b09c0c18632bd65ef84dd",
     "bbn_Yp": "9b6c81080f556b534328344b53cd78c2fdb62b9df1c41aeabe54fdd5d7424496",
     "bbn_dm_np": "b7d488060ced1e38adc48e446b35243ed1ee6022fc3531ea8cdbc5dfce4f9e55",
-    "bbn_joint_response": "7ada85c449ae0dd64e414af0247023156a580efc2e4b3168bfe1a08a7699ddc4",
+    "bbn_joint_response": "62369164cb576227d52a6083fd6a559094c5c023080caf9ea721ca2d9546e615",
     "bbn_tau_n": "98e286852cd0e2a8fe9abc484fd7fcfd70e5d360e92e119a38b5977fa9a6c39f",
     "cp_jarlskog_magnitude": "d859a054409554dcc5e377638e2742885ab410137f1b01fd2d4cedf02dddb1f8",
-    "endpoint_bao_record": "b58a73bdbccc9b40cabbcf43efc502671ac33f18f986a6323966072947dc023b",
+    "endpoint_bao_record": "4fbc827d2b0413b91ca978aed65d3b50cd9b3afa26986a894cffc97760d7c06a",
     "endpoint_camb_record": "7de24364842d8ad628e1e82f55d394c5adaf0b2260fcc70fb5f1d56ee31c5fa8",
     "eta_B_photon_zero_mode_factor": "07148b09c833b9488e5ccb1b85abde9c5ae0b6256d1fa7bcecf051a7a326173e",
     "eta_b": "b3651beafe967a773f1c143adae7481edf0f744ecc5ee1e1c2eb23147f4b7639",
@@ -12294,7 +12294,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "checks": {
@@ -12574,7 +12574,7 @@
       "threshold_reference_degrees_of_freedom": 13
      },
      "fixed_bao_chi2": 29.508798455132876,
-     "fixed_bao_pte": 0.005539933055639767,
+     "fixed_bao_pte": 0.0055399330556397675,
      "fixed_cmb_pull": -0.01056505071576434,
      "fixed_joint_chi2": 29.5089100754295,
      "fixed_joint_degrees_of_freedom": 14,
@@ -12823,7 +12823,7 @@
          "survival_factor": 0.5391979920670623
         },
         "phase_space": {
-         "estimated_abs_error": 1.2979515220100289e-12,
+         "estimated_abs_error": 1.297949994219528e-12,
          "integrand_evaluations": 609,
          "method": "adaptive Gauss-Kronrod on normalized Coulomb-regular phase space",
          "unit": "1",
@@ -12904,12 +12904,12 @@
          ],
          "quadrature_error_estimates": {
           "Y_p_range_endpoints": [
-           1.1097138009148916e-14,
-           1.0969982984961572e-15
+           1.1097160966485915e-14,
+           1.096939957402111e-15
           ],
           "tau_n_range_endpoints_s": [
-           4.091943206693715e-11,
-           8.203758451767523e-11
+           4.091951671950171e-11,
+           8.203322155518002e-11
           ]
          },
          "range_method": "monotone component endpoints and positive product enclosure",
@@ -12972,12 +12972,12 @@
          ],
          "quadrature_error_estimates": {
           "Y_p_range_endpoints": [
-           2.9809639991440995e-14,
-           2.940333180211327e-15
+           2.9809688692477155e-14,
+           2.940152314731594e-15
           ],
           "tau_n_range_endpoints_s": [
-           9.060143076311697e-11,
-           3.102113912551594e-11
+           9.060157878179675e-11,
+           3.1019230956316755e-11
           ]
          },
          "range_method": "monotone component endpoints and positive product enclosure",
@@ -13040,12 +13040,12 @@
          ],
          "quadrature_error_estimates": {
           "Y_p_range_endpoints": [
-           2.6660022025826018e-14,
-           5.273551905169073e-14
+           2.6660062073195234e-14,
+           5.273550109248112e-14
           ],
           "tau_n_range_endpoints_s": [
-           7.739266089781703e-11,
-           9.114953174645184e-10
+           7.73927771532523e-11,
+           9.114950070525653e-10
           ]
          },
          "range_method": "monotone component endpoints and positive product enclosure",
@@ -13101,7 +13101,7 @@
        "derivative_integrand_evaluations": 576,
        "derivative_interval_evaluations": 16,
        "derivative_splitting_ratio": 4.384554014793587,
-       "estimated_abs_error": 1.3128554355890723e-12,
+       "estimated_abs_error": 1.3128549794285562e-12,
        "integrand_evaluations": 1143,
        "method": "adaptive Gauss-Kronrod on normalized Coulomb-regular phase space",
        "reused_center_subintervals": 14,
@@ -13150,11 +13150,11 @@
       "linear_conditional_lifetime_change_percent": -4.254985365392389,
       "linear_lifetime_bias_from_gap_percent": 4.22746564968444,
       "numerical_error_estimates": {
-       "Y_p_abs": 4.325643206172997e-14,
+       "Y_p_abs": 4.3256417031989576e-14,
        "method": "adaptive quadrature estimate with first-order lifetime and capture propagation",
-       "phase_space_abs": 1.3128554355890723e-12,
+       "phase_space_abs": 1.3128549794285562e-12,
        "rigorous_interval_bound": false,
-       "tau_n_abs_s": 6.754942799679172e-10
+       "tau_n_abs_s": 6.75494045262853e-10
       },
       "operation_counts": {
        "additional_phase_space_quadratures": 1,
@@ -13661,8 +13661,8 @@
         }
        ],
        "gaussian_reference_tail_probability_interval": [
-        0.005546726704475214,
-        0.005546726704475214
+        0.005546726704475215,
+        0.005546726704475215
        ],
        "sound_horizon_interval_Mpc": [
         146.94638604411406,
@@ -14008,7 +14008,7 @@
       }
      ],
      "fixed_chi2": 29.508798455132876,
-     "fixed_tail_probability": 0.005539933055639767,
+     "fixed_tail_probability": 0.0055399330556397675,
      "late_ionization": {
       "chi2_interval": [
        28.049070257741462,
@@ -14232,8 +14232,8 @@
         }
        ],
        "gaussian_reference_tail_probability_interval": [
-        0.005539933055639691,
-        0.005539933055639691
+        0.00553993305563971,
+        0.00553993305563971
        ],
        "recfast_calibration": "cosmorec",
        "sound_horizon_interval_Mpc": [
@@ -14694,18 +14694,18 @@
   "response_local_source_feedback": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/modal_algebra.py": "0f1346d1d52ea7606626f816417f1d356704d7f82b9d2e80fea44c6b5d4d3452",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/rational_interval.py": "2841773858c2a21c544e3434ef8f73605e73be0703324183b0f6919b4fe162a6",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
      "cg_frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/cosmology/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
@@ -14714,7 +14714,7 @@
      "cg_frg/ewsb/native_condensate.py": "d9155b59d40e3002c73e09d1cf8bc550cdd9c0dc398d96f5cc3cc38d89acb240",
      "cg_frg/gravity/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/gravity/local_response.py": "86f151ff8f8d8ee9b5abe150cc2dd4b7177072c5bcf4ba6afa1825ccd97cc805",
-     "cg_frg/gravity/matter_source_response.py": "1193dd5cf3e09525657ad80387258048237119ef84fac1b4eae685365b89bf95",
+     "cg_frg/gravity/matter_source_response.py": "aaa2a10f90b59884eeb9fc73834f54f89661c52be91c16d9235d3f3d5be063fa",
      "scripts/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "scripts/evaluate_joint_extensions.py": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb"
     }
@@ -14736,7 +14736,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "covariant_clock": {
@@ -16328,16 +16328,16 @@
   "response_local_static_response": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
      "cg_frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/gravity/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
@@ -16355,7 +16355,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "background_response": {
@@ -16434,27 +16434,27 @@
   "response_matter_extensions": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/beta_functions.py": "cb2745287271a835d50a388b7e179e01021ba037d68d9334de09cf9f67376074",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/beta_functions.py": "67bac7caea9fe66b7b017b7e82970275f07d364c52e807babf7203d309aed9f0",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/finite_connector.py": "0ee4dd39efada86c55c4750498c8147b092f2f68cf2f0b58f6d0871f08c5a1be",
      "cg_core/gauge_running.py": "2f745799d7ef8caddf031386c3bd1eb53dc5d3d544faf6a38d3d37099e375d60",
      "cg_core/matter_matching.py": "9d39e335cd638c477bfb596915fe5a2116e934a9e720185d833ee542f4e38132",
      "cg_core/modal_algebra.py": "0f1346d1d52ea7606626f816417f1d356704d7f82b9d2e80fea44c6b5d4d3452",
      "cg_core/native_matter_matching.py": "010e92c592822de98f5ff5a2b69b45485d3761236d1d037e26658745e1833164",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rk4.py": "445a577b4c1949b04d41acdcf53983c22464c75447dce468fcd7df6c5c69cca8",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
      "cg_frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/cosmology/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_frg/cosmology/bbn_helium.py": "799273f5084c38ebcf2ff9e7d6cca4e02f31a971e1cdc278b57a8ca2699be30f",
+     "cg_frg/cosmology/bbn_helium.py": "f05d7aea206b79152efbcf266b77ab0fdf47e8c886337c797c68927aed875f17",
      "cg_frg/cosmology/cold_source.py": "b7ac85a40ee584c7380be61711becc2d5f64af1f4df93c4a2332fdc4f088c7aa",
      "cg_frg/cosmology/reaction_network.py": "3014d15c2a49806d134929eec5672db7e18c6f5e35acde1ea43d94db678841ad",
      "cg_frg/cosmology/thermal_weak.py": "bdf315fbce4dbb94fce417c91342a6414cf334587fa5169f42ba85495487d8ba",
@@ -16536,7 +16536,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "checks_passed": true,
@@ -17558,13 +17558,13 @@
       "spin_lift": "left-trivialized selected lift, integer j"
      },
      "joint_family_action": {
-      "J": 3.1502636854936955e-05,
+      "J": 3.150263685493696e-05,
       "ambient_dimension": 44,
       "basepoint_covariance_residuals": {
-       "down": 2.9519958333711736e-19,
-       "up": 6.347596976395002e-19
+       "down": 2.441597747171504e-19,
+       "up": 6.321729253282952e-19
       },
-      "commutator_norm": 2.439479880403981e-05,
+      "commutator_norm": 2.4394798804039818e-05,
       "complement": "original Dirac spectral complement; source vertices vanish and source rotations act as identity",
       "complement_dimension": 38,
       "down_transfer": [
@@ -17574,42 +17574,42 @@
       ],
       "down_vertex_imag": [
        [
-        -1.9982331293728508e-27,
-        -9.009681605446278e-27,
+        1.998233129372851e-27,
+        9.00968160544628e-27,
         -8.567498809750192e-05
        ],
        [
-        -3.8929296657599815e-09,
-        -1.755253492964652e-08,
-        2.1160252308743513e-25
+        -3.892929665759983e-09,
+        -1.7552534929646524e-08,
+        -2.1160252308743518e-25
        ],
        [
-        -9.475771834130392e-08,
-        -4.272458800548724e-07,
-        5.1506125218201355e-24
+        -9.475771834130391e-08,
+        -4.2724588005487244e-07,
+        -5.1506125218201355e-24
        ]
       ],
       "down_vertex_real": [
        [
         2.694687418124635e-05,
-        0.00012149871457253256,
+        0.00012149871457253254,
         3.3624955005669274e-05
        ],
        [
-        -6.188007020033239e-06,
+        -6.18800702003324e-06,
         0.0005283292795465326,
-        0.000999257520895439
+        0.0009992575208954391
        ],
        [
-        2.169693498164758e-07,
-        -2.1873307108636873e-05,
+        2.1696934981647574e-07,
+        -2.187330710863687e-05,
         0.024322906100322426
        ]
       ],
       "down_yukawa": [
        2.7649259102166706e-05,
-       0.0005425609548059435,
-       0.024343597671653887
+       0.0005425609548059445,
+       0.024343597671653883
       ],
       "family_shell_order": [
        2,
@@ -17622,7 +17622,7 @@
        "j2_j0": 0.7745966692414834,
        "j2_j1": 0.9486832980505138
       },
-      "imag_trace_commutator_cubed": 1.0649711612065056e-21,
+      "imag_trace_commutator_cubed": 1.0649711612065058e-21,
       "inherited_angular_prescription_realized": true,
       "inputs": {
        "angular_sines": [
@@ -17642,26 +17642,26 @@
       "mixing_moduli": [
        [
         0.9745966096840073,
-        0.2239356029885867,
-        0.0037807547628255674
+        0.22393560298858659,
+        0.0037807547628255496
        ],
        [
-        0.22380376348262998,
-        0.973769444996405,
-        0.041048062590148614
+        0.22380376348263004,
+        0.9737694449964045,
+        0.0410480625901484
        ],
        [
-        0.008562934278011044,
-        0.04032262027115603,
-        0.999150019992503
+        0.008562934278011039,
+        0.040322620271156115,
+        0.9991500199925026
        ]
       ],
       "native_matrix_units": "radial spectral projectors times centred-character multiplication, with Clebsch-Gordan normalization",
       "radial_projection": "R_j=Ev_g^*/sqrt(d_j/2), the unique isotropy spin-1/2 copy",
       "readout_recovery_residuals": {
-       "J": 1.4230153513872246e-19,
+       "J": 1.4907779871675686e-19,
        "basepoint_mixing_moduli": 5.551115123125783e-16,
-       "down_singular_values": 1.1926223897340549e-18,
+       "down_singular_values": 3.469446951953614e-18,
        "up_singular_values": 2.6020852139652106e-18
       },
       "scope": "forward native spectral-kernel realization of inherited mass transfers and ordered angular source",
@@ -17686,12 +17686,12 @@
       "source_sequence": "exp(theta23 A23) exp(theta13 A13(delta)) exp(theta12 A12)",
       "source_sequence_uniqueness_proved": false,
       "structural_residuals": {
-       "complement_rotation_identity": 1.5604732292485276e-16,
-       "complement_source_vertex": 1.6352976391418525e-18,
-       "matrix_units": 3.5225675534971734e-16,
+       "complement_rotation_identity": 1.52105357796422e-16,
+       "complement_source_vertex": 1.635297639141853e-18,
+       "matrix_units": 3.5225675534971725e-16,
        "radial_gram": 4.440892098500626e-16,
-       "rotation_unitarity": 2.359896206084457e-16,
-       "spin_factorization": 6.776265539019292e-21
+       "rotation_unitarity": 2.307249551427797e-16,
+       "spin_factorization": 2.173708278277553e-19
       },
       "up_transfer": [
        1.2936001135833096e-05,
@@ -17794,8 +17794,8 @@
       "mass_vertex_readout": "R_L^* B R_R=I_2; a specified action coefficient multiplies this spatial pairing",
       "normalization": 1.7320508075688772,
       "residuals": {
-       "basepoint_gaunt_covariance": 1.156944817763202e-16,
-       "basepoint_kernel_covariance": 2.8845493697777244e-16,
+       "basepoint_gaunt_covariance": 1.1188630228279524e-16,
+       "basepoint_kernel_covariance": 2.044526886736481e-16,
        "gaunt_readout": 0.0,
        "independent_gaunt": 0.0,
        "left_gram": 1.1102230246251565e-16,
@@ -17820,7 +17820,7 @@
     "thermal_weak": {
      "Tnu_final_GeV": 0.000490656518982094,
      "beta_phase_space": {
-      "estimated_abs_error": 1.4648585482076346e-12,
+      "estimated_abs_error": 1.4648518943727742e-12,
       "integrand_evaluations": 567,
       "method": "adaptive Gauss-Kronrod on normalized Coulomb-regular phase space",
       "unit": "1",
@@ -17856,7 +17856,7 @@
       "reduced_planck_mass_GeV": 2.435323595526305e+18,
       "source": "current V5 EW, mass-splitting and specified hadronic readouts"
      },
-     "neutron_fraction_final": 0.19334818050612276,
+     "neutron_fraction_final": 0.19334818050611327,
      "scope": "same specified weak inputs; static-nucleon rates and instantaneous neutrino decoupling",
      "zero_temperature_lifetime_s": 915.5435125833858
     }
@@ -17866,18 +17866,18 @@
   "response_native_operations": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/finite_connector.py": "0ee4dd39efada86c55c4750498c8147b092f2f68cf2f0b58f6d0871f08c5a1be",
      "cg_core/modal_algebra.py": "0f1346d1d52ea7606626f816417f1d356704d7f82b9d2e80fea44c6b5d4d3452",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
      "scripts/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "scripts/evaluate_joint_extensions.py": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb"
@@ -17892,7 +17892,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "all_checks_passed": true,
@@ -17975,25 +17975,25 @@
   "response_native_scalar_intensity": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/modal_algebra.py": "0f1346d1d52ea7606626f816417f1d356704d7f82b9d2e80fea44c6b5d4d3452",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/rational_interval.py": "2841773858c2a21c544e3434ef8f73605e73be0703324183b0f6919b4fe162a6",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
      "cg_frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/ewsb/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/ewsb/native_condensate.py": "d9155b59d40e3002c73e09d1cf8bc550cdd9c0dc398d96f5cc3cc38d89acb240",
      "cg_frg/gravity/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/gravity/local_response.py": "86f151ff8f8d8ee9b5abe150cc2dd4b7177072c5bcf4ba6afa1825ccd97cc805",
-     "cg_frg/gravity/matter_source_response.py": "1193dd5cf3e09525657ad80387258048237119ef84fac1b4eae685365b89bf95",
+     "cg_frg/gravity/matter_source_response.py": "aaa2a10f90b59884eeb9fc73834f54f89661c52be91c16d9235d3f3d5be063fa",
      "scripts/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "scripts/evaluate_joint_extensions.py": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb"
     }
@@ -18015,7 +18015,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "assigned_production_mass": false,
@@ -18580,7 +18580,7 @@
          "maximum_characteristic_imaginary_part": 0.0,
          "mean_expansion": 0.05851375844935306,
          "mean_volume_scale": 1.0000731484246166,
-         "minimum_absolute_characteristic_speed": 0.6189568309648156,
+         "minimum_absolute_characteristic_speed": 0.6189568309648157,
          "minimum_kinetic_eigenvalue": 1.8364756039264316,
          "minimum_phase_norm": 0.07943706573376902,
          "minimum_phase_rate": 0.28184581908158407,
@@ -18754,7 +18754,7 @@
          "maximum_characteristic_imaginary_part": 0.0,
          "mean_expansion": 0.05847981981785749,
          "mean_volume_scale": 1.000512002657918,
-         "minimum_absolute_characteristic_speed": 0.6193569830516026,
+         "minimum_absolute_characteristic_speed": 0.6193569830516027,
          "minimum_kinetic_eigenvalue": 1.8349857342846845,
          "minimum_phase_norm": 0.07935695990107251,
          "minimum_phase_rate": 0.281703673921858,
@@ -18783,7 +18783,7 @@
          "maximum_characteristic_imaginary_part": 0.0,
          "mean_expansion": 0.058474169384605014,
          "mean_volume_scale": 1.0005851389994254,
-         "minimum_absolute_characteristic_speed": 0.6194236616890919,
+         "minimum_absolute_characteristic_speed": 0.6194236616890915,
          "minimum_kinetic_eigenvalue": 1.8347377388183188,
          "minimum_phase_norm": 0.07934361423863631,
          "minimum_phase_rate": 0.28167998551305756,
@@ -19340,7 +19340,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05850809771827327,
           "mean_volume_scale": 1.0001462951094129,
-          "minimum_absolute_characteristic_speed": 0.6190235331155143,
+          "minimum_absolute_characteristic_speed": 0.6190235331155138,
           "minimum_kinetic_eigenvalue": 1.8362270630384028,
           "minimum_phase_norm": 0.07942371130185892,
           "minimum_phase_rate": 0.2818221270621931,
@@ -19456,7 +19456,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05849678140888936,
           "mean_volume_scale": 1.0002925833009517,
-          "minimum_absolute_characteristic_speed": 0.619156924904392,
+          "minimum_absolute_characteristic_speed": 0.6191569249043918,
           "minimum_kinetic_eigenvalue": 1.8357302584828747,
           "minimum_phase_norm": 0.07939700638974667,
           "minimum_phase_rate": 0.28177474405941116,
@@ -19485,7 +19485,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05849395340460686,
           "mean_volume_scale": 1.0003291542707946,
-          "minimum_absolute_characteristic_speed": 0.619190270329716,
+          "minimum_absolute_characteristic_speed": 0.6191902703297165,
           "minimum_kinetic_eigenvalue": 1.8356061145914042,
           "minimum_phase_norm": 0.07939033103366548,
           "minimum_phase_rate": 0.28176289861098724,
@@ -19514,7 +19514,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.058491125829401316,
           "mean_volume_scale": 1.000365724809667,
-          "minimum_absolute_characteristic_speed": 0.6192236147753591,
+          "minimum_absolute_characteristic_speed": 0.6192236147753593,
           "minimum_kinetic_eigenvalue": 1.8354819934254039,
           "minimum_phase_norm": 0.07938365604302243,
           "minimum_phase_rate": 0.2817510533130665,
@@ -19543,7 +19543,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05848829868319828,
           "mean_volume_scale": 1.0004022949176923,
-          "minimum_absolute_characteristic_speed": 0.6192569582558507,
+          "minimum_absolute_characteristic_speed": 0.6192569582558508,
           "minimum_kinetic_eigenvalue": 1.8353578948982472,
           "minimum_phase_norm": 0.07937698142613525,
           "minimum_phase_rate": 0.28173920818042925,
@@ -19572,7 +19572,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05848547196592313,
           "mean_volume_scale": 1.0004388645949938,
-          "minimum_absolute_characteristic_speed": 0.6192903007857113,
+          "minimum_absolute_characteristic_speed": 0.6192903007857115,
           "minimum_kinetic_eigenvalue": 1.835233818923383,
           "minimum_phase_norm": 0.07937030719131369,
           "minimum_phase_rate": 0.28172736322784425,
@@ -19601,7 +19601,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05848264567750115,
           "mean_volume_scale": 1.0004754338416946,
-          "minimum_absolute_characteristic_speed": 0.6193236423794586,
+          "minimum_absolute_characteristic_speed": 0.619323642379459,
           "minimum_kinetic_eigenvalue": 1.8351097654143327,
           "minimum_phase_norm": 0.07936363334686088,
           "minimum_phase_rate": 0.2817155184700709,
@@ -19630,7 +19630,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05847981981785749,
           "mean_volume_scale": 1.000512002657918,
-          "minimum_absolute_characteristic_speed": 0.6193569830516024,
+          "minimum_absolute_characteristic_speed": 0.6193569830516025,
           "minimum_kinetic_eigenvalue": 1.8349857342846845,
           "minimum_phase_norm": 0.07935695990107251,
           "minimum_phase_rate": 0.281703673921858,
@@ -19688,7 +19688,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05847416938460503,
           "mean_volume_scale": 1.0005851389994251,
-          "minimum_absolute_characteristic_speed": 0.6194236616890916,
+          "minimum_absolute_characteristic_speed": 0.6194236616890914,
           "minimum_kinetic_eigenvalue": 1.8347377388183184,
           "minimum_phase_norm": 0.07934361423863635,
           "minimum_phase_rate": 0.2816799855130576,
@@ -20523,7 +20523,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05851375844935306,
           "mean_volume_scale": 1.0000731484246166,
-          "minimum_absolute_characteristic_speed": 0.6189568309648166,
+          "minimum_absolute_characteristic_speed": 0.6189568309648158,
           "minimum_kinetic_eigenvalue": 1.8364756039264314,
           "minimum_phase_norm": 0.07943706573376902,
           "minimum_phase_rate": 0.28184581908158407,
@@ -20610,7 +20610,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.058505267996941064,
           "mean_volume_scale": 1.0001828678043694,
-          "minimum_absolute_characteristic_speed": 0.6190568826049639,
+          "minimum_absolute_characteristic_speed": 0.619056882604964,
           "minimum_kinetic_eigenvalue": 1.8361028273773983,
           "minimum_phase_norm": 0.07941703456734034,
           "minimum_phase_rate": 0.2818102811597553,
@@ -20871,7 +20871,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05847981981785749,
           "mean_volume_scale": 1.0005120026579182,
-          "minimum_absolute_characteristic_speed": 0.6193569830516024,
+          "minimum_absolute_characteristic_speed": 0.6193569830516028,
           "minimum_kinetic_eigenvalue": 1.8349857342846845,
           "minimum_phase_norm": 0.07935695990107251,
           "minimum_phase_rate": 0.281703673921858,
@@ -20900,7 +20900,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05847699438691716,
           "mean_volume_scale": 1.0005485710437874,
-          "minimum_absolute_characteristic_speed": 0.6193903228166475,
+          "minimum_absolute_characteristic_speed": 0.6193903228166474,
           "minimum_kinetic_eigenvalue": 1.8348617254481017,
           "minimum_phase_norm": 0.07935028686223723,
           "minimum_phase_rate": 0.2816918295979442,
@@ -20929,7 +20929,7 @@
           "maximum_characteristic_imaginary_part": 0.0,
           "mean_expansion": 0.05847416938460503,
           "mean_volume_scale": 1.0005851389994254,
-          "minimum_absolute_characteristic_speed": 0.6194236616890915,
+          "minimum_absolute_characteristic_speed": 0.6194236616890912,
           "minimum_kinetic_eigenvalue": 1.8347377388183184,
           "minimum_phase_norm": 0.07934361423863635,
           "minimum_phase_rate": 0.2816799855130576,
@@ -22433,16 +22433,16 @@
   "response_neutrino_propagation": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
      "cg_frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
      "cg_frg/neutrino/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
@@ -22471,7 +22471,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "beta_mass_observables": {
@@ -22502,21 +22502,21 @@
      [
       0.9859353764327136,
       0.006936922845667673,
-      0.007127700721619044
+      0.007127700721619053
      ],
      [
-      0.0065143165929645785,
+      0.006514316592964576,
       0.8426633065644334,
-      0.150822376842602
+      0.1508223768426021
      ],
      [
-      0.007550306974322144,
-      0.15039977058989895,
+      0.007550306974322135,
+      0.15039977058989887,
       0.8420499224357788
      ]
     ],
     "probability_convention": "P[detected, produced]",
-    "profile_probability_residual": 4.574396417211801e-13,
+    "profile_probability_residual": 4.575506640236426e-13,
     "scope": "vacuum example using the current static masses and labelled PMNS texture",
     "unitarity_residual": 2.6856006499175967e-13
    },
@@ -22525,16 +22525,16 @@
   "response_undeformed_branch_margin": {
    "calculation": {
     "comparison_input_sha256": {},
-    "run_id": "20261018T021851Z-4cbd0c00",
+    "run_id": "20261018T041312Z-1101284b",
     "source_sha256": {
      "cg_core/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-     "cg_core/content_response.py": "899f3ea35c32cf941da22264d6639eca283532c592196734a6877931792949ee",
-     "cg_core/ec_structure.py": "53010ac17c2ab83bf11219a30c8224db3220b8e97fc2cd6d93aaac3c4ce02171",
+     "cg_core/content_response.py": "6414d09dfd52855ec079b9596fed78468fdadd66a4fc06b0819c73351f525f73",
+     "cg_core/ec_structure.py": "315b8c80f502665cd2ced606efdd2c845f45b0a4467fc6670c04a1a2fbb9da20",
      "cg_core/params.py": "0c9b1b1be6bba96251df889c7eb6a2eb7c9fe24be3cb07e567766e504116d8b6",
-     "cg_core/quantities.py": "3a5addab5644d65b3195ff8c99b2d0a47a70d346577310c46150494b5317a673",
+     "cg_core/quantities.py": "adc8ff683bfb238d852527e888506c0ef5091e64a56513ae386b86f3ea77c5b0",
      "cg_core/release.py": "2f3deee4181640a96f545f7ec14e177ef5103e63e035d9d466ee8717590f6261",
      "cg_core/rp3_spectrum.py": "e3aaa9c3a3c3895d81bae864841750b1ae21668d6db4141972340c2a4a2f0c05",
-     "cg_core/sm_content.py": "c12c81961f8e6445f49da0ebb0b4e3ebeab95238be5aac7a3379a88a3fd076ea",
+     "cg_core/sm_content.py": "c517f8b2538d5d0f64b20bc3adb1af55ecaad9013b4ad5298d07a7367d60f4df",
      "cg_core/spectrum_loop.py": "b476261e725dda37f169a3c24697442398c01d4df947c29755457e408e58b0e8",
      "cg_core/window_weights.py": "956f39c1a1c18dafc18166a1c11960f24155acbb04d3b552e13896850812b5c7",
      "cg_frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
@@ -22565,7 +22565,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "analytic_x0_upper_bound": "65/(7*pi^2)",
@@ -22597,16 +22597,16 @@
     "response_complex_mixing": "861e7aaa61220d98500d09dc1a9fab5be15a3eef864ae9e1851a8fce2b332234",
     "response_endpoint_source_response": "a56b9202a691874e640c3f6e20e5e2712fbe728eb2cbf113e29f4443b04b9b8b",
     "response_exact_affine_certificates": "9d1955454c8ab7700ca9def620c9b984750b4550b6f1ebb6edf3daf95f64602c",
-    "response_external_gauge_tensor": "655975e9af5db58f27555163c733203c3bd720ca0229263a8f918bcce64d3e84",
-    "response_finite_matter_source": "b00d11815caeae6c890d4f9f3782a43e26675e92525788806edf915ba008c92b",
+    "response_external_gauge_tensor": "62610f21383a08ce92ff73776b98ac1b581cfe948fce94a764bcc21ceb589178",
+    "response_finite_matter_source": "79710a04140ae32617e137b174453e3c76341bbf4d6af2793abf834073fb05ce",
     "response_free_covariance": "833c355512b3306cceb74c02a779d0cb911329ac2c8c52878f93fe6d51d31975",
-    "response_joint_response": "00fa63bda4e2667ba823d7e7255d49c81716149737f8f8606e2478d9118438af",
+    "response_joint_response": "b3850ff77a772d0cfeb60b20692618fc09649d258af19eb22bb12942c60b744a",
     "response_local_source_feedback": "acad7b18f983afdbb1f49af049bbf830beb26b6c34852c6c64be648937d6c16a",
     "response_local_static_response": "0c1db8620269cdf6da5505d916b09b2db9ca64762f883256a01c14dc811cf78f",
-    "response_matter_extensions": "175e4a5eb6824e5562b19a283988249a9a73a377efb2a0c115e2990279d0b2b2",
+    "response_matter_extensions": "e575c4324d126cdd5858526e30e95d1c6945b9f24922d68ae06b126394f6142b",
     "response_native_operations": "b802d17907ac5fe4a6026298bbaa79d16bcfade131eace836d2e36fc42cf7c1a",
-    "response_native_scalar_intensity": "d9239aec36ca44fc5726ab75be14b0b53fe7f3d4918543b01d48c860d61b43b7",
-    "response_neutrino_propagation": "c55c7e70e9b70b962e75f9d5e64d0ac6b557c64fc2b74fdd81322ab77c015870",
+    "response_native_scalar_intensity": "671ded1dc9c603909a8434531beadd701e744e6f13b9525c99c4596bb655da10",
+    "response_neutrino_propagation": "e684e6fb9f8cef4d062ec2b4a837943d6db993b1c0dd9dd678471274b43213a5",
     "response_undeformed_branch_margin": "62c425f10a2d6be91c04d7d579b443d4016b12ed8579814694762cd6e18f89a0"
    },
    "evidence_kind": "computation under declared definitions",
@@ -22621,23 +22621,23 @@
     "response_complex_mixing": "861e7aaa61220d98500d09dc1a9fab5be15a3eef864ae9e1851a8fce2b332234",
     "response_endpoint_source_response": "a56b9202a691874e640c3f6e20e5e2712fbe728eb2cbf113e29f4443b04b9b8b",
     "response_exact_affine_certificates": "9d1955454c8ab7700ca9def620c9b984750b4550b6f1ebb6edf3daf95f64602c",
-    "response_external_gauge_tensor": "655975e9af5db58f27555163c733203c3bd720ca0229263a8f918bcce64d3e84",
-    "response_finite_matter_source": "b00d11815caeae6c890d4f9f3782a43e26675e92525788806edf915ba008c92b",
+    "response_external_gauge_tensor": "62610f21383a08ce92ff73776b98ac1b581cfe948fce94a764bcc21ceb589178",
+    "response_finite_matter_source": "79710a04140ae32617e137b174453e3c76341bbf4d6af2793abf834073fb05ce",
     "response_free_covariance": "833c355512b3306cceb74c02a779d0cb911329ac2c8c52878f93fe6d51d31975",
-    "response_joint_response": "00fa63bda4e2667ba823d7e7255d49c81716149737f8f8606e2478d9118438af",
+    "response_joint_response": "b3850ff77a772d0cfeb60b20692618fc09649d258af19eb22bb12942c60b744a",
     "response_local_source_feedback": "acad7b18f983afdbb1f49af049bbf830beb26b6c34852c6c64be648937d6c16a",
     "response_local_static_response": "0c1db8620269cdf6da5505d916b09b2db9ca64762f883256a01c14dc811cf78f",
-    "response_matter_extensions": "175e4a5eb6824e5562b19a283988249a9a73a377efb2a0c115e2990279d0b2b2",
+    "response_matter_extensions": "e575c4324d126cdd5858526e30e95d1c6945b9f24922d68ae06b126394f6142b",
     "response_native_operations": "b802d17907ac5fe4a6026298bbaa79d16bcfade131eace836d2e36fc42cf7c1a",
-    "response_native_scalar_intensity": "d9239aec36ca44fc5726ab75be14b0b53fe7f3d4918543b01d48c860d61b43b7",
-    "response_neutrino_propagation": "c55c7e70e9b70b962e75f9d5e64d0ac6b557c64fc2b74fdd81322ab77c015870",
+    "response_native_scalar_intensity": "671ded1dc9c603909a8434531beadd701e744e6f13b9525c99c4596bb655da10",
+    "response_neutrino_propagation": "e684e6fb9f8cef4d062ec2b4a837943d6db993b1c0dd9dd678471274b43213a5",
     "response_undeformed_branch_margin": "62c425f10a2d6be91c04d7d579b443d4016b12ed8579814694762cd6e18f89a0"
    },
    "note": "Checks of the unified response records in this run.",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
    "value": {
     "all_checks_passed": true,
@@ -22693,7 +22693,7 @@
     "unit": "GeV^4"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "ec4506653bd5d7600646777d9b14ef23240edf2ed6db0f9ccfc9794b9913b9c7",
    "value": 2.5233889268202705e-47,
    "writer": "cg_frg/cosmology/dark_energy.py"
@@ -22732,7 +22732,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 1.0095672941254585,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -22780,7 +22780,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 1.009510375871435,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -22830,7 +22830,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 0.23327430154635165,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -22884,7 +22884,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 0.2220830410009569,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -22921,7 +22921,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "d969b434eae93ebe311aba7618e35c13cdba156c7ad039915d57052676285d06",
    "value": 0.5210239987806164,
    "writer": "cg_frg/generation/sector_alpha.py"
@@ -22958,7 +22958,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "d969b434eae93ebe311aba7618e35c13cdba156c7ad039915d57052676285d06",
    "value": 0.4903755282641096,
    "writer": "cg_frg/generation/sector_alpha.py"
@@ -22994,7 +22994,7 @@
     "unit": "GeV^-1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13274d50c5727663cd3aebba2d69156f15a2a89b04d4a34d916345b319f9fddc",
    "value": 6.9499956844971196e+41,
    "writer": "cg_frg/cosmology/gw_ratio.py"
@@ -23048,7 +23048,7 @@
     "unit": "nb"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "16225fd8fdfa771db24e38ed69e2d1f1810ec24a505eae1071155f9b63a0b9fb",
    "value": 41.50937748359421,
    "writer": "cg_frg/ewsb/ew_precision.py"
@@ -23100,7 +23100,7 @@
     "unit": "nb"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 41.54847835413312,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -23124,7 +23124,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "informational",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "67c3966d41da736b38158da4ae05e1e65d1f5a317b74d6ac49cb5736a35ed3b3",
    "value": {
     "L_phys(k)": "capacity/k in GeV^-1; k in GeV",
@@ -23173,7 +23173,7 @@
     "unit": "1"
    },
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.29999999999999993,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -23209,7 +23209,7 @@
     "unit": "1"
    },
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.021936679743943206,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -23245,7 +23245,7 @@
     "unit": "1"
    },
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
    "value": 0.5506605918211689,
    "writer": "cg_frg/neutrino/neutrino_closure.py"
@@ -23286,7 +23286,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 0.23157075086464043,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -23334,7 +23334,7 @@
     "unit": "1"
    },
    "role": "comparison",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": 0.23011353985028052,
    "writer": "cg_frg/ewsb/ew_one_loop.py"
@@ -23346,7 +23346,7 @@
    "module_read_inputs": {
     "G_N_PDG": "1f47e5a0ec1ff2724d49b53530ecb475b0a7b761ae89107e194ed61a669811b1"
    },
-   "note": "tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = 0.02; N_L=8, N_R=7, N_f=15, SumY2=3.3333333333333335",
+   "note": "tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = 0.02 on the 15-coordinate charged quotient; N_L=8, N_R=7, N_f=15, SumY2=3.3333333333333335; the complete carrier is 8+8",
    "provenance": "DERIVED",
    "quantity_definition": {
     "assumptions": [
@@ -23356,8 +23356,8 @@
     "carrier": "fixed compact content and Gaussian response window",
     "error_kind": "computed centre; numerical and model errors assessed separately",
     "normalization": "as given by the operator formula and stated units",
-    "object": "finite-content chiral response ratio",
-    "operator": "(N_L-N_R)/(N_f Tr(Y^2))=1/50",
+    "object": "charged-quotient response modulus",
+    "operator": "(N_L-N_R)/(N_f Tr(Y^2))=1/50 on the 15-coordinate gauge-active quotient",
     "order": "finite content and endpoint readout",
     "projection": "named production readout",
     "scale_GeV": null,
@@ -23366,8 +23366,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
-   "source_sha256": "7446b818ede7161b92b4c9dabd81a59035532408f3be9e8a2c9ba8c2f0d5af5f",
+   "run_id": "20261018T063501Z-119447ea",
+   "source_sha256": "ca96609eb0fe7af15bcedb87ab04a5aaf282e72910c6c1af1a14763d9cd74a2a",
    "value": 0.02,
    "writer": "scripts/init_v5.py"
   },
@@ -23386,7 +23386,7 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "13274d50c5727663cd3aebba2d69156f15a2a89b04d4a34d916345b319f9fddc",
    "value": 2.5066282746310002,
    "writer": "cg_frg/cosmology/gw_ratio.py"
@@ -23424,7 +23424,7 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "32709674884abd4f6eb77c2cd77365ea3d8c49d7f732a0b73328dac3bf63aa46",
    "value": 246.18969645238943,
    "writer": "cg_frg/ewsb/vev_closure.py"
@@ -23465,7 +23465,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "4fdb96ad896fa9c78e2c0aee0ed64482eb74d89ce3362bf71137aac3430457e7",
    "value": 0.024343597671653887,
    "writer": "cg_frg/fermion/mass_operator_overlap.py"
@@ -23501,7 +23501,7 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "4fdb96ad896fa9c78e2c0aee0ed64482eb74d89ce3362bf71137aac3430457e7",
    "value": 1.0,
    "writer": "cg_frg/fermion/mass_operator_overlap.py"
@@ -23547,7 +23547,7 @@
     "unit": "GeV per entry"
    },
    "role": "internal",
-   "run_id": "20261018T030855Z-69c18be4",
+   "run_id": "20261018T063501Z-119447ea",
    "source_sha256": "a0df36949f00c9d35c5b97dcc526fe607aec9de292d17b8e454acc82a7f29557",
    "value": {
     "Z": 2.5063559621245686,

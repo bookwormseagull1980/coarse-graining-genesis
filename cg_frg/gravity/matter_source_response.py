@@ -19,7 +19,7 @@ The same-source family is A(eta)=exp(eta) A_B exp(eta), where
 A_B=D_B*D_B+3/(4 L^2), H=sqrt(A_B), and E_N=Tr(N H).  Occupations,
 connection and real compression profiles are explicit inputs. The computed
 first and second derivatives give the fixed-state internal energy response.
-The external tensor propagator is determined by its sourced action and
+The noncompact tensor propagator is determined by its sourced action and
 constraint reduction.
 
 Products in D_B retain their complete harmonic support before the Gram
@@ -32,7 +32,7 @@ The time-dependent conformal source uses the same finite field action:
 M(eta)=exp(-3 eta), B(eta)=exp(-eta/2) A_B exp(-eta/2).  Its canonical
 Hamiltonian retains both signs of the oscillator frequencies and every
 occupied coherence.  Phase covariances in the finite-carrier examples
-describe classical occupied ensembles on the prescribed external background.
+describe classical occupied ensembles on the prescribed common spacetime background.
 The same conformal matrices also determine their covariant Hilbert
 stress, exchange with spacetime-dependent compression sources, and the
 matter contributions to the lapse and shift constraints.
@@ -2130,7 +2130,7 @@ def _covariant_interface_verification(carrier, profiles, occupations):
     def complex_record(value):
         return {"real": np.asarray(value).real.tolist(), "imaginary": np.asarray(value).imag.tolist()}
     return {
-        "scope": "finite internal matter coupled to an external metric and scalar compression sources",
+        "scope": "finite internal matter coupled dynamically to the common noncompact metric and scalar-compression sectors",
         "covariant_action": "S_m=-integral sqrt(-g) [g^{mu nu} partial_mu(phi)^dagger M partial_nu(phi)+phi^dagger B phi]/2",
         "source_action_supplied": False,
         "source_exchange_identity": "nabla_mu T^mu_nu=Re(E_phi^dagger partial_nu phi)+Q_a partial_nu eta^a",

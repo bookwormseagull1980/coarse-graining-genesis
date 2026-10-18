@@ -73,14 +73,18 @@ def init() -> None:
               f"Planck mass, the identity from the single observed "
               f"anchor G_N)")
 
-    # The content invariant is
+    # The charged-quotient response modulus is
     # tau=(N_L-N_R)/(N_f SumY2)=(8-7)/(15*(10/3))=1/50.
+    # The neutral right coordinate completes the full 8+8 carrier and has
+    # zero hypercharge, so it is absent from this gauge-active trace without
+    # creating a center bias of the complete carrier.
     source_response = finite_source_response()
     tau_computed = float(source_response["tau"])
     SY2 = float(source_response["hypercharge_second_moment"])
     pset("tau", tau_computed, provenance="DERIVED", dependencies=(),
          note=f"tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = "
-              f"{tau_computed}; N_L=8, N_R=7, N_f=15, SumY2={SY2}")
+              f"{tau_computed} on the 15-coordinate charged quotient; "
+              f"N_L=8, N_R=7, N_f=15, SumY2={SY2}; the complete carrier is 8+8")
     # L_Cg = sqrt(pi): the Gaussian endpoint — the window's
     # characteristic length from the Gaussian normalisation
     # integral int exp(-x^2) dx = sqrt(pi) (the unbiased measure's

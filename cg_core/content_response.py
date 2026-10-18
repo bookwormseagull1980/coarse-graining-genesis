@@ -85,7 +85,10 @@ def finite_source_response():
             "hessian": tuple(tuple(row) for row in h),
             "hypercharge_second_moment": y2,
             "weak_extensive_per_generation": Q(doublets, 2),
-            "tau": mean_j / (n * h[1][1])}
+            "tau": mean_j / (n * h[1][1]),
+            "carrier_scope": "15-coordinate gauge-active charged quotient",
+            "complete_carrier_dimension": 16,
+            "complete_center_bias": Q(0)}
 
 
 def chiral_center_response(log_left_right_ratio=0.0, *, neutral_right_weight=1.0):
@@ -96,9 +99,10 @@ def chiral_center_response(log_left_right_ratio=0.0, *, neutral_right_weight=1.0
     between zero and one describe an explicitly retained effective weight;
     they are not silently identified with an exact Schur elimination.
 
-    The source coordinate is half the logarithm of the left/right weight
-    ratio, so differentiation with respect to that coordinate gives the
-    connected center susceptibility.
+    The optional argument is an applied response probe: half the logarithm
+    of the left/right weight ratio.  It is not a source required by the
+    closed generated carrier.  Differentiation with respect to the probe
+    gives the connected center susceptibility.
     """
     if not math.isfinite(log_left_right_ratio):
         raise ValueError("a finite logarithmic left/right ratio is required")
@@ -107,9 +111,9 @@ def chiral_center_response(log_left_right_ratio=0.0, *, neutral_right_weight=1.0
     left_capacity = 8.0
     charged_right_capacity = 7.0
     right_capacity = charged_right_capacity + neutral_right_weight
-    external_drive = 0.5 * log_left_right_ratio
+    applied_probe = 0.5 * log_left_right_ratio
     content_drive = 0.5 * math.log(left_capacity / right_capacity)
-    total_drive = external_drive + content_drive
+    total_drive = applied_probe + content_drive
     bias = math.tanh(total_drive)
     susceptibility = 1.0 - bias * bias
     return {
@@ -118,7 +122,7 @@ def chiral_center_response(log_left_right_ratio=0.0, *, neutral_right_weight=1.0
         "neutral_right_weight": neutral_right_weight,
         "right_capacity": right_capacity,
         "total_capacity": left_capacity + right_capacity,
-        "external_drive": external_drive,
+        "applied_probe": applied_probe,
         "content_drive": content_drive,
         "total_drive": total_drive,
         "bias": bias,
@@ -128,6 +132,42 @@ def chiral_center_response(log_left_right_ratio=0.0, *, neutral_right_weight=1.0
         "charged_quotient": neutral_right_weight == 0.0,
         "removed_coordinate": None if neutral_right_weight == 1.0 else "nu_R",
         "elimination_feedback_required": neutral_right_weight != 1.0,
+        "external_source_required": False,
+    }
+
+
+def closed_chiral_center_certificate():
+    """Certify intrinsic center closure of the complete matter carrier.
+
+    With eight left and eight right coordinates, the normalized partition
+    function under an optional odd probe h is
+
+        Z(h) = (8 exp(h) + 8 exp(-h))/16 = cosh(h).
+
+    It is even, so its logarithmic derivative vanishes at h=0.  The charged
+    15-coordinate quotient is returned only as a projection diagnostic; its
+    8:7 offset is not an asymmetry of the complete generated system.
+    """
+    complete = chiral_center_response()
+    quotient = chiral_center_response(neutral_right_weight=0.0)
+    return {
+        "complete_dimension": 16,
+        "left_capacity": complete["left_capacity"],
+        "right_capacity": complete["right_capacity"],
+        "partition_at_zero": 1.0,
+        "partition_even": True,
+        "closed_center_bias": complete["bias"],
+        "closed_center_susceptibility": complete["susceptibility"],
+        "closed_restoring_hessian": complete["restoring_hessian"],
+        "external_source_required": False,
+        "quotient_dimension": 15,
+        "quotient_bias": quotient["bias"],
+        "quotient_is_projection_defect": True,
+        "removed_coordinate": quotient["removed_coordinate"],
+        "scope": (
+            "intrinsic closure of the complete 8_L+8_R generated carrier; "
+            "an applied probe is optional and belongs only to response theory"
+        ),
     }
 
 
@@ -138,9 +178,9 @@ def chiral_center_power_law_screening(
     scale_ratio=math.inf,
     neutral_right_weight=1.0,
 ):
-    """Certified logarithmic-scale energy bound for a decaying center drive.
+    """Optional logarithmic-scale response to a decaying applied probe.
 
-    For x=L/L0>=1, the external drive is h(x)=amplitude*x**(-exponent).
+    For x=L/L0>=1, the applied probe is h(x)=amplitude*x**(-exponent).
     Since tanh is one-Lipschitz, with m0 the zero-drive content bias,
 
         |m(x)| <= |m0| + |amplitude| x**(-exponent).
@@ -148,7 +188,8 @@ def chiral_center_power_law_screening(
     Integration against dx/x gives the returned finite-window bound.  On the
     infinite scale interval it is finite exactly in the balanced carrier
     covered here (m0=0); a nonzero quotient bias leaves a nonintegrable
-    constant tail and is reported as such.
+    constant tail and is reported as such.  This diagnostic is not a closure
+    premise: the complete carrier is already center balanced at zero probe.
     """
     if not (math.isfinite(amplitude) and math.isfinite(exponent) and exponent > 0.0):
         raise ValueError("finite amplitude and positive finite exponent required")
@@ -186,6 +227,7 @@ def chiral_center_power_law_screening(
         "uniformly_integrable_on_declared_interval": uniformly_integrable,
         "infinite_scale_restoration": math.isinf(scale_ratio) and baseline == 0.0,
         "persistent_projection_defect": math.isinf(scale_ratio) and baseline != 0.0,
+        "closure_input": False,
         "scope": (
             "complete-carrier chiral response; a neutral-state quotient must "
             "retain its Schur or threshold feedback separately"
@@ -307,7 +349,8 @@ def interacting_content_response(background=None, source=None):
 
     tau_response is the declared gradient/Hessian readout at this K. Its
     zero-background value is 1/50; no invariance under arbitrary interactions
-    is imposed. The structural tau of finite_source_response stays separate.
+    is imposed. The charged-quotient modulus of finite_source_response stays
+    separate from the zero center bias of the complete carrier.
     """
     import numpy as np
     A = charged_source_matrices()
@@ -323,7 +366,8 @@ def weighted_content_response(left_weight, right_weight):
     """Positive block weights implemented as K=log(w_L)P_L+log(w_R)P_R.
 
     A common multiplier cancels from every normalized response. Unequal
-    weights change tau: for r=w_L/w_R it is (8r-7)/(10r+40).
+    weights change the charged-quotient response tau: for r=w_L/w_R it is
+    (8r-7)/(10r+40). This does not define the complete-carrier center mean.
     """
     import numpy as np
     if not all(math.isfinite(w) and w > 0 for w in (left_weight,right_weight)):

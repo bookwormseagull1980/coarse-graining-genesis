@@ -51,10 +51,20 @@ def test_hypercharge_square_sum():
     assert abs(hypercharge_sum_sq() - 10.0 / 3.0) < 1e-12
 
 
-def test_chiral_asymmetry():
-    from cg_core.sm_content import chiral_asymmetry
-    # N_L - N_R = 1 (the chiral drive of tau).
-    assert chiral_asymmetry() == 1
+def test_charged_quotient_index():
+    from cg_core.sm_content import charged_quotient_index, chiral_asymmetry
+    # N_L - N_R = 1 on the charged quotient; the historical API is identical.
+    assert charged_quotient_index() == 1
+    assert chiral_asymmetry() == charged_quotient_index()
+
+
+def test_tau_source_is_explicitly_a_charged_quotient():
+    from cg_core.content_response import finite_source_response
+    response = finite_source_response()
+    assert response["dimension"] == 15
+    assert response["carrier_scope"] == "15-coordinate gauge-active charged quotient"
+    assert response["complete_carrier_dimension"] == 16
+    assert response["complete_center_bias"] == 0
 
 
 # ---------------------------------------------------------------------------

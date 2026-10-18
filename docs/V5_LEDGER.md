@@ -22,6 +22,7 @@ derivations. The [reviewer guide](../REVIEWER_START_HERE.md) provides
 execution commands and the validation map.
 
 - [Data discipline](#data-discipline)
+- [Closed-world object discipline](#closed-world-object-discipline)
 - [Defining closures](#defining-closures)
 - [Spectral construction and certification](#spectral-construction-and-certification)
 - [Matter, running and thermal methods](#matter-running-and-thermal-methods)
@@ -49,7 +50,8 @@ boundary and approximation data.
 
 The computation distinguishes four layers:
 
-1. `OBSERVED / anchor`: Newton's constant sets the dimensional scale.
+1. `OBSERVED / anchor`: Newton's constant sets the dimensional scale. This
+   empirical unit calibration is not a dynamical source of the closed model.
 2. Structural inputs: the compact RP3 spectrum, content counts, Gaussian
    response domain, projected response, endpoint normalization and matching
    conventions stated in the papers.
@@ -57,7 +59,7 @@ The computation distinguishes four layers:
 4. Comparison: observational reference values and covariances in
    `comparison/reference_inputs.json`, used to evaluate the completed calculation.
 
-Fixed-input external propagation retains its executed solver version,
+Fixed-input downstream propagation retains its executed solver version,
 resolved configuration and input fingerprints with its scientific result.
 A matching completed calculation is reused under its recorded validity
 conditions. The comparison role and read protections keep observational
@@ -71,6 +73,26 @@ Its storage contract binds exactly these two scientific stores. Reuse
 checks the identity of a calculation before reading its value from the
 parameter store; the manifest supplies the identity checks only.
 
+## Closed-world object discipline
+
+V5 uses four distinct notions that are not interchangeable:
+
+| Term | Meaning | What it does not mean |
+| --- | --- | --- |
+| complete generated source | the positive joint state containing every retained sector and its common dynamics | a signed center observable |
+| quotient or projected source | the state seen after a declared carrier reduction, with its Schur or threshold feedback retained when required | the ontology of the complete carrier |
+| applied probe | an optional parameter used to differentiate a response function | a source required to close the generated system |
+| interface or comparison datum | boundary data inherited by a subsystem, or an observed value used for units and comparison | an outside-universe dynamical cause |
+
+Accordingly, the complete `8_L+8_R` matter carrier has zero intrinsic center
+bias. The `8_L+7_R` value and `tau=1/50` belong to the gauge-active charged
+quotient. The historical word `external` in tensor module names means
+noncompact relative to the compact internal carrier; that tensor sector is
+dynamical and belongs to the same closed action. A finite-window or projected
+imbalance is reported as endpoint flux or projection defect, not promoted to
+a fundamental source. These distinctions are part of the scientific contract,
+not merely terminology.
+
 ## Defining Closures
 
 - The one-loop TT spectral response is
@@ -80,9 +102,11 @@ parameter store; the manifest supplies the identity checks only.
 - With `y=m^2/(k^2+m^2)`, the mass-weighted response is
   `y(1-y)^2`. Its unique interior maximum is `4/27` at `y=1/3`;
   the endpoint closure adopts this extremum as its response normalisation.
-  The external tensor spectrum is evaluated from its sourced physical action.
-- The torsion modulus is the dimensionless content invariant
-  `tau=(N_L-N_R)/(N_f SumY2)=1/50`.
+  The noncompact tensor spectrum is evaluated from its sourced physical action.
+- The torsion modulus is the dimensionless charged-quotient response invariant
+  `tau=(N_L-N_R)/(N_f SumY2)=1/50`. The complete matter carrier is `8_L+8_R`
+  and has zero intrinsic center bias; the neutral right coordinate is absent
+  only from the gauge-active trace.
 - The generation capacity is the declared map
   `n+3/2 < (kL)^2` on `n=0,2,4,...`; at the fixed point it returns
   `n=0,2,4`.
@@ -184,7 +208,7 @@ carrier therefore has capacities `8_L+8_R`; only the charged trace has
 
 - `chiral_center_response(neutral_right_weight=1)` evaluates the complete
   center channel and gives zero bias, unit susceptibility, and unit restoring
-  Hessian at zero external drive;
+  Hessian without an applied probe;
 - `chiral_center_response(neutral_right_weight=0)` evaluates the charged
   quotient and recovers bias `1/15`, susceptibility `224/225`, and restoring
   Hessian `225/224`;
@@ -193,7 +217,17 @@ carrier therefore has capacities `8_L+8_R`; only the charged trace has
   projection defect and is not identified with a fundamental asymmetry of the
   complete carrier.
 
-For an external center drive `h(L)=a(L/L0)^(-alpha)`, the exact response is
+No external center source is needed to close the generated system.  On the
+complete carrier the optional odd-probe partition function is
+
+    Z(h)=(8 exp(h)+8 exp(-h))/16=cosh(h).
+
+It is even, and therefore its logarithmic derivative vanishes exactly at
+`h=0`.  `closed_chiral_center_certificate()` records this intrinsic
+`8_L+8_R` closure.  The `8_L+7_R` result belongs only to the charged
+projection obtained after removing `nu_R`.
+
+For the separate response experiment `h(L)=a(L/L0)^(-alpha)`, the response is
 `m=tanh(h+h0)`, where `h0=(1/2)log(N_L/N_R)`. Since `tanh` is one-Lipschitz,
 the complete carrier satisfies
 
@@ -202,9 +236,9 @@ the complete carrier satisfies
 The charged quotient instead has the persistent zero-drive tail `m0=1/15`;
 its infinite logarithmic-scale energy diverges, although every declared
 finite window has the explicit bound returned by
-`chiral_center_power_law_screening`. This distinction prevents a finite
-charged-window certificate from being reported as complete-carrier
-restoration.
+`chiral_center_power_law_screening`. This optional probe calculation is not a
+closure premise.  The distinction prevents a finite charged-window
+certificate from being reported as complete-carrier restoration.
 
 For a supplied Hermitian interaction/background K,
 `log_partition_response(K,A,J)` evaluates `log Tr exp(K+sum J_a A_a)/n`,
@@ -799,7 +833,7 @@ the matching dynamics. Each direct set follows the value formula at the
 store boundary. Local intermediates are traced to their actual stored
 inputs; note-only reads and unrelated outputs of the same module are
 excluded. A finite content identity has an explicitly empty set. The
-initial Newton anchor identifies its external source separately.
+initial Newton anchor identifies its empirical dimensional datum separately.
 The audit validates physical-definition fields and checks each declared
 input fingerprint against the publication-time read. Coverage is reported
 without interpreting process-wide reads as direct dependencies.
@@ -1062,7 +1096,7 @@ vertex as c^4. The radius and critical detuning are evaluated by the equations
 A_R/c=4/27 and x(chi_c)=1. The
 undeformed branch obeys x(0) < 65/(7*pi^2) < 1; pi > 157/50 gives the exact
 denominator margin 1-x(0) > 10043/172543. The propagation calculation
-evaluates the same-source external tensor equations at the critical branch.
+evaluates the same-source noncompact metric-tensor equations at the critical branch.
 For a scalar factorization with chi(Q^2)=chi_c-a Q^2+O(Q^4), a>0, and the
 critical numerator Pi(0)=J(chi_c)/c^4, its residue is
 J(chi_c)/(c^4 a x'(chi_c)). The function chi(Q^2) and slope a are fixed by the propagation action and its inverse-response matching
@@ -1080,7 +1114,7 @@ are retained in the corresponding structured record in `cg_params.json`.
 
 The gravitational field is a macroscopic collective response. Its
 helicity-two excitations give the effective use of the term graviton.
-The external tensor construction specifies a dimensionless symmetric field Phi
+The noncompact metric-tensor construction specifies a dimensionless symmetric field Phi
 on a fixed Minkowski background, its local two-derivative Fierz-Pauli
 action with positive coefficient Z, and the common vertex g Phi:T.
 The linear symmetry delta Phi=partial xi+transpose and source conservation
@@ -1115,8 +1149,8 @@ ell(chi)=(1-x(chi))/Pi(chi)=Z_hat q^2, q^2=Q^2/M_P^2.
 Since ell'(chi_c)=-x'(chi_c)/Pi_c<0, the analytic inverse-function
 theorem gives chi(0)=chi_c and -dchi/dq^2=Z_hat Pi_c/x'(chi_c)>0.
 At Z_hat=1 the matched residue is one in Planck units. The conversion
-slope is registered with the other external tensor coefficients. The matching is a specified effective
-identification of the internal ladder and external source normalization.
+slope is registered with the other noncompact tensor coefficients. The matching is a specified effective
+identification of the internal ladder and noncompact tensor-source normalization.
 
 The implementation evaluates the kinetic gauge identity, two normalized
 spatial polarizations, reflection positivity, exact rational helicity
@@ -1130,7 +1164,7 @@ background solutions of the macroscopic field equations.
 
 ### Occupied matter and complete geometric source derivatives
 
-The six `external_tensor_*` coefficient and status records are published
+The six historically named `external_tensor_*` coefficient and status records are published
 in the production store with current run identity. `chi_pole_crossing`
 supplies the existing critical coordinate. The stored conversion slope is
 -dchi/d(Q^2/M_P^2), whereas `chi_detuning_response.slope` is x'(chi_c).

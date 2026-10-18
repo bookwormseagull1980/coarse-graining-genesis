@@ -112,13 +112,15 @@ over B2/G2, and RP³ over other spherical quotients):
 
 HYPERCHARGE STATISTICS (the input to τ)
 ---------------------------------------
-The torsion parameter τ = (N_L − N_R)/(N_f · ΣY²) uses the
-hypercharge sums:
+The charged-sector response modulus τ = (N_L − N_R)/(N_f · ΣY²) uses
+the hypercharge sums on the 15-coordinate gauge-active quotient:
     ΣY²  = Σ over the 15 Weyl fermions of Y² (per generation)
-    N_L − N_R = 1 (the chiral asymmetry: 8 left vs 7 right components
-    per generation in the Weyl counting — N_LEFT = 8, N_RIGHT = 7)
+    N_L − N_R = 1 (the quotient index: 8 left vs 7 charged right
+    components per generation — N_LEFT = 8, N_RIGHT = 7)
 The specific values (ΣY² = 10/3 per generation, τ = 1/50) are the
-statistical content used by the EC torsion modules.
+charged-response content used by the EC torsion modules.  The complete
+matter carrier also contains neutral nu_R and has 8 left plus 8 right
+coordinates; it has no intrinsic center bias.
 
 IMPLEMENTATION
 -------------
@@ -156,7 +158,7 @@ from cg_core.content_response import (
 # (colour = minimal non-trivial rep 3), chirality (A2 -> SU(2)_L doublet),
 # and colour vectoriality (anomaly cancellation).  The content counting is
 # proved in Lean: lean_proofs/fermion_content.lean
-# (key symmetry: N_L = 8 = N_g = N_c²−1; N_R = 7 = N_g−1).
+# (charged quotient: N_L = 8 = N_g = N_c²−1; N_R = 7 = N_g−1).
 # components counts the Weyl fermions: colour × weak-doublet members
 # (for Q_L: 3 × 2 = 6; for singlets: 3 or 1).
 _ONE_GENERATION = [(name, rep, float(y), n)
@@ -183,9 +185,10 @@ SCALAR_DOF = 2 * N_WEAK  # real components of the complex Higgs doublet
 #   N_L = Q_L + L_L = 3·2 + 1·2 = 6 + 2 = 8  =  N_g = N_c² − 1 = 8
 #   N_R = u_R + d_R + e_R = 3 + 3 + 1 = 7    =  N_g − 1
 #
-# The specified minimal representations give N_L = 8, N_R = 7,
+# The specified charged representations give N_L = 8, N_R = 7,
 # N_f = 15 and ΣY² = 10/3. These counts enter the torsion readout
-# and the neutrino ratio r12 = (N_L−N_R)/ΣY².
+# and the neutrino ratio r12 = (N_L−N_R)/ΣY².  They are quotient
+# observables; adding neutral nu_R restores the complete 8+8 carrier.
 N_LEFT = sum(n for _, _, _, n, sign in CHARGED_GENERATION if sign == 1)
 N_RIGHT = sum(n for _, _, _, n, sign in CHARGED_GENERATION if sign == -1)
 N_G_COLOR = N_GAUGE["su3"]
@@ -239,13 +242,14 @@ def hypercharge_sum_cube() -> float:
     return sum(c * y ** 3 for _, _, y, c in _ONE_GENERATION)
 
 
-def chiral_asymmetry() -> int:
-    """N_L − N_R per generation = 1.
+def charged_quotient_index() -> int:
+    """Charged-quotient index N_L − N_R per generation = 1.
 
     Derivation: the left-handed doublets Q_L, L_L carry 6 + 2 = 8
     components; the right-handed singlets u_R, d_R, e_R carry
-    3 + 3 + 1 = 7; the difference is 1.  This is the chiral
-    asymmetry that sources the torsion parameter τ.
+    3 + 3 + 1 = 7; the difference is 1.  This charged response index
+    enters τ.  It is not the center bias of the complete carrier, whose
+    additional neutral right coordinate gives 8+8.
 
     THE CONTENT IDENTITY N_L = N_g: the LEFT-handed
     component count per generation is EXACTLY the colour generator
@@ -255,35 +259,44 @@ def chiral_asymmetry() -> int:
     same 8-fold content as the colour adjoint), not an independent
     datum.  Lean: AXIOM_PROOF_SERIES/fermion_content.lean (9 theorems).
 
-    THE Z₂ TOPOLOGY : N_L − N_R = 1 is ODD, the
+    THE CHARGED-QUOTIENT Z₂ INDEX: N_L − N_R = 1 is odd, the
     non-trivial element of π₁(RP³) = Z₂ (the antipodal loop winds
     once).  RP³ = S³/Z₂ has TWO spin structures (H¹(RP³, Z₂) = Z₂):
     the trivial one (even winding, P=+) and the non-trivial one (odd
-    winding, P=−).  The per-generation chiral asymmetry = 1 selects
-    the NON-TRIVIAL spin structure — the same Z₂ that fixes the
-    glueball n mod 2 = parity.  This is the topological SOURCE of τ.
+    winding, P=−).  The per-generation charged-quotient index = 1 selects
+    the non-trivial quotient class used by the charged response.  It does
+    not turn the complete 8+8 matter carrier into a center-biased source.
     """
     n_left = sum(c for name, _, _, c in _ONE_GENERATION if name in ("Q_L", "L_L"))
     n_right = N_WEYL_PER_GENERATION - n_left
     return n_left - n_right
 
 
-def tau_statistical() -> float:
-    """τ = (N_L − N_R)/(N_f · ΣY²) = 1/50.
+def chiral_asymmetry() -> int:
+    """Backward-compatible name for :func:`charged_quotient_index`.
 
-    Derivation: the chiral asymmetry per generation is N_L − N_R = 1
+    The returned integer belongs to the 15-coordinate gauge-active quotient.
+    It is not a center bias of the complete 8+8 matter carrier.
+    """
+    return charged_quotient_index()
+
+
+def tau_statistical() -> float:
+    """Charged-response modulus τ = (N_L − N_R)/(N_f · ΣY²) = 1/50.
+
+    Derivation: the charged-quotient index is N_L − N_R = 1
     (the left doublets carry 8 components, the right singlets 7);
     N_f = 15 is the number of Weyl fermions per generation; ΣY² =
     10/3 is the hypercharge capacity per generation.  Hence
     τ = 1/(15 · 10/3) = 1/50 = 0.02.
 
-    Equivalently, tau is the chiral excess per Weyl degree of freedom,
-    normalised by the first non-zero hypercharge moment.  This dimensionless
+    Equivalently, tau is the charged-quotient index per gauge-active Weyl
+    degree of freedom, normalized by the first non-zero hypercharge moment. This dimensionless
     content ratio supplies the modulus used by the homogeneous EC ansatz and
     the squash-response chain.
     """
     n_f = N_WEYL_PER_GENERATION  # 15 Weyl fermions per generation
-    return chiral_asymmetry() / (n_f * hypercharge_sum_sq())  # 1/50
+    return charged_quotient_index() / (n_f * hypercharge_sum_sq())  # 1/50
 
 
 def _self_test() -> None:

@@ -78,8 +78,8 @@ def readout_definition(key):
          "natural units with reduced Planck convention", "dimensional normalization",
          ("the anchor is an external measurement",)),
         ({
-            "tau": ("finite-content chiral response ratio", "1",
-                    "(N_L-N_R)/(N_f Tr(Y^2))=1/50"),
+            "tau": ("charged-quotient response modulus", "1",
+                    "(N_L-N_R)/(N_f Tr(Y^2))=1/50 on the 15-coordinate gauge-active quotient"),
             "L_Cg": ("Gaussian dimensionless endpoint length", "1", "sqrt(pi)"),
             "k_GUT": ("internal isometry-breaking scale", "GeV",
                       "M_P sqrt(pi) tau/sqrt(3)"),

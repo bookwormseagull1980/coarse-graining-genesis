@@ -123,7 +123,7 @@ def compute() -> dict:
     # V_cb (the 2-3 adjacent-generation mixing) carries −s0·κ (the
     # squash amplitude — the J=2 isometry breaking acting on the
     # adjacent generation); V_ub (the 1-3 cross-generation mixing,
-    # chiral) carries +τ·κ (the chiral asymmetry, acting on the
+    # charged) carries +τ·κ (the charged-quotient response, acting on the
     # cross-generation).  The adjacent-vs-cross generation distinction
     # selects the squash (s0 = 2τ) vs chiral (τ) content.
     tau = float(get("tau"))

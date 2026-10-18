@@ -25,6 +25,7 @@ import pytest
 
 from cg_core.content_response import (
     chiral_center_power_law_screening, chiral_center_response,
+    closed_chiral_center_certificate,
     finite_source_response, interacting_content_response,
     log_partition_response, weighted_content_response,
 )
@@ -172,6 +173,7 @@ def test_complete_and_quotient_chiral_center_responses():
     assert complete['susceptibility'] == 1
     assert complete['restoring_hessian'] == 1
     assert not complete['elimination_feedback_required']
+    assert not complete['external_source_required']
 
     quotient = chiral_center_response(neutral_right_weight=0)
     exact = finite_source_response()
@@ -183,6 +185,18 @@ def test_complete_and_quotient_chiral_center_responses():
     assert quotient['susceptibility'] == pytest.approx(float(exact['hessian'][0][0]))
     assert quotient['removed_coordinate'] == 'nu_R'
     assert quotient['elimination_feedback_required']
+
+    closed = closed_chiral_center_certificate()
+    assert closed['complete_dimension'] == 16
+    assert closed['partition_even']
+    assert closed['closed_center_bias'] == 0
+    assert closed['closed_center_susceptibility'] == 1
+    assert closed['closed_restoring_hessian'] == 1
+    assert not closed['external_source_required']
+    assert closed['quotient_dimension'] == 15
+    assert closed['quotient_bias'] == pytest.approx(1/15, abs=2e-16)
+    assert closed['quotient_is_projection_defect']
+    assert closed['removed_coordinate'] == 'nu_R'
 
 
 def test_center_drive_derivative_and_scale_screening():
@@ -199,6 +213,7 @@ def test_center_drive_derivative_and_scale_screening():
     full = chiral_center_power_law_screening(.4, .3)
     assert full['infinite_scale_restoration']
     assert full['energy_upper_bound'] == pytest.approx(.4**2/(2*.3))
+    assert not full['closure_input']
 
     quotient = chiral_center_power_law_screening(
         0, .3, neutral_right_weight=0

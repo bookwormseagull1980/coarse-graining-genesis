@@ -108,7 +108,7 @@ def squash_correction() -> float:
           floor.
       L3  The specific sign and multiplier of v (−s0κ, the
           traceless shear), m_ν3 (+s0κ, the level-transfer conservation
-          v·m_ν3 = const), T_d and Δ²_R (−τκ, the chiral asymmetry τ = s0/2),
+          v·m_ν3 = const), T_d and Δ²_R (−τκ, the charged-quotient modulus τ = s0/2),
           m_p (+5τκ/3 = +τκ·ΣY²·Δ_s, the constituent content ratio), α_s
           (−s0κ/N_g = −s0κ·ξ, the Yukawa-difference conformal normalisation)
           are computed moments c_Q=a_Q r_Q.  The amplitude fraction a_Q

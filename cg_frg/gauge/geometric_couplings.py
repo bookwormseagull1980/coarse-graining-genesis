@@ -384,7 +384,7 @@ def compute() -> dict:
 
     #   delta_g1 = -tau * r23 * (SigmaY2 * Delta_f * xi)
 
-    #     tau      = (N_L-N_R)/(N_f SigmaY2)  chiral asymmetry
+    #     tau      = (N_L-N_R)/(N_f SigmaY2)  charged-quotient response modulus
 
     #     r23      = 3/(10 sqrt3)             hypercharge-trace hierarchy ratio
 

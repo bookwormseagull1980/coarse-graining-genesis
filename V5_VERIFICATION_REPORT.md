@@ -17,8 +17,8 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 # V5 Verification Report
 
-Generated: 2026-10-18 11:17:22
-Python: `3.12.14`
+Generated: 2026-10-18 14:44:22
+Python: `3.12.10`
 Root: `.`
 
 ## Verdict
@@ -29,19 +29,11 @@ A requested reproduction builds empty temporary stores and publishes only after 
 The results below identify the checks executed in this invocation;
 a proof-library result does not certify a numerical run or the entire manuscript chain.
 
-## Not Executed
-
-- Full reproduction during this verification invocation (--no-reproduce).
-- Lean archive compilation (source audit alone is not compilation).
-- Lean Formalization of Arithmetic and Basic Physical Interfaces compilation and axiom audit (enable with --foundations).
-- Isolated full-chain numeric stability rerun (enable with --stability).
-
-No PASS claim is made for these omitted checks.
-
 ## Steps
 
 | step | status | command |
 |---|---:|---|
+| full reproduction | PASS | `python -B scripts/reproduce_v5.py` |
 | current run manifest | PASS | `verify existing run identity and fingerprints` |
 | parameter provenance audit | PASS | `python scripts/audit_param_writers.py` |
 | observation leakage audit | PASS | `python scripts/audit_observation_leakage.py` |
@@ -50,13 +42,21 @@ No PASS claim is made for these omitted checks.
 | path portability audit | PASS | `python scripts/audit_path_portability.py` |
 | full comparison table | PASS | `python comparison/param_audit_full.py` |
 | pytest | PASS | `python -B -m pytest -q -m 'not release_audit' -p no:cacheprovider --basetemp <temporary>` |
+| Lean proof archive | PASS | `python scripts/verify_lean_archive.py --lean-exe <lean.exe>` |
+| Lean Formalization of Arithmetic and Basic Physical Interfaces | PASS | `python -B scripts/verify_foundations.py --project <foundations-project> --lake-exe <lake.exe>` |
+| numeric stability audit | PASS | `python scripts/audit_numeric_stability.py` |
 | run identity after verification | PASS | `verify existing run identity and fingerprints` |
 
-Full Python test results: 597 passed, 5 deselected, 10 subtests passed.
+Full Python test results: 598 passed, 5 deselected, 10 subtests passed.
 The complete release audits are executed in the steps above;
 their duplicate test wrappers are deselected.
 
-Run identity: `20261018T030855Z-69c18be4`.
+Foundations record: `f47bdccf36114e94a3a7177095486a3f`; scope: `current_implemented_library`.
+This is separate from the Lean 4.7.0 archive and numerical verification.
+
+Audits executed once during reproduction and reused after current-run fingerprint validation: parameter provenance audit, observation leakage audit.
+
+Run identity: `20261018T063501Z-119447ea`.
 Bound calculation sources: 119; verification sources: 47; outputs: 2; reference identities: 99; solver execution identities: 2.
 
 ### Store Summary
@@ -181,12 +181,12 @@ enter the causal response, including the direct second source variation.
 - source-charge relative residual: 1.91480936223e-16
 - causal-equation relative residual: 1.90973710345e-16
 - response cutoff comparison: 7.04460217705e-16
-- maximum canonical-form residual: 5.41611936844e-15
-- maximum source-work balance residual: 3.31679128607e-15
+- maximum canonical-form residual: 5.38626232194e-15
+- maximum source-work balance residual: 1.16573417586e-14
 - dominant operation counts: {'causal_entry_divisions': 1192464, 'dense_liouvillian_factorizations': 0, 'exact_segment_propagators': 6, 'nonzero_source_diagonalizations': 2, 'nonzero_source_mode_diagonalizations': 2, 'phase_response_basis_transforms': 0, 'reference_mode_diagonalizations': 2, 'retained_phase_dimensions': [140, 336]}
 
 The exact finite source protocol has positive matter kinetic and spatial forms.
-The external gravitational response additionally requires the collective metric
+The collective gravitational response additionally uses the common noncompact metric
 source map and the reduction of its common constraints.
 
 ### Clock parametrization of the same source history
@@ -201,15 +201,15 @@ selected monotone parametrization of the same source history
 
 ## Covariant native source and metric constraints
 
-finite internal matter coupled to an external metric and scalar compression sources
+finite internal matter coupled dynamically to the common noncompact metric and scalar-compression sectors
 S_m=-integral sqrt(-g) [g^{mu nu} partial_mu(phi)^dagger M partial_nu(phi)+phi^dagger B phi]/2
 nabla_mu T^mu_nu=Re(E_phi^dagger partial_nu phi)+Q_a partial_nu eta^a
 
-- stress-divergence residual: 7.2858385991e-17
-- normal stress / lapse-source residual: 2.22044604925e-16
-- momentum stress / shift-source residual: 2.70972469321e-17
-- source-work charge residual: 1.38777878078e-16
-- Legendre-transform residual: 0
+- stress-divergence residual: 3.46944695195e-17
+- normal stress / lapse-source residual: 0
+- momentum stress / shift-source residual: 3.68807269888e-17
+- source-work charge residual: 2.3966823025e-16
+- Legendre-transform residual: -4.4408920985e-16
 - dominant operation counts: {'common_source_diagonalizations': 1, 'exponential_frechet_divided_difference_matrices': 2, 'external_metric_inversions': 1, 'finite_difference_derivatives': 0, 'source_frechet_directions_per_matrix': 3, 'spatial_metric_inversions': 1}
 
 The source and matter equations enter the total covariant conservation law.
@@ -334,7 +334,7 @@ from the production mass readouts.
 ## Continuous thermal evolution
 
 same specified weak inputs; static-nucleon rates and instantaneous neutrino decoupling
-- final neutron fraction = 0.1933481805061228
+- final neutron fraction = 0.1933481805061133
 - final neutrino temperature = 0.000490656518982094 GeV
 - EOS evaluations / requests = 75 / 205
 - weak-rate evaluations / requests = 125 / 205

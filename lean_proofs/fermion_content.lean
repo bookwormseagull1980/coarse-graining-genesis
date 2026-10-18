@@ -67,7 +67,7 @@ theorem N_L_equals_N_g : Q_L_comp + L_L_comp = N_g := by
 theorem N_R_equals_N_g_minus_1 : u_R_comp + d_R_comp + e_R_comp = N_g - 1 := by
   native_decide
 
--- (5) chiral asymmetry: N_L − N_R = 1 (the numerator of τ)
+-- (5) charged-quotient index: N_L − N_R = 1 (the numerator of τ)
 theorem chiral_asymmetry : (Q_L_comp + L_L_comp) - (u_R_comp + d_R_comp + e_R_comp) = 1 := by
   native_decide
 

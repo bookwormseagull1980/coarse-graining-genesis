@@ -22,7 +22,7 @@ PURPOSE
 -----------------------------------
 The internal space carries an Einstein-Cartan (EC) geometry: the
 connection has both curvature and torsion.  The dimensionless torsion
-modulus is fixed by the fermion-content ratio tau=1/50.  The EC data —
+modulus is fixed by the charged-quotient response ratio tau=1/50.  The EC data —
 the torsion ansatz, the curvature relation, the contorsion — enter
 the EC mass shifts of the spectrum (spectrum_loop: the gauge
 τ²/(6L²) and fermion 3τ²/(8L²) torsion shifts, the gauge
@@ -44,15 +44,17 @@ K = (1/2)T (coefficient τ/(2L)).
 
 THE CONTENT CLOSURE FOR τ
 -------------------------
-The torsion modulus is the dimensionless fermion-content ratio
+The torsion modulus is the dimensionless charged-quotient response ratio
 (see sm_content.tau_statistical)
 
     τ = ⟨χ⟩ / Π_ren = (N_L − N_R)/(N_f · ΣY²) = 1/50,
 
-Here N_L-N_R=1 is the chiral excess of one selected generation,
+Here N_L-N_R=1 is the index of the 15-coordinate charged quotient,
 N_f=15 is its Weyl-fermion count, and sum Y^2=10/3 is its quadratic
-hypercharge moment.  This closure fixes the coefficient of the
-homogeneous isotropic torsion ansatz T^a_bc=(tau/L) epsilon^a_bc.
+hypercharge moment.  The neutral right coordinate completes the full
+8+8 carrier and does not enter this charged trace.  This closure fixes the
+coefficient of the homogeneous isotropic torsion ansatz
+T^a_bc=(tau/L) epsilon^a_bc.
 
 The torsion enters the spectrum only through τ² (the shifts below),
 so the O(10⁻⁴) effect is the magnitude of the torsion.

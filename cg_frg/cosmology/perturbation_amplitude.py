@@ -90,13 +90,13 @@ def compute() -> dict:
     r = delta_squared(kL_cmb)
     # ---- chiral x squash correction  ----
     # The spin-1/2 zero-point D0 is chiral (the minimal unbiased change
-    # is a spinor), so the amplitude carries +tau·kappa (the chiral
-    # asymmetry tau x the squash normalisation kappa) — the same chiral-
+    # is a spinor), so the amplitude carries +tau·kappa (the charged-quotient
+    # quotient modulus tau x the squash normalisation kappa) — the same charged-
     # squash content as eta_B and T_deconf.  (1 - tau·kappa) brings
     # Delta2_R to -0.19%.
     # the chiral-level (1-tau*kappa) factor
     # is the chiral-restoration charge c=−1/2 (τ=s0/2) of squash_level_transfer;
-    # the spin-1/2 zero-point chirality couples to the chiral asymmetry τ.
+    # the spin-1/2 zero-point channel couples to the charged-quotient modulus τ.
     # See epsilon_ratio SOURCE OF THE CORRECTION FACTORS.
     s0 = 2.0 * tau
     kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)

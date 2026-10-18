@@ -50,8 +50,8 @@ THE DERIVATION CHAIN
       inverse square root. The external one-form kinetic norm is a
       different contraction, evaluated by matter_matching.
 
-  STEP 1 — THE CONTENT MODULUS (tau)
-      The chiral excess and quadratic hypercharge moment give
+  STEP 1 — THE CHARGED-QUOTIENT MODULUS (tau)
+      The gauge-active quotient index and quadratic hypercharge moment give
 
           tau=(N_L-N_R)/(N_f sum Y^2)=1/50.
 
@@ -82,10 +82,10 @@ THE DERIVATION CHAIN
           a_Q = amplitude fraction (1 geometric, 1/2 chiral),
           r_Q = content ratio (1, sum Y^2 Delta_s, 1/N_g, 4).
 
-      The amplitude fraction is the broken-generator vs chiral-asymmetry
+      The amplitude fraction is the broken-generator vs charged-quotient
       content: a geometric quantity couples to BOTH broken generators
-      (n_broken = 2 -> a = 1), a chiral quantity to the single chiral
-      asymmetry (N_L-N_R = 1 -> a = (N_L-N_R)/n_broken = 1/2).  The content
+      (n_broken = 2 -> a = 1), a charged response to the single quotient
+      index (N_L-N_R = 1 -> a = (N_L-N_R)/n_broken = 1/2).  The content
       ratio r_Q is the specific content of the operator (below).
 
   STEP 4 — THE CORRECTION FACTOR
@@ -144,7 +144,7 @@ _N_BROKEN = 2            # n_broken = dim SU(2)_R - dim U(1)_R = 2
 def _content() -> dict:
     """The DERIVED content used by every moment (no hard-coding)."""
     SigmaY2 = hypercharge_sum_sq()          # 10/3 (anomaly-normalised)
-    N_L_minus_N_R = float(chiral_asymmetry())   # 1 (Z2 spin structure)
+    N_L_minus_N_R = float(chiral_asymmetry())   # 1 (charged-quotient index)
     N_f = float(N_WEYL_PER_GENERATION)      # 15 Weyl per generation
     tau = N_L_minus_N_R / (N_f * SigmaY2)   # 1/50
     xi = (_D - 2.0) / (4.0 * (_D - 1.0))    # 1/8 (Yamabe conformal coupling)
@@ -235,13 +235,14 @@ def unified_source() -> dict:
 # ---------------------------------------------------------------------------
 def amplitude_fraction(level: str) -> float:
     """a_Q — the amplitude fraction of the level (the broken-generator vs
-    chiral-asymmetry content).
+    charged-quotient content).
 
     A GEOMETRIC/seesaw/power quantity couples to BOTH broken generators of
     the squash (n_broken = 2), so a_Q = 1 (the full amplitude s0 = 2 tau).
-    A CHIRAL/constituent quantity couples to the single chiral asymmetry
+    A CHIRAL/constituent quantity couples to the single charged-quotient index
     (N_L - N_R = 1), so a_Q = (N_L-N_R)/n_broken = 1/2 (the amplitude tau
-    = s0/2).  This is the DERIVED geometric-vs-chiral split.
+    = s0/2).  This is the DERIVED geometric-vs-charged-response split; it is
+    not a center asymmetry of the complete 8+8 carrier.
     """
     c = _content()
     half = c["N_L_minus_N_R"] / _N_BROKEN      # 1/2
@@ -422,7 +423,7 @@ def _self_test() -> None:
     # STEP 0: kappa^2 = (1+s)/(1-2s)^{5/2} (the geometric integral).
     assert abs(kappa - math.sqrt((1 + s0) / (1 - 2 * s0) ** 2.5)) < tol
 
-    # STEP 3: the amplitude fraction is the broken-generator vs chiral content.
+    # STEP 3: the amplitude fraction is the broken-generator vs charged-quotient content.
     assert abs(amplitude_fraction("geometric") - 1.0) < tol
     assert abs(amplitude_fraction("chiral_restoration")
                - c["N_L_minus_N_R"] / _N_BROKEN) < tol   # 1/2

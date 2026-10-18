@@ -29,10 +29,13 @@ and adiabatic initial data and unit linear response are separate choices.
 
 The local response uses a Gaussian variance ratio (equivalently, the
 normalized susceptibility of the specified linear source), with its square
-root assigned as the RMS-to-flux amplitude.  In the local source identity,
-rho_Sigma^free is prescribed source data and rho_pol is determined by the
-solution Phi.  This module implements no evolution or averaging map from
-the homogeneous rho_Sigma to either local density or their sum.
+root assigned as the RMS-to-flux amplitude.  In this local subsystem,
+rho_Sigma^free is interface data inherited from the closed cosmological
+state and rho_pol is determined by the solution Phi.  It is not an
+outside-universe source.  This module implements no evolution or averaging
+map from the homogeneous rho_Sigma to either local density or their sum, so
+that transfer remains an explicit subsystem boundary rather than a claimed
+local derivation.
 
 Records with role="comparison" are downstream
 propagations of the closed parameter set through CAMB or evaluations
@@ -247,7 +250,7 @@ def compute() -> dict:
             "mu(y)=sqrt(Z_IR)=y/sqrt(1+y^2), where Z_IR is the variance "
             "ratio or normalized susceptibility.  In the local identity "
             "rho_dark,eff = rho_Sigma^free + rho_pol, rho_Sigma^free is "
-            "given source data and rho_pol follows from the solution Phi. "
+            "closed-state interface data and rho_pol follows from the solution Phi. "
             "No evolution or averaging relation to homogeneous rho_Sigma "
             "is implemented here."
         ),

@@ -732,7 +732,7 @@ def report_text(results: list[dict], not_executed: list[str]) -> str:
                       f"- maximum source-work balance residual: {native_matter['maximum_energy_balance_residual']:.12g}",
                       f"- dominant operation counts: {native_matter['dominant_operation_counts']}", "",
                       "The exact finite source protocol has positive matter kinetic and spatial forms.",
-                      "The external gravitational response additionally requires the collective metric",
+                      "The collective gravitational response additionally uses the common noncompact metric",
                       "source map and the reduction of its common constraints.", ""]
             clock_chart = native_matter.get("clock_reparametrization", {})
             if clock_chart:

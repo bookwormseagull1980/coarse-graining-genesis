@@ -149,7 +149,8 @@ def alpha_em_zero() -> float:
 N_G = float(N_G_COLOR)  # colour adjoint dimension from the common carrier
 DELTA_S = 0.5         # scalar conformal weight (d−2)/2
 # NOTE: the torsion parameter τ = (N_L−N_R)/(N_f·ΣY²) = 1/50 is the
-# framework's DERIVED content ratio (Lean-proven); the run-time value is
+# framework's DERIVED charged-quotient ratio (Lean-proven); it is not a
+# center bias of the complete 8+8 carrier.  The run-time value is
 # always read from the store via get("tau") — no local copy is kept.
 
 

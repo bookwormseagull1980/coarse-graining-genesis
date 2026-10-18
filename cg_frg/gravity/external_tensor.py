@@ -15,6 +15,10 @@
 
 """Macroscopic tensor response from one covariant Einstein--matter action.
 
+The historical module name ``external_tensor`` means external to the compact
+internal carrier.  The metric is a dynamical noncompact sector of the same
+closed system, not an exogenous field or an outside-universe source.
+
 The dimensionless field Phi couples as g Phi_{mu nu} T^{mu nu}. Its
 Fierz--Pauli kinetic coefficient is Z>0. The physical helicity space has
 two components with inverse covariance Z Q^2 and residue g^2/Z.
@@ -126,7 +130,7 @@ def exact_helicity_certificate(kinetic, coupling=1):
     certificate = certify_affine_residue([[0, 0], [0, 0]], [[z, 0], [0, z]],
                                          [[g, 0], [0, g]])
     return {"scope": "flat-background quadratic macroscopic tensor response",
-            "physical_variable": "external Euclidean Q^2 on a fixed background",
+            "physical_variable": "noncompact Euclidean Q^2 on a fixed background",
             "physical_helicities": [-2, 2],
             "mass_term": "zero by the declared local linear gauge symmetry",
             "kinetic_coefficient": str(z), "source_coupling": str(g),
@@ -348,16 +352,16 @@ def compute():
     mp = _positive(float(get("M_P")), "Planck scale")
     pset("external_tensor_Z", mp*mp, provenance="DERIVED",
          note="Z=M_P^2, coefficient of the specified external Fierz-Pauli action in GeV^2.",
-         dependencies=("M_P",), definition=definition("external tensor kinetic coefficient", "GeV^2", "Z Q^2 I_2"),
+         dependencies=("M_P",), definition=definition("noncompact metric tensor kinetic coefficient", "GeV^2", "Z Q^2 I_2"),
          evidence_kind=evidence)
     z = float(get("external_tensor_Z"))
     pset("external_tensor_residue", 1/z, provenance="DERIVED",
          note="Positive physical helicity residue g^2/Z with g=1, in GeV^-2.",
-         dependencies=("external_tensor_Z",), definition=definition("external helicity pole residue", "GeV^-2", "lim Q^2 C_hel(Q^2)"),
+         dependencies=("external_tensor_Z",), definition=definition("noncompact metric helicity pole residue", "GeV^-2", "lim Q^2 C_hel(Q^2)"),
          evidence_kind=evidence)
     pset("external_tensor_G", 1/(8*math.pi*z), provenance="DERIVED",
          note="Static energy-source coefficient G=1/(8*pi*Z), in GeV^-2, in the specified gauge action.",
-         dependencies=("external_tensor_Z",), definition=definition("external static Newton coefficient", "GeV^-2", "complete conserved-source exchange", "static energy monopoles"),
+         dependencies=("external_tensor_Z",), definition=definition("static Newton coefficient of the common metric sector", "GeV^-2", "complete conserved-source exchange", "static energy monopoles"),
          evidence_kind=evidence)
     detuning = get("chi_detuning_response")
     slope = _positive(float(detuning["slope"]), "internal crossing slope")
@@ -368,7 +372,7 @@ def compute():
          evidence_kind=evidence)
     pset("external_tensor_chi_slope", residue, provenance="DERIVED",
          note="-dchi/d(Q^2/M_P^2)=Pi_c/x'(chi_c)=R_delta for Z_hat=1 under inverse-response matching.",
-         dependencies=("chi_detuning_response",), definition=definition("external momentum conversion slope", "dimensionless", "-dchi/d(Q^2/M_P^2) at Q^2=0", "matched scalar inverse response"),
+         dependencies=("chi_detuning_response",), definition=definition("noncompact momentum conversion slope", "dimensionless", "-dchi/d(Q^2/M_P^2) at Q^2=0", "matched scalar inverse response"),
          evidence_kind=evidence)
     critical = float(get("chi_pole_crossing"))
     status = {"scope": "macroscopic Einstein--matter response; flat-background tensor coefficients",
@@ -389,7 +393,7 @@ def compute():
               "stationary_limit": "Delta(Psi)=rho/(2*M_star^2)",
               "approximation_order": "classical effective action and its linear response on a specified solution"}
     pset("external_tensor_status", status, provenance="DERIVED", role="informational",
-         note="Physical realization and matching scope of the external tensor coefficients; the helicity pole follows from the specified quadratic gauge action.",
+         note="Physical realization and matching scope of the historically named external_tensor coefficients; they belong to the common noncompact metric sector, and the helicity pole follows from the specified quadratic gauge action.",
          dependencies=("chi_pole_crossing",), evidence_kind=evidence)
     return status
 
