@@ -209,7 +209,9 @@ def generated_yang_mills_interval_certificate(
         else:
             high = mid
 
-    iv = mpmath.iv
+    from mpmath.ctx_iv import MPIntervalContext
+
+    iv = MPIntervalContext()
     iv.dps = decimal_places
     L_iv = iv.mpf(repr(L))
     critical_iv = iv.sqrt(iv.pi)
