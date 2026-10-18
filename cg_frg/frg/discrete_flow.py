@@ -68,25 +68,25 @@ consolidates the discrete flow's four structural properties:
   sampling convention. Its square is not an error bound: a convergence
   bound needs the actual update, method, stability and derivative data.
 
-  PROPERTY 4 — THE MASS-GAP SPECTRUM
-  ------------------------------------
-  The discrete flow with the long-root condensate potential
-  produces a SPECTRUM of states, not just a single gap:
+  PROPERTY 4 — THE GENERATED YANG--MILLS MASS SPECTRUM
+  ----------------------------------------------------
+  Paper 4 closes the condensed response in two physical blocks.  The
+  source-normalised radial block has mass squared
 
-      [−Δ_{RP³} + m²_long(σ)]·ψ_n = E_n·ψ_n
-      m²_long(σ) = K·(R(σ) − R_c),   K = 8/3
+      m_rad² = 4q F''(q)/Z(q),
 
-  · at the emergence scale R(M_G) < R_c: the tachyon — the
-    condensation trigger (order_parameter);
-  · the condensate ⟨E⟩ = s₀·M_G/√2 (s₀ = 2τ) gives the generator
-    mass m_gen = g₂·⟨E⟩ — the QCD initial condition
-    (mass_gap_scale): m_gen² = g₂²⟨E⟩² > 0;
-  · the assigned J = 2 effective-directory coefficient
-    (14+8tau+2tau²)/L² is positive; it is not the genuine rough-TT
-    eigenvalue or a proof of a particular observable's lowest mass;
-  · the assigned glueball catalogue ratios are 1, sqrt(2), 3/2
-    and sqrt(17/8). Their use as physical channels requires the
-    source and two-body matching stated in the QCD calculation.
+  while coclosed colour-connection modes are governed by
+
+      Δ_1^perp + δ_q I,       δ_q = 2q C_ad/(3 V h).
+
+  On RP³ the latter begins at 4/L²+δ_q.  The generated response gap is
+
+      Δ_YM² = min{m_rad², 4/L²+δ_q} > 0.
+
+  The long-root negative coefficient K(R-R_c) is the trigger that selects
+  the condensed branch.  The endpoint generator scale g₂⟨E⟩, the assigned
+  J=2 directory, and the glueball catalogue are parallel readouts; they do
+  not replace the two-block spectral minimum above.
 
   REFLECTION POSITIVITY (the OS structure)
   ----------------------------------------
@@ -101,7 +101,7 @@ consolidates the discrete flow's four structural properties:
 PARAMETERS
 ----------
 Reads : kL, M_G, tau, g2_MG, R_c_star, mass_gap_m_gen,
-        sigma_C (the IR endpoint, gw_ratio)
+        generated_ym_mass_gap, sigma_C (the IR endpoint, gw_ratio)
 Writes: discrete_flow_semigroup, discrete_flow_beta,
         discrete_flow_step, discrete_flow_gap_spectrum,
         discrete_flow_reflection_positivity, discrete_flow_status
@@ -112,8 +112,8 @@ IMPLEMENTATION
 No observed value enters the computation: the semigroup check is
 numerical (the Gaussian kernel), the β is the analytic closed
 form, the gap spectrum uses the framework's internal quantities.
-The glueball tower's absolute scale is the standard QCD dynamics
-(comparison), not a framework input.
+The QCD running scale and catalogue are retained as separately named
+readouts and are not used to define the generated mass gap.
 """
 
 from __future__ import annotations
@@ -195,6 +195,7 @@ def compute() -> dict:
     g2 = float(get("g2_MG"))
     R_c = float(get("R_c_star"))
     mgen = float(get("mass_gap_m_gen"))
+    generated_ym = get("generated_ym_mass_gap")
     sigma_C = float(get("sigma_C_hubble"))
 
     # PROPERTY 1 — the semigroup (numerical, machine precision):
@@ -215,11 +216,23 @@ def compute() -> dict:
     step_squared = dln_sigma * dln_sigma
     free_checks = free_carrier_checks()
 
-    # PROPERTY 4 — the gap spectrum:
+    # PROPERTY 4 — generated gap and parallel endpoint diagnostics:
     R_MG = 6.0 / (kL * kL)
     m2_long = (8.0 / 3.0) * (R_MG - R_c)      # the tachyon at M_G
     lam_J2 = 14.0 + 8.0 * tau + 2.0 * tau * tau   # the J=2 kinetic > 0
     m_gen_sq = mgen * mgen                     # g2^2 <E>^2 > 0
+    radial_mass_squared = float(generated_ym["radial_mass_squared"])
+    transverse_mass_squared = float(generated_ym["transverse_mass_squared"])
+    curvature_score_overlap = float(generated_ym["curvature_score_overlap"])
+    radial_intertwining_residual = float(
+        generated_ym["radial_intertwining_residual"])
+    gap_squared = float(generated_ym["gap_squared"])
+    gap_mass = float(generated_ym["gap"])
+    controlling_block = generated_ym["controlling_block"]
+    if not math.isclose(gap_squared,
+                        min(radial_mass_squared, transverse_mass_squared),
+                        rel_tol=2e-13, abs_tol=0.0):
+        raise ValueError("generated Yang--Mills gap is inconsistent with its blocks")
     # The glueball tower ratios — GEOMETRIC (the two-gluon SO(4) Casimir
     # spectrum of qcd_sector, NOT the lattice comparison): 2++/0++ = sqrt2,
     # 0-+ = sqrt(17/8), 0++* = sqrt(18/8) = 3/2.
@@ -242,15 +255,30 @@ def compute() -> dict:
          note=f"Delta ln sigma = 1/kL* = {dln_sigma:.4f} — the "
               f"specified sampling in log sigma; its square "
               f"{step_squared:.2f} is not a certified discretisation error")
-    pset("discrete_flow_gap_spectrum",
-         f"m_long^2(M_G) = K(R-R_c) = {m2_long:.4f} < 0 (the tachyon — "
-         f"the condensation trigger); m_gen^2 = g2^2<E>^2 = "
-         f"{m_gen_sq:.3e} GeV^2 > 0 and the J=2 kinetic lambda_J = "
-         f"{lam_J2:.4f}/L^2 > 0 in the assigned effective directory; "
-         f"the prescribed glueball catalogue ratios: " + ", ".join(f"{k} {v:.2f}" for k, v in tower.items()),
+    gap_spectrum = {
+        "generated_yang_mills": {
+            "radial_mass_squared": radial_mass_squared,
+            "transverse_mass_squared": transverse_mass_squared,
+            "curvature_score_overlap": curvature_score_overlap,
+            "radial_intertwining_residual": radial_intertwining_residual,
+            "gap_squared": gap_squared,
+            "gap_mass": gap_mass,
+            "controlling_block": controlling_block,
+        },
+        "long_root_trigger": m2_long,
+        "generator_scale_squared": m_gen_sq,
+        "j2_directory_coefficient": lam_J2,
+        "glueball_catalogue_ratios": tower,
+    }
+    pset("discrete_flow_gap_spectrum", gap_spectrum,
          provenance="DERIVED", role="internal",
-         note="Positive assigned coefficients and prescribed QCD catalogue; "
-              "no source-resolved mass gap or external tensor pole is inferred.")
+         dependencies=("generated_ym_mass_gap", "mass_gap_m_gen", "kL",
+                       "R_c_star", "tau"),
+         note=f"The generated Yang--Mills response has spectral bottom "
+              f"Delta_YM^2={gap_squared:.8g}, controlled by the "
+              f"{controlling_block} block. The long-root trigger, endpoint "
+              f"generator scale, J=2 directory and QCD catalogue remain "
+              f"separately identified diagnostics.")
     pset("discrete_flow_reflection_positivity",
          free_checks,
          provenance="DERIVED", role="informational",
@@ -259,16 +287,18 @@ def compute() -> dict:
               "Neither establishes interacting or gravitational OS positivity.")
     pset("discrete_flow_status",
          "Gaussian resolution semigroup with specified logarithmic sampling "
-         "and resolution speed; assigned positive excitation catalogue; "
-         "explicit finite free reflection-positive covariance. Physical "
-         "time evolution and an interacting functional RG are separate inputs.",
+         "and resolution speed; generated condensed Yang--Mills spectrum "
+         "with radial and coclosed-connection blocks; explicit finite free "
+         "reflection-positive covariance.",
          provenance="DERIVED", role="informational",
-         note="The multiplier, state channel, free covariance and assigned "
-              "excitation catalogue have distinct definitions.")
+         note="The resolution multiplier, generated mass operator, state "
+              "channel, free covariance and QCD catalogue have distinct "
+              "definitions and are published separately.")
 
     return {"semigroup_err": err, "beta_MG": beta_MG, "dln_sigma": dln_sigma,
             "N_steps": N_steps, "step_squared": step_squared, "m2_long": m2_long,
             "m_gen_sq": m_gen_sq, "lambda_J2": lam_J2, "tower": tower,
+            "generated_ym": generated_ym, "gap_spectrum": gap_spectrum,
             "free_carrier_checks": free_checks}
 
 
@@ -279,8 +309,11 @@ if __name__ == "__main__":
     print(f"window step dlnσ   = {r['dln_sigma']:.4f}  "
           f"(N steps M_P->sigma_C = {r['N_steps']:.0f})")
     print(f"tachyon m2_long    = {r['m2_long']:.4f} < 0 (the trigger)")
-    print(f"m_gen^2            = {r['m_gen_sq']:.3e} GeV^2 > 0, "
-          f"lambda_J2 = {r['lambda_J2']:.4f} > 0 — the gap")
+    print(f"generated YM gap^2 = {r['generated_ym']['gap_squared']:.6e} "
+          f"({r['generated_ym']['controlling_block']} block)")
+    print(f"generated YM gap   = {r['generated_ym']['gap']:.6e} GeV")
+    print(f"m_gen^2            = {r['m_gen_sq']:.3e} GeV^2, "
+          f"lambda_J2 = {r['lambda_J2']:.4f} (parallel readouts)")
     print(f"tower ratios       = " + ", ".join(
         f"{k} {v:.2f}" for k, v in r['tower'].items()))
     print("discrete_flow OK")

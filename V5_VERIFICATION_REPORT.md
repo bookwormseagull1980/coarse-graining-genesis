@@ -4,18 +4,20 @@ Author: Jinku Guo <guojk@nwpu.edu.cn>
 Northwestern Polytechnical University, Xi'an 710072, China
 ORCID: 0009-0000-6600-6171
 References:
-DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
-DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
-DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
-DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
-DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
-DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
+Guo, J. (2026a). Certified Spectral Computation for Semilinear Evolution: Finite Records and Polynomial Bit Cost. Unpublished manuscript.
+Guo, J. (2026b). Coarse-Graining and Long-Range Response in Generated Systems. Unpublished manuscript.
+Guo, J. (2026c). Dynamics of Generated Spectra from Minimal Change: Certified Function Classes and Finite Windows. Unpublished manuscript.
+Guo, J. (2026d). The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap. Unpublished manuscript.
+Guo, J. (2026e). A Spectral Construction of Natural-Number Arithmetic. Unpublished manuscript.
+Guo, J. (2026f). A Spectral Criterion for Emergent Gravity. Unpublished manuscript.
+Guo, J. (2026g). The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales. Unpublished manuscript.
+Guo, J. (2026h). The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation. Unpublished manuscript.
 Full bibliography: REFERENCES.md and CITATION.cff.
 -->
 
 # V5 Verification Report
 
-Generated: 2026-10-06 16:04:08
+Generated: 2026-10-18 09:22:30
 Python: `3.12.10`
 Root: `.`
 
@@ -23,11 +25,14 @@ Root: `.`
 
 PASS for the executed checks
 
-The reproduction builds empty stores in the system temporary directory
-and publishes only after success. This report describes the current run.
+A requested reproduction builds empty temporary stores and publishes only after success.
+The results below identify the checks executed in this invocation;
+a proof-library result does not certify a numerical run or the entire manuscript chain.
 
 ## Not Executed
 
+- Lean archive compilation (source audit alone is not compilation).
+- Lean Formalization of Arithmetic and Basic Physical Interfaces compilation and axiom audit (enable with --foundations).
 - Isolated full-chain numeric stability rerun (enable with --stability).
 
 No PASS claim is made for these omitted checks.
@@ -45,26 +50,25 @@ No PASS claim is made for these omitted checks.
 | path portability audit | PASS | `python scripts/audit_path_portability.py` |
 | full comparison table | PASS | `python comparison/param_audit_full.py` |
 | pytest | PASS | `python -B -m pytest -q -m 'not release_audit' -p no:cacheprovider --basetemp <temporary>` |
-| Lean proof archive | PASS | `python scripts/verify_lean_archive.py --lean-exe <lean.exe>` |
 | run identity after verification | PASS | `verify existing run identity and fingerprints` |
 
-Full Python test results: 539 passed, 5 deselected, 10 subtests passed.
+Full Python test results: 583 passed, 5 deselected, 10 subtests passed.
 The complete release audits are executed in the steps above;
 their duplicate test wrappers are deselected.
 
 Audits executed once during reproduction and reused after current-run fingerprint validation: parameter provenance audit, observation leakage audit.
 
-Run identity: `20261006T080138Z-cf78444e`.
-Bound calculation sources: 117; verification sources: 44; outputs: 2; reference identities: 99; solver execution identities: 2.
+Run identity: `20261018T011955Z-546661b7`.
+Bound calculation sources: 118; verification sources: 47; outputs: 2; reference identities: 99; solver execution identities: 2.
 
 ### Store Summary
 
-- cg_params records: 239
+- cg_params records: 241
 - Isolated reference records: 99
-- provenance: DERIVED=235, OBSERVED=1, PENDING=2, SCALE_CHOICE=1
-- roles: anchor=1, cg=23, comparison=49, informational=21, internal=145
+- provenance: DERIVED=237, OBSERVED=1, PENDING=2, SCALE_CHOICE=1
+- roles: anchor=1, cg=23, comparison=49, informational=21, internal=147
 - declared physical definitions: 120
-- declared direct-input sets: 119
+- declared direct-input sets: 122
 
 ### Selected Closed Values
 
@@ -163,7 +167,7 @@ enter the causal response, including the direct second source variation.
 
 - source-charge relative residual: 1.91480936223e-16
 - causal-equation relative residual: 1.90973710345e-16
-- response cutoff comparison: 7.18669928059e-16
+- response cutoff comparison: 7.04460217705e-16
 - maximum canonical-form residual: 5.38626232194e-15
 - maximum source-work balance residual: 1.16573417586e-14
 - dominant operation counts: {'causal_entry_divisions': 1192464, 'dense_liouvillian_factorizations': 0, 'exact_segment_propagators': 6, 'nonzero_source_diagonalizations': 2, 'nonzero_source_mode_diagonalizations': 2, 'phase_response_basis_transforms': 0, 'reference_mode_diagonalizations': 2, 'retained_phase_dimensions': [140, 336]}
