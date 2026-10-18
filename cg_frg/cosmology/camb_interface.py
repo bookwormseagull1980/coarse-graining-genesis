@@ -649,7 +649,7 @@ def late_ionization_drag_capacity(*, redshift_max, cosmology, components, atomic
     neutrinos and vacuum add nonnegative density. Interval arithmetic bounds
     the analytic capacity for the supplied numerical input values.
     """
-    from mpmath import iv
+    from mpmath.ctx_iv import MPIntervalContext
     inputs = (redshift_max, cosmology['H0'], cosmology['YHe'], components['baryon'],
               components['cdm'], components['photon'], *atomic.values())
     if (not all(math.isfinite(x) for x in inputs) or redshift_max < 0
@@ -657,6 +657,8 @@ def late_ionization_drag_capacity(*, redshift_max, cosmology, components, atomic
             or min(cosmology['H0'], components['baryon'], components['cdm'],
                    components['photon'], *atomic.values()) <= 0):
         raise ValueError("positive background and atomic inputs and a finite nonnegative cutoff required")
+    iv = MPIntervalContext()
+
     def q(value):
         # Exact integers and decimal strings remain exact.  A Python float is
         # a binary datum, so first enclose that datum between its adjacent
