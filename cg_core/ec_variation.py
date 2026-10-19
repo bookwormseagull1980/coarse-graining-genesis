@@ -216,6 +216,7 @@ def minimal_coupled_action_variation(dual, psi, psi_bar, native_dirac, coefficie
     ket = np.asarray(psi, complex)
     bra = np.asarray(psi_bar, complex)
     d0 = np.asarray(native_dirac, complex)
+    coefficients = np.asarray(coefficients, float)
     if b.shape != (3, 3) or ket.ndim != 1 or ket.size == 0 or bra.shape != ket.shape:
         raise ValueError("a real 3 by 3 torsion matrix and equally sized matter row and column required")
     if d0.shape != (ket.size, ket.size) or len(coefficients) != 3:
@@ -283,6 +284,80 @@ def minimal_classical_stationarity():
     }
 
 
+def eliminate_minimal_trace_torsion(bilinear, *, radius, coefficients):
+    """Exact stationary elimination of the minimally coupled trace sector.
+
+    Write c0=2(a-b), B=(tau/L)I and rho=bar(psi)psi.  The part of the
+    action depending on tau is 3*c0*tau^2/L^2-3*tau*rho/(4*L).
+    Completing its square gives tau_*=L*rho/(8*c0) and the induced
+    interaction -3*rho^2/(64*c0).  This is an algebraic stationary
+    elimination, including when c0<0; it is not a Gaussian integral over
+    a negative Euclidean quadratic form.  The fermion bilinear remains
+    an observable of the same matter action, never an imposed drive.
+
+    Rational inputs remain exact.  The normalization of rho includes
+    the complete matter fibre, including its neutral right coordinate.
+    Only the trace coefficient is used: transverse fluctuations must be
+    retained separately when computing a full fluctuation determinant.
+    """
+    def rational(value):
+        return Q(str(value)) if isinstance(value, (float, np.floating)) else Q(value)
+
+    if len(coefficients) != 3:
+        raise ValueError("three quadratic torsion coefficients required")
+    rho, length = rational(bilinear), rational(radius)
+    a, b, c = map(rational, coefficients)
+    if length <= 0:
+        raise ValueError("positive radius required")
+    c0 = quadratic_torsion_coefficients(a, b, c)[0]
+    if not c0:
+        raise ValueError("the trace auxiliary Hessian must be invertible")
+    tau = length*rho/(8*c0)
+    induced = -Q(3, 64)/c0
+    return {
+        "trace_coefficient": c0,
+        "trace_hessian": 6*c0/length**2,
+        "stationary_tau": tau,
+        "stationary_dual_trace": tau/length,
+        "induced_four_fermion_coefficient": induced,
+        "induced_interaction": induced*rho*rho,
+        "completed_square_coefficient": 3*c0/length**2,
+        "trace_equation_residual": 6*c0*tau/length**2-3*rho/(4*length),
+        "content_dimension": full_carrier_response()["dimension"],
+    }
+
+
+def eliminate_auxiliary_hessian(hessian, auxiliary_indices):
+    """Hessian of an action after stationary auxiliary-field elimination.
+
+    The physical Hessian is Hxx-Hxa*Haa^{-1}*Hax.  Invertibility of Haa
+    is required, while positivity of Haa is not.  No mixed block is
+    dropped.  The inertia of the reduced physical form is returned so
+    a caller can check stability on its actual physical/gauge quotient.
+    """
+    matrix = np.asarray(hessian, float)
+    indices = tuple(auxiliary_indices)
+    if (matrix.ndim != 2 or matrix.shape[0] != matrix.shape[1]
+            or not np.all(np.isfinite(matrix))
+            or not np.allclose(matrix, matrix.T, rtol=1e-12, atol=1e-14)):
+        raise ValueError("a finite real symmetric Hessian required")
+    if (not indices or len(set(indices)) != len(indices)
+            or any(not isinstance(i, (int, np.integer)) or isinstance(i, bool)
+                   or i < 0 or i >= len(matrix) for i in indices)):
+        raise ValueError("distinct valid auxiliary indices required")
+    physical = tuple(i for i in range(len(matrix)) if i not in indices)
+    if not physical:
+        raise ValueError("at least one retained physical coordinate required")
+    haa = matrix[np.ix_(indices, indices)]
+    hax = matrix[np.ix_(indices, physical)]
+    feedback = hax.T @ np.linalg.solve(haa, hax)
+    reduced = matrix[np.ix_(physical, physical)]-feedback
+    return {"physical_indices": physical, "auxiliary_indices": indices,
+            "auxiliary_response": -np.linalg.solve(haa, hax),
+            "schur_feedback": feedback, "reduced_hessian": reduced,
+            "reduced_eigenvalues": np.linalg.eigvalsh(reduced)}
+
+
 def solve_algebraic_torsion(current, coefficients):
     """Stationary point of sum c_i ||B_i||^2+<J,B> in all nine directions.
 
@@ -347,6 +422,11 @@ def production_torsion_sector_contract(tau, radius):
         "minimal_classical_stationary_tau": 0.,
         "minimal_classical_trace_residual_at_input_tau": -36*action["a"]*tau/radius**2,
         "minimal_dirac_square_matching": "signed cross term retained; quadratic coefficient 9/16 differs from production 3/8",
+        "induced_four_fermion_coefficient_unit_MG": float(
+            eliminate_minimal_trace_torsion(0, radius=radius, coefficients=coefficients)
+            ["induced_four_fermion_coefficient"]),
+        "quantum_response_calculation": "cg_frg.ewsb.torsion_response: common EC plus regulated Gaussian fermion action; fixed geometry/window",
+        "quartic_reconstruction_used_to_determine_tau": False,
         "matter_action_derivative_required": 36*action["a"]*tau/radius**2,
         "gauge_torsion_mass_squared": m2_gauge(0., radius, tau),
         "fermion_torsion_mass_squared": m2_fermion(radius, tau),

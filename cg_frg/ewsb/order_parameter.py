@@ -38,10 +38,12 @@ dynamics is the Landau potential on the curvature axis:
   g₁/g₂ normalisation κ(s₀) matching the SM — the U(1)_Y
   kinematic closure);
 
-· λ = ξ·(R_c − R_GUT)/(2τ)² ≈ 149.0 — the quartic, self-consistent
-  from the stationarity at the GUT onset (R_GUT = 6/L_GUT² with
+· λ = ξ·(R_c − R_GUT)/(2τ)² ≈ 149.0 — the quartic reconstructed
+  from the retained VEV at the GUT onset (R_GUT = 6/L_GUT² with
   L_GUT = √3/τ — the J=2 isometry-breaking scale; √3 enters as
-  the T³-diagonal geometric factor, the same family as √(2π));
+  the T³-diagonal geometric factor, the same family as √(2π)).
+  This reconstructs lambda after tau is supplied; the resulting stationary
+  identity does not independently determine the torsion amplitude;
 
 · m²(L) = ξ·(R(L) − R_c) — the effective mass²: the tachyon
   appears for R < R_c, i.e. L > L_Cg* = √π — the symmetry-
@@ -160,6 +162,10 @@ def lambda_quartic(xi: float, R_c: float, tau: float) -> float:
 
     R_GUT = 6/L_GUT², L_GUT = √3/τ — the J=2 isometry-breaking
     scale (√3 — the T³-diagonal geometric factor).
+    Since phi0=2*tau is used to reconstruct lambda, the corresponding
+    Landau stationary equation cannot subsequently be used as an
+    independent equation for tau. The common torsion-response action
+    does not consume this reconstructed coupling.
     """
     L_GUT = math.sqrt(3.0) / tau
     R_GUT = 6.0 / (L_GUT * L_GUT)
@@ -240,8 +246,9 @@ def compute() -> dict:
               f"-0.05%)")
     pset("order_parameter_lambda", lam, provenance="DERIVED", role="internal",
          note=f"lambda = xi(R_c-R_GUT)/(2 tau)^2 = {lam:.3f} — the quartic "
-              f"from the stationarity at the GUT onset (R_GUT = 6/L_GUT^2, "
-              f"L_GUT = sqrt(3)/tau = {L_GUT:.3f})")
+               f"reconstructed from the retained phi0=2tau at the GUT onset "
+               f"(R_GUT = 6/L_GUT^2, L_GUT = sqrt(3)/tau = {L_GUT:.3f}); "
+               f"this stationary identity is not an independent equation for tau")
     pset("order_parameter_mass2_MG", m2_MG, provenance="DERIVED",
          role="internal",
          note=f"m^2(M_G) = xi(R(M_G)-R_c) = {m2_MG:.6f} < 0 — the "

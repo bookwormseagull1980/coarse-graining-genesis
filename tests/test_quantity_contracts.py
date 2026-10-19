@@ -189,8 +189,22 @@ def test_production_shared_ew_and_mass_outputs_ignore_comparison_mutation(tmp_pa
     from comparison.sm_rge.inputs import published_running_mass_benchmark
     first_comparison = published_running_mass_benchmark()
     baseline = params.resolved_records(json.loads(original_bytes["_PARAM_FILE"])["parameters"])
-    assert {key: record["value"] for key, record in first.items()} == {
-        key: record["value"] for key, record in baseline.items()}
+
+    def compare_snapshot(actual, expected):
+        # A stored binary-float snapshot can differ in its last few bits
+        # across numerical-library versions. The observation-isolation
+        # comparison between the two executions below remains exact.
+        if isinstance(expected, dict):
+            assert actual.keys() == expected.keys()
+            for key in expected:
+                compare_snapshot(actual[key], expected[key])
+        elif isinstance(expected, float):
+            assert actual == pytest.approx(expected, rel=1e-14, abs=0.)
+        else:
+            assert actual == expected
+
+    compare_snapshot({key: record["value"] for key, record in first.items()},
+                     {key: record["value"] for key, record in baseline.items()})
     sm_records = json.loads(params._SM_FILE.read_text(encoding="utf-8"))["parameters"]
     changed = []
     for index, (key, record) in enumerate(sorted(sm_records.items())):

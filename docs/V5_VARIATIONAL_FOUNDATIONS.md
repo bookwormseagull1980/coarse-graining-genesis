@@ -255,6 +255,169 @@ operator with the retained response catalogue. The programme below
 therefore does not identify a charge-response value with a stationary
 connection merely because both have been denoted by `tau`.
 
+### Exact auxiliary elimination and the induced interaction
+
+Let `rho=bar(psi)psi`, with the contraction taken on the complete matter
+fibre. Only the trace coefficient `c0=2(a-b)` enters the isotropic
+background. The exact square completion is
+
+\[
+ S_\tau=\frac{3c_0}{L^2}\tau^2-\frac{3}{4L}\tau\rho
+ =\frac{3c_0}{L^2}\left(\tau-\frac{L\rho}{8c_0}\right)^2
+   -\frac{3\rho^2}{64c_0}.
+\]
+
+For `c0!=0` the stationary auxiliary value and reduced interaction are
+
+\[
+ \tau_* =\frac{L\rho}{8c_0},\qquad
+ S_{\rm induced}=-\frac{3}{64c_0}\rho^2.
+\]
+
+At the production coefficients `c0=-6a`, these become
+`tau_*=-L rho/(48a)` and `S_induced=rho^2/(128a)`. In unit-M_G
+normalization `a=1/4`, the latter coefficient is exactly `1/32`.
+`eliminate_minimal_trace_torsion` evaluates the identity in rational
+arithmetic. This is a stationary algebraic elimination. It does not
+define a convergent Euclidean integral over a negative quadratic form.
+Its induced interaction must not be added a second time when the same
+auxiliary field is retained in a fermion determinant.
+
+The classical vanishing-field result does not evaluate an interacting
+bilinear expectation. A nonzero expectation must follow from the same
+reduced interaction, or equivalently from a consistently defined
+auxiliary-field effective action. No independently assigned spin current
+is introduced by this reduction. The transverse coefficients still enter
+transverse fluctuations if those fluctuations are integrated.
+
+For an auxiliary/physical Hessian, differentiation after stationary
+elimination gives
+
+\[
+ H_{\rm reduced}=H_{XX}-H_{X\tau}H_{\tau\tau}^{-1}H_{\tau X}.
+\]
+
+Invertibility of the auxiliary block is the elimination condition;
+physical stability is checked on the reduced physical form. A negative
+bare auxiliary curvature is not, by itself, a propagating instability.
+`eliminate_auxiliary_hessian` retains the whole mixed block.
+
+### One action for the regulated Gaussian spin response
+
+`cg_frg/ewsb/torsion_response.py` computes the next variation directly
+from the signed operator. For each reference eigenvalue `d_n` of `D0`,
+put `lambda_n=d_n^2`, `v=3/(4L)` and
+
+\[
+ \delta_n(\tau)=(d_n-v\tau)^2-d_n^2,
+ \quad A_{n,k}(\omega)=\omega^2+\lambda_n+
+ R_k(\omega^2+\lambda_n),
+ \quad R_k(z)=\frac{z}{e^{z/k^2}-1}.
+\]
+
+The projection `omega^2+lambda_n<R k^2` and the regulator are held
+fixed during tau differentiation. This is the fixed-reference convention
+already used by the V5 finite response domain; it is not a moving
+projection of `D_tau`. With the existing Weyl trace weight, the relative
+Gaussian fermion action density is
+
+\[
+ F_k(\tau)=-\frac1{V_3}\sum_n g_n
+   \int_{-\Omega_n}^{\Omega_n}\frac{d\omega}{2\pi}
+        \log\left(1+\frac{\delta_n(\tau)}{A_{n,k}(\omega)}\right),
+ \qquad \Omega_n=\sqrt{Rk^2-\lambda_n}.
+\]
+
+Here `V3=pi^2 L^3`. The source projection assigns the eight left
+components to odd signed shells and the eight right components to even
+signed shells. Thus `g_n=8 N_gen (n+1)(n+2)`; the neutral right line
+contributes `N_gen (n+1)(n+2)` on every even shell. Intrinsic Dirac sign
+and four-dimensional chirality are not identified as operators; this
+is the particular source projection already retained in V5.
+
+The minimal torsion vertex is the identity on the content fibre, so the
+charged--neutral off-diagonal fermion blocks vanish on this background.
+Eliminating the neutral Gaussian block therefore leaves its own log
+determinant in the action for tau. Its gauge charge is zero, but its
+tau derivative is not: omitting that determinant would change the
+stationary equation. Both contributions are included in `F_k` above.
+
+The actual first and second variations of this one action are
+
+\[
+ J_k=-\frac1{V_3}\sum_n g_n\int\frac{d\omega}{2\pi}
+            \frac{\delta'_n}{A_{n,k}+\delta_n},
+\qquad
+ H_k=\frac1{V_3}\sum_n g_n\int\frac{d\omega}{2\pi}
+ \left[\frac{(\delta'_n)^2}{(A_{n,k}+\delta_n)^2}
+             -\frac{\delta''_n}{A_{n,k}+\delta_n}\right],
+\]
+
+where `delta'_n=-2v(d_n-v tau)` and `delta''_n=2v^2`. The associated
+bilinear is `rho_k=-J_k/v`; its sign and magnitude are computed.
+The gauge-neutral contribution is evaluated separately and retained.
+The unit-M_G EC plus Gaussian-fermion equation is consequently
+
+\[
+ G_k(\tau)=\frac{6c_0}{L^2}\tau+J_k(\tau)=0.
+\]
+
+This calculation uses the production quadratic coefficients with their
+declared normalization. It does not derive those coefficients from
+rotational symmetry. It also does not replace the retained catalogue
+insertion `3tau^2/(8L^2)` by stealth: the operator-derived response is a
+separate calculation with its own signed spectrum.
+
+`certify_fermion_window_response` encloses the continuous frequency
+integrals by outward rational rectangles on `omega=Omega_n u`,
+`0<=u<=1`. The reference propagator `z/(1-exp(-z/k^2))` is increasing,
+since `exp(x)>1+x` for `x>0`, so its endpoint enclosures bound every
+rectangle. Exact rational pi/exponential enclosures are taken from the
+existing interval kernel. No difference between two quadrature grids is
+used as a rigorous error estimate. Bounds on `G'_k` over an entire
+supplied tau interval, together with opposite endpoint signs, establish
+existence and uniqueness there. The finite measurement domain is part
+of this calculation, not a claim that the full Gaussian tail is zero.
+
+`solve_torsion_response.py` holds the stored TT endpoint `kL` fixed and
+uses `k=1` in emergence-scale units. The stored radius is interpreted as
+its decimal point value; the torsion enclosure does not certify the
+separate endpoint computation. The result is stationarity of the EC
+plus Gaussian fermion block. Gauge/Higgs interactions, metric variation
+and their coupled Schur response are not supplied by holding that
+radius fixed. No generated parameter-store value is overwritten.
+
+The Landau quartic in `order_parameter.lambda_quartic` is reconstructed
+from the already retained `phi0=2tau`. Its stationary equation therefore
+cannot independently determine tau. The Gaussian response above does
+not consume that quartic or insert a target-dependent linear term.
+
+For the stored point value `L=2.4935343325226915`, `k=1`, `R=5` and
+three generations, 512 rational integration cells give
+
+\[
+ -0.0306684016535989\leq\tau_*\leq-0.0297723339558305,
+ \qquad \tau_*\simeq-0.030220367804714675.
+\]
+
+On the whole search interval `[-0.49,0.24]`, the common-action Hessian
+lies in `[-1.4875255821690794,-1.2167909737515575]`. The first
+derivative is positive at the left endpoint and negative at the right
+endpoint, proving that this saddle exists and is unique on that
+interval. At the retained gauge-response coordinate it instead obeys
+
+\[
+ -0.0695058669678698\leq G_k(1/50)
+                \leq-0.0684174949746179<0.
+\]
+
+Thus the fixed-geometry EC--Gaussian-fermion block does not reproduce
+`1/50` as its stationary torsion. At the numerical saddle the neutral
+right current is approximately `0.06028594585864595`, and is not
+decoupled. These are results for the displayed action and fixed
+reference domain. They neither equate the gauge content response to a
+connection saddle nor replace the downstream response coordinate.
+
 ### Transfer to the downstream V5 chain
 
 `order_parameter.compute` now obtains its coefficients from `ec_action`,
@@ -408,11 +571,20 @@ action derivatives in all torsion and matter directions, exact rational
 torsion contractions, signed native Dirac squares, Schur/full
 resolvent agreement and parameter-parent registration.
 
+`python scripts/solve_torsion_response.py --cells 512` evaluates the
+EC--Gaussian-fermion saddle above without writing either parameter
+store. `tests/test_torsion_response.py` checks rational square completion
+against the nine-direction action, the full auxiliary Schur complement,
+the first and second action variations, neutral-line multiplicities,
+and continuous-integral enclosures against independent high-precision
+integrals. The root certificate uses signs and derivative bounds over
+the entire search interval, rather than a small numerical residual.
+
 The three action-level matching tasks are consequently explicit:
 
 | Quantity | Computed result | Remaining action identity |
 |---|---|---|
-| `tau` | Full-carrier gauge response `1/50`; minimal coupled classical action has stationary torsion `0`, with derivative `-9/50` at the response value in unit normalization; signed Dirac square differs from the retained even response insertion | A nonzero stationary value requires a computed interacting condensate and an action-consistent spectrum; derive the selected quadratic-action coefficients |
+| `tau` | Full-carrier gauge response `1/50`; minimal classical stationary torsion `0`; exact auxiliary elimination induces the four-fermion coefficient `1/32` in unit-M_G convention; the fixed-geometry EC--Gaussian-fermion saddle is enclosed in `[-0.030669,-0.029772]`, excluding `1/50` | Determine the common interacting gauge/Higgs/geometry stationary point and its relation to the gauge content response; derive the selected quadratic-action coefficients |
 | `4/27` | Unique survival-profile maximum; Gaussian action derivative differs | Derive the endpoint from the actual effective-action variation and normalize its TT kinetic vertex |
 | Gauge factor | Constant-mode integral and exact required `g7^2`; production convention registered | Derive that higher-dimensional kinetic coefficient from the common generated action |
 
