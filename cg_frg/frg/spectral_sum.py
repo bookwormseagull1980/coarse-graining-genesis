@@ -33,6 +33,17 @@ composition.  Raising quadrature accuracy within this domain does
 not recover the omitted full-Gaussian tail.  The alternative
 scheme key "litim" selects the implemented sharp frequency step.
 
+Radius conventions (different objects; do not conflate):
+
+* ``L`` in this module is the internal RP³ radius.  Production TT
+  endpoint calls use ``L = kL = 2.493534...``.
+* ``R = 5`` is the finite response-domain level, not an internal radius.
+* ``sqrt(2*pi) = 2.506628...`` is the Gaussian correlation window's IR
+  edge; Lean's ``CanonicalYangMills`` IR-edge model uses it.  It is not
+  the TT endpoint: at that edge the TT readout is about ``0.147374``,
+  below ``4/27``.
+* ``sqrt(pi) = 1.772454...`` is the critical endpoint ratio, not an edge.
+
 The TT kernel is K_TT(q²,m²) = q⁴/(q²+m²)².  Its readout enters
 the normalised endpoint V₃Π²/(32π²) = 4/27 in endpoint_constraint.
 That equality alone does not establish a massless external-momentum

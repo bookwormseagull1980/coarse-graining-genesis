@@ -6,6 +6,13 @@ construction.  They are deliberately not public tuning arguments.  The
 condensed response has two invariant blocks: the normalized radial intensity
 and the coclosed colour connection.  Their spectral bottoms determine the
 bottom of the complete generated Yang--Mills mass operator.
+
+Radius convention: production calls use the V5 TT endpoint
+``L = kL = 2.4935343325...``, the root of ``A(L) = 4/27``.  The Gaussian IR
+edge ``sqrt(2*pi) = 2.5066282746...`` is a different scale (the TT sum there
+is about ``0.147374``, below ``4/27``).  Lean's ``CanonicalYangMills``
+IR-edge model uses ``sqrt(2*pi)``; its absolute gap is not the V5 TT gap.
+Do not substitute one radius for the other.
 """
 
 from __future__ import annotations
@@ -311,7 +318,9 @@ def generated_yang_mills_gap(
 ) -> dict:
     """Evaluate the generated Yang--Mills mass-gap theorem.
 
-    ``L`` is the generated endpoint-scaled radius.  The critical radius,
+    ``L`` is the generated endpoint-scaled radius.  Production calls pass
+    ``L = kL`` (the V5 TT endpoint); the Gaussian IR edge ``sqrt(2*pi)`` is a
+    different model and is **not** substituted here.  The critical radius,
     colour algebra, adjoint Casimir and long-root carrier dimension are fixed
     by the source construction.  ``mass_unit`` only attaches physical units to
     the already dimensionless spectral bottom.

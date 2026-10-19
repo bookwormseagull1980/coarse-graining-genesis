@@ -15,6 +15,7 @@ if str(_ROOT) not in sys.path:
 
 from cg_core.params import get  # noqa: E402
 from cg_frg.frg.tt_response_domain import (  # noqa: E402
+    _response,
     certificate,
     endpoint_coordinate,
     response_edge,
@@ -46,6 +47,15 @@ def test_c6_is_not_an_upper_certificate():
     # The production c(6) is still below sqrt(15/2); the upper edge is the
     # shell-support bound R <= 16/pi, not a c crossing.
     assert endpoint_coordinate(6) < math.sqrt(15.0 / 2.0)
+
+
+def test_tt_endpoint_is_not_the_gaussian_ir_edge():
+    result = certificate()
+    tt = result["radii"]["tt_endpoint_at_R5"]
+    edge = math.sqrt(2.0 * math.pi)
+    assert tt == pytest.approx(result["endpoint_coordinates"]["5"], rel=0.0, abs=1e-15)
+    assert tt < edge
+    assert _response(5, edge, float(get("tau")), float(get("M_P"))) < 4.0 / 27.0
 
 
 def test_certificate_selects_the_unique_integer_level():

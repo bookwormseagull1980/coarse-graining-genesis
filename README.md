@@ -115,6 +115,22 @@ boundaries, integrates the scale transfers and evaluates the mass relations.
 It also computes the common cosmological budget and the macroscopic tensor
 coefficients. The generated records retain their input dependencies.
 
+### Radii: four different objects (do not conflate)
+
+| object | meaning | value |
+|---|---|---:|
+| `R=5` | finite response-domain **level** `q^2 < R*Lambda^2` | `5` |
+| `kL` | V5 **TT endpoint** internal radius: root of `A(L)=4/27` | `2.4935343325...` |
+| `sqrt(2*pi)` | Gaussian correlation window **IR edge**; Lean's `CanonicalYangMills` IR-edge model uses it | `2.5066282746...` |
+| `sqrt(pi)` | critical endpoint **ratio** `ir/uv`, not an edge | `1.7724538509...` |
+
+`kL` and `sqrt(2*pi)` are **not** the same scale.  At the IR edge the TT sum
+is about `0.147374`, below `4/27`; the edge does not satisfy the V5 endpoint
+equation.  Production V5 uses `kL`; the Lean zero-argument canonical entry
+uses the IR edge.  The two closures are kept separate and must not be
+substituted for one another.  See `cg_frg/frg/endpoint_constraint.py` and
+`cg_frg/frg/tt_response_domain.py`.
+
 Joint diagnostics evaluate the geometric six-mass relation, its shared-input
 derivatives, and the correlated change of electron and electroweak scales
 with response bandwidth. The active shell support and three-position condition

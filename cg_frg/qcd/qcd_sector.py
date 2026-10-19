@@ -350,6 +350,7 @@ def glueball_two_gluon_spectrum() -> dict:
 def compute() -> dict:
     """Publish specified QCD results and the checked finite candidate carrier."""
     tau = float(get("tau"))
+    # c = kL is the V5 TT endpoint; the Gaussian IR edge sqrt(2*pi) is not used.
     c = float(get("kL"))
     dE = float(get("mass_gap_dE"))
     mgen = float(get("mass_gap_m_gen"))

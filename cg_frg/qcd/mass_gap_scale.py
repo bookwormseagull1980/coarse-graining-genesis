@@ -233,6 +233,7 @@ def compute() -> dict:
     g2 = float(get("g2_MG"))
     tau = float(get("tau"))
     g3_MG = float(get("g3_MG_geo"))
+    # L = kL is the V5 TT endpoint, not the Gaussian IR edge sqrt(2*pi).
     L = float(get("kL"))
     L_c_store = math.sqrt(6.0 / float(get("R_c_star")))
     if not math.isclose(L_c_store, CRITICAL_RADIUS, rel_tol=3e-14):

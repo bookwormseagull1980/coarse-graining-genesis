@@ -167,8 +167,15 @@ It prints the positive endpoint coordinates `c(4), c(5), c(6)`, the lower edge
 realization gives `c(4) < sqrt(11/2)` and `c(6) < sqrt(15/2)`; the upper edge
 is therefore the shell-support bound `R <= 16/pi`, not a crossing of `c` at
 `sqrt(15/2)`. These are floating-point centre values; an outward interval
-certificate is a separate calculation. High-precision floating-point central
-values and observational residuals have their own accuracy statements. A
+certificate is a separate calculation.
+
+The value `c(5)=kL=2.493534...` is the V5 **TT endpoint**.  It is not the
+Gaussian correlation window's IR edge `sqrt(2*pi)=2.506628...`: at that edge
+the TT sum is about `0.147374`, below `4/27`.  Lean's zero-argument
+`CanonicalYangMills` is the separate IR-edge model; its absolute gap is not
+the V5 TT gap.  Do not substitute one radius for the other.  High-precision
+floating-point central values and observational residuals have their own
+accuracy statements. A
 supplied native-condensate problem can be certified separately:
 
 ```powershell

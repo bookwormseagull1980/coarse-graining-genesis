@@ -24,6 +24,18 @@ This module keeps ``R`` explicit, solves the self-consistent endpoint
 for ``c(R)``, and evaluates the three-position bounds.  It is read-only: no
 parameter store is written, and no observational value is read.
 
+Radii (different objects; do not conflate):
+
+* ``R = 5`` is the finite response-domain **level** in
+  ``q^2 < R*Lambda^2``, not an internal-space radius.
+* ``c(5) = kL = 2.493534...`` is the V5 **TT endpoint** internal-radius
+  coordinate, the root solved here.
+* ``sqrt(2*pi) = 2.506628...`` is the Gaussian correlation window's IR
+  **edge**; it is not a TT root (``A`` there is about ``0.147374 < 4/27``).
+  Lean's ``CanonicalYangMills`` IR-edge model uses this edge; V5 does not.
+* ``sqrt(pi) = 1.772454...`` is the **critical ratio** ``ir/uv``, not an
+  endpoint.
+
 The key correction recorded here is that the upper edge of the platform is
 the shell-support bound ``R <= 16/pi``, not a crossing
 ``c(R) = sqrt(15/2)``.  In the production realization ``c(6)`` is still below
@@ -79,6 +91,10 @@ def endpoint_coordinate(
     The response is monotone decreasing in ``c`` on the production branch;
     the bracket is checked explicitly.  The returned value is a floating-point
     centre, not an interval certificate.
+
+    At ``R=5`` the returned value is the V5 TT endpoint ``kL``.  It is not
+    the Gaussian IR edge ``sqrt(2*pi)``; the edge is not a root of this
+    equation.
     """
     tau_value = float(get("tau")) if tau is None else float(tau)
     M_P_value = float(get("M_P")) if M_P is None else float(M_P)
@@ -167,6 +183,17 @@ def certificate(
             "R": "explicit finite Gaussian domain",
             "weight": "exp(-q^2/Lambda^2)",
             "upper_shell_bound": upper,
+        },
+        "radii": {
+            "response_domain_level": 5,
+            "tt_endpoint_at_R5": values[5],
+            "gaussian_ir_edge": math.sqrt(2.0 * math.pi),
+            "critical_ratio": math.sqrt(math.pi),
+            "note": (
+                "tt_endpoint_at_R5 is V5's L=kL; gaussian_ir_edge is "
+                "Lean's CanonicalYangMills IR-edge model. They are different "
+                "scales and must not be substituted for one another."
+            ),
         },
         "endpoint_coordinates": {str(R): value for R, value in values.items()},
         "endpoint_at_upper_shell_bound": c_upper,

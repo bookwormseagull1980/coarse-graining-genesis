@@ -30,6 +30,21 @@ not compute an external-momentum massless pole or its residue.
 The Gaussian composition law fixes the envelope, not the separate
 choice R = 5; the full Gaussian domain defines a different response.
 
+Radii used here (these are different objects; do not conflate them):
+
+* ``R = 5``: the finite response-domain level in ``q^2 < R*Lambda^2``.
+  It is not an internal-space radius.
+* ``L_Cg = sqrt(pi)``: the critical endpoint **ratio**, not an edge and
+  not the TT endpoint.
+* ``kL``: the TT endpoint internal-radius coordinate, the root of
+  ``A(L) = 4/27`` at ``k = M_G``.  The V5 production value is
+  ``kL = 2.4935343325...``.
+* ``irEndpoint = sqrt(2*pi)`` and ``uvEndpoint = sqrt(2)``: the IR and UV
+  edges of the Gaussian correlation window.  ``sqrt(2*pi)`` is **not**
+  the TT endpoint: at that edge the TT sum is about ``0.147374``, below
+  ``4/27``.  The Lean ``CanonicalYangMills`` IR-edge model uses
+  ``sqrt(2*pi)``; V5 uses ``kL`` and never substitutes the edge.
+
 On a fixed content and projection branch, the endpoint equation has
 the form F_R(c) = A_R/c − 4/27 with A_R > 0, and hence one positive
 root c = 27 A_R/4.  This is conditional uniqueness for that response
@@ -94,6 +109,10 @@ def v_pi0(k: float, kL: float, tau: float, M_G: float, M_P: float,
     finite Gaussian domain R = 5 and zero external momentum.  Passing a
     ``ResponseDomain`` evaluates the same readout at an explicit finite
     response domain; the production callers keep the default.
+
+    At ``k = M_G`` this readout uses ``L = kL``, the TT endpoint.  It does
+    **not** use the Gaussian IR edge ``sqrt(2*pi)``; the two differ by about
+    0.5% and the edge does not satisfy the endpoint equation.
     """
     L = kL * M_G / k
     V3 = math.pi ** 2 * L ** 3
@@ -141,6 +160,11 @@ def self_consistent_chain(M_P: float, L_Cg: float, tau: float,
     The fixed point kL* = C/k* with k* = M_G (the F_MG two-step
     iteration): M_G = C/kL*, k_GUT = C/L_GUT with L_GUT = √3/τ (the
     isometry-breaking scale of the J=2 squash).
+
+    ``kL*`` is the **TT endpoint**, not the Gaussian IR edge
+    ``sqrt(2*pi)`` and not the critical ratio ``sqrt(pi)``.  The latter
+    two are separate scales; substituting either for ``kL*`` changes the
+    endpoint equation and all downstream masses.
 
     The floating-point update stops when successive kL values differ
     by less than 1e-15 or after 60 steps.  This stopping rule does

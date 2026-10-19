@@ -56,6 +56,15 @@ class ResponseDomain:
     ``fixed`` holds the reference spectral projection fixed under source
     differentiation. ``moving`` requires differentiating its boundary as
     well as the integrand. Neither convention selects a physical R.
+
+    ``radius`` here is the dimensionless response-domain **level** ``R``
+    (for example ``R=5``), not an internal-space radius.  Do not confuse it
+    with:
+    * ``kL = 2.493534...``, the V5 TT endpoint;
+    * ``sqrt(2*pi) = 2.506628...``, the Gaussian correlation window's IR
+      edge used by Lean's ``CanonicalYangMills`` IR-edge model;
+    * ``sqrt(pi) = 1.772454...``, the critical endpoint ratio.
+    These are four different objects.
     """
     radius: float = 5.0
     projection: str = "fixed"

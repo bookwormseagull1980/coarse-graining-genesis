@@ -325,6 +325,13 @@ Gaussian domain defines a separate model-sensitivity calculation. The
 interval bounds certify the retained-position platform; central-value
 comparison residuals have their own numerical accuracy.
 
+The central root at `R=5` is `kL = 2.493534...`, the V5 **TT endpoint**.
+It is not the Gaussian correlation window's IR edge
+`sqrt(2*pi) = 2.506628...`; at that edge the TT sum is about `0.147374`,
+below `4/27`, so the edge is not an endpoint solution.  The critical ratio
+is `sqrt(pi) = 1.772454...`.  Lean's `CanonicalYangMills` uses the IR edge
+in a deliberately separate model; the two closures are not identified.
+
 ### Joint bandwidth response
 
 At fixed three-copy content and tau=1/50, the positive Gaussian integrand
