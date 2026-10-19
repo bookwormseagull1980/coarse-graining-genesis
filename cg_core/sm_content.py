@@ -295,8 +295,10 @@ def tau_statistical() -> float:
     content ratio supplies the modulus used by the homogeneous EC ansatz and
     the squash-response chain.
     """
-    n_f = N_WEYL_PER_GENERATION  # 15 Weyl fermions per generation
-    return charged_quotient_index() / (n_f * hypercharge_sum_sq())  # 1/50
+    # Select the gauge channel by the support of the actual Y operator on
+    # all sixteen coordinates.  No coordinate is discarded from the carrier.
+    from cg_core.ec_variation import full_carrier_response
+    return float(full_carrier_response()["gauge_conditioned_tau"])
 
 
 def _self_test() -> None:

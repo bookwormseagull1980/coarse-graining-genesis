@@ -57,6 +57,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 from cg_core.params import get, set as pset  # noqa: E402
 from cg_core.quantities import QuantityDefinition  # noqa: E402
 from cg_frg.frg.spectral_sum import channel_tmunu_spin2  # noqa: E402
+from cg_frg.gauge.zero_mode_reduction import register_gauge_scale_factor  # noqa: E402
 
 # Normalised TT-response endpoint.  For internal spectral q²,
 # y = m²/(q²+m²) gives K_TT = (1−y)² and max y(1−y)² = 4/27.
@@ -171,7 +172,6 @@ def compute() -> dict:
     chain_pi = self_consistent_chain(M_P, L_Cg, tau)
     kL_pi = chain_pi["kL"]
     M_G_pi = chain_pi["M_G"]
-    g2_pi = math.sqrt(8.0 * (M_G_pi / M_P) ** 2 / kL_pi ** 3)
     pset("kL", kL_pi, provenance="DERIVED",
          definition=QuantityDefinition(
              "finite-response endpoint kL", "1", "three-copy charged RP3 spectrum",
@@ -193,8 +193,11 @@ def compute() -> dict:
              "specified framework scale matching", "algebraic",
              scale_GeV=M_G_pi, error_kind="propagated numerical centre"),
          note="M_G = M_P*L_Cg/kL with L_Cg=sqrt(pi)")
+    scale_factor = register_gauge_scale_factor()
+    g2_pi = math.sqrt(8.0 * scale_factor / kL_pi ** 3)
     pset("g2_MG_bare_constraint", g2_pi, provenance="DERIVED",
          role="internal",
+         dependencies=("gauge_kinetic_scale_factor", "kL"),
          note="bare g2(M_G) = sqrt(8)(M_G/M_P)kL^{-3/2} at L_Cg=sqrt(pi) "
               "(geometric boundary value; the physical g2_MG incorporates "
               "the inverse-coupling term 1/N_c - tau^2*pi/2 in "

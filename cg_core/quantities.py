@@ -78,8 +78,8 @@ def readout_definition(key):
          "natural units with reduced Planck convention", "dimensional normalization",
          ("the anchor is an external measurement",)),
         ({
-            "tau": ("charged-quotient response modulus", "1",
-                    "(N_L-N_R)/(N_f Tr(Y^2))=1/50 on the 15-coordinate gauge-active quotient"),
+            "tau": ("complete-carrier gauge-conditioned response modulus", "1",
+                    "Tr(P chi)/(Tr(P) Tr(Y^2))=1/50 on the complete 16D carrier; P=support(Y)"),
             "L_Cg": ("Gaussian dimensionless endpoint length", "1", "sqrt(pi)"),
             "k_GUT": ("internal isometry-breaking scale", "GeV",
                       "M_P sqrt(pi) tau/sqrt(3)"),
@@ -90,6 +90,37 @@ def readout_definition(key):
          "finite-source chiral and hypercharge responses and the endpoint",
          "declared compact normalization", "finite content and endpoint readout",
          ("kL uses the R=5 response", "the family count includes joint screening compatibility")),
+        ({
+            "ec_action_torsion_coeffs": (
+                "production quadratic torsion coefficients", "GeV^3",
+                "a=M_G^3/4, b=4a, c=-(a+b/3); three independent SO(3) invariants"),
+            "ec_torsion_sector_contract": (
+                "algebraic torsion sectors and downstream spectral response", "dimensionless M_G units",
+                "H=(2(2a-2b),2(2a+b+2c),2(2a+b)); "
+                "minimal spin vertex=-(tr B) I/4; retained shifts at tau and L=kL"),
+        }, "metric-compatible internal torsion, decomposed as 1+3+5",
+         "production EC coefficients and minimal internal spin coupling",
+         "T_abc=epsilon_dbc B_ad; independent scalar tau/L on the isotropic ray",
+         "classical derivative-free quadratic torsion variation",
+         ("rotation fixes the invariant direction, not the three coefficients",
+          "nonzero transverse Hessians eliminate unsourced trace-free sectors",
+          "gauge-conditioned tau and stationary spin-current amplitude are distinct calculations")),
+        ({
+            "gauge_kinetic_scale_factor": (
+                "Killing-response scale normalization prescription", "1",
+                "(M_G/M_P)^2; a registered scale convention, not a zero-mode integral"),
+            "g2_MG_geo": ("bare weak Killing-response coupling", "1",
+                "sqrt(8 gauge_kinetic_scale_factor/kL^3)"),
+            "g2_MG_bare_constraint": ("bare weak endpoint coupling", "1",
+                "sqrt(8 gauge_kinetic_scale_factor/kL^3) at the TT endpoint"),
+            "g2_MG": ("screened weak matching coupling", "1",
+                "sqrt(4 pi/[4 pi/g2_MG_geo^2+1/3-tau^2 pi/2])"),
+        }, "common connection in the RP3 Killing-response convention",
+         "registered normalization, finite-response endpoint and content screening",
+         "fixed Killing norm 2 pi^2 kL^3 and numerator 16 pi^2",
+         "algebraic boundary matching before gauge running",
+         ("gauge_kinetic_scale_factor is a SCALE_CHOICE prescription",
+          "its seven-dimensional action matching is evaluated separately")),
         ({
             "alpha_up": ("up-sector spectral transfer exponent", "1", "kL-2 tau"),
             "alpha_down": ("down-sector spectral transfer exponent", "1", "alpha_up-18 Delta/17"),

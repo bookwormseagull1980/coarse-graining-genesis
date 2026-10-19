@@ -131,6 +131,17 @@ coordinates; it is not a classification of all possible bundle topologies.
   `tau=(N_L-N_R)/(N_f SumY2)=1/50`. The complete matter carrier is `8_L+8_R`
   and has zero intrinsic center bias; the neutral right coordinate is absent
   only from the gauge-active trace.
+  Equivalently, on all sixteen coordinates it is
+  `Tr(P chi)/(Tr(P) Tr(Y^2))`, `P=support(Y)`. The spin-connection
+  vertex also acts on the neutral coordinate. In the classical minimal
+  internal spin action it sources only the trace of dual torsion;
+  the other two sectors eliminate uniquely at the invertible production
+  Hessians. Rotational symmetry fixes this isotropic direction but
+  allows three independent quadratic-action coefficients. The field
+  equation for its amplitude and the downstream spectral derivatives are
+  evaluated in `cg_core.ec_variation` and recorded by
+  `ec_torsion_sector_contract`. See
+  [the action variations and their matching equations](V5_VARIATIONAL_FOUNDATIONS.md).
 - The generation capacity is the declared map
   `n+3/2 < (kL)^2` on `n=0,2,4,...`; at the fixed point it returns
   `n=0,2,4`.

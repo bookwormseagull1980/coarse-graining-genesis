@@ -227,10 +227,10 @@ def compute() -> dict:
               f"two broken SU(2)_R generators (T^1_R, T^2_R — the "
               f"Goldstone directions absorbed by W_R+/-), each "
               f"contributing the torsion modulus tau to the squash "
-              f"amplitude; the EC consistency b = 4a (the algebraic "
-              f"torsion, rebuilt in this module) fixes the leading "
-              f"coefficients; the g1/g2 normalisation kappa(s0) "
-              f"matching the SM fixes the same value.  PURE-CONTENT "
+              f"amplitude in the production content map. The three "
+              f"quadratic EC coefficients and their trace-current "
+              f"stationarity are recorded separately by "
+              f"ec_torsion_sector_contract. PURE-CONTENT "
               f"RATIO : s0/N_R = "
               f"n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175 — "
               f"the symmetry correction is HALF the "
@@ -268,23 +268,33 @@ def compute() -> dict:
               f"the factor-5) share ONE root: the F_MG condition uses "
               f"m2_tt = 6/L2 (zero-order Lichnerowicz) and MISSES the "
               f"J=2 squash first-order torsion shift N_g*tau.")
-    # The EC torsion algebra:
-    # the most general parity-preserving 3D torsion Lagrangian
-    # L = a T^2 + b T^{bac}T_{abc} + c (T^a_ab)^2 with the Holst-type
-    # condition b = 4a (the algebraic torsion equation, the Immirzi
-    # constraint) and c = -(a + b/3) = -(7/3)a (the trace term).
-    a_ec = M_G ** 3 / 4.0
-    b_ec = 4.0 * a_ec
-    c_ec = -(a_ec + b_ec / 3.0)
-    torsion_algebraic = abs(a_ec + b_ec / 2.0) > 1e-30
+    # SO(3) fixes one isotropic tensor direction, but permits three
+    # independent quadratic invariants. Test every algebraic Hessian.
+    from cg_core.ec_variation import (
+        quadratic_torsion_coefficients, production_torsion_sector_contract,
+    )
+    from cg_frg.ewsb.squash_level_transfer import ec_action
+    action = ec_action(M_G)
+    a_ec, b_ec, c_ec = (action[key] for key in ("a", "b", "c"))
+    hessians = tuple(2*c for c in quadratic_torsion_coefficients(a_ec, b_ec, c_ec))
+    torsion_algebraic = all(math.isfinite(c) and c != 0 for c in hessians)
     pset("ec_action_torsion_coeffs",
          {"a": a_ec, "b": b_ec, "c": c_ec,
           "b_equals_4a": abs(b_ec / a_ec - 4.0) < 1e-12,
           "torsion_algebraic": torsion_algebraic},
          provenance="DERIVED", role="informational",
-         note="the EC torsion algebra: L = a T^2 + b T^{bac}T_{abc} + "
-              "c (T^a_ab)^2 with a = M_G^3/4, b = 4a (the Holst/Immirzi "
-              "algebraic-torsion condition), c = -(7/3)a (the trace term)")
+         dependencies=("M_G",),
+         note="production quadratic torsion action: a=M_G^3/4, b=4a, "
+              "c=-7a/3. Three independent rotational invariants; these "
+              "coefficient ratios are not fixed by rotational symmetry. "
+              "All three irreducible algebraic Hessians are invertible")
+    pset("ec_torsion_sector_contract", production_torsion_sector_contract(tau, kL),
+         provenance="DERIVED", role="informational", dependencies=("tau", "kL"),
+         note="minimal internal spin source has only trace torsion; the "
+              "production transverse Hessians are positive and eliminate "
+              "both trace-free classical sectors. Trace-current amplitude "
+              "matching remains separate. Mass shifts, squash and coupling "
+              "derivatives use the retained isotropic production background")
 
     return {"xi": xi, "R_c": R_c, "R_c_store": R_c_store,
             "dev_rc_pct": dev_rc, "s0": s0, "lambda": lam,

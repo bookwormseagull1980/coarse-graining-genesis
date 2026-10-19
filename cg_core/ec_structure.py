@@ -26,7 +26,7 @@ modulus is fixed by the charged-quotient response ratio tau=1/50.  The EC data �
 the torsion ansatz, the curvature relation, the contorsion — enter
 the EC mass shifts of the spectrum (spectrum_loop: the gauge
 τ²/(6L²) and fermion 3τ²/(8L²) torsion shifts, the gauge
-C₂/(2L²) Camporesi mass) and the EC action (frg_lpa/ec_action).
+C₂/(2L²) Camporesi mass) and the EC action (squash_level_transfer.ec_action).
 This module is the single reference for that geometry.
 
 THE TORSION ANSATZ
@@ -52,9 +52,17 @@ The torsion modulus is the dimensionless charged-quotient response ratio
 Here N_L-N_R=1 is the index of the 15-coordinate charged quotient,
 N_f=15 is its Weyl-fermion count, and sum Y^2=10/3 is its quadratic
 hypercharge moment.  The neutral right coordinate completes the full
-8+8 carrier and does not enter this charged trace.  This closure fixes the
-coefficient of the homogeneous isotropic torsion ansatz
-T^a_bc=(tau/L) epsilon^a_bc.
+8+8 carrier and does not enter this charged trace.  The same response is
+computed on all sixteen coordinates using P=support(Y) in ec_variation.
+The production spectrum uses it as the coefficient of
+T^a_bc=(tau/L) epsilon^a_bc.  The separate contorsion variation and
+minimal spin-current vertex are evaluated in ec_variation; a neutral
+hypercharge vertex does not imply a neutral spin-connection vertex.
+The minimal internal spin vertex has no trace-free dual-torsion component.
+The three independent quadratic invariants have production Hessians
+(-12a,8a/3,12a); their transverse parts eliminate uniquely at this
+algebraic level. These coefficients are not fixed by rotational symmetry.
+The stationary trace amplitude still requires its matter-current equation.
 
 The torsion enters the spectrum only through τ² (the shifts below),
 so the O(10⁻⁴) effect is the magnitude of the torsion.

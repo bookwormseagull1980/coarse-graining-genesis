@@ -47,7 +47,7 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from cg_core.params import get, init_stores, published_sm_value, set as pset  # noqa: E402
-from cg_core.content_response import finite_source_response  # noqa: E402
+from cg_core.ec_variation import publish_content_modulus  # noqa: E402
 
 
 FOUNDATION_REFERENCE_KEYS = (
@@ -78,13 +78,7 @@ def init() -> None:
     # The neutral right coordinate completes the full 8+8 carrier and has
     # zero hypercharge, so it is absent from this gauge-active trace without
     # creating a center bias of the complete carrier.
-    source_response = finite_source_response()
-    tau_computed = float(source_response["tau"])
-    SY2 = float(source_response["hypercharge_second_moment"])
-    pset("tau", tau_computed, provenance="DERIVED", dependencies=(),
-         note=f"tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = "
-              f"{tau_computed} on the 15-coordinate charged quotient; "
-              f"N_L=8, N_R=7, N_f=15, SumY2={SY2}; the complete carrier is 8+8")
+    publish_content_modulus()
     # L_Cg = sqrt(pi): the Gaussian endpoint — the window's
     # characteristic length from the Gaussian normalisation
     # integral int exp(-x^2) dx = sqrt(pi) (the unbiased measure's

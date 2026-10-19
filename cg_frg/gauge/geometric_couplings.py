@@ -133,6 +133,9 @@ if str(_PROJECT_ROOT) not in sys.path:
 from cg_core.params import get, set as pset  # noqa: E402
 
 from cg_core.gauge_running import geometric_run, common_origin  # noqa: E402
+from cg_frg.gauge.zero_mode_reduction import (  # noqa: E402
+    killing_coupling_squared, register_gauge_scale_factor,
+)
 
 
 
@@ -152,9 +155,9 @@ def g2_killing(M_G: float, M_P: float, kL: float) -> float:
 
 
 
-    GEOMETRIC CLOSED FORM : the window-edge identity
+    When the endpoint matching supplies the window-edge identity
 
-    kL·M_G = M_P·√π (0.036% cross-check) collapses this to
+    kL·M_G = M_P·√π, this expression reduces to
 
         g₂² = 8π/kL⁵  ⇒  α_W(M_G) = g₂²/4π = 2/kL⁵,
 
@@ -168,7 +171,7 @@ def g2_killing(M_G: float, M_P: float, kL: float) -> float:
 
     """
 
-    return math.sqrt(8.0 * (M_G / M_P) ** 2 / kL ** 3)
+    return math.sqrt(killing_coupling_squared(M_G, M_P, kL))
 
 
 
@@ -280,7 +283,13 @@ def compute() -> dict:
 
 
 
-    g2_geo = g2_killing(M_G, M_P, kL)   # bare geometry = 0.510601 (Killing normalisation)
+    scale_factor = register_gauge_scale_factor()
+    g2_geo = math.sqrt(8.0 * scale_factor / kL ** 3)
+    pset("g2_MG_geo", g2_geo, provenance="DERIVED", role="internal",
+         dependencies=("gauge_kinetic_scale_factor", "kL"),
+         note="bare g2=sqrt(8 gauge_kinetic_scale_factor/kL^3); "
+              "the absolute scale prescription is recorded separately")
+    g2_geo = float(get("g2_MG_geo"))
 
     kappa = kappa_mixing(tau)
 
@@ -294,9 +303,11 @@ def compute() -> dict:
 
     #     N_c(1/alpha - 1/alpha_W + tau^2 pi/2) = 1   <->   N_g xi = 1
 
-    # alpha_W = 2/kL^5
+    # alpha_W = g2_geo^2/(4*pi), with g2_geo consuming the registered
+    # gauge kinetic scale factor. It reduces to 2/kL^5 when the endpoint
+    # obeys kL*M_G=M_P*sqrt(pi).
 
-    # is the window-capacity weak coupling (the framework's own content);
+    # This uses the same bare connection normalization as the endpoint;
 
     # the 1/N_c and tau^2 pi/2 terms are the colour-number and
 
@@ -316,9 +327,9 @@ def compute() -> dict:
 
     #              (the totally antisymmetric torsion T^a_bc=(tau/L)eps^a_bc
 
-    #              raises the scalar curvature by the six-component square
-
-    #              2 tau^2 — ec_structure);
+    #              contributes +2 tau^2 to this retained J=2 response).
+    #              This is not the EC scalar-curvature shift, which is
+    #              negative and equals -3 tau^2/(2 L^2) in ec_structure.
 
     #   2 pi      = the Euclidean period (the Matsubara zero-freq of the
 
@@ -348,7 +359,7 @@ def compute() -> dict:
 
     N_c = 3.0
 
-    alpha_W = 2.0 / kL ** 5
+    alpha_W = g2_geo ** 2 / (4.0 * math.pi)
 
     inv_alpha_pred = 1.0 / alpha_W + 1.0 / N_c - tau ** 2 * math.pi / 2.0
 
@@ -519,13 +530,8 @@ def compute() -> dict:
 
 
 
-    pset("g2_MG_geo", g2_geo, provenance="DERIVED", role="internal",
-
-         note=f"bare geometric g2 = sqrt(8)(M_G/M_P)kL^-3/2 = {g2_geo:.9f} "
-
-              f"(Killing-normalised geometric boundary)")
-
     pset("g2_MG", g2, provenance="DERIVED",
+         dependencies=("g2_MG_geo", "tau"),
 
          note=f"g2(M_G) = {g2:.9f}; the geometric boundary obeys "
 

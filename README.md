@@ -445,6 +445,13 @@ sensitivity have distinct meanings. The framework ledger states their
 scope. The Lean archive verifies selected finite implications; the
 companion papers give the analytic and physical arguments.
 
+The [variational foundation calculations](docs/V5_VARIATIONAL_FOUNDATIONS.md)
+give the complete-carrier torsion response, all three algebraic torsion
+sectors and their downstream spectral transfer, the endpoint-profile
+variation, and the gauge zero-mode normalization. Run
+`py -3.13 scripts/check_variational_foundations.py` for the corresponding
+store-independent calculation report.
+
 ## Citation and license
 
 Cite this software as J. Guo, *Coarse-Graining Genesis Framework V5*,

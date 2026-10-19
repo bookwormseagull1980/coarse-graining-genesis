@@ -772,7 +772,9 @@
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
     "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
+    "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
    },
@@ -780,8 +782,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
+   "run_id": "direct-module-run",
+   "source_sha256": "9ed1ea9a2f15b22d40e5f3ada3920e46489d14c9e50ca8a622c0151a9e3fd9a1",
    "value": 1.7724538509055159,
    "writer": "cg_frg/frg/endpoint_constraint.py"
   },
@@ -791,15 +793,15 @@
    "module_read_inputs": {
     "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
-    "kL": "f8752128ff8a32377ff74a1c6fda618bb1f7f7764bac7679e210dcd2a53d2c04",
+    "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
    },
    "note": "L(M_G)=kL=C/M_G at L_Cg=sqrt(pi)",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
+   "run_id": "direct-module-run",
+   "source_sha256": "9ed1ea9a2f15b22d40e5f3ada3920e46489d14c9e50ca8a622c0151a9e3fd9a1",
    "value": 2.4935343325226915,
    "writer": "cg_frg/frg/endpoint_constraint.py"
   },
@@ -808,7 +810,9 @@
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
     "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
+    "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
    },
@@ -816,8 +820,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
+   "run_id": "direct-module-run",
+   "source_sha256": "9ed1ea9a2f15b22d40e5f3ada3920e46489d14c9e50ca8a622c0151a9e3fd9a1",
    "value": 1.7724538509055159,
    "writer": "cg_frg/frg/endpoint_constraint.py"
   },
@@ -888,8 +892,8 @@
     "unit": "GeV"
    },
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
+   "run_id": "direct-module-run",
+   "source_sha256": "9ed1ea9a2f15b22d40e5f3ada3920e46489d14c9e50ca8a622c0151a9e3fd9a1",
    "value": 1.7310765000475023e+18,
    "writer": "cg_frg/frg/endpoint_constraint.py"
   },
@@ -1397,7 +1401,9 @@
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
     "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
+    "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
    },
@@ -1405,8 +1411,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
+   "run_id": "direct-module-run",
+   "source_sha256": "9ed1ea9a2f15b22d40e5f3ada3920e46489d14c9e50ca8a622c0151a9e3fd9a1",
    "value": 1.909859317102744,
    "writer": "cg_frg/frg/endpoint_constraint.py"
   },
@@ -1856,8 +1862,11 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
@@ -1867,9 +1876,9 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
-   "value": 128.20705760852226,
+   "run_id": "direct-module-run",
+   "source_sha256": "d1275e3aaac6c8f939c271492f9201a88348aff7f50a73c1a96f01a555061f34",
+   "value": 128.20705760852235,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
   "alpha_lepton": {
@@ -3424,26 +3433,126 @@
    "writer": "cg_frg/cosmology/gw_ratio.py"
   },
   "ec_action_torsion_coeffs": {
-   "dependency_scope": "reads in this process before publication",
+   "dependency_scope": "explicit direct inputs, checked against reads",
+   "direct_inputs": {
+    "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38"
+   },
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
     "R_c_star": "ac2ebe64c001d6783d6318aeaf5a0cc369f187e55aab6389b9be5f036e5cb9d9",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
-    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
+    "v_HIGGS": "a1cf5782661c5da67818f9d62b8f620fd9a54707f0e2b790c83762ec85aece51"
    },
-   "note": "the EC torsion algebra: L = a T^2 + b T^{bac}T_{abc} + c (T^a_ab)^2 with a = M_G^3/4, b = 4a (the Holst/Immirzi algebraic-torsion condition), c = -(7/3)a (the trace term)",
+   "note": "production quadratic torsion action: a=M_G^3/4, b=4a, c=-7a/3. Three independent rotational invariants; these coefficient ratios are not fixed by rotational symmetry. All three irreducible algebraic Hessians are invertible",
    "provenance": "DERIVED",
-   "quantity_definition": null,
+   "quantity_definition": {
+    "assumptions": [
+     "rotation fixes the invariant direction, not the three coefficients",
+     "nonzero transverse Hessians eliminate unsourced trace-free sectors",
+     "gauge-conditioned tau and stationary spin-current amplitude are distinct calculations"
+    ],
+    "carrier": "metric-compatible internal torsion, decomposed as 1+3+5",
+    "error_kind": "computed centre; numerical and model errors assessed separately",
+    "normalization": "as given by the operator formula and stated units",
+    "object": "production quadratic torsion coefficients",
+    "operator": "a=M_G^3/4, b=4a, c=-(a+b/3); three independent SO(3) invariants",
+    "order": "classical derivative-free quadratic torsion variation",
+    "projection": "named production readout",
+    "scale_GeV": null,
+    "scheme": "T_abc=epsilon_dbc B_ad; independent scalar tau/L on the isotropic ray",
+    "source": "production EC coefficients and minimal internal spin coupling",
+    "unit": "GeV^3"
+   },
    "role": "informational",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
+   "run_id": "direct-module-run",
+   "source_sha256": "4e4c35a77e91e9c7b1b4759d59a2d8f0d63c4107c710a512fe95f0cda09e8e79",
    "value": {
     "a": 1.2968471466669305e+54,
     "b": 5.187388586667722e+54,
     "b_equals_4a": true,
     "c": -3.0259766755561716e+54,
     "torsion_algebraic": true
+   },
+   "writer": "cg_frg/ewsb/order_parameter.py"
+  },
+  "ec_torsion_sector_contract": {
+   "dependency_scope": "explicit direct inputs, checked against reads",
+   "direct_inputs": {
+    "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+   },
+   "evidence_kind": "computation under declared definitions",
+   "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
+    "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "R_c_star": "ac2ebe64c001d6783d6318aeaf5a0cc369f187e55aab6389b9be5f036e5cb9d9",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
+    "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
+    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
+    "v_HIGGS": "a1cf5782661c5da67818f9d62b8f620fd9a54707f0e2b790c83762ec85aece51"
+   },
+   "note": "minimal internal spin source has only trace torsion; the production transverse Hessians are positive and eliminate both trace-free classical sectors. Trace-current amplitude matching remains separate. Mass shifts, squash and coupling derivatives use the retained isotropic production background",
+   "provenance": "DERIVED",
+   "quantity_definition": {
+    "assumptions": [
+     "rotation fixes the invariant direction, not the three coefficients",
+     "nonzero transverse Hessians eliminate unsourced trace-free sectors",
+     "gauge-conditioned tau and stationary spin-current amplitude are distinct calculations"
+    ],
+    "carrier": "metric-compatible internal torsion, decomposed as 1+3+5",
+    "error_kind": "computed centre; numerical and model errors assessed separately",
+    "normalization": "as given by the operator formula and stated units",
+    "object": "algebraic torsion sectors and downstream spectral response",
+    "operator": "H=(2(2a-2b),2(2a+b+2c),2(2a+b)); minimal spin vertex=-(tr B) I/4; retained shifts at tau and L=kL",
+    "order": "classical derivative-free quadratic torsion variation",
+    "projection": "named production readout",
+    "scale_GeV": null,
+    "scheme": "T_abc=epsilon_dbc B_ad; independent scalar tau/L on the isotropic ray",
+    "source": "production EC coefficients and minimal internal spin coupling",
+    "unit": "dimensionless M_G units"
+   },
+   "role": "informational",
+   "run_id": "direct-module-run",
+   "source_sha256": "4e4c35a77e91e9c7b1b4759d59a2d8f0d63c4107c710a512fe95f0cda09e8e79",
+   "value": {
+    "background_unchanged_at_fixed_trace_coefficient_and_current": true,
+    "carrier_dimension": 16,
+    "classical_trace_free_elimination": "unique zero for the minimal algebraic spin source",
+    "d_fermion_mass_squared_d_tau": 0.0024124624073590534,
+    "d_gauge_mass_squared_d_tau": 0.0010722055143818016,
+    "d_inverse_alpha_torsion_term_d_tau": -0.06283185307179587,
+    "d_lambda_ec_d_tau": 8.08,
+    "d_log_kappa_d_tau": 6.396321070234114,
+    "fermion_torsion_mass_squared": 2.4124624073590533e-05,
+    "gauge_torsion_mass_squared": 1.0722055143818016e-05,
+    "lambda_ec": 14.1608,
+    "matter_action_derivative_required": 0.02894954888830864,
+    "spin_source_trace_free_vertex_norm": 0.0,
+    "squash_amplitude": 0.04,
+    "squash_kappa": 1.1318317836812264,
+    "stationary_equation_scope": "production algebraic torsion; no extra torsion kinetic term",
+    "tau_matter_current_matching": "requires the trace-current expectation of the common matter action",
+    "tau_observation": "full-carrier gauge-conditioned response",
+    "trace_free_fluctuation_hessian_depends_on_action_coefficients": true,
+    "trace_free_hessian_eigenvalues": [
+     0.666666666666667,
+     3.0
+    ],
+    "trace_free_hessian_multiplicities": [
+     3,
+     5
+    ],
+    "trace_hessian_eigenvalue": -3.0
    },
    "writer": "cg_frg/ewsb/order_parameter.py"
   },
@@ -6512,8 +6621,11 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
@@ -6522,64 +6634,130 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
-   "value": 0.6049900729523602,
+   "run_id": "direct-module-run",
+   "source_sha256": "d1275e3aaac6c8f939c271492f9201a88348aff7f50a73c1a96f01a555061f34",
+   "value": 0.6049900729523598,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
   "g2_MG": {
-   "dependency_scope": "reads in this process before publication",
+   "dependency_scope": "explicit direct inputs, checked against reads",
+   "direct_inputs": {
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+   },
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
    },
    "note": "g2(M_G) = 0.508847703; the geometric boundary obeys the inverse-coupling relation 1/alpha_SM = 1/alpha_W + 1/N_c - tau^2*pi/2; Lean checks the associated finite content and coefficient identities",
    "provenance": "DERIVED",
-   "quantity_definition": null,
+   "quantity_definition": {
+    "assumptions": [
+     "gauge_kinetic_scale_factor is a SCALE_CHOICE prescription",
+     "its seven-dimensional action matching is evaluated separately"
+    ],
+    "carrier": "common connection in the RP3 Killing-response convention",
+    "error_kind": "computed centre; numerical and model errors assessed separately",
+    "normalization": "as given by the operator formula and stated units",
+    "object": "screened weak matching coupling",
+    "operator": "sqrt(4 pi/[4 pi/g2_MG_geo^2+1/3-tau^2 pi/2])",
+    "order": "algebraic boundary matching before gauge running",
+    "projection": "named production readout",
+    "scale_GeV": null,
+    "scheme": "fixed Killing norm 2 pi^2 kL^3 and numerator 16 pi^2",
+    "source": "registered normalization, finite-response endpoint and content screening",
+    "unit": "1"
+   },
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
-   "value": 0.5088477031823814,
+   "run_id": "direct-module-run",
+   "source_sha256": "d1275e3aaac6c8f939c271492f9201a88348aff7f50a73c1a96f01a555061f34",
+   "value": 0.5088477031823813,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
   "g2_MG_bare_constraint": {
-   "dependency_scope": "reads in this process before publication",
+   "dependency_scope": "explicit direct inputs, checked against reads",
+   "direct_inputs": {
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
+    "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e"
+   },
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
     "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
+    "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
    },
    "note": "bare g2(M_G) = sqrt(8)(M_G/M_P)kL^{-3/2} at L_Cg=sqrt(pi) (geometric boundary value; the physical g2_MG incorporates the inverse-coupling term 1/N_c - tau^2*pi/2 in geometric_couplings)",
    "provenance": "DERIVED",
-   "quantity_definition": null,
+   "quantity_definition": {
+    "assumptions": [
+     "gauge_kinetic_scale_factor is a SCALE_CHOICE prescription",
+     "its seven-dimensional action matching is evaluated separately"
+    ],
+    "carrier": "common connection in the RP3 Killing-response convention",
+    "error_kind": "computed centre; numerical and model errors assessed separately",
+    "normalization": "as given by the operator formula and stated units",
+    "object": "bare weak endpoint coupling",
+    "operator": "sqrt(8 gauge_kinetic_scale_factor/kL^3) at the TT endpoint",
+    "order": "algebraic boundary matching before gauge running",
+    "projection": "named production readout",
+    "scale_GeV": null,
+    "scheme": "fixed Killing norm 2 pi^2 kL^3 and numerator 16 pi^2",
+    "source": "registered normalization, finite-response endpoint and content screening",
+    "unit": "1"
+   },
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
+   "run_id": "direct-module-run",
+   "source_sha256": "9ed1ea9a2f15b22d40e5f3ada3920e46489d14c9e50ca8a622c0151a9e3fd9a1",
    "value": 0.5106008686060399,
    "writer": "cg_frg/frg/endpoint_constraint.py"
   },
   "g2_MG_geo": {
-   "dependency_scope": "reads in this process before publication",
+   "dependency_scope": "explicit direct inputs, checked against reads",
+   "direct_inputs": {
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
+    "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e"
+   },
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
-    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
    },
-   "note": "bare geometric g2 = sqrt(8)(M_G/M_P)kL^-3/2 = 0.510600869 (Killing-normalised geometric boundary)",
+   "note": "bare g2=sqrt(8 gauge_kinetic_scale_factor/kL^3); the absolute scale prescription is recorded separately",
    "provenance": "DERIVED",
-   "quantity_definition": null,
+   "quantity_definition": {
+    "assumptions": [
+     "gauge_kinetic_scale_factor is a SCALE_CHOICE prescription",
+     "its seven-dimensional action matching is evaluated separately"
+    ],
+    "carrier": "common connection in the RP3 Killing-response convention",
+    "error_kind": "computed centre; numerical and model errors assessed separately",
+    "normalization": "as given by the operator formula and stated units",
+    "object": "bare weak Killing-response coupling",
+    "operator": "sqrt(8 gauge_kinetic_scale_factor/kL^3)",
+    "order": "algebraic boundary matching before gauge running",
+    "projection": "named production readout",
+    "scale_GeV": null,
+    "scheme": "fixed Killing norm 2 pi^2 kL^3 and numerator 16 pi^2",
+    "source": "registered normalization, finite-response endpoint and content screening",
+    "unit": "1"
+   },
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
+   "run_id": "direct-module-run",
+   "source_sha256": "d1275e3aaac6c8f939c271492f9201a88348aff7f50a73c1a96f01a555061f34",
    "value": 0.5106008686060399,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
@@ -6587,18 +6765,21 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
    },
-   "note": "g3(M_G) = 0.497760 via common-origin g3(k_GUT)=g2(k_GUT)*(1+alpha_GUT^2/K) run down TWO-LOOP (Machacek-Vaughn/Buttazzo beta_gauge; K = 8/3 the long-root condensation coefficient — the alpha^2/K bifurcation is the CF-3 forward content; checked RK4 forward relative boundary residual -8.545e-13)",
+   "note": "g3(M_G) = 0.497760 via common-origin g3(k_GUT)=g2(k_GUT)*(1+alpha_GUT^2/K) run down TWO-LOOP (Machacek-Vaughn/Buttazzo beta_gauge; K = 8/3 the long-root condensation coefficient — the alpha^2/K bifurcation is the CF-3 forward content; checked RK4 forward relative boundary residual -8.543e-13)",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
+   "run_id": "direct-module-run",
+   "source_sha256": "d1275e3aaac6c8f939c271492f9201a88348aff7f50a73c1a96f01a555061f34",
    "value": 0.4977601563548794,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
@@ -6606,8 +6787,11 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
@@ -6616,9 +6800,9 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
-   "value": 0.5184195497773932,
+   "run_id": "direct-module-run",
+   "source_sha256": "d1275e3aaac6c8f939c271492f9201a88348aff7f50a73c1a96f01a555061f34",
+   "value": 0.5184195497773931,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
   "gamma_M": {
@@ -6672,6 +6856,46 @@
    "source_sha256": "366318ec432e99c0f56dfb27fb22918556fe7bda493d6eadfe7661872e8b7e41",
    "value": "{'SO(4) isometry': 'SU(2)_L x SU(2)_R (6 Killing vectors of S^3, Z_2-quotiented to RP^3)', 'SU(2)_L': 'the 3 even (untwisted) generators — the weak isospin', 'SU(2)_R': 'the 3 odd (twisted) generators — broken by the geometric isometry breaking (EWSB)', 'U(1)_Y': 'the diagonal generator of the chirality layers (SU(2)_R -> U(1)_Y by the long-root condensate)', 'SU(3)_c': 'the composite of the two su(2) blocks with the long-root coupling (the A_2 root system) — the coupling is CLOSED via g3 = g2*(1+alpha_GUT^2/K)'}",
    "writer": "cg_frg/gauge/gauge_group_emergence.py"
+  },
+  "gauge_kinetic_scale_factor": {
+   "dependency_scope": "explicit direct inputs, checked against reads",
+   "direct_inputs": {
+    "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012"
+   },
+   "evidence_kind": "evaluated registered normalization prescription",
+   "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
+    "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
+    "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+   },
+   "note": "Killing-response prescription (M_G/M_P)^2; a 7D action matching would require g7^2=8*pi^2/(M_P^2*M_G), which is not inferred from the constant-mode overlap alone",
+   "provenance": "SCALE_CHOICE",
+   "quantity_definition": {
+    "assumptions": [
+     "gauge_kinetic_scale_factor is a SCALE_CHOICE prescription",
+     "its seven-dimensional action matching is evaluated separately"
+    ],
+    "carrier": "common connection in the RP3 Killing-response convention",
+    "error_kind": "computed centre; numerical and model errors assessed separately",
+    "normalization": "as given by the operator formula and stated units",
+    "object": "Killing-response scale normalization prescription",
+    "operator": "(M_G/M_P)^2; a registered scale convention, not a zero-mode integral",
+    "order": "algebraic boundary matching before gauge running",
+    "projection": "named production readout",
+    "scale_GeV": null,
+    "scheme": "fixed Killing norm 2 pi^2 kL^3 and numerator 16 pi^2",
+    "source": "registered normalization, finite-response endpoint and content screening",
+    "unit": "1"
+   },
+   "role": "internal",
+   "run_id": "direct-module-run",
+   "source_sha256": "f1914152c389bf220402df274c4ba75355fe3ee2ad0d5adf684be25d064d6ca0",
+   "value": 0.5052649450680499,
+   "writer": "cg_frg/gauge/zero_mode_reduction.py"
   },
   "generated_ym_gap_mass": {
    "dependency_scope": "explicit direct inputs, checked against reads",
@@ -7207,7 +7431,7 @@
    "module_read_inputs": {
     "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
-    "kL": "f8752128ff8a32377ff74a1c6fda618bb1f7f7764bac7679e210dcd2a53d2c04",
+    "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
    },
    "note": "F_MG fixed point for the specified R=5 response at L_Cg=sqrt(pi)",
@@ -7229,8 +7453,8 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "13d3841abf031cbec3e39910125e0d8907fa214e9f7f0ca54b1a03917ceb5799",
+   "run_id": "direct-module-run",
+   "source_sha256": "9ed1ea9a2f15b22d40e5f3ada3920e46489d14c9e50ca8a622c0151a9e3fd9a1",
    "value": 2.4935343325226915,
    "writer": "cg_frg/frg/endpoint_constraint.py"
   },
@@ -7314,8 +7538,11 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
     "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
     "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
     "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
@@ -7324,8 +7551,8 @@
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "11a0323683629d30bd906d9cbf082c91ee30f59e1ecb2b8e4ead47720bf780e1",
+   "run_id": "direct-module-run",
+   "source_sha256": "d1275e3aaac6c8f939c271492f9201a88348aff7f50a73c1a96f01a555061f34",
    "value": 1.1318317836812264,
    "writer": "cg_frg/gauge/geometric_couplings.py"
   },
@@ -8437,17 +8664,23 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
     "R_c_star": "ac2ebe64c001d6783d6318aeaf5a0cc369f187e55aab6389b9be5f036e5cb9d9",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
-    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
+    "v_HIGGS": "a1cf5782661c5da67818f9d62b8f620fd9a54707f0e2b790c83762ec85aece51"
    },
    "note": "R_c* = 6/pi = 1.909859 (the Gaussian family; the store R_c_star = 1.909859 confirms to +0.000%)",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
+   "run_id": "direct-module-run",
+   "source_sha256": "4e4c35a77e91e9c7b1b4759d59a2d8f0d63c4107c710a512fe95f0cda09e8e79",
    "value": 1.909859317102744,
    "writer": "cg_frg/ewsb/order_parameter.py"
   },
@@ -8455,17 +8688,23 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
     "R_c_star": "ac2ebe64c001d6783d6318aeaf5a0cc369f187e55aab6389b9be5f036e5cb9d9",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
-    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
+    "v_HIGGS": "a1cf5782661c5da67818f9d62b8f620fd9a54707f0e2b790c83762ec85aece51"
    },
    "note": "V_min(GUT) = -xi^2(R_c-R_GUT)^2/(4 lambda) = -0.0001 — the Mexican-hat depth at the GUT onset",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
+   "run_id": "direct-module-run",
+   "source_sha256": "4e4c35a77e91e9c7b1b4759d59a2d8f0d63c4107c710a512fe95f0cda09e8e79",
    "value": -9.545296585513721e-05,
    "writer": "cg_frg/ewsb/order_parameter.py"
   },
@@ -8473,17 +8712,23 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
     "R_c_star": "ac2ebe64c001d6783d6318aeaf5a0cc369f187e55aab6389b9be5f036e5cb9d9",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
-    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
+    "v_HIGGS": "a1cf5782661c5da67818f9d62b8f620fd9a54707f0e2b790c83762ec85aece51"
    },
    "note": "lambda = xi(R_c-R_GUT)/(2 tau)^2 = 149.145 — the quartic from the stationarity at the GUT onset (R_GUT = 6/L_GUT^2, L_GUT = sqrt(3)/tau = 86.603)",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
+   "run_id": "direct-module-run",
+   "source_sha256": "4e4c35a77e91e9c7b1b4759d59a2d8f0d63c4107c710a512fe95f0cda09e8e79",
    "value": 149.1452591486519,
    "writer": "cg_frg/ewsb/order_parameter.py"
   },
@@ -8491,17 +8736,23 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
     "R_c_star": "ac2ebe64c001d6783d6318aeaf5a0cc369f187e55aab6389b9be5f036e5cb9d9",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
-    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
+    "v_HIGGS": "a1cf5782661c5da67818f9d62b8f620fd9a54707f0e2b790c83762ec85aece51"
    },
    "note": "lambda_EC*L^2 = N_g(1+tau/2)^2 + 6 = 14+8tau+2tau^2 = 14.1608 > 0 — the J=2 EC Lichnerowicz eigenvalue (the free-EC sector stable; the tachyon comes from the curvature coupling xi(R-R_c), not the free spectrum).  GRAVITY HIGHER-ORDER EFFECT : the first-order torsion shift N_g*tau = 8tau, with N_g = 8 the su(3) generator count; 8tau/14 = 2*(s0/N_R) EXACTLY — the kL correction s0/N_R = n_broken*tau/N_R = 2tau/7 is HALF the J=2 EC first-order torsion shift, the factor 2 = N_g/(2*n_broken) = 8/4 (n_broken = 2 broken SU(2)_R generators) and lambda_TT = 14 = 2*N_R.  So the three deviations (alpha_sd=3/2, V_us=e^-d/2, the factor-5) share ONE root: the F_MG condition uses m2_tt = 6/L2 (zero-order Lichnerowicz) and MISSES the J=2 squash first-order torsion shift N_g*tau.",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
+   "run_id": "direct-module-run",
+   "source_sha256": "4e4c35a77e91e9c7b1b4759d59a2d8f0d63c4107c710a512fe95f0cda09e8e79",
    "value": 14.1608,
    "writer": "cg_frg/ewsb/order_parameter.py"
   },
@@ -8509,17 +8760,23 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
     "R_c_star": "ac2ebe64c001d6783d6318aeaf5a0cc369f187e55aab6389b9be5f036e5cb9d9",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
-    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
+    "v_HIGGS": "a1cf5782661c5da67818f9d62b8f620fd9a54707f0e2b790c83762ec85aece51"
    },
    "note": "m^2(M_G) = xi(R(M_G)-R_c) = -0.118109 < 0 — the tachyon at the emergence scale (R(M_G) = 0.964985 < R_c): the condensation trigger",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
+   "run_id": "direct-module-run",
+   "source_sha256": "4e4c35a77e91e9c7b1b4759d59a2d8f0d63c4107c710a512fe95f0cda09e8e79",
    "value": -0.11810929426989034,
    "writer": "cg_frg/ewsb/order_parameter.py"
   },
@@ -8527,17 +8784,23 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
     "R_c_star": "ac2ebe64c001d6783d6318aeaf5a0cc369f187e55aab6389b9be5f036e5cb9d9",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
-    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
+    "v_HIGGS": "a1cf5782661c5da67818f9d62b8f620fd9a54707f0e2b790c83762ec85aece51"
    },
    "note": "n_broken = dim SU(2)_R - dim U(1)_R = 3 - 1 = 2 — the two broken generators (T^1_R, T^2_R, the Goldstone directions absorbed by W_R+/-); the s0 = 2 tau mechanism COMPUTED: each broken generator contributes the torsion modulus tau to the squash amplitude",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
+   "run_id": "direct-module-run",
+   "source_sha256": "4e4c35a77e91e9c7b1b4759d59a2d8f0d63c4107c710a512fe95f0cda09e8e79",
    "value": 2,
    "writer": "cg_frg/ewsb/order_parameter.py"
   },
@@ -8545,17 +8808,23 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
     "R_c_star": "ac2ebe64c001d6783d6318aeaf5a0cc369f187e55aab6389b9be5f036e5cb9d9",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
-    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
+    "v_HIGGS": "a1cf5782661c5da67818f9d62b8f620fd9a54707f0e2b790c83762ec85aece51"
    },
-   "note": "s0 = 2 tau = 0.04 — the squash VEV; the MECHANISM (the breaking-torsion balance): the 2 = the two broken SU(2)_R generators (T^1_R, T^2_R — the Goldstone directions absorbed by W_R+/-), each contributing the torsion modulus tau to the squash amplitude; the EC consistency b = 4a (the algebraic torsion, rebuilt in this module) fixes the leading coefficients; the g1/g2 normalisation kappa(s0) matching the SM fixes the same value.  PURE-CONTENT RATIO : s0/N_R = n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175 — the symmetry correction is HALF the gravity higher-order (J=2 EC first-order torsion) shift N_g tau/14 = 8tau/14, the factor 2 = N_g/(2 n_broken) = (d+1)/2 = 2; alpha_sd = Delta_f(1-s0/N_R) matches to -0.05%)",
+   "note": "s0 = 2 tau = 0.04 — the squash VEV; the MECHANISM (the breaking-torsion balance): the 2 = the two broken SU(2)_R generators (T^1_R, T^2_R — the Goldstone directions absorbed by W_R+/-), each contributing the torsion modulus tau to the squash amplitude in the production content map. The three quadratic EC coefficients and their trace-current stationarity are recorded separately by ec_torsion_sector_contract. PURE-CONTENT RATIO : s0/N_R = n_broken/(N_f SigmaY2 N_R) = 2/(15*(10/3)*7) = 1/175 — the symmetry correction is HALF the gravity higher-order (J=2 EC first-order torsion) shift N_g tau/14 = 8tau/14, the factor 2 = N_g/(2 n_broken) = (d+1)/2 = 2; alpha_sd = Delta_f(1-s0/N_R) matches to -0.05%)",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
+   "run_id": "direct-module-run",
+   "source_sha256": "4e4c35a77e91e9c7b1b4759d59a2d8f0d63c4107c710a512fe95f0cda09e8e79",
    "value": 0.04,
    "writer": "cg_frg/ewsb/order_parameter.py"
   },
@@ -8563,17 +8832,23 @@
    "dependency_scope": "reads in this process before publication",
    "evidence_kind": "computation under declared definitions",
    "module_read_inputs": {
+    "L_Cg": "533ccea90e4592dc766e42d8d5ae3c3e94794d70dfb4bca0b86eeefac792a969",
     "M_G": "8e7311febe2602cfdf19eee1ca0d04ceafb574dac1317116902725078ba12e38",
+    "M_P": "20b6105698e1ff9299c2e9d1be51987923358c6b505f7a786d105197350f1012",
     "R_c_star": "ac2ebe64c001d6783d6318aeaf5a0cc369f187e55aab6389b9be5f036e5cb9d9",
+    "g2_MG_geo": "ffc5a511a06b9712bc7e20d3ef5ca033dd9b1a5415fa6cc0b3535521f28f13cd",
+    "gauge_kinetic_scale_factor": "2a251cca487cab2310c196585339dcf3724245d0fd54e4beaf71c80cd38a547d",
     "kL": "9cf2e5c7f64625804a6e530d909c4bf10dea358715e28675293a951c5b0b9f9e",
-    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7"
+    "k_GUT": "e8bfa37ca464bcdc7e2e01cd33e8725c9bed86e1fa669fc2cda4a232a7bd595d",
+    "tau": "a7e46abf169710b34fe8898b950d57ec0863c3a4190e4b38c56b1f9f257d50e7",
+    "v_HIGGS": "a1cf5782661c5da67818f9d62b8f620fd9a54707f0e2b790c83762ec85aece51"
    },
    "note": "xi = (d-2)/(4(d-1)) = 0.125 in d = 3 — the conformal curvature coupling of the order parameter",
    "provenance": "DERIVED",
    "quantity_definition": null,
    "role": "cg",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "51d7c57337b312561d89b7ff9bf2bdebb2321172d5fee66e9ee2b4b16c3d0ac6",
+   "run_id": "direct-module-run",
+   "source_sha256": "4e4c35a77e91e9c7b1b4759d59a2d8f0d63c4107c710a512fe95f0cda09e8e79",
    "value": 0.125,
    "writer": "cg_frg/ewsb/order_parameter.py"
   },
@@ -23342,11 +23617,9 @@
   "tau": {
    "dependency_scope": "explicit direct inputs, checked against reads",
    "direct_inputs": {},
-   "evidence_kind": "computation under declared definitions",
-   "module_read_inputs": {
-    "G_N_PDG": "1f47e5a0ec1ff2724d49b53530ecb475b0a7b761ae89107e194ed61a669811b1"
-   },
-   "note": "tau = (N_L - N_R)/(N_f * Sum Y^2) = 1/50 = 0.02 on the 15-coordinate charged quotient; N_L=8, N_R=7, N_f=15, SumY2=3.3333333333333335; the complete carrier is 8+8",
+   "evidence_kind": "exact rational full-carrier spectral-projection response",
+   "module_read_inputs": {},
+   "note": "Tr(P chi)/(Tr(P) Tr(Y^2))=1/50 on the full 16D carrier; P=support(Y) has rank 15, Tr(P chi)=1, Tr(Y^2)=10/3; the complete center trace is zero. EC stationarity is a separate action derivative, not this trace identity",
    "provenance": "DERIVED",
    "quantity_definition": {
     "assumptions": [
@@ -23356,8 +23629,8 @@
     "carrier": "fixed compact content and Gaussian response window",
     "error_kind": "computed centre; numerical and model errors assessed separately",
     "normalization": "as given by the operator formula and stated units",
-    "object": "charged-quotient response modulus",
-    "operator": "(N_L-N_R)/(N_f Tr(Y^2))=1/50 on the 15-coordinate gauge-active quotient",
+    "object": "complete-carrier gauge-conditioned response modulus",
+    "operator": "Tr(P chi)/(Tr(P) Tr(Y^2))=1/50 on the complete 16D carrier; P=support(Y)",
     "order": "finite content and endpoint readout",
     "projection": "named production readout",
     "scale_GeV": null,
@@ -23366,10 +23639,10 @@
     "unit": "1"
    },
    "role": "internal",
-   "run_id": "20261018T063501Z-119447ea",
-   "source_sha256": "ca96609eb0fe7af15bcedb87ab04a5aaf282e72910c6c1af1a14763d9cd74a2a",
+   "run_id": "direct-module-run",
+   "source_sha256": "570dd7d8614f499cf20693ee8fa468476fa408d566dff28827110986ba8c82fd",
    "value": 0.02,
-   "writer": "scripts/init_v5.py"
+   "writer": "cg_core/ec_variation.py"
   },
   "twoL_entropy_min_distance": {
    "dependency_scope": "reads in this process before publication",

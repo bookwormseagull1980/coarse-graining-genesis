@@ -34,7 +34,8 @@ THE DERIVATION CHAIN
       The internal RP3 geometry supplies
         (i)  the torsion Lagrangian   L_tors = a T^2 + b T^{bac}T_{abc}
              + c (T^a_ab)^2,  with a = M_G^3/4, b = 4a, c = -(7/3)a
-             (the Holst/Immirzi algebraic-torsion condition b = 4a);
+             (the production coefficient ratios, not consequences of
+              rotational invariance alone);
         (ii) the order-parameter (J=2 squash) Landau potential
              V(phi) = (1/2) xi (R - R_c) phi^2 + (lambda/4) phi^4,
              xi = 1/8 the conformal coupling, R_c = 6/pi;
@@ -50,10 +51,15 @@ THE DERIVATION CHAIN
       inverse square root. The external one-form kinetic norm is a
       different contraction, evaluated by matter_matching.
 
-  STEP 1 — THE CHARGED-QUOTIENT MODULUS (tau)
-      The gauge-active quotient index and quadratic hypercharge moment give
+  STEP 1 — THE FULL-CARRIER GAUGE RESPONSE (tau)
+      The support projection P=support(Y) on all sixteen coordinates gives
 
-          tau=(N_L-N_R)/(N_f sum Y^2)=1/50.
+          tau=Tr(P chi)/(Tr(P) Tr(Y^2))=1/50.
+
+      The minimal spin vertex is trace torsion and acts also on nu_R.
+      Identifying this gauge response with a stationary EC amplitude
+      requires the trace-current equation in ec_variation. Rotational
+      invariance fixes its tensor direction, not the three action ratios.
 
   STEP 2 — THE SQUASH AMPLITUDE (s0)
       The broken-generator content gives
@@ -146,7 +152,7 @@ def _content() -> dict:
     SigmaY2 = hypercharge_sum_sq()          # 10/3 (anomaly-normalised)
     N_L_minus_N_R = float(chiral_asymmetry())   # 1 (charged-quotient index)
     N_f = float(N_WEYL_PER_GENERATION)      # 15 Weyl per generation
-    tau = N_L_minus_N_R / (N_f * SigmaY2)   # 1/50
+    tau = torsion_content_modulus()        # full-carrier support response, 1/50
     xi = (_D - 2.0) / (4.0 * (_D - 1.0))    # 1/8 (Yamabe conformal coupling)
     Delta_s = (_D - 2.0) / 2.0              # 1/2 (scalar conformal weight)
     return {"SigmaY2": SigmaY2, "tau": tau, "xi": xi,
@@ -158,9 +164,12 @@ def _content() -> dict:
 # STEP 0 — the Einstein-Cartan action (explicit coefficients)
 # ---------------------------------------------------------------------------
 def ec_action(M_G: float) -> dict:
-    """The EC torsion algebra L = a T^2 + b T^{bac}T_{abc} + c (T^a_ab)^2,
-    with a = M_G^3/4, b = 4a (Holst/Immirzi algebraic-torsion condition),
-    c = -(a + b/3) = -(7/3)a (the trace term)."""
+    """Production coefficients of the three independent torsion invariants.
+
+    L=a T^2+b T^{bac}T_{abc}+c (T^a_ab)^2 with a=M_G^3/4,
+    b=4a, c=-(a+b/3). Algebraic torsion only requires the three
+    irreducible Hessians to be invertible; it does not force b=4a.
+    """
     a = M_G ** 3 / 4.0
     b = 4.0 * a
     c = -(a + b / 3.0)
@@ -205,13 +214,19 @@ def killing_normalisation(tau: float) -> dict:
 # STEP 1 & 2 — content modulus and squash amplitude
 # ---------------------------------------------------------------------------
 def torsion_field_equation() -> float:
-    """Return the content modulus tau=(N_L-N_R)/(N_f sum Y^2)=1/50.
+    """Compatibility alias for the content-response modulus, not a variation.
 
-    The evaluated relation is the dimensionless content closure used by the
-    main chain.
+    The actual homogeneous action variation is in
+    cg_core.ec_variation.production_torsion_variation.  This legacy name
+    is kept for callers; new code should use torsion_content_modulus.
     """
-    c = _content()
-    return c["N_L_minus_N_R"] / (c["N_f"] * c["SigmaY2"])
+    return torsion_content_modulus()
+
+
+def torsion_content_modulus() -> float:
+    """Gauge-conditioned response evaluated on the complete 16D carrier."""
+    from cg_core.ec_variation import full_carrier_response
+    return float(full_carrier_response()["gauge_conditioned_tau"])
 
 
 def squash_field_equation(tau: float) -> float:
