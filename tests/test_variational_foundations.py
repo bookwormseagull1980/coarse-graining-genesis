@@ -17,6 +17,8 @@ from cg_core.ec_variation import (
     quadratic_torsion_coefficients, torsion_invariants,
     minimal_internal_torsion_vertices, solve_algebraic_torsion,
     production_torsion_sector_contract,
+    minimal_torsion_spectral_terms, minimal_coupled_action_variation,
+    minimal_classical_stationarity,
 )
 from cg_frg.frg.endpoint_variation import (
     survival_stationary_geometry, gaussian_mode_action,
@@ -169,6 +171,82 @@ def test_full_algebraic_elimination_against_independent_tensor_action():
     np.testing.assert_allclose(changed["stationary_dual_torsion"], minimal["stationary_dual_torsion"])
     changed_full = solve_algebraic_torsion(current, (.25, 1., -.2))
     assert np.linalg.norm(changed_full["stationary_dual_torsion"]-b) > .1
+
+
+def test_common_dirac_torsion_action_all_euler_derivatives():
+    rng = np.random.default_rng(74)
+    b = rng.normal(size=(3, 3))
+    # Spin times the complete content carrier, including its neutral line.
+    dimension = 2*full_carrier_response()["dimension"]
+    ket = rng.normal(size=dimension)+1j*rng.normal(size=dimension)
+    bra = rng.normal(size=dimension)+1j*rng.normal(size=dimension)
+    matrix = rng.normal(size=(dimension, dimension))+1j*rng.normal(size=(dimension, dimension))
+    d0 = (matrix+matrix.conj().T)/2
+    coefficients = (.25, 1., -7/12)
+    result = minimal_coupled_action_variation(b, ket, bra, d0, coefficients)
+    vertices = minimal_internal_torsion_vertices()
+    def action(point, column, row):
+        # Independently assemble the matter operator from all nine vertices
+        # and the torsion action from all tensor components.
+        operator = d0+np.kron(np.einsum("ij,ijuv->uv", point, vertices), np.eye(16))
+        return sum(c*i for c, i in zip(coefficients, torsion_invariants(point)))+row@operator@column
+    assert result["action"] == pytest.approx(action(b, ket, bra), abs=1e-11)
+    h = 1e-5
+    for i in range(3):
+        for j in range(3):
+            delta = np.zeros((3, 3))
+            delta[i, j] = h
+            derivative = (action(b+delta, ket, bra)-action(b-delta, ket, bra))/(2*h)
+            assert derivative == pytest.approx(result["torsion_gradient"][i, j], abs=2e-8)
+    for i in (0, dimension-1):
+        delta = np.zeros(dimension)
+        delta[i] = h
+        row_derivative = (action(b, ket, bra+delta)-action(b, ket, bra-delta))/(2*h)
+        column_derivative = (action(b, ket+delta, bra)-action(b, ket-delta, bra))/(2*h)
+        assert row_derivative == pytest.approx(result["matter_row_equation"][i], abs=2e-8)
+        assert column_derivative == pytest.approx(result["matter_column_equation"][i], abs=2e-8)
+
+
+@pytest.mark.parametrize("n", (0, 1, 2, 7, 20))
+def test_native_torsion_square_retains_the_signed_cross_term(n):
+    tau, radius, h = .02, 1.7, 1e-6
+    result = minimal_torsion_spectral_terms(n, tau, radius)
+    scalar_vertex = sum(minimal_internal_torsion_vertices()[i, i] for i in range(3))*tau/radius
+    full_operator = result["native_dirac"]*np.eye(32)+np.kron(scalar_vertex, np.eye(16))
+    np.testing.assert_allclose(full_operator@full_operator,
+                               result["coupled_dirac_square"]*np.eye(32), atol=3e-14)
+    assert result["neutral_dirac_shift"] == result["torsion_dirac_shift"]
+    plus = minimal_torsion_spectral_terms(n, tau+h, radius)["coupled_dirac_square"]
+    minus = minimal_torsion_spectral_terms(n, tau-h, radius)["coupled_dirac_square"]
+    assert (plus-minus)/(2*h) == pytest.approx(result["d_dirac_square_d_tau"], rel=1e-8)
+    assert abs(result["production_minus_coupled_square"]) > .01
+    d, v = result["native_dirac"], result["torsion_dirac_shift"]
+    paired = ((d+v)**2+(-d+v)**2)/2
+    assert paired-d*d == pytest.approx(9*tau*tau/(16*radius*radius), abs=5e-14)
+
+
+def test_minimal_classical_equations_close_at_zero_not_at_gauge_response():
+    data = minimal_classical_stationarity()
+    assert data["stationary_tau"] == 0
+    assert data["trace_action_derivative_at_gauge_tau"] == -Q(9, 50)
+    assert data["required_matter_bilinear_times_radius_at_gauge_tau"] == -Q(6, 25)
+    assert data["sign_averaged_quadratic_difference"] == Q(3, 16)
+    assert not data["gauge_tau_is_a_minimal_classical_stationary_point"]
+    coefficients = (.25, 1., -7/12)
+    zero = np.zeros(32)
+    for tau in (-.4999, 0., .02, .2499):
+        result = minimal_coupled_action_variation(tau*np.eye(3), zero, zero,
+                                                  1.5*np.eye(32), coefficients)
+        singular = np.linalg.svd(result["coupled_dirac"], compute_uv=False)
+        assert min(singular) >= float(data["uniform_coupled_gap_times_radius_lower_bound"])
+        assert np.trace(result["torsion_gradient"]).real == pytest.approx(-9*tau)
+    # The nonzero charge-derived value fails the trace equation even though
+    # the two matter equations and all eight trace-free equations hold.
+    at_gauge = minimal_coupled_action_variation(.02*np.eye(3), zero, zero,
+                                                1.5*np.eye(32), coefficients)
+    np.testing.assert_allclose(at_gauge["matter_row_equation"], 0)
+    np.testing.assert_allclose(at_gauge["matter_column_equation"], 0)
+    np.testing.assert_allclose(at_gauge["torsion_gradient"], -.06*np.eye(3), atol=1e-15)
 
 
 def test_torsion_sector_contract_tracks_actual_downstream_formulas():

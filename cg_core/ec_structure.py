@@ -62,10 +62,17 @@ The minimal internal spin vertex has no trace-free dual-torsion component.
 The three independent quadratic invariants have production Hessians
 (-12a,8a/3,12a); their transverse parts eliminate uniquely at this
 algebraic level. These coefficients are not fixed by rotational symmetry.
-The stationary trace amplitude still requires its matter-current equation.
+The minimal classical matter and torsion equations are evaluated together
+in ec_variation.minimal_classical_stationarity. In the positive-metric
+domain the coupled Dirac operator is invertible, so this action has only
+the zero-field, zero-torsion stationary point. The charge response 1/50
+is therefore not a nonzero stationary point of that minimal action.
 
-The torsion enters the spectrum only through τ² (the shifts below),
-so the O(10⁻⁴) effect is the magnitude of the torsion.
+The retained production response catalogue uses shifts quadratic in tau.
+The minimally coupled Dirac operator instead has D_tau=D_0-3tau/(4L).
+Its square also has the term -3tau D_0/(2L). The catalogue's fermion
+insertion 3tau^2/(8L^2) is not that complete Dirac square. The comparison
+is explicit in ec_variation.minimal_torsion_spectral_terms.
 
 THE CURVATURE RELATION
 ----------------------

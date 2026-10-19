@@ -167,6 +167,122 @@ def minimal_internal_torsion_vertices():
     return vertices
 
 
+def minimal_torsion_spectral_terms(n, tau, radius):
+    """Differentiate the minimally coupled internal Dirac square, shell by shell.
+
+    This uses the signed native RP3 Dirac spectrum and the Clifford vertex
+    above, with T_abc=(tau/radius)*epsilon_abc.  The vertex acts as I_16 on
+    matter content.  In particular a neutral hypercharge does not remove it.
+
+    The production mass insertion is also reported for comparison.  It is
+    not substituted for the Dirac square: squaring D0-3*tau/(4*radius)
+    retains both the term linear in D0 and the scalar quadratic term.
+    """
+    from cg_core.rp3_spectrum import spinor_dirac_eigenvalue, spinor_multiplicity
+    from cg_core.spectrum_loop import m2_fermion
+    if (not isinstance(n, int) or isinstance(n, bool) or n < 0
+            or not np.isfinite(tau) or not np.isfinite(radius) or radius <= 0):
+        raise ValueError("a nonnegative integer shell, finite torsion and positive radius required")
+    native = spinor_dirac_eigenvalue(n, radius)
+    shift = -3*tau/(4*radius)
+    shifted = native+shift
+    production = native*native+m2_fermion(radius, tau)
+    return {
+        "shell": n, "spatial_multiplicity": spinor_multiplicity(n),
+        "content_dimension": full_carrier_response()["dimension"],
+        "native_dirac": native, "torsion_dirac_shift": shift,
+        "coupled_dirac": shifted, "coupled_dirac_square": shifted*shifted,
+        "linear_square_term": 2*native*shift,
+        "quadratic_square_term": shift*shift,
+        "d_dirac_square_d_tau": -3*shifted/(2*radius),
+        "d2_dirac_square_d_tau2": 9/(8*radius*radius),
+        "production_squared_response": production,
+        "production_minus_coupled_square": production-shifted*shifted,
+        "neutral_dirac_shift": shift,
+    }
+
+
+def minimal_coupled_action_variation(dual, psi, psi_bar, native_dirac, coefficients):
+    """The complete first variation of the finite minimal algebraic action.
+
+    S=sum c_i*||B_i||^2 + psi_bar*(D0-tr(B)/4)*psi.  The two matter
+    arguments are independent column and row variables, as in a Dirac
+    action; no positivity assumption on their bilinear is used.  D0 may
+    be a finite native spectral block tensored with the full matter fibre.
+    B has units of inverse length.  This function evaluates a field
+    configuration; it does not introduce another source or fix its state.
+    """
+    b = np.asarray(dual, float)
+    ket = np.asarray(psi, complex)
+    bra = np.asarray(psi_bar, complex)
+    d0 = np.asarray(native_dirac, complex)
+    if b.shape != (3, 3) or ket.ndim != 1 or ket.size == 0 or bra.shape != ket.shape:
+        raise ValueError("a real 3 by 3 torsion matrix and equally sized matter row and column required")
+    if d0.shape != (ket.size, ket.size) or len(coefficients) != 3:
+        raise ValueError("a compatible native Dirac matrix and three action coefficients required")
+    if not all(np.all(np.isfinite(x)) for x in (b, ket, bra, d0, coefficients)):
+        raise ValueError("finite field and action data required")
+    weights = quadratic_torsion_coefficients(*coefficients)
+    b0 = np.eye(3)*np.trace(b)/3
+    ba = (b-b.T)/2
+    bs = (b+b.T)/2-b0
+    parts = (b0, ba, bs)
+    torsion_action = sum(w*np.sum(part*part) for w, part in zip(weights, parts))
+    coupled = d0-np.trace(b)/4*np.eye(ket.size)
+    bilinear = bra @ ket
+    current = -bilinear/4*np.eye(3)
+    gradient = sum(2*w*part for w, part in zip(weights, parts))+current
+    return {
+        "action": torsion_action+bra @ coupled @ ket,
+        "torsion_action": torsion_action, "matter_bilinear": bilinear,
+        "coupled_dirac": coupled, "torsion_gradient": gradient,
+        "matter_row_equation": coupled @ ket,
+        "matter_column_equation": bra @ coupled,
+        "matter_current": current,
+    }
+
+
+def minimal_classical_stationarity():
+    """Exact all-shell result at fixed round RP3 geometry for the minimal action.
+
+    For the production coefficients the two transverse Hessians are
+    invertible.  The computed spin vertex has only a trace component, so
+    their equations imply B=(tau/L)I.  In the downstream metric domain
+    -1/2<tau<1/4 every native Dirac eigenvalue has modulus >=3/(2L),
+    while the isotropic shift has modulus <3/(8L).  Thus D_tau is
+    invertible on the entire tower, not just a finite cutoff.  The two
+    classical matter equations then set both matter variables to zero;
+    the trace equation sets tau to zero.
+
+    This is a classical result for precisely the action evaluated by
+    minimal_coupled_action_variation.  A fermionic effective determinant,
+    condensate or other interacting sector has its own action derivative
+    and is not replaced by the gauge-content trace.
+    """
+    production = production_torsion_variation()
+    tau_g = production["gauge_conditioned_tau"]
+    a = production["action_coefficients"][0]
+    trace_residual = production["isotropic_hessian"]*tau_g
+    native_gap = Q(3, 2)
+    dirac_shift_coefficient = Q(3, 4)
+    uniform_gap = native_gap-dirac_shift_coefficient*Q(1, 2)
+    return {
+        "scope": "minimal classical algebraic Dirac--torsion action on the full 16D fibre at fixed round RP3 geometry",
+        "metric_tau_interval": (Q(-1, 2), Q(1, 4)),
+        "native_dirac_gap_times_radius": native_gap,
+        "uniform_coupled_gap_times_radius_lower_bound": uniform_gap,
+        "stationary_tau": Q(0),
+        "stationary_matter_field": "zero",
+        "gauge_conditioned_tau": tau_g,
+        "trace_action_derivative_at_gauge_tau": trace_residual,
+        "required_matter_bilinear_times_radius_at_gauge_tau": -48*a*tau_g,
+        "gauge_tau_is_a_minimal_classical_stationary_point": trace_residual == 0,
+        "dirac_square_quadratic_coefficient": Q(9, 16),
+        "production_mass_quadratic_coefficient": Q(3, 8),
+        "sign_averaged_quadratic_difference": Q(3, 16),
+    }
+
+
 def solve_algebraic_torsion(current, coefficients):
     """Stationary point of sum c_i ||B_i||^2+<J,B> in all nine directions.
 
@@ -227,7 +343,10 @@ def production_torsion_sector_contract(tau, radius):
         "classical_trace_free_elimination": "unique zero for the minimal algebraic spin source",
         "stationary_equation_scope": "production algebraic torsion; no extra torsion kinetic term",
         "tau_observation": "full-carrier gauge-conditioned response",
-        "tau_matter_current_matching": "requires the trace-current expectation of the common matter action",
+        "tau_matter_current_matching": "minimal classical joint equations give tau=0; gauge response is a different observable",
+        "minimal_classical_stationary_tau": 0.,
+        "minimal_classical_trace_residual_at_input_tau": -36*action["a"]*tau/radius**2,
+        "minimal_dirac_square_matching": "signed cross term retained; quadratic coefficient 9/16 differs from production 3/8",
         "matter_action_derivative_required": 36*action["a"]*tau/radius**2,
         "gauge_torsion_mass_squared": m2_gauge(0., radius, tau),
         "fermion_torsion_mass_squared": m2_fermion(radius, tau),

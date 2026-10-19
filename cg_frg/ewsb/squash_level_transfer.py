@@ -430,7 +430,7 @@ def _self_test() -> None:
     src = unified_source()
     s0, kappa, sk, tau = src["s0"], src["kappa"], src["sk"], src["tau"]
 
-    # STEP 1: the torsion field equation -> tau = 1/50.
+    # STEP 1: the full-carrier gauge response -> tau = 1/50.
     assert abs(torsion_field_equation() - 1.0 / 50.0) < tol
     # STEP 2: the squash field equation -> s0 = 2 tau = N_g tau/(d+1).
     assert abs(squash_field_equation(tau) - 2.0 * tau) < tol

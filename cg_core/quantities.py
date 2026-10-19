@@ -97,14 +97,16 @@ def readout_definition(key):
             "ec_torsion_sector_contract": (
                 "algebraic torsion sectors and downstream spectral response", "dimensionless M_G units",
                 "H=(2(2a-2b),2(2a+b+2c),2(2a+b)); "
-                "minimal spin vertex=-(tr B) I/4; retained shifts at tau and L=kL"),
+                "minimal spin vertex=-(tr B) I/4; minimal classical stationary tau=0; "
+                "signed Dirac square versus retained response shifts at tau and L=kL"),
         }, "metric-compatible internal torsion, decomposed as 1+3+5",
          "production EC coefficients and minimal internal spin coupling",
          "T_abc=epsilon_dbc B_ad; independent scalar tau/L on the isotropic ray",
          "classical derivative-free quadratic torsion variation",
          ("rotation fixes the invariant direction, not the three coefficients",
           "nonzero transverse Hessians eliminate unsourced trace-free sectors",
-          "gauge-conditioned tau and stationary spin-current amplitude are distinct calculations")),
+          "minimal classical Dirac and torsion equations give zero torsion",
+          "production even mass insertion differs from the full minimal Dirac square")),
         ({
             "gauge_kinetic_scale_factor": (
                 "Killing-response scale normalization prescription", "1",

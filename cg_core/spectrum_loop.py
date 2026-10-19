@@ -44,13 +44,15 @@ THE EC MASS SHIFTS (derivation of each)
   SU(2), 0.0 for U(1)); the second is the EC-torsion shift
   τ²/(6L²).
 
-· Fermion: m² = 3τ²/(8L²) — the EC-torsion shift only.  The
+· Fermion: the retained even response insertion is m² = 3τ²/(8L²). The
   curvature is ALREADY inside the Dirac² spectrum: the Lichnerowicz
   identity D² = ∇*∇ + R/4 folds the curvature into the spinor
   eigenvalues (the n-mode carries (n+3/2)²/L²), so adding another
   curvature term 3R/8 = 9/(4L²) would DOUBLE-COUNT the n = 0
-  eigenvalue.  The torsion shift 3τ²/(8L²) is the only additional
-  mass.
+  eigenvalue. This catalogue insertion is not the full minimally coupled
+  Dirac square: D_tau=D_0-3tau/(4L), whose square also has a linear
+  term in D_0 and the quadratic coefficient 9/16. The actual operator
+  and its variation are evaluated separately in ec_variation.
 
 · Tensor response: the declared three-branch catalogue has eigenvalues
   (C₂+6)/L² and an additional response shift m² = 6/L². Its scalar
@@ -194,11 +196,15 @@ def m2_gauge(c2: float, L: float, tau: float) -> float:
 
 
 def m2_fermion(L: float, tau: float) -> float:
-    """m² = 3τ²/(8L²) — the EC-torsion shift only.
+    """Retained even response insertion m² = 3τ²/(8L²).
 
     The curvature is already inside the Dirac² spectrum (the
     Lichnerowicz identity D² = ∇*∇ + R/4); adding it again would
-    double-count the n = 0 eigenvalue.
+    double-count the n = 0 eigenvalue. This assigned insertion is not
+    the square of the minimally coupled Dirac operator. That operator
+    is D0-3tau/(4L), whose square has a signed linear term and the
+    quadratic coefficient 9/16; see ec_variation. No spin current or
+    stationary tau is inferred from this response insertion.
     """
     return 3.0 * tau * tau / (8.0 * L * L)
 

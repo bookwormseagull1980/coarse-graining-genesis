@@ -292,8 +292,10 @@ def compute() -> dict:
          provenance="DERIVED", role="informational", dependencies=("tau", "kL"),
          note="minimal internal spin source has only trace torsion; the "
               "production transverse Hessians are positive and eliminate "
-              "both trace-free classical sectors. Trace-current amplitude "
-              "matching remains separate. Mass shifts, squash and coupling "
+              "both trace-free classical sectors. The minimal classical "
+              "joint equations give zero torsion; the charge response "
+              "1/50 does not supply a spin-current expectation. Mass "
+              "shifts, squash and coupling "
               "derivatives use the retained isotropic production background")
 
     return {"xi": xi, "R_c": R_c, "R_c_store": R_c_store,

@@ -17,6 +17,7 @@ from cg_core.ec_variation import (  # noqa: E402
     full_carrier_response, minimal_spin_connection_vertex,
     neutral_connector_schur, production_torsion_variation,
     production_torsion_sector_contract,
+    minimal_classical_stationarity, minimal_torsion_spectral_terms,
 )
 from cg_frg.frg.endpoint_variation import (  # noqa: E402
     survival_stationary_geometry, gaussian_mode_action_derivative,
@@ -39,6 +40,11 @@ def evaluate():
         "unit_connector_schur_feedback_norm": schur["schur_feedback_norm"],
         "schur_resolvent_residual": float(np.linalg.norm(schur["resolvent_difference"])),
         "homogeneous_production_action_variation": production_torsion_variation(),
+        "minimal_coupled_classical_stationarity": minimal_classical_stationarity(),
+        "minimal_dirac_square_comparison": [
+            minimal_torsion_spectral_terms(n, float(carrier["gauge_conditioned_tau"]), 1.)
+            for n in (0, 1)
+        ],
         "torsion_sector_transfer_at_unit_radius": production_torsion_sector_contract(
             float(carrier["gauge_conditioned_tau"]), 1.),
         "survival_profile": survival_stationary_geometry(),

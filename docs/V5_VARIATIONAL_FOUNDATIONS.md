@@ -168,6 +168,93 @@ quadratic action unchanged while changing those transverse responses.
 A positive transverse Hessian is not a proof that the entire action is
 the unique action selected by the source.
 
+### The coupled classical variation and the signed Dirac square
+
+The minimal matter current can be computed as a field functional, rather
+than supplied as an unspecified source. At fixed round RP3 geometry,
+on the complete matter fibre, the minimal action just derived is
+
+\[
+ S(B,\bar\psi,\psi)
+ =\sum_{i=0,A,S}c_i\|B_i\|^2
+  +\bar\psi\bigl(D_0-\tfrac14\operatorname{tr}(B)I\bigr)\psi.
+\]
+
+Here the row and column matter fields are independent variational
+variables. The identity in the spin vertex includes the neutral matter
+coordinate. The complete equations are
+
+\[
+ 2\sum_i c_i B_i-\tfrac14(\bar\psi\psi)I_3=0,
+ \qquad D_B\psi=0,\qquad\bar\psi D_B=0.
+\]
+
+There is no extra source in these equations. The two transverse equations
+give `B_A=B_S=0` at the production coefficients. Put `B=(tau/L)I_3`.
+The signed native RP3 spectrum then gives
+
+\[
+ D_\tau=D_0-\frac{3\tau}{4L}I,\qquad
+ \left|\lambda(D_0)\right|\ge\frac{3}{2L}.
+\]
+
+Throughout the positive-metric interval `-1/2<tau<1/4`, the triangle
+inequality yields the uniform, all-shell lower bound
+
+\[
+ \left|\lambda(D_\tau)\right|
+ \ge\frac{3/2-3|\tau|/4}{L}>\frac{9}{8L}.
+\]
+
+Thus both classical matter fields vanish at a stationary point. The
+remaining equation is `-36a tau/L^2=0`, so the unique stationary torsion
+of this minimal classical action in that interval is `tau=0`. Reversing
+the Clifford orientation reverses the linear spin vertex but leaves
+this gap argument and conclusion unchanged. This is a stationary-point
+statement, not a claim that the negative bare trace Hessian is stable.
+
+In units `M_G=L=1`, the exact first derivative at the charge-response
+value `tau=1/50` is `-9/50` once the classical matter equations hold.
+For a general matter configuration the same equation would require
+
+\[
+ \bar\psi\psi=-\frac{48a\tau}{L};
+ \qquad (\bar\psi\psi)_{\tau=1/50}=-\frac6{25}
+ \quad(M_G=L=1).
+\]
+
+That bilinear cannot be substituted as an independently chosen input:
+it must also satisfy the matter equations, which exclude it in this
+minimal classical model. At the effective-action level it would instead
+be a condensate computed from the common interacting action. A finite
+charge trace does not compute such a condensate. Metric variation,
+Yukawa vertices and fluctuation determinants are not part of the
+displayed minimal action; their derivatives belong to the complete
+effective stationarity equation.
+
+The operator calculation also fixes its square before any averaging:
+
+\[
+ D_\tau^2=D_0^2-\frac{3\tau}{2L}D_0
+               +\frac{9\tau^2}{16L^2}I.
+\]
+
+The retained production insertion `3tau^2/(8L^2)` omits the signed linear
+term and has a different quadratic coefficient. Even an average of
+opposite Dirac eigenvalues would give `9/16`, not `3/8`. For the first
+two native shells at `L=1,tau=1/50`, the minimally coupled squares are
+`2.205225` and `6.325225`; the production response values are `2.25015`
+and `6.25015`. Summing sixteen content coordinates multiplies these
+terms; it does not change their operator coefficients.
+
+`minimal_coupled_action_variation` evaluates all nine torsion derivatives
+and both matter derivatives of the displayed action.
+`minimal_classical_stationarity` records the all-shell argument and
+exact residual, and `minimal_torsion_spectral_terms` compares the signed
+operator with the retained response catalogue. The programme below
+therefore does not identify a charge-response value with a stationary
+connection merely because both have been denoted by `tau`.
+
 ### Transfer to the downstream V5 chain
 
 `order_parameter.compute` now obtains its coefficients from `ec_action`,
@@ -195,12 +282,14 @@ On this isotropic branch, the two unsourced transverse sectors do not
 alter these formulas. Their determinant contributions or additional
 kinetic terms, if included in a later action, require their own matching;
 they cannot be inferred from a classical algebraic elimination. The
-remaining trace equation is still
-`partial_tau L_matter=36a tau/L^2`. Computing that expectation from the
-common matter action is necessary to identify its stationary torsion
-with the gauge-conditioned `1/50`. The existing downstream numbers use
-that gauge-conditioned value. The transfer record states this identity
-and reports the required current without substituting it as a new input.
+trace equation has now been solved jointly with the minimal classical
+matter equations: it gives zero torsion. A nonzero effective stationary
+torsion requires the actual interacting matter action and its computed
+condensate. The existing downstream numbers use the gauge-conditioned
+`1/50` as their response coordinate. The transfer record includes the
+minimal classical result, the nonzero derivative at that coordinate,
+and the operator-square mismatch; it does not silently replace the
+retained spectrum by a different matter action.
 
 ## 2. The response maximum and an effective-action stationary point
 
@@ -311,17 +400,19 @@ vertex; it is not eliminated by a field-coordinate change.
 
 `scripts/check_variational_foundations.py` evaluates the full-carrier
 traces, spin vertex, Schur feedback, homogeneous action derivative,
+coupled classical variation, signed Dirac-square comparison,
 profile geometry, loop measure and zero-mode matching without writing
 the parameter stores. `tests/test_variational_foundations.py` checks
 independent matrix contractions, simultaneous basis changes, numerical
-action derivatives, exact rational torsion contractions, Schur/full
+action derivatives in all torsion and matter directions, exact rational
+torsion contractions, signed native Dirac squares, Schur/full
 resolvent agreement and parameter-parent registration.
 
 The three action-level matching tasks are consequently explicit:
 
 | Quantity | Computed result | Remaining action identity |
 |---|---|---|
-| `tau` | Full-carrier gauge response `1/50`; three-sector variation; minimal spin source eliminates both trace-free classical sectors; neutral spin vertex and connector feedback nonzero | Evaluate the complete generated matter-current derivative and match it to `36a tau/L^2`; derive the selected quadratic-action coefficients |
+| `tau` | Full-carrier gauge response `1/50`; minimal coupled classical action has stationary torsion `0`, with derivative `-9/50` at the response value in unit normalization; signed Dirac square differs from the retained even response insertion | A nonzero stationary value requires a computed interacting condensate and an action-consistent spectrum; derive the selected quadratic-action coefficients |
 | `4/27` | Unique survival-profile maximum; Gaussian action derivative differs | Derive the endpoint from the actual effective-action variation and normalize its TT kinetic vertex |
 | Gauge factor | Constant-mode integral and exact required `g7^2`; production convention registered | Derive that higher-dimensional kinetic coefficient from the common generated action |
 
