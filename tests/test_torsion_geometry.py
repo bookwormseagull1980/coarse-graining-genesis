@@ -13,6 +13,8 @@ from cg_frg.ewsb.torsion_geometry import (
     _reference_jet, fermion_geometry_response, torsion_geometry_response,
     trace_matched_curvature_response, solve_joint_window_saddle,
     certify_joint_window_saddle,
+    content_fixed_geometry_response, solve_content_fixed_radius,
+    certify_content_fixed_radius,
 )
 
 
@@ -129,7 +131,7 @@ def test_volume_measure_and_curvature_completion_are_varied_before_stationarity(
     assert bare["density_gradient"][1] == pytest.approx(-2*bare["density"])
 
 
-def test_joint_stationarity_solves_both_equations_without_adjusting_content_tau():
+def test_independent_connection_comparison_keeps_the_content_value_separate():
     data = solve_joint_window_saddle(radius_bracket=(1.65, 1.95), scale=1., generations=3)
     np.testing.assert_allclose(data["integrated_gradient"], 0, atol=1e-7)
     assert data["tau_estimate"] != pytest.approx(1/50, rel=.1)
@@ -138,6 +140,50 @@ def test_joint_stationarity_solves_both_equations_without_adjusting_content_tau(
     assert data["neutral_reference_multiplicity"] > 0
     assert abs(data["relative_only_radius_force"]) > 1
     assert not data["interval_existence_or_uniqueness_certificate"]
+
+
+def test_content_pullback_differentiates_the_same_action_without_a_schur_elimination():
+    length, step = 1.8, 3e-6
+    opts = dict(scale=1., generations=1)
+    data = content_fixed_geometry_response(radius=length, **opts)
+    assert data["content_balance"]["tau_content"] == Q(1, 50)
+    assert data["tau_content_exact"] == "1/50"
+    restricted = data["content_fixed"]
+    plus = trace_matched_curvature_response(.02, radius=length*math.exp(step), **opts)
+    minus = trace_matched_curvature_response(.02, radius=length*math.exp(-step), **opts)
+    pj, mj = plus["curvature_completed"], minus["curvature_completed"]
+    first = (pj["integrated_action"]-mj["integrated_action"])/(2*step)
+    second = (pj["integrated_gradient"][1]-mj["integrated_gradient"][1])/(2*step)
+    assert first == pytest.approx(restricted["integrated_gradient"], rel=3e-7)
+    assert second == pytest.approx(restricted["integrated_hessian"], rel=3e-7)
+    assert abs(restricted["ambient_connection_derivative"]) > 1
+    assert abs(restricted["connection_elimination_correction"]) > 1
+    assert restricted["integrated_hessian"] == data["curvature_completed"]["integrated_hessian"][1][1]
+    with pytest.raises(TypeError):
+        content_fixed_geometry_response(tau=.1, radius=length, **opts)
+
+
+def test_fixed_content_radius_solution_and_exact_interval_certificate():
+    result = solve_content_fixed_radius(radius_bracket=(1.65, 1.95), scale=1.)
+    assert result["tau_content_exact"] == "1/50"
+    assert result["radius_estimate"] == pytest.approx(1.7996569055591913, abs=1e-10)
+    assert abs(result["content_fixed"]["integrated_gradient"]) < 1e-7
+    assert result["content_fixed"]["integrated_hessian"] > 3000
+    assert result["content_fixed"]["ambient_connection_derivative"] > 10
+    assert abs(result["frequency_boundary_radius_force"]) > 500
+    certificate = certify_content_fixed_radius(
+        radius_interval=(1.794, 1.805), scale=1., cells=256)
+    assert certificate["tau_content_exact"] == "1/50"
+    assert certificate["opposite_endpoint_signs"]
+    assert certificate["positive_restricted_curvature"]
+    assert certificate["unique_restricted_radius_minimum_certified"]
+    assert float(certificate["restricted_radius_hessian"][0]) > 900
+    # A nonzero normal derivative is consistent with the restricted
+    # minimum, and must not be reported as zero by the certificate.
+    assert float(certificate["ambient_connection_derivative"][0]) > 10
+    unresolved = certify_content_fixed_radius(
+        radius_interval=(1.79965, 1.79966), scale=1., cells=8)
+    assert not unresolved["unique_restricted_radius_minimum_certified"]
 
 
 @pytest.mark.parametrize("low,high", ((Q(1, 10**12), Q(1, 7)), (Q(1), Q(1)),
@@ -189,6 +235,9 @@ def test_unresolved_interval_inclusion_is_not_reported_as_a_proof():
     lambda: torsion_geometry_response(.25, radius=2., scale=1.),
     lambda: solve_joint_window_saddle(radius_bracket=(1.8, 2.1), scale=1.),
     lambda: solve_joint_window_saddle(radius_bracket=(2., 1.), scale=1.),
+    lambda: solve_content_fixed_radius(radius_bracket=(1.8, 2.1), scale=1.),
+    lambda: certify_content_fixed_radius(radius_interval=(1.7, 1.7), scale=1.),
+    lambda: certify_content_fixed_radius(radius_interval=(1.5, 1.8), scale=1.),
     lambda: certify_joint_window_saddle(tau_interval=(.001, .02), radius_interval=(.4, .5),
                                         center=(.01, .45), scale=1., domain=ResponseDomain(9), cells=2),
 ))

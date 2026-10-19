@@ -18,6 +18,7 @@ from cg_core.ec_variation import (  # noqa: E402
     neutral_connector_schur, production_torsion_variation,
     production_torsion_sector_contract,
     minimal_classical_stationarity, minimal_torsion_spectral_terms,
+    torsion_capacity_balance,
 )
 from cg_frg.frg.endpoint_variation import (  # noqa: E402
     survival_stationary_geometry, gaussian_mode_action_derivative,
@@ -28,6 +29,7 @@ from cg_frg.gauge.zero_mode_reduction import (  # noqa: E402
 )
 from cg_core.connection_action import (  # noqa: E402
     production_curvature_matching, paired_dirac_determinants, minimal_algebraic_torsion_span,
+    content_connection_lift,
 )
 
 
@@ -38,6 +40,8 @@ def evaluate():
     schur = neutral_connector_schur()
     return {
         "complete_carrier": carrier,
+        "finite_capacity_balance": torsion_capacity_balance(),
+        "content_to_connection_lift": content_connection_lift(),
         "minimal_neutral_spin_vertex_norm": float(np.linalg.norm(spin["neutral_vertex"])),
         "unit_connector_neutral_coupling_norm": schur["neutral_coupling_norm"],
         "unit_connector_schur_feedback_norm": schur["schur_feedback_norm"],
@@ -68,4 +72,4 @@ def evaluate():
 
 if __name__ == "__main__":
     print(json.dumps(evaluate(), indent=2, ensure_ascii=False,
-                     default=lambda value: str(value) if isinstance(value, Fraction) else value))
+                     default=lambda value: str(value) if isinstance(value, Fraction) else value.tolist()))

@@ -468,6 +468,17 @@ variation, and the gauge zero-mode normalization. Run
 `py -3.13 scripts/check_variational_foundations.py` for the corresponding
 store-independent calculation report.
 
+The finite content equation has positive capacity `50` and the unique
+exact solution `tau_content=1/50`. The normalized isotropic connection
+lift is implemented without a modulus argument. Run
+`py -3.13 scripts/solve_torsion_response.py` to evaluate this fixed-content
+lift, or
+`py -3.13 scripts/solve_torsion_response.py --content-radius-bracket 1.65 1.95 --cells 256`
+for a certified local radius minimum of the displayed curvature/fermion
+action restricted to that lift. Independent connection comparisons are
+selected explicitly by `--vary-connection` or `--joint-radius-bracket`;
+they do not replace the exact content value.
+
 The same calculations now include joint torsion/radius variation with
 the reference determinant, internal volume and moving frequency edges
 retained. Run

@@ -9,6 +9,7 @@ from cg_core.connection_action import (
     cartan_connection, scalar_curvature_difference, production_curvature_matching,
     cartan_spin_connection_vertices, minimal_gauge_curvature, paired_dirac_determinants,
     minimal_algebraic_torsion_span,
+    content_connection_lift,
 )
 from cg_core.ec_variation import (
     minimal_internal_torsion_vertices, torsion_invariants, quadratic_torsion_coefficients,
@@ -27,6 +28,37 @@ def _dual_basis():
         item[a, b] = Q(1)
         basis.append(item)
     return basis
+
+
+def test_exact_content_lift_retains_cartan_sign_and_frame_covariance():
+    data = content_connection_lift()
+    tau = data["content"]["tau_content"]
+    assert tau == Q(1, 50)
+    assert data["normalization_residual"] == 0
+    assert data["torsion_norm_squared_times_radius_squared"] == Q(3, 1250)
+    assert data["scalar_curvature_shift_times_radius_squared"] == -Q(3, 5000)
+    assert data["ec_to_lc_curvature_ratio"] == Q(9999, 10000)
+    assert data["legacy_dirac_shift_times_radius"] == -Q(3, 200)
+    assert data["cartan_dirac_shift_times_radius"] == Q(3, 200)
+    t, c, k = (data[key] for key in (
+        "dimensionless_torsion", "dimensionless_cartan_connection",
+        "dimensionless_legacy_connection"))
+    for a, b, d in product(range(3), repeat=3):
+        assert t[a, b, d] == c[a, d, b]-c[a, b, d]
+        assert c[a, b, d] == -t[a, b, d]/2
+        assert k[a, b, d] == -c[a, b, d]
+    rotation = np.array([[Q(3, 5), -Q(4, 5), 0],
+                         [Q(4, 5), Q(3, 5), 0], [0, 0, 1]], dtype=object)
+    for a, b, d in product(range(3), repeat=3):
+        transformed = sum(rotation[a, i]*rotation[b, j]*rotation[d, l]*t[i, j, l]
+                          for i, j, l in product(range(3), repeat=3))
+        assert transformed == t[a, b, d]
+    # The actual Clifford vertex, including all ordered connection entries,
+    # independently recovers the legacy signed spin shift on this lift.
+    vertex = sum(float(data["dimensionless_dual"][i, j])*
+                 minimal_internal_torsion_vertices()[i, j]
+                 for i, j in product(range(3), repeat=2))
+    np.testing.assert_allclose(vertex, -3*np.eye(2)/200, atol=1e-17)
 
 
 def test_complete_quadratic_identity_by_exact_polarization():

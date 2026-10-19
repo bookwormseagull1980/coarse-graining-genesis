@@ -97,6 +97,43 @@ def scalar_curvature_difference(dual, derivative=None):
             "quadratic_identity_residual": quadratic-polynomial}
 
 
+def content_connection_lift():
+    """Dimensionless tensors of the existing V5 isotropic content lift.
+
+    First solve the exact finite capacity equation; then implement the
+    production prescription L*B=tau_content*I.  Neither the content value
+    nor a connection amplitude is accepted as an input.  Dividing these
+    dimensionless tensors by L gives their physical connection units.
+
+    Isotropy and the normalization L*tr(B)/3=tau_content uniquely specify
+    this lift.  The normalization is the existing content-to-geometry
+    prescription, not a consequence of the capacity equation alone.
+    Cartan C and the legacy K=-C have opposite signed spin vertices;
+    their common quadratic curvature does not remove that distinction.
+    """
+    from cg_core.ec_variation import torsion_capacity_balance
+    balance = torsion_capacity_balance()
+    tau = balance["tau_content"]
+    dual = np.eye(3, dtype=object)*tau
+    data = scalar_curvature_difference(dual)
+    legacy = -data["connection"]
+    return {
+        "content": balance,
+        "dimensionless_dual": dual,
+        "dimensionless_torsion": data["torsion"],
+        "dimensionless_cartan_connection": data["connection"],
+        "dimensionless_legacy_connection": legacy,
+        "torsion_norm_squared_times_radius_squared": data["invariants"][0],
+        "scalar_curvature_shift_times_radius_squared": data["scalar_difference"],
+        "ec_to_lc_curvature_ratio": 1+data["scalar_difference"]/6,
+        "legacy_dirac_shift_times_radius": -3*tau/4,
+        "cartan_dirac_shift_times_radius": 3*tau/4,
+        "normalization_residual": sum(dual[i, i] for i in range(3))/3-tau,
+        "connection_normalization": "L * trace(B) / 3 = tau_content; B isotropic",
+        "construction": "existing V5 isotropic content-to-connection prescription",
+    }
+
+
 def production_curvature_matching():
     """Compare the actual production action with curvature in M_G=1 units.
 

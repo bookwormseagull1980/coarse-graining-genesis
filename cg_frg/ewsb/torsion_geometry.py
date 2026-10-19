@@ -205,6 +205,82 @@ def trace_matched_curvature_response(tau, *, radius, scale,
             "scope": "trace-matched scalar-curvature completion of the displayed common block; coefficient matching is stated explicitly"}
 
 
+def content_fixed_geometry_response(*, radius, scale,
+                                    domain=DEFAULT_RESPONSE_DOMAIN,
+                                    generations=N_GENERATIONS):
+    """Pull the displayed action back along the V5 fixed-content lift.
+
+    For eta=log(L), iota(eta)=(tau_content,eta) has tangent (0,1).
+    Consequently d(iota*S)=S_eta and d2(iota*S)=S_eta,eta.  No torsion
+    equation is solved and no Schur complement is taken.  The ambient
+    normal derivative S_tau is reported, not discarded or replaced by
+    an assumed matter current.  This calculation uses the existing
+    production identification of content with connection amplitude.
+    """
+    from cg_core.ec_variation import torsion_capacity_balance
+    balance = torsion_capacity_balance()
+    report = trace_matched_curvature_response(
+        float(balance["tau_content"]), radius=radius, scale=scale,
+        domain=domain, generations=generations)
+    jet = report["curvature_completed"]
+    hessian = jet["integrated_hessian"]
+    return {
+        **report, "content_balance": balance,
+        "tau_content_exact": str(balance["tau_content"]),
+        "tau_content": float(balance["tau_content"]),
+        "content_fixed": {
+            "coordinate": "log_radius",
+            "integrated_action": jet["integrated_action"],
+            "integrated_gradient": jet["integrated_gradient"][1],
+            "integrated_hessian": hessian[1][1],
+            "tangent": [0, 1],
+            "ambient_connection_derivative": jet["integrated_gradient"][0],
+            "connection_elimination_correction": (None if hessian[0][0] == 0 else
+                -hessian[1][0]*hessian[0][1]/hessian[0][0]),
+        },
+        "construction": "pullback along the existing V5 isotropic content lift",
+    }
+
+
+def solve_content_fixed_radius(*, radius_bracket, scale,
+                               domain=DEFAULT_RESPONSE_DOMAIN,
+                               generations=N_GENERATIONS):
+    """Solve the radius variation while preserving exact content capacity.
+
+    This is a one-dimensional restriction of the same displayed test
+    action used by solve_joint_window_saddle, not a different fitted
+    functional.  The two-variable saddle remains a separate comparison.
+    """
+    from scipy.optimize import brentq
+    if (len(radius_bracket) != 2 or
+            not all(math.isfinite(x) for x in radius_bracket) or
+            not 0 < radius_bracket[0] < radius_bracket[1]):
+        raise ValueError("two ordered positive finite radius endpoints required")
+    low, high = radius_bracket
+    if len(_reference_modes(low, scale, domain, generations)) != len(
+            _reference_modes(high, scale, domain, generations)):
+        raise ValueError("radius search crosses a spectral-domain shell edge")
+
+    def response(length):
+        return content_fixed_geometry_response(radius=length, scale=scale,
+                                                domain=domain, generations=generations)
+
+    length = brentq(lambda l: response(l)["content_fixed"]["integrated_gradient"],
+                    low, high, xtol=1e-12)
+    data = response(length)
+    return {
+        "status": "numerical radius stationary point on the fixed-content lift",
+        "tau_content_exact": data["tau_content_exact"],
+        "tau_content": data["tau_content"], "radius_estimate": length,
+        "radius_bracket": list(radius_bracket),
+        "content_fixed": data["content_fixed"],
+        "reference_radius_force": data["reference"]["integrated_gradient"][1],
+        "frequency_boundary_radius_force": data["full"]["integrated_radius_boundary"],
+        "scope": data["scope"], "construction": data["construction"],
+        "interval_existence_or_uniqueness_certificate": False,
+    }
+
+
 def solve_joint_window_saddle(*, radius_bracket, scale,
                               domain=DEFAULT_RESPONSE_DOMAIN,
                               generations=N_GENERATIONS,
@@ -398,3 +474,44 @@ def certify_joint_window_saddle(*, tau_interval, radius_interval, scale,
             "reduced_radius_curvature_box": None if schur is None else schur.decimal_bounds(),
             "one_negative_one_positive_direction_certified": bool(inertia),
             "scope": data["scope"]}
+
+
+def certify_content_fixed_radius(*, radius_interval, scale,
+                                 domain=DEFAULT_RESPONSE_DOMAIN,
+                                 generations=N_GENERATIONS, cells=512):
+    """Certify a restricted radius minimum by signs and positive curvature.
+
+    Exact interval derivatives refer to (tau,L).  Restricting tau to the
+    rational capacity value leaves the second gradient and (L,L) Hessian
+    entries.  Opposite endpoint signs prove existence; a strictly positive
+    Hessian throughout the box proves uniqueness and a strict minimum.
+    Neither a vanishing ambient torsion derivative nor its Schur
+    complement is asserted by this certificate.
+    """
+    from cg_core.ec_variation import torsion_capacity_balance
+    if (not isinstance(cells, int) or isinstance(cells, bool) or cells < 1 or
+            len(radius_interval) != 2):
+        raise ValueError("two radius endpoints and a positive cell count required")
+    low, high = (Q(str(x)) for x in radius_interval)
+    if not 0 < low < high:
+        raise ValueError("ordered positive radius endpoints required")
+    tau = torsion_capacity_balance()["tau_content"]
+    options = dict(scale=scale, domain=domain, generations=generations, cells=cells)
+    left, _ = _interval_joint_variation((tau, tau), (low, low), **options)
+    right, _ = _interval_joint_variation((tau, tau), (high, high), **options)
+    gradient, hessian = _interval_joint_variation((tau, tau), (low, high), **options)
+    signs = left[1].hi < 0 < right[1].lo
+    positive = hessian[1][1].lo > 0
+    return {
+        "proof": "opposite radius derivative signs and positive restricted curvature",
+        "tau_content_exact": str(tau), "cells": cells,
+        "radius_interval": I.bounds(low, high).decimal_bounds(),
+        "left_radius_derivative": left[1].decimal_bounds(),
+        "right_radius_derivative": right[1].decimal_bounds(),
+        "restricted_radius_hessian": hessian[1][1].decimal_bounds(),
+        "ambient_connection_derivative": gradient[0].decimal_bounds(),
+        "opposite_endpoint_signs": bool(signs),
+        "positive_restricted_curvature": bool(positive),
+        "unique_restricted_radius_minimum_certified": bool(signs and positive),
+        "construction": "existing V5 isotropic content lift of the displayed action",
+    }

@@ -70,6 +70,35 @@ def full_source_matrices():
     return full
 
 
+def torsion_capacity_balance():
+    """The finite content equation, with no connection or state argument.
+
+    The two counts are evaluated on support(Y), retaining the neutral
+    coordinate in the complete carrier.  Positive capacity makes
+    capacity*tau=index a uniquely solvable rational equation.  This is
+    the SourceTorsionContent identity; it is not an equation obtained by
+    varying an independently supplied connection.
+    """
+    content = full_carrier_response()
+    rank, index = content["gauge_support_rank"], content["projected_center_trace"]
+    capacity = rank*content["hypercharge_second_moment"]
+    if capacity <= 0:
+        raise ArithmeticError("the generated charged capacity must be positive")
+    return {
+        "full_dimension": content["dimension"],
+        "left_count": (rank+index)/2,
+        "charged_right_count": (rank-index)/2,
+        "charged_weyl_count": rank,
+        "hypercharge_capacity": content["hypercharge_second_moment"],
+        "charged_index": index, "balance_capacity": capacity,
+        "tau_content": index/capacity,
+        "balance_residual": capacity*content["gauge_conditioned_tau"]-index,
+        "capacity_positive": capacity > 0,
+        "equation": "balance_capacity * tau_content = charged_index",
+        "scope": "finite generated content with its fixed charge normalization",
+    }
+
+
 def publish_content_modulus():
     """Publish the complete-carrier gauge response with its operator identity."""
     from cg_core.params import set as pset

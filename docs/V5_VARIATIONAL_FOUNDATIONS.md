@@ -39,6 +39,74 @@ observation and changing the state are nevertheless distinct operations:
 on the maximally mixed full carrier, the unconditioned center response is
 zero, and `Tr(P chi)/(16 Tr(Y^2))=3/160`. These are different observables.
 
+### Exact capacity closure and the connection constructed from it
+
+The content conclusion is a finite algebraic statement. Define
+
+\[
+ I=\operatorname{Tr}(P\chi)=N_L-N_R=1,\qquad
+ C=\operatorname{Tr}P\operatorname{Tr}Y^2=50.
+\]
+
+Since `C>0`, the equation `C tau_content=I` has the unique solution
+`tau_content=1/50`. For any second solution, subtraction gives
+`C(tau'-tau_content)=0`, hence equality. The counts are `N_L=8`,
+`N_R=7`, `N_f=15`; the neutral coordinate remains in the full carrier
+and has zero hypercharge capacity. Neither an infinite-dimensional
+Hilbert space nor a numerical stationary-point calculation enters this
+proof. `ec_variation.torsion_capacity_balance()` computes the exact
+rational equation without accepting a carrier, background, or connection
+parameter. It is the V5 counterpart of `SourceTorsionContent`.
+
+The traces are unchanged under a simultaneous change of content basis.
+At fixed generated content and charge normalization their variations
+vanish; differentiating the finite equation gives
+
+\[
+ C\,\delta\tau_{\rm content}=0,
+ \qquad \delta\tau_{\rm content}=0.
+\]
+
+These are structural counts per generation. Replication changes the
+multiplicity in a matter determinant, not the definition of this
+one-generation modulus. Replacing the counts by arbitrary state-weighted
+expectations would define a different response.
+
+V5 already implements the following content-to-geometry prescription:
+
+\[
+ \overline B:=LB=\tau_{\rm content}I_3,\qquad
+ \overline T_{abc}:=LT_{abc}=\tau_{\rm content}\epsilon_{abc}.
+\]
+
+For an isotropic dual tensor, rotation invariance forces `B=b I`:
+commutation with the three half-turns kills its off-diagonal entries,
+and quarter-turns equate the diagonal entries. The normalization
+`L tr(B)/3=tau_content` then fixes `b=tau_content/L`. This proves
+uniqueness within this normalized isotropic construction. Isotropy alone
+leaves `b` free; the finite capacity theorem alone does not identify an
+arbitrary independently varied connection with this construction.
+
+`connection_action.content_connection_lift()` explicitly implements the
+existing prescription with no modulus argument. Direct tensor contraction
+gives the exact dimensionless results
+
+\[
+ \begin{aligned}
+ L^2\|T\|^2&=6\tau_{\rm content}^2=\frac3{1250},\\
+ L^2(R_\omega-R_{\rm LC})&=-\frac32\tau_{\rm content}^2=-\frac3{5000},\\
+ R_\omega/R_{\rm LC}&=\frac{9999}{10000},\\
+ L(D_{\rm legacy}-D_0)&=-\frac34\tau_{\rm content}=-\frac3{200}.
+ \end{aligned}
+\]
+
+Cartan's connection difference is `C=-T/2`, while the retained signed
+spin table uses `K=-C=T/2`. Its Cartan spin shift has the opposite sign.
+The implementation returns both tables, rather than identifying them
+through a quadratic curvature identity. The resulting lift is independent
+of an oriented orthonormal frame. A dimensional radius only converts these
+dimensionless coefficients to inverse-length units.
+
 ### Which vertex sources contorsion?
 
 For the Hermitian minimally coupled Dirac action, in an orthonormal frame,
@@ -108,10 +176,11 @@ action density is
  =-36a\tau/L^2+\partial_\tau\mathcal L_{\rm matter}.
 \]
 
-Thus `tau=1/50` is stationary precisely when the actual matter action
+In an independently varied connection, `tau=1/50` is stationary precisely when the actual matter action
 has derivative `36a/(50L^2)` there. In units `M_G=L=1` the required
 derivative is `9/50`, while the torsion-only stationary point is zero.
-This is the remaining action-matching equation. A charge-trace identity
+This is an unrestricted action-matching equation, not an additional
+condition for the finite capacity closure. A charge-trace identity
 does not evaluate a spin-current expectation. The legacy function name
 `torsion_field_equation` delegates to `torsion_content_modulus`; the
 action derivative is evaluated separately in `ec_variation`.
@@ -819,6 +888,62 @@ coefficients and the production spectral insertions. A measured-window
 stationary point also depends on its stated boundary response; removing
 that response requires carrying the unresolved part in the same action.
 
+### Variation along the fixed-content construction
+
+The previous two-variable calculation permits a connection coordinate
+`theta` to vary independently. The content construction instead supplies
+an embedding
+
+\[
+ \iota:\eta\longmapsto(\tau_{\rm content},\eta),\qquad
+ \eta=\log L.
+\]
+
+For the same displayed test action `S(theta,eta)`, the chain rule gives
+
+\[
+ \frac{d}{d\eta}\iota^*S=S_\eta,
+ \qquad
+ \frac{d^2}{d\eta^2}\iota^*S=S_{\eta\eta}.
+\]
+
+The normal derivative `S_theta` need not vanish at a restricted stationary
+point. It is retained in the calculation report. Eliminating an independent
+connection by its own stationary equation would instead produce
+`S_eta,eta-S_eta,theta S_theta,theta^(-1) S_theta,eta`. That Schur curvature
+belongs to a different family of configurations. It cannot be substituted
+for the fixed-content second derivative. Although `tau_content` is fixed,
+`B=(tau_content/L)I` varies with the radius; its derivative is already
+included in `S_eta`.
+
+`content_fixed_geometry_response` performs precisely this pullback. The
+action includes the reference determinant, internal volume, and moving
+frequency edges used above. Its exact content argument is generated
+internally. `solve_content_fixed_radius` varies only the radius. With
+`k=1`, response domain `R=5`, three generations and the same trace-matched
+curvature/fermion block, it gives
+
+\[
+ \tau_{\rm content}=\frac1{50},\qquad L_*\simeq1.7996569055591913,
+\]
+
+with `S_eta=0`, `S_eta,eta` approximately `3389.22801`, and normal derivative
+`S_theta` approximately `14.68530`. Thus this point is a minimum of the
+restricted radius functional, with a nonzero normal derivative in the
+larger connection space. The earlier two-variable saddle near
+`(0.116197,1.795626)` remains a result about that larger space; it does not
+change the exact capacity ratio.
+
+`certify_content_fixed_radius` proves a local restricted minimum using
+outward rational bounds. On a radius interval in one open spectral chamber,
+it checks a negative left derivative, positive right derivative, and
+strictly positive `S_LL` throughout. Continuity and the intermediate value
+theorem give existence; positive curvature gives uniqueness. It never
+uses the numerical residual as an existence proof. The scope is the same
+explicit test action as before. The pullback does not supply an independent
+derivation of that action from the interacting source, nor identify a
+capacity trace with a matter-current expectation.
+
 ### Transfer to the downstream V5 chain
 
 `order_parameter.compute` now obtains its coefficients from `ec_action`,
@@ -972,8 +1097,12 @@ action derivatives in all torsion and matter directions, exact rational
 torsion contractions, signed native Dirac squares, Schur/full
 resolvent agreement and parameter-parent registration.
 
-`python scripts/solve_torsion_response.py --cells 512` evaluates the
-EC--Gaussian-fermion saddle above without writing either parameter
+`python scripts/solve_torsion_response.py` evaluates the exact fixed-content
+lift at the stored radius. It does not solve a free torsion equation.
+`python scripts/solve_torsion_response.py --content-radius-bracket 1.65 1.95 --cells 256`
+solves and certifies the restricted radius problem.
+`python scripts/solve_torsion_response.py --vary-connection --cells 512` evaluates the
+independent-connection EC--Gaussian-fermion saddle without writing either parameter
 store. `tests/test_torsion_response.py` checks rational square completion
 against the nine-direction action, the full auxiliary Schur complement,
 the first and second action variations, neutral-line multiplicities,
@@ -987,7 +1116,9 @@ Newton box. `tests/test_torsion_geometry.py` compares both gradients
 and every Hessian column with independent action variations, checks the
 moving boundary against a high-precision frequency integral, and verifies
 the rational inclusion and its explicit failure on an unresolved box.
-The fixed-radius mode also reports the geometry residual of that saddle.
+The independent-connection fixed-radius mode also reports the geometry
+residual of that saddle. These comparison modes do not replace the
+content value in the production store.
 
 `cg_core/connection_action.py` computes the complete connection contraction,
 its divergence, the signed spin-connection convention and the minimal
@@ -1002,7 +1133,7 @@ The three action-level matching tasks are consequently explicit:
 
 | Quantity | Computed result | Remaining action identity |
 |---|---|---|
-| `tau` | Full-carrier gauge response `1/50`; minimal classical stationary torsion `0`; induced four-fermion coefficient `1/32`; the fixed-radius nine-component saddle; a certified local joint torsion/radius saddle near `(0.116197,1.795626)` for the explicit trace-matched curvature/fermion action, including reference, volume and frequency-edge variations; an exact coefficient-span obstruction for the minimal operators | Derive the extra transverse-action coefficients and production response insertions from the actual interacting source vertices; match the common geometry/matter functional and its boundary response |
+| `tau` | Exact positive-capacity equation uniquely gives `tau_content=1/50`; its normalized isotropic connection lift and fixed-content action pullback; a certified restricted radius minimum near `1.799657`; separately, the independent-connection classical and Gaussian saddles and the exact coefficient-span obstruction for minimal operators | Derive the extra transverse-action coefficients and production response insertions from the actual interacting source vertices; match the common geometry/matter functional and its boundary response |
 | `4/27` | Unique survival-profile maximum; Gaussian action derivative differs | Derive the endpoint from the actual effective-action variation and normalize its TT kinetic vertex |
 | Gauge factor | Constant-mode integral and exact required `g7^2`; production convention registered | Derive that higher-dimensional kinetic coefficient from the common generated action |
 

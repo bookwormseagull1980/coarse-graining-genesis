@@ -19,6 +19,7 @@ from cg_core.ec_variation import (
     production_torsion_sector_contract,
     minimal_torsion_spectral_terms, minimal_coupled_action_variation,
     minimal_classical_stationarity,
+    torsion_capacity_balance,
 )
 from cg_frg.frg.endpoint_variation import (
     survival_stationary_geometry, gaussian_mode_action,
@@ -56,6 +57,23 @@ def test_full_carrier_projection_traces_and_response():
     pu = eigenvectors[:, eigenvalues > 1e-12] @ eigenvectors[:, eigenvalues > 1e-12].conj().T
     tau = np.trace(pu@cu)/(np.trace(pu)*np.trace(yu@yu))
     assert tau == pytest.approx(.02, abs=2e-14)
+
+
+def test_capacity_equation_is_exact_positive_and_uniquely_solvable():
+    result = torsion_capacity_balance()
+    assert result["left_count"] == 8
+    assert result["charged_right_count"] == 7
+    assert result["charged_weyl_count"] == 15
+    assert result["hypercharge_capacity"] == Q(10, 3)
+    assert result["balance_capacity"] == 50
+    assert result["tau_content"] == Q(1, 50)
+    assert result["balance_residual"] == 0
+    assert result["capacity_positive"]
+    # An independent scalar cannot be substituted without changing the
+    # finite balance equation. No numerical tolerance is used here.
+    for displacement in (Q(-1, 3), Q(1, 10**30), Q(7)):
+        other = result["tau_content"]+displacement
+        assert result["balance_capacity"]*other-result["charged_index"] == 50*displacement
 
 
 def test_full_log_partition_hessian_includes_neutral_coordinate():
