@@ -75,6 +75,13 @@ parameter store; the manifest supplies the identity checks only.
 
 ## Closed-world object discipline
 
+The dependency graph has exactly one ontological root, minimal unbiased
+compositional change.  The zero-argument executable entry
+`closed_generated_world_contract()` records that root and verifies the balanced
+complete matter capacity.  All parameters below occur only after this root as
+generated realization coordinates, internal projections, unit conventions, or
+comparison records.
+
 V5 uses four distinct notions that are not interchangeable:
 
 | Term | Meaning | What it does not mean |
@@ -92,6 +99,23 @@ dynamical and belongs to the same closed action. A finite-window or projected
 imbalance is reported as endpoint flux or projection defect, not promoted to
 a fundamental source. These distinctions are part of the scientific contract,
 not merely terminology.
+
+### Concrete matter bundle
+
+`cg_core.canonical_matter_bundle.generated_matter_bundle()` takes no
+realization arguments. It constructs the Hermitian four-coordinate base,
+the complete sixteen-coordinate source fibre, its identity frame and the
+existing colour, weak and hypercharge matrices. The neutral line is obtained
+from the simultaneous kernel of those actual matrices; it is retained in the
+complete fibre. For source frame configurations, relative transitions are
+`g(x)^(-1) h(x)` and section components transform by the same unitary action.
+Their cocycle, norm preservation, component compatibility and faithful-action
+uniqueness are proved in `CanonicalMatterBundle.lean`.
+
+The total space here is the product of the already generated base and fibre.
+No arbitrary localized bundle is required to instantiate this result.
+Coordinate uniqueness means uniqueness preserving these two source
+coordinates; it is not a classification of all possible bundle topologies.
 
 ## Defining Closures
 
@@ -1143,6 +1167,22 @@ on exact rational local field derivatives, including separate coefficients
 in field amplitude. A nonzero residual with the cubic vertex omitted verifies the sensitivity
 of the Noether-identity check to the required self-interaction.
 Guo (2026f) gives the arbitrary-field proof and constraint-propagation argument.
+
+The relative cubic coefficient also has a formal uniqueness test in the
+unit-normalized first-order family. Write
+`L_c=q.R_linear+(1-c) eta.R_quadratic+c q.R_quadratic`.
+At the origin, affine dilation has the actual tensor-density Lie variations
+`delta q=2q`, `delta Gamma=Gamma` and `delta(dGamma)=2 dGamma`.
+Differentiation gives
+`delta L_c-div(xi L_c)=2(c-1) eta.R_quadratic`.
+The torsion-free connection with `Gamma^0_11=1` and
+`Gamma^1_01=Gamma^1_10=2` has `eta.R_quadratic=-2`; hence covariance throughout
+this family is equivalent to `c=1`. `SourceNonlinearTensorAction.lean`
+proves the Lie weights, the actual derivative, the residual formula and
+this equivalence. `nonlinear_tensor.affine_dilation_completion()` evaluates
+the same witness with exact rational arithmetic. This is the affine part
+of nonlinear covariance in the stated action class, not a formal proof of
+the full local-diffeomorphism identity or all nonlinear field equations.
 
 In endpoint units, inverse-response matching is
 ell(chi)=(1-x(chi))/Pi(chi)=Z_hat q^2, q^2=Q^2/M_P^2.

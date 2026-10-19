@@ -25,7 +25,7 @@ import pytest
 
 from cg_core.content_response import (
     chiral_center_power_law_screening, chiral_center_response,
-    closed_chiral_center_certificate,
+    closed_chiral_center_certificate, closed_generated_world_contract,
     finite_source_response, interacting_content_response,
     log_partition_response, weighted_content_response,
 )
@@ -197,6 +197,17 @@ def test_complete_and_quotient_chiral_center_responses():
     assert closed['quotient_bias'] == pytest.approx(1/15, abs=2e-16)
     assert closed['quotient_is_projection_defect']
     assert closed['removed_coordinate'] == 'nu_R'
+
+    world = closed_generated_world_contract()
+    assert world['sole_root'] == 'minimal_unbiased_compositional_change'
+    assert world['root_argument_count'] == 0
+    assert world['complete_matter_capacity'] == 16
+    assert world['complete_capacity_balanced']
+    assert world['charged_quotient_is_internal_projection']
+    assert world['applied_probes_are_response_coordinates']
+    assert world['subsystem_boundaries_are_internal_complements']
+    assert not world['comparison_data_are_dynamical_sources']
+    assert not world['external_dynamical_source_required']
 
 
 def test_center_drive_derivative_and_scale_screening():

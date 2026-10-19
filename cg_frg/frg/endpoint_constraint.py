@@ -84,20 +84,28 @@ def threshold_geometry() -> dict:
             "curvature": curvature, "band": band}
 
 
-def v_pi0(k: float, kL: float, tau: float, M_G: float, M_P: float) -> float:
+def v_pi0(k: float, kL: float, tau: float, M_G: float, M_P: float,
+          domain=None) -> float:
     """V₃·Π²^{Tμν2}/(32π²) along the kL-const trajectory at scale k.
 
     The spectral arguments are L = kL·M_G/k and cutoff = (k/M_P)²,
     with V₃ = π²L³.  The default spectral_sum response uses the
-    finite Gaussian domain R = 5 and zero external momentum.
+    finite Gaussian domain R = 5 and zero external momentum.  Passing a
+    ``ResponseDomain`` evaluates the same readout at an explicit finite
+    response domain; the production callers keep the default.
     """
     L = kL * M_G / k
     V3 = math.pi ** 2 * L ** 3
     cut = (k / M_P) ** 2
-    return V3 * channel_tmunu_spin2(L, cut, tau)["rp3_pi0"] / FACTOR
+    if domain is None:
+        pi0 = channel_tmunu_spin2(L, cut, tau)["rp3_pi0"]
+    else:
+        pi0 = channel_tmunu_spin2(L, cut, tau, domain=domain)["rp3_pi0"]
+    return V3 * pi0 / FACTOR
 
 
-def k_star(kL: float, tau: float, M_G: float, M_P: float) -> float:
+def k_star(kL: float, tau: float, M_G: float, M_P: float,
+           domain=None) -> float:
     """Find the endpoint crossing V·Π²/(32π²) = 4/27 by bisection.
 
     The initial bracket is [0.3 M_G, 3 M_G].  Iteration stops at
@@ -107,13 +115,13 @@ def k_star(kL: float, tau: float, M_G: float, M_P: float) -> float:
     errors are not bounded by interval arithmetic here.
     """
     lo, hi = 0.3 * M_G, 3.0 * M_G
-    flo = v_pi0(lo, kL, tau, M_G, M_P) - CRIT
-    fhi = v_pi0(hi, kL, tau, M_G, M_P) - CRIT
+    flo = v_pi0(lo, kL, tau, M_G, M_P, domain=domain) - CRIT
+    fhi = v_pi0(hi, kL, tau, M_G, M_P, domain=domain) - CRIT
     if flo * fhi > 0:
         raise RuntimeError(f"no crossing: kL={kL:.4f} M_G={M_G:.3e}")
     for _ in range(200):
         mid = 0.5 * (lo + hi)
-        f = v_pi0(mid, kL, tau, M_G, M_P) - CRIT
+        f = v_pi0(mid, kL, tau, M_G, M_P, domain=domain) - CRIT
         if (hi - lo) < 1e-15:
             return mid
         if flo * f < 0:
@@ -124,7 +132,8 @@ def k_star(kL: float, tau: float, M_G: float, M_P: float) -> float:
     return 0.5 * (lo + hi)
 
 
-def self_consistent_chain(M_P: float, L_Cg: float, tau: float) -> dict:
+def self_consistent_chain(M_P: float, L_Cg: float, tau: float,
+                          domain=None) -> dict:
     """The self-consistent emergence chain for a given endpoint
     geometry.
 
@@ -141,7 +150,7 @@ def self_consistent_chain(M_P: float, L_Cg: float, tau: float) -> dict:
     kL = get("kL")
     for _ in range(60):
         M_G = C / kL
-        kL_new = C / k_star(kL, tau, M_G, M_P)
+        kL_new = C / k_star(kL, tau, M_G, M_P, domain=domain)
         if abs(kL_new - kL) < 1e-15:
             kL = kL_new
             break

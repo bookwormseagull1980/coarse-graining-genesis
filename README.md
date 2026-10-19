@@ -46,6 +46,21 @@ and cosmological observables. The same source ledger, normalizations and matchin
 relations are carried through the chain, so a reader can inspect where a result
 is generated, where a comparison enters, and where an approximation begins.
 
+The ontological dependency graph has one zero-argument root: minimal unbiased
+compositional change.  Its canonical generated realization supplies the source
+record and every physical sector.  Probes are response coordinates, subsystem
+boundaries retain the complementary part of the same state, and observational
+records set units or test predictions; none is a second dynamical source.  The
+executable contract is `cg_core.content_response.closed_generated_world_contract`.
+
+The concrete matter bundle is built by
+`cg_core.canonical_matter_bundle.generated_matter_bundle()`: its base is the
+generated Hermitian four-carrier, its fibre is the complete sixteen-coordinate
+source matter carrier, and relative frames use the same source action.
+Their transition cocycle and component compatibility are proved in the
+corresponding Lean module. General bundle comparison lemmas do not supply
+an additional bundle or compatibility premise to this construction.
+
 This makes the release a concrete test of a broader physical question: how much
 of a macroscopic description can be inherited from a common spectral source
 without silently replacing generated quantities by sector-by-sector fits. The
@@ -184,6 +199,12 @@ gives the critical coordinate and external momentum conversion. The common
 Einstein--scalar action supplies the nonlinear interaction and conserved
 matter coupling. Cosmological evolution and the local static equation use
 their stated background, source and boundary data.
+Within the unit-normalized first-order quadratic-plus-cubic density class,
+affine-dilation covariance fixes the relative cubic coefficient to one.
+`affine_dilation_completion()` evaluates the detecting variation in exact
+rational arithmetic; Lean proves the derivative identity for every local
+configuration and uniqueness within that class. The full local-coordinate
+covariance and nonlinear metric field equations are separate proof targets.
 The internal conformal source has a canonical matter evolution with
 kinetic weight `M=exp(-3 eta)` and spatial form
 `B=exp(-eta/2) A exp(-eta/2)`. Their normalized frequencies reproduce
@@ -340,7 +361,15 @@ py examples/quickstart/run_example.py
 
 It generates a three-shell scalar record on the `RP3` carrier and checks the
 stored output values. The example completes without optional cosmology
-solvers. Then run the core regression suite:
+solvers. Then run the explicit finite response-domain endpoint certificate:
+
+```powershell
+py scripts/certify_tt_response.py
+```
+
+It prints `c(4)`, `c(5)`, `c(6)`, the lower platform edge `R_*`, and the unique
+integer level in `(R_*, 16/pi]`; the upper edge is the shell-support bound, not
+the `c(6)` crossing. Then run the core regression suite:
 
 ```powershell
 py -m pip install -r requirements.txt

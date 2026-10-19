@@ -20,7 +20,9 @@ q=sqrt(-g) g^{-1}.  It is cubic in q-eta and Gamma after removal of a
 boundary term.  Scalar matter uses the same density.  The routines evaluate
 the off-shell density identity delta L = partial_mu(xi^mu L) on arbitrary
 rational jets; no field equations or discretized derivatives are used.
-The common generally covariant action is an effective input.
+The affine-dilation comparison below determines the relative cubic
+self-coupling uniquely inside the unit-normalized first-order family.
+The full generally covariant action remains the declared effective class.
 """
 from __future__ import annotations
 
@@ -249,3 +251,52 @@ def verify_classical_completion():
             "scalar_ward_residual": str(scalar["ward_residual"]),
             "arithmetic": "exact rational; polynomial degree at most four",
             "jet_evaluations": 11, "passed": passed}
+
+
+def affine_dilation_completion():
+    """Exact nonlinear self-coupling test on the generated four-carrier.
+
+    At the coordinate origin xi=0 and dxi=I, tensor-density transport gives
+    delta q=2q, delta Gamma=Gamma and delta(dGamma)=2dGamma. If c multiplies
+    (q-eta) Gamma Gamma, the actual density residual is
+
+        delta L_c - div(xi L_c) = 2(c-1) eta.R_quadratic.
+
+    The torsion-free witness below has eta.R_quadratic=-2. Thus this
+    necessary covariance identity forces c=1. These exact evaluations are
+    the executable counterpart of SourceNonlinearTensorAction in Lean;
+    they do not replace its arbitrary-configuration derivative theorem.
+    """
+    from cg_core.canonical_matter_bundle import generated_matter_bundle
+    dimension = generated_matter_bundle()["base_dimension"]
+    eta = np.diag([1, -1, -1, -1]).astype(object)
+    connection = np.zeros((dimension,) * 3, dtype=object)
+    connection[0, 1, 1] = 1
+    connection[1, 0, 1] = connection[1, 1, 0] = 2
+    zeros = lambda rank: np.zeros((dimension,) * rank, dtype=object)
+
+    def evaluate(coefficient):
+        return palatini_ward_residual(
+            eta, zeros(3), connection, zeros(4), zeros(5),
+            zeros(1), np.eye(dimension, dtype=object), zeros(3), zeros(4),
+            background=eta, cubic_weight=coefficient,
+        )["ward_residual"]
+
+    residual_zero = evaluate(Fraction(0))
+    residual_one = evaluate(Fraction(1))
+    slope = residual_one - residual_zero
+    if slope == 0:
+        raise ArithmeticError("the chosen torsion-free jet did not detect self-coupling")
+    coefficient = -residual_zero / slope
+    if evaluate(coefficient) != 0:
+        raise ArithmeticError("the derived self-coupling fails the density identity")
+    return {
+        "coefficient": coefficient,
+        "ward_residual": residual_one,
+        "omitted_cubic_residual": residual_zero,
+        "residual_slope": slope,
+        "dimension": dimension,
+        "root_argument_count": 0,
+        "comparison_class": "unit-normalized first-order quadratic plus cubic density",
+        "identity": "delta L_c-div(xi L_c)=2(c-1) eta.R_quadratic",
+    }

@@ -62,6 +62,16 @@ The unified records include finite-operator examples, matter matching,
 complete condensates, tensor and local responses, thermal evolution and
 CAMB/BAO calculations. Conditional examples retain their supplied parameters.
 
+The zero-argument `generated_matter_bundle()` constructs the concrete source
+bundle independently of the general localized-bundle comparison interfaces.
+`tests/test_canonical_matter_bundle.py` checks its actual source operators,
+neutral coordinate, determinant signature and frame compatibility. The same
+suite checks the exact rational affine-dilation variation that detects the
+relative cubic self-coupling. General configuration identities and the unique
+coefficient in the normalized first-order class are proved by the Lean
+`CanonicalMatterBundle` and `SourceNonlinearTensorAction` modules; full local
+nonlinear metric equations are not included in that formalization.
+
 ## Reproduce and verify
 
 From the repository root, install the runtime and verification dependencies:
@@ -145,9 +155,21 @@ py scripts/certify_spectral_inputs.py
 ```
 
 Its interval certifies the three retained positions on the specified response
-domain. High-precision floating-point central values and observational
-residuals have their own accuracy statements. A supplied native-condensate
-problem can be certified separately:
+domain. The explicit finite-domain endpoint certificate evaluates `c(R)` for
+`R=4,5,6`, the lower platform edge `R_*`, and the shell-support upper bound:
+
+```powershell
+py scripts/certify_tt_response.py
+```
+
+It prints the positive endpoint coordinates `c(4), c(5), c(6)`, the lower edge
+`R_*`, and the unique integer level in `(R_*, 16/pi]`. The production
+realization gives `c(4) < sqrt(11/2)` and `c(6) < sqrt(15/2)`; the upper edge
+is therefore the shell-support bound `R <= 16/pi`, not a crossing of `c` at
+`sqrt(15/2)`. These are floating-point centre values; an outward interval
+certificate is a separate calculation. High-precision floating-point central
+values and observational residuals have their own accuracy statements. A
+supplied native-condensate problem can be certified separately:
 
 ```powershell
 py scripts/solve_native_condensate.py --g 1 --Z 2 --L 2.5 --shells 512

@@ -171,6 +171,35 @@ def closed_chiral_center_certificate():
     }
 
 
+def closed_generated_world_contract():
+    """Return the zero-argument contract of the complete generated world.
+
+    Minimal unbiased compositional change is the sole ontological root.  The
+    finite source, complete matter carrier, quotient responses, probes,
+    subsystem boundaries, and comparison records are downstream realizations
+    or readouts; none is a second dynamical cause.
+    """
+    center = closed_chiral_center_certificate()
+    return {
+        "sole_root": "minimal_unbiased_compositional_change",
+        "root_argument_count": 0,
+        "complete_matter_capacity": (
+            center["left_capacity"] + center["right_capacity"]
+        ),
+        "complete_capacity_balanced": (
+            center["left_capacity"] == center["right_capacity"]
+            and center["closed_center_bias"] == 0.0
+        ),
+        "charged_quotient_is_internal_projection": center[
+            "quotient_is_projection_defect"
+        ],
+        "applied_probes_are_response_coordinates": True,
+        "subsystem_boundaries_are_internal_complements": True,
+        "comparison_data_are_dynamical_sources": False,
+        "external_dynamical_source_required": False,
+    }
+
+
 def chiral_center_power_law_screening(
     amplitude,
     exponent,
