@@ -8,6 +8,7 @@ import pytest
 from cg_core.connection_action import (
     cartan_connection, scalar_curvature_difference, production_curvature_matching,
     cartan_spin_connection_vertices, minimal_gauge_curvature, paired_dirac_determinants,
+    minimal_algebraic_torsion_span,
 )
 from cg_core.ec_variation import (
     minimal_internal_torsion_vertices, torsion_invariants, quadratic_torsion_coefficients,
@@ -151,6 +152,22 @@ def test_two_sign_average_cannot_replace_the_actual_fermion_determinant():
         assert result["same_parameter_quadratic_shift_ratio"] == Q(2, 3)
     zero = paired_dirac_determinants(a, d, 0, length)
     assert zero["exact_to_mean_determinant_ratio"] == 1
+
+
+def test_minimal_quadratic_action_span_has_an_exact_production_obstruction():
+    span = minimal_algebraic_torsion_span()
+    assert span["curvature_annihilator_pairing"] == span["spin_annihilator_pairing"] == 0
+    assert span["production_annihilator_pairing"] == Q(11, 6)
+    assert not span["production_in_this_span"]
+    # The all-nine-component Clifford table annihilates a basis of the
+    # whole trace-free subspace, not just the isotropic trace slice.
+    basis = _dual_basis()
+    vertices = minimal_internal_torsion_vertices()
+    trace_free = [b for i, b in enumerate(basis) if i not in (0, 4, 8)]
+    trace_free += [basis[0]-basis[4], basis[4]-basis[8]]
+    for b in trace_free:
+        vertex = sum(float(b[i, j])*vertices[i, j] for i, j in product(range(3), repeat=2))
+        np.testing.assert_array_equal(vertex, np.zeros((2, 2)))
 
 
 @pytest.mark.parametrize("call", (

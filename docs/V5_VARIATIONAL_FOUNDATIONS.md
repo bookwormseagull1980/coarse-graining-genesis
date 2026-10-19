@@ -201,6 +201,52 @@ identity. Its use as a response insertion is distinct from deriving it
 from a common connection action. Changes of geometry, interacting states
 or nonminimal terms must be varied in their actual functionals.
 
+### Which quadratic coefficients the minimal operators can generate
+
+The Clifford contraction also gives an operator identity, before any
+spectral expansion. For every trace-free perturbation `B_perp(x)`,
+
+\[
+ D_{B+B_\perp}=D_B,
+ \qquad D_B=D_0-\tfrac14\operatorname{tr}(B)I.
+\]
+
+At fixed metric, measure and torsion-independent regulator, every
+well-defined determinant or resolvent of this operator has the same
+identity. Its derivatives in the eight trace-free directions vanish to
+all orders. This statement allows position-dependent trace-free fields;
+it follows pointwise from the vertex, rather than from a homogeneous
+ansatz. The minimal gauge curvature is likewise independent of `B`, as
+shown above. A scalar action formed from `d`, the metric and the LC
+curvature is independent of `B` as well. Integrating these specified
+Gaussian operators therefore supplies no missing transverse algebraic
+torsion term.
+
+There is a useful stronger test at quadratic, zero-derivative order.
+Even if a scalar insertion proportional to the full connection scalar
+curvature is included, its algebraic quadratic variation at the round
+zero-torsion background has the curvature direction. Together with the
+spin trace direction, the accessible coefficient space is
+
+\[
+ \operatorname{span}\{(-\tfrac12,-1,1),(1,0,0)\}
+ \quad\text{in the }(\|B_0\|^2,\|B_A\|^2,\|B_S\|^2)\text{ basis}.
+\]
+
+Every element satisfies `c_A+c_S=0`. The actual production action gives
+
+\[
+ c_A+c_S=\tfrac13+\tfrac32=\tfrac{11}{6}.
+\]
+
+This exact nonzero pairing proves that no choice of the two displayed
+response coefficients generates the production action. The test is
+implemented by `minimal_algebraic_torsion_span`; it does not exclude
+additional nonminimal source vertices, derivative terms or metric
+fluctuations. Those terms need their actual operator contractions. In
+particular, increasing the numerical resolution of the trace-only
+fermion determinant cannot determine these transverse coefficients.
+
 ### Eliminating the two trace-free sectors
 
 The irreducible decomposition also gives the complete algebraic field
@@ -568,6 +614,211 @@ each Hessian column. These results establish the complete algebraic
 torsion variation of the stated EC--Gaussian-fermion functional, while
 the geometry and reference window retain the fixed values stated above.
 
+### Joint torsion and radius variation of the same Gaussian block
+
+A torsion-stationary point at a prescribed radius need not solve the
+radius equation. The previous relative determinant subtracts its
+zero-torsion value at each radius. This subtraction has zero torsion
+derivative, but has a radius derivative. To vary the full determinant,
+restore that reference term, or place the identical term in the
+geometry action with its stated sign. These two bookkeeping choices
+agree only when the same complete functional is used.
+
+Let `eta=log L`, hold `k` fixed and retain the reference domain
+`omega^2+d_n(L)^2<Rk^2`. Define
+
+\[
+ \begin{gathered}
+ A(z)=\frac{z}{1-e^{-z/k^2}},\qquad
+ \delta_n=(d_n-3\tau/(4L))^2-d_n^2,\\
+ F^{\rm full}(\tau,L)
+ =-\frac1{\pi V_3}\sum_n g_n\int_0^{\Omega_n(L)}
+       \log\frac{A(\omega^2+d_n^2)+\delta_n}{k^2}\,d\omega,\\
+ \Omega_n^2=Rk^2-d_n^2,\qquad
+ F^{\rm ref}(L)=F^{\rm full}(0,L),\qquad
+ F^{\rm rel}=F^{\rm full}-F^{\rm ref}.
+ \end{gathered}
+\]
+
+The logarithm is dimensionless in the same internal scale units. Its
+normalization is part of this displayed Gaussian functional. A different
+reference subtraction changes the geometry functional by a computable
+term and must be propagated into that action. The torsion derivatives
+of `F_full` and `F_rel` agree. Their geometry derivatives differ by the
+derivative of `F_ref`.
+
+For homogeneous fields it is the integrated action `S=V_3 F` that is
+varied, with `V_3=pi^2 L^3`. Thus
+
+\[
+ S_\eta=V_3(F_\eta+3F),\qquad
+ S_{\tau\eta}=V_3(F_{\tau\eta}+3F_\tau),\qquad
+ S_{\eta\eta}=V_3(F_{\eta\eta}+6F_\eta+9F).
+\]
+
+The action density alone gives a different radius equation. For example,
+the production torsion density is proportional to `L^-2`, whereas its
+volume integral is proportional to `L`. In the coordinates `(tau,L)`,
+varying the radius at fixed `tau` changes the trace matrix as
+`B=(tau/L)I`. These coordinates are nonsingular; joint stationarity is
+equivalent to stationarity in the trace matrix and radius coordinates.
+
+Within a fixed open spectral chamber, Leibniz' rule gives the independent
+bulk and frequency-edge decomposition
+
+\[
+ \begin{split}
+ \partial_\eta F^{\rm full}
+ ={}&-3F^{\rm full}
+ +\frac1{\pi V_3}\sum_n g_n\int_0^{\Omega_n}
+       \frac{2(d_n^2 A_z+\delta_n)}{A+\delta_n}\,d\omega\\
+ &-\frac1{\pi V_3}\sum_n g_n\frac{d_n^2}{\Omega_n}
+       \log\frac{A(Rk^2)+\delta_n}{k^2}.
+ \end{split}
+\]
+
+The last term is generally nonzero. A finite measurement domain does not
+make its Gaussian integrand vanish. At a shell crossing `Omega_n=0`,
+this functional generally has a square-root cusp. Ordinary radius
+derivatives and Newton boxes are consequently restricted to an open
+chamber; the implementation rejects a box meeting a shell crossing.
+
+`fermion_geometry_response` computes the full two-variable Hessian by
+differentiating the same integrand and measure. In normalized frequency
+coordinates `omega=Omega_n u`,
+
+\[
+ z_\eta=-2d_n^2(1-u^2),\quad
+ \delta_{n,\eta}=-2\delta_n,\quad
+ \partial_\eta\log(\Omega_n/V_3)=d_n^2/\Omega_n^2-3.
+\]
+
+These identities give both derivatives and their mixed term. The bulk
+and edge formula above provides a separate check. An independent
+high-precision frequency integral verifies the resulting geometry force.
+
+For an explicit joint calculation, complete the trace-matched curvature
+contribution identified earlier. In the retained units its coefficient
+is `gamma=3`; no new coefficient is fitted to a stationary point. On the
+isotropic branch the resulting integrated action is
+
+\[
+ \boxed{\quad
+ S_{\rm test}(\tau,L)
+ =\pi^2 L(18-\tfrac92\tau^2)
+   +V_3 F^{\rm full}(\tau,L).
+ \quad}
+\]
+
+The two transverse production terms remain as previously decomposed;
+their field equations force both constant trace-free matrices to zero.
+This is a specified curvature completion of the production torsion
+action. Trace matching fixes its coefficient within this completion;
+it does not derive the complete generated matter--geometry action or
+its overall normalization. The calculation determines exactly what
+this particular completion predicts.
+
+For `k=1,R=5` and three full sixteen-coordinate generations, the two
+stationary equations have a numerical solution
+
+\[
+ \tau_*=0.11619682549993063,\qquad
+ L_*=1.7956264727915705.
+\]
+
+The search chamber is bounded by the neighbouring shell thresholds
+`3.5/sqrt(5)<L<4.5/sqrt(5)`. At the solution the gradient in `(tau,eta)`
+is approximately `(1.1e-14,2.3e-13)`. Its Hessian is approximately
+
+\[
+ \begin{pmatrix}
+ -150.6485901&71.5623638\\
+ 71.5623638&3386.9570847
+ \end{pmatrix}.
+\]
+
+Eliminating the auxiliary trace direction gives the positive radius
+Schur curvature `3420.9512423` in the `eta` coordinate. This is a
+joint stationary point, not a minimum in the auxiliary torsion variable.
+The neutral right reference multiplicity is `42`; the neutral spin
+response is retained throughout.
+
+### Rational existence and uniqueness certificate for the joint point
+
+The small numerical gradient is supplemented by a separate interval
+proof. Extend the integer-arithmetic kernel with a positive logarithm:
+reduce its argument to `[1,2]` by powers of two, put
+`z=(x-1)/(x+1)` and use
+
+\[
+ \log x=2\sum_{j=0}^{49}\frac{z^{2j+1}}{2j+1}+r,
+ \qquad
+ 0\leq r\leq\frac{2(1/3)^{101}}{101(1-1/9)}.
+\]
+
+Together with the existing exponential, square-root and pi enclosures,
+this bounds the continuous frequency integrals and the full Hessian
+on a two-dimensional parameter box. The integration cells are interval
+rectangles, rather than point samples.
+
+Write `g=grad S_test` and choose a rational nonsingular matrix `P`
+approximating the inverse Hessian at a rational centre `x0`. The
+numerical inverse only proposes this rational matrix. All subsequent
+inclusions use outward integer arithmetic. For a box `X`, compute
+
+\[
+ T(X)\subseteq x_0-Pg(x_0)+(I-PH(X))(X-x_0),\qquad
+ \|I-PH(X)\|_\infty<1.
+\]
+
+If the right-hand box lies strictly inside `X`, the map
+`T(x)=x-Pg(x)` is a contraction of the complete box into itself.
+Banach's theorem gives a unique fixed point; nonsingularity of `P`
+makes it a zero of the actual gradient. This proves local existence
+and uniqueness independently of the numerical root residual.
+
+For
+
+\[
+ X=[0.111,0.122]\times[1.790,1.801]
+ \quad\text{in coordinates }(\tau,L),
+\]
+
+256 integration cells give a contraction norm below `0.133615`, with
+Newton image contained in
+
+\[
+ [0.1144939,0.1179039]\times[1.7941224,1.7971579]
+ \subset\operatorname{int}X.
+\]
+
+The same outward Hessian bounds give `S_tau,tau<0` throughout the box
+and radius Schur curvature greater than `936.07` in the `L` coordinate.
+Thus the joint two-dimensional auxiliary Hessian has one negative and
+one positive direction there. The eight constant trace-free directions
+have positive, nonzero production coefficients. Their equations set them
+to zero, so the certificate also fixes the stationary point among all
+nine homogeneous torsion components and the radius with `(tau,L)` in
+this box. It does not classify other spectral chambers or spatially
+varying fields.
+
+At the joint solution the reference radius force is about `-328.47020`
+and the full frequency-boundary force is about `-593.36077`. Omitting
+the reference action changes a zero radius residual to about `328.47020`;
+omitting the boundary term changes it to about `593.36077`. These are
+direct calculations of the lost terms. At the earlier fixed radius
+`L=2.4935343325226915`, the certified torsion saddle instead has radius
+residual about `-4578.46600` in the same completed action.
+
+The two-variable calculation therefore does not identify the gauge
+content response `1/50` with a connection saddle. It supplies a complete
+joint variation and a certified local saddle for an explicit common
+block. Matching that block to the generated interacting action still
+requires the genuine source vertices behind the two transverse
+coefficients and the production spectral insertions. A measured-window
+stationary point also depends on its stated boundary response; removing
+that response requires carrying the unresolved part in the same action.
+
 ### Transfer to the downstream V5 chain
 
 `order_parameter.compute` now obtains its coefficients from `ec_action`,
@@ -730,6 +981,14 @@ and continuous-integral enclosures against independent high-precision
 integrals. The root certificate uses signs and derivative bounds over
 the entire search interval, rather than a small numerical residual.
 
+`python scripts/solve_torsion_response.py --joint-radius-bracket 1.65 1.95 --cells 256`
+solves the two joint equations above and checks an outward invariant
+Newton box. `tests/test_torsion_geometry.py` compares both gradients
+and every Hessian column with independent action variations, checks the
+moving boundary against a high-precision frequency integral, and verifies
+the rational inclusion and its explicit failure on an unresolved box.
+The fixed-radius mode also reports the geometry residual of that saddle.
+
 `cg_core/connection_action.py` computes the complete connection contraction,
 its divergence, the signed spin-connection convention and the minimal
 non-Abelian gauge cancellation. `tests/test_connection_action.py`
@@ -743,7 +1002,7 @@ The three action-level matching tasks are consequently explicit:
 
 | Quantity | Computed result | Remaining action identity |
 |---|---|---|
-| `tau` | Full-carrier gauge response `1/50`; minimal classical stationary torsion `0`; induced four-fermion coefficient `1/32`; a unique nine-component EC--Gaussian-fermion stationary point with trace in `[-0.030669,-0.029772]` and auxiliary inertia `(8 positive,1 negative)` at the stated fixed geometry/window; production curvature decomposition and spin convention now explicit | Derive the extra transverse-action coefficients and production response insertions from the common interacting action; vary geometry and the other fields in that same functional |
+| `tau` | Full-carrier gauge response `1/50`; minimal classical stationary torsion `0`; induced four-fermion coefficient `1/32`; the fixed-radius nine-component saddle; a certified local joint torsion/radius saddle near `(0.116197,1.795626)` for the explicit trace-matched curvature/fermion action, including reference, volume and frequency-edge variations; an exact coefficient-span obstruction for the minimal operators | Derive the extra transverse-action coefficients and production response insertions from the actual interacting source vertices; match the common geometry/matter functional and its boundary response |
 | `4/27` | Unique survival-profile maximum; Gaussian action derivative differs | Derive the endpoint from the actual effective-action variation and normalize its TT kinetic vertex |
 | Gauge factor | Constant-mode integral and exact required `g7^2`; production convention registered | Derive that higher-dimensional kinetic coefficient from the common generated action |
 

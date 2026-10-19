@@ -133,6 +133,45 @@ def production_curvature_matching():
     }
 
 
+def minimal_algebraic_torsion_span():
+    """Quadratic directions supplied by curvature and the minimal spin vertex.
+
+    At fixed metric, measure and regulator the Hermitian spin operator is
+    D_B=D0-tr(B)/4. Its determinant is therefore unchanged by any trace-free
+    B, to all orders, also for point-dependent trace-free perturbations.
+    Minimal scalar/gauge actions formed with d and the LC metric have no
+    B vertex. No loop of these particular Gaussian operators generates a
+    transverse algebraic coefficient.
+
+    Even allowing a scalar insertion proportional to the scalar-curvature
+    difference adds just the curvature direction at quadratic, zero-derivative
+    order around the round zero-torsion background. Such coefficients lie
+    in span{(-1/2,-1,1),(1,0,0)} in the (trace, skew, symmetric-traceless)
+    norm basis. The exact annihilator (0,1,1) tests this restricted class.
+    Additional nonminimal vertices, derivative invariants and dynamical
+    metric loops must be computed in their own actions; they are not
+    excluded by this statement.
+    """
+    matching = production_curvature_matching()
+    curvature = matching["curvature_irreducible_weights"]
+    spin = (Q(1), Q(0), Q(0))
+    production = quadratic_torsion_coefficients(
+        *matching["production_invariant_coefficients"])
+    witness = (Q(0), Q(1), Q(1))
+    pairing = lambda weights: sum(x*y for x, y in zip(witness, weights))
+    return {
+        "sector_order": ("trace", "antisymmetric", "symmetric_trace_free"),
+        "curvature_quadratic_direction": curvature,
+        "spin_quadratic_direction": spin,
+        "annihilator": witness,
+        "curvature_annihilator_pairing": pairing(curvature),
+        "spin_annihilator_pairing": pairing(spin),
+        "production_annihilator_pairing": pairing(production),
+        "production_in_this_span": pairing(production) == 0,
+        "scope": "quadratic algebraic sector of the stated minimal operators at fixed round geometry, with optional scalar-curvature insertion",
+    }
+
+
 def cartan_spin_connection_vertices():
     """All nine Hermitian Pauli vertices in the stated Cartan convention.
 

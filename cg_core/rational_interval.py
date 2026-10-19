@@ -151,3 +151,48 @@ def exp_negative(x):
     for _ in range(halvings):
         exponential = exponential*exponential
     return exponential
+
+
+def _unit_logarithm(value):
+    """log(value), 1<=value<=2, from a positive atanh series and its tail."""
+    z = Interval.point((value-1)/(value+1))
+    zz = z*z
+    partial = Interval.point(0)
+    for j in range(49, -1, -1):
+        partial = Fraction(1, 2*j+1)+zz*partial
+    # 2 sum_{j>=50} z^(2j+1)/(2j+1)
+    # <= 2 (1/3)^101 / (101 (1-1/9)).
+    tail = Interval.point(Fraction(9, 404*3**101))
+    result = 2*z*partial
+    return Interval(result.lo, result.hi+tail.hi)
+
+
+@lru_cache(maxsize=1)
+def _log_two():
+    return _unit_logarithm(Fraction(2))
+
+
+def log_positive(x):
+    """Outward log(x) for positive intervals, using only integer arithmetic.
+
+    Exact powers of two reduce each endpoint to [1,2]. The fifty-term
+    atanh series has a positive geometrically bounded remainder. Monotonicity
+    of log then encloses the whole input interval; no library logarithm or
+    floating-point endpoint enters the certificate.
+    """
+    if x.lo <= 0:
+        raise ValueError("positive logarithm interval required")
+
+    def endpoint(value):
+        shifts = 0
+        while value > 2:
+            value /= 2
+            shifts += 1
+        while value < 1:
+            value *= 2
+            shifts -= 1
+        return _unit_logarithm(value)+shifts*_log_two()
+
+    lower = endpoint(Fraction(x.lo, GRID))
+    upper = endpoint(Fraction(x.hi, GRID))
+    return Interval(lower.lo, upper.hi)
