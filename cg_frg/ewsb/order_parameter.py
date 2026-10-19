@@ -294,6 +294,9 @@ def compute() -> dict:
          note="production quadratic torsion action: a=M_G^3/4, b=4a, "
               "c=-7a/3. Three independent rotational invariants; these "
               "coefficient ratios are not fixed by rotational symmetry. "
+              "They are not proportional to the connection-curvature "
+              "coefficients (1/4,1/2,-1); the difference is retained "
+              "in ec_torsion_sector_contract. "
               "All three irreducible algebraic Hessians are invertible")
     pset("ec_torsion_sector_contract", production_torsion_sector_contract(tau, kL),
          provenance="DERIVED", role="informational", dependencies=("tau", "kL"),

@@ -116,6 +116,91 @@ does not evaluate a spin-current expectation. The legacy function name
 `torsion_field_equation` delegates to `torsion_content_modulus`; the
 action derivative is evaluated separately in `ec_variation`.
 
+### Computing the connection curvature before choosing action coefficients
+
+The complete connection contraction now fixes a comparison which the
+isotropic ansatz by itself could not determine. Use Cartan's convention
+`T^a=de^a+omega^a_b wedge e^b` and write `omega=omega_LC+C`. In an
+orthonormal frame,
+
+\[
+ C_{ab,c}=-\tfrac12(T_{abc}+T_{bca}-T_{cab}),\qquad
+ T_{abc}=C_{ac,b}-C_{ab,c}.
+\]
+
+At an LC-normal frame the curvature difference is `d_LC C+C wedge C`.
+Put `S=B^T-(tr B)I/2`; direct epsilon contraction gives
+`C_ab,c=epsilon_abd S_dc`. Contracting the matrix commutator then yields
+
+\[
+ \begin{split}
+ R(\omega)-R_{\rm LC}
+ &=\nabla_a J_a+\operatorname{tr}(S^2)-(\operatorname{tr}S)^2\\
+ &=\nabla_a J_a+\operatorname{tr}(B^2)
+                    -\tfrac12(\operatorname{tr}B)^2\\
+ &=\nabla_a J_a+\tfrac14 I_1+\tfrac12 I_2-I_3,\qquad
+ J_a=2\sum_b C_{ab,b}=-2\sum_bT_{bb a}.
+ \end{split}
+\]
+
+Here `tr(B^2)` is a matrix trace, not the squared Frobenius norm of an
+arbitrary nonsymmetric `B`. These formulas hold on the entire nine-component
+torsion space. The divergence is retained in `scalar_curvature_difference`,
+including all covariant-derivative components. For smooth global torsion
+on closed RP3 its integral vanishes by Stokes' theorem. A region with
+boundary carries the displayed boundary flux. The isotropic specialization
+is exactly the existing `-3 tau^2/(2L^2)` curvature correction.
+
+The scalar-curvature coefficients are consequently `(1/4,1/2,-1)`.
+The production coefficients `(1/4,1,-7/12) M_G^3` are not proportional
+to them. Matching the isotropic trace fixes the only possible overall
+factor to `3 M_G^3`. The complete identity is
+
+\[
+ \boxed{\quad
+ \mathcal L_{\rm prod}
+ =3M_G^3\bigl(R(\omega)-R_{\rm LC}-\nabla_aJ_a\bigr)
+   +M_G^3\left(\tfrac{10}{3}\|B_A\|^2
+                         -\tfrac32\|B_S\|^2\right).
+ \quad}
+\]
+
+Thus an overall normalization can match the trace saddle but cannot
+identify the full actions. Their transverse fluctuations differ. This
+is an exact decomposition of the selected production functional; it
+does not derive its additional two coefficients, nor the gravitational
+prefactor, from rotation invariance. In particular, replacing that
+functional by scalar curvature alone would change the transverse
+Hessians and the resulting fluctuation determinant. The comparison is
+included in the downstream torsion-sector contract.
+
+There is also a signed convention to fix before transporting a stationary
+value. The existing spin calculation uses the table `K=-C`. Its Pauli
+vertex is `-(tr B)I/4`, whereas inserting `C` into the same Hermitian
+spin action gives `+(tr B)I/4`. The actual connection and spin operator
+agree after `B_Cartan=-B_existing`. Curvature norms do not reveal this
+sign because they are quadratic. `cartan_spin_connection_vertices`
+evaluates all nine components and makes the conversion explicit; the
+previous stationary calculations keep their stated existing spin
+orientation throughout.
+
+For the minimally coupled Yang--Mills action there is a separate exact
+identity. In the same connection,
+
+\[
+ F_{ab}=\nabla^\omega_a A_b-\nabla^\omega_b A_a
+          +T^c{}_{ab}A_c+[A_a,A_b]
+       =\nabla^{\rm LC}_a A_b-\nabla^{\rm LC}_b A_a+[A_a,A_b].
+\]
+
+The contorsion cancels before `F` is squared, including for noncommuting
+gauge matrices. Therefore the fixed-metric minimal Yang--Mills term has
+no explicit algebraic torsion current. The production gauge insertion
+`tau^2/(6L^2)` is not obtained by omitting the torsion term in this
+identity. Its use as a response insertion is distinct from deriving it
+from a common connection action. Changes of geometry, interacting states
+or nonminimal terms must be varied in their actual functionals.
+
 ### Eliminating the two trace-free sectors
 
 The irreducible decomposition also gives the complete algebraic field
@@ -246,6 +331,26 @@ two native shells at `L=1,tau=1/50`, the minimally coupled squares are
 `2.205225` and `6.325225`; the production response values are `2.25015`
 and `6.25015`. Summing sixteen content coordinates multiplies these
 terms; it does not change their operator coefficients.
+
+A change of the torsion coordinate cannot fix this difference. For
+`tau_old=c tau_new`, the actual square retains a term linear in every
+signed `D0` unless `c=0`; that value also removes its quadratic term.
+Even in a genuinely paired two-sign spectrum, replacing the operators
+by their mean before taking the determinant loses a second-order term.
+Write `v=-3tau/(4L)` and let `A>0` denote the shared regulated reference
+denominator. The exact identity is
+
+\[
+ (A+v^2+2dv)(A+v^2-2dv)=(A+v^2)^2-4d^2v^2.
+\]
+
+`paired_dirac_determinants` evaluates this comparison exactly. Setting
+`c^2=2/3` could match the isolated coefficients `9/16` and `3/8`, but
+does not remove the signed term or the determinant difference; it also
+changes the coefficient of the same geometric torsion tensor. Thus
+neither reparametrization nor sign averaging identifies the production
+insertion with the minimal connection action. On RP3 a missing sign
+partner must not be supplied merely to perform this comparison.
 
 `minimal_coupled_action_variation` evaluates all nine torsion derivatives
 and both matter derivatives of the displayed action.
@@ -418,6 +523,51 @@ decoupled. These are results for the displayed action and fixed
 reference domain. They neither equate the gauge content response to a
 connection saddle nor replace the downstream response coordinate.
 
+### The same saddle solves all nine homogeneous algebraic torsion equations
+
+The determinant need not be restricted to an isotropic trial field. The
+minimal vertex already evaluated on all nine directions gives
+`D_B=D0-tr(B)/4`. Hence at fixed geometry and reference window its
+relative action is exactly `F_k(L tr(B)/3)` for any constant dual matrix `B`.
+The complete action, gradient and Hessian are therefore
+
+\[
+ \begin{split}
+ S(B)&=\sum_{i=0,A,S}c_i\|B_i\|^2+F_k(L\operatorname{tr}B/3),\\
+ \nabla_B S&=2\sum_i c_i B_i+\tfrac L3F'_k I,\\
+ H_B&=\left(2c_0+\tfrac{L^2}{3}F''_k\right)P_0
+                     +2c_AP_A+2c_SP_S.
+ \end{split}
+\]
+
+The projections are orthogonal for the Frobenius pairing. The production
+transverse coefficients are nonzero, so the two transverse equations
+force `B_A=B_S=0`; this is now a consequence of the full determinant
+variation. The trace equation is precisely `G_k(tau)=0`. Consequently
+the certified scalar root is the unique stationary point among all nine
+torsion components whose trace coordinate lies in the certified interval,
+with no bound imposed on the transverse matrices. The trace eigenvalue
+is `L^2 G'_k/3`, and the transverse eigenvalues are `2/3` and `3`, of
+multiplicities three and five. For the reported certified interval the
+full homogeneous auxiliary Hessian has eight positive and one negative directions,
+with no zero mode. Its negative direction remains an auxiliary saddle;
+physical stability requires the reduced interacting Hessian.
+
+At the stored geometry the certified trace eigenvalue lies in
+`[-3.0830026151526404,-2.5218858748634153]` throughout the search domain.
+At the numerical root its value is approximately `-2.8459534741741273`;
+the largest of the nine gradient residuals is `4.2e-17`. The residual
+is a numerical check; existence and uniqueness use the interval bounds
+and the nonzero transverse coefficients above.
+
+`torsion_matrix_window_action` computes this complete matrix variation.
+`solve_torsion_window` carries its all-component uniqueness and Hessian
+bounds into the same certificate, without a second numerical root fit.
+Independent differences of the tensor action check each gradient and
+each Hessian column. These results establish the complete algebraic
+torsion variation of the stated EC--Gaussian-fermion functional, while
+the geometry and reference window retain the fixed values stated above.
+
 ### Transfer to the downstream V5 chain
 
 `order_parameter.compute` now obtains its coefficients from `ec_action`,
@@ -580,11 +730,20 @@ and continuous-integral enclosures against independent high-precision
 integrals. The root certificate uses signs and derivative bounds over
 the entire search interval, rather than a small numerical residual.
 
+`cg_core/connection_action.py` computes the complete connection contraction,
+its divergence, the signed spin-connection convention and the minimal
+non-Abelian gauge cancellation. `tests/test_connection_action.py`
+checks every coefficient of the quadratic tensor identity by rational
+polarization on all nine components, every covariant-derivative direction,
+a nontrivial rational frame rotation and direct connection-matrix
+commutators. The same tests compare the actual two-sign determinants
+before and after the proposed averaging.
+
 The three action-level matching tasks are consequently explicit:
 
 | Quantity | Computed result | Remaining action identity |
 |---|---|---|
-| `tau` | Full-carrier gauge response `1/50`; minimal classical stationary torsion `0`; exact auxiliary elimination induces the four-fermion coefficient `1/32` in unit-M_G convention; the fixed-geometry EC--Gaussian-fermion saddle is enclosed in `[-0.030669,-0.029772]`, excluding `1/50` | Determine the common interacting gauge/Higgs/geometry stationary point and its relation to the gauge content response; derive the selected quadratic-action coefficients |
+| `tau` | Full-carrier gauge response `1/50`; minimal classical stationary torsion `0`; induced four-fermion coefficient `1/32`; a unique nine-component EC--Gaussian-fermion stationary point with trace in `[-0.030669,-0.029772]` and auxiliary inertia `(8 positive,1 negative)` at the stated fixed geometry/window; production curvature decomposition and spin convention now explicit | Derive the extra transverse-action coefficients and production response insertions from the common interacting action; vary geometry and the other fields in that same functional |
 | `4/27` | Unique survival-profile maximum; Gaussian action derivative differs | Derive the endpoint from the actual effective-action variation and normalize its TT kinetic vertex |
 | Gauge factor | Constant-mode integral and exact required `g7^2`; production convention registered | Derive that higher-dimensional kinetic coefficient from the common generated action |
 

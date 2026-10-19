@@ -15,6 +15,10 @@ R_k(z)=z/(exp(z/k^2)-1), D_tau=D0-3*tau/(4*L).  The window and regulator
 are held fixed in tau; only the actual operator is differentiated.  Thus
 the action, first derivative and Hessian use precisely the same support
 and denominator.  No current is adjusted to a target torsion.
+The signed operator uses ec_variation's retained K table. For Cartan
+T=de+omega wedge e the same connection has dual torsion -B; see
+connection_action. This sign conversion leaves the action contraction
+and all reported calculations in their explicitly stated orientation.
 
 This is the regulated Gaussian fermion block at fixed round geometry,
 not the interacting gauge/Higgs/geometry effective action.  The relative
@@ -207,6 +211,52 @@ def torsion_window_action(tau, *, radius, scale, domain=DEFAULT_RESPONSE_DOMAIN,
             "scope": "EC plus Gaussian fermion block in unit-M_G action convention; fixed round geometry"}
 
 
+def torsion_matrix_window_action(dual, *, radius, scale, domain=DEFAULT_RESPONSE_DOMAIN,
+                                 generations=N_GENERATIONS):
+    """One action and its complete homogeneous auxiliary torsion variation.
+
+    The minimal spin operator depends on an arbitrary constant dual matrix
+    through D_B=D0-tr(B)/4, with B measured in inverse-length units. Thus
+    tau=L*tr(B)/3 is a coordinate, not an isotropy assumption. All three
+    quadratic production invariants are retained before variation.
+
+    The fermion determinant has no trace-free vertex and supplies a
+    rank-one Hessian on the trace direction. The eight other directions
+    keep their actual production Hessians. Geometry and the reference
+    window are fixed as in torsion_window_action; the complete matter
+    fibre, including the neutral right line, is integrated out there.
+    """
+    from cg_frg.ewsb.squash_level_transfer import ec_action
+    b = np.asarray(dual, float)
+    if b.shape != (3, 3) or not np.all(np.isfinite(b)):
+        raise ValueError("a finite real 3 by 3 dual torsion matrix required")
+    tau = radius*np.trace(b)/3
+    fermion = fermion_window_response(tau, radius=radius, scale=scale,
+                                      domain=domain, generations=generations)
+    action = ec_action(1.)
+    weights = quadratic_torsion_coefficients(*(action[key] for key in ("a", "b", "c")))
+    trace = np.eye(3)*np.trace(b)/3
+    parts = (trace, (b-b.T)/2, (b+b.T)/2-trace)
+    bare = sum(w*np.sum(part*part) for w, part in zip(weights, parts))
+    gradient = sum(2*w*part for w, part in zip(weights, parts))
+    gradient += fermion["tau_current"]*radius/3*np.eye(3)
+    identity, transpose = np.eye(9), np.eye(9).reshape(9, 3, 3).transpose(0, 2, 1).reshape(9, 9)
+    axis = np.eye(3).reshape(9)
+    p0 = np.outer(axis, axis)/3
+    pa = (identity-transpose)/2
+    ps = (identity+transpose)/2-p0
+    bare_hessian = sum(2*w*p for w, p in zip(weights, (p0, pa, ps)))
+    hessian = bare_hessian+fermion["tau_curvature"]*radius**2/3*p0
+    eigenvalues = (2*weights[0]+fermion["tau_curvature"]*radius**2/3,
+                   2*weights[1], 2*weights[2])
+    return {**fermion, "relative_action": bare+fermion["relative_action"],
+            "trace_tau": tau, "dual_torsion_gradient": gradient,
+            "dual_torsion_hessian": hessian,
+            "auxiliary_eigenvalues": list(eigenvalues),
+            "auxiliary_multiplicities": [1, 3, 5],
+            "scope": "all nine homogeneous algebraic torsion components of the production EC plus Gaussian fermion action; fixed round geometry/window"}
+
+
 def solve_torsion_window(*, radius, scale, domain=DEFAULT_RESPONSE_DOMAIN,
                          generations=N_GENERATIONS, bracket=(-.49, .24), cells=512):
     """Compute a saddle and certify existence/uniqueness when signs permit.
@@ -243,6 +293,25 @@ def solve_torsion_window(*, radius, scale, domain=DEFAULT_RESPONSE_DOMAIN,
               "strict_monotonicity_certified": monotone,
               "existence_certified": crossed,
               "unique_root_certified": crossed and monotone}
+    # The determinant depends only on tr(B). The transverse equations are
+    # the invertible production algebraic Hessians, not extra assumptions.
+    coefficients = production_torsion_variation()["irreducible_weights"]
+    trace_eigenvalue = derivative*_rational(radius)**2/3
+    transverse = tuple(2*w for w in coefficients[1:])
+    result["nine_component_stationarity"] = {
+        "unique_stationary_point_certified": bool(crossed and monotone and all(transverse)),
+        "stationary_dual_matrix": "(tau/radius) I_3 in the retained K orientation",
+        "trace_parameter_domain": [str(low), str(high)],
+        "transverse_domain": "all constant real antisymmetric and symmetric trace-free dual matrices",
+        "trace_hessian_eigenvalue_on_domain": trace_eigenvalue.decimal_bounds(),
+        "transverse_hessian_eigenvalues": [str(value) for value in transverse],
+        "multiplicities": [1, 3, 5],
+        "negative_directions_certified": int(trace_eigenvalue.hi < 0)+sum(
+            mult for mult, value in zip((3, 5), transverse) if value < 0),
+        "positive_directions_certified": int(trace_eigenvalue.lo > 0)+sum(
+            mult for mult, value in zip((3, 5), transverse) if value > 0),
+        "scope": "complete homogeneous auxiliary torsion variation of this EC--Gaussian-fermion action at fixed geometry/window",
+    }
     tau_gauge = full_carrier_response()["gauge_conditioned_tau"]
     gauge_j, _ = certify_fermion_window_response((tau_gauge, tau_gauge), cells=cells, **options)
     gauge_residual = gauge_j+bare_hessian*tau_gauge

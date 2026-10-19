@@ -14,7 +14,7 @@ from cg_core.rational_interval import GRID
 from cg_core.window_weights import ResponseDomain
 from cg_frg.ewsb.torsion_response import (
     fermion_window_response, certify_fermion_window_response,
-    torsion_window_action, solve_torsion_window,
+    torsion_window_action, solve_torsion_window, torsion_matrix_window_action,
 )
 
 
@@ -135,6 +135,33 @@ def test_common_ec_fermion_action_uses_actual_derivative_and_no_quartic_reconstr
     assert center["bare_tau_hessian"] == pytest.approx(float(expected)/4)
 
 
+def test_all_nine_torsion_variations_of_the_same_gaussian_action():
+    from cg_core.ec_variation import torsion_invariants
+    options = dict(radius=2., scale=1., generations=1)
+    b = np.array([[.012, .017, -.011], [-.009, -.007, .021], [.003, -.013, .008]])
+    data = torsion_matrix_window_action(b, **options)
+    # Build the action independently from tensor contractions and the
+    # determinant's actual trace vertex, without irreducible projectors.
+    def action(point):
+        scalar = sum(c*i for c, i in zip((.25, 1., -7/12), torsion_invariants(point)))
+        tau = options["radius"]*np.trace(point)/3
+        return scalar+fermion_window_response(tau, **options)["relative_action"]
+    step = 2e-6
+    for i, j in np.ndindex((3, 3)):
+        delta = np.zeros((3, 3))
+        delta[i, j] = step
+        first = (action(b+delta)-action(b-delta))/(2*step)
+        assert first == pytest.approx(data["dual_torsion_gradient"][i, j], abs=2e-10)
+        gp = torsion_matrix_window_action(b+delta, **options)["dual_torsion_gradient"]
+        gm = torsion_matrix_window_action(b-delta, **options)["dual_torsion_gradient"]
+        np.testing.assert_allclose(((gp-gm)/(2*step)).reshape(9),
+                                   data["dual_torsion_hessian"][:, 3*i+j], atol=2e-9, rtol=1e-8)
+    expected = sorted(v for v, m in zip(data["auxiliary_eigenvalues"], (1, 3, 5)) for _ in range(m))
+    np.testing.assert_allclose(np.linalg.eigvalsh(data["dual_torsion_hessian"]), expected, atol=1e-14)
+    np.testing.assert_allclose(data["dual_torsion_hessian"], data["dual_torsion_hessian"].T, atol=0)
+    assert data["content_dimension_per_generation"] == 16
+
+
 def test_window_saddle_certificate_or_explicit_failure_to_certify():
     result = solve_torsion_window(radius=2., scale=1., generations=1, cells=128)
     assert result["strict_monotonicity_certified"]
@@ -144,6 +171,14 @@ def test_window_saddle_certificate_or_explicit_failure_to_certify():
     assert result["at_root"]["stationarity_residual"] == pytest.approx(0, abs=1e-11)
     assert result["gauge_tau_stationarity_excluded"]
     assert result["at_root"]["tau_hessian"] < 0  # auxiliary saddle, not a physical tachyon test
+    full = result["nine_component_stationarity"]
+    assert full["unique_stationary_point_certified"]
+    assert (full["positive_directions_certified"], full["negative_directions_certified"]) == (8, 1)
+    assert full["transverse_hessian_eigenvalues"] == ["2/3", "3"]
+    b = result["root_estimate"]/2*np.eye(3)
+    data = torsion_matrix_window_action(b, radius=2., scale=1., generations=1)
+    np.testing.assert_allclose(data["dual_torsion_gradient"], 0, atol=1e-11)
+    assert data["relative_action"] == pytest.approx(result["at_root"]["relative_action"], abs=1e-14)
 
 
 @pytest.mark.parametrize("call", (

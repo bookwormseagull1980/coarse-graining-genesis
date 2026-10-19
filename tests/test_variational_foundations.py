@@ -369,6 +369,10 @@ def test_production_order_parameter_publishes_three_sector_transfer(tmp_path, mo
     assert set(contract["direct_inputs"]) == {"tau", "kL"}
     assert contract["quantity_definition"]["order"] == "classical derivative-free quadratic torsion variation"
     assert contract["value"]["trace_free_hessian_eigenvalues"] == pytest.approx((2/3, 3))
+    matching = contract["value"]["curvature_action_matching"]
+    assert not matching["same_action_up_to_overall_normalization"]
+    assert matching["extra_irreducible_weights_MG3"] == pytest.approx((0, 10/3, -1.5))
+    assert matching["cartan_tau_from_existing_spin_tau"] == -1
     assert records["ec_action_torsion_coeffs"]["value"]["torsion_algebraic"]
 
 

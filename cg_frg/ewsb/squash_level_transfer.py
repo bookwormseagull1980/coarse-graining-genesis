@@ -169,6 +169,9 @@ def ec_action(M_G: float) -> dict:
     L=a T^2+b T^{bac}T_{abc}+c (T^a_ab)^2 with a=M_G^3/4,
     b=4a, c=-(a+b/3). Algebraic torsion only requires the three
     irreducible Hessians to be invertible; it does not force b=4a.
+    These coefficients are a general quadratic torsion response, not
+    the scalar-curvature contraction I1/4+I2/2-I3. The exact comparison
+    in connection_action retains their additional transverse terms.
     """
     a = M_G ** 3 / 4.0
     b = 4.0 * a

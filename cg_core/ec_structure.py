@@ -22,12 +22,15 @@ PURPOSE
 -----------------------------------
 The internal space carries an Einstein-Cartan (EC) geometry: the
 connection has both curvature and torsion.  The dimensionless torsion
-modulus is fixed by the charged-quotient response ratio tau=1/50.  The EC data —
+production modulus is the charged-quotient response ratio tau=1/50. The EC data —
 the torsion ansatz, the curvature relation, the contorsion — enter
 the EC mass shifts of the spectrum (spectrum_loop: the gauge
 τ²/(6L²) and fermion 3τ²/(8L²) torsion shifts, the gauge
 C₂/(2L²) Camporesi mass) and the EC action (squash_level_transfer.ec_action).
-This module is the single reference for that geometry.
+This module records the isotropic geometry; connection_action computes the
+complete connection curvature and compares its action with the production
+quadratic torsion response. Those functionals are distinct away from the
+isotropic trace sector.
 
 THE TORSION ANSATZ
 ------------------
@@ -41,6 +44,14 @@ where τ is the dimensionless torsion (the framework's statistical
 modulus τ = 0.02).  The contorsion K relates the EC connection to
 the Levi-Civita one; for the totally antisymmetric torsion,
 K = (1/2)T (coefficient τ/(2L)).
+
+Here K denotes the legacy connection table satisfying
+K_abc-K_acb=T_abc. In Cartan's convention T=de+omega wedge e the actual
+connection difference is C=-K. The existing signed spin operator uses K;
+thus its modulus has the opposite sign to the Cartan torsion coefficient.
+Curvature and torsion norms, being quadratic, do not detect this sign.
+connection_action.cartan_connection and cartan_spin_connection_vertices
+keep the conversion explicit.
 
 THE CONTENT CLOSURE FOR τ
 -------------------------
@@ -78,6 +89,12 @@ THE CURVATURE RELATION
 ----------------------
 R(ω) = R_LC − (3/2)(τ/L)²          (Hehl 1976; Shapiro 2002)
 R(ω)/R_LC = 1 − (τ/2)²
+
+The full contraction is R(omega)-R_LC=div J+I1/4+I2/2-I3.
+For smooth global fields on closed RP3 the divergence integrates to zero.
+The production action a I1+4a I2-7a I3/3 is not proportional to this
+curvature functional on the complete torsion space; the comparison and
+its extra transverse terms are computed in connection_action.
 
 with Ric_LC = (2/L²) g and R_LC = 6/L².  For τ = 0.02 the torsion
 effect is O(10⁻⁴) — a tiny correction to the curvature.

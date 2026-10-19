@@ -26,6 +26,9 @@ from cg_frg.frg.endpoint_variation import (  # noqa: E402
 from cg_frg.gauge.zero_mode_reduction import (  # noqa: E402
     required_seven_dimensional_coefficient,
 )
+from cg_core.connection_action import (  # noqa: E402
+    production_curvature_matching, paired_dirac_determinants,
+)
 
 
 def evaluate():
@@ -41,6 +44,9 @@ def evaluate():
         "schur_resolvent_residual": float(np.linalg.norm(schur["resolvent_difference"])),
         "homogeneous_production_action_variation": production_torsion_variation(),
         "minimal_coupled_classical_stationarity": minimal_classical_stationarity(),
+        "complete_connection_action_matching": production_curvature_matching(),
+        "two_sign_dirac_determinant_comparison": paired_dirac_determinants(
+            Fraction(4), Fraction(3, 2), carrier["gauge_conditioned_tau"], Fraction(1)),
         "minimal_dirac_square_comparison": [
             minimal_torsion_spectral_terms(n, float(carrier["gauge_conditioned_tau"]), 1.)
             for n in (0, 1)

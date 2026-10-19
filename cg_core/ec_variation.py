@@ -143,6 +143,8 @@ def minimal_internal_torsion_vertices():
 
     T_abc=epsilon_dbc B_ad and
     K_abc=(T_abc+T_bca-T_cab)/2 give K_abc-K_acb=T_abc.
+    This is the retained K table. Cartan's T=de+omega wedge e uses
+    C=-K; connection_action computes the opposite signed vertex from C.
     Direct Pauli multiplication evaluates i/8 K_bc,a {gamma_a,gamma_b gamma_c}.
     The result is -(tr B)/4 I_2: the minimal source has no antisymmetric
     or symmetric traceless dual-torsion component. Both ordered connection
@@ -397,6 +399,7 @@ def production_torsion_sector_contract(tau, radius):
     """
     from cg_core.spectrum_loop import m2_gauge, m2_fermion
     from cg_frg.ewsb.squash_level_transfer import ec_action, killing_normalisation
+    from cg_core.connection_action import production_curvature_matching
     if not np.isfinite(tau) or not -.5 < tau < .25 or not np.isfinite(radius) or radius <= 0:
         raise ValueError("-.5 < tau < .25 and positive finite radius required by the squash metric")
     action = ec_action(1.)
@@ -407,6 +410,7 @@ def production_torsion_sector_contract(tau, radius):
     deviator = vertices.copy()
     for i in range(3):
         deviator[i, i] -= trace/3
+    matching = production_curvature_matching()
     # The source amplitude is deliberately not inferred from its channel.
     # These derivatives transfer any computed amplitude correction downstream.
     return {
@@ -417,6 +421,12 @@ def production_torsion_sector_contract(tau, radius):
         "trace_free_hessian_multiplicities": [3, 5],
         "classical_trace_free_elimination": "unique zero for the minimal algebraic spin source",
         "stationary_equation_scope": "production algebraic torsion; no extra torsion kinetic term",
+        "curvature_action_matching": {
+            "same_action_up_to_overall_normalization": matching["same_action_up_to_overall_normalization"],
+            "trace_matched_curvature_normalization_MG3": float(matching["trace_matched_curvature_normalization"]),
+            "extra_irreducible_weights_MG3": [float(w) for w in matching["extra_irreducible_weights"]],
+            "cartan_tau_from_existing_spin_tau": float(matching["cartan_dual_from_existing_spin_dual"]),
+        },
         "tau_observation": "full-carrier gauge-conditioned response",
         "tau_matter_current_matching": "minimal classical joint equations give tau=0; gauge response is a different observable",
         "minimal_classical_stationary_tau": 0.,
