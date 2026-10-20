@@ -180,7 +180,8 @@ def compute() -> dict:
              scheme="declared low-scale charged-lepton mass readout",
              order="specified exponential cascade with multiplicative squash correction",
              assumptions=("cascade exponent 20=(d+1)(SumY2*Delta_f)",
-                          "positive squash-corrected mass branch")),
+                          "positive squash-corrected mass branch"),
+             error_kind="computed centre; endpoint interval propagated separately"),
          note=f"m_e = M_P e^(-20 kL) (1 - s0*kappa) = {me:.3f} MeV (the "
               f"Planck-anchored exponential chain times the low-scale "
               f"squash correction; exponent 20 = 4x5 structural)")

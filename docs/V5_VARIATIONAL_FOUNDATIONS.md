@@ -1,9 +1,20 @@
 # Full-carrier response, endpoint variation and gauge-action matching
 
+Status: release
+Version: 5.0.2
+V5 run: `20261020T002918Z-eff10097`
+
 This calculation separates three questions about the V5 base chain. All
 content operators act on the generated sixteen-dimensional carrier. The
 production values are retained while their operator definitions and action
 derivatives are evaluated explicitly.
+
+The derivation is part of the unique V5 effective model.  It is not a full
+Standard Model plus General Relativity derivation.  `V5/Lean` solves the
+generated Yang--Mills mass gap; no traditional 4D QCD quantum field is
+constructed separately.  The canonical counts and scope are in
+[RELEASE_FACTS.md](RELEASE_FACTS.md) and
+[SCOPE_AND_LIMITS.md](SCOPE_AND_LIMITS.md).
 
 ## 1. The sixteen-dimensional response and the torsion equation
 
@@ -1071,19 +1082,21 @@ metric component of an Einstein action, the reduction uses the Killing
 vector Gram matrix and must start from that metric action rather than
 substitute it for the gauge action above.
 
-V5 now publishes `gauge_kinetic_scale_factor=(M_G/M_P)^2` as
-`SCALE_CHOICE`, with a complete quantity definition and checked direct
-parents `M_G,M_P`. Both the endpoint's bare coupling and the subsequent
-screened coupling consume that record. Definitions of `g2_MG`,
-`g2_MG_geo`, and `g2_MG_bare_constraint` identify their normalization
-and projection. The screened coupling is computed from the actual bare
-record, not from a second hard-coded formula that bypasses it.
+V5 now derives `gauge_kinetic_scale_factor=(M_G/M_P)^2` from the common 7D
+Planck normalization `g7^2=8*pi^2/(M_P^2*M_G)` and the zero-mode volume
+identity `g4^2=g7^2/V3`, with checked direct parents `M_G,M_P`. Both the
+endpoint's bare coupling and the subsequent screened coupling consume that
+record. Definitions of `g2_MG`, `g2_MG_geo`, and `g2_MG_bare_constraint`
+identify their normalization and projection. The screened coupling is
+computed from the actual bare record, not from a second hard-coded formula
+that bypasses it.
 
 The dimensional anchor cancels from this particular coupling when
-`c M_G=M_P sqrt(pi)`, giving `g4^2=8pi/c^5`. That cancellation does
-not determine the factor assigned to the kinetic action. At fixed
-geometry, changing `g_7^2` changes the canonically normalized charged
-vertex; it is not eliminated by a field-coordinate change.
+`c M_G=M_P sqrt(pi)`, giving `g4^2=8pi/c^5`. The common-origin
+normalization `g7^2=8*pi^2/(M_P^2*M_G)` fixes the remaining kinetic factor;
+`cg_core/structure/normalization.py` checks the zero-mode identity. At fixed
+geometry, changing `g_7^2` changes the canonically normalized charged vertex;
+it is not eliminated by a field-coordinate change.
 
 ## Reproducible calculation
 

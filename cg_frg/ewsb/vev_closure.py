@@ -97,7 +97,8 @@ def compute() -> dict:
              scheme="declared electroweak hierarchy closure",
              order="specified multiplicative squash correction",
              assumptions=("M_G and kL belong to the same endpoint branch",
-                          "positive squash-corrected hierarchy branch")),
+                          "positive squash-corrected hierarchy branch"),
+             error_kind="computed centre; endpoint interval propagated separately"),
          note=f"v = M_G*epsilon_window = {v:.2f} GeV (the window-squared "
               f"line eps=(3alpha/pi)e^(-4pi kL)(1 - s0*kappa(2tau)) — "
               f"the J=2 squash correction s0=2tau, kappa=U(1)_Y norm)")

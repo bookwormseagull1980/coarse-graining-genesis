@@ -1,0 +1,721 @@
+{
+  "capacity_closure": {
+    "checks": {
+      "4_over_27_factorization": true,
+      "gravity_two_helicities": true,
+      "gravity_visible_rank_two": true,
+      "gravity_zero_mass_term": true,
+      "r5_platform_bounds": true,
+      "response_level_derivation_pass": true,
+      "tt_endpoint_equals_stored_kL": true,
+      "tt_endpoint_inside_platform": true,
+      "tt_unique_integer_R5": true,
+      "ym_gap_interval_positive": true,
+      "ym_gap_positive": true
+    },
+    "critical_response": "4/27",
+    "gravity": {
+      "mass_term": "zero by the declared local linear gauge symmetry",
+      "physical_helicities": [
+        -2,
+        2
+      ],
+      "scope": "flat-background quadratic macroscopic tensor response",
+      "visible_rank": 2
+    },
+    "response_level": {
+      "candidates": [
+        4,
+        5
+      ],
+      "checks": {
+        "R_star_above_4": true,
+        "candidate_integers": true,
+        "shell_support_interval": true,
+        "stored_endpoint_matches": true,
+        "three_position_lower_crossing": true,
+        "three_position_upper_crossing": true,
+        "unique_selected": true,
+        "upper_shell_below_6": true
+      },
+      "endpoint_coordinates": {
+        "4": 2.3376087469412976,
+        "5": 2.4935343325226915,
+        "6": 2.595864031345581
+      },
+      "schema_version": 1,
+      "selected_R": 5,
+      "shell_support_interval": [
+        3.8992961057514357,
+        5.092958178940651
+      ],
+      "status": "PASS",
+      "step": "response_level_derivation",
+      "three_position_interval": [
+        2.345207879911715,
+        2.7386127875258306
+      ]
+    },
+    "schema_version": 1,
+    "status": "PASS",
+    "step": "capacity_endpoint_ym",
+    "tt_endpoint": {
+      "R5": 5,
+      "R_star": 4.018711984220831,
+      "kL": 2.4935343325226915,
+      "upper_shell_bound": 5.092958178940651
+    },
+    "ym_gap": {
+      "L": 2.4935343325226915,
+      "gap": 34.31639830716205,
+      "gap_squared": 1177.6151927757944
+    }
+  },
+  "content_capacity": {
+    "N_L": 8,
+    "N_R": 7,
+    "N_f": 15,
+    "anomalies": {
+      "SU2_squared_U1": "0",
+      "SU3_squared_U1": "0",
+      "U1_cubed": "0",
+      "gravitational_U1": "0"
+    },
+    "checks": {
+      "N_L_8": true,
+      "N_R_7": true,
+      "N_f_15": true,
+      "SU2_squared_U1_zero": true,
+      "SU3_squared_U1_zero": true,
+      "U1_cubed_zero": true,
+      "content_derivation_pass": true,
+      "gravitational_U1_zero": true,
+      "sum_Y2_10_over_3": true,
+      "tau_1_over_50": true
+    },
+    "content": [
+      {
+        "Y": "1/6",
+        "chirality": 1,
+        "colour": 3,
+        "count": 6,
+        "name": "Q_L",
+        "weak": 2
+      },
+      {
+        "Y": "2/3",
+        "chirality": -1,
+        "colour": 3,
+        "count": 3,
+        "name": "u_R",
+        "weak": 1
+      },
+      {
+        "Y": "-1/3",
+        "chirality": -1,
+        "colour": 3,
+        "count": 3,
+        "name": "d_R",
+        "weak": 1
+      },
+      {
+        "Y": "-1/2",
+        "chirality": 1,
+        "colour": 1,
+        "count": 2,
+        "name": "L_L",
+        "weak": 2
+      },
+      {
+        "Y": "0",
+        "chirality": -1,
+        "colour": 1,
+        "count": 1,
+        "name": "nu_R",
+        "weak": 1
+      },
+      {
+        "Y": "-1",
+        "chirality": -1,
+        "colour": 1,
+        "count": 1,
+        "name": "e_R",
+        "weak": 1
+      }
+    ],
+    "derivation": {
+      "primitive_charge": [
+        3,
+        1
+      ],
+      "relative_character": [
+        1,
+        -3
+      ],
+      "sectors": [
+        {
+          "charge": 1,
+          "colour": "coloured",
+          "hypercharge": "1/6",
+          "multiplicity": 6,
+          "name": "Q_L",
+          "neutral": false,
+          "spin": "left"
+        },
+        {
+          "charge": 4,
+          "colour": "coloured",
+          "hypercharge": "2/3",
+          "multiplicity": 3,
+          "name": "u_R",
+          "neutral": false,
+          "spin": "upper"
+        },
+        {
+          "charge": -2,
+          "colour": "coloured",
+          "hypercharge": "-1/3",
+          "multiplicity": 3,
+          "name": "d_R",
+          "neutral": false,
+          "spin": "lower"
+        },
+        {
+          "charge": -3,
+          "colour": "scalar",
+          "hypercharge": "-1/2",
+          "multiplicity": 2,
+          "name": "L_L",
+          "neutral": false,
+          "spin": "left"
+        },
+        {
+          "charge": 0,
+          "colour": "scalar",
+          "hypercharge": "0",
+          "multiplicity": 1,
+          "name": "nu_R",
+          "neutral": true,
+          "spin": "upper"
+        },
+        {
+          "charge": -6,
+          "colour": "scalar",
+          "hypercharge": "-1",
+          "multiplicity": 1,
+          "name": "e_R",
+          "neutral": false,
+          "spin": "lower"
+        }
+      ]
+    },
+    "schema_version": 1,
+    "status": "PASS",
+    "step": "content_capacity",
+    "sum_Y_squared": "10/3",
+    "tau": "1/50"
+  },
+  "endpoint_interval": {
+    "bracket": [
+      "817081/327680",
+      "3268327/1310720"
+    ],
+    "bracket_decimal": [
+      2.4935333251953127,
+      2.493535614013672
+    ],
+    "cached": true,
+    "cells": 2048,
+    "critical": "4/27",
+    "response_left": [
+      "0.1481481874457744",
+      "0.1481482256482642"
+    ],
+    "response_right": [
+      "0.1481480514604332",
+      "0.1481480896628879"
+    ],
+    "schema_version": 1,
+    "scope": "strict root existence and uniqueness on the bracket",
+    "status": "PASS",
+    "uniqueness": {
+      "cells": 256,
+      "derivative": [
+        "-0.0574746205293326",
+        "-0.0499492909416930"
+      ],
+      "sign": "negative",
+      "status": "PASS",
+      "unique_on_bracket": true
+    }
+  },
+  "internal_geometry": {
+    "L": 2.4935343325226915,
+    "checks": {
+      "rp3_derivation_pass": true,
+      "scalar_formula_matches_legacy": true,
+      "scalar_lowest_zero": true,
+      "spinor_formula_matches_legacy": true,
+      "spinor_lowest_positive": true,
+      "tt_lowest_six": true,
+      "tt_rough_formula_matches_legacy": true,
+      "vector_formula_matches_legacy": true,
+      "vector_lowest_positive": true
+    },
+    "rp3_derivation": {
+      "amplitude": {
+        "centre": "Z2",
+        "real_dimension": 4,
+        "unit_group": "SU(2)"
+      },
+      "checks": {
+        "centre_elements_are_unit": true,
+        "centre_is_pm_one": true,
+        "centre_quotient_identifies_rotation": true,
+        "one_form_odd_tower": true,
+        "scalar_even_tower": true,
+        "scalar_lowest_zero": true,
+        "spinor_even_tower": true,
+        "spinor_lowest_positive": true,
+        "tt_even_tower": true,
+        "tt_lowest_six": true,
+        "unit_quaternion": true,
+        "vector_lowest_positive": true
+      },
+      "quotient": {
+        "also": "RP3",
+        "diffeomorphic_to": "SO(3)",
+        "space": "SU(2)/Z2"
+      },
+      "schema_version": 1,
+      "spectrum": {
+        "one_form": {
+          "eigenvalue": "(l+1)^2/L^2",
+          "l": "odd >=1",
+          "multiplicity": "2l(l+2)"
+        },
+        "scalar": {
+          "eigenvalue": "l(l+2)/L^2",
+          "l": "even",
+          "multiplicity": "(l+1)^2"
+        },
+        "spinor": {
+          "eigenvalue": "(n+3/2)^2/L^2",
+          "multiplicity": "(n+1)(n+2)",
+          "n": "even"
+        },
+        "tt_rough": {
+          "eigenvalue": "(k(k+2)-2)/L^2",
+          "k": "even >=2",
+          "multiplicity": "2(k-1)(k+3)"
+        }
+      },
+      "status": "PASS",
+      "step": "rp3_derivation"
+    },
+    "schema_version": 1,
+    "spectra": {
+      "scalar": {
+        "l_range": [
+          0,
+          20,
+          2
+        ],
+        "multiplicity": "(l+1)^2"
+      },
+      "spinor": {
+        "multiplicity": "(n+1)(n+2)",
+        "n_range": [
+          0,
+          20,
+          2
+        ]
+      },
+      "tt_rough": {
+        "k_range": [
+          2,
+          20,
+          2
+        ],
+        "multiplicity": "2(k-1)(k+3)"
+      },
+      "vector": {
+        "l_range": [
+          1,
+          19,
+          2
+        ],
+        "multiplicity": "2l(l+2)"
+      }
+    },
+    "status": "PASS",
+    "step": "internal_geometry_spectra"
+  },
+  "matching": {
+    "checks": {
+      "action_coefficient_continuous": true,
+      "identity_when_z_unchanged": true,
+      "positive_g_after": true
+    },
+    "condition": "Z_before/g_before^2 = Z_after/g_after^2",
+    "g_after": 0.5477225575051661,
+    "g_before": 0.5,
+    "schema_version": 1,
+    "status": "PASS",
+    "step": "gauge_matching_derivation"
+  },
+  "minimal_change": {
+    "carrier": {
+      "d0": "trivial",
+      "d1": "finite O(1)={+1,-1}; no continuous rotation",
+      "d2": "connected SO(d) with continuous rotations",
+      "dimension": 2,
+      "group": "SO(2)"
+    },
+    "checks": {
+      "carrier_dimension_two": true,
+      "carrier_group_so2": true,
+      "critical_ratio_squared_pi": true,
+      "dimension_one_no_continuous_rotation": true,
+      "dimension_two_connected": true,
+      "dimension_zero_trivial": true,
+      "ir_squared_two_pi": true,
+      "reflection_first_eigenvalues": true,
+      "uv_squared_two": true,
+      "width_one": true,
+      "window_length_positive": true
+    },
+    "endpoints": {
+      "critical_ratio": 1.7724538509055157,
+      "critical_ratio_sq": 3.141592653589792,
+      "ir": 2.5066282746310002,
+      "ir_sq": 6.283185307179585,
+      "uv": 1.4142135623730951,
+      "uv_sq": 2.0000000000000004,
+      "window_length": 1.092414712257905
+    },
+    "gaussian": {
+      "variance": 1.0,
+      "width": 1.0
+    },
+    "reflection_spectrum": [
+      0,
+      1,
+      4,
+      9,
+      16,
+      25,
+      36,
+      49
+    ],
+    "schema_version": 1,
+    "status": "PASS",
+    "step": "minimal_change_gaussian_endpoints"
+  },
+  "normalization": {
+    "checks": {
+      "gauge_scale_matches": true,
+      "positive_g4": true,
+      "positive_g7": true,
+      "positive_volume": true,
+      "unit_speed_flow": true,
+      "zero_mode_identity": true
+    },
+    "flow_beta": 1.0374777173335444e+55,
+    "g4_squared": 0.2607132470212424,
+    "g7_squared": 7.690598137762721e-54,
+    "gauge_scale_factor": 0.5052649450680499,
+    "schema_version": 1,
+    "status": "PASS",
+    "step": "normalization_derivation",
+    "volume": 2.9498302160059045e-53
+  },
+  "projection": {
+    "alternatives": {
+      "fixed": 0.0,
+      "moving": 0.22360679774997896
+    },
+    "checks": {
+      "fixed_boundary_derivative_zero": true,
+      "fixed_is_the_source_response_projection": true,
+      "moving_boundary_derivative_nonzero": true
+    },
+    "projection": "fixed",
+    "reason": "fixed spectral domain: the source derivative acts inside the window; moving the boundary adds a separate Leibniz term",
+    "schema_version": 1,
+    "status": "PASS",
+    "step": "projection_derivation"
+  },
+  "response_level": {
+    "candidates": [
+      4,
+      5
+    ],
+    "checks": {
+      "R_star_above_4": true,
+      "candidate_integers": true,
+      "shell_support_interval": true,
+      "stored_endpoint_matches": true,
+      "three_position_lower_crossing": true,
+      "three_position_upper_crossing": true,
+      "unique_selected": true,
+      "upper_shell_below_6": true
+    },
+    "endpoint_coordinates": {
+      "4": 2.3376087469412976,
+      "5": 2.4935343325226915,
+      "6": 2.595864031345581
+    },
+    "schema_version": 1,
+    "selected_R": 5,
+    "shell_support_interval": [
+      3.8992961057514357,
+      5.092958178940651
+    ],
+    "status": "PASS",
+    "step": "response_level_derivation",
+    "three_position_interval": [
+      2.345207879911715,
+      2.7386127875258306
+    ]
+  },
+  "rp3_derivation": {
+    "amplitude": {
+      "centre": "Z2",
+      "real_dimension": 4,
+      "unit_group": "SU(2)"
+    },
+    "checks": {
+      "centre_elements_are_unit": true,
+      "centre_is_pm_one": true,
+      "centre_quotient_identifies_rotation": true,
+      "one_form_odd_tower": true,
+      "scalar_even_tower": true,
+      "scalar_lowest_zero": true,
+      "spinor_even_tower": true,
+      "spinor_lowest_positive": true,
+      "tt_even_tower": true,
+      "tt_lowest_six": true,
+      "unit_quaternion": true,
+      "vector_lowest_positive": true
+    },
+    "quotient": {
+      "also": "RP3",
+      "diffeomorphic_to": "SO(3)",
+      "space": "SU(2)/Z2"
+    },
+    "schema_version": 1,
+    "spectrum": {
+      "one_form": {
+        "eigenvalue": "(l+1)^2/L^2",
+        "l": "odd >=1",
+        "multiplicity": "2l(l+2)"
+      },
+      "scalar": {
+        "eigenvalue": "l(l+2)/L^2",
+        "l": "even",
+        "multiplicity": "(l+1)^2"
+      },
+      "spinor": {
+        "eigenvalue": "(n+3/2)^2/L^2",
+        "multiplicity": "(n+1)(n+2)",
+        "n": "even"
+      },
+      "tt_rough": {
+        "eigenvalue": "(k(k+2)-2)/L^2",
+        "k": "even >=2",
+        "multiplicity": "2(k-1)(k+3)"
+      }
+    },
+    "status": "PASS",
+    "step": "rp3_derivation"
+  },
+  "tt_branch_reduction": {
+    "active_branch_count": 8,
+    "bracket": [
+      "817081/327680",
+      "3268327/1310720"
+    ],
+    "branch_origin": [
+      "scalar l=0: a=l(l+2)=0, m2=3/4, deg=4",
+      "scalar l=2: a=l(l+2)=8, m2=3/4, deg=4(l+1)^2=36",
+      "gauge l=1, c2=3: a=(l+1)^2=4, m2=3/2+tau^2/6, 8*2*l(l+2)*4=192",
+      "gauge l=1, c2=2: a=4, m2=1+tau^2/6, 3*2*l(l+2)*4=72",
+      "gauge l=1, c2=0: a=4, m2=tau^2/6, 1*2*l(l+2)*4=24",
+      "fermion n=0: a=(n+3/2)^2=9/4, m2=3tau^2/8, 21*(n+1)(n+2)*4=168",
+      "fermion n=1: a=25/4, m2=3tau^2/8, 24*(n+1)(n+2)*4=576",
+      "fermion n=2: a=49/4, m2=3tau^2/8, 21*(n+1)(n+2)*4=1008"
+    ],
+    "branches_at_left": [
+      {
+        "a": "0",
+        "b": "3/4",
+        "match": true,
+        "v5_a": "0",
+        "v5_b": "3/4",
+        "v5_weight": 4,
+        "weight": 4
+      },
+      {
+        "a": "9/4",
+        "b": "3/20000",
+        "match": true,
+        "v5_a": "9/4",
+        "v5_b": "3/20000",
+        "v5_weight": 168,
+        "weight": 168
+      },
+      {
+        "a": "4",
+        "b": "1/15000",
+        "match": true,
+        "v5_a": "4",
+        "v5_b": "1/15000",
+        "v5_weight": 24,
+        "weight": 24
+      },
+      {
+        "a": "4",
+        "b": "15001/15000",
+        "match": true,
+        "v5_a": "4",
+        "v5_b": "15001/15000",
+        "v5_weight": 72,
+        "weight": 72
+      },
+      {
+        "a": "4",
+        "b": "22501/15000",
+        "match": true,
+        "v5_a": "4",
+        "v5_b": "22501/15000",
+        "v5_weight": 192,
+        "weight": 192
+      },
+      {
+        "a": "25/4",
+        "b": "3/20000",
+        "match": true,
+        "v5_a": "25/4",
+        "v5_b": "3/20000",
+        "v5_weight": 576,
+        "weight": 576
+      },
+      {
+        "a": "8",
+        "b": "3/4",
+        "match": true,
+        "v5_a": "8",
+        "v5_b": "3/4",
+        "v5_weight": 36,
+        "weight": 36
+      },
+      {
+        "a": "49/4",
+        "b": "3/20000",
+        "match": true,
+        "v5_a": "49/4",
+        "v5_b": "3/20000",
+        "v5_weight": 1008,
+        "weight": 1008
+      }
+    ],
+    "branches_at_right": [
+      {
+        "a": "0",
+        "b": "3/4",
+        "match": true,
+        "v5_a": "0",
+        "v5_b": "3/4",
+        "v5_weight": 4,
+        "weight": 4
+      },
+      {
+        "a": "9/4",
+        "b": "3/20000",
+        "match": true,
+        "v5_a": "9/4",
+        "v5_b": "3/20000",
+        "v5_weight": 168,
+        "weight": 168
+      },
+      {
+        "a": "4",
+        "b": "1/15000",
+        "match": true,
+        "v5_a": "4",
+        "v5_b": "1/15000",
+        "v5_weight": 24,
+        "weight": 24
+      },
+      {
+        "a": "4",
+        "b": "15001/15000",
+        "match": true,
+        "v5_a": "4",
+        "v5_b": "15001/15000",
+        "v5_weight": 72,
+        "weight": 72
+      },
+      {
+        "a": "4",
+        "b": "22501/15000",
+        "match": true,
+        "v5_a": "4",
+        "v5_b": "22501/15000",
+        "v5_weight": 192,
+        "weight": 192
+      },
+      {
+        "a": "25/4",
+        "b": "3/20000",
+        "match": true,
+        "v5_a": "25/4",
+        "v5_b": "3/20000",
+        "v5_weight": 576,
+        "weight": 576
+      },
+      {
+        "a": "8",
+        "b": "3/4",
+        "match": true,
+        "v5_a": "8",
+        "v5_b": "3/4",
+        "v5_weight": 36,
+        "weight": 36
+      },
+      {
+        "a": "49/4",
+        "b": "3/20000",
+        "match": true,
+        "v5_a": "49/4",
+        "v5_b": "3/20000",
+        "v5_weight": 1008,
+        "weight": 1008
+      }
+    ],
+    "cells": 256,
+    "coefficient": [
+      "0.3694084671969687",
+      "0.3694160576081247"
+    ],
+    "derivation": "u=c*omega; lambda=a/c^2, m^2=b/c^2, cutoff=pi/c^2; the Gaussian, kernel, measure and frequency edge all scale to a c-independent integral, so A_V5(c)=A_5/c exactly",
+    "difference": [
+      "-0.0000075904111559",
+      "0.0000075904111559"
+    ],
+    "exact_interval_identity": true,
+    "excluded_thresholds": {
+      "fermion_n3": "a=81/4=20.25 > 5*pi",
+      "gauge_l3": "a=16 > 5*pi",
+      "scalar_l4": "a=24 > 5*pi"
+    },
+    "full_scaled": [
+      "0.3694084671969687",
+      "0.3694160576081247"
+    ],
+    "scope": "full V5 active finite spectrum equals the Lean eight-branch coefficient model on the certified endpoint bracket",
+    "stable_active_set": true,
+    "status": "PASS"
+  }
+}

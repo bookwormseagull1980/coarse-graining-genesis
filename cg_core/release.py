@@ -16,7 +16,7 @@
 """Software identity and bibliography shared by published data and reports."""
 
 SOFTWARE_NAME = "Coarse-Graining Genesis Framework V5.0"
-SOFTWARE_VERSION = "5.0.0"
+SOFTWARE_VERSION = "5.0.2"
 
 BIBLIOGRAPHY = (
     ("2026a", "Certified Spectral Computation for Semilinear Evolution: Finite Records and Polynomial Bit Cost"),

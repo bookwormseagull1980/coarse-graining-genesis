@@ -148,6 +148,8 @@ class GravityReadoutTests(unittest.TestCase):
         self.assertIsNone(current_camb_record(changed)['outputs'])
         helium_change = dict(inputs, bbn_Yp=inputs['bbn_Yp']+.001)
         self.assertEqual(current_camb_record(helium_change)['status'], 'PENDING')
+        rounding_only = dict(inputs, Omega_b=math.nextafter(inputs['Omega_b'], math.inf))
+        self.assertEqual(current_camb_record(rounding_only)['status'], 'current_inputs_match')
         cfg = new_configuration(changed, YHe=.25, N_eff=3.044,
                                 tau_reio=record['configuration']['cosmology']['tau'])
         self.assertEqual(cfg['neutrino_masses_eV'], [inputs[k] for k in ('m_nu1', 'm_nu2', 'm_nu3')])
@@ -232,7 +234,7 @@ class GravityReadoutTests(unittest.TestCase):
                     seed[key]['value'] = value
                 if scenario == 'stale':
                     completed = saved
-                    seed['bbn_Yp']['value'] = math.nextafter(inputs['bbn_Yp'], math.inf)
+                    seed['bbn_Yp']['value'] = inputs['bbn_Yp'] + 1e-6
                 store.write_text(json.dumps({'parameters': seed}), encoding='utf8')
                 with patch.object(params, '_PARAM_FILE', store), \
                         patch.object(params, '_SM_FILE', sm_store), \

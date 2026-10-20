@@ -66,10 +66,20 @@ class ResponseDomain:
     * ``sqrt(pi) = 1.772454...``, the critical endpoint ratio.
     These are four different objects.
     """
-    radius: float = 5.0
-    projection: str = "fixed"
+    radius: float | None = None
+    projection: str | None = None
 
     def __post_init__(self):
+        if self.projection is None:
+            from cg_core.structure.projection import certificate
+            object.__setattr__(self, "projection", certificate()["projection"])
+        if self.radius is None:
+            # Resolve the level from the endpoint/shell certificate, not from
+            # a hard-coded production constant.  Explicit ResponseDomain(R)
+            # constructions remain unaffected.
+            from cg_core.structure.response_level import certificate
+            object.__setattr__(self, "radius",
+                               float(certificate()["selected_R"]))
         if not math.isfinite(self.radius) or self.radius <= 0:
             raise ValueError("finite positive response-domain radius required")
         if self.projection not in ("fixed", "moving"):
@@ -103,7 +113,35 @@ class ResponseDomain:
         return (self.radius*dcutoff+cutoff*dradius-dlam)/(2*math.sqrt(delta))
 
 
-DEFAULT_RESPONSE_DOMAIN = ResponseDomain()
+class _LazyResponseDomain(ResponseDomain):
+    """Compatibility default whose radius is resolved from the certificate."""
+
+    def __init__(self):
+        object.__setattr__(self, "_delegate", None)
+
+    def _resolved(self) -> ResponseDomain:
+        delegate = object.__getattribute__(self, "_delegate")
+        if delegate is None:
+            from cg_core.structure.response_level import certificate
+            delegate = ResponseDomain(radius=float(certificate()["selected_R"]))
+            object.__setattr__(self, "_delegate", delegate)
+        return delegate
+
+    @property
+    def radius(self) -> float:
+        return self._resolved().radius
+
+    @property
+    def projection(self) -> str:
+        return self._resolved().projection
+
+    def __getattr__(self, name):
+        if name == "_delegate":
+            raise AttributeError(name)
+        return getattr(self._resolved(), name)
+
+
+DEFAULT_RESPONSE_DOMAIN = _LazyResponseDomain()
 
 
 def conformal_coupling(d: int = 3) -> float:

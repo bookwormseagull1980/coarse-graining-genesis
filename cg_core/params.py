@@ -558,6 +558,74 @@ def set(
            calculation=calculation)
 
 
+def annotate_error_kind(key: str, error_kind: str, *, note: str = "") -> None:
+    """Attach a classification to an existing record without changing its value.
+
+    Used by the release-wide metadata completion pass for diagnostic bundles,
+    status records and exact structural values that never carried a
+    ``QuantityDefinition``.  The value, provenance and writer are preserved.
+    """
+    if not isinstance(error_kind, str) or not error_kind.strip():
+        raise ValueError("a nonempty error_kind is required")
+    data = _load_store(_PARAM_FILE)
+    record = data["parameters"].get(key)
+    if record is None:
+        raise KeyError(f"parameter {key!r} is absent")
+    definition = record.get("quantity_definition")
+    if not isinstance(definition, dict):
+        definition = {}
+    # A diagnostic/status record can lack a physical definition.  Preserve the
+    # existing fields when present and fill the required schema explicitly;
+    # these are metadata classifications, not reinterpretations of the value.
+    definition.setdefault("object", key)
+    definition.setdefault("unit", "framework units")
+    definition.setdefault("carrier", "release diagnostic/structural record")
+    definition.setdefault("operator", "named record")
+    definition.setdefault("source", str(record.get("writer", "parameter store")))
+    definition.setdefault("projection", "named production readout")
+    definition.setdefault("normalization", "as stored")
+    definition.setdefault("scheme", "release metadata completion")
+    definition.setdefault("order", "not a perturbative expansion")
+    definition.setdefault("scale_GeV", None)
+    definition.setdefault("assumptions",
+                          ("value is unchanged; classification only",))
+    definition["error_kind"] = error_kind
+    record["quantity_definition"] = definition
+    if note:
+        record["error_kind_note"] = note
+    _save_store(_PARAM_FILE, data)
+
+
+def annotate_interval(key: str, interval: dict, *, source: str,
+                      note: str = "") -> None:
+    """Attach a numeric interval to an existing record without changing its value.
+
+    The interval is an additional certified field.  The centre, provenance and
+    writer remain untouched, so the parameter table can expose the numeric bar
+    directly instead of only publishing a separate interval record.
+    """
+    lo, hi = float(interval["lo"]), float(interval["hi"])
+    if not math.isfinite(lo) or not math.isfinite(hi) or lo > hi:
+        raise ValueError("a finite ordered interval is required")
+    data = _load_store(_PARAM_FILE)
+    record = data["parameters"].get(key)
+    if record is None:
+        raise KeyError(f"parameter {key!r} is absent")
+    value = record.get("value")
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        if not lo <= float(value) <= hi:
+            raise ValueError(f"interval does not contain the stored value of {key!r}")
+    definition = record.get("quantity_definition")
+    if not isinstance(definition, dict):
+        definition = {}
+    definition["error_kind"] = "numeric interval propagated from a certified input"
+    record["quantity_definition"] = definition
+    record["interval"] = {"lo": lo, "hi": hi, "source": source}
+    if note:
+        record["interval_note"] = note
+    _save_store(_PARAM_FILE, data)
+
+
 def record_alias(key, source_key, path=(), *, role="comparison", note=""):
     """Publish a named projection without duplicating the source's numerical value."""
     source_value = get(source_key)

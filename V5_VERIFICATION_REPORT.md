@@ -17,8 +17,8 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 # V5 Verification Report
 
-Generated: 2026-10-18 14:44:22
-Python: `3.12.10`
+Generated: 2026-10-20 08:40:54
+Python: `3.13.12`
 Root: `.`
 
 ## Verdict
@@ -38,35 +38,32 @@ a proof-library result does not certify a numerical run or the entire manuscript
 | parameter provenance audit | PASS | `python scripts/audit_param_writers.py` |
 | observation leakage audit | PASS | `python scripts/audit_observation_leakage.py` |
 | Lean source audit | PASS | `python scripts/audit_lean_sources.py` |
+| structural-closure certificates | PASS | `python scripts/structure_certificates.py` |
 | numeric precision audit | PASS | `python scripts/audit_numeric_precision.py` |
 | path portability audit | PASS | `python scripts/audit_path_portability.py` |
 | full comparison table | PASS | `python comparison/param_audit_full.py` |
 | pytest | PASS | `python -B -m pytest -q -m 'not release_audit' -p no:cacheprovider --basetemp <temporary>` |
 | Lean proof archive | PASS | `python scripts/verify_lean_archive.py --lean-exe <lean.exe>` |
-| Lean Formalization of Arithmetic and Basic Physical Interfaces | PASS | `python -B scripts/verify_foundations.py --project <foundations-project> --lake-exe <lake.exe>` |
 | numeric stability audit | PASS | `python scripts/audit_numeric_stability.py` |
 | run identity after verification | PASS | `verify existing run identity and fingerprints` |
 
-Full Python test results: 598 passed, 5 deselected, 10 subtests passed.
+Full Python test results: 708 passed, 5 deselected, 10 subtests passed.
 The complete release audits are executed in the steps above;
 their duplicate test wrappers are deselected.
 
-Foundations record: `f47bdccf36114e94a3a7177095486a3f`; scope: `current_implemented_library`.
-This is separate from the Lean 4.7.0 archive and numerical verification.
-
 Audits executed once during reproduction and reused after current-run fingerprint validation: parameter provenance audit, observation leakage audit.
 
-Run identity: `20261018T063501Z-119447ea`.
-Bound calculation sources: 119; verification sources: 47; outputs: 2; reference identities: 99; solver execution identities: 2.
+Run identity: `20261020T002918Z-eff10097`.
+Bound calculation sources: 159; verification sources: 60; outputs: 2; reference identities: 99; solver execution identities: 1.
 
 ### Store Summary
 
-- cg_params records: 241
+- cg_params records: 261
 - Isolated reference records: 99
-- provenance: DERIVED=237, OBSERVED=1, PENDING=2, SCALE_CHOICE=1
-- roles: anchor=1, cg=23, comparison=49, informational=21, internal=147
-- declared physical definitions: 122
-- declared direct-input sets: 122
+- provenance: DERIVED=260, OBSERVED=1
+- roles: anchor=1, cg=24, comparison=51, informational=20, internal=165
+- declared physical definitions: 261
+- declared direct-input sets: 144
 
 ### Selected Closed Values
 
@@ -74,32 +71,32 @@ Bound calculation sources: 119; verification sources: 47; outputs: 2; reference 
 |---|---:|---|---|
 | `kL` | `2.4935343325226915` | DERIVED | `cg_frg/frg/endpoint_constraint.py` |
 | `M_G` | `1.7310765000475023e+18` | DERIVED | `cg_frg/frg/endpoint_constraint.py` |
-| `g2_MG` | `0.5088477031823814` | DERIVED | `cg_frg/gauge/geometric_couplings.py` |
-| `g1_MG_geo` | `0.6049900729523602` | DERIVED | `cg_frg/gauge/geometric_couplings.py` |
+| `g2_MG` | `0.5088477031823813` | DERIVED | `cg_frg/gauge/geometric_couplings.py` |
+| `g1_MG_geo` | `0.6049900729523598` | DERIVED | `cg_frg/gauge/geometric_couplings.py` |
 | `g3_MG_geo` | `0.4977601563548794` | DERIVED | `cg_frg/gauge/geometric_couplings.py` |
 | `generated_ym_gap_mass` | `5.940431067579812e+19` | DERIVED | `cg_frg/qcd/mass_gap_scale.py` |
 | `n_generations` | `3` | DERIVED | `cg_frg/generation/window_capacity.py` |
 | `v_HIGGS` | `246.18969645238943` | DERIVED | `cg_frg/ewsb/vev_closure.py` |
-| `M_Z_pred` | `91.12483998892056` | DERIVED | `cg_frg/ewsb/ew_precision.py` |
-| `M_W_pred` | `80.37174514486661` | DERIVED | `cg_frg/ewsb/ew_precision.py` |
-| `M_W_pred_lead1loop` | `80.33739698310175` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
-| `Gamma_b_pred_1loop` | `0.38040730308009635` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
-| `Gamma_had_pred_lead1loop` | `1.7520580283558593` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
-| `Gamma_Z_pred_lead1loop` | `2.5063559621245686` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
+| `M_Z_pred` | `91.12483998892053` | DERIVED | `cg_frg/ewsb/ew_precision.py` |
+| `M_W_pred` | `80.37174514486658` | DERIVED | `cg_frg/ewsb/ew_precision.py` |
+| `M_W_pred_lead1loop` | `80.33739698310173` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
+| `Gamma_b_pred_1loop` | `0.38040730308009596` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
+| `Gamma_had_pred_lead1loop` | `1.7520580283558576` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
+| `Gamma_Z_pred_lead1loop` | `2.506355962124566` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
 | `R_b_pred_lead1loop` | `0.2171202648105626` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
-| `R_l_pred_lead1loop` | `20.791529232604695` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
-| `sigma_had_pred_lead1loop` | `41.54847835413312` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
-| `sin2_theta_eff_l_pred` | `0.23011353985028052` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
+| `R_l_pred_lead1loop` | `20.791529232604688` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
+| `sigma_had_pred_lead1loop` | `41.54847835413315` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
+| `sin2_theta_eff_l_pred` | `0.23011353985028046` | DERIVED | `cg_frg/ewsb/ew_one_loop.py` |
 | `m_H_pred` | `124.98344026878286` | DERIVED | `cg_frg/ewsb/ew_precision.py` |
 | `Omega_Lambda` | `0.6850442965140158` | DERIVED | `cg_frg/cosmology/dark_energy.py` |
-| `Omega_Sigma` | `0.2655475114476184` | DERIVED | `cg_frg/cosmology/endpoint_residual.py` |
+| `Omega_Sigma` | `0.26554751144761846` | DERIVED | `cg_frg/cosmology/endpoint_residual.py` |
 | `T_CMB_GeV` | `2.353400743797703e-13` | DERIVED | `cg_frg/cosmology/dark_energy.py` |
 | `T_CMB_corrected_K` | `2.725473977921092` | DERIVED | `cg_frg/cosmology/endpoint_residual.py` |
-| `endpoint_sigma8` | `None` | PENDING | `cg_frg/cosmology/endpoint_residual.py` |
-| `endpoint_S8` | `None` | PENDING | `cg_frg/cosmology/endpoint_residual.py` |
-| `bbn_dm_np` | `0.0012849675512388058` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
-| `bbn_tau_n` | `915.5435125712569` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
-| `bbn_Yp` | `0.2460823786548142` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
+| `endpoint_sigma8` | `0.8123320817756509` | DERIVED | `cg_frg/cosmology/endpoint_residual.py` |
+| `endpoint_S8` | `0.8322623365089923` | DERIVED | `cg_frg/cosmology/endpoint_residual.py` |
+| `bbn_dm_np` | `0.0012849675512388067` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
+| `bbn_tau_n` | `915.5435125712529` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
+| `bbn_Yp` | `0.24608237865481353` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
 | `bbn_Neff` | `3.043873359487886` | DERIVED | `cg_frg/cosmology/bbn_helium.py` |
 
 ## Generated Yang--Mills Theorem Certificate
@@ -180,7 +177,7 @@ enter the causal response, including the direct second source variation.
 
 - source-charge relative residual: 1.91480936223e-16
 - causal-equation relative residual: 1.90973710345e-16
-- response cutoff comparison: 7.04460217705e-16
+- response cutoff comparison: 5.37805396907e-16
 - maximum canonical-form residual: 5.38626232194e-15
 - maximum source-work balance residual: 1.16573417586e-14
 - dominant operation counts: {'causal_entry_divisions': 1192464, 'dense_liouvillian_factorizations': 0, 'exact_segment_propagators': 6, 'nonzero_source_diagonalizations': 2, 'nonzero_source_mode_diagonalizations': 2, 'phase_response_basis_transforms': 0, 'reference_mode_diagonalizations': 2, 'retained_phase_dimensions': [140, 336]}
@@ -237,13 +234,13 @@ Landau-gauge MSbar VEV convention through one loop.
 Six stored readouts supply the leading couplings and reference scale;
 the finite coefficient is evaluated once without additional RG evolution.
 
-- Q = 91.12483998892056 GeV
+- Q = 91.12483998892053 GeV
 - v_F = 246.1896964523894 GeV
 - G_F = 1.166662548042236e-05 GeV^-2
 - v_L = 248.6618895442452 GeV
 - v_L squared = 61826.623573031 GeV^2
 - Delta r = 0.02008364385252736
-- one-loop tadpole term = -375.7115102984538 GeV^2
+- one-loop tadpole term = -375.7115102984546 GeV^2
 
 The VEV and its square are separately truncated series.
 Finite native-source readout corrections retain their source-matching definitions.
@@ -252,10 +249,10 @@ Finite native-source readout corrections retain their source-matching definition
 
 The generated masses define three pole conditions of the common electroweak action.
 The photon, W, Z and Higgs terms retain finite charged-lepton masses.
-- matching scale: 91.12483998892056 GeV
-- weighted one-loop correction: 0.00933751775404148
+- matching scale: 91.12483998892053 GeV
+- weighted one-loop correction: 0.009337517754041473
 - finite weak part: 2.348914726193714e-06
-- numerical interval: [0.009337517754041479, 0.009337517754041482]
+- numerical interval: [0.009337517754041472, 0.009337517754041475]
 - work: {'analytic_interval_B_evaluations': 9, 'distinct_A_values': 6, 'distinct_B_values': 9, 'quadrature_integrand_evaluations': 0}
 - uncomputed orders: two-loop electroweak and QED corrections; neutrino-mass contributions
 
@@ -263,7 +260,7 @@ The interval encloses numerical evaluation at fixed input values; the perturbati
 
 - required weighted matching: 0.01127358296141212
 - reference standard uncertainty: 0.0005816838843775095
-- required minus predicted at the reference scale: 0.001936065880283619
+- required minus predicted at the reference scale: 0.001936065880283626
 
 The comparison retains the uncomputed perturbative remainder; no theory significance is assigned.
 
@@ -290,7 +287,7 @@ independent QCD+QED total at its physical point; generated weak and thermal inpu
 |---|---|---|---|
 | additive_envelope | [0.00112, 0.0019000000000000002] | [86.20276246216451, 2330.923327112371] | [0.009830736984774179, 0.3552893137328956] |
 | statistical | [0.00135, 0.00167] | [181.54406064065452, 665.665173440235] | [0.05293670013806314, 0.20523974671561424] |
-| systematic | [0.00128, 0.00174] | [142.81959167859748, 939.0429726765738] | [0.034293569392035664, 0.2493608496820379] |
+| systematic | [0.00128, 0.00174] | [142.81959167859736, 939.0429726765738] | [0.03429356939203563, 0.2493608496820379] |
 
 finite input variations; additive envelope has no assigned coverage probability
 adaptive quadrature estimates; no outward-rounding certificate
@@ -314,14 +311,14 @@ The finite Yukawa, quartic and quadratic coefficients are evaluated
 in the Landau-gauge tadpole-free MSbar top-Yukawa truncation.
 The three gauge coefficients remain specified leading boundaries.
 
-- Q = 91.12483998892056 GeV
+- Q = 91.12483998892053 GeV
 - y_t = 0.9860941669637286
 - lambda = 0.145267456179647
-- m squared = -8585.718899938649 GeV^2
-- top mass correction = 0.6726563424163345 GeV
-- Higgs squared-mass correction = -2302.000479053791 GeV^2
+- m squared = -8585.718899938647 GeV^2
+- top mass correction = 0.67265634241633 GeV
+- Higgs squared-mass correction = -2302.000479053793 GeV^2
 - Born top width (m_b=0, |V_tb|=1) = 1.534454470831274 GeV
-- first-order condition residuals (GeV^2): {'Higgs': 0.0, 'stationarity': -2.8421709430404007e-13, 'top': 8.526512829121202e-14}
+- first-order condition residuals (GeV^2): {'Higgs': 0.0, 'stationarity': 1.4210854715202004e-12, 'top': -2.842170943040401e-14}
 - distinct A values: 4
 - distinct B values: 7
 - quadrature integrand evaluations: 84
@@ -334,10 +331,10 @@ from the production mass readouts.
 ## Continuous thermal evolution
 
 same specified weak inputs; static-nucleon rates and instantaneous neutrino decoupling
-- final neutron fraction = 0.1933481805061133
+- final neutron fraction = 0.1933481805061248
 - final neutrino temperature = 0.000490656518982094 GeV
-- EOS evaluations / requests = 75 / 205
-- weak-rate evaluations / requests = 125 / 205
+- EOS evaluations / requests = 75 / 202
+- weak-rate evaluations / requests = 125 / 202
 - quadrature calls = 975
 - integrand evaluations = 266745
 - cache capacity per kernel = 256
@@ -396,20 +393,10 @@ The invariant-subsystem condition applies when this particular parent evolution 
 
 ## Correlated BAO comparison
 
-Fixed model: chi squared = 29.5087984551, degrees of freedom = 13, p = 0.00553993305564.
-Common-scale diagnostic: alpha = 0.989282404391 +/- 0.00274031093677.
-Scale contribution = 15.2966047426; orthogonal contribution = 14.2121937125.
+Fixed model: chi squared = 29.5087010512, degrees of freedom = 13, p = 0.00554011073956.
+Common-scale diagnostic: alpha = 0.989282438148 +/- 0.00274031103028.
+Scale contribution = 15.2965073386; orthogonal contribution = 14.2121937125.
 The diagnostic projection uses the retained distances and covariance factor.
-
-## Finite thermal-history response
-
-range over a deterministic prediction set using the original observational covariance
-- late-ionization sound horizon (Mpc): [146.86995460564577, 147.02326402733587]
-- late-ionization chi-squared range: [28.049070257741462, 31.026437778316918]
-- HYREC standard_atomic: sound horizon (Mpc) [146.94638604411406, 146.94638604411406]; chi squared [29.50507638285028, 29.50507638285028]
-- HYREC generated_atomic: sound horizon (Mpc) [147.07454727664094, 147.07454727664094]; chi squared [27.11909550195077, 27.11909550195077]
-Distance propagation work: {'additional_covariance_factorizations': 0, 'new_thermal_background_solves': 0, 'power_spectrum_solves': 0}
-The late-ionization range covers its stated redshift sector. The direct atomic-input response retains the atomic and radiative-transfer approximation of its solver.
 
 ## Native scalar intensity
 

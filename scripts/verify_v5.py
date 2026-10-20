@@ -24,9 +24,8 @@ This is the one-command entry point for reviewers and Git browsers:
 
 It can rebuild the generated stores from scratch, reproduce the full
 V5 chain, audit parameter provenance, audit observed-value isolation,
-audit Lean proof-source hygiene, optionally compile the Lean archive,
-optionally compile and audit the separately pinned foundations library with
---foundations, optionally run the test suite, and write a Markdown report.
+audit Lean proof-source hygiene, optionally compile the V5-internal Lean
+archive, optionally run the test suite, and write a Markdown report.
 """
 
 from __future__ import annotations
@@ -54,13 +53,11 @@ from cg_core.params import (resolved_records, value_fingerprint, write_json_atom
 from scripts.evaluate_joint_extensions import RESPONSE_NAMES, response_source_identities, response_bundle
 from scripts.reproduce_v5 import (verification_fingerprints, external_input_fingerprints,
                                  storage_contract, solver_execution_identity)
-from scripts import verify_foundations as foundations
 
 PY = sys.executable
 DEFAULT_REPORT = ROOT / "V5_VERIFICATION_REPORT.md"
-FOUNDATIONS_LABEL = foundations.PUBLIC_NAME
-FOUNDATIONS_RECORD = "foundations:verification-manifest.json"
-FOUNDATIONS_SCOPE = "current_implemented_library"
+# External foundations verification was removed: V5 is independent of the
+# separate Lean physical branch.
 
 
 def base_env() -> dict[str, str]:
@@ -92,12 +89,8 @@ def display_command(cmd: list[str]) -> str:
     return " ".join(parts)
 
 
-def sanitize_output(text: str, *, proof_project: Path | None = None) -> str:
+def sanitize_output(text: str) -> str:
     out = text
-    proof_root = foundations.project_path(ROOT, proof_project)
-    for needle in {str(proof_root), str(proof_root).replace("\\", "/"),
-                   str(proof_root).replace("\\", "\\\\")}:
-        out = out.replace(needle, "<foundations-project>")
     for needle in {
         str(ROOT),
         str(ROOT).replace("\\", "/"),
@@ -142,49 +135,6 @@ def run(label: str, cmd: list[str], *, required: bool = True,
     }
 
 
-def foundations_reference_errors(reference: dict, root: Path,
-                                project: Path | None = None) -> list[str]:
-    """Check saved proof evidence against local files without running a compiler.
-
-    This checks the binding of a past verification, not current executables or
-    dependency checkouts. A new proof run checks that environment separately.
-    """
-    fields = {"path", "sha256", "verification_id", "scope", "audit_sha256",
-              "reference_sha256"}
-    if (not isinstance(reference, dict) or set(reference) != fields
-            or reference.get("path") != FOUNDATIONS_RECORD
-            or reference.get("scope") != FOUNDATIONS_SCOPE):
-        return ["invalid foundations evidence reference"]
-    try:
-        project, _, pin = foundations.load_project(root, project)
-        if reference["reference_sha256"] != foundations.reference_hash(root):
-            return ["foundations release reference changed"]
-        raw = (project / foundations.MANIFEST_NAME).read_bytes()
-        record = json.loads(raw)
-        if hashlib.sha256(raw).hexdigest() != reference["sha256"]:
-            return ["foundations verification record changed"]
-        if (record.get("kind") != "generated-foundations-verification"
-                or record.get("status") != "passed"
-                or record.get("scope") != FOUNDATIONS_SCOPE
-                or record.get("semantic_review") != "not_certified"
-                or record.get("verification_id") != reference["verification_id"]
-                or not re.fullmatch(r"[0-9a-f]{32}", str(reference["verification_id"]))):
-            return ["foundations record has invalid verification identity or scope"]
-        if pin["source_files"] != record.get("source_files"):
-            return ["foundations verification sources changed"]
-        if record.get("verifier") != pin["verifier"]:
-            return ["foundations verifier changed"]
-        audit = record.get("audit", {})
-        if (audit.get("path") != foundations.AUDIT_LOG
-                or audit.get("sha256") != reference["audit_sha256"]
-                or hashlib.sha256((project / foundations.AUDIT_LOG).read_bytes()).hexdigest()
-                != reference["audit_sha256"]):
-            return ["foundations audit log changed or missing"]
-    except (OSError, ValueError, TypeError, AttributeError, foundations.VerificationError) as exc:
-        return ["foundations evidence unavailable: " + str(exc)]
-    return []
-
-
 def manifest_contract_errors(manifest: dict) -> list[str]:
     """Reject additional scientific payloads in the identity-only manifest."""
     allowed = {"publication", "storage_contract", "solver_execution_identity", "run_id",
@@ -224,15 +174,8 @@ def manifest_contract_errors(manifest: dict) -> list[str]:
                         errors.append("manifest check contains unsupported payload fields")
                     elif item.get("ok") is True and "output" in item:
                         errors.append("successful manifest checks retain summaries, not full output")
-                    elif "evidence" in item and (item.get("label") != FOUNDATIONS_LABEL
-                                                  or item.get("ok") is not True):
-                        errors.append("only successful foundations checks may reference proof evidence")
-                    elif item.get("label") == FOUNDATIONS_LABEL and item.get("ok") is True:
-                        reference = item.get("evidence")
-                        fields = {"path", "sha256", "verification_id", "scope", "audit_sha256",
-                                  "reference_sha256"}
-                        if not isinstance(reference, dict) or set(reference) != fields:
-                            errors.append("foundations check must contain only an evidence identity")
+                    elif "evidence" in item:
+                        errors.append("manifest checks may not reference external proof evidence")
     return errors
 
 
@@ -308,7 +251,7 @@ def validate_run_manifest(root: Path = ROOT, *, manifest: dict | None = None) ->
             failures.append(f"manifest is not a complete computational run: {status}")
         detail = f"run_id: {run_id}\nsource files: {len(current_sources)}\n"
         detail += "\n".join(failures) if failures else "All run identities and fingerprints match."
-    except (OSError, ValueError, TypeError, KeyError, AttributeError, foundations.VerificationError) as exc:
+    except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
         failures.append(str(exc))
         detail = "Manifest verification failed: " + str(exc)
     return {"label": "current run manifest", "cmd": "verify existing run identity and fingerprints",
@@ -371,15 +314,9 @@ def record_verification(results: list[dict], not_executed: list[str],
         return None
     checks = []
     for result in results:
-        if result["label"] == FOUNDATIONS_LABEL and result["ok"]:
-            errors = foundations_reference_errors(result.get("evidence"), root)
-            if errors:
-                result.update(ok=False, returncode=1, output="\n".join(errors))
         item = {key: result[key] for key in ("label", "cmd", "required", "ok", "returncode")}
         if item["ok"]:
             item["summary"] = result.get("summary", "Completed the declared check successfully.")
-            if item["label"] == FOUNDATIONS_LABEL:
-                item["evidence"] = dict(result["evidence"])
             if item["label"].startswith("pytest"):
                 counts = re.findall(r"\b\d+ (?:subtests passed|passed|failed|skipped|deselected|xfailed|xpassed)\b",
                                     result.get("output", ""))
@@ -432,9 +369,6 @@ def verification_state(root: Path = ROOT, *, manifest: dict | None = None) -> di
                     or type(item.get("returncode")) is not int
                     or item["ok"] != (item["returncode"] == 0)):
                 return {**state, "status": "invalid verification"}
-            if item["label"] == FOUNDATIONS_LABEL and item["ok"]:
-                if foundations_reference_errors(item.get("evidence"), root):
-                    return {**state, "status": "stale proof evidence"}
         status = "FAIL" if any(item["required"] and not item["ok"] for item in checks) else "PASS"
         if saved.get("status") != status:
             return {**state, "status": "invalid verification"}
@@ -455,58 +389,6 @@ def run_lean_archive(lean_exe: str | None, *, key_only=False) -> dict:
         cmd.append("--key-only")
         display += " --key-only"
     return run("Lean proof archive", cmd, display_cmd=display)
-
-
-def run_foundations(lake_exe: str | None, project: Path | None = None) -> dict:
-    """Require a newly completed proof audit and bind its saved evidence."""
-    try:
-        project, _, _ = foundations.load_project(ROOT, project)
-    except (OSError, ValueError, TypeError, AttributeError, foundations.VerificationError) as exc:
-        return {"label": FOUNDATIONS_LABEL, "cmd": "python -B scripts/verify_foundations.py",
-                "ok": False, "required": True, "returncode": 1,
-                "output": sanitize_output("Independent proof library unavailable: " + str(exc))}
-    path = project / foundations.MANIFEST_NAME
-    try:
-        old_id = json.loads(path.read_bytes()).get("verification_id")
-    except (OSError, ValueError, AttributeError):
-        old_id = None
-    cmd = [PY, "-B", "scripts/verify_foundations.py", "--project", str(project)]
-    display = "python -B scripts/verify_foundations.py --project <foundations-project>"
-    if lake_exe:
-        cmd.extend(["--lake-exe", lake_exe])
-        display += " --lake-exe <lake.exe>"
-    result = run(FOUNDATIONS_LABEL, cmd, display_cmd=display)
-    result["output"] = sanitize_output(result["output"], proof_project=project)
-    if not result["ok"]:
-        return result
-    checked = run("foundations record binding", cmd + ["--check-manifest"],
-                  display_cmd=display + " --check-manifest")
-    checked["output"] = sanitize_output(checked["output"], proof_project=project)
-    if not checked["ok"]:
-        result.update(ok=False, returncode=checked["returncode"],
-                      output=result["output"] + "\n" + checked["output"])
-        return result
-    try:
-        raw = path.read_bytes()
-        record = json.loads(raw)
-        if record.get("verification_id") == old_id:
-            raise ValueError("no new foundations verification record was produced")
-        reference = {"path": FOUNDATIONS_RECORD, "sha256": hashlib.sha256(raw).hexdigest(),
-                     "verification_id": record.get("verification_id"),
-                     "scope": record.get("scope"),
-                     "audit_sha256": record.get("audit", {}).get("sha256"),
-                     "reference_sha256": foundations.reference_hash(ROOT)}
-        errors = foundations_reference_errors(reference, ROOT, project)
-        if errors:
-            raise ValueError("; ".join(errors))
-        result["evidence"] = reference
-        result["summary"] = ("Current implemented library compiled and audited; record "
-                             + reference["verification_id"]
-                             + ". Full-chain and manuscript coverage are not certified by this check.")
-    except (OSError, ValueError, TypeError, AttributeError) as exc:
-        result.update(ok=False, returncode=1, output=sanitize_output(
-            result["output"] + "\n" + str(exc), proof_project=project))
-    return result
 
 
 def run_numeric_stability() -> dict:
@@ -601,11 +483,6 @@ def report_text(results: list[dict], not_executed: list[str]) -> str:
             f"`{result['cmd']}` |"
         )
     for result in results:
-        if result["label"] == FOUNDATIONS_LABEL and result.get("ok"):
-            evidence = result.get("evidence", {})
-            lines += ["", "Foundations record: `" + evidence.get("verification_id", "")
-                      + "`; scope: `" + evidence.get("scope", "") + "`.",
-                      "This is separate from the Lean 4.7.0 archive and numerical verification."]
         if result["label"].startswith("pytest"):
             counts = re.findall(r"\b\d+ (?:subtests passed|passed|failed|skipped|deselected|xfailed|xpassed)\b",
                                 result["output"])
@@ -1056,12 +933,6 @@ def main() -> int:
                         help="optional lean.exe path passed through to the strict Lean verifier")
     parser.add_argument("--lean-key-only", action="store_true",
                         help="compile the selected matter, two-loop and cold-source proofs")
-    parser.add_argument("--foundations", action="store_true",
-                        help="compile and audit the separately pinned independent proof library")
-    parser.add_argument("--foundations-lake-exe",
-                        help="pinned Lake executable for --foundations; independent of --lean-exe")
-    parser.add_argument("--foundations-project", type=Path,
-                        help="independent proof checkout; otherwise FOUNDATIONS_PROJECT or the sibling directory")
     parser.add_argument("--pytest", action="store_true",
                         help="run the Python test suite")
     parser.add_argument("--test-scope", choices=("all", "core"),
@@ -1080,13 +951,6 @@ def main() -> int:
         parser.error("--fresh and --no-reproduce cannot be combined")
     if args.test_scope and not args.pytest:
         parser.error("--test-scope requires --pytest")
-    if args.foundations_lake_exe and not args.foundations:
-        parser.error("--foundations-lake-exe requires --foundations")
-    if args.foundations_project and not args.foundations:
-        parser.error("--foundations-project requires --foundations")
-    if args.foundations_project:
-        os.environ["FOUNDATIONS_PROJECT"] = str(args.foundations_project.resolve())
-
     report_path = args.report if args.report.is_absolute() else ROOT / args.report
     results: list[dict] = []
     not_executed = []
@@ -1098,6 +962,7 @@ def main() -> int:
         results.append(reproduction)
     results.extend(run_source_audits(reproduction))
     results.append(run("Lean source audit", [PY, "scripts/audit_lean_sources.py"]))
+    results.append(run("structural-closure certificates", [PY, "scripts/structure_certificates.py"]))
     results.append(run("numeric precision audit", [PY, "scripts/audit_numeric_precision.py"]))
     results.append(run("path portability audit", [PY, "scripts/audit_path_portability.py"]))
     if not args.skip_full_comparison:
@@ -1123,10 +988,6 @@ def main() -> int:
             not_executed.append("Lean files outside the selected four-file key-proof suite.")
     else:
         not_executed.append("Lean archive compilation (source audit alone is not compilation).")
-    if args.foundations:
-        results.append(run_foundations(args.foundations_lake_exe))
-    else:
-        not_executed.append(FOUNDATIONS_LABEL + " compilation and axiom audit (enable with --foundations).")
     if args.stability:
         results.append(run_numeric_stability())
     else:

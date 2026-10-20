@@ -1,0 +1,16 @@
+include README.md
+include REVIEWER_START_HERE.md
+include V5_COMPLETENESS_AUDIT.md
+include V5_VERIFICATION_REPORT.md
+include LICENSE
+include CITATION.cff
+include REFERENCES.md
+include requirements.txt
+include requirements-lock.txt
+include cg_params.json
+recursive-include comparison *.json *.md *.py
+recursive-include certificates *.json
+recursive-include docs *.md *.html
+recursive-include lean_proofs *.lean *.md
+recursive-include scripts *.py
+recursive-include tests *.py

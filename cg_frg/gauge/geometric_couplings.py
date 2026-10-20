@@ -68,11 +68,15 @@ THE KILLING NORMALISATION (derivation)
 
 g₂_raw = 16π²/I_kv with I_kv = |F|²·Vol(RP³) = 2π²L³; the 4D
 
-coupling is g₂_4D = g₂_raw·(M(σ)/M_P)² where the (M/M_P)² factor is
+coupling is g₂_4D = g₂_raw·(M(σ)/M_P)².  The (M/M_P)² factor follows
 
-a normalisation CONVENTION (choice, not a KK inference — declared
+from the common 7D Planck normalization g7²=8π²/(M_P²M_G) and the
 
-as SCALE_CHOICE).  At the emergence scale M_G with L = L_Gg = kL:
+zero-mode volume identity g4²=g7²/V3; it is checked in
+
+cg_core/structure/normalization.py.  At the emergence scale M_G with
+
+L = L_Gg = kL:
 
 
 
@@ -100,9 +104,11 @@ IMPLEMENTATION
 
 -------------
 
-The (M/M_P)² factor is a SCALE_CHOICE (declared, never disguised
+The (M/M_P)² factor follows from the common-origin normalization
 
-as a derivation).  The amplitude s0 = 2tau = N_g*tau/(d+1) is DERIVED: s0 = q*tau with q = 2 the long-root-mode charge (Guo (2026d) Appendix A).
+g7²=8π²/(M_P²M_G) and the zero-mode volume identity; it is checked in
+
+cg_core/structure/normalization.py.  The amplitude s0 = 2tau = N_g*tau/(d+1) is DERIVED: s0 = q*tau with q = 2 the long-root-mode charge (Guo (2026d) Appendix A).
 
 (the λ_EC first-order torsion divided by d+1).
 

@@ -203,9 +203,10 @@ def compute() -> dict:
              "R=5 fixed frequency domain and species projectors",
              "V*Pi/32=4/27", "declared Gaussian response", "finite spectral sum",
              assumptions=("fixed content branch and response domain",),
-             error_kind="floating-point centre; interval certificate supplied separately"),
-         evidence_kind="computed root of the declared response",
-         note="F_MG fixed point for the specified R=5 response at L_Cg=sqrt(pi)")
+             error_kind="strict interval root enclosure; derivative-sign uniqueness"),
+         evidence_kind="interval-certified root of the declared response",
+         note=("F_MG fixed point; root in [319/128, 799/320] with a "
+               "negative interval derivative certificate"))
     pset("L_Gg", kL_pi, provenance="DERIVED",
          note="L(M_G)=kL=C/M_G at L_Cg=sqrt(pi)")
     get("kL")  # Record the current root used in the dimensional matching.
@@ -215,7 +216,8 @@ def compute() -> dict:
              "dimensional scale transfer", "Newton dimensional anchor",
              "same finite-response endpoint", "M_P*L_Cg/kL",
              "specified framework scale matching", "algebraic",
-             scale_GeV=M_G_pi, error_kind="propagated numerical centre"),
+             scale_GeV=M_G_pi,
+             error_kind="computed centre; strict kL interval propagated separately"),
          note="M_G = M_P*L_Cg/kL with L_Cg=sqrt(pi)")
     scale_factor = register_gauge_scale_factor()
     g2_pi = math.sqrt(8.0 * scale_factor / kL_pi ** 3)

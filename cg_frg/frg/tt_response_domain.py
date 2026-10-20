@@ -169,9 +169,9 @@ def certificate(
         "R_star_between_4_and_5": 4.0 < R_star < 5.0,
         "upper_shell_bound_below_6": upper < 6.0,
         "c5_inside_three_position_platform": first < values[5] < second,
-        # Recorded correction: the upper edge is the shell-support bound
-        # R <= 16/pi, not the crossing c(R) = sqrt(15/2).
-        "c6_above_next_position": values[6] >= second,
+        # The upper edge is the shell-support bound R <= 16/pi, not the
+        # crossing c(R) = sqrt(15/2).  c(6) is below that crossing.
+        "c6_below_next_position": values[6] < second,
         "c_upper_below_next_position": c_upper < second,
     }
     levels = [

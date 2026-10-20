@@ -1,0 +1,7 @@
+# Tested V5.0.2 release environment (Python 3.13.12).
+# Install this file for exact reproduction of the published verification run.
+numpy==2.4.3
+scipy==1.17.1
+mpmath==1.3.0
+camb==2.0.5
+pytest==9.1.1

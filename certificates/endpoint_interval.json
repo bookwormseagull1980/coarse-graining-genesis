@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "bracket": [
+    "817081/327680",
+    "3268327/1310720"
+  ],
+  "bracket_decimal": [
+    2.4935333251953127,
+    2.493535614013672
+  ],
+  "response_left": [
+    "0.1481481874457744",
+    "0.1481482256482642"
+  ],
+  "response_right": [
+    "0.1481480514604332",
+    "0.1481480896628879"
+  ],
+  "critical": "4/27",
+  "cells": 2048,
+  "uniqueness": {
+    "status": "PASS",
+    "derivative": [
+      "-0.0574746205293326",
+      "-0.0499492909416930"
+    ],
+    "sign": "negative",
+    "unique_on_bracket": true,
+    "cells": 256
+  },
+  "scope": "strict root existence and uniqueness on the bracket"
+}

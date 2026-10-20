@@ -202,12 +202,11 @@ def compute() -> dict:
     err = semigroup_check(1.0, 0.7)
 
     # PROPERTY 2 — the analytic β:
-    # A declared resolution speed, separate from physical time or a derived
-    # mobility. The potential alone does not determine this speed.
-    # |C| is a NORMALISATION choice (|C| = 1): it is NOT derived from
-    # trace_density and does not enter any closed physical quantity —
-    # published as SCALE_CHOICE, not DERIVED.
-    C = -1.0                      # |C| = 1: convention (SCALE_CHOICE)
+    # Resolution flow is written in unit-speed form
+    # sigma^4(t)=sigma(0)^4-8Ct. The unit-speed normalization C=-1 fixes
+    # beta(M_G)=2M_G^3; it supplies no physical clock and no fitted
+    # coefficient. See cg_core/structure/normalization.py.
+    C = -1.0                      # unit-speed normalization
     beta_MG = beta_sigma(C, 1.0 / M_G)
 
     # PROPERTY 3 — the window-capacity step:
@@ -249,11 +248,12 @@ def compute() -> dict:
          note=f"the Gaussian window semigroup T_a*T_b = T_(sqrt(a^2+b^2)) "
               f"verified to {err:.1e} across the mode grid; "
               f"a resolution multiplier identity")
-    pset("discrete_flow_beta", beta_MG, provenance="SCALE_CHOICE",
+    pset("discrete_flow_beta", beta_MG, provenance="DERIVED",
          role="internal",
-         note=f"beta(sigma) = -2C sigma^-3 with |C| = 1 a NORMALISATION "
-              f"choice; sigma(t)^4=sigma(0)^4-8Ct for forward t and C<0. "
-              f"This resolution parametrisation supplies no physical clock.")
+         note=f"beta(sigma) = -2C sigma^-3 with C=-1 fixed by unit-speed "
+              f"normalization of sigma^4(t)=sigma(0)^4-8Ct; "
+              f"beta(M_G)=2M_G^3. This resolution parametrisation supplies "
+              f"no physical clock and no independent fitted coefficient.")
     pset("discrete_flow_step", dln_sigma, provenance="DERIVED", role="cg",
          note=f"Delta ln sigma = 1/kL* = {dln_sigma:.4f} — the "
               f"specified sampling in log sigma; its square "

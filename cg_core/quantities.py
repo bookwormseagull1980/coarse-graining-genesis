@@ -109,8 +109,8 @@ def readout_definition(key):
           "production even mass insertion differs from the full minimal Dirac square")),
         ({
             "gauge_kinetic_scale_factor": (
-                "Killing-response scale normalization prescription", "1",
-                "(M_G/M_P)^2; a registered scale convention, not a zero-mode integral"),
+                "common-origin zero-mode gauge normalization", "1",
+                "(M_G/M_P)^2 = g7^2/V3 with g7^2=8*pi^2/(M_P^2*M_G)"),
             "g2_MG_geo": ("bare weak Killing-response coupling", "1",
                 "sqrt(8 gauge_kinetic_scale_factor/kL^3)"),
             "g2_MG_bare_constraint": ("bare weak endpoint coupling", "1",
@@ -121,8 +121,8 @@ def readout_definition(key):
          "registered normalization, finite-response endpoint and content screening",
          "fixed Killing norm 2 pi^2 kL^3 and numerator 16 pi^2",
          "algebraic boundary matching before gauge running",
-         ("gauge_kinetic_scale_factor is a SCALE_CHOICE prescription",
-          "its seven-dimensional action matching is evaluated separately")),
+         ("gauge_kinetic_scale_factor follows from the common 7D Planck normalization",
+          "its zero-mode volume identity is checked in cg_core/structure/normalization.py")),
         ({
             "alpha_up": ("up-sector spectral transfer exponent", "1", "kL-2 tau"),
             "alpha_down": ("down-sector spectral transfer exponent", "1", "alpha_up-18 Delta/17"),

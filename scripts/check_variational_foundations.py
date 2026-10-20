@@ -63,9 +63,9 @@ def evaluate():
         "four_dimensional_loop_measure": four_dimensional_loop_measure(),
         "gauge_action_matching": {
             "identity": "g7^2 = 8*pi^2/(M_P^2*M_G)",
-            "meaning": "coefficient required to reproduce the V5 prescription",
+            "meaning": "common-origin 7D Planck normalization; g4^2=g7^2/V3",
             "unit_comparison": required_seven_dimensional_coefficient(1., 1., 2.),
-            "production_scale_provenance": "SCALE_CHOICE",
+            "production_scale_provenance": "DERIVED",
         },
     }
 

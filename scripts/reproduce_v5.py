@@ -30,6 +30,8 @@ The ordered module list computes the parameter anchors, internal spectra,
 finite-domain endpoint, coupling boundaries, mass scales, cosmological
 readouts and macroscopic gravitational response. The generated records
 include physical definitions and the input values consumed by each module.
+Immediately before the endpoint-cosmology module, the full CAMB 2.0.5
+power spectrum and background-response record is regenerated in-process.
 
 The run starts with empty stores in a temporary directory. Parameter,
 observation-isolation and input-binding checks precede publication.
@@ -76,6 +78,8 @@ MODULES = [
     "cg_core/sm_content.py",
     "cg_core/cluster_decay.py",
     "cg_frg/frg/spectral_sum.py",
+    "cg_frg/frg/spectral_interval_certificate.py",
+    "cg_core/trace_kernels_certificate.py",
     "cg_frg/frg/endpoint_constraint.py",
     "comparison/sm_rge/run_rge.py",
     "cg_frg/ewsb/vev_closure.py",
@@ -111,21 +115,30 @@ MODULES = [
     "cg_frg/neutrino/neutrino_closure.py",
     "cg_frg/neutrino/neutrino_mass_matrix.py",
     "cg_frg/fermion/electron_mass.py",
+    "cg_frg/frg/precision_budget.py",
     "cg_frg/framework/cp_sector.py",
     "cg_frg/frg/trace_density.py",
     "cg_frg/qcd/mass_gap_scale.py",
     "cg_frg/qcd/qcd_sector.py",
     "cg_frg/cosmology/bbn_helium.py",
+    "cg_frg/cosmology/bbn_interval_certificate.py",
+    "cg_frg/cosmology/bbn_weak_interval_certificate.py",
+    "cg_frg/cosmology/bbn_yield_interval_certificate.py",
     "cg_frg/ewsb/ew_precision.py",
+    "cg_frg/framework/production_interval_propagation.py",
     "cg_frg/ewsb/ew_one_loop.py",
     "cg_frg/cosmology/gw_ratio.py",
     # The evaluated closure summary consumes the Gaussian distance published
     # by gw_ratio as well as the already computed masses and generation count.
     "cg_frg/framework/five_items.py",
+    "cg_frg/ewsb/native_condensate_certificate.py",
     "cg_frg/cosmology/endpoint_residual.py",
     "cg_frg/framework/sigma_language.py",
     "cg_frg/frg/discrete_flow.py",
     "cg_frg/gauge/gauge_group_emergence.py",
+    # Structural-closure certificates: minimal change -> Gaussian/endpoints
+    # -> internal spectra -> content capacity -> endpoint/YM capacity.
+    "scripts/structure_certificates.py",
 ]
 
 # Summary entries: (physical label, generated key, reference key, reference multiplier).
@@ -156,7 +169,7 @@ CLOSURES = [
     ("m_e (MeV)", "m_e_pred", "m_e_obs", 1),
     ("Delta2_R", "perturbation_amplitude", "Delta2_R_obs", 1),
     ("m_glueball (GeV)", "m_glueball", "m_glueball_obs", 1),
-    ("mass gap dE/M_G", "mass_gap_dE", None, 1),
+    ("long-root dE/M_G", "mass_gap_dE_over_MG", None, 1),
     ("H0 (GeV)", "H0_GEV", "H0_GeV_obs", 1),
     ("M_Z (GeV)", "M_Z_pred", "M_Z", 1),
     ("M_W lead-univ (GeV)", "M_W_pred_lead1loop", "m_W_obs", 1),
@@ -175,8 +188,6 @@ CLOSURES = [
     ("T_CMB corrected (K)", "T_CMB_corrected_K", "T_CMB_K", 1),
     ("endpoint z_eq", "endpoint_z_eq", None, 1),
     ("endpoint r_drag", "endpoint_r_drag_Mpc", None, 1),
-    ("endpoint sigma8", "endpoint_sigma8", None, 1),
-    ("endpoint S8", "endpoint_S8", None, 1),
     ("2L = sqrt(2pi)", "twoL_entropy_min_distance", None, 1),
     ("alpha_up (internal)", "alpha_up", None, 1),
     ("alpha_dn (internal)", "alpha_down", None, 1),
@@ -191,10 +202,37 @@ CLOSURES = [
 ]
 
 
+CAMB_COMMAND = [
+    _PY, str(_PROJECT_ROOT / "scripts/run_explicit_camb.py"),
+    "--mode", "full", "--accuracy", "2", "--background-response",
+    "--response-coordinates",
+    "YHe,omega_b,omega_m,TCMB,N_eff,H0,neutrino_mass_scale",
+]
+
+
 def run_all(env: dict | None = None) -> list:
-    """Run every module in order; collect the failures."""
+    """Run every module in order; collect the failures.
+
+    The CAMB full record is regenerated immediately after the anchors are
+    initialised, so a published checkout does not depend on a stored CAMB
+    payload or on a manual external-solver step.
+    """
     failures = []
     for mod in MODULES:
+        # The CAMB inputs are produced by the thermal, neutrino, perturbation
+        # and background modules.  Refresh the full record immediately before
+        # the endpoint-cosmology module consumes it.
+        if mod == "cg_frg/cosmology/endpoint_residual.py":
+            print("\n── CAMB full endpoint record ──")
+            camb = subprocess.run(CAMB_COMMAND, capture_output=True, text=True,
+                                  encoding="utf-8", errors="replace", env=env)
+            camb_out = (camb.stdout or "") + (camb.stderr or "")
+            lines = camb_out.splitlines()
+            for line in lines[-8:]:
+                print("  " + line)
+            if camb.returncode != 0:
+                failures.append("scripts/run_explicit_camb.py")
+                break
         print(f"\n── {mod} ──")
         r = subprocess.run([_PY, str(_PROJECT_ROOT / mod)],
                            capture_output=True, text=True,
@@ -284,13 +322,10 @@ def external_input_fingerprints(root: Path = _PROJECT_ROOT) -> dict:
 
 
 def verification_fingerprints(root: Path = _PROJECT_ROOT) -> dict:
-    """Bind local checks and the pinned reference to the independent proof library."""
+    """Bind V5-local tests and the V5-internal Lean archive."""
     paths = [p for folder, suffix in (("tests", "*.py"), ("lean_proofs", "*.lean"))
              for p in (root / folder).rglob(suffix)]
     paths.extend(root / name for name in ("pyproject.toml", "requirements.txt"))
-    reference = root / "foundations-reference.json"
-    if reference.is_file():
-        paths.append(reference)
     result = {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
               for p in sorted(paths)}
     return result
@@ -344,6 +379,12 @@ def execute(destination: Path, *, publish: bool, recompute_responses=False) -> i
     if extension.returncode:
         raise RuntimeError(extension.stderr or extension.stdout)
     print(extension.stdout.strip())
+    metadata = subprocess.run(
+        [_PY, str(_PROJECT_ROOT / "cg_frg/frg/error_kind_completion.py")],
+        capture_output=True, text=True, encoding="utf-8", env=env)
+    if metadata.returncode:
+        raise RuntimeError(metadata.stderr or metadata.stdout)
+    print(metadata.stdout.strip())
     audits = {}
     for script in ("audit_param_writers.py", "audit_observation_leakage.py"):
         audit = subprocess.run([_PY, str(_PROJECT_ROOT / "scripts" / script)],

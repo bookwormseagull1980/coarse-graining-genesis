@@ -16,10 +16,34 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 # V5 Framework Ledger
 
 This document specifies the physical objects, numerical methods and
-certification used by Coarse-Graining Genesis Framework V5, version 5.0.1.
+certification used by Coarse-Graining Genesis Framework V5, version 5.0.2.
 The companion papers in [REFERENCES.md](../REFERENCES.md) supply the
 derivations. The [reviewer guide](../REVIEWER_START_HERE.md) provides
 execution commands and the validation map.
+
+## Release snapshot
+
+```text
+run identity          20261020T002918Z-eff10097
+parameter records     261
+DERIVED / PENDING     260 / 0
+complete definitions  261/261
+Python tests          708 passed, 5 deselected, 10 subtests
+structural certs      11 PASS
+internal Lean archive 18 files
+explicit intervals    17
+attached intervals    9
+centre-only records   159
+endpoint bracket      [817081/327680, 3268327/1310720]
+```
+
+**V5/Lean solves the generated Yang--Mills mass gap.  4D QCD does not exist as a traditional 4D quantum field: the conventional 4D QFT construction cannot construct the 4D quantum field or prove the Yang--Mills mass gap.**
+The solved operator is the generated finite Yang--Mills operator.  Lean proves
+the IR-edge generated gap; V5 computes the TT-endpoint generated gap.  The
+low-energy glueball catalogue is a separate effective readout.
+
+Canonical release numbers: [RELEASE_FACTS.md](RELEASE_FACTS.md).  Scope:
+[SCOPE_AND_LIMITS.md](SCOPE_AND_LIMITS.md).
 
 - [Data discipline](#data-discipline)
 - [Closed-world object discipline](#closed-world-object-discipline)
@@ -52,9 +76,12 @@ The computation distinguishes four layers:
 
 1. `OBSERVED / anchor`: Newton's constant sets the dimensional scale. This
    empirical unit calibration is not a dynamical source of the closed model.
-2. Structural inputs: the compact RP3 spectrum, content counts, Gaussian
-   response domain, projected response, endpoint normalization and matching
-   conventions stated in the papers.
+2. Structural derivation: V5-local certificates derive the RP3 carrier from
+   the quaternion centre quotient, the content from the primitive trace-free
+   charge lattice, the finite response level from the endpoint inequalities,
+   and the gauge/flow normalizations from the common Planck normalization and
+   unit-speed flow. The projected response and matching conventions remain
+   stated model conventions, not fitted parameters.
 3. `DERIVED`: scientific records produced by the acyclic calculation.
 4. Comparison: observational reference values and covariances in
    `comparison/reference_inputs.json`, used to evaluate the completed calculation.
@@ -326,11 +353,17 @@ interval bounds certify the retained-position platform; central-value
 comparison residuals have their own numerical accuracy.
 
 The central root at `R=5` is `kL = 2.493534...`, the V5 **TT endpoint**.
-It is not the Gaussian correlation window's IR edge
+The Gaussian correlation window's IR edge is
 `sqrt(2*pi) = 2.506628...`; at that edge the TT sum is about `0.147374`,
-below `4/27`, so the edge is not an endpoint solution.  The critical ratio
-is `sqrt(pi) = 1.772454...`.  Lean's `CanonicalYangMills` uses the IR edge
-in a deliberately separate model; the two closures are not identified.
+below `4/27`, so the edge is not a TT endpoint solution.  The critical ratio
+is `sqrt(pi) = 1.772454...`.
+
+Lean's `CanonicalYangMills` proves the generated IR-edge Yang--Mills gap; V5
+computes the generated TT-endpoint gap.  They are two evaluations of the same
+generated finite-operator family.  The exact `tt_branch_reduction` certificate
+is the bridge where the TT coefficient applies.  No traditional 4D QCD
+quantum field is constructed separately; the conventional 4D QFT route cannot
+construct the 4D quantum field or prove the Yang--Mills mass gap.
 
 ### Joint bandwidth response
 
@@ -936,6 +969,20 @@ both derivatives reuse that partition with local refinement. The current
 calculation uses 567 central and 576 derivative integrand evaluations,
 with no finite-difference production-chain solves. Its derivative error
 is a quadrature estimate. These sensitivities propagate a supplied covariance as J C J^T.
+
+The production beta phase space also has an outward interval certificate,
+`bbn_beta_phase_space_interval`.  Because the freeze-out temperature depends on
+`G_F`, `g_A` and the splitting rather than the phase-space normalization, the
+interval propagates monotonically to the production lifetime and helium yield:
+
+```text
+tau_n in [915.5097706487959, 915.5853078835371] s
+Yp    in [0.2460803489939253, 0.24608489256300006]
+```
+
+The record `bbn_yield_interval` attaches those intervals directly to
+`bbn_tau_n` and `bbn_Yp`.  The six weak-rate channel intervals are separate
+certificates; production freeze-out uses the beta phase-space normalization.
 The comparison assigns no joint significance without independently
 established rate, hadronic and capture errors.
 

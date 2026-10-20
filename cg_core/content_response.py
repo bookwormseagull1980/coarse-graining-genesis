@@ -23,22 +23,17 @@ does not infer a generation count from an endpoint already using it.
 from fractions import Fraction as Q
 import math
 
+from cg_core.content_derivation import all_content
 
-CHARGED_GENERATION = (
-    ("Q_L", (3, 2), Q(1, 6), 6, 1),
-    ("u_R", (3, 1), Q(2, 3), 3, -1),
-    ("d_R", (3, 1), Q(-1, 3), 3, -1),
-    ("L_L", (1, 2), Q(-1, 2), 2, 1),
-    ("e_R", (1, 1), Q(-1), 1, -1),
-)
-
-# The upstream joint carrier also contains the gauge-neutral right singlet.
-# It may be omitted from charged gauge traces, but not from a chiral-capacity
-# response or from an odd Higgs connector without retaining the elimination
-# feedback.  The coordinate is the neutral right line identified explicitly
-# by ``finite_connector.elementary_connector``.
-FULL_GENERATION = CHARGED_GENERATION + (
-    ("nu_R", (1, 1), Q(0), 1, -1),
+# The content is derived from the primitive charge lattice, not assigned as a
+# table.  The neutral scalar-upper line (nu_R) is retained in the full carrier
+# but excluded from the charged 15-coordinate quotient.
+_CONTENT_ORDER = ("Q_L", "u_R", "d_R", "L_L", "e_R", "nu_R")
+_CONTENT_BY_NAME = {row[0]: row for row in all_content()}
+FULL_GENERATION = tuple(_CONTENT_BY_NAME[name] for name in _CONTENT_ORDER)
+CHARGED_GENERATION = tuple(
+    (name, reps, y, count, sign)
+    for name, reps, y, count, sign in FULL_GENERATION if name != "nu_R"
 )
 
 

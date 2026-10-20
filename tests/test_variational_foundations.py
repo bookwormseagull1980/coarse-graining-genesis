@@ -343,7 +343,7 @@ def test_gauge_prescription_has_store_identity_and_checked_parents(tmp_path, mon
     value = register_gauge_scale_factor()
     record = params.all_records()["gauge_kinetic_scale_factor"]
     assert value == (3/7)**2
-    assert record["provenance"] == "SCALE_CHOICE"
+    assert record["provenance"] == "DERIVED"
     assert set(record["direct_inputs"]) == {"M_G", "M_P"}
     for key in ("gauge_kinetic_scale_factor", "g2_MG", "g2_MG_geo", "g2_MG_bare_constraint"):
         assert readout_definition(key).unit == "1"
@@ -366,7 +366,7 @@ def test_production_gauge_boundary_consumes_registered_factor(tmp_path, monkeypa
     bare, screened = records["g2_MG_geo"], records["g2_MG"]
     assert set(bare["direct_inputs"]) == {"gauge_kinetic_scale_factor", "kL"}
     assert set(screened["direct_inputs"]) == {"g2_MG_geo", "tau"}
-    assert records["gauge_kinetic_scale_factor"]["provenance"] == "SCALE_CHOICE"
+    assert records["gauge_kinetic_scale_factor"]["provenance"] == "DERIVED"
     for key in ("g2_MG_geo", "g2_MG", "g1_MG_geo", "alpha_inv_MZ_pred"):
         assert records[key]["value"] == pytest.approx(old_records[key]["value"], rel=2e-12)
 

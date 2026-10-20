@@ -145,8 +145,17 @@ def current_camb_record(inputs, record=None, *, source_root=None):
             raise TypeError("CAMB records must be in-memory mappings from the unified parameter store")
         cfg = record["configuration"]
         current = {k: float(inputs[k]) for k in INPUT_KEYS}
-        if fingerprint(cfg["endpoint_inputs"]) != fingerprint(current):
+        stored = cfg["endpoint_inputs"]
+        # The completed solver payload is bound at 1e-13 relative precision.
+        # A fresh evaluation of the same algebraic chain can differ in the
+        # last few ulps; physically meaningful input changes stay PENDING
+        # (the 0.1% rejection tests below).  Reconstruct the configuration
+        # from the record's exact doubles so its stored hash remains valid.
+        if set(stored) != set(current) or not all(
+                math.isclose(float(stored[key]), current[key], rel_tol=1e-13, abs_tol=0.0)
+                for key in INPUT_KEYS):
             raise ValueError("endpoint inputs do not match the completed comparison")
+        current = {key: float(stored[key]) for key in INPUT_KEYS}
         if record["configuration_sha256"] != fingerprint(cfg):
             raise ValueError("CAMB configuration fingerprint mismatch")
         expected = new_configuration(current, YHe=current["bbn_Yp"],
@@ -995,7 +1004,10 @@ def thermal_history_distance_budget(center, bao, *, generated_atomic=None):
     if bao.get('camb_execution_sha256') != center['execution_sha256']:
         raise ValueError('the BAO comparison and thermal budget must share their background')
     if 'direct_hyrec_atomic_response' in thermal:
-        if generated_atomic != thermal['direct_hyrec_atomic_response']['generated_atomic_inputs']:
+        retained = thermal['direct_hyrec_atomic_response']['generated_atomic_inputs']
+        if generated_atomic is None or set(generated_atomic) != set(retained) or not all(
+                math.isclose(float(generated_atomic[key]), float(retained[key]),
+                             rel_tol=1e-13, abs_tol=0.0) for key in retained):
             raise ValueError('current generated atomic inputs must match the retained direct recombination calculation')
     rd0 = center['outputs']['r_drag_Mpc']
     projection = bao['scale_diagnostic']

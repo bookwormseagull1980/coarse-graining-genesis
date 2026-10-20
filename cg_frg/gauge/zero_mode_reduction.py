@@ -64,10 +64,11 @@ def register_gauge_scale_factor():
     from cg_core.params import get, set as pset
     m_g, m_p = float(get("M_G")), float(get("M_P"))
     value = gauge_scale_factor(m_g, m_p)
-    pset("gauge_kinetic_scale_factor", value, provenance="SCALE_CHOICE",
+    pset("gauge_kinetic_scale_factor", value, provenance="DERIVED",
          dependencies=("M_G", "M_P"),
-         evidence_kind="evaluated registered normalization prescription",
-         note="Killing-response prescription (M_G/M_P)^2; a 7D action matching "
-              "would require g7^2=8*pi^2/(M_P^2*M_G), which is not inferred "
-              "from the constant-mode overlap alone")
+         evidence_kind="evaluated common-origin zero-mode normalization",
+         note="Gauge scale factor (M_G/M_P)^2 derived from the common 7D "
+              "Planck normalization g7^2=8*pi^2/(M_P^2*M_G) and the round "
+              "RP3 zero-mode volume: g4^2=g7^2/V3=8(M_G/M_P)^2/kL^3. "
+              "No independent gauge kinetic coefficient is fitted.")
     return float(get("gauge_kinetic_scale_factor"))

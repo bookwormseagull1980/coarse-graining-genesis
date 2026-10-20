@@ -243,6 +243,12 @@ def compute() -> dict:
     dE = condensate_energy(M_G)
     mgen = generator_mass(g2, tau, M_G)
     ym_gap = generated_yang_mills_gap(L, mass_unit=M_G)
+    ym_gap["interpretation"] = (
+        "positive spectral bottom of the generated Yang-Mills mass operator "
+        "on the generated Fock/GNS Hilbert space; it is the framework's "
+        "emergence-scale YM gap. The low-energy QCD glueball catalogue mass "
+        "is a separate observable and is not identified with this UV gap."
+    )
     g1_MG = float(get("g1_MG_geo"))
     Lam, alpha_s_MZ = lambda_qcd(g1_MG, g2, g3_MG, M_G)
     mgl = glueball_from_Lambda(Lam)
@@ -268,6 +274,9 @@ def compute() -> dict:
     pset("mass_gap_dE", dE, provenance="DERIVED",
          note=f"Delta E = (1/8) M_G = {dE:.3e} GeV (the condensate "
               f"energy of the long-root, xi = 1/8)")
+    pset("mass_gap_dE_over_MG", dE / M_G, provenance="DERIVED",
+         note=f"Delta E / M_G = {dE / M_G:.12f}: the dimensionless "
+              f"long-root condensate fraction, not a QCD mass gap.")
     pset("mass_gap_m_gen", mgen, provenance="DERIVED",
          note=f"m_gen = g2 (2 tau) M_G / sqrt(2) = {mgen:.3e} GeV "
                f"(the long-root endpoint coordinate of the generated colour sector)")

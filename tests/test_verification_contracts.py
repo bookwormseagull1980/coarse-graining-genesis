@@ -264,21 +264,12 @@ def test_core_scope_is_explicit_and_does_not_claim_full_test_coverage(tmp_path, 
         "not release_audit and not numerical and not auxiliary")
     record = published[0]
     assert any("Numerical-certification and auxiliary" in item for item in record["not_executed"])
-    assert any(verify.FOUNDATIONS_LABEL in item for item in record["not_executed"])
     test_check = next(item for item in record["checks"] if item["label"].startswith("pytest"))
     assert test_check["summary"] == "Core suite: 12 passed; 8 deselected."
 
 
 def test_scope_option_requires_test_execution(monkeypatch):
     monkeypatch.setattr(sys, "argv", ["verify_v5.py", "--test-scope", "core"])
-    with pytest.raises(SystemExit) as stopped:
-        verify.main()
-    assert stopped.value.code == 2
-
-
-@pytest.mark.parametrize("option", ["--foundations-lake-exe", "--foundations-project"])
-def test_foundations_tool_option_requires_execution(monkeypatch, option):
-    monkeypatch.setattr(sys, "argv", ["verify_v5.py", option, "fixture-path"])
     with pytest.raises(SystemExit) as stopped:
         verify.main()
     assert stopped.value.code == 2

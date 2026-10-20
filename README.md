@@ -15,7 +15,7 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 # Coarse-Graining Genesis Framework V5
 
-Version 5.0.1.
+Version 5.0.2.
 
 [![CI](https://github.com/bookwormseagull1980/coarse-graining-genesis/actions/workflows/ci.yml/badge.svg)](https://github.com/bookwormseagull1980/coarse-graining-genesis/actions/workflows/ci.yml)
 [![Concept DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22067005.svg)](https://doi.org/10.5281/zenodo.22067005)
@@ -58,7 +58,9 @@ The concrete matter bundle is built by
 generated Hermitian four-carrier, its fibre is the complete sixteen-coordinate
 source matter carrier, and relative frames use the same source action.
 Their transition cocycle and component compatibility are proved in the
-corresponding Lean module. General bundle comparison lemmas do not supply
+companion Lean physical branch (`Physical.CanonicalMatterBundle`). That is a
+documentary cross-reference, not a V5 build dependency; V5's numerical chain
+does not import that repository. General bundle comparison lemmas do not supply
 an additional bundle or compatibility premise to this construction.
 
 This makes the release a concrete test of a broader physical question: how much
@@ -70,16 +72,29 @@ that claim.
 
 ## Numerical evidence in the release
 
+Release snapshot: version `5.0.2`, run `20261020T002918Z-eff10097`, `261`
+parameter records, `260` derived, `0` pending, `708` passing tests.  The
+canonical numbers are collected in [RELEASE_FACTS.md](docs/RELEASE_FACTS.md).
+
 The V5 records expose the numbers rather than hiding them behind a model label:
 
 - one finite Gaussian response domain, `R=5`, with the certified active-window
   threshold `R_* ~= 4.0187119842`;
+- a cached strict TT endpoint certificate: root bracket
+  `[817081/327680, 3268327/1310720]`, endpoint sign change and a strictly
+  negative interval derivative proving uniqueness;
+- an exact branch-reduction certificate: the full active V5 TT spectrum is
+  exactly the eight branches used by the companion Lean coefficient model,
+  and `c*A_V5(c)` equals that coefficient interval;
 - a common source and matching ledger for the endpoint, effective couplings,
   mass scales, tensor response and cosmological propagation;
 - generated neutron--proton difference `1.28497 MeV`, free lifetime `915.54 s`
   and helium baryon fraction `Yp=0.246082`;
 - fixed-input DESI comparison `chi2=29.5088`, `p=0.00553993`, and the direct
-  HYREC realization `r_d=147.07455 Mpc`, `chi2=27.1191`.
+  HYREC realization `r_d=147.07455 Mpc`, `chi2=27.1191`;
+- `17` explicit interval records, `9` production records with an attached
+  interval, and `159` centre-only records.  No full covariance or fabricated
+  model-error envelope is published; see [PRECISION_BUDGET.md](docs/PRECISION_BUDGET.md).
 
 These are calculated records, not independently fitted observational inputs.
 Reference observations and covariance matrices remain in a separate comparison
@@ -171,6 +186,32 @@ covariantly to every positive generated scale.  The endpoint generator scale,
 QCD scale and scalar glueball catalogue are the corresponding scale and
 composite-state readouts of this same generated colour sector.
 
+### Generated Yang--Mills mass gap
+
+V5 proves, within its executable certificate system, the **generated
+Yang--Mills mass gap** as a positive spectral bottom of the generated
+Yang--Mills mass operator:
+
+\[
+\Delta_{\rm YM}^2>0,\qquad
+m_{\rm YM}=\sqrt{\Delta_{\rm YM}^2}\,M_G
+=5.940431\times10^{19}\ {\rm GeV}.
+\]
+
+The chain certifies the radial and complete coclosed colour-connection
+blocks, their self-adjoint Hessian, the positive bottom and the finite Fock
+gap; `capacity_closure` records the outward interval lower bound and
+`generated_ym_gap_mass` records the mass.
+
+**V5/Lean solves the generated Yang--Mills mass gap.  4D QCD does not exist as a traditional 4D quantum field: the conventional 4D QFT construction cannot construct the 4D quantum field or prove the Yang--Mills mass gap.**
+
+The solved operator is the generated finite Yang--Mills operator.  The Lean
+zero-argument theorem proves the IR-edge generated operator; V5 computes the
+TT-endpoint generated gap.  The two ends are joined, where the TT coefficient
+is concerned, by the exact V5 `tt_branch_reduction` certificate.  The
+low-energy glueball catalogue mass `m_glueball=8*Lambda_QCD=1.664 GeV` is a
+separate effective readout.
+
 Electroweak partial widths use one effective neutral-current amplitude,
 with a common weak angle and normalization, heavy-top bottom-vertex
 interference, and factorized QCD and QED radiators. The partial widths
@@ -218,9 +259,11 @@ their stated background, source and boundary data.
 Within the unit-normalized first-order quadratic-plus-cubic density class,
 affine-dilation covariance fixes the relative cubic coefficient to one.
 `affine_dilation_completion()` evaluates the detecting variation in exact
-rational arithmetic; Lean proves the derivative identity for every local
-configuration and uniqueness within that class. The full local-coordinate
-covariance and nonlinear metric field equations are separate proof targets.
+rational arithmetic; the companion Lean physical branch proves the derivative
+identity for every local configuration and uniqueness within that class. This
+is a documentary cross-reference, not a V5 build dependency. The full
+local-coordinate covariance and nonlinear metric field equations are separate
+proof targets.
 The internal conformal source has a canonical matter evolution with
 kinetic weight `M=exp(-3 eta)` and spatial form
 `B=exp(-eta/2) A exp(-eta/2)`. Their normalized frequencies reproduce
@@ -388,23 +431,39 @@ integer level in `(R_*, 16/pi]`; the upper edge is the shell-support bound, not
 the `c(6)` crossing. Then run the core regression suite:
 
 ```powershell
-py -m pip install -r requirements.txt
-py -m pip install "pytest>=7.4" "mpmath>=1.3"
+py -m pip install -r requirements-lock.txt
 py -m pytest -q -m "not numerical and not auxiliary" -p no:cacheprovider
 ```
 
-For a full release verification, including fresh reproduction and audits, use
-the command in [REVIEWER_START_HERE.md](REVIEWER_START_HERE.md). The CI workflow
+`requirements-lock.txt` records the tested Python 3.13.12 environment;
+`requirements.txt` gives compatible lower bounds for ordinary installation.
+Both include CAMB 2.0.5, and `scripts/reproduce_v5.py` runs the full endpoint
+power-spectrum record automatically. For a full release
+verification, including fresh reproduction and audits, use the command in
+[REVIEWER_START_HERE.md](REVIEWER_START_HERE.md). The CI workflow
 runs the core suite on every push and pull request; it is a public regression
 check, not a substitute for the full release verification.
 
+- [Release facts](docs/RELEASE_FACTS.md): canonical counts, run identity,
+  endpoint/interval widths and the YM/Lean snapshot.
 - [Scientific overview](docs/papers_overview.pdf): construction, selected results,
   macroscopic dynamics and the interpretation of the comparisons.
-- Popular introductions: [English](docs/From%20Change%20to%20Everything%20-%20A%20Popular%20Science%20Introduction.docx)
-  and [中文](docs/从变化到万物_科普导读.docx).
+- [Papers index](docs/PAPERS.md): all companion PDFs and popular introductions.
 - [Framework ledger](docs/V5_LEDGER.md): spectral construction, effective
   couplings, finite matching, thermal evolution, gravity and cosmology,
   with their assumptions, normalizations and error controls.
+- [Structural closure](docs/STRUCTURAL_CLOSURE.md): executable certificate
+  chain and the exact TT branch reduction.
+- [TT equivalence](docs/TT_EQUIVALENCE.md): the V5-to-Lean eight-branch identity.
+- [Lean correspondence](docs/LEAN_CORRESPONDENCE.md): what the Lean physical
+  branch proves, what is certificate-conditional, and the YM mass-gap scope.
+- [Precision budget](docs/PRECISION_BUDGET.md): endpoint/BBN intervals and the
+  centre-only record boundary.
+- [Scope and limits](docs/SCOPE_AND_LIMITS.md): what is solved, what is
+  effective, and why no traditional 4D QCD quantum field is constructed.
+- [Changelog](CHANGELOG.md): the 5.0.2 release delta.
+- [Completeness audit](V5_COMPLETENESS_AUDIT.md): final state and residual
+  numerical boundaries.
 - [Reviewer guide](REVIEWER_START_HERE.md): installation, reproduction,
   test and formal-verification commands, and the validation map.
 - [Verification report](V5_VERIFICATION_REPORT.md): executed checks and
@@ -429,15 +488,38 @@ core algebra and isolation checks, extended numerical certification, and
 auxiliary presentation checks. Full verification is used for release;
 targeted tests cover changes to individual sectors.
 
-The independent proof library *Lean Formalization of Arithmetic and Basic
-Physical Interfaces* contains the shared foundations formalized for the
-arithmetic and gauge-structure papers. It is maintained separately from V5.
-`foundations-reference.json` pins its proof sources, dependency locks and
-complete verification program. V5's optional `--foundations` check invokes that
-program and binds a newly produced proof record; it does not certify the
-numerical calculation or the full mathematical content of the papers.
-The ordinary V5 calculation and test imports do not require this library.
-See the [reviewer guide](REVIEWER_START_HERE.md) for checkout configuration.
+V5 is self-contained. Its numerical chain does not import or require the
+separate Lean physical branch. V5 carries its own finite Lean archive in
+`lean_proofs/` for selected integer/rational identities, and its structural
+chain is recorded by the executable certificates in `cg_core/structure/`:
+minimal change -> Gaussian endpoints -> internal spectra -> content capacity
+-> endpoint root and Yang--Mills capacity. These certificates are V5-local and do not
+claim to be Lean formal proofs of the full structural theorems.
+
+The `certificates/structure_certificates.json` record is regenerated by
+`py scripts/structure_certificates.py` and by the full reproduction chain.
+The ordinary V5 calculation and test imports do not require any external
+proof checkout.
+
+The companion Lean physical branch proves the generated **IR-edge**
+Yang--Mills mass gap.  Its `SourceTTGaussianCoefficient` uses eight active
+branches with response `A_5/c`.  V5 certifies that the **full** active finite
+spectrum on the endpoint bracket is exactly those eight branches and that
+`c*A_V5(c)` equals the same coefficient interval; the certificate is
+`cg_core/tt_branch_reduction.py`.  The Lean root theorem therefore applies to
+the V5 full response as an exact model reduction, not a numerical
+approximation.  The bridge is a V5 certificate/table identity, not a Lean
+import.  The full derivation is in [TT_EQUIVALENCE.md](docs/TT_EQUIVALENCE.md).
+V5's strict endpoint certificate and generated Yang--Mills gap remain
+self-contained.
+
+**The generated Yang--Mills mass gap is solved.  There is no traditional 4D
+QCD quantum field to be matched or proved separately**: the conventional 4D
+QFT construction cannot construct the 4D quantum field or prove the
+Yang--Mills mass gap.  The low-energy glueball catalogue is an effective
+readout of the same generated finite operator.
+The certified endpoint width and its propagation to the mass scale are
+tracked separately in [PRECISION_BUDGET.md](docs/PRECISION_BUDGET.md).
 
 ## Repository contents
 
@@ -447,10 +529,15 @@ See the [reviewer guide](REVIEWER_START_HERE.md) for checkout configuration.
 | `cg_frg/` | Endpoint, coupling, matter, cosmology and macroscopic gravity sectors |
 | `scripts/` | Reproduction, verification, certificates, fixed-input comparisons and dashboard generation |
 | `tests/` | Independent identities, numerical convergence and software-contract checks |
-| `lean_proofs/` | Finite integer/rational formalizations with their declared premises |
-| `foundations-reference.json` | Pinned reference to the independently maintained arithmetic and basic-physics proof library |
+| `cg_core/structure/` | V5-local structural certificates: minimal change, Gaussian endpoints, internal spectra, content capacity, endpoint root, TT branch reduction and YM capacity |
+| `certificates/` | Generated structural and numerical certificates |
+| `lean_proofs/` | V5-internal finite integer/rational Lean checks |
 | `comparison/` | Observational inputs and post-calculation comparison procedures |
-| `docs/` | Framework ledger and generated reviewer dashboard |
+| `docs/` | Release facts, ledger, structural/TT/Lean correspondence, precision/scope, papers index and generated dashboard |
+| `MANIFEST.in` | Source-distribution inclusions for tests, scripts, certificates and documentation |
+| `V5_COMPLETENESS_AUDIT.md` | Current completeness/rigor audit |
+| `V5_VERIFICATION_REPORT.md` | Generated verification evidence for the release run |
+| `CHANGELOG.md` | Release delta |
 | `cg_params.json` | Unified scientific records and their provenance |
 | `run_manifest.json` | Run identity, source/output fingerprints and verification state |
 | `CITATION.cff` | Software citation metadata |
@@ -490,13 +577,14 @@ functional from the published content-response coordinate `tau=1/50`.
 ## Citation and license
 
 Cite this software as J. Guo, *Coarse-Graining Genesis Framework V5*,
-version 5.0.1 (2026), together with the applicable companion papers in
+version 5.0.2 (2026), together with the applicable companion papers in
 [REFERENCES.md](REFERENCES.md). The version-series DOI is
 [10.5281/zenodo.22067005](https://doi.org/10.5281/zenodo.22067005); use the
-Git tag `v5.0.1` to identify this exact source revision. Machine-readable
+Git tag `v5.0.2` to identify this exact source revision. Machine-readable
 citation information is provided in [CITATION.cff](CITATION.cff).
 
 Source repository:
 [coarse-graining-genesis](https://github.com/bookwormseagull1980/coarse-graining-genesis).
 
-License and attribution terms are provided in [LICENSE](LICENSE).
+The software is released under the standard MIT License in [LICENSE](LICENSE);
+the requested citation is recorded separately in [CITATION.cff](CITATION.cff).

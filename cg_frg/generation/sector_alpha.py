@@ -46,9 +46,9 @@ RUNG 2 — the sector step (the so(4)-isometry × the tilt × the
                 coupling — the 4D rotation group);
     · 1−n_s  — the spectral tilt τ·[(1+2+1+3)/(d+1)] = τ·(7/4)
                 = 0.035 (ns_tilt, the closed window-evolution rate);
-    · kL_CMB — the CMB-scale window width (the SCALE_CHOICE
-                published by perturbation_amplitude; the
-                closed value 2.4810667).
+    · kL_CMB — the CMB-scale window width (DERIVED by
+                perturbation_amplitude as kL*(1-tau/4);
+                the closed value 2.4810667).
 
 RUNG 3 — the 9/8 hypercharge identity (the exact algebra):
 

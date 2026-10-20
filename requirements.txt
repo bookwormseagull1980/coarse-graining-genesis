@@ -22,6 +22,10 @@
 scipy>=1.10
 numpy>=1.24
 mpmath>=1.3
+# CAMB is part of the reproducible V5 cosmology chain: reproduce_v5.py
+# regenerates the full endpoint power-spectrum record before the endpoint
+# cosmology module runs.  The wheel includes the CAMB binary.
+camb==2.0.5
 
 # Verification additionally requires pytest>=7.4.
 # Installation commands are given in REVIEWER_START_HERE.md.

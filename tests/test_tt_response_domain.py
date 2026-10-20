@@ -65,4 +65,4 @@ def test_certificate_selects_the_unique_integer_level():
     assert result["checks"]["c4_below_first_position"]
     assert result["checks"]["R_star_between_4_and_5"]
     assert result["checks"]["upper_shell_bound_below_6"]
-    assert not result["checks"]["c6_above_next_position"]
+    assert result["checks"]["c6_below_next_position"]

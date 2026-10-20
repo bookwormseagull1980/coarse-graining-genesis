@@ -72,7 +72,11 @@ def prescribed_readout(k: float, L: float, tau: float, M_P: float) -> dict:
             "r_read": ratio, "Z_read": Z_read,
             "G_anchor": 1.0 / (EIGHT_PI * M_P ** 2),
             "G_read": G_N_from_Z(Z_read, M_P), "response_domain_R": 5,
-            "external_pole_established": False}
+            "external_pole_established": False,
+            "pole_scope": ("this finite-domain Newton readout does not establish "
+                           "an external pole; the quadratic tensor action and "
+                           "its two-helicity residue are recorded separately in "
+                           "cg_frg/gravity/external_tensor.py")}
 
 
 def _sigma_response(k: float, kL: float, tau: float, M_P: float) -> float:
