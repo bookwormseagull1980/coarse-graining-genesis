@@ -569,6 +569,40 @@ or repeated stationary solve in this response evaluation. The example has respon
 
 ## Matter, running and thermal methods
 
+### Common physical mechanisms
+
+The vacuum stabilizer locks the right frame rotation to the relative colour
+scalar phase; primitivity fixes the charge unit. Common frame covariance
+transports the connection, source frame, probability law, observations and
+allowed response domain together. The local check
+`examples/check_common_frame_response.py` includes
+the derivative of that transformation, the restoring term and a transported
+finite source probe law. Pure frame changes have zero relative response;
+varying the connection with the source frame fixed gives a restoring cost.
+The positive radial and coclosed spectral edges determine the generated
+Yang--Mills gap independently of this presentation invariance.
+
+On the complete matter carrier `8_L+(7_R+1_neutral)`, exchange preserves
+capacity and equal chiral responses have zero graded trace. Independently,
+the charge kernel determines the charged quotient `8_L+7_R`. These are
+three statements on the same carrier, not a sequence of implications.
+
+Gaussian resolution acts on fields and their unresolved response.
+`cg_core.modal_algebra.joint_resolution` carries the full nonlinear
+response plus residual by the source heat map. Its exact compensation
+cocycle makes two resolution steps agree with their combined step.
+Products retain their full modal support. The source heat parameter
+measures resolution, separately from physical evolution and RG scale.
+
+In common evolution the source work identity retains the matter equation
+residual. On the matter equation its source term is balanced by the common
+source equation, yielding total stress conservation. The retained real
+pair has conserved phase charge; on the positive regular branch its rate
+is fixed by that charge, physical volume, source coefficient and amplitude.
+The phase therefore supplies a clock along the solution. The exact names,
+formal clauses and executable checks are listed in
+[the physical mechanism correspondence](LEAN_CORRESPONDENCE.md#physical-mechanisms).
+
 ### Gauge running
 
 The calculation uses the declared three-gauge flow with fixed geometric

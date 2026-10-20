@@ -963,6 +963,7 @@ def main() -> int:
     results.extend(run_source_audits(reproduction))
     results.append(run("Lean source audit", [PY, "scripts/audit_lean_sources.py"]))
     results.append(run("structural-closure certificates", [PY, "scripts/structure_certificates.py"]))
+    results.append(run("common frame response", [PY, "-B", "examples/check_common_frame_response.py"]))
     results.append(run("numeric precision audit", [PY, "scripts/audit_numeric_precision.py"]))
     results.append(run("path portability audit", [PY, "scripts/audit_path_portability.py"]))
     if not args.skip_full_comparison:

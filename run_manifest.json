@@ -120,8 +120,8 @@
   }
  },
  "output_sha256": {
-  "cg_params.json": "03b92cf943d3b599754a3be51b1a628454fa2ada88f2c869c23a7e7a9ea0ad01",
-  "comparison/reference_inputs.json": "dc5521b715fc2449a51e30056b6472bfc734d40c18a4c6760a04fd22787a0f5a"
+  "cg_params.json": "577ea1bd4380b89376d7ab804fb74ba85695554615276f6efa825b14b57afddb",
+  "comparison/reference_inputs.json": "ab39cb1b4e846e5af7300acbad8d13d626723cc772fa736317dee9e3dab434ca"
  },
  "publication": {
   "author": "Jinku Guo",
@@ -186,8 +186,8 @@
   "software": "Coarse-Graining Genesis Framework V5.0",
   "version": "5.0.2"
  },
- "python": "3.13.12",
- "run_id": "20261020T002918Z-eff10097",
+ "python": "3.12.10",
+ "run_id": "20261020T151355Z-10526ee4",
  "scope": "declared framework; input-bound external comparisons carry separate status",
  "solver_execution_identity": {
   "CAMB": {
@@ -323,7 +323,7 @@
   "cg_frg/neutrino/neutrino_closure.py": "edb1e4ae343e9a24b1f5194d37a7ee3e6ff72332b9ba68fea0c4ea64da56a7ff",
   "cg_frg/neutrino/neutrino_mass_matrix.py": "09deed3761c2fe699c3ad15e566c937f247231792079399c3f5947ede7f35062",
   "cg_frg/neutrino/propagation.py": "6c906e2cdea9a4e9b19adc7af837f49dea50b76d125217944cc7e9267fa8c8d0",
-  "cg_frg/qcd/generated_yang_mills.py": "0c7c3b9bd7d22f76cef52c697773fc5077e1b10518ee1087d67f13a9051503bc",
+  "cg_frg/qcd/generated_yang_mills.py": "fe83c502b29bba607a5cdd9f23e8aeb2cbfe47135ee49e411a78c4044d301ebc",
   "cg_frg/qcd/mass_gap_scale.py": "69bee0a1af99506e41457bfb0dbe42c25ad8782a4130e64fa673753e937e1e2e",
   "cg_frg/qcd/qcd_sector.py": "27930696843a94ee732482c10cc1dee665c2c09e1370591f85696bc6ac3ead7f",
   "comparison/crosschecks.py": "51468181e8a6f79f390d25485df9d046eaf265071d3a32a6f2f8dbbbfd372c84",
@@ -345,7 +345,7 @@
   "scripts/check_variational_foundations.py": "12c4a861468195339dfa12c2902fec5901d2be566e51a08d579a04ec09e820a6",
   "scripts/evaluate_joint_extensions.py": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
   "scripts/init_v5.py": "6a2a965c5c7e15479d229711a07b952fae014e96c1884db935d182b5a5e37747",
-  "scripts/make_reviewer_dashboard.py": "c925da0d6d2ac3e1e72725859bb3e251f9aff5a74da6e76720ed63eea5a7503e",
+  "scripts/make_reviewer_dashboard.py": "05907074385dde55b0b903277bbe1eb9ecd5d597afd726a3a466856383e49852",
   "scripts/regime_spread.py": "c0c6a8cea30a5125e7f208c2b4e0413d20ba76e11325f33953735cdc87ee33a1",
   "scripts/reproduce_v5.py": "9d23ae10ee3cf413a2e73e5bd21e2e87650e0613ed765e74aefac25755cb4716",
   "scripts/run_bao_comparison.py": "62da16ee26b8937889b2c4b5cdaeaa7e876e809e6367e8a357ebcc29ecf96a3e",
@@ -356,7 +356,7 @@
   "scripts/structure_certificates.py": "c75ce4b84d1fb9f37563efb52a38a3fc3f680bcaa54d87958a512b7a1c3940f7",
   "scripts/validate_endpoint_cosmology.py": "ab97aa105fbf3aad8d8e558ab097d2a81a7399c9ccffa236862faf7b231d4519",
   "scripts/verify_lean_archive.py": "50888adc603e0ab99f6461e2464378595f660943d20a71a46bdb11ad0edffbf8",
-  "scripts/verify_v5.py": "55c2db41b14c6068804aa185e624cf5949d74159aff6aaab48183e55317151cf"
+  "scripts/verify_v5.py": "077ae310394b107f7840f3093cc16e2d086f9c75bdfb308b5dacceeeb9093b1d"
  },
  "status": "complete computational run",
  "storage_contract": {
@@ -369,16 +369,8 @@
   "scientific_value_reads": "read the scientific stores; the manifest only validates their identity"
  },
  "verification": {
-  "binding_sha256": "375eb1c22b5f15a64aa9e5229f20689304e6c949c44245cef1f0710dc6291a5b",
+  "binding_sha256": "8ee36ea4d950c5001daa3db54bd43464408569a4432700f7e32b293de1f8f154",
   "checks": [
-   {
-    "cmd": "python -B scripts/reproduce_v5.py",
-    "label": "full reproduction",
-    "ok": true,
-    "required": true,
-    "returncode": 0,
-    "summary": "Completed the declared check successfully."
-   },
    {
     "cmd": "verify existing run identity and fingerprints",
     "label": "current run manifest",
@@ -393,7 +385,7 @@
     "ok": true,
     "required": true,
     "returncode": 0,
-    "summary": "Executed once during this invocation's reproduction; reused after run, source, reference and output fingerprints were verified."
+    "summary": "Completed the declared check successfully."
    },
    {
     "cmd": "python scripts/audit_observation_leakage.py",
@@ -401,7 +393,7 @@
     "ok": true,
     "required": true,
     "returncode": 0,
-    "summary": "Executed once during this invocation's reproduction; reused after run, source, reference and output fingerprints were verified."
+    "summary": "Completed the declared check successfully."
    },
    {
     "cmd": "python scripts/audit_lean_sources.py",
@@ -414,6 +406,14 @@
    {
     "cmd": "python scripts/structure_certificates.py",
     "label": "structural-closure certificates",
+    "ok": true,
+    "required": true,
+    "returncode": 0,
+    "summary": "Completed the declared check successfully."
+   },
+   {
+    "cmd": "python -B examples/check_common_frame_response.py",
+    "label": "common frame response",
     "ok": true,
     "required": true,
     "returncode": 0,
@@ -444,28 +444,12 @@
     "summary": "Completed the declared check successfully."
    },
    {
-    "cmd": "python -B -m pytest -q -m 'not release_audit' -p no:cacheprovider --basetemp <temporary>",
-    "label": "pytest",
+    "cmd": "python -B -m pytest -q -m 'not release_audit and not numerical and not auxiliary' -p no:cacheprovider --basetemp <temporary>",
+    "label": "pytest (core)",
     "ok": true,
     "required": true,
     "returncode": 0,
-    "summary": "Full suite: 708 passed; 5 deselected; 10 subtests passed."
-   },
-   {
-    "cmd": "python scripts/verify_lean_archive.py --lean-exe <lean.exe>",
-    "label": "Lean proof archive",
-    "ok": true,
-    "required": true,
-    "returncode": 0,
-    "summary": "18 formal-proof sources compiled successfully."
-   },
-   {
-    "cmd": "python scripts/audit_numeric_stability.py",
-    "label": "numeric stability audit",
-    "ok": true,
-    "required": true,
-    "returncode": 0,
-    "summary": "Completed the declared check successfully."
+    "summary": "Core suite: 559 passed; 154 deselected; 10 subtests passed."
    },
    {
     "cmd": "verify existing run identity and fingerprints",
@@ -476,8 +460,13 @@
     "summary": "Completed the declared check successfully."
    }
   ],
-  "not_executed": [],
-  "run_id": "20261020T002918Z-eff10097",
+  "not_executed": [
+   "Full reproduction during this verification invocation (--no-reproduce).",
+   "Numerical-certification and auxiliary Python tests (--test-scope core; use --test-scope all for the full suite).",
+   "Lean archive compilation (source audit alone is not compilation).",
+   "Isolated full-chain numeric stability rerun (enable with --stability)."
+  ],
+  "run_id": "20261020T151355Z-10526ee4",
   "status": "PASS"
  },
  "verification_source_sha256": {
@@ -510,7 +499,7 @@
   "tests/test_content_and_beta.py": "33e37dfe7f00845fccbec875816aa5195fd047eed3e3821292830c83b9f1e0ce",
   "tests/test_external_tensor.py": "464598ea04d8b4dbebb0d2af5db73badd97303810be0500fc8d35dab8b7abd91",
   "tests/test_free_covariance.py": "3fc9661bc7cf7ea9f28e07f914acfbfac828dd74be57113f513e3292e91328e2",
-  "tests/test_generated_ym_gap.py": "bc253d564e0169b19f690c6d4578e01a920b0819cf6374f09a6322819a952b52",
+  "tests/test_generated_ym_gap.py": "668648dabf7375aba542d44a574de7de6f20fcce75c5adcd427fc0517882a041",
   "tests/test_geometry_isolation.py": "7fc24cb121dee1f2a28002bf958b09db9bd811a29bf080bd9ec9074b831c8a83",
   "tests/test_gravity_diagnostics.py": "067e69f01bdeebf3241c6abff71611f96be4bbb271d49e08e1b73a5e32f11abe",
   "tests/test_gravity_extensions.py": "0b63e6ec4444668682c9608d3683176592d71115a33de5aa2cb86196a0a4e4c8",

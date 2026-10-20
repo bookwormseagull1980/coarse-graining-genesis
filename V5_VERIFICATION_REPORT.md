@@ -17,8 +17,8 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 # V5 Verification Report
 
-Generated: 2026-10-20 08:40:54
-Python: `3.13.12`
+Generated: 2026-10-20 23:27:27
+Python: `3.12.10`
 Root: `.`
 
 ## Verdict
@@ -29,31 +29,36 @@ A requested reproduction builds empty temporary stores and publishes only after 
 The results below identify the checks executed in this invocation;
 a proof-library result does not certify a numerical run or the entire manuscript chain.
 
+## Not Executed
+
+- Full reproduction during this verification invocation (--no-reproduce).
+- Numerical-certification and auxiliary Python tests (--test-scope core; use --test-scope all for the full suite).
+- Lean archive compilation (source audit alone is not compilation).
+- Isolated full-chain numeric stability rerun (enable with --stability).
+
+No PASS claim is made for these omitted checks.
+
 ## Steps
 
 | step | status | command |
 |---|---:|---|
-| full reproduction | PASS | `python -B scripts/reproduce_v5.py` |
 | current run manifest | PASS | `verify existing run identity and fingerprints` |
 | parameter provenance audit | PASS | `python scripts/audit_param_writers.py` |
 | observation leakage audit | PASS | `python scripts/audit_observation_leakage.py` |
 | Lean source audit | PASS | `python scripts/audit_lean_sources.py` |
 | structural-closure certificates | PASS | `python scripts/structure_certificates.py` |
+| common frame response | PASS | `python -B examples/check_common_frame_response.py` |
 | numeric precision audit | PASS | `python scripts/audit_numeric_precision.py` |
 | path portability audit | PASS | `python scripts/audit_path_portability.py` |
 | full comparison table | PASS | `python comparison/param_audit_full.py` |
-| pytest | PASS | `python -B -m pytest -q -m 'not release_audit' -p no:cacheprovider --basetemp <temporary>` |
-| Lean proof archive | PASS | `python scripts/verify_lean_archive.py --lean-exe <lean.exe>` |
-| numeric stability audit | PASS | `python scripts/audit_numeric_stability.py` |
+| pytest (core) | PASS | `python -B -m pytest -q -m 'not release_audit and not numerical and not auxiliary' -p no:cacheprovider --basetemp <temporary>` |
 | run identity after verification | PASS | `verify existing run identity and fingerprints` |
 
-Full Python test results: 708 passed, 5 deselected, 10 subtests passed.
+Core Python test results: 559 passed, 154 deselected, 10 subtests passed.
 The complete release audits are executed in the steps above;
 their duplicate test wrappers are deselected.
 
-Audits executed once during reproduction and reused after current-run fingerprint validation: parameter provenance audit, observation leakage audit.
-
-Run identity: `20261020T002918Z-eff10097`.
+Run identity: `20261020T151355Z-10526ee4`.
 Bound calculation sources: 159; verification sources: 60; outputs: 2; reference identities: 99; solver execution identities: 1.
 
 ### Store Summary
@@ -177,7 +182,7 @@ enter the causal response, including the direct second source variation.
 
 - source-charge relative residual: 1.91480936223e-16
 - causal-equation relative residual: 1.90973710345e-16
-- response cutoff comparison: 5.37805396907e-16
+- response cutoff comparison: 7.04460217705e-16
 - maximum canonical-form residual: 5.38626232194e-15
 - maximum source-work balance residual: 1.16573417586e-14
 - dominant operation counts: {'causal_entry_divisions': 1192464, 'dense_liouvillian_factorizations': 0, 'exact_segment_propagators': 6, 'nonzero_source_diagonalizations': 2, 'nonzero_source_mode_diagonalizations': 2, 'phase_response_basis_transforms': 0, 'reference_mode_diagonalizations': 2, 'retained_phase_dimensions': [140, 336]}

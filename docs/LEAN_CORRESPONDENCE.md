@@ -52,6 +52,53 @@ readout of the same generated finite operator, not a second QCD theory.
 | `capacity_closure.ym_gap` | generated YM positive spectral bottom | `SourceHaarYangMillsHessian.operator_selfAdjoint`, `complete_coercivity`, `gap_attained`; `CanonicalYangMills` | structural |
 | `capacity_closure.gravity` | two physical helicities, zero mass term | `SourceCollectiveGravityClosure.tt_dimension`; `SourceLinearizedGravity` | structural |
 
+## Physical mechanisms
+
+The following names identify physical mechanisms across the manuscripts,
+formal declarations and executable checks. They do not add parameters to
+the generated stores or change the rank of a manuscript proposition.
+
+| Mechanism | Formal statement | Executable counterpart |
+|---|---|---|
+| Vacuum stabilizer and primitive charge | `SourceChargeLattice.oriented_fixedUpper_unique`; `SourceGlobalGaugeGroup` | `cg_core/content_derivation.py` |
+| Common frame covariance and response invariance | `SourceGeneratedYangMillsFrameResponse.commonFrameResponseAction_gauge_invariant` | `examples/check_common_frame_response.py`, including the inhomogeneous connection term and a transported finite source probe law |
+| Generated Yang--Mills mass gap | `CanonicalYangMills`; `SourceHaarYangMillsHessian` | `cg_frg/qcd/generated_yang_mills.py`; `tests/test_generated_ym_gap.py` |
+| Complete source exchange | `SourceClosedCenterResponse.exchange_capacity_conservation` | Complete carrier and source matrices in `cg_core/content_response.py` |
+| Common response centre trace cancellation | `SourceClosedCenterResponse.common_response_centre_trace` | Full carrier centre response in `cg_core/content_response.py` |
+| Neutral kernel and charged quotient | `SourceMatterCharge`; `SourceCompleteMatterExactSequence` | `cg_core/finite_connector.py`; `tests/test_native_operations.py` |
+| Nonlinear response compensation under Gaussian resolution | `SourceResolutionCompensation.compensation_cocycle`, `resolution_add`, `complete_response_transport`, `residual_unique` | `cg_core/modal_algebra.py`; direct defect, Duhamel integral and composition checks in `tests/test_native_operations.py` |
+| Source work and total stress balance | Common variation in the companion manuscript; equation residuals retained in the Ward identity | `cg_frg/gravity/matter_source_response.py`; `tests/test_matter_source_response.py` |
+| Phase charge and a relational clock | `SourcePhaseCharge.phase_work_identity`, `phase_charge_conservation`, `phase_rate_pos` | Common source evolution and independent phase quadrature in `cg_frg/gravity/matter_source_response.py` |
+| Collective tensor identities and coefficient uniqueness | `SourceLinearTensor.fpOperator_pureGauge`, `fpOperator_transverse`, `generalTensorOperator_coefficients_unique` | `cg_frg/gravity/external_tensor.py`; `tests/test_external_tensor.py` |
+
+The complete carrier has decomposition `8_L+(7_R+1_neutral)`.
+Exchange preserves its total capacity. Equal responses on the complete
+left and right copies have zero graded trace. The charge kernel,
+independently computed, gives the quotient `8_L+7_R`.
+
+Common frame transport includes the probability law, observables and
+allowed field domain as well as the connection and frame. The local
+executable probe transports the same samples and weights; the manuscript
+proves the source-state and form-domain transport.
+
+Resolution carries `response + residual` by the same source heat map.
+Its compensation law is not constancy of the response and is not a
+physical time equation. The Lean instance uses the actual quotient Haar
+heat map and continuous finite coefficient products, with colour acting
+on all sixteen matter coordinates. Its algebraic statements correspond
+to the composition and transport clauses of the manuscript proposition.
+
+The matter stress identity retains the matter equation residual. On the
+matter equation only source work remains; total stress conservation also
+uses the common source equation. Phase conservation is proved for the
+retained real pair with common kinetic and restoring coefficients. Its
+positive-charge regular branch supplies the monotone phase clock.
+
+The tensor coefficient comparison uses the displayed five-term local
+second-order class and unit TT normalization. Euclidean momentum
+contractions and the Lorentzian event carrier retain their respective
+metric conventions.
+
 ## Exact TT bridge
 
 At the endpoint fixed point, `L=c`, `cutoff=pi/c^2`, `R=5`.  For each retained

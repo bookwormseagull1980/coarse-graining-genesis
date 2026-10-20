@@ -869,6 +869,11 @@ pre {{
 
   <section>
     <h2>3. Fresh rebuild verification path</h2>
+    <p>The <a href="docs/LEAN_CORRESPONDENCE.md#physical-mechanisms">physical mechanism correspondence</a>
+    links the vacuum stabilizer, common frame response, spectral gap, source exchange,
+    resolution compensation, source work and phase charge to their precise checks.
+    Run <code>python -B examples/check_common_frame_response.py</code> for the local
+    frame check, including the transported source probe law.</p>
     <div class="timeline">
       <div class="step">initialize<br>empty temporary stores</div>
       <div class="step pass">calculate<br><code>reproduce_v5.py</code></div>
