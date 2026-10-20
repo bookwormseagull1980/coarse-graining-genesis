@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Tests for the charged-lepton geometric-to-pole fixed point."""
 
 from pathlib import Path
@@ -10,6 +10,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from cg_frg.fermion.lepton_pole import (  # noqa: E402
     charged_lepton_conversions,
+    geometric_to_pole_one_loop,
     solve_pole_mass,
 )
 
@@ -93,4 +94,41 @@ def test_weights_must_sum_to_zero():
             scheme=SCHEME, scale_GeV=91.0, boundary_source=BOUNDARY,
             weights=(1.0, 1.0, 1.0))
 
+
+
+def test_one_loop_geometric_to_pole_uses_existing_kernel():
+    geometric = {
+        "e": 0.0005103542513564916,
+        "mu": 0.10531446305553036,
+        "tau": 1.772105081689173,
+    }
+    result = geometric_to_pole_one_loop(
+        geometric,
+        [0.4615882289132695, 0.6482117683683781],
+        246.18969645238943,
+        higgs_mass_GeV=124.98344026878286,
+        scale_GeV=91.12483998892053,
+        input_scheme="MSbar_at_scale",
+        action_source="generated five-coupling charged-lepton action",
+    )
+    assert result["iterations"] >= 1
+    assert result["convergence"] <= 2e-10
+    assert math.isfinite(result["Delta_L"])
+    for label in LABELS:
+        entry = result["leptons"][label]
+        assert entry["G"] > 0.0
+        assert abs(entry["running_residual"]) <= 2e-10
+
+
+def test_one_loop_conversion_requires_declared_input_scheme():
+    with pytest.raises(ValueError):
+        geometric_to_pole_one_loop(
+            GEOM,
+            [0.46, 0.65],
+            246.0,
+            higgs_mass_GeV=125.0,
+            scale_GeV=91.0,
+            input_scheme="pole_mass_input",
+            action_source="test action",
+        )
 

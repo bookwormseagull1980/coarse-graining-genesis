@@ -812,6 +812,14 @@ running-mass comparison transfers the coefficient from the generated
 scale to its reference scale through the one-loop weighted beta function.
 No reference data enter the generated matching calculation.
 
+The inverse geometric-to-pole problem is separate. The module
+`cg_frg/fermion/lepton_pole.py` solves
+`M_l = m_l^geom + delta M_l(M_l)` when the caller declares a matching
+scheme and boundary source. Its current executable convention is
+`MSbar_at_scale`, using the same one-loop charged-lepton kernel; it does
+not replace the production pole-condition calculation above and does not
+publish a production `G_l` without that declared scheme.
+
 #### Generated on-shell conditions
 
 The effective on-shell realization specifies the generated G_F, top mass

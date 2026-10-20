@@ -185,3 +185,124 @@ def charged_lepton_conversions(
         "boundary_source": boundary_source,
         "order": "one-loop on-shell fixed point for each charged lepton",
     }
+
+def geometric_to_pole_one_loop(
+    geometric_masses_GeV: Mapping[str, float],
+    gauge_couplings,
+    vev_GeV: float,
+    *,
+    higgs_mass_GeV: float,
+    scale_GeV: float,
+    input_scheme: str,
+    action_source: str,
+    labels: Sequence[str] = DEFAULT_LABELS,
+    weights: Sequence[float] = DEFAULT_WEIGHTS,
+    tolerance: float = 1e-11,
+    max_iterations: int = 40,
+) -> dict:
+    """One-loop conversion with the geometric mass as MSbar at the scale.
+
+    This is the declared matching convention of this function: the generated
+    geometric mass is the ``MSbar`` mass at ``scale_GeV`` in the common Landau
+    action.  The pole mass is then the fixed point of the existing V5
+    charged-lepton kernel,
+
+        mbar_l(Q) = M_l * (1 + delta_l(M_l)),
+
+    solved by iteration on M_l.  The kernel is the same one-loop V5
+    calculation used for the pole-to-running factors; no observed mass enters.
+    A different geometric-mass scheme must be implemented separately rather
+    than hidden in this conversion.
+    """
+    if input_scheme != "MSbar_at_scale":
+        raise ValueError("input_scheme must be 'MSbar_at_scale'")
+    labels = tuple(labels)
+    weights = tuple(float(w) for w in weights)
+    if len(labels) != 3 or len(weights) != 3:
+        raise ValueError("exactly three charged-lepton labels and weights are required")
+    if abs(sum(weights)) > 1e-15:
+        raise ValueError("Delta_L weights must sum to zero")
+    if set(geometric_masses_GeV) != set(labels):
+        raise ValueError("geometric mass map must contain exactly the requested labels")
+    action_source = _text("action_source", action_source)
+    scale_GeV = _positive("scale_GeV", scale_GeV)
+    vev_GeV = _positive("vev_GeV", vev_GeV)
+    higgs_mass_GeV = _positive("higgs_mass_GeV", higgs_mass_GeV)
+    if not math.isfinite(float(tolerance)) or tolerance <= 0.0:
+        raise ValueError("tolerance must be finite and positive")
+    if not isinstance(max_iterations, int) or max_iterations < 1:
+        raise ValueError("max_iterations must be a positive integer")
+
+    from cg_core.matter_matching import charged_lepton_pole_matching_one_loop
+
+    species = ("electron", "muon", "tau")
+    mapping = dict(zip(labels, species))
+    reverse = {v: k for k, v in mapping.items()}
+    geometric = {name: _positive(f"geometric mass {name}", geometric_masses_GeV[label])
+                 for label, name in mapping.items()}
+    poles = dict(geometric)
+    kernel = None
+    for iteration in range(1, max_iterations + 1):
+        kernel = charged_lepton_pole_matching_one_loop(
+            poles, gauge_couplings, vev_GeV,
+            higgs_mass_GeV=higgs_mass_GeV, scale_GeV=scale_GeV,
+            input_definition="generated_on_shell_conditions",
+            action_source=action_source,
+        )
+        running = kernel["running_masses_GeV_first_order"]
+        updated = {}
+        for name in species:
+            candidate = poles[name] * geometric[name] / float(running[name])
+            if not math.isfinite(candidate) or candidate <= 0.0:
+                raise ValueError("one-loop pole iteration left the positive branch")
+            updated[name] = candidate
+        change = max(abs(updated[name] - poles[name]) / max(abs(updated[name]), 1e-300)
+                     for name in species)
+        poles = updated
+        if change <= tolerance:
+            break
+    else:
+        raise RuntimeError("one-loop geometric-to-pole iteration did not converge")
+
+    if kernel is None:
+        raise RuntimeError("one-loop kernel was not evaluated")
+    # Final kernel at the converged pole masses, for the residual and terms.
+    kernel = charged_lepton_pole_matching_one_loop(
+        poles, gauge_couplings, vev_GeV,
+        higgs_mass_GeV=higgs_mass_GeV, scale_GeV=scale_GeV,
+        input_definition="generated_on_shell_conditions",
+        action_source=action_source,
+    )
+    running = kernel["running_masses_GeV_first_order"]
+    leptons = {}
+    logs = {}
+    for name in species:
+        label = reverse[name]
+        G = poles[name] / geometric[name]
+        residual = (float(running[name]) - geometric[name]) / geometric[name]
+        leptons[label] = {
+            "geometric_mass_GeV": geometric[name],
+            "pole_mass_GeV": poles[name],
+            "G": G,
+            "log_G": math.log(G),
+            "running_residual": residual,
+            "log_matching_factor": kernel["log_matching_factors"][name],
+            "log_matching_components": kernel["log_matching_components"][name],
+        }
+        logs[label] = math.log(G)
+    delta_L = sum(weight * logs[label] for label, weight in zip(labels, weights))
+    return {
+        "leptons": leptons,
+        "Delta_L": delta_L,
+        "common_log_G": sum(logs.values()) / 3.0,
+        "nonuniversal_log_spread": max(logs.values()) - min(logs.values()),
+        "weights": dict(zip(labels, weights)),
+        "input_scheme": input_scheme,
+        "scale_GeV": float(scale_GeV),
+        "action_source": action_source,
+        "iterations": iteration,
+        "convergence": change,
+        "pole_kernel_order": kernel["order"],
+        "uncomputed_orders": kernel["uncomputed_orders"],
+        "order": "one-loop geometric-to-pole fixed point with the V5 charged-lepton kernel",
+    }
