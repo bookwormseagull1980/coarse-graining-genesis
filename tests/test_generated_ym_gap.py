@@ -79,6 +79,15 @@ def test_generated_gap_closes_independent_mass_routes(L):
         1.0, abs=4e-15
     )
     assert result["curvature_radial_coefficient"] > 0.0
+    assert result["curvature_radial_coefficient"] == pytest.approx(
+        result["long_root_eigenvalue"]
+        + 2.0 * result["response_coordinate"] / (3.0 * result["L"] ** 2),
+        rel=2e-15,
+    )
+    assert result["curvature_radial_coefficient"] == pytest.approx(
+        result["long_root_eigenvalue"] + result["transverse_shift"],
+        rel=2e-15,
+    )
     assert result["curvature_score_overlap"] > 0.0
     assert result["scalar_constant_mode_mass_squared"] == pytest.approx(
         result["radial_mass_squared"], rel=4e-15

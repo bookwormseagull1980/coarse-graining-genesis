@@ -355,7 +355,12 @@ def generated_yang_mills_gap(
     score_scale = math.sqrt(CONNECTION_COEFFICIENT_COUNT / 2.0) / q
     normalized_score_variance = score_scale ** 2 * score_variance
     long_root_eigenvalue = 16.0 / L ** 2
-    curvature_radial_coefficient = long_root_eigenvalue + 2.0 * curvature * z
+    # O'(q) = lambda_R + 2 alpha_R q in the source coordinate
+    # z = g_YM L^2 q.  The second term is the coclosed response shift,
+    # not 2 z H'(z); H'(z) is the full radial restoring curvature.
+    curvature_radial_coefficient = (
+        long_root_eigenvalue + 2.0 * z / (3.0 * L ** 2)
+    )
     curvature_score_overlap = (
         curvature_radial_coefficient
         * q
