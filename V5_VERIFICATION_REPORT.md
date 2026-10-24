@@ -17,8 +17,8 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 # V5 Verification Report
 
-Generated: 2026-10-20 23:27:27
-Python: `3.12.10`
+Generated: 2026-10-24 16:54:36
+Python: `3.13.12`
 Root: `.`
 
 ## Verdict
@@ -31,9 +31,6 @@ a proof-library result does not certify a numerical run or the entire manuscript
 
 ## Not Executed
 
-- Full reproduction during this verification invocation (--no-reproduce).
-- Numerical-certification and auxiliary Python tests (--test-scope core; use --test-scope all for the full suite).
-- Lean archive compilation (source audit alone is not compilation).
 - Isolated full-chain numeric stability rerun (enable with --stability).
 
 No PASS claim is made for these omitted checks.
@@ -42,6 +39,7 @@ No PASS claim is made for these omitted checks.
 
 | step | status | command |
 |---|---:|---|
+| full reproduction | PASS | `python -B scripts/reproduce_v5.py` |
 | current run manifest | PASS | `verify existing run identity and fingerprints` |
 | parameter provenance audit | PASS | `python scripts/audit_param_writers.py` |
 | observation leakage audit | PASS | `python scripts/audit_observation_leakage.py` |
@@ -51,24 +49,27 @@ No PASS claim is made for these omitted checks.
 | numeric precision audit | PASS | `python scripts/audit_numeric_precision.py` |
 | path portability audit | PASS | `python scripts/audit_path_portability.py` |
 | full comparison table | PASS | `python comparison/param_audit_full.py` |
-| pytest (core) | PASS | `python -B -m pytest -q -m 'not release_audit and not numerical and not auxiliary' -p no:cacheprovider --basetemp <temporary>` |
+| pytest | PASS | `python -B -m pytest -q -m 'not release_audit' -p no:cacheprovider --basetemp <temporary>` |
+| Lean proof archive | PASS | `python scripts/verify_lean_archive.py --lean-exe <lean.exe>` |
 | run identity after verification | PASS | `verify existing run identity and fingerprints` |
 
-Core Python test results: 559 passed, 154 deselected, 10 subtests passed.
+Full Python test results: 776 passed, 5 deselected, 10 subtests passed.
 The complete release audits are executed in the steps above;
 their duplicate test wrappers are deselected.
 
-Run identity: `20261020T151355Z-10526ee4`.
-Bound calculation sources: 159; verification sources: 60; outputs: 2; reference identities: 99; solver execution identities: 1.
+Audits executed once during reproduction and reused after current-run fingerprint validation: parameter provenance audit, observation leakage audit.
+
+Run identity: `20261024T084548Z-d52375b5`.
+Bound calculation sources: 168; verification sources: 65; outputs: 2; reference identities: 99; solver execution identities: 1.
 
 ### Store Summary
 
-- cg_params records: 261
+- cg_params records: 262
 - Isolated reference records: 99
-- provenance: DERIVED=260, OBSERVED=1
-- roles: anchor=1, cg=24, comparison=51, informational=20, internal=165
-- declared physical definitions: 261
-- declared direct-input sets: 144
+- provenance: DERIVED=261, OBSERVED=1
+- roles: anchor=1, cg=24, comparison=51, informational=20, internal=166
+- declared physical definitions: 262
+- declared direct-input sets: 145
 
 ### Selected Closed Values
 
@@ -117,6 +118,40 @@ The computed operator is the orthogonal direct sum of the normalized radial inte
 - first coclosed total multiplicity: `48`
 - radial/scalar semigroup residual: `0.0`
 - scale-transport ratio spread: `0.0`
+
+## Native coefficient source and complete curvature memory
+
+The rates use the original coefficient composition parameter. The
+complete curvature keeps its quadratic, cubic and quartic Hermite sectors.
+
+- coefficient dimension: `120`
+- coefficient composition rate: `1179.5451627016814`
+- intensity correlation rate: `2359.090325403363`
+- collective-law tangent restoring rate: `7527.411368214042`
+- complete Hermite weights: `{'degree_2': 1.2034322626162688e+16, 'degree_3': 27506615877316.168, 'degree_4': 1455797423253428.5}`
+- full variance excess over radial replacement: `0.11416344651875843`
+- full integrated-memory excess over radial replacement: `0.05769309715952242`
+
+No clock conversion or mixed lepton vertex is assigned by this source record.
+
+The joint-source static response follows the stationary branch of
+Phi(n,J)=F(n)+Gamma(n,J)-Gamma(n,0), with source exp(h*N-J*Q).
+
+- direct susceptibility: `1483304039130744.8`
+- collective susceptibility: `1598733221486.998`
+- total static susceptibility: `1484902772352231.8`
+- stationary intensity derivative: `-1355381101.1569831`
+
+These are static Schur-response coefficients; the fixed-source
+Hermite correlation rates above retain their coefficient-composition meaning.
+
+## Z endpoint response
+
+Each sample recomputes the generated gauge boundaries, common-origin
+colour condition and the Z fixed point. The sampled range is a numerical
+response diagnostic, not an enclosure of the unsampled interval.
+
+Sample range: `[91.12445370847422, 91.12528970739383]` GeV.
 
 ## Exact affine certificates
 
@@ -182,7 +217,7 @@ enter the causal response, including the direct second source variation.
 
 - source-charge relative residual: 1.91480936223e-16
 - causal-equation relative residual: 1.90973710345e-16
-- response cutoff comparison: 7.04460217705e-16
+- response cutoff comparison: 5.37805396907e-16
 - maximum canonical-form residual: 5.38626232194e-15
 - maximum source-work balance residual: 1.16573417586e-14
 - dominant operation counts: {'causal_entry_divisions': 1192464, 'dense_liouvillian_factorizations': 0, 'exact_segment_propagators': 6, 'nonzero_source_diagonalizations': 2, 'nonzero_source_mode_diagonalizations': 2, 'phase_response_basis_transforms': 0, 'reference_mode_diagonalizations': 2, 'retained_phase_dimensions': [140, 336]}

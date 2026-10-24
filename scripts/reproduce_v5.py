@@ -119,6 +119,7 @@ MODULES = [
     "cg_frg/framework/cp_sector.py",
     "cg_frg/frg/trace_density.py",
     "cg_frg/qcd/mass_gap_scale.py",
+    "cg_frg/qcd/native_source_response.py",
     "cg_frg/qcd/qcd_sector.py",
     "cg_frg/cosmology/bbn_helium.py",
     "cg_frg/cosmology/bbn_interval_certificate.py",
@@ -363,7 +364,9 @@ def execute(destination: Path, *, publish: bool, recompute_responses=False) -> i
                 "gravity_r_read", "gravity_Z_read", "gravity_G_read",
                 "external_tensor_Z", "external_tensor_residue", "external_tensor_G",
                 "external_tensor_Pi_critical", "external_tensor_chi_slope",
-                "external_tensor_status")
+                "external_tensor_status", "native_colour_source_response",
+                "m_mu_pred_interval", "m_tau_pred_interval", "m_b_pred_interval",
+                "M_Z_pred_endpoint_response")
     missing = [key for key in required if key not in parameters]
     if missing:
         raise RuntimeError(f"required outputs missing from this run: {missing}")

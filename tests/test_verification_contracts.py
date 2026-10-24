@@ -295,6 +295,21 @@ def test_report_sanitizes_python_library_paths_in_failure_output():
             assert runtime_root.as_posix() not in sanitized
 
 
+def test_report_sanitizes_json_escaped_unicode_paths(monkeypatch):
+    root = Path.cwd() / "用户" / "论文" / "Framework"
+    monkeypatch.setattr(verify, "ROOT", root)
+    for separator in ("\\", "/"):
+        path = str(root / "certificates" / "structure_certificates.json")
+        path = path.replace("\\", separator).replace("/", separator)
+        for ascii_only in (True, False):
+            output = json.dumps({"output": path}, ensure_ascii=ascii_only)
+            sanitized = verify.sanitize_output(output)
+            relative = json.loads(sanitized)["output"]
+            assert relative == "." + separator + "certificates" + separator + "structure_certificates.json"
+            assert "用户" not in sanitized
+            assert "\\u7528" not in sanitized
+
+
 def test_manifest_detects_changed_verification_sources(tmp_path, monkeypatch):
     _fake_manifest(tmp_path, monkeypatch)
     assert verify.validate_run_manifest(tmp_path)["ok"]

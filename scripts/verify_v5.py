@@ -89,24 +89,29 @@ def display_command(cmd: list[str]) -> str:
     return " ".join(parts)
 
 
+def _path_variants(path: str) -> set[str]:
+    windows = path.replace("/", "\\")
+    forward = path.replace("\\", "/")
+    variants = {path, windows, forward, windows.replace("\\", "\\\\")}
+    # Subprocesses may serialize paths as JSON with escaped non-ASCII names.
+    variants.update(json.dumps(item, ensure_ascii=True)[1:-1]
+                    for item in (path, windows, forward))
+    return variants
+
+
 def sanitize_output(text: str) -> str:
     out = text
-    for needle in {
-        str(ROOT),
-        str(ROOT).replace("\\", "/"),
-        str(ROOT).replace("\\", "\\\\"),
-    }:
+    for needle in sorted(_path_variants(str(ROOT)), key=len, reverse=True):
         out = out.replace(needle, ".")
-    for needle in {PY, PY.replace("\\", "/"), PY.replace("\\", "\\\\")}:
+    for needle in sorted(_path_variants(PY), key=len, reverse=True):
         out = out.replace(needle, "python")
     runtime_roots = {str(Path(PY).resolve().parent), sys.prefix, sys.base_prefix}
     runtime_paths = {variant for root in runtime_roots if root
-                     for variant in (root, root.replace("\\", "/"), root.replace("\\", "\\\\"))}
+                     for variant in _path_variants(root)}
     for needle in sorted(runtime_paths, key=len, reverse=True):
         out = out.replace(needle, "<python-runtime>")
     temporary_root = tempfile.gettempdir()
-    for needle in {temporary_root, temporary_root.replace("\\", "/"),
-                   temporary_root.replace("\\", "\\\\")}:
+    for needle in sorted(_path_variants(temporary_root), key=len, reverse=True):
         out = out.replace(needle, "<temporary>")
     out = out.replace(".\\.deps", ".deps")
     return out
@@ -533,6 +538,36 @@ def report_text(results: list[dict], not_executed: list[str]) -> str:
             f"- scale-transport ratio spread: `{transport.get('ratio_spread')}`",
             "",
         ]
+    native_response = records.get("native_colour_source_response", {}).get("value", {})
+    if native_response:
+        lines += ["## Native coefficient source and complete curvature memory", "",
+                  "The rates use the original coefficient composition parameter. The",
+                  "complete curvature keeps its quadratic, cubic and quartic Hermite sectors.", "",
+                  f"- coefficient dimension: `{native_response['source_dimension']}`",
+                  f"- coefficient composition rate: `{native_response['coefficient_composition_rate']}`",
+                  f"- intensity correlation rate: `{native_response['intensity_correlation_rate']}`",
+                  f"- collective-law tangent restoring rate: `{native_response['collective_law_tangent_restoring_rate']}`",
+                  f"- complete Hermite weights: `{native_response['curvature_Hermite_weights']}`",
+                  f"- full variance excess over radial replacement: `{native_response['full_variance_excess_over_radial']}`",
+                  f"- full integrated-memory excess over radial replacement: `{native_response['full_integral_excess_over_radial']}`", "",
+                  "No clock conversion or mixed lepton vertex is assigned by this source record.", ""]
+        susceptibility = native_response.get("joint_static_susceptibility")
+        if susceptibility:
+            lines += ["The joint-source static response follows the stationary branch of",
+                      "Phi(n,J)=F(n)+Gamma(n,J)-Gamma(n,0), with source exp(h*N-J*Q).", "",
+                      f"- direct susceptibility: `{susceptibility['direct']}`",
+                      f"- collective susceptibility: `{susceptibility['collective']}`",
+                      f"- total static susceptibility: `{susceptibility['total']}`",
+                      f"- stationary intensity derivative: `{susceptibility['stationary_intensity_derivative_J']}`", "",
+                      "These are static Schur-response coefficients; the fixed-source",
+                      "Hermite correlation rates above retain their coefficient-composition meaning.", ""]
+    z_response = records.get("M_Z_pred_endpoint_response", {}).get("value", {})
+    if z_response:
+        lines += ["## Z endpoint response", "",
+                  "Each sample recomputes the generated gauge boundaries, common-origin",
+                  "colour condition and the Z fixed point. The sampled range is a numerical",
+                  "response diagnostic, not an enclosure of the unsampled interval.", "",
+                  f"Sample range: `{z_response['sample_range_GeV']}` GeV.", ""]
     if "response_validation" in records:
         extension = response_bundle(records)
         affine = extension.get("exact_affine_certificates", {})

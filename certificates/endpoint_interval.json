@@ -1,33 +1,114 @@
 {
-  "schema_version": 1,
-  "status": "PASS",
-  "bracket": [
-    "817081/327680",
-    "3268327/1310720"
+ "arithmetic_grid": "1e-40",
+ "bracket": [
+  "1246766993313/500000000000",
+  "623383657407/250000000000"
+ ],
+ "bracket_decimal": [
+  2.493533986626,
+  2.493534629628
+ ],
+ "cells": 2048,
+ "coefficient": [
+  "0.3694124424633204429038817843348229038292",
+  "0.3694125377225016593565632315693703927806"
+ ],
+ "critical": "4/27",
+ "method": "reference-scale composite trapezoid with cellwise second-derivative bounds",
+ "publication": {
+  "author": "Jinku Guo",
+  "references": [
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026a)",
+    "status": "unpublished manuscript",
+    "title": "Certified Spectral Computation for Semilinear Evolution: Finite Records and Polynomial Bit Cost",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026b)",
+    "status": "unpublished manuscript",
+    "title": "Coarse-Graining and Long-Range Response in Generated Systems",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026c)",
+    "status": "unpublished manuscript",
+    "title": "Dynamics of Generated Spectra from Minimal Change: Certified Function Classes and Finite Windows",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026d)",
+    "status": "unpublished manuscript",
+    "title": "The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026e)",
+    "status": "unpublished manuscript",
+    "title": "A Spectral Construction of Natural-Number Arithmetic",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026f)",
+    "status": "unpublished manuscript",
+    "title": "A Spectral Criterion for Emergent Gravity",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026g)",
+    "status": "unpublished manuscript",
+    "title": "The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026h)",
+    "status": "unpublished manuscript",
+    "title": "The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation",
+    "year": 2026
+   }
   ],
-  "bracket_decimal": [
-    2.4935333251953127,
-    2.493535614013672
-  ],
-  "response_left": [
-    "0.1481481874457744",
-    "0.1481482256482642"
-  ],
-  "response_right": [
-    "0.1481480514604332",
-    "0.1481480896628879"
-  ],
-  "critical": "4/27",
+  "software": "Coarse-Graining Genesis Framework V5.0",
+  "version": "5.0.2"
+ },
+ "response_left": [
+  "0.1481481481482320",
+  "0.1481481863507117"
+ ],
+ "response_right": [
+  "0.1481481099456122",
+  "0.1481481481480820"
+ ],
+ "root_enclosure": [
+  "2.4935339866274129896012020442600546008471",
+  "2.4935346296268862006568018130932501512691"
+ ],
+ "schema_version": 1,
+ "scope": "strict root existence and uniqueness on the bracket",
+ "status": "PASS",
+ "uniqueness": {
   "cells": 2048,
-  "uniqueness": {
-    "status": "PASS",
-    "derivative": [
-      "-0.0574746205293326",
-      "-0.0499492909416930"
-    ],
-    "sign": "negative",
-    "unique_on_bracket": true,
-    "cells": 256
-  },
-  "scope": "strict root existence and uniqueness on the bracket"
+  "derivative": [
+   "-0.0594129404873968",
+   "-0.0594128945254367"
+  ],
+  "identity": "response(c)=A/c; derivative=-A/c^2; A>0",
+  "sign": "negative",
+  "status": "PASS",
+  "unique_on_bracket": true
+ },
+ "work": {
+  "additional_derivative_quadratures": 0,
+  "coefficient_evaluations": 1,
+  "exponential_enclosures": 32776,
+  "quadrature_cells": 16384,
+  "spectral_rows": 8
+ }
 }

@@ -72,8 +72,8 @@ that claim.
 
 ## Numerical evidence in the release
 
-Release snapshot: version `5.0.2`, run `20261020T002918Z-eff10097`, `261`
-parameter records, `260` derived, `0` pending, `708` passing tests.  The
+Current verified calculation: version `5.0.2`, run `20261024T084548Z-d52375b5`, `262`
+parameter records, `261` derived, `0` pending, `776` passing tests. The
 canonical numbers are collected in [RELEASE_FACTS.md](docs/RELEASE_FACTS.md).
 
 The V5 records expose the numbers rather than hiding them behind a model label:
@@ -81,7 +81,7 @@ The V5 records expose the numbers rather than hiding them behind a model label:
 - one finite Gaussian response domain, `R=5`, with the certified active-window
   threshold `R_* ~= 4.0187119842`;
 - a cached strict TT endpoint certificate: root bracket
-  `[817081/327680, 3268327/1310720]`, endpoint sign change and a strictly
+  `[1246766993313/500000000000, 623383657407/250000000000]`, endpoint sign change and a strictly
   negative interval derivative proving uniqueness;
 - an exact branch-reduction certificate: the full active V5 TT spectrum is
   exactly the eight branches used by the companion Lean coefficient model,
@@ -92,8 +92,8 @@ The V5 records expose the numbers rather than hiding them behind a model label:
   and helium baryon fraction `Yp=0.246082`;
 - fixed-input DESI comparison `chi2=29.5088`, `p=0.00553993`, and the direct
   HYREC realization `r_d=147.07455 Mpc`, `chi2=27.1191`;
-- `17` explicit interval records, `9` production records with an attached
-  interval, and `159` centre-only records.  No full covariance or fabricated
+- `16` explicit interval records, `8` production records with an attached
+  interval, and `160` centre-only records. No full covariance or fabricated
   model-error envelope is published; see [PRECISION_BUDGET.md](docs/PRECISION_BUDGET.md).
 
 These are calculated records, not independently fitted observational inputs.

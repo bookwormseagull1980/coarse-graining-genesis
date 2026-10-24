@@ -2,7 +2,7 @@
 
 Status: release<br>
 Version: 5.0.2<br>
-V5 run: `20261020T002918Z-eff10097`
+V5 run: `20261024T084548Z-d52375b5`
 
 This note records the exact identity behind
 `cg_core/tt_branch_reduction.py` and the Lean
@@ -11,7 +11,7 @@ This note records the exact identity behind
 Current certificate:
 
 ```text
-bracket        [817081/327680, 3268327/1310720]
+branch-check scale interval [817081/327680, 3268327/1310720]
 active branches 8
 coefficient    [0.3694084671969687, 0.3694160576081247]
 status         PASS

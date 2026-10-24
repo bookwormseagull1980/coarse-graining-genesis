@@ -1,0 +1,223 @@
+{
+ "finite_precision_example": {
+  "comparison_covariance": [
+   [
+    0.7142857142857143,
+    0.0
+   ],
+   [
+    0.0,
+    0.4545454545454546
+   ]
+  ],
+  "comparison_relative_entropy": 0.03504649364627466,
+  "identity_residual": 0.0,
+  "mean_precision": [
+   [
+    1.4,
+    0.0
+   ],
+   [
+    0.0,
+    2.1999999999999997
+   ]
+  ],
+  "mean_relative_entropy": 0.14253386322651773,
+  "precision_offset": 0.10748736958024308
+ },
+ "generated_gap": {
+  "L": 2.4935343325226915,
+  "L_c": 1.7724538509055159,
+  "adjoint_casimir": 3.0,
+  "algebra_dimension": 8,
+  "amplitude": 848.7620209319728,
+  "canonical_constants": {
+   "adjoint_casimir": 3.0,
+   "algebra_dimension": 8,
+   "connection_coefficient_count": 120,
+   "critical_radius": 1.7724538509055159,
+   "long_root_dimension": 15
+  },
+  "controlling_block": "coclosed_colour_connection",
+  "curvature_radial_coefficient": 1179.5451627016814,
+  "curvature_score_overlap": 109701060.27820644,
+  "dimensionless_drive": 82.67926896122573,
+  "feedback_coefficient": 0.0024506735622020813,
+  "gap": 34.31639830716205,
+  "gap_squared": 1177.6151927757944,
+  "intensity_q": 720396.9681765266,
+  "kappa": 0.015237586012075052,
+  "long_root_dimension": 15,
+  "long_root_eigenvalue": 2.5732932345163237,
+  "mass_unit": 1.0,
+  "normalized_score_variance": 1.0,
+  "operator_certificate": {
+   "coclosed_degree_class": "positive odd integers",
+   "coclosed_first_bottom": 1177.6151927757944,
+   "coclosed_first_degree": 1,
+   "coclosed_first_multiplicity_per_colour": 6,
+   "coclosed_first_total_multiplicity": 48,
+   "complete_spectral_bottom": 1177.6151927757944,
+   "controlling_block": "coclosed_colour_connection",
+   "cross_block_norm": 0.0,
+   "cross_block_reason": "orthogonal source-carrier grading",
+   "decomposition": "normalized radial intensity direct-sum coclosed colour connection",
+   "positivity_certificate": "z>0, H'(z)>0, L>0, and every positive odd vector degree is at least one",
+   "radial_block_bottom": 7527.411368214042,
+   "radial_block_dimension": 1
+  },
+  "phase": "condensed",
+  "potential_curvature": 8.70268267496718e-07,
+  "radial_identity_residual": -9.094947017729282e-13,
+  "radial_intertwining_residual": 0.0,
+  "radial_intertwining_times": [
+   0.0,
+   0.125,
+   1.0,
+   4.0
+  ],
+  "radial_mass_squared": 7527.411368214042,
+  "radial_metric": 0.0003331496530412802,
+  "reference_drive": -2.519664944424328,
+  "response_coordinate": 10977.110765427919,
+  "response_coordinate_bracket": [
+   10977.110765427919,
+   10977.11076542792
+  ],
+  "scalar_constant_mode_mass_squared": 7527.411368214043,
+  "score_scale": 1.0752358816863811e-05,
+  "score_variance": 8649529862.63219,
+  "source_dimension": 120,
+  "stationarity_residual": -1.4210854715202004e-14,
+  "theorem": "generated Yang--Mills positive spectral bottom",
+  "transverse_mass_squared": 1177.6151927757944,
+  "transverse_shift": 1176.971869467165,
+  "volume": 153.01915595116608
+ },
+ "native_colour_source_response": {
+  "angular_fourth_weight": 1357585359349129.2,
+  "centred_score_square_covariance_weights": {
+   "rate_2a": 2.033333333333333,
+   "rate_a": 0.06666666666666667
+  },
+  "coefficient_composition_rate": 1179.5451627016814,
+  "collective_law_tangent_restoring_rate": 7527.411368214042,
+  "composition_clock_conversion_assigned": false,
+  "covariance_definition": "sum_(d=2,3,4) W_d exp(-d*omega*abs(h))",
+  "curvature_Hermite_weights": {
+   "degree_2": 1.2034322626162688e+16,
+   "degree_3": 27506615877316.168,
+   "degree_4": 1455797423253428.5
+  },
+  "curvature_covariance_integral_composition_units": 5417579371202.061,
+  "curvature_mean": 425797275.840977,
+  "curvature_variance": 1.3517626665293432e+16,
+  "fixed_mean_partial_legendre_curvature_JJ": -1483304039130744.8,
+  "fixed_mean_residual_covariance_weights": {
+   "degree_3": 27506615877316.168,
+   "degree_4": 1455797423253428.5
+  },
+  "full_integral_excess_over_radial": 0.05769309715952242,
+  "full_to_radial_fourth_weight_ratio": 14.822999999999995,
+  "full_variance_excess_over_radial": 0.11416344651875843,
+  "haar_contractions": {
+   "determinant": "7/100",
+   "norm_square": "3/5",
+   "wedge_square": "243/1250"
+  },
+  "intensity_correlation_rate": 2359.090325403363,
+  "intensity_q": 720396.9681765266,
+  "intensity_variance": 8649529862.63219,
+  "joint_static_susceptibility": {
+   "collective": 1598733221486.998,
+   "continuation": "Phi(n,J)=F(n)+Gamma(n,J)-Gamma(n,0)",
+   "definition": "-d_J Gamma_J(n(J),J) at J=0+; partial_n Phi(n(J),J)=0",
+   "direct": 1483304039130744.8,
+   "mean_curvature_derivative_q": 1179.5451627016816,
+   "potential_curvature": 8.70268267496718e-07,
+   "radial_mass_squared": 7527.411368214042,
+   "stationary_intensity_derivative_J": -1355381101.1569831,
+   "total": 1484902772352231.8
+  },
+  "lepton_mixed_vertex_assigned": false,
+  "normalized_score_fourth_moment": 3.1,
+  "normalized_score_third_moment": 0.2581988897471611,
+  "omitted_fraction_of_full_variance": 0.1024656183753525,
+  "radial_curvature_variance": 1.2132534690066988e+16,
+  "radial_fourth_weight": 98212063904299.33,
+  "score_square_variance": 2.1,
+  "source_dimension": 120,
+  "spatial_dimension": 3,
+  "stationary_intensity_scale": 12006.616136275443,
+  "stationary_intensity_shape": 60.0
+ },
+ "publication": {
+  "author": "Jinku Guo",
+  "references": [
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026a)",
+    "status": "unpublished manuscript",
+    "title": "Certified Spectral Computation for Semilinear Evolution: Finite Records and Polynomial Bit Cost",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026b)",
+    "status": "unpublished manuscript",
+    "title": "Coarse-Graining and Long-Range Response in Generated Systems",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026c)",
+    "status": "unpublished manuscript",
+    "title": "Dynamics of Generated Spectra from Minimal Change: Certified Function Classes and Finite Windows",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026d)",
+    "status": "unpublished manuscript",
+    "title": "The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026e)",
+    "status": "unpublished manuscript",
+    "title": "A Spectral Construction of Natural-Number Arithmetic",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026f)",
+    "status": "unpublished manuscript",
+    "title": "A Spectral Criterion for Emergent Gravity",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026g)",
+    "status": "unpublished manuscript",
+    "title": "The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales",
+    "year": 2026
+   },
+   {
+    "author": "Jinku Guo",
+    "citation": "Guo (2026h)",
+    "status": "unpublished manuscript",
+    "title": "The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation",
+    "year": 2026
+   }
+  ],
+  "software": "Coarse-Graining Genesis Framework V5.0",
+  "version": "5.0.2"
+ },
+ "radius": 2.4935343325226915,
+ "radius_origin": {
+  "key": "kL",
+  "path": "cg_params.json",
+  "sha256": "a70c81546d8e7635c1ddc5e646fae9d417289460b20a1f534834c766fc3e9643"
+ }
+}

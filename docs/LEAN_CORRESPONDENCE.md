@@ -2,7 +2,7 @@
 
 Status: release<br>
 Version: 5.0.2<br>
-V5 run: `20261020T002918Z-eff10097`<br>
+V5 run: `20261024T084548Z-d52375b5`<br>
 Lean snapshot: 4.34, 91 physical files, 429 local modules
 
 V5 does not import the Lean physical branch.  The two projects are separate

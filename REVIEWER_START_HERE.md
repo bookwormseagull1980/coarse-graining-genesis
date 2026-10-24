@@ -22,9 +22,9 @@ Genesis Framework V5, version 5.0.2. The software citation is in
 [REFERENCES.md](REFERENCES.md) provides the full author–year
 bibliography for the cited manuscripts.
 
-Release snapshot: run `20261020T002918Z-eff10097`, `261` records, `260`
-derived, `0` pending, `708` passing tests.  The canonical numbers and the
-Lean/YM snapshot are in [RELEASE_FACTS.md](docs/RELEASE_FACTS.md).
+Current verified calculation: run `20261024T084548Z-d52375b5`, `262` records, `261`
+derived, `0` pending, `759` passing tests. The canonical numbers and the
+Lean/YM correspondence are in [RELEASE_FACTS.md](docs/RELEASE_FACTS.md).
 
 ## Inputs and scientific definitions
 
@@ -115,16 +115,18 @@ executed check and any optional check that was not run.
 Expected release result:
 
 ```text
-Run identity: 20261020T002918Z-eff10097
-261 parameter records, 260 DERIVED, 0 PENDING
-708 passed, 5 deselected, 10 subtests passed
-10/10 release checks PASS
+Run identity: 20261024T084548Z-d52375b5
+262 parameter records, 261 DERIVED, 0 PENDING
+776 passed, 5 deselected, 10 subtests passed
+13/13 verification checks PASS
 11 structural certificates PASS
 ```
 
-The endpoint bracket is `[817081/327680, 3268327/1310720]`, width `2.2888e-6`.
-The precision record is `17` explicit intervals, `9` production records with
-an attached interval, and `159` centre-only records.
+The endpoint bracket is `[1246766993313/500000000000, 623383657407/250000000000]`, width `6.43002e-7`.
+The precision record is `16` explicit intervals, `8` production records with
+an attached interval, and `160` centre-only records. The Z response now reruns
+the gauge boundary and fixed point; its sampled range is a numerical
+diagnostic rather than a certified enclosure.
 The five complete source and store audits execute once. Provenance and
 observation-isolation results from this invocation's reproduction are reused
 after the published run and file identities are verified; the remaining
@@ -212,7 +214,7 @@ The strict endpoint root is certified separately, once, and cached:
 py scripts/certify_endpoint_interval.py --cells 2048
 ```
 
-It returns the outward root bracket `[817081/327680, 3268327/1310720]`, the endpoint signs,
+It returns the outward root bracket `[1246766993313/500000000000, 623383657407/250000000000]`, the endpoint signs,
 and a strictly negative interval derivative on that bracket; together these
 give existence and uniqueness of `c(5)=kL`. Normal V5 runs load the cached
 certificate and do not recompute it.

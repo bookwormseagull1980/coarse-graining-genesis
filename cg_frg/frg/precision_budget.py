@@ -21,8 +21,7 @@ if str(_ROOT) not in sys.path:
 
 from cg_core.params import get, set as pset  # noqa: E402
 from cg_core.quantities import QuantityDefinition  # noqa: E402
-from cg_frg.ewsb.epsilon_ratio import epsilon_window  # noqa: E402
-from cg_frg.fermion.electron_mass import m_e_planck  # noqa: E402
+from cg_core.rational_interval import Interval, exp_negative, pi_interval  # noqa: E402
 
 _CERT = _ROOT / "certificates" / "endpoint_interval.json"
 
@@ -31,8 +30,7 @@ def _endpoint_bracket() -> tuple[float, float]:
     data = json.loads(_CERT.read_text(encoding="utf-8"))
     if data.get("status") != "PASS":
         raise RuntimeError("cached endpoint certificate is not PASS")
-    lo, hi = (frac.split("/") for frac in data["bracket"])
-    return float(Fraction(int(lo[0]), int(lo[1]))), float(Fraction(int(hi[0]), int(hi[1])))
+    return tuple(float(Fraction(value)) for value in data["bracket"])
 
 
 def _definition(obj: str, unit: str, operator: str, normalization: str,
@@ -54,19 +52,21 @@ def compute() -> dict:
     if not lo <= kL <= hi:
         raise RuntimeError("stored kL lies outside the cached endpoint bracket")
 
-    # M_G = M_P sqrt(pi) / kL is decreasing in kL.
-    M_G_lo = M_P * math.sqrt(math.pi) / hi
-    M_G_hi = M_P * math.sqrt(math.pi) / lo
-
-    s0 = 2.0 * tau
-    kappa = math.sqrt((1.0 + s0) / (1.0 - 2.0 * s0) ** 2.5)
-    squash = 1.0 - s0 * kappa
-    m_e_lo = m_e_planck(M_P, hi) * squash
-    m_e_hi = m_e_planck(M_P, lo) * squash
-
-    # v = M_G * epsilon(kL), both factors decrease with kL.
-    v_lo = (M_P * math.sqrt(math.pi) / hi) * epsilon_window(hi)
-    v_hi = (M_P * math.sqrt(math.pi) / lo) * epsilon_window(lo)
+    # Include binary conversion of the rational bracket, then evaluate all
+    # elementary factors with the same outward rational kernel.
+    c = Interval.bounds(math.nextafter(lo, -math.inf), math.nextafter(hi, math.inf))
+    pi = pi_interval()
+    anchor, t = Interval.point(M_P), Interval.point(tau)
+    s = 2*t
+    squash = 1-s*((1+s)/((1-2*s)**2*(1-2*s).sqrt())).sqrt()
+    if squash.lo <= 0:
+        raise ValueError("positive squash branch required")
+    def floats(interval):
+        lower, upper = interval.decimal_bounds(40)
+        return math.nextafter(float(lower), -math.inf), math.nextafter(float(upper), math.inf)
+    M_G_lo, M_G_hi = floats(anchor*pi.sqrt()/c)
+    m_e_lo, m_e_hi = floats(anchor*squash*exp_negative(20*c)*1000)
+    v_lo, v_hi = floats(anchor*3*squash*exp_negative(4*pi*c)/(16*pi**2*pi.sqrt()*c))
 
     def rel(lo_value: float, hi_value: float) -> float:
         centre = 0.5 * (lo_value + hi_value)
@@ -83,7 +83,7 @@ def compute() -> dict:
         definition=_definition(
             "strict endpoint interval", "1", "root enclosure",
             "cached outward rational interval",
-            "strict interval root enclosure; derivative-sign uniqueness",
+            "outward coefficient enclosure; analytic scale-law uniqueness",
             ("endpoint certificate is full finite spectral sum",),
         ),
         note="Strict kL bracket from certificates/endpoint_interval.json.",

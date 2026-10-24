@@ -36,8 +36,17 @@ if str(_PROJECT_ROOT) not in sys.path:
 _NUMERICAL_MODULES = {
     "test_spectral_contracts.py", "test_response_domains.py",
     "test_matter_source_response.py", "test_native_matter_matching.py",
+    "test_lepton_self_energy.py",
 }
 _NUMERICAL_CASES = {
+    "test_native_colour_response.py": {
+        "test_curvature_haar_contractions_against_actual_cg_modes_and_quadrature",
+        "test_complete_curvature_weights_from_actual_colour_wick_tensors",
+        "test_full_memory_and_laplace_integral_keep_the_nonradial_terms",
+    },
+    "test_lepton_pole.py": {
+        "test_current_native_lepton_diagnostic_keeps_references_separate",
+    },
     "test_matter_extensions.py": {
         "test_lepton_matching_analytic_intervals_against_independent_integrals",
         "test_coupled_actual_beta_semigroup_and_boundary_residual",

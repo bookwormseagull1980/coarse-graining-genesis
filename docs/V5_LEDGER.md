@@ -21,20 +21,20 @@ The companion papers in [REFERENCES.md](../REFERENCES.md) supply the
 derivations. The [reviewer guide](../REVIEWER_START_HERE.md) provides
 execution commands and the validation map.
 
-## Release snapshot
+## Current verified calculation
 
 ```text
-run identity          20261020T002918Z-eff10097
-parameter records     261
-DERIVED / PENDING     260 / 0
-complete definitions  261/261
-Python tests          708 passed, 5 deselected, 10 subtests
+run identity          20261024T084548Z-d52375b5
+parameter records     262
+DERIVED / PENDING     261 / 0
+complete definitions  262/262
+Python tests          776 passed, 5 deselected, 10 subtests
 structural certs      11 PASS
 internal Lean archive 18 files
-explicit intervals    17
-attached intervals    9
-centre-only records   159
-endpoint bracket      [817081/327680, 3268327/1310720]
+explicit intervals    16
+attached intervals    8
+centre-only records   160
+endpoint bracket      [1246766993313/500000000000, 623383657407/250000000000]
 ```
 
 **V5/Lean solves the generated Yang--Mills mass gap.  4D QCD does not exist as a traditional 4D quantum field: the conventional 4D QFT construction cannot construct the 4D quantum field or prove the Yang--Mills mass gap.**
@@ -335,11 +335,15 @@ operators, sources, projections and normalization conventions.
 
 ### Reproducible R=5 enclosure
 
-The endpoint certificate uses N=4096 for each of the eight finite
-integrals by default. Its invocation is listed in the reviewer guide.
-It uses the Guo (2026g) Appendix D bound
-|f''|<=726, interval length U<9/2, and midpoint error
-726(9/2)^3/(24N²). Pi uses forty alternating Machin-series terms;
+The production endpoint certificate evaluates the eight finite integrals
+at the reference scale with 2048 cells per row. Composite trapezoids use
+cellwise second-derivative bounds and the square-root endpoint cap.
+The homogeneous identity response(c)=A/c determines the root and
+derivative from this single coefficient enclosure. Its work is 16,384
+cells and 32,776 exponential enclosures, with no derivative quadratures.
+The coarser N=4096 midpoint enclosure in Guo (2026g), Appendix D, uses
+|f''|<=726 and U<9/2 to certify the discrete branch selection.
+Pi uses forty alternating Machin-series terms;
 exponentials use a degree-sixty positive Taylor polynomial with the
 explicit remainder 243*5^61/61!, followed by reciprocal/range reduction.
 Integer arithmetic rounds every operation outward on a 10^-40 grid.
@@ -420,6 +424,90 @@ at fixed source data, one bandwidth. At R=5 the inverse derivatives are
 `dc/dln(v/m_e)=0.14219508` and `dR/dln(v/m_e)=2.29569558`. The scalar
 scale-ratio inverse requires no spectral integrals. The accompanying
 charged-lepton invariant and its common-scheme comparison are given below.
+
+The muon and tau endpoint enclosures propagate this same endpoint through
+the electron cascade and the lepton ladder together. Writing
+`a=1-12*ns_tilt*(1-tau/4)`, their masses in GeV are
+`M_P*squash*exp((-20+k*a)*c-2*k*tau+sqrt(2*pi))`, with `k=2,4`.
+`production_interval_propagation.lepton_endpoint_enclosures` combines the
+shared endpoint before applying outward rational interval arithmetic.
+The resulting component intervals retain the common endpoint as their
+source; they are not independent statistical uncertainties. The Planck
+anchor, torsion and tilt remain at their recorded values, and physical
+mass matching is separate. Scaling the VEV interval by a fixed central
+lepton-to-VEV ratio does not enclose these production formulas.
+
+The bottom enclosure likewise propagates both the VEV and the down-sector
+exponent through the common endpoint. The emergence scale, electron and
+VEV enclosures use the outward rational elementary-function kernel.
+The top transfer uses the exact factor `1/sqrt(2)`.
+The right weak mass enclosure propagates both `M_G(c)` and its generated
+`g_R(c)` boundary; the CMB window uses the exact factor `1-tau/4`.
+
+The Z readout also depends on its gauge boundaries and running. Its old
+VEV-only interval has been replaced by `M_Z_pred_endpoint_response`, which
+recomputes the common-origin colour boundary and the self-consistent Z
+mass at both endpoints and the production centre. The sampled range is a
+numerical response estimate; it is not attached as a certified mass interval.
+
+### Native source composition and complete curvature memory
+
+`cg_core.native_colour_response` restricts the existing 120-coefficient
+Gaussian Mehler update to `N=sum(c_i^2)`. With `x=N/q`, `alpha=60` and
+`a=2*omega`, its generator is
+
+    (L/a) f(x) = (1-x) f'(x) + (x/alpha) f''(x).
+
+The stationary intensity has Gamma shape 60 and scale `q/60`. Exact rational
+polynomial updates preserve its moments and compose under multiplication
+of the squared coefficient correlation. The normalized intensity score has
+fourth moment `3+12/120`; replacing this score by a Gaussian loses its
+nonlinear correlations.
+
+For the complete three-dimensional curvature `Q=||dB+B wedge B||^2`, the
+same source gives
+
+    Cov(Q(h),Q(0)) = W2 exp(-2*omega*|h|)
+                    + W3 exp(-3*omega*|h|) + W4 exp(-4*omega*|h|).
+
+The vector addition kernel and actual colour matrices fix all three
+weights. The cubic term and angular part of the quartic term remain in
+the production record `native_colour_source_response`. At the current
+endpoint the radial replacement omits about 10.25 percent of the full
+variance; the full variance exceeds the radial one by about 11.42 percent.
+The one-sided integrated memory increases by about 5.77 percent. These
+are source-response differences, not assigned lepton mass corrections.
+The coefficient composition rate, intensity correlation rate and
+collective-law tangent restoring rate have separate fields and units.
+
+With `M=120`, `h=8`, `C_ad=3`, `V=pi^2*L^3`, `lambda_R=16/L^2` and
+`alpha_R=C_ad/(3*V*h)`, the weights are
+
+    W2 = 2*q^2/M * (lambda_R + 2*alpha_R*q)^2,
+    W3 = 7*C_ad*lambda_R*q^3/(75*V*h^2),
+    W4 = 9*C_ad^2*q^4/(1250*V^2*h^3).
+
+The normalized vector addition kernel is
+`K(R)=3/10*((Tr R)*R+R^2)-I/5`. Its SO(3) Haar averages are
+`<det K>=7/100` and `<||wedge^2 K||^2>=243/1250`. The actual eight colour
+matrices give `sum(f_ABC^2)=24` and the fourth-chaos contraction `216`.
+These independently determine the cubic and quartic weights. The radial
+fourth weight is `8*alpha_R^2*q^4/[M*(M+2)]`; their ratio is `14.823`.
+Fixing the mean intensity by partial Legendre transformation removes the
+linear score overlap and gives `Gamma_JJ=-(W3+W4)`. This negative curvature
+is not assigned as a positive field covariance or a pathwise fixed-intensity
+process.
+
+`native_source_attachment.native_lepton_attachment` obtains the complete
+four-dimensional lepton representation from the colour Casimir kernel.
+It retains both neutral and charged states, verifies weak and Higgs block
+preservation, and computes zero direct colour vertex on both chiralities.
+The retained weak and Higgs vertices are nonzero. Consequently the source
+memory enters a lepton correction only through an actually calculated
+mixed vertex. A static mass derivative, a frame compression or the source
+covariance alone does not provide that vertex. The existing two-point
+diagnostic now reports the complete source alongside the separate mass,
+left-kinetic and right-kinetic terms; no mass-store replacement is made.
 
 ### Complete native condensate
 
@@ -819,6 +907,269 @@ scheme and boundary source. Its current executable convention is
 `MSbar_at_scale`, using the same one-loop charged-lepton kernel; it does
 not replace the production pole-condition calculation above and does not
 publish a production `G_l` without that declared scheme.
+The scheme and source labels identify the caller's boundary condition;
+they do not derive it from the generated vertex. The generic solver records the
+relative iteration step and the independently evaluated relative mass-equation
+residual. Both must satisfy the requested tolerance, without a fixed GeV
+floor in the stopping rule. This is a numerical convergence check, not a
+bound on perturbative truncation or on the distance to another solution.
+The MSbar diagnostic records the
+strict first-order inverse in `first_order` separately from the implicit
+fixed point of the truncated equation. At the existing generated inputs
+and Z scale, their weighted log conversions are -0.00933751775404147 and
+-0.00984318047026994, respectively. The difference is a partial higher-order
+effect of the iteration, not a certified truncation error. Both calculations
+test the declared MSbar identification at that scale; neither determines
+the independent generated-vertex matching.
+
+The action-level diagnostic can be reproduced without changing the stores:
+
+```console
+python scripts/diagnose_lepton_vertex_matching.py --compare-reference
+```
+
+It reconstructs the existing mass vertex on the six radial spinors inside
+the 44-dimensional three-shell carrier. Its three singular values recover
+the generated masses. The zero mass-vertex block on the orthogonal
+complement is a tree-level identity; it is not an estimate of thresholds
+mediated by additional interactions. No new transfer weight is selected.
+
+For a mass vertex B that already includes the scalar amplitude, the new
+`lepton_mass_vertex_response` differentiates
+`M = K_L^(-1/2) B K_R^(-1/2)` with all three terms retained. At unit tree
+kinetic forms it gives
+`delta M = delta B - delta K_L M/2 - M delta K_R/2`.
+Noncommuting kinetic forms are handled by the exact divided difference of
+the inverse square root. The weighted singular-value derivative is checked
+against finite differences and fixed invertible changes of field coordinates.
+An additional Higgs normalization must not be applied to this mass vertex.
+
+Common vertex, left kinetic and right kinetic normalization directions
+give individual log derivatives 1, -1/2 and -1/2, respectively. Every
+weighted derivative is zero. The actual light, middle and heavy source
+projectors instead have weighted sensitivities -1, 2 and -1. These are
+derivatives of the existing action, not calculated loop coefficients.
+Thus only the corresponding nonuniversal combination needs to be derived;
+a common field normalization cannot repair the invariant.
+The common rung also cancels: with the heavy normalization fixed, the
+existing ladder has `log m = (log A-4*alpha-L, log A-2*alpha, log A)`.
+The weighted derivatives of the common normalization, rung alpha and
+light insertion L are 0, 0 and 1. Holding the electron anchor instead
+adds only common directions and leaves these weighted derivatives
+unchanged. Consequently the common sector ladder has no direct effect on
+the geometric invariant. Its effects on mass-dependent loop kernels are
+separate and are not excluded by this tree-level cancellation. The next finite source calculation concerns
+the light-insertion channel modulo those two null directions, including
+its vertex and kinetic contributions. The comparison residual must not
+be used to alter the generated value `L=sqrt(2*pi)`.
+
+At the current generated inputs the pole-to-MSbar weighted correction is
+`Delta_D = 0.009337517754041473`. Its photon component is
+`0.009335168839315278`; all remaining components sum to
+`0.000002348914726195`. The photon term also satisfies the analytic
+identity `Delta_D_photon = 3*alpha/(2*pi)*log(m_mu^2/(m_e*m_tau))`.
+For `mbar = C*m_geom = D*M`, the first-order equation is
+`Delta_pole = Delta_C - Delta_D`. The isolated reference comparison then
+requires `Delta_C = 0.011915968480345056` at these zeroth-order mass
+arguments. This number is a comparison target, not a generated correction;
+the reference masses are read only after the generated calculation finishes.
+
+To compute Delta_C the remaining action-level quantities are the finite
+chirality-changing vertex and the two spacetime kinetic corrections, from
+the same generated amplitudes at the same matching momenta. Shared EFT
+loops must be subtracted before the separately computed D is applied.
+The diagnostic does not replace these quantities with internal Haar norms,
+source susceptibilities, chosen mass schemes or reference residuals. It
+does not publish a new G or resolve the pole-invariant discrepancy. Interval
+roundoff bounds for D do not bound the uncomputed matching or higher orders.
+
+The common local action's three chiral two-point coefficients are now
+calculated separately in `cg_frg/fermion/lepton_self_energy.py`. The
+photon, W, Z, Higgs and both Goldstone diagrams are evaluated from their
+Feynman-parameter numerators in tadpole-free Landau MSbar. The lepton
+electric charge, two isospins and charged-current transition strength are
+extracted from the existing complete matter matrices. For the convention
+`S^-1 = pslash*(1-Sigma_L P_L-Sigma_R P_R)-(m+Omega)`, the three finite
+two-point variations are `delta B=Omega`, `delta K_L=-Sigma_L`,
+`delta K_R=-Sigma_R`. These are coefficient functions at the specified
+momentum, not LSZ residues.
+
+Writing `Delta=x*V+(1-x)*f-x*(1-x)*s-i0`, the integrals are
+`B=-int log(Delta/Q^2)`, `Bq=-int x*log(Delta/Q^2)`, and
+`T=int [Delta/2*(1-log(Delta/Q^2))-s*(1-x)^2*log(Delta/Q^2)]`.
+For a massive transverse vector the kinetic numerator is
+`J=-B+3*(B-Bq)+1-2*(T(V)-T(0))/V`; the mass numerator is `3*B-2`.
+The rational terms retain dimensional-numerator finite parts. The
+massless-vector kinetic coefficient vanishes by integration by parts.
+The scalar and pseudoscalar mass numerators have opposite signs.
+These diagram expressions recombine at `s=m^2` to the independently
+implemented [Martin mass kernel](https://doi.org/10.1103/PhysRevD.93.094017).
+The W and charged-Goldstone absorptive parts cancel in the stable pole
+mass combination. Leaving out a Goldstone diagram breaks that check.
+
+At the common spacelike subtraction momentum `s=-Q^2`, with the current
+generated `Q=M_Z`, the shared local contributions are:
+
+| species | Omega (GeV) | -Sigma_L | -Sigma_R |
+| --- | ---: | ---: | ---: |
+| electron | 0.000001284614091908391 | -0.0013003029786422028 | -0.00016737317575272583 |
+| muon | 0.0002650844091252959 | -0.0013003017965277767 | -0.00016736972097122234 |
+| tau | 0.0044524964939201125 | -0.0012999685187804304 | -0.00016639519065058154 |
+
+The diagnostic reports these terms to subtract, together with all six
+on-shell diagrams. The shared mass combination reproduces D with a
+binary64 residual of zero at the current inputs. Tests also compare
+35- and 55-digit quadrature at larger allowed Yukawa couplings, check
+the analytic off-shell photon integral and feed the spacelike coefficients
+through the canonical mass-vertex derivative. These checks concern
+numerical stability and diagram recombination, not a rigorous quadrature
+enclosure or missing loop orders.
+
+The direct colour contribution is independently zero: all eight colour
+matrices annihilate the charged-lepton source coordinates. Thus a graph
+with an external lepton-colour vertex vanishes before any momentum
+integration, regardless of the colour covariance. This excludes a direct
+one-loop colour self-energy; it does not exclude mixed higher-loop effects.
+
+The matching difference still requires the source-specific fermionic
+two-point function. At the same momentum and in the same field coordinates,
+its definitions are `delta B = Omega_gen-Omega_EFT` and
+`delta K_L/R = -Sigma_gen_L/R+Sigma_EFT_L/R`. Identical local diagrams
+cancel in these differences before the canonical mass response is taken.
+The listed local amplitudes must not themselves be reused as Delta_C.
+The existing colour source response supplies neither a lepton-colour
+vertex nor an additional electroweak source covariance. The radial mass
+operator and inherited Haar norms fix tree pairings; their derivatives
+alone do not specify the remaining fermionic one-particle-irreducible
+amplitudes. Consequently the diagnostic leaves the source excess
+uncomputed, without setting it to zero or identifying it with the
+comparison target. No production parameter or release record is changed.
+
+The existing neutral-sector output does not supply this excess implicitly.
+`neutrino_closure.py` and `complex_mixing.py` fix a light Majorana mass
+matrix through a Weinberg coefficient. They do not provide a heavy neutral
+mass matrix and its Dirac Yukawa matrix. This distinction persists even
+if a common heavy mass is held fixed. For example, let
+`m_nu = U* diag(m_i) U^dagger` and use, only for this algebraic check,
+`M_R = M I` and
+`Y_nu = i sqrt(2*M)/v U* sqrt(diag(m_i)) R`, where `R R^T = I`.
+Then `-v^2 Y_nu M_R^(-1) Y_nu^T/2 = m_nu` for every such R, whereas
+`Y_nu Y_nu^dagger` contains `R R^dagger` and need not be fixed.
+The complex orthogonal block
+`R(t) = [[cosh(t), i*sinh(t)], [-i*sinh(t), cosh(t)]]`
+already exhibits the distinction. These are witnesses of what the
+Weinberg output alone determines, not claims that every witness follows
+from the generating source. No heavy-neutrino completion is added to
+the V5 action by this check.
+
+For comparison of the relevant coefficient structures, the conventional
+type-I threshold at a degenerate heavy scale `Q=M`, to leading order in
+the inverse heavy mass, is
+`delta Y_e = [5*Y_nu Y_nu^dagger Y_e/8
+              -tr(Y_nu^dagger Y_nu)*Y_e/4]/(16*pi^2)`
+after canonical normalization
+([Zhang and Zhou, Eq. (127)](https://doi.org/10.1007/JHEP09(2021)163)).
+The common trace term cancels from the charged-lepton weighted invariant;
+the nonuniversal term depends on the undetermined Hermitian product.
+In the same convention its leading vertex and left kinetic pieces are
+`delta B = (Y_nu Y_nu^dagger) B/(16*pi^2)` and
+`delta K_L = 3*(Y_nu Y_nu^dagger)/(64*pi^2)`;
+the heavy contribution to `delta K_R` vanishes at this order. Thus the
+coefficient 5/8 includes the left kinetic subtraction; using the vertex
+alone gives the wrong threshold. Universal Higgs normalization does not
+alter the weighted invariant. Terms of order `m_H^2/M^2` and the other
+induced operators are not included in these displayed leading terms.
+
+A numerical algebraic check uses the current static neutrino masses and
+completed PMNS texture, sets the illustrative heavy M to
+`k_GUT/(2*pi)^2`, and varies only this complex orthogonal block. For
+`t=0, 0.5, 1`, the light mass matrices agree to relative residual below
+`2.8e-16`, while the leading weighted heavy-scale corrections are
+`0.004967410531248927`, `0.005075203236092859` and
+`0.005161808572986359`. The block parameters are fixed test values and
+are not fitted to charged-lepton references. These heavy-scale numbers
+are neither generated predictions nor corrections at the Z scale; a
+specified source completion and consistent scale transport would be
+needed before comparing them with the Z-scale target above. Even a
+fixed heavy scale and the full light mass texture therefore do not
+substitute for the missing source-derived fermionic amplitudes. The
+neutral channel remains a possible mechanism to derive, rather than an
+extra matching contribution already determined by the existing output.
+
+A change of EFT mass scheme cannot itself supply the missing physical
+correction. In the labelled mass basis, if `mbar'_l = H_l*mbar_l`, the
+same matching relation transforms both `C'_l=H_l*C_l` and `D'_l=H_l*D_l`.
+Consequently `G'_l=C'_l/D'_l=G_l` and `Delta_C-Delta_D` is unchanged.
+Keeping C equal to one while changing only D instead imposes a different
+geometric boundary identification. It is not a scheme change of one
+fixed physical calculation. The source-specific two-point amplitudes,
+or an equivalent source-derived finite matching prescription, remain
+necessary to compute the physical conversion. The existing source
+response API accepts the residual and readout or their derivatives;
+it does not generate these missing fermionic amplitudes from the
+geometric mass singular values.
+
+The normalized spatial source continuation supplies an exact additional
+check. With the transfer matrix M held fixed and the inherited isometries
+R_L(s), R_R(s), its vertex is
+`B(s)=R_L(s) (M tensor I_2) R_R(s)^dagger` and therefore
+`R_L(s)^dagger B(s) R_R(s)=M tensor I_2`.
+Its nonzero singular values do not change along this continuation. This
+uses the normalized projected kernel, including the inverse of its
+character-overlap matrix; differentiating the unnormalized overlap alone
+would describe a different vertex. Physical changes of M or of the
+spacetime kinetic operator require their own action calculation.
+
+The diagnostic checks this statement on the actual 44-dimensional radial
+carrier. At the deterministic basepoint `(0.23,-0.31,0.19)`, compressing the
+moved mass vertex onto the *old* six-dimensional subspace gives an apparent
+weighted log shift `0.0855880363715844`. Keeping the transported readout
+instead recovers the original masses. Exact elimination of the other 38
+coordinates also retains their nonzero mass-squared spectral positions.
+For `H=B^dagger B` in the old retained/complementary decomposition, the
+identity used is
+
+`P(z-H)^(-1)P = [z-H_PP-H_PQ(z-H_QQ)^(-1)H_QP]^(-1)`
+
+where the inverses exist. The numerical checks use the original shell
+blocks, a negative spectral argument and the three nonzero spectral
+positions. They test the identity and its source transport; they are not
+an interval enclosure. This finite vertex resolvent is not substituted
+for the interacting spacetime propagator. No probability law is assigned
+to the basepoint coordinates and no source fluctuation amplitude is
+selected. The apparent frozen-subspace shift is therefore excluded as a
+matching correction, without excluding genuine source-mediated vertex or
+kinetic corrections. Computing those corrections still requires the
+connected fermionic amplitudes of the same source action.
+
+The direct colour-source statement also holds before a loop expansion.
+At fixed scalar and electroweak backgrounds the lepton quadratic operator
+has source dependence only through its colour representation,
+`D_lepton[B]=D_lepton[0]+gamma^mu rho_lepton(B_mu)=D_lepton[0]`.
+Its inverse is then independent of B wherever defined. Any normalized
+average over that direct colour source leaves this conditional lepton
+propagator unchanged. This does not integrate over the other backgrounds:
+a colour-induced change in a dynamical scalar's action can still affect
+leptons through that scalar. To calculate such a contribution the source
+construction must supply the mixed scalar/fermion vertices and their
+common propagators. A positive colour radial Hessian alone does not fix
+these mixed derivatives, and changing the source intensity is not itself
+a declared spacetime scalar fluctuation.
+
+The stationary branch does not implicitly supply this coupling either.
+The current data flow computes the TT endpoint c, the masses and the
+colour stationary intensity q_*(c) from that endpoint. In particular the
+electron mass reads `(M_P,c,tau)`, and the charged-lepton rung reads
+`(c,c_CMB,ns_tilt,tau)`. The endpoint sum itself has no independent
+colour-intensity argument. Consequently differentiating m_i(c) through
+the inverse stationary relation c(q_*) follows a change of endpoint;
+it is not the derivative with respect to a radial intensity fluctuation
+at fixed c, which is the variation used for the colour radial Hessian.
+The absence of q from these static readouts is a dependency fact, not
+a proof that every physical mixed fermion amplitude vanishes. A source
+variation of the full fermion operator must establish the relation
+between these directions before a branch derivative can enter a loop
+vertex. No branch derivative is used as a matching contribution here.
 
 #### Generated on-shell conditions
 

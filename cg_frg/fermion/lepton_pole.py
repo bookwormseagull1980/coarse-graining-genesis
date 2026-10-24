@@ -13,23 +13,24 @@
 # Full bibliography: REFERENCES.md and CITATION.cff.
 # =============================================================================
 
-"""One-loop geometric-to-pole conversion for charged leptons.
+"""Conditional charged-lepton mass-conversion diagnostics.
 
-The geometric masses are generated readouts.  They are not pole masses and
-must not be identified with pole masses by numerical proximity.  This module
-solves the on-shell fixed-point condition
+This module does not derive the matching of a generated mass vertex to a
+renormalized action.  The generic solver evaluates the supplied mass equation
 
     M_l = m_l^geom + delta M_l(M_l),
 
-where ``delta M_l`` is the finite on-shell mass shift supplied by the same
-generated action.  The caller must state the renormalization/matching scheme,
-the scale at which the geometric readout is defined, and the physical
-boundary source.  No observed pole mass is read here.
+where ``delta M_l`` is supplied by the caller.  Scheme, scale and boundary
+source identify the declared calculation; their presence does not prove that
+its matching follows from the generated action.  No observed pole mass is
+read here.
 
 The self-energy is intentionally a callable: the weak, Higgs and threshold
 terms belong to the action-level calculation and are not reconstructed from
 target masses.  A missing scheme or boundary source is an error, not a
-silent tree-level identification.
+silent tree-level identification.  The MSbar diagnostic below reports the
+strict first-order inverse separately from its implicit fixed point.  Solving
+a one-loop-truncated equation does not supply the complete higher orders.
 """
 
 from __future__ import annotations
@@ -40,6 +41,90 @@ import math
 
 DEFAULT_LABELS = ("e", "mu", "tau")
 DEFAULT_WEIGHTS = (-1.0, 2.0, -1.0)
+
+
+def lepton_mass_vertex_response(
+    mass_vertex_GeV, left_gram, right_gram, *, delta_mass_vertex_GeV,
+    delta_left_gram, delta_right_gram, action_source: str,
+) -> dict:
+    """Differentiate the same action's canonical three-family mass vertex.
+
+    For B(eps), K_L(eps), K_R(eps), differentiate
+    M = K_L**(-1/2) B K_R**(-1/2) at eps=0. B already contains the
+    scalar amplitude; its variation belongs in delta_mass_vertex_GeV,
+    and no additional Higgs/VEV normalization is inserted.
+    The three supplied deltas must be derivatives with respect to the same
+    parameter in the same fixed field coordinates. In a canonical tree
+    basis this reduces to dM = dB - dK_L M/2 - M dK_R/2.
+
+    Eigenvalue divided differences evaluate the inverse-square-root
+    derivative, including noncommuting kinetic forms and repeated kinetic
+    eigenvalues. For simple nonzero singular values m_i, dlog(m_i) is
+    Re(u_i^dagger dM v_i)/m_i. Its (-1,2,-1) combination is independent
+    of fixed invertible field coordinates. Degenerate mass labels are
+    rejected, since their individual derivatives need a separate splitting.
+
+    This computes a response, not its loop coefficients. It is a finite
+    generated-to-EFT matching correction only when the supplied deltas are
+    that independently calculated amplitude difference, with shared EFT
+    loops subtracted. In particular a source susceptibility is not silently
+    substituted for a spacetime kinetic coefficient.
+    """
+    import numpy as np
+    from cg_core.matter_matching import inverse_sqrt_gram
+
+    action_source = _text("action_source", action_source)
+
+    def matrix(value, name):
+        result = np.asarray(value, dtype=complex)
+        if result.shape != (3, 3) or not np.isfinite(result).all():
+            raise ValueError(f"{name} must be a finite 3 by 3 matrix")
+        return result
+
+    def kinetic_response(gram, delta, name):
+        gram = matrix(gram, name)
+        delta = matrix(delta, "delta " + name)
+        if not np.allclose(delta, delta.conj().T, rtol=1e-11, atol=1e-13):
+            raise ValueError(f"delta {name} must be Hermitian")
+        inverse = inverse_sqrt_gram(gram)
+        eigenvalues, vectors = np.linalg.eigh(gram)
+        roots = np.sqrt(eigenvalues)
+        # (x^(-1/2)-y^(-1/2))/(x-y), with its continuous diagonal value.
+        divided = -1.0 / (roots[:, None] * roots[None, :]
+                          * (roots[:, None] + roots[None, :]))
+        derivative = vectors @ (divided * (vectors.conj().T @ delta @ vectors)) @ vectors.conj().T
+        return inverse, derivative
+
+    vertex = matrix(mass_vertex_GeV, "mass vertex")
+    delta_vertex = matrix(delta_mass_vertex_GeV, "delta mass vertex")
+    left, delta_left = kinetic_response(left_gram, delta_left_gram, "left kinetic form")
+    right, delta_right = kinetic_response(right_gram, delta_right_gram, "right kinetic form")
+    mass = left @ vertex @ right
+    terms = {"mass_vertex": left @ delta_vertex @ right,
+             "left_kinetic": delta_left @ vertex @ right,
+             "right_kinetic": left @ vertex @ delta_right}
+    u, values, vh = np.linalg.svd(mass, full_matrices=False)
+    values, u, v = values[::-1], u[:, ::-1], vh.conj().T[:, ::-1]
+    floor = 32 * np.finfo(float).eps * values[-1]
+    if values[0] <= floor or np.any(np.diff(values) <= floor):
+        raise ValueError("three resolved, positive, distinct mass singular values required")
+    logs = {name: np.real(np.diag(u.conj().T @ term @ v)) / values
+            for name, term in terms.items()}
+    total = sum(logs.values())
+    weighted = lambda x: math.fsum(w * float(a) for w, a in zip(DEFAULT_WEIGHTS, x))
+    return {
+        "species_order": list(DEFAULT_LABELS),
+        "masses_GeV": dict(zip(DEFAULT_LABELS, map(float, values))),
+        "dlog_masses": dict(zip(DEFAULT_LABELS, map(float, total))),
+        "dlog_components": {name: dict(zip(DEFAULT_LABELS, map(float, value)))
+                             for name, value in logs.items()},
+        "weighted_log_response": weighted(total),
+        "weighted_log_components": {name: weighted(value) for name, value in logs.items()},
+        "canonical_mass_vertex_GeV": mass,
+        "delta_canonical_mass_vertex_GeV": sum(terms.values()),
+        "action_source": action_source,
+        "scalar_amplitude_included_in_mass_vertex": True,
+    }
 
 
 def _positive(name: str, value: float) -> float:
@@ -74,6 +159,8 @@ def solve_pole_mass(
     fixed point is evaluated by functional iteration because the shift
     depends on the pole mass being solved for.  A non-positive or
     non-finite iterate is rejected, as is failure to converge.
+    ``tolerance`` bounds both the relative last step and the relative
+    equation residual; neither criterion introduces a fixed mass scale.
 
     The result is a derived readout: ``G = M/m_geom`` and
     ``Delta_L``-style quantities are assembled by
@@ -91,8 +178,7 @@ def solve_pole_mass(
     if not callable(self_energy):
         raise TypeError("self_energy must be callable")
 
-    mass = m_geom
-    for iteration in range(1, max_iterations + 1):
+    def finite_shift(mass):
         shift = self_energy(mass)
         try:
             shift = float(shift)
@@ -100,23 +186,37 @@ def solve_pole_mass(
             raise ValueError("self_energy must return a finite real shift") from exc
         if not math.isfinite(shift):
             raise ValueError("self_energy returned a non-finite shift")
+        return shift
+
+    mass = m_geom
+    for iteration in range(1, max_iterations + 1):
+        shift = finite_shift(mass)
         new_mass = m_geom + shift
         if not math.isfinite(new_mass) or new_mass <= 0.0:
             raise ValueError("self-energy iteration left the positive mass branch")
-        scale_check = max(abs(new_mass), abs(mass), 1.0)
-        if abs(new_mass - mass) <= tol * scale_check:
-            return {
-                "geometric_mass_GeV": m_geom,
-                "pole_mass_GeV": new_mass,
-                "G": new_mass / m_geom,
-                "self_energy_GeV": shift,
-                "residual_GeV": new_mass - (m_geom + self_energy(new_mass)),
-                "iterations": iteration,
-                "scheme": scheme,
-                "scale_GeV": scale,
-                "boundary_source": boundary_source,
-                "order": "one-loop on-shell fixed point",
-            }
+        relative_step = abs(new_mass - mass) / max(new_mass, mass)
+        if relative_step <= tol:
+            final_shift = finite_shift(new_mass)
+            equation_mass = m_geom + final_shift
+            if not math.isfinite(equation_mass) or equation_mass <= 0.0:
+                raise ValueError("self-energy iteration left the positive mass branch")
+            residual = new_mass - equation_mass
+            relative_residual = abs(residual) / max(new_mass, equation_mass)
+            if relative_residual <= tol:
+                return {
+                    "geometric_mass_GeV": m_geom,
+                    "pole_mass_GeV": new_mass,
+                    "G": new_mass / m_geom,
+                    "self_energy_GeV": final_shift,
+                    "residual_GeV": residual,
+                    "relative_residual": relative_residual,
+                    "relative_step": relative_step,
+                    "iterations": iteration,
+                    "scheme": scheme,
+                    "scale_GeV": scale,
+                    "boundary_source": boundary_source,
+                    "order": "implicit mass equation; shift order supplied by caller",
+                }
         mass = new_mass
 
     raise RuntimeError("charged-lepton pole iteration did not converge")
@@ -147,6 +247,8 @@ def charged_lepton_conversions(
         raise ValueError("exactly three charged-lepton labels and weights are required")
     if len(set(labels)) != 3:
         raise ValueError("charged-lepton labels must be distinct")
+    if not all(math.isfinite(w) for w in weights):
+        raise ValueError("weights must be finite")
     if abs(sum(weights)) > 1e-15:
         raise ValueError("Delta_L weights must sum to zero")
     if set(geometric_masses_GeV) != set(labels):
@@ -183,7 +285,7 @@ def charged_lepton_conversions(
         "scheme": scheme,
         "scale_GeV": float(scale_GeV),
         "boundary_source": boundary_source,
-        "order": "one-loop on-shell fixed point for each charged lepton",
+        "order": "implicit mass equations; shift order supplied by caller",
     }
 
 def geometric_to_pole_one_loop(
@@ -200,7 +302,7 @@ def geometric_to_pole_one_loop(
     tolerance: float = 1e-11,
     max_iterations: int = 40,
 ) -> dict:
-    """One-loop conversion with the geometric mass as MSbar at the scale.
+    """Conditional MSbar conversion using the existing one-loop mass kernel.
 
     This is the declared matching convention of this function: the generated
     geometric mass is the ``MSbar`` mass at ``scale_GeV`` in the common Landau
@@ -211,8 +313,13 @@ def geometric_to_pole_one_loop(
 
     solved by iteration on M_l.  The kernel is the same one-loop V5
     calculation used for the pole-to-running factors; no observed mass enters.
+    ``first_order`` contains the perturbatively expanded inverse, evaluated
+    at the zeroth-order masses.  The top-level poles and ``Delta_L`` instead
+    solve the truncated relation implicitly and retain some higher-order
+    terms.  Their difference is a diagnostic, not a higher-order error bound.
     A different geometric-mass scheme must be implemented separately rather
-    than hidden in this conversion.
+    than hidden in this conversion.  This function does not establish that
+    the generated vertex has the declared MSbar boundary value.
     """
     if input_scheme != "MSbar_at_scale":
         raise ValueError("input_scheme must be 'MSbar_at_scale'")
@@ -220,6 +327,10 @@ def geometric_to_pole_one_loop(
     weights = tuple(float(w) for w in weights)
     if len(labels) != 3 or len(weights) != 3:
         raise ValueError("exactly three charged-lepton labels and weights are required")
+    if len(set(labels)) != 3:
+        raise ValueError("charged-lepton labels must be distinct")
+    if not all(math.isfinite(w) for w in weights):
+        raise ValueError("weights must be finite")
     if abs(sum(weights)) > 1e-15:
         raise ValueError("Delta_L weights must sum to zero")
     if set(geometric_masses_GeV) != set(labels):
@@ -240,6 +351,29 @@ def geometric_to_pole_one_loop(
     reverse = {v: k for k, v in mapping.items()}
     geometric = {name: _positive(f"geometric mass {name}", geometric_masses_GeV[label])
                  for label, name in mapping.items()}
+    leading_kernel = charged_lepton_pole_matching_one_loop(
+        geometric, gauge_couplings, vev_GeV,
+        higgs_mass_GeV=higgs_mass_GeV, scale_GeV=scale_GeV,
+        input_definition="generated_on_shell_conditions",
+        action_source=action_source,
+    )
+    first_order_logs = {
+        label: -leading_kernel["log_matching_factors"][name]
+        for label, name in mapping.items()
+    }
+    first_order = {
+        "leptons": {
+            label: {
+                "log_G_first_order": first_order_logs[label],
+                "G_first_order": 1.0 + first_order_logs[label],
+                "pole_mass_GeV_first_order": geometric[name] * (1.0 + first_order_logs[label]),
+            }
+            for label, name in mapping.items()
+        },
+        "Delta_L": math.fsum(weight * first_order_logs[label]
+                             for label, weight in zip(labels, weights)),
+        "order": "strict first order; inverse masses and logarithms expanded consistently",
+    }
     poles = dict(geometric)
     kernel = None
     for iteration in range(1, max_iterations + 1):
@@ -302,7 +436,11 @@ def geometric_to_pole_one_loop(
         "action_source": action_source,
         "iterations": iteration,
         "convergence": change,
+        "first_order": first_order,
+        "implicit_minus_first_order_Delta_L": delta_L - first_order["Delta_L"],
         "pole_kernel_order": kernel["order"],
         "uncomputed_orders": kernel["uncomputed_orders"],
-        "order": "one-loop geometric-to-pole fixed point with the V5 charged-lepton kernel",
+        "order": "implicit inversion of a one-loop-truncated mass relation",
+        "generated_vertex_matching_derived": False,
+        "production_replacement": False,
     }

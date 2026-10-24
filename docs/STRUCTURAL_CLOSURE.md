@@ -2,7 +2,7 @@
 
 Status: release<br>
 Version: 5.0.2<br>
-V5 run: `20261020T002918Z-eff10097`
+V5 run: `20261024T084548Z-d52375b5`
 
 V5 is a self-contained numerical/effective framework. It does not import or
 require the separate Lean physical branch. Its structural chain is recorded by
@@ -83,7 +83,7 @@ Those remain in the separate Lean physical branch and are not V5 runtime or
 verification dependencies.
 
 The exact TT reduction `A_V5(c)=A_5/c` is checked on the current bracket
-`[817081/327680, 3268327/1310720]` with coefficient interval
+`[1246766993313/500000000000, 623383657407/250000000000]` with coefficient interval
 `[0.3694084671969687, 0.3694160576081247]`.  The external Lean branch supplies
 the structural operator proof; the V5 certificate supplies the numerical
 branch table and the interval identity.  Neither is a runtime import of the

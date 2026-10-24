@@ -1,9 +1,9 @@
 # V5 Release Facts
 
-Status: release snapshot<br>
+Status: current verified calculation<br>
 Version: 5.0.2<br>
-Run: `20261020T002918Z-eff10097`<br>
-Date: 2026-10-20
+Run: `20261024T084548Z-d52375b5`<br>
+Date: 2026-10-24
 
 This page is the single numerical reference for the release.  It is generated
 from `cg_params.json`, `run_manifest.json` and `V5_VERIFICATION_REPORT.md`.
@@ -12,20 +12,20 @@ from `cg_params.json`, `run_manifest.json` and `V5_VERIFICATION_REPORT.md`.
 
 | Fact | Value |
 |---|---|
-| Parameter records | `261` |
-| `DERIVED` | `260` |
+| Parameter records | `262` |
+| `DERIVED` | `261` |
 | `PENDING` | `0` |
-| Complete quantity definitions | `261/261` |
-| Python tests | `708 passed, 5 deselected, 10 subtests` |
+| Complete quantity definitions | `262/262` |
+| Python tests | `776 passed, 5 deselected, 10 subtests` |
 | Structural certificates | `11 PASS` |
 | V5 internal Lean archive | `18 files`, trust level 0 |
-| Explicit interval records | `17` |
-| Production records with attached interval | `9` |
-| Centre-only records | `159` |
-| Endpoint bracket | `[817081/327680, 3268327/1310720]` |
-| Endpoint width | `2.2888e-6` |
-| `m_e` relative width | `4.58e-5` |
-| `v_HIGGS` relative width | `2.97e-5` |
+| Explicit interval records | `16` |
+| Production records with attached interval | `8` |
+| Centre-only records | `160` |
+| Endpoint bracket | `[1246766993313/500000000000, 623383657407/250000000000]` |
+| Endpoint width | `6.43002e-7` |
+| `m_e` relative width | `1.28601e-5` |
+| `v_HIGGS` relative width | `8.33807e-6` |
 | CAMB | `2.0.5`, full mode |
 | `sigma8` | `0.8123320817756509` |
 | `S8` | `0.8322623365089923` |
@@ -33,6 +33,12 @@ from `cg_params.json`, `run_manifest.json` and `V5_VERIFICATION_REPORT.md`.
 | BBN `Yp` interval | `[0.2460803489939253, 0.24608489256300006]` |
 | Generated YM gap mass | `5.940431067579812e19 GeV` |
 | Glueball catalogue mass | `1.6642238631694293 GeV` |
+| Complete curvature variance excess over radial replacement | `11.4163%` |
+| Complete integrated-memory excess over radial replacement | `5.76931%` |
+
+The Z endpoint response recomputes the gauge boundaries and fixed point.
+Its three-sample range, `[91.1244537084, 91.1252897074]` GeV, is a numerical
+response estimate. It is not counted as a certified mass enclosure.
 
 ## Lean physical branch
 

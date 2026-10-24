@@ -13,6 +13,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from cg_core.endpoint_interval import certify_root  # noqa: E402
+from cg_core.params import write_json_atomic  # noqa: E402
 
 
 def main() -> int:
@@ -23,8 +24,7 @@ def main() -> int:
     args = parser.parse_args()
     result = certify_root(cells=args.cells)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, indent=2, default=str) + "\n",
-                           encoding="utf-8")
+    write_json_atomic(args.output, result)
     print(json.dumps({"status": result["status"],
                       "bracket": result["bracket_decimal"],
                       "cells": result["cells"],

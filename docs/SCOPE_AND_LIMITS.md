@@ -2,7 +2,7 @@
 
 Status: release<br>
 Version: 5.0.2<br>
-Run: `20261020T002918Z-eff10097`
+Run: `20261024T084548Z-d52375b5`
 
 V5 is the unique effective model under its root conditions and definitions.
 It is not one option in a family of models, and conventional alternatives are
@@ -31,14 +31,20 @@ retained as an effective readout of the generated finite operator.
 
 | Item | Value |
 |---|---:|
-| Parameter records | `261` |
-| Explicit interval records | `17` |
-| Production records with attached interval | `9` |
-| Centre-only records | `159` |
+| Parameter records | `262` |
+| Explicit interval records | `16` |
+| Production records with attached interval | `8` |
+| Centre-only records | `160` |
 
-The 159 centre-only records are multi-input nonlinear readouts, diagnostic
+The 160 centre-only records are multi-input nonlinear readouts, diagnostic
 bundles, algebraic evaluations or model definitions without a single certified
 input interval.  They are not missing production factors.
+
+The Z endpoint diagnostic regenerates its gauge boundary, evolution and
+fixed point at both endpoints and the centre. It is not counted as a
+certified enclosure. The lepton and bottom mass enclosures retain their
+full shared endpoint dependence; the right weak mass enclosure also
+retains the generated weak-coupling boundary.
 
 No full covariance is published: the certified inputs are intervals, not a
 joint probability distribution.  No model-approximation envelope is fabricated:

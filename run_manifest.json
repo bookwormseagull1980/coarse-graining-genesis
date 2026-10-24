@@ -120,8 +120,8 @@
   }
  },
  "output_sha256": {
-  "cg_params.json": "577ea1bd4380b89376d7ab804fb74ba85695554615276f6efa825b14b57afddb",
-  "comparison/reference_inputs.json": "ab39cb1b4e846e5af7300acbad8d13d626723cc772fa736317dee9e3dab434ca"
+  "cg_params.json": "a70c81546d8e7635c1ddc5e646fae9d417289460b20a1f534834c766fc3e9643",
+  "comparison/reference_inputs.json": "749968311efddfc5b767403e7fcd62944cb11c434815e004214059a030ef447d"
  },
  "publication": {
   "author": "Jinku Guo",
@@ -186,8 +186,8 @@
   "software": "Coarse-Graining Genesis Framework V5.0",
   "version": "5.0.2"
  },
- "python": "3.12.10",
- "run_id": "20261020T151355Z-10526ee4",
+ "python": "3.13.12",
+ "run_id": "20261024T084548Z-d52375b5",
  "scope": "declared framework; input-bound external comparisons carry separate status",
  "solver_execution_identity": {
   "CAMB": {
@@ -208,7 +208,7 @@
   "cg_core/ec_structure.py": "ac35a572340fe2517a404bfa999db92f00e5bcb807927da2408f31218fec5957",
   "cg_core/ec_variation.py": "1c3c351db8f08ad07f4c1cfd1aab4b67206718a572275f86222ddfd2e9d228b2",
   "cg_core/electroweak.py": "aedbaa8ccca0be0d34affae8d437ff52a636882bd24f78d839235b864d7791c1",
-  "cg_core/endpoint_interval.py": "2a29fc91cf445a02a5176415ee38f9e71cbc6a491e94bbf783e744178c61be98",
+  "cg_core/endpoint_interval.py": "be03b3ba068dadb3c2e13c5b6f0c839b2f10ae1057434556903267cae52f9683",
   "cg_core/finite_connector.py": "0ee4dd39efada86c55c4750498c8147b092f2f68cf2f0b58f6d0871f08c5a1be",
   "cg_core/free_covariance.py": "81989a253b87f30396a83b8a119d4702a3e88a58916a590b2179521c0b6887b9",
   "cg_core/frg_regulator.py": "b669f8e5768966333f599e542dea1c4e6ec0b1001ab9e784d71ba4d86a5ef3f2",
@@ -217,8 +217,10 @@
   "cg_core/joint_response.py": "19f63a68d9fcf0e7ba68c6dd5ed7b4b896dcb3de06f8979509fac7646ba042f8",
   "cg_core/matter_matching.py": "9d39e335cd638c477bfb596915fe5a2116e934a9e720185d833ee542f4e38132",
   "cg_core/modal_algebra.py": "0f1346d1d52ea7606626f816417f1d356704d7f82b9d2e80fea44c6b5d4d3452",
+  "cg_core/native_colour_response.py": "e0bfeff1428149c65758a90c55ba970ac0f2391e76745fbf095182549da44edb",
   "cg_core/native_matter_matching.py": "010e92c592822de98f5ff5a2b69b45485d3761236d1d037e26658745e1833164",
   "cg_core/params.py": "efd263096ad5186bce09ad489874fa787538fb1d990c76b7a0956f3bab60e3de",
+  "cg_core/precision_comparison.py": "b775b0834e37042613e4700b5b288657be03c5a84b2b24f6af16485e28420df2",
   "cg_core/quantities.py": "92f84d3ff84f6bc1db170217f8f4c68710ed999c33040c47c846c928a822f33d",
   "cg_core/rational_interval.py": "f18dc347317b3a03ecdd9c35e7e0542726cc169ae2dfffb979af67035e736ba8",
   "cg_core/release.py": "f9fddcf7ae993e88332fa5fcd4a96d2c22e52e1d36e439688e7a657ee018f22d",
@@ -276,10 +278,13 @@
   "cg_frg/ewsb/torsion_response.py": "10db82a680685810356e96d209b63cb830e64dbaa8ebd093252e098a7ce4fa01",
   "cg_frg/ewsb/vev_closure.py": "a209aa658444c5f8bb085e5188360e101a5abf0b5686405e3bc6d794586c8fff",
   "cg_frg/fermion/electron_mass.py": "e8d0620b988c05352102bd7cfcb583e4c7aac5a4c1dd624899f070f67fc20601",
+  "cg_frg/fermion/lepton_pole.py": "ef23369c14f14aab8a1c8f992f07009f38b39f781e67ad2e2c42bebf6945cba7",
+  "cg_frg/fermion/lepton_self_energy.py": "a9811538b4eac4a16a480cf47c37e04f4af6ce2cdd90a0be2fd5a64d512acb7c",
   "cg_frg/fermion/mass_operator_overlap.py": "4fdb96ad896fa9c78e2c0aee0ed64482eb74d89ce3362bf71137aac3430457e7",
+  "cg_frg/fermion/native_source_attachment.py": "9d3e1ff4ec1c25284898de53439ca33b5c7f0be77385552605439d1fb88cbe69",
   "cg_frg/framework/cp_sector.py": "79ba63f171ab3608698c36c09601126d7cc2a5e6050ef928cfd18c9d94b3af83",
   "cg_frg/framework/five_items.py": "089422314c01a29ed451efd47c51921ce30f2e4a6282614e9a77ca6fedf44fc6",
-  "cg_frg/framework/production_interval_propagation.py": "0def3b649fafcfd2ae82123328769e9ac7b0d40aab8f877d490bf53ff7e01052",
+  "cg_frg/framework/production_interval_propagation.py": "fb1dbccd2ae43acf03ed5a90cb5c3f7d2cf0f43532f1713324eafff150fca3ec",
   "cg_frg/framework/sigma_language.py": "67c3966d41da736b38158da4ae05e1e65d1f5a317b74d6ac49cb5736a35ed3b3",
   "cg_frg/frg/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
   "cg_frg/frg/discrete_flow.py": "0e8622c52dba2de09b7ac576e303d5e3b2f0ce67c832f8ca628b8be2794cabcb",
@@ -290,7 +295,7 @@
   "cg_frg/frg/ir/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
   "cg_frg/frg/ir_flow.py": "17d80ac6964e71a06ab2339974cda5c75f46d0a11a0b0be680c9ca8bb5ad0b19",
   "cg_frg/frg/lpa/__init__.py": "5908b3db0288a531ef138e918d2acf55ad50e86cb88a599303589fc7983b3b7a",
-  "cg_frg/frg/precision_budget.py": "d158b1b4b94a28d2383e92bfe5493124b27001b57d5593a3c5df70a5804e698c",
+  "cg_frg/frg/precision_budget.py": "4c5df96122caebb9ee013242fe05a4a73e0dcbc1d716e3f58078a9551761b2a5",
   "cg_frg/frg/spectral_interval.py": "6f9bed9d3a8bcde8edc039cd75a32faa0683e713d877aa47decdac4ce8eb0760",
   "cg_frg/frg/spectral_interval_certificate.py": "d96f3788ef51303fecf29be5bb126d42878407d8e169daec8a7bc02d984efd12",
   "cg_frg/frg/spectral_sum.py": "a704e93ae23171133bc278637a7825de113dae71e750bb04804d5c0d333d8922",
@@ -325,8 +330,10 @@
   "cg_frg/neutrino/propagation.py": "6c906e2cdea9a4e9b19adc7af837f49dea50b76d125217944cc7e9267fa8c8d0",
   "cg_frg/qcd/generated_yang_mills.py": "fe83c502b29bba607a5cdd9f23e8aeb2cbfe47135ee49e411a78c4044d301ebc",
   "cg_frg/qcd/mass_gap_scale.py": "69bee0a1af99506e41457bfb0dbe42c25ad8782a4130e64fa673753e937e1e2e",
+  "cg_frg/qcd/native_source_response.py": "42e62bd18e4e4f1ffafe1bbe095ca4cba1c2ed3448858c3783ebc265f0f6e6ae",
   "cg_frg/qcd/qcd_sector.py": "27930696843a94ee732482c10cc1dee665c2c09e1370591f85696bc6ac3ead7f",
   "comparison/crosschecks.py": "51468181e8a6f79f390d25485df9d046eaf265071d3a32a6f2f8dbbbfd372c84",
+  "comparison/lepton_vertex_matching.py": "5a4fac67c303c4d12e7eedbd01582f63fd44022b44f5297f035aa41a48334906",
   "comparison/param_audit_full.py": "60c716d365f0bda1d2922c757bcbf946b40997b56da74cb4a0d58b7d0c31f421",
   "comparison/sm_rge/__init__.py": "f0355e8b7aac0bcc0cdebd3d0255b68c4b1320841d828aa4d778523fceb06943",
   "comparison/sm_rge/inputs.py": "b1f01eb9d467595281a0ede80967d71363bae723f3bbe14833d283f48a60eca4",
@@ -339,15 +346,16 @@
   "scripts/audit_observation_leakage.py": "1e89d30dd9b2db2e5f688503c972f246ed94d6aa5d70e943791d0a260f2cd4b0",
   "scripts/audit_param_writers.py": "99f48b14a563892e0a1be24c3c6984713b9498f105816397fa514a36a6dc7da6",
   "scripts/audit_path_portability.py": "43088948d2d6d5ad210ac66adca52f86c16c0504873b8d43c3188fd25d3fc419",
-  "scripts/certify_endpoint_interval.py": "d93b05d99a561d304918a3616530432255e4104e62ae2e3c4761fa92a17d8db6",
+  "scripts/certify_endpoint_interval.py": "d4d9a1df29d3544c3d0775af45fea85281f9891dc0bcf033574cd6d39aeba94f",
   "scripts/certify_spectral_inputs.py": "4fbdaf31762683a9d69c4597855273da912e855e760852064b6b0405bdfc33a7",
   "scripts/certify_tt_response.py": "afd49ab4d4fc8c7355dfd64edb1cc53d6000567fa2bc471839ab6fd8cc98a9a0",
   "scripts/check_variational_foundations.py": "12c4a861468195339dfa12c2902fec5901d2be566e51a08d579a04ec09e820a6",
+  "scripts/diagnose_lepton_vertex_matching.py": "0822bc64d6179034e0bc53f06b690a5e8da9dd5e6804aaf2a62862aac6157853",
   "scripts/evaluate_joint_extensions.py": "9c9bb63c70f2d3c9e5f710d10550cc044ef3fda2b96200df3e5e61d0c9334efb",
   "scripts/init_v5.py": "6a2a965c5c7e15479d229711a07b952fae014e96c1884db935d182b5a5e37747",
   "scripts/make_reviewer_dashboard.py": "05907074385dde55b0b903277bbe1eb9ecd5d597afd726a3a466856383e49852",
   "scripts/regime_spread.py": "c0c6a8cea30a5125e7f208c2b4e0413d20ba76e11325f33953735cdc87ee33a1",
-  "scripts/reproduce_v5.py": "9d23ae10ee3cf413a2e73e5bd21e2e87650e0613ed765e74aefac25755cb4716",
+  "scripts/reproduce_v5.py": "d9b57f7c9f94e72aa30603ad17e43b418a945f614c639482f70ff2eecd6df341",
   "scripts/run_bao_comparison.py": "62da16ee26b8937889b2c4b5cdaeaa7e876e809e6367e8a357ebcc29ecf96a3e",
   "scripts/run_explicit_camb.py": "8978f32aad9b13ddfc029cc3f7218f5bfb124a07b55d91bcda7f4bd6042d37c5",
   "scripts/sensitivity_analysis.py": "d0064d47d1e9f0d43eb02ea14617370aade33344c295f625296a6ea4dd7ac998",
@@ -356,7 +364,8 @@
   "scripts/structure_certificates.py": "c75ce4b84d1fb9f37563efb52a38a3fc3f680bcaa54d87958a512b7a1c3940f7",
   "scripts/validate_endpoint_cosmology.py": "ab97aa105fbf3aad8d8e558ab097d2a81a7399c9ccffa236862faf7b231d4519",
   "scripts/verify_lean_archive.py": "50888adc603e0ab99f6461e2464378595f660943d20a71a46bdb11ad0edffbf8",
-  "scripts/verify_v5.py": "077ae310394b107f7840f3093cc16e2d086f9c75bdfb308b5dacceeeb9093b1d"
+  "scripts/verify_source_response.py": "22aa4fbc3ce9b4fe44ed7bda3aea8e9ec8f6965a0a8d8861e2d49fcff147c85f",
+  "scripts/verify_v5.py": "c0fb4a428e23a2afa285968bd718e3ab752863ce39b15dc4a14169ec61e46f33"
  },
  "status": "complete computational run",
  "storage_contract": {
@@ -369,8 +378,16 @@
   "scientific_value_reads": "read the scientific stores; the manifest only validates their identity"
  },
  "verification": {
-  "binding_sha256": "8ee36ea4d950c5001daa3db54bd43464408569a4432700f7e32b293de1f8f154",
+  "binding_sha256": "9115664e1ec4b0535ebbeb6524705f8fc1614cc5038d9fe6f5ea42d786a358e3",
   "checks": [
+   {
+    "cmd": "python -B scripts/reproduce_v5.py",
+    "label": "full reproduction",
+    "ok": true,
+    "required": true,
+    "returncode": 0,
+    "summary": "Completed the declared check successfully."
+   },
    {
     "cmd": "verify existing run identity and fingerprints",
     "label": "current run manifest",
@@ -385,7 +402,7 @@
     "ok": true,
     "required": true,
     "returncode": 0,
-    "summary": "Completed the declared check successfully."
+    "summary": "Executed once during this invocation's reproduction; reused after run, source, reference and output fingerprints were verified."
    },
    {
     "cmd": "python scripts/audit_observation_leakage.py",
@@ -393,7 +410,7 @@
     "ok": true,
     "required": true,
     "returncode": 0,
-    "summary": "Completed the declared check successfully."
+    "summary": "Executed once during this invocation's reproduction; reused after run, source, reference and output fingerprints were verified."
    },
    {
     "cmd": "python scripts/audit_lean_sources.py",
@@ -444,12 +461,20 @@
     "summary": "Completed the declared check successfully."
    },
    {
-    "cmd": "python -B -m pytest -q -m 'not release_audit and not numerical and not auxiliary' -p no:cacheprovider --basetemp <temporary>",
-    "label": "pytest (core)",
+    "cmd": "python -B -m pytest -q -m 'not release_audit' -p no:cacheprovider --basetemp <temporary>",
+    "label": "pytest",
     "ok": true,
     "required": true,
     "returncode": 0,
-    "summary": "Core suite: 559 passed; 154 deselected; 10 subtests passed."
+    "summary": "Full suite: 776 passed; 5 deselected; 10 subtests passed."
+   },
+   {
+    "cmd": "python scripts/verify_lean_archive.py --lean-exe <lean.exe>",
+    "label": "Lean proof archive",
+    "ok": true,
+    "required": true,
+    "returncode": 0,
+    "summary": "18 formal-proof sources compiled successfully."
    },
    {
     "cmd": "verify existing run identity and fingerprints",
@@ -461,12 +486,9 @@
    }
   ],
   "not_executed": [
-   "Full reproduction during this verification invocation (--no-reproduce).",
-   "Numerical-certification and auxiliary Python tests (--test-scope core; use --test-scope all for the full suite).",
-   "Lean archive compilation (source audit alone is not compilation).",
    "Isolated full-chain numeric stability rerun (enable with --stability)."
   ],
-  "run_id": "20261020T151355Z-10526ee4",
+  "run_id": "20261024T084548Z-d52375b5",
   "status": "PASS"
  },
  "verification_source_sha256": {
@@ -490,7 +512,7 @@
   "lean_proofs/yukawa_gauge_mixing.lean": "2a6453a225e48903c09eee3c024267fa8f6ae9a880c4d731ff939d657462f797",
   "pyproject.toml": "ef982a22bb1e72df7e3e60a8748923030e174f54ccc5c2bc80cf179387da3671",
   "requirements.txt": "59b2fc1fc6607605eb4bc9f8ccc2a64cf0c01ccd6a1086f64a20d26a4944064f",
-  "tests/conftest.py": "186264358121c3a84eae779279b81322f092054093961706f39583252159a290",
+  "tests/conftest.py": "2cdf95548858e564d4625b1580059db4f470403c3108b5fb5da922d86c172efe",
   "tests/test_audit.py": "05c1570ea40b8e5232be48fac6def482cfb6a44738e760cdc042b7eea12bcc78",
   "tests/test_bbn_interval.py": "b1d803c885ebd54f5f1fdbfeca2babc10a86160fc22d7ce79cb1e797bd5dbbe8",
   "tests/test_bbn_weak_interval.py": "37bc4808a0a87b38a179e4b2926f16ba45a341c57f0c3fd67d2238fde87e7db6",
@@ -505,17 +527,22 @@
   "tests/test_gravity_extensions.py": "0b63e6ec4444668682c9608d3683176592d71115a33de5aa2cb86196a0a4e4c8",
   "tests/test_independence.py": "a296d4aa10f9dcd33fcf5c8f0731a2f7bef865c5d7b7759d74bc0cf1a9911ee0",
   "tests/test_joint_response.py": "db315dabbdd749883963e5201993fce7eb5217221df6e2479a5f835c262856d0",
+  "tests/test_lepton_pole.py": "69953f1a04c00dc0e4915c6a59e007b6272eb83d63268e86405dacee4c916736",
+  "tests/test_lepton_self_energy.py": "5f2a95f476e52608436bf51274878718cdf9079e3fd419efca9ac7470e28d44f",
   "tests/test_matter_extensions.py": "427aa7681d56432f4f5c38336e2719eac1bb0b587836058013f6c41a38068982",
   "tests/test_matter_source_response.py": "00e6f110f3bb2c04f39ef2da231096f7a3b2c63629848b7757372dd5b8f88cd3",
+  "tests/test_native_colour_response.py": "269d22483dd4b3e484c498640cba61d91d3fea5d1b80695ee95c9b3e917c6cc0",
   "tests/test_native_condensate_interval.py": "dcd608893f65ed9a130b9c95a23ccd7d46b6f54e37caad8a94ddcbc8c39e1036",
+  "tests/test_native_curvature_susceptibility.py": "c44869ff496f46c9bd80aefb7927995833e5ee0a7e6c981a1dd842da65c72b7f",
   "tests/test_native_matter_matching.py": "580c294acc36f9fe81ef1f63d33aba2a133b3e4bd464e5f6dfda02d755124aa8",
   "tests/test_native_operations.py": "76e0ccd099a6583dad7a89aea09884ea569b081e0feed9bfa25f59cf842426e4",
   "tests/test_neutrino_mass_matrix.py": "addcebf29a881ca9c1f73fee817fec56830ba6d3be2c1ab3018eb18481075d9e",
   "tests/test_numeric_contracts.py": "3a5dc8f14e1eeb09b8e0e20cbf4295e742c6ea75917d71d2849515dbddcf5c6d",
   "tests/test_params.py": "7c729823fde7eb7f6bd2248f32e908ea72762eb354d2e290668c194c022880e9",
   "tests/test_physics_closures.py": "58d047d57ba689e0fbacb7a36e822ec925d11e151f698cf92580b5e6de0a328e",
-  "tests/test_precision_budget.py": "86f4e925185c2c8b754e4b9ff9b6a4e992f26baefc98ede153a7a14c6af7c2c4",
-  "tests/test_production_interval_propagation.py": "4cf70f089f57813dbcc208e114b587d5a7faa8f7708e93833704bae4353497a6",
+  "tests/test_precision_budget.py": "1e10a6bb66e49ea484f14143b4f8ec81525b2c49eceafccb55b23c563dbe7494",
+  "tests/test_precision_comparison.py": "189b46dfdcccf90be1a015f67a254c19622b7578659fb08fb5354a928509e83f",
+  "tests/test_production_interval_propagation.py": "8a86aa1d185cbf0bc6780f00961f2211af56588b84afebd1396d2c9a14bf361b",
   "tests/test_propagation.py": "67538fd2a3265dd480274654fc209c49f6b059d38f9a7bc1c87859c953c7a66f",
   "tests/test_quantity_contracts.py": "98c4f662c270b5b9a5328eab1bb29a0aa1b3a13b0f555bcea807df3bc60bac71",
   "tests/test_response_domains.py": "efa12f2028f39fab86f2a298008ae3a5f967f723edbc5312bcc093783e888a7d",
@@ -529,6 +556,6 @@
   "tests/test_trace_kernels_interval.py": "2b9321b3f8f57539fdeda115ec8c31bab153117bdc67d5b37b91ada9420d4ef0",
   "tests/test_tt_response_domain.py": "27c8ba20b6e00f0ea5fcd1fa1d8fd6ba692166231a6a75d971882a785ab6b0af",
   "tests/test_variational_foundations.py": "35ea8b65fe91ce0c386d515e6cb3bb6cdf7b6d117becf4798d8ea98ade23b16a",
-  "tests/test_verification_contracts.py": "08b3f3cd52c37383daa4c3ade5f96aa3d4b342fbc0fe93a213105cd7ff07a76c"
+  "tests/test_verification_contracts.py": "bdba758c5a138f76296a0aef0b0b4008b1d9730352fec5208476a4725edc7332"
  }
 }
