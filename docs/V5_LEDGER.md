@@ -2161,9 +2161,9 @@ vector t, observation vector y and covariance C, its coefficient is
 `1/sqrt(t^T C^-1 t)`. Orthogonal projection decomposes the fixed statistic
 into the scale displacement and the remaining residual. The corresponding
 diagnostic has twelve degrees of freedom; the fixed model retains thirteen.
-The fixed comparison has `chi2=29.5087984551` and `p=0.0055399331`.
-The common-scale diagnostic gives `alpha=0.9892824044` and
-`chi2=15.2966047426+14.2121937125`. All predictions retain their
+The fixed comparison has `chi2=29.5087010512` and `p=0.0055401107`.
+The common-scale diagnostic gives `alpha=0.9892824381` and
+`chi2=15.2965073386+14.2121937125`. All predictions retain their
 generated inputs. The projection needs one additional triangular
 right-hand side and four inner products.
 

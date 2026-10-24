@@ -90,8 +90,10 @@ The V5 records expose the numbers rather than hiding them behind a model label:
   mass scales, tensor response and cosmological propagation;
 - generated neutron--proton difference `1.28497 MeV`, free lifetime `915.54 s`
   and helium baryon fraction `Yp=0.246082`;
-- fixed-input DESI comparison `chi2=29.5088`, `p=0.00553993`, and the direct
-  HYREC realization `r_d=147.07455 Mpc`, `chi2=27.1191`;
+- fixed-input DESI comparison `chi2=29.5087`, `p=0.00554011`, and the direct
+  HYREC realization at the archived fixed background,
+  `r_d=147.07455 Mpc`, `chi2=27.1191`
+  ([calculation archive](https://github.com/bookwormseagull1980/coarse-graining-genesis/tree/4962752ee7edbc722c1a19c636327870d40900e6));
 - `16` explicit interval records, `8` production records with an attached
   interval, and `160` centre-only records. No full covariance or fabricated
   model-error envelope is published; see [PRECISION_BUDGET.md](docs/PRECISION_BUDGET.md).
@@ -385,8 +387,8 @@ and thermal neutrinos. The propagation and subsequent DESI BAO comparison
 retain their complete configurations and data identities. The calculated
 statistics are available in the parameter store and generated reviewer
 dashboard.
-The fixed thirteen-component DESI comparison gives `chi2=29.5088`
-and `p=0.00553993`. A common cosmological mass-normalization direction
+The fixed thirteen-component DESI comparison gives `chi2=29.5087`
+and `p=0.00554011`. A common cosmological mass-normalization direction
 has distance-ratio elasticity approximately `-0.74496`. Combining that
 direction with the independent CMB temperature of Fixsen (2009) permits
 only about `0.00063` in logarithmic normalization at three standard
