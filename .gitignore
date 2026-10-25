@@ -48,10 +48,10 @@ htmlcov/
 *.docx
 *.pdf
 
-# Published introductions
+# Published documentation
 !docs/从变化到万物_科普导读.docx
 !docs/From Change to Everything - A Popular Science Introduction.docx
-!docs/papers_overview.pdf
+!docs/*.pdf
 
 # OS / editor
 .DS_Store
