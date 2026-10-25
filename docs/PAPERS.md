@@ -12,7 +12,7 @@ implements their numerical realizations and finite certificates.
 |---|---:|---|
 | [A Spectral Construction of Natural-Number Arithmetic](A%20Spectral%20Construction%20of%20Natural-Number%20Arithmetic.pdf) | 91 | Generated arithmetic and ordered histories |
 | [Prime Decomposition and Operator Responses in Spectral Natural-Number Arithmetic](Prime%20Decomposition%20and%20Operator%20Responses%20in%20Spectral%20Natural-Number%20Arithmetic.pdf) | 112 | Prime decomposition and operator responses |
-| [The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap](The%20Spectrum%20of%20a%20Compact%20Internal%20Space%20I%20-%20Gauge%20Structure%20and%20a%20Scalar%20Mass%20Gap.pdf) | 158 | Gauge structure and scalar mass gap |
+| [The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap](The%20Spectrum%20of%20a%20Compact%20Internal%20Space%20I%20-%20Gauge%20Structure%20and%20a%20Scalar%20Mass%20Gap.pdf) | 157 | Gauge structure and scalar mass gap |
 | [The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales](The%20Spectrum%20of%20a%20Compact%20Internal%20Space%20II%20-%20Effective%20Couplings%20and%20Mass%20Scales.pdf) | 166 | Effective couplings and mass scales |
 | [The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation](The%20Spectrum%20of%20a%20Compact%20Internal%20Space%20III%20-%20Finite-Window%20Dynamics%20of%20Cosmic%20Structure%20Formation.pdf) | 86 | Finite-window cosmology |
 | [A Spectral Criterion for Emergent Gravity](A%20Spectral%20Criterion%20for%20Emergent%20Gravity.pdf) | 71 | Emergent gravity criterion |
