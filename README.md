@@ -1,18 +1,3 @@
-<!--
-Coarse-Graining Genesis Framework V5.0
-Author: Jinku Guo <guojk@nwpu.edu.cn>
-Northwestern Polytechnical University, Xi'an 710072, China
-ORCID: 0009-0000-6600-6171
-References:
-DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
-DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
-DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
-DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
-DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
-DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
-Full bibliography: REFERENCES.md and CITATION.cff.
--->
-
 # Coarse-Graining Genesis Framework V5
 
 Version 5.0.2.
@@ -25,56 +10,77 @@ The canonical DOI for the V5 release series is
 It resolves to the latest published version; the Git tag identifies the exact
 source revision used for a calculation.
 
-An auditable spectral-to-physics calculation chain. V5 carries one provenance
-record from a compact internal spectrum and finite response domain through
-effective couplings, matter scales, macroscopic tensor response and cosmological
-observables. Every reported quantity is bound to its source, normalization,
-units, approximation and comparison data, while interval certificates and
-independent regression checks make the published calculation reproducible.
-The physical interpretation and analytic hypotheses are stated in the companion
-papers; this repository makes their finite computational realization inspectable.
-
 Author: Jinku Guo, Northwestern Polytechnical University, Xi'an 710072, China.
 Email: guojk@nwpu.edu.cn. ORCID: [0009-0000-6600-6171](https://orcid.org/0009-0000-6600-6171).
 
-## What is distinctive
+## Research overview
 
-V5 is not a collection of unrelated sector calculations. Its central object is
-a provenance-preserving map from one finite spectral source record to successive
-response layers: effective couplings, matter scales, macroscopic tensor response
-and cosmological observables. The same source ledger, normalizations and matching
-relations are carried through the chain, so a reader can inspect where a result
-is generated, where a comparison enters, and where an approximation begins.
+### Executing the common generating chain
 
-The ontological dependency graph has one zero-argument root: minimal unbiased
-compositional change.  Its canonical generated realization supplies the source
-record and every physical sector.  Probes are response coordinates, subsystem
-boundaries retain the complementary part of the same state, and observational
-records set units or test predictions; none is a second dynamical source.  The
-executable contract is `cg_core.content_response.closed_generated_world_contract`.
+The Coarse-Graining Genesis Framework V5 is the computational implementation of a generating approach to mathematical physics. Its common source is minimal unbiased compositional change, realized through the Gaussian and compact spectral construction. It evaluates the resulting chain through gauge response, mass scales, effective couplings and cosmological readouts. Each quantity is accompanied by a definition and its upstream dependencies, so a numerical result can be followed back through the construction that produces it.
+
+This makes V5 more than a catalogue of output values. Source normalizations, shared endpoints, representation factors, unit conversions and approximation prescriptions enter a dependency structure. A change to one shared input is propagated to the quantities that depend on it. Experimental reference data are maintained as comparison data, allowing the consequences of the generated relations to be examined without feeding the comparison residual back into their source definitions.
+
+### Structural and numerical outputs
+
+The implementation realizes the canonical matter bundle with its sixteen-dimensional complex fibre and the normalized spectral responses used by the gauge-matter construction. Source support and screening conditions select the integer domain $R=5$. The tensor endpoint is evaluated from the same eight-branch response used in the analytic derivation.
+
+An exact change of variable reduces that response to a positive coefficient divided by $c=kL$. One outward enclosure of the coefficient determines both the root and its derivative. The saved rational certificate gives
+
+$$
+2.493533986626\le kL\le2.493534629628,
+$$
+
+with width $6.43002\times10^{-7}$. Its floating-point center is approximately 2.4935343325. Shared endpoint dependence is retained when this enclosure is propagated to derived quantities. In the recorded calculation the induced relative interval width for the electron mass is about $1.28601\times10^{-5}$.
+
+The generated Yang-Mills calculation includes the positive collective radial response and the complete coexact connection sector. It evaluates the equilibrium gap and the curvature response of the defined generated operator. Retaining the complete response has a measurable numerical effect. The current release records a curvature-variance excess of about 11.42 percent and an integrated-memory excess of about 5.77 percent over the radial replacement. These calculations make the information lost in a scalar reduction directly visible.
+
+Particle-sector outputs include mass-transfer relations, gauge normalization, finite electroweak matching and decay readouts. Cosmological calculations include homogeneous backgrounds, neutrino-related normalization tests, perturbation outputs and primordial-abundance estimates. Their shared inputs make it possible to examine correlations across sectors and locate the source of a discrepancy.
+
+### Numerical evidence with a defined meaning
+
+V5 separates numerical centers, rigorous interval records, perturbative approximations and comparisons with reference data. The endpoint enclosure is a rational certificate with explicit quadrature and tail control. Propagated intervals preserve the dependence on that endpoint. Multi-input physical readouts retain their own matching and approximation information.
+
+The release also records the coverage of its interval calculations. This makes a precise uncertainty assessment possible for each quantity. A displayed center can be used as a reproducible numerical result, while a certified interval carries the stronger enclosure statement supplied by its construction. The two forms of evidence remain distinguishable throughout the output.
+
+The current numerical record includes $\sigma_8$ near 0.81233 and $S_8$ near 0.83226 from the stated cosmological calculation. Nuclear and abundance outputs carry their associated finite-rate and spectral-input information. Cross-sector comparisons can therefore be reproduced and assessed at their actual approximation level.
+
+### Connection to formal proof
+
+V5 and the Lean foundation library supply complementary forms of evidence. Lean declarations prove the indexed source, arithmetic and physical-interface theorems under their explicit formal definitions. V5 evaluates the finite spectral integrals, fixed points, matrix elements and observational mappings associated with those constructions. Structural certificates connect selected executable quantities to the corresponding mathematical identities.
+
+This division makes the full research chain inspectable. A structural theorem establishes the object and its properties. An executable definition fixes the finite calculation. A numerical certificate controls the enclosed quantity. A physical comparison then tests the stated interpretation and matching prescription.
+
+### What the framework contributes
+
+V5 turns a broad generating construction into a reproducible quantitative system. Its principal achievements are the common dependency chain, the selected spectral domain, the certified tensor endpoint, the generated Yang-Mills gap calculation, linked particle and cosmological readouts, and explicit sensitivity to retained response channels.
+
+The strongest advantage is the ability to follow a result across mathematical, numerical and physical layers. Shared origins create testable relations, and recorded dependencies make their consequences visible. V5 provides the computational means to study those relations with finite calculations whose definitions, precision and comparison data can be examined independently.
+
+### Computational entry points
+
+The executable source contract is
+`cg_core.content_response.closed_generated_world_contract`. Its canonical
+generated realization supplies the source record and physical sectors. Probes
+are response coordinates, subsystem boundaries retain complementary state
+information, and observational records supply dimensional units or comparisons.
 
 The concrete matter bundle is built by
-`cg_core.canonical_matter_bundle.generated_matter_bundle()`: its base is the
+`cg_core.canonical_matter_bundle.generated_matter_bundle()`. Its base is the
 generated Hermitian four-carrier, its fibre is the complete sixteen-coordinate
-source matter carrier, and relative frames use the same source action.
-Their transition cocycle and component compatibility are proved in the
-companion Lean physical branch (`Physical.CanonicalMatterBundle`). That is a
-documentary cross-reference, not a V5 build dependency; V5's numerical chain
-does not import that repository. General bundle comparison lemmas do not supply
-an additional bundle or compatibility premise to this construction.
-
-This makes the release a concrete test of a broader physical question: how much
-of a macroscopic description can be inherited from a common spectral source
-without silently replacing generated quantities by sector-by-sector fits. The
-software does not replace the analytic proofs or the observational papers. It
-provides the finite, executable and audit-ready realization needed to examine
-that claim.
+source matter carrier, and relative frames use the source action. The transition
+cocycle and component compatibility are proved in the companion Lean module
+`Physical.CanonicalMatterBundle`. That cross-reference identifies the formal
+result; the V5 numerical build remains independent of the Lean repository.
 
 ## Numerical evidence in the release
 
-Current verified calculation: version `5.0.2`, run `20261024T084548Z-d52375b5`, `262`
-parameter records, `261` derived, `0` pending, `776` passing tests. The
-canonical numbers are collected in [RELEASE_FACTS.md](docs/RELEASE_FACTS.md).
+The current release record is version `5.0.2`, run
+`20261025T021453Z-a4c66902`, with `262` parameter records, `261` derived
+records and `0` pending records. It records `648` passing CI-core tests in a
+separate check; the complete test suite was not rerun for that record. The
+canonical numerical and verification facts are collected in
+[RELEASE_FACTS.md](docs/RELEASE_FACTS.md).
 
 The V5 records expose the numbers rather than hiding them behind a model label:
 
@@ -205,7 +211,7 @@ blocks, their self-adjoint Hessian, the positive bottom and the finite Fock
 gap; `capacity_closure` records the outward interval lower bound and
 `generated_ym_gap_mass` records the mass.
 
-**V5/Lean solves the generated Yang--Mills mass gap.  4D QCD does not exist as a traditional 4D quantum field: the conventional 4D QFT construction cannot construct the 4D quantum field or prove the Yang--Mills mass gap.**
+**V5 certifies a strictly positive, attained spectral bottom for the generated Yang--Mills operator at the TT endpoint. The companion Lean library proves the generated IR-edge operator theorem.**
 
 The solved operator is the generated finite Yang--Mills operator.  The Lean
 zero-argument theorem proves the IR-edge generated operator; V5 computes the
