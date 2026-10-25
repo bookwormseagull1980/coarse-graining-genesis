@@ -146,3 +146,25 @@ provides space for these details.
 Subjects: computational physics, generated gauge structure, Yang-Mills mass
 gap, Standard Model, spectral geometry, effective couplings, electroweak
 matching, emergent gravity, cosmology, validated numerics and interval arithmetic.
+
+## Research subjects and results
+
+### Primary subjects
+
+Computational physics; Standard Model; Yang-Mills theory; Mass gap; Gauge coupling constants; Fermion masses; Higgs physics; Emergent gravity; Cosmology; Spectral methods; Validated numerics; Reproducible research.
+
+### Research subjects
+
+Gauge theory; Chiral matter; Fermion generations; Mass hierarchies; Charged lepton masses; Electroweak scale; Electroweak matching; Higgs mass; Top quark decay; Spectral geometry; Gravitational response; Cosmic expansion; Matter power spectrum; Structure growth; Primordial abundances.
+
+### Methods
+
+Scientific computing; Numerical analysis; Interval arithmetic; Error propagation; Spectral tail bounds; Numerical quadrature; Root finding; Spectral truncation; One-loop calculations; Parameter dependence; Automated testing; Computational reproducibility; Python; Numerical certificates; Reference-data comparison.
+
+### Results and research questions
+
+Reproducible calculations of gauge couplings and mass scales; Generated Yang-Mills spectral gap; Unique transverse-traceless endpoint with numerical enclosure; Correlated fermion mass relations; Electroweak matching from a common spectral source; Coupled particle and cosmological observables; Certified spectral tails and quadrature errors; Reproducible matter-clustering amplitudes sigma8 and S8.
+
+### Chinese subject terms
+
+计算物理; 标准模型; 杨米尔斯质量间隙; 规范耦合; 费米子质量; 电弱匹配; 希格斯物理; 涌现引力; 宇宙学; 区间算术; 可复现研究; 数值认证.

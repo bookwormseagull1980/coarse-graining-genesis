@@ -20,24 +20,66 @@ abstract: V5 is the executable numerical branch of a mathematical-physics progra
   geometry, gauge-matter response, effective couplings, mass scales, emergent gravity and cosmological
   observables.
 keywords:
-- computational physics
-- mathematical physics
-- minimal change
-- spectral geometry
-- gauge theory
-- yang mills
-- mass gap
-- standard model
-- particle physics
-- electroweak theory
-- emergent gravity
-- cosmology
-- coarse graining
-- spectral methods
-- scientific computing
-- validated numerics
-- interval arithmetic
-- reproducible research
-- numerical analysis
-- python
+- "Computational physics"
+- "Standard Model"
+- "Yang-Mills theory"
+- "Mass gap"
+- "Gauge coupling constants"
+- "Fermion masses"
+- "Higgs physics"
+- "Emergent gravity"
+- "Cosmology"
+- "Spectral methods"
+- "Validated numerics"
+- "Reproducible research"
+- "Gauge theory"
+- "Chiral matter"
+- "Fermion generations"
+- "Mass hierarchies"
+- "Charged lepton masses"
+- "Electroweak scale"
+- "Electroweak matching"
+- "Higgs mass"
+- "Top quark decay"
+- "Spectral geometry"
+- "Gravitational response"
+- "Cosmic expansion"
+- "Matter power spectrum"
+- "Structure growth"
+- "Primordial abundances"
+- "Scientific computing"
+- "Numerical analysis"
+- "Interval arithmetic"
+- "Error propagation"
+- "Spectral tail bounds"
+- "Numerical quadrature"
+- "Root finding"
+- "Spectral truncation"
+- "One-loop calculations"
+- "Parameter dependence"
+- "Automated testing"
+- "Computational reproducibility"
+- "Python"
+- "Numerical certificates"
+- "Reference-data comparison"
+- "Reproducible calculations of gauge couplings and mass scales"
+- "Generated Yang-Mills spectral gap"
+- "Unique transverse-traceless endpoint with numerical enclosure"
+- "Correlated fermion mass relations"
+- "Electroweak matching from a common spectral source"
+- "Coupled particle and cosmological observables"
+- "Certified spectral tails and quadrature errors"
+- "Reproducible matter-clustering amplitudes sigma8 and S8"
+- "计算物理"
+- "标准模型"
+- "杨米尔斯质量间隙"
+- "规范耦合"
+- "费米子质量"
+- "电弱匹配"
+- "希格斯物理"
+- "涌现引力"
+- "宇宙学"
+- "区间算术"
+- "可复现研究"
+- "数值认证"
 doi: 10.5281/zenodo.22067005
