@@ -1,35 +1,43 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+message: If you use this software, please cite it as below.
 authors:
-  - family-names: Guo
-    given-names: Jinku
-    affiliation: "Northwestern Polytechnical University, Xi'an, China"
-    orcid: "https://orcid.org/0009-0000-6600-6171"
-title: "Coarse-Graining Genesis Framework"
-version: "5.0.2"
+- family-names: Guo
+  given-names: Jinku
+  affiliation: Northwestern Polytechnical University, Xi'an, China
+  orcid: https://orcid.org/0009-0000-6600-6171
+title: Coarse-Graining Genesis Framework
+version: 5.0.2
 date-released: 2026-10-20
-license: "MIT"
+license: MIT
 type: software
-repository-code: "https://github.com/bookwormseagull1980/coarse-graining-genesis"
+repository-code: https://github.com/bookwormseagull1980/coarse-graining-genesis
 identifiers:
-  - type: doi
-    value: "10.5281/zenodo.22067005"
-    description: "Zenodo DOI for the V5 version series"
-abstract: >-
-  An auditable spectral-to-physics calculation chain that carries one finite
-  source record through effective couplings, matter scales, macroscopic tensor
-  response and cosmological observables. The V5 release keeps generated
-  quantities, comparison data, normalizations and approximations distinct while
-  providing provenance-preserving response maps, interval certificates,
-  fixed-input propagation and independent regression checks.
+- type: doi
+  value: 10.5281/zenodo.22067005
+  description: Zenodo concept DOI for all versions
+abstract: V5 is the executable numerical branch of a mathematical-physics programme starting
+  from minimal unbiased compositional change. It follows one source record through compact spectral
+  geometry, gauge-matter response, effective couplings, mass scales, emergent gravity and cosmological
+  observables.
 keywords:
-  - spectral datum
-  - coarse-graining
-  - gauge structure
-  - fermion content
-  - mass scales
-  - mathematical physics
-  - computational physics
-  - spectral geometry
-  - cosmology
-  - reproducible research
+- computational physics
+- mathematical physics
+- minimal change
+- spectral geometry
+- gauge theory
+- yang mills
+- mass gap
+- standard model
+- particle physics
+- electroweak theory
+- emergent gravity
+- cosmology
+- coarse graining
+- spectral methods
+- scientific computing
+- validated numerics
+- interval arithmetic
+- reproducible research
+- numerical analysis
+- python
+doi: 10.5281/zenodo.22067005
