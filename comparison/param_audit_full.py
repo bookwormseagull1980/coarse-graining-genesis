@@ -53,8 +53,8 @@ MAPPING = [
     ("m_t/m_u",              "m_t_over_m_u",        "m_t_over_m_u_obs", 1.0),
     ("m_t (GeV)",            "m_t_pred",            "m_t_obs",      1.0),
     ("m_b (GeV)",            "m_b_pred",            "m_b_obs",      1.0),
-    ("m_e (MeV)",            "m_e_pred",            "m_e_obs",      1.0),
-    ("m_mu/m_e",             "m_mu_over_m_e",       "m_mu_over_m_e_obs", 1.0),
+    ("m_e geom (MeV)",       "m_e_pred",            "m_e_obs",      1.0),
+    ("m_mu/m_e geom",        "m_mu_over_m_e",       "m_mu_over_m_e_obs", 1.0),
     ("m_d/m_s",              "m_s_over_m_d",        "m_d_over_m_s_obs", 1.0),
     ("Cabibbo input r_G",     "md_over_ms_geo",      None,           1.0),
     ("m_s/m_d",              "m_s_over_m_d",        "m_d_over_m_s_obs", 1.0),
@@ -137,6 +137,7 @@ def main() -> int:
     print("run_id:", manifest["run_id"])
     print("Solar rows distinguish the static spectrum from the specified tilt propagation readout.")
     print("Effective Z observables use one common neutral-current amplitude; Gamma_l is per flavour.")
+    print("Charged-lepton geom rows compare geometric readouts with pole data under G_l=1 (diagnostic).")
 
     def getv(store, key):
         v = store.get(key)

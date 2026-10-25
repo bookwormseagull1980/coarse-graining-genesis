@@ -17,7 +17,7 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 # V5 Verification Report
 
-Generated: 2026-10-24 16:54:36
+Generated: 2026-10-25 10:19:42
 Python: `3.13.12`
 Root: `.`
 
@@ -31,6 +31,8 @@ a proof-library result does not certify a numerical run or the entire manuscript
 
 ## Not Executed
 
+- Python test suite (enable with --pytest).
+- Lean archive compilation (source audit alone is not compilation).
 - Isolated full-chain numeric stability rerun (enable with --stability).
 
 No PASS claim is made for these omitted checks.
@@ -49,17 +51,11 @@ No PASS claim is made for these omitted checks.
 | numeric precision audit | PASS | `python scripts/audit_numeric_precision.py` |
 | path portability audit | PASS | `python scripts/audit_path_portability.py` |
 | full comparison table | PASS | `python comparison/param_audit_full.py` |
-| pytest | PASS | `python -B -m pytest -q -m 'not release_audit' -p no:cacheprovider --basetemp <temporary>` |
-| Lean proof archive | PASS | `python scripts/verify_lean_archive.py --lean-exe <lean.exe>` |
 | run identity after verification | PASS | `verify existing run identity and fingerprints` |
-
-Full Python test results: 776 passed, 5 deselected, 10 subtests passed.
-The complete release audits are executed in the steps above;
-their duplicate test wrappers are deselected.
 
 Audits executed once during reproduction and reused after current-run fingerprint validation: parameter provenance audit, observation leakage audit.
 
-Run identity: `20261024T084548Z-d52375b5`.
+Run identity: `20261025T021453Z-a4c66902`.
 Bound calculation sources: 168; verification sources: 65; outputs: 2; reference identities: 99; solver execution identities: 1.
 
 ### Store Summary
@@ -285,22 +281,22 @@ the finite coefficient is evaluated once without additional RG evolution.
 The VEV and its square are separately truncated series.
 Finite native-source readout corrections retain their source-matching definitions.
 
-## Charged-lepton finite matching
+## Charged-lepton pole-to-running conversion
 
-The generated masses define three pole conditions of the common electroweak action.
+In the specified G_l=1 realization, the generated masses define three pole conditions of the common electroweak action.
 The photon, W, Z and Higgs terms retain finite charged-lepton masses.
 - matching scale: 91.12483998892053 GeV
-- weighted one-loop correction: 0.009337517754041473
-- finite weak part: 2.348914726193714e-06
+- weighted one-loop pole-to-running Delta_D: 0.009337517754041473
+- finite weak part of Delta_D: 2.348914726193714e-06
 - numerical interval: [0.009337517754041472, 0.009337517754041475]
 - work: {'analytic_interval_B_evaluations': 9, 'distinct_A_values': 6, 'distinct_B_values': 9, 'quadrature_integrand_evaluations': 0}
 - uncomputed orders: two-loop electroweak and QED corrections; neutrino-mass contributions
 
 The interval encloses numerical evaluation at fixed input values; the perturbative remainder is separate.
 
-- required weighted matching: 0.01127358296141212
+- required weighted geometric-to-running Delta_C: 0.01127358296141212
 - reference standard uncertainty: 0.0005816838843775095
-- required minus predicted at the reference scale: 0.001936065880283626
+- required Delta_C minus Delta_D at the reference scale: 0.001936065880283626
 
 The comparison retains the uncomputed perturbative remainder; no theory significance is assigned.
 
@@ -413,10 +409,10 @@ and boundary values are registered with the calculation.
 
 | steps | maximum energy-balance residual | mass residual | minimum cell length | field solves |
 |---:|---:|---:|---:|---:|
-| 20 | 3.86083981625e-11 | 0 | 0.11686044012 | 21 |
-| 40 | 9.65207623028e-12 | 0 | 0.116860445311 | 41 |
+| 20 | 3.86083966446e-11 | 0 | 0.11686044012 | 21 |
+| 40 | 9.65208121761e-12 | 0 | 0.116860445311 | 41 |
 
-Energy-error reduction factor: 4.00000966024.
+Energy-error reduction factor: 4.00000743614.
 Final-position difference: 2.65796231913e-07.
 Time-step refinement is evaluated at fixed material-cell resolution.
 
@@ -502,8 +498,8 @@ Inputs: {'acceleration_ratio': 0.18377629847393065, 'duration': 0.05, 'initial_d
 Common constraint: -p_a^2/(12a)+k^2 p_D^2/(M a^2)+rho_vac a^3+M+W(a,D)=0
 Homogeneous limit: D=p_D=0 gives 3H^2=rho_vac+M/a^3
 Local response: at fixed a the exact periodic field solves the full RMS Poisson equation for the noncrossing cold displacement
-Verification: {'background_continuity': True, 'exact_flux_reconstruction': True, 'full_poisson_equation': True, 'lapse_constraint': True, 'noncrossing_flow': True, 'numerical_refinement': True, 'positive_physical_hamiltonian_hessian': True, 'retained_force_projection': True, 'uniform_exit_certificate': True}
+Verification: {'background_acceleration': True, 'background_continuity': True, 'background_friedmann': True, 'canonical_energy_exchange': True, 'exact_flux_reconstruction': True, 'full_poisson_equation': True, 'lapse_constraint': True, 'material_clock_domain': True, 'noncrossing_flow': True, 'numerical_refinement': True, 'positive_physical_hamiltonian_hessian': True, 'retained_force_projection': True, 'uniform_exit_certificate': True}
 State refinement difference: 1.0952610346448566e-14
-Operation counts: {'diagnostic_phase_points': 139264, 'exact_field_reconstructions': 134, 'potential_quadratures': 134, 'quadrature_node_evaluations': 12864, 'rational_exit_certificate_evaluations': 1, 'rhs_evaluations': 98}
+Operation counts: {'canonical_diagnostic_evaluations': 34, 'diagnostic_phase_points': 139264, 'exact_field_reconstructions': 100, 'material_readout_certificate_evaluations': 1, 'material_readout_evaluations': 34, 'material_readout_hypotenuse_evaluations': 34, 'material_readout_interval_square_roots': 2, 'material_readout_square_roots': 102, 'potential_quadratures': 100, 'quadrature_node_evaluations': 9600, 'rational_exit_certificate_evaluations': 1, 'rhs_evaluations': 64}
 
 The retained variational equations and the omitted spatial-mode residuals are recorded separately.

@@ -167,7 +167,7 @@ CLOSURES = [
     ("Delta m31^2", "Delta_m31_sq", "Delta_m31_sq_obs", 1),
     ("sin^2 theta12", "sin2_theta12", None, 1),
     ("m_t (GeV)", "m_t_pred", "m_t_obs", 1),
-    ("m_e (MeV)", "m_e_pred", "m_e_obs", 1),
+    ("m_e geom (MeV)", "m_e_pred", "m_e_obs", 1),
     ("Delta2_R", "perturbation_amplitude", "Delta2_R_obs", 1),
     ("m_glueball (GeV)", "m_glueball", "m_glueball_obs", 1),
     ("long-root dE/M_G", "mass_gap_dE_over_MG", None, 1),
@@ -196,7 +196,7 @@ CLOSURES = [
     ("sector step Delta", "sector_alpha_delta", None, 1),
     ("sin^2 theta(M_Z)", "s2_thetaW_MZ", "sin2thetaW_MSbar_obs", 1),
     ("sin^2 theta_eff^l", "sin2_theta_eff_l_pred", "sin2thetaW_eff_obs", 1),
-    ("m_tau (GeV)", "m_tau_pred", "m_tau_obs", 1),
+    ("m_tau geom (GeV)", "m_tau_pred", "m_tau_obs", 1),
     ("order parameter lambda", "order_parameter_lambda", None, 1),
     ("Z quantum shift", "Z_quantum_shift", None, 1),
     ("m_WR (GeV)", "geometric_ewsb_m_WR", None, 1),
@@ -256,6 +256,7 @@ def summary() -> None:
     print("\n" + "=" * 66)
     print("  V5 CLOSURE TABLE")
     print("=" * 66)
+    print("  Charged-lepton geom rows compare geometric readouts with pole data under G_l=1 (diagnostic).")
     print(f"  {'quantity':24s} {'value':>14s} {'reference':>12s} {'dev':>8s}")
     for label, key, reference_key, reference_multiplier in CLOSURES:
         try:

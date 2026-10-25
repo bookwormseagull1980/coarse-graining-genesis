@@ -709,12 +709,12 @@ def report_text(results: list[dict], not_executed: list[str]) -> str:
         lepton_matching = extension.get("matter_extensions", {}).get(
             "electroweak_finite_matching", {}).get("generated_charged_lepton_realization", {})
         if lepton_matching:
-            lines += ["## Charged-lepton finite matching", "",
-                      "The generated masses define three pole conditions of the common electroweak action.",
+            lines += ["## Charged-lepton pole-to-running conversion", "",
+                      "In the specified G_l=1 realization, the generated masses define three pole conditions of the common electroweak action.",
                       "The photon, W, Z and Higgs terms retain finite charged-lepton masses.",
                       f"- matching scale: {lepton_matching['scale_GeV']:.16g} GeV",
-                      f"- weighted one-loop correction: {lepton_matching['charged_lepton_log_correction']:.16g}",
-                      f"- finite weak part: {lepton_matching['finite_weak_log_correction']:.16g}",
+                      f"- weighted one-loop pole-to-running Delta_D: {lepton_matching['charged_lepton_log_correction']:.16g}",
+                      f"- finite weak part of Delta_D: {lepton_matching['finite_weak_log_correction']:.16g}",
                       f"- numerical interval: {lepton_matching['charged_lepton_log_correction_interval']}",
                       f"- work: {lepton_matching['evaluation_work']}",
                       f"- uncomputed orders: {lepton_matching['uncomputed_orders']}", "",
@@ -722,9 +722,9 @@ def report_text(results: list[dict], not_executed: list[str]) -> str:
             lepton_test = extension.get("joint_response", {}).get(
                 "running_mass_comparison", {}).get("generated_pole_lepton_test", {})
             if lepton_test:
-                lines += [f"- required weighted matching: {lepton_test['required_weighted_matching']:.16g}",
+                lines += [f"- required weighted geometric-to-running Delta_C: {lepton_test['required_weighted_matching']:.16g}",
                           f"- reference standard uncertainty: {lepton_test['reference_standard_uncertainty']:.16g}",
-                          f"- required minus predicted at the reference scale: {lepton_test['required_minus_predicted']:.16g}", "",
+                          f"- required Delta_C minus Delta_D at the reference scale: {lepton_test['required_minus_predicted']:.16g}", "",
                           "The comparison retains the uncomputed perturbative remainder; no theory significance is assigned.", ""]
 
         weak_comparison = extension.get("joint_response", {}).get("neutron_helium_comparison", {})

@@ -24,11 +24,11 @@ execution commands and the validation map.
 ## Current verified calculation
 
 ```text
-run identity          20261024T084548Z-d52375b5
+run identity          20261025T021453Z-a4c66902
 parameter records     262
 DERIVED / PENDING     261 / 0
 complete definitions  262/262
-Python tests          776 passed, 5 deselected, 10 subtests
+Python tests          648 CI-core tests passed separately; full suite not rerun
 structural certs      11 PASS
 internal Lean archive 18 files
 explicit intervals    16
@@ -879,18 +879,20 @@ definitions.
 
 #### Charged-lepton pole conditions
 
-The three generated charged-lepton masses define pole conditions of the
-same leading electroweak action. At the generated Z scale, the complete
+In the specified `G_l=1` realization, the three generated charged-lepton
+masses define pole conditions of the same leading electroweak action. At the
+generated Z scale, the complete
 one-loop mass kernel contains photon, W, Z and Higgs terms, with massless
 neutrino partners and finite charged-lepton masses. The coefficient is
 Martin (2016), Eq. (2.20), with charge -1 and isospin -1/2. The small-mass
 weak limit agrees with Martin (2019), Sec. II.C. Pole inversion gives
-log C_l=-Re(delta s_l)/(2 M_l²); the weights (-1,2,-1) cancel the common
+log D_l=-Re(delta s_l)/(2 M_l²); the weights (-1,2,-1) cancel the common
 VEV conversion, including conversion to a fixed Fermi-VEV convention.
 
 The same action fixes alpha(Q)=0.007799932720360654. Its weighted photon
 and finite weak terms are 0.009335168839315287 and 2.3489147262e-6,
-giving Delta_L=0.00933751775404148. Nine analytic two-point functions
+giving the pole-to-running combination Delta_D=0.00933751775404148. Nine
+analytic two-point functions
 are evaluated with 50-digit interval arithmetic, without quadrature.
 Independent high-precision parameter integrals test the components.
 The numerical interval encloses this one-loop coefficient at fixed
@@ -1770,6 +1772,20 @@ subspace invariance are verified against the complete native operator.
 A gravitational realization varies this phase, amplitude, internal
 source and metric together in its action.
 
+The same phase equation determines the coordinate acceleration, including
+the source's time dependence. Write
+`chi=eta+log(1-P/m^2)/2`, and let `v=a dx/dt` be peculiar velocity in
+an FLRW background, with `D_t=partial_t+(v/a).grad`. Its exact equation is
+`D_t v+H v=H |v|^2 v-(1-|v|^2)*(grad(chi)/a+v partial_t chi)`.
+With weak metric perturbations, the slow-motion force is
+`-grad(Phi+chi)/a-v partial_t chi`, together with the metric and
+velocity remainder obtained from the covariant equation. The drift
+contains the time dependence of both the conformal source and the
+amplitude correction through `chi`. The static
+dynamical potential is `Phi+chi` when the time-source term is within
+the stated approximation. This relation follows from the same matter
+action and phase clock used above.
+
 The calculation supplies the occupied-matter energy response on the stated
 native scalar carrier. A tensor propagation calculation varies its collective
 action with the external geometric source, reduces the constraints, and
@@ -1788,6 +1804,31 @@ variable. Its actual generated map is the solution of `U_eta+3T-V=0`.
 At fixed canonical momenta this equation has derivative
 `h_H=U_etaeta+9T+V`; the velocity curvature used in perturbation theory is
 `h=U_etaeta-9T+V`.
+
+At fixed positive amplitude `y=E^2` and the same positive coupling `g`,
+set `z=L^-2` and `u=g*y/z`.
+The complete relative potential gives
+`U_eta=mu^4*(16*z*y-2*u*I'(u))` and
+`U_etaeta=mu^4*(32*z*y+4*u*I'(u)+4*u^2*I''(u))>0`.
+Here `I'(u)=sum_j beta_j*u/[gamma_j*(gamma_j+u)]`, with positive
+spectral coefficients and `sum_j beta_j/gamma_j^2<infinity`.
+For fixed canonical data, including spatial gradients, write
+`T=t0*exp(3*eta)`, `G=g0*exp(-3*eta)` and `V=v0*exp(-eta)`,
+with nonnegative finite coefficients. The full source equation is
+`C_H=U_eta+3T-3G-V=0`, and its derivative is
+`h_H=U_etaeta+9T+9G+V>0`. Moreover, `C_H` tends to negative and
+positive infinity at the two ends of the eta axis. Thus this source
+equation has a unique root for each such canonical state. The numerical
+evaluator brackets this root within its declared finite range; propagation
+is evaluated on the positive physical branch certified below.
+
+The implicit response is `delta eta=-(D_x C_H delta x)/h_H`, with
+the other canonical data denoted by `x`. Substitution into the linearized
+matter and metric equations retains their common source feedback.
+The velocity curvature is `h=U_etaeta-9T+9G+V`; its sign and the spatial
+propagation form determine the physical branch. The archived background
+and plane-symmetric calculations evaluate the nonlinear source law and
+propagation margins on their stated finite intervals.
 
 The explicit occupied initial state uses `L0^2=3*pi`, the stationary
 amplitude at that radius, `T0=V0=-U_eta/2` and positive expansion fixed
@@ -2003,6 +2044,19 @@ displacement interval. At zero displacement the homogeneous equation
 is the dust--vacuum Friedmann equation; holding the scale factor fixed
 recovers the same local RMS field. These are the two limits of this
 nonrelativistic finite realization.
+
+The saved canonical states also determine the material density contrast,
+peculiar speed and expansion rate. In the retained weak-field metric the
+clock rate is `sqrt(1+2 Phi-u^2)`. The same rational exit box bounds the
+density contrast by `[-1/501,1/499]`, speed by `1.70e-4 c`, expansion
+from below by `0.875 H0`, and `|2 Phi-u^2|` by `1/5000`. Its clock
+square-root Taylor remainder is below `5.01e-9`. These bounds are stored
+under `expanding_window.uniform_certificate.material_readings` alongside
+the state and force certificate. The remainder refers to this specified
+metric reading. Saved-state diagnostics reuse the reconstructed potential
+for the canonical derivatives and readings. Their work and the two
+additional outward interval square roots are counted separately; they
+require no additional field reconstruction or evolution step.
 
 ### Free covariance and supplied scale profiles
 

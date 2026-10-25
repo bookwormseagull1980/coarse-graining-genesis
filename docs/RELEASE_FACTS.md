@@ -2,8 +2,8 @@
 
 Status: current verified calculation<br>
 Version: 5.0.2<br>
-Run: `20261024T084548Z-d52375b5`<br>
-Date: 2026-10-24
+Run: `20261025T021453Z-a4c66902`<br>
+Date: 2026-10-25
 
 This page is the single numerical reference for the release.  It is generated
 from `cg_params.json`, `run_manifest.json` and `V5_VERIFICATION_REPORT.md`.
@@ -16,7 +16,7 @@ from `cg_params.json`, `run_manifest.json` and `V5_VERIFICATION_REPORT.md`.
 | `DERIVED` | `261` |
 | `PENDING` | `0` |
 | Complete quantity definitions | `262/262` |
-| Python tests | `776 passed, 5 deselected, 10 subtests` |
+| Python tests | `648 CI-core tests passed separately; full suite not rerun` |
 | Structural certificates | `11 PASS` |
 | V5 internal Lean archive | `18 files`, trust level 0 |
 | Explicit interval records | `16` |

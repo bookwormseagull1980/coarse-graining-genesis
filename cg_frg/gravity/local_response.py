@@ -57,11 +57,55 @@ def flux_jacobian(g, a0=1.0, epsilon=0.0):
     return mu[..., None, None]*np.eye(3) + c[..., None, None]*g[..., :, None]*g[..., None, :]
 
 
+def _rms_energy_terms(magnitude, a0, *, terms=('primitive', 'legendre', 'scale')):
+    """Unregularized Psi, g*J-Psi and 3*Psi-g*J for radial magnitudes.
+
+    Their small-field leading orders are x^3, x^3 and x^5, where
+    x=|g|/a0. Four-term alternating expansions at x<0.01 bound relative
+    truncation by 7.46e-18, 3.73e-17 and 9.47e-17, respectively.
+    Requested terms share powers and require no additional quadrature.
+    """
+    magnitude = np.abs(np.asarray(magnitude, dtype=float))
+    x = magnitude/a0
+    small = x < .01
+    answer = [np.empty_like(magnitude) for _ in terms]
+    if np.any(small):
+        z = x[small]**2
+        scale = a0*a0*x[small]*z
+        coefficients = {
+            'primitive': (1/3, -1/10, 3/56, -5/144),
+            'legendre': (2/3, -2/5, 9/28, -5/18),
+            'scale': (1/5, -3/14, 5/24, -35/176),
+        }
+        for result, name in zip(answer, terms):
+            values = coefficients[name]
+            polynomial = values[-1]
+            for coefficient in values[-2::-1]:
+                polynomial = coefficient+z*polynomial
+            result[small] = scale*(z*polynomial if name == 'scale' else polynomial)
+    if np.any(~small):
+        s = magnitude[~small]
+        denominator = np.hypot(s, a0)
+        potential = .5*(s*denominator-a0*a0*np.arcsinh(s/a0))
+        values = {'primitive': potential}
+        if any(name != 'primitive' for name in terms):
+            flux_work = s*s*s/denominator
+            if 'legendre' in terms:
+                values['legendre'] = flux_work-potential
+            if 'scale' in terms:
+                values['scale'] = 3*potential-flux_work
+        for result, name in zip(answer, terms):
+            result[~small] = values[name]
+    return tuple(answer)
+
+
 def primitive(g, a0=1.0, epsilon=0.0):
     w = np.sqrt(np.sum(g*g, axis=-1)+epsilon*epsilon)
-    def value(t):
-        return 0.5*(t*np.sqrt(t*t+a0*a0)-a0*a0*np.arcsinh(t/a0))
-    return value(w)-value(epsilon)
+    value, = _rms_energy_terms(w, a0, terms=('primitive',))
+    if epsilon == 0:
+        return value
+    offset, = _rms_energy_terms(epsilon, a0, terms=('primitive',))
+    return value-offset
 
 
 def background_response(background_gradient, *, a0=1.0):
@@ -657,11 +701,8 @@ def _plane_inverse_flux(current, a0):
 def _plane_legendre(current, a0):
     """H(j)=g*j-F(g), evaluated stably through the zero-gradient point."""
     g = _plane_inverse_flux(current, a0)
-    x = np.abs(g)/a0
-    answer = g*np.asarray(current)-primitive(g[..., None], a0)
-    small = x < .01
-    series = a0*a0*x**3*(2/3+x*x*(-2/5+x*x*(9/28-5*x*x/18)))
-    return np.where(small, series, answer)
+    answer, = _rms_energy_terms(g, a0, terms=('legendre',))
+    return answer
 
 
 @lru_cache(maxsize=8)

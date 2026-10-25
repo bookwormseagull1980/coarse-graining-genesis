@@ -163,8 +163,8 @@ The finite one-loop lepton transfer reduces the common running path
 to one weighted integral and supports outward interval bounds. The
 remaining matching coefficients satisfy a sharp logarithmic
 flavour-spread constraint after the calculated conversion terms.
-In the generated-pole realization, the same electroweak action gives the
-independent one-loop lepton combination `Delta_L=0.009337517754`, including
+In the specified `G_l=1` pole-condition realization, the same electroweak action
+gives the one-loop pole-to-running combination `Delta_D=0.009337517754`, including
 a finite weak contribution `2.348914726e-6`. Its numerical enclosure and
 perturbative order accompany the result; no reference mass fixes its inputs.
 
@@ -368,6 +368,10 @@ Its homogeneous limit gives the dust--vacuum Friedmann equation; freezing
 the expansion retains the same local nonlinear constitutive law. The
 remaining spatial approximation is the displacement window, whose omitted
 force is bounded and recorded separately.
+The same canonical states supply density, velocity, expansion and weak-field
+material-clock readings. Their uniform bounds use the existing rational
+exit box. Saved-state derivatives and readings share one reconstructed
+potential; the clock bounds add no field solve or trajectory step.
 
 Scientific values, complete operator and matching evaluations, interval
 certificates and fixed-input propagation results are registered in

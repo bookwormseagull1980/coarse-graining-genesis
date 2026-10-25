@@ -876,6 +876,61 @@ def expanding_rms_window():
                                         acceleration_ratio=1/5)
 
 
+def test_rms_energy_terms_against_positive_high_precision_integrals():
+    import mpmath as mp
+    from cg_frg.gravity.local_response import (
+        _rms_energy_terms, _plane_inverse_flux, _plane_legendre, primitive)
+    a0 = .3
+    ratios = np.array([0., 1e-12, 1e-7, 1e-4, .009999, .010001, .1, .5, 3.])
+    magnitudes = a0*ratios
+    actual = _rms_energy_terms(magnitudes, a0)
+    with mp.workdps(70):
+        scale = mp.mpf(a0)**2
+        for index, magnitude in enumerate(magnitudes):
+            x = mp.mpf(float(magnitude))/mp.mpf(a0)
+            expected = (
+                scale*x**3*mp.quad(lambda t: t*t/mp.sqrt(1+x*x*t*t), [0, 1]),
+                scale*x**3*mp.quad(
+                    lambda t: t*t*(x*x*t*t+2)/(1+x*x*t*t)**mp.mpf('1.5'), [0, 1]),
+                scale*x**5*mp.quad(
+                    lambda t: t**4/(1+x*x*t*t)**mp.mpf('1.5'), [0, 1]))
+            for values, reference in zip(actual, expected):
+                assert values[index] >= 0
+                if x == 0:
+                    assert values[index] == 0
+                elif x < mp.mpf('.01'):
+                    assert abs(mp.mpf(float(values[index]))/reference-1) < mp.mpf('2e-15')
+                else:
+                    # Closed forms outside the series branch have an absolute
+                    # rounding scale proportional to a0^2*x.
+                    assert abs(mp.mpf(float(values[index]))-reference) < 8*np.finfo(float).eps*scale*x
+    np.testing.assert_array_equal(primitive(np.c_[magnitudes, 0*magnitudes], a0), actual[0])
+    for current in (0., 1e-20, -1e-12, .03):
+        gradient = _plane_inverse_flux(current, a0)
+        expected, = _rms_energy_terms(gradient, a0, terms=('legendre',))
+        assert _plane_legendre(current, a0) == expected
+
+
+def test_rms_regularized_primitive_retains_its_flux_integral():
+    import mpmath as mp
+    from cg_frg.gravity.local_response import primitive
+    a0 = .3
+    with mp.workdps(70):
+        for epsilon in (.0002, .1):
+            for ratio in (0., .1, 2.):
+                magnitude = ratio*epsilon
+                r, e, a = map(mp.mpf, (magnitude, epsilon, a0))
+                expected = r*r*mp.quad(
+                    lambda t: t*mp.sqrt(r*r*t*t+e*e)
+                    /mp.sqrt(r*r*t*t+e*e+a*a), [0, 1])
+                actual = float(primitive(np.array([magnitude, 0., 0.]), a0, epsilon))
+                assert actual >= 0
+                if magnitude == 0:
+                    assert actual == 0
+                else:
+                    assert abs(mp.mpf(actual)/expected-1) < mp.mpf('3e-12')
+
+
 def test_expanding_rms_exact_field_and_uniform_constraint_window(expanding_rms_window):
     import json
     result = expanding_rms_window
@@ -905,8 +960,8 @@ def test_expanding_rms_energy_derivatives_from_independent_quadrature(expanding_
             theta = math.pi*u*u/2
             flux = mass*D*math.sin(theta)/(2*a*a*k)
             g = math.sqrt((flux*flux+flux*math.hypot(flux, 2*a0))/2)
-            # Independent convergent small-g expansion avoids cancellation
-            # in the primitive used by the production implementation.
+            # An independent expansion and adaptive quadrature check the
+            # energy derivatives of the fixed material window.
             potential = g**3/(3*a0)-g**5/(10*a0**3)+3*g**7/(56*a0**5)-5*g**9/(144*a0**7)
             return 4*a**3*u*(potential-g*flux)
         return quad(integrand, 0., 1., epsabs=1e-23, epsrel=1e-12)[0]
@@ -920,3 +975,59 @@ def test_expanding_rms_energy_derivatives_from_independent_quadrature(expanding_
     assert result['maximum_state_refinement_difference'] < 1e-10
     assert result['operation_counts']['exact_field_reconstructions'] == result['operation_counts']['potential_quadratures']
     assert result['operation_counts']['rational_exit_certificate_evaluations'] == 1
+
+
+def test_expanding_rms_material_readings_and_shared_field_work(expanding_rms_window):
+    result = expanding_rms_window
+    mass, vacuum = 3*result['inputs']['omega_m'], 3*result['inputs']['omega_vacuum']
+    k = result['inputs']['wavenumber']
+    rows = result['main']['rows']+result['refined']['rows']
+    bounds = result['uniform_certificate']['material_readings']
+    for row in rows:
+        a, D, pD, pa = row['state']
+        kinetic = k*k*pD*pD/(mass*a*a)
+        density = (mass+kinetic+row['potential_energy'])/a**3
+        assert row['background_density'] == pytest.approx(density, rel=2e-15)
+        assert row['expansion'] == pytest.approx(-pa/(6*a*a), rel=2e-15)
+        np.testing.assert_allclose(row['density_contrast_range'], [-D/(1+D), D/(1-D)],
+                                   rtol=2e-15, atol=0)
+        assert row['maximum_peculiar_speed'] == pytest.approx(2*k*abs(pD)/(mass*a), abs=1e-18)
+        assert abs(3*row['expansion']**2-vacuum-density) < 2e-12
+        assert abs(row['background_acceleration_residual']) < 2e-12
+        assert abs(row['canonical_energy_exchange_residual']) < 1e-20
+        assert row['density_contrast_range'][0] >= float(bounds['density_contrast'][0])
+        assert row['density_contrast_range'][1] <= float(bounds['density_contrast'][1])
+        assert row['maximum_peculiar_speed'] <= float(bounds['peculiar_speed_upper'])
+        assert row['expansion'] >= float(bounds['expansion_lower'])
+        assert row['potential_absolute_bound'] <= float(bounds['potential_absolute_upper'])
+        assert row['material_clock_domain']
+        rates = row['material_clock_rate_enclosure']
+        assert rates[0] >= float(bounds['clock_rate'][0]) > 0
+        assert rates[1] <= float(bounds['clock_rate'][1])
+        assert row['material_clock_taylor_remainder_bound'] <= float(bounds['clock_taylor_remainder_upper'])
+    work = result['operation_counts']
+    assert work['material_readout_evaluations'] == len(rows)
+    assert work['canonical_diagnostic_evaluations'] == len(rows)
+    assert work['exact_field_reconstructions'] == work['rhs_evaluations']+len(rows)+2
+    assert work['material_readout_square_roots'] == 3*len(rows)
+    assert work['material_readout_hypotenuse_evaluations'] == len(rows)
+    assert work['material_readout_certificate_evaluations'] == 1
+    assert work['material_readout_interval_square_roots'] == 2
+
+
+def test_expanding_rms_uniform_clock_bound_by_exact_rational_comparison(expanding_rms_window):
+    from fractions import Fraction as Q
+    bounds = expanding_rms_window['uniform_certificate']['material_readings']
+    eta = Q(bounds['clock_argument_absolute_upper'])
+    lower, upper = map(Q, bounds['clock_rate'])
+    remainder = Q(bounds['clock_taylor_remainder_upper'])
+    assert Q(bounds['density_contrast'][0]) <= -Q(1, 501)
+    assert Q(bounds['density_contrast'][1]) >= Q(1, 499)
+    assert 0 < eta < Q(1, 5000)
+    assert 0 < lower and lower*lower <= 1-eta
+    assert upper*upper >= 1+eta
+    assert remainder*remainder >= eta**4/(64*(1-eta)**3)
+    # The analytic Taylor enclosure bounds both ends of the allowed clock input.
+    for x in (-float(eta), float(eta)):
+        actual = abs(math.sqrt(1+x)-1-x/2)
+        assert actual <= float(remainder)+2*np.finfo(float).eps

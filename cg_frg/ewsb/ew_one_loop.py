@@ -29,8 +29,8 @@ with the factorized massless QCD/QED radiators. The generated alpha_Z
 is the common effective electromagnetic input at the Z reference scale.
 
 The two-point and self-energy expressions form a separate diagnostic
-implementation; their complete on-shell solver requires analytic
-zero-momentum and massless limits before use as an observable solver.
+implementation with analytic zero-momentum and massless limits. The
+production readout uses the improved-Born amplitudes specified above.
 Their light-quark effective masses follow Denner, eq. (8.10). The
 comparison calculation evaluates the production approximation on an
 independently specified reference set.
@@ -77,89 +77,175 @@ from cg_core.electroweak import (  # noqa: E402
 
 
 def _B0(p2: complex, m0: float, m1: float, mu: float) -> complex:
-    """Scalar two-point function B0(p^2; m0, m1), MS-bar subtracted.
+    """MS-bar finite part of -integral log([x m0²+(1-x)m1²-x(1-x)p²-i0]/mu²).
 
-    Denner eq. (4.23):
-
-        B0 = Delta + 2 - ln(m0 m1/mu^2)
-             + (m0^2-m1^2)/p^2 ln(m1/m0) - (m0 m1/p^2)(1/r - r) ln r
-
-    with r + 1/r = (m0^2+m1^2-p^2 - i eps)/(m0 m1), |r|<=1, r never crossing
-    the negative real axis.  The universal UV divergence
-    Delta = 2/(4-D) - gamma_E + ln(4 pi) is dropped (MS-bar); the finite
-    constant +2 is retained.  Special limits (one/two massless lines) are
-    implemented analytically.
-
-    Returns a complex number (the imaginary part encodes the threshold/i eps
-    branch).  All masses in GeV; mu is the MS renormalisation scale in GeV.
+    The zero and massless limits are analytic. Real threshold roots are
+    integrated with a logarithmic primitive; other cases use dimensionless
+    parameter quadrature. In particular
+    Im B0(s;0,0)=+pi for real s>0. No dimensionful small-momentum cutoff or
+    artificial finite imaginary regulator is used.
     """
     p2 = complex(p2)
     m0 = abs(float(m0))
     m1 = abs(float(m1))
+    mu = float(mu)
+    if not all(math.isfinite(x) for x in (p2.real, p2.imag, m0, m1, mu)) or mu <= 0:
+        raise ValueError("B0 requires finite momentum/masses and a positive scale")
     m0sq = m0 * m0
     m1sq = m1 * m1
-
-    # ---- p^2 = 0 ----
-    if abs(p2) < 1e-14:
+    if p2 == 0:
         if m0 == 0.0 and m1 == 0.0:
-            raise ValueError("B0(0; 0, 0) is IR divergent (only finite "
-                             "differences are used)")
-        if m0 == m1 and m0 > 0:
-            # B0(0; m, m) = Delta - ln(m^2/mu^2)   [the +2 cancels the
-            # (1/r-r) ln r term at p^2=0]  ->  -ln(m^2/mu^2)  (MS-bar)
-            return -cmath.log(m0sq / mu**2)
-        if m0 == 0.0 or m1 == 0.0:
-            # one massless line: B0(0;0,m) = 1 - ln(m^2/mu^2)
-            mz = m1 if m0 == 0.0 else m0
-            return 1.0 - cmath.log(mz * mz / mu**2)
-        # general m0 != m1, both massive
-        #   B0(0;m0,m1) = Delta + 1
-        #        - [ m0^2 ln(m0^2/mu^2) - m1^2 ln(m1^2/mu^2) ]/(m0^2 - m1^2)
-        num = m0sq * cmath.log(m0sq / mu**2) - m1sq * cmath.log(m1sq / mu**2)
-        return 1.0 - num / (m0sq - m1sq)
+            raise ValueError("B0(0; 0, 0) is IR divergent")
+        largest, smallest = max(m0, m1), min(m0, m1)
+        logarithm = 2*math.log(largest/mu)
+        if smallest == largest:
+            return complex(-logarithm)
+        if smallest == 0:
+            return complex(1-logarithm)
+        ratio = (smallest/largest)**2
+        gap = 1-ratio
+        if gap == 0:
+            return complex(-logarithm)
+        if ratio == 0:
+            return complex(1-logarithm)
+        log_ratio = math.log(ratio) if ratio < .5 else math.log1p(-gap)
+        return complex(1-logarithm+ratio*log_ratio/gap)
 
-    # ---- p^2 != 0 ----
     if m0 == 0.0 and m1 == 0.0:
-        # two massless lines (appears only in IR-singular difference terms;
-        # B0(p^2;0,0) = Delta + 2 - ln(-p^2/mu^2) - i pi for p^2>0)
+        if p2.imag == 0 and p2.real > 0:
+            return complex(2-math.log(p2.real/mu**2), math.pi)
         return 2.0 - cmath.log((-p2) / mu**2)
     if m0 == 0.0 or m1 == 0.0:
-        # one massless, one mass m
         m = m1 if m0 == 0.0 else m0
-        msq = m * m
-        # B0(p^2;0,m) = 2 - ln(m^2/mu^2) - (1 - m^2/p^2) ln(1 - p^2/m^2 - i eps)
-        z = 1.0 - p2 / msq
-        if abs(z.imag) < 1e-300 and z.real <= 0.0:
-            z = complex(z.real, -1e-20)  # -i eps just below the cut
-        return 2.0 - cmath.log(msq / mu**2) - (1.0 - msq / p2) * cmath.log(z)
+        ratio = p2/(m*m)
+        logarithm = 2*math.log(m/mu)
+        if abs(ratio) < .01:
+            # B0(s;0,m)-B0(0;0,m)=sum (s/m²)^n/[n(n+1)].
+            term, total = ratio/2, 0j
+            for n in range(1, 32):
+                total += term
+                term *= ratio*n/(n+2)
+                if abs(term) < 1e-17*abs(total):
+                    break
+            return 1-logarithm+total
+        if ratio == 1:
+            return complex(2-logarithm)
+        z = 1-ratio
+        if ratio.imag == 0 and ratio.real > 1:
+            return 2-logarithm-(1-1/ratio)*complex(math.log(-z.real), -math.pi)
+        return 2-logarithm-(1-1/ratio)*cmath.log(z)
 
-    # ---- general m0>0, m1>0 ----
-    K = (m0sq + m1sq - p2) / (m0 * m1)          # r + 1/r = K  (eq. 4.24)
-    if abs(p2.imag) < 1e-300 and p2.real > (m0 + m1) ** 2:
-        K = K - 1e-12j                            # -i eps above threshold
-    disc = K * K - 4.0
-    r = (K - cmath.sqrt(disc)) / 2.0
-    if abs(r) > 1.0:                              # enforce |r| <= 1
-        r = 1.0 / r
-    val = (2.0 - cmath.log(m0 * m1 / mu**2)
-           + (m0sq - m1sq) / p2 * cmath.log(m1 / m0)
-           - (m0 * m1 / p2) * (1.0 / r - r) * cmath.log(r))
-    return val
+    from scipy.integrate import quad
+
+    scale2 = max(abs(p2), m0sq, m1sq)
+    a, b, s = m0sq/scale2, m1sq/scale2, p2/scale2
+    offset = math.log(scale2/mu**2)
+    if p2.imag == 0:
+        delta = math.fsum((p2.real, -m0sq, -m1sq))/scale2
+        cross = 2*m0*m1/scale2
+        # Compare s-a-b with 2*m0*m1 before forming (m0+m1)^2.
+        # Squaring the rounded sum misclassifies s=m0² when m1 << m0.
+        if delta >= cross:
+            width = math.sqrt(max(0., (delta-cross)*(delta+cross)))/s.real
+            center = math.fsum((p2.real, m1sq, -m0sq))/(2*p2.real)
+            upper = center+width/2
+            lower = b/(s.real*upper)
+
+            def primitive(root):
+                # Integral_0^1 log|x-root| dx; x log x has a zero endpoint limit.
+                def xlog(x):
+                    return x*math.log(abs(x)) if x else 0.
+                return xlog(1-root)+xlog(root)-1
+
+            value = -math.log(s.real)-primitive(lower)-primitive(upper)-offset
+            return complex(value, math.pi*width)
+
+        points = [0., 1.]
+        if s.real > 0 and delta > -cross:
+            center = math.fsum((p2.real, m1sq, -m0sq))/(2*p2.real)
+            minimum = (cross-delta)*(cross+delta)/(4*s.real)
+
+            def integrand(x):
+                return -math.log(s.real*(x-center)**2+minimum)
+
+            # Resolve the narrow endpoint/minimum layer, e.g. lambda/M_W
+            # on the W shell. An unsplit quad can miss its O(lambda/M_W)
+            # contribution while reporting a small internal error.
+            width = math.sqrt(minimum/s.real)
+            if 0 < center < 1:
+                points.append(center)
+            while 0 < width < 2:
+                points.extend(x for x in (center-width, center+width) if 0 < x < 1)
+                width *= 8
+        else:
+            def integrand(x):
+                return -math.log(x*a+(1-x)*b-x*(1-x)*s.real)
+
+        points = sorted(set(points))
+        value = 0.
+        for start, end in zip(points[:-1], points[1:]):
+            result = quad(integrand, start, end, epsabs=2e-12,
+                          epsrel=2e-12, full_output=1)
+            if len(result) != 3:
+                raise ArithmeticError("B0 parameter integral did not converge")
+            value += result[0]
+        return complex(value-offset)
+
+    def integrand(x):
+        return -cmath.log(x*a+(1-x)*b-x*(1-x)*s)
+
+    values = []
+    for component in (lambda x: integrand(x).real, lambda x: integrand(x).imag):
+        result = quad(component, 0., 1., epsabs=2e-12, epsrel=2e-12, full_output=1)
+        if len(result) != 3:
+            raise ArithmeticError("complex B0 parameter integral did not converge")
+        values.append(result[0])
+    return complex(values[0]-offset, values[1])
 
 
 def _dB0dp2_at0(m0: float, m1: float) -> complex:
-    """Partial momentum derivative of B0 at p^2 = 0 (Denner eq. 4.25 limit).
-
-    Used solely for Pi_AA(0) = d Sigma_AA/dk^2|_0  (Denner eq. 8.5).  For the
-    equal-mass case we use the well-known limit dB0/dp^2|_0 = 1/(6 m^2).
-    """
+    """Integral x(1-x)/(x m0²+(1-x)m1²), including unequal and massless limits."""
     m0 = abs(float(m0))
     m1 = abs(float(m1))
+    if not all(math.isfinite(x) for x in (m0, m1)) or max(m0, m1) == 0:
+        raise ValueError("B0 derivative requires at least one positive finite mass")
     if m0 == m1:
         return 1.0 / (6.0 * m0 * m0)
-    # general / one-massless cases are not needed for Pi_AA(0) (only the
-    # equal-mass fermion and the W-W insertion are used); kept as a guard.
-    raise NotImplementedError("dB0/dp^2|_0 only implemented for equal masses")
+    if min(m0, m1) == 0:
+        return 1/(2*max(m0, m1)**2)
+    from scipy.integrate import quad
+    scale2 = max(m0, m1)**2
+    a, b = m0*m0/scale2, m1*m1/scale2
+    result = quad(lambda x: x*(1-x)/(x*a+(1-x)*b), 0., 1.,
+                  epsabs=2e-13, epsrel=2e-13, full_output=1)
+    if len(result) != 3:
+        raise ArithmeticError("B0 zero derivative did not converge")
+    return result[0]/scale2
+
+
+def _B0_difference_quotient(p2, m0, m1, mu):
+    """(B0(p²)-B0(0))/p² with its analytic limit, without subtractive loss."""
+    if p2 == 0:
+        return _dB0dp2_at0(m0, m1)
+    if abs(p2) > 1e-4*(m0+m1)**2:
+        return (_B0(p2, m0, m1, mu)-_B0(0., m0, m1, mu))/p2
+    from scipy.integrate import quad
+    scale2 = max(m0, m1)**2
+    a, b, s = m0*m0/scale2, m1*m1/scale2, p2/scale2
+
+    def integrand(x):
+        ratio = x*(1-x)/(x*a+(1-x)*b)
+        z = s*ratio
+        return ratio*(1+z*(1/2+z*(1/3+z*(1/4+z*(1/5+z/6)))))
+
+    result = []
+    for component in (lambda x: complex(integrand(x)).real,
+                      lambda x: complex(integrand(x)).imag):
+        value = quad(component, 0., 1., epsabs=2e-13, epsrel=2e-13, full_output=1)
+        if len(value) != 3:
+            raise ArithmeticError("B0 difference quotient did not converge")
+        result.append(value[0]/scale2)
+    return complex(*result)
 
 
 # =========================================================================
@@ -205,6 +291,22 @@ def _couplings(q: float, i3: float, s2: float):
     return gp, gm
 
 
+def _mass_squared_B0_at_zero(mass, scale):
+    """The finite combination m² B0(0;m,m), including its zero-mass limit."""
+    return mass*mass*_B0(0., mass, mass, scale) if mass else 0j
+
+
+def _charged_doublet_bracket(k2, up, down, scale):
+    """One chiral doublet in B.4, before its colour and weak factors."""
+    if up == down == 0:
+        return k2*(-_B0(k2, 0., 0., scale)+1/3) if k2 else 0j
+    a, b = up*up, down*down
+    return (-(k2-(a+b)/2)*_B0(k2, up, down, scale)+k2/3
+            + _mass_squared_B0_at_zero(up, scale)
+            + _mass_squared_B0_at_zero(down, scale)
+            + (a-b)**2/2*_B0_difference_quotient(k2, up, down, scale))
+
+
 # =========================================================================
 #  3.  The four transverse gauge-boson self-energies  (Denner eq. B.1-B.4)
 # =========================================================================
@@ -214,14 +316,19 @@ def _sigma_AA(k2: complex, ferm, MW, s2, alpha, mu) -> complex:
     for _name, q, _i3, nc, mf in ferm:
         if q == 0.0:
             continue
+        if mf == 0:
+            res += nc*2*q*q*k2*(-_B0(k2, 0., 0., mu)+1/3) if k2 else 0j
+            continue
         b0 = _B0(k2, mf, mf, mu)
         b0_0 = _B0(0.0, mf, mf, mu)
-        res += nc * q * q * (-(k2 + 2 * mf * mf) * b0
-                             + 2 * mf * mf * b0_0 + k2 / 3.0)
+        res += nc * 2 * q * q * (-(k2 + 2 * mf * mf) * b0
+                                 + 2 * mf * mf * b0_0 + k2 / 3.0)
+    # B.1: 2/3 multiplies the fermion sum, not the W-boson bracket.
+    res *= 2.0 / 3.0
     b0w = _B0(k2, MW, MW, mu)
     b0w0 = _B0(0.0, MW, MW, mu)
     res += (3.0 * k2 + 4.0 * MW * MW) * b0w - 4.0 * MW * MW * b0w0
-    return -(alpha / (4.0 * math.pi)) * (2.0 / 3.0) * res
+    return -(alpha / (4.0 * math.pi)) * res
 
 
 def _sigma_AZ(k2: complex, ferm, MW, s2, c2, alpha, mu) -> complex:
@@ -232,16 +339,20 @@ def _sigma_AZ(k2: complex, ferm, MW, s2, c2, alpha, mu) -> complex:
         if q == 0.0:
             continue
         gp, gm = _couplings(q, i3, s2)
+        if mf == 0:
+            res += nc*(-q)*(gp+gm)*k2*(-_B0(k2, 0., 0., mu)+1/3) if k2 else 0j
+            continue
         b0 = _B0(k2, mf, mf, mu)
         b0_0 = _B0(0.0, mf, mf, mu)
         res += nc * (-q) * (gp + gm) * (-(k2 + 2 * mf * mf) * b0
                                         + 2 * mf * mf * b0_0 + k2 / 3.0)
+    res *= 2.0 / 3.0
     b0w = _B0(k2, MW, MW, mu)
     b0w0 = _B0(0.0, MW, MW, mu)
     brace = ((9.0 * c2 + 0.5) * k2 + (12.0 * c2 + 4.0) * MW * MW) * b0w \
         - (12.0 * c2 - 2.0) * MW * MW * b0w0 + k2 / 3.0
     res -= brace / (3.0 * sc)
-    return -(alpha / (4.0 * math.pi)) * (2.0 / 3.0) * res
+    return -(alpha / (4.0 * math.pi)) * res
 
 
 def _sigma_ZZ(k2: complex, ferm, MW, MZ, MH, s2, c2, alpha, mu) -> complex:
@@ -250,11 +361,15 @@ def _sigma_ZZ(k2: complex, ferm, MW, MZ, MH, s2, c2, alpha, mu) -> complex:
     res = 0.0 + 0.0j
     for _name, q, i3, nc, mf in ferm:
         gp, gm = _couplings(q, i3, s2)
+        if mf == 0:
+            res += nc*(gp**2+gm**2)*k2*(-_B0(k2, 0., 0., mu)+1/3) if k2 else 0j
+            continue
         b0 = _B0(k2, mf, mf, mu)
         b0_0 = _B0(0.0, mf, mf, mu)
         res += nc * ((gp ** 2 + gm ** 2) * (-(k2 + 2 * mf * mf) * b0
                     + 2 * mf * mf * b0_0 + k2 / 3.0)
                      + 3.0 / (4.0 * s2c2) * mf * mf * b0)
+    res *= 2.0 / 3.0
     # W-W loop
     b0w = _B0(k2, MW, MW, mu)
     b0w0 = _B0(0.0, MW, MW, mu)
@@ -265,14 +380,14 @@ def _sigma_ZZ(k2: complex, ferm, MW, MZ, MH, s2, c2, alpha, mu) -> complex:
     res += brace_w / (6.0 * s2c2)
     # Z-H loop
     b0zh = _B0(k2, MZ, MH, mu)
-    b0zh0 = _B0(0.0, MZ, MH, mu)
     b0z0 = _B0(0.0, MZ, MZ, mu)
     b0h0 = _B0(0.0, MH, MH, mu)
     brace_h = (2 * MH ** 2 - 10 * MZ ** 2 - k2) * b0zh \
         - 2 * MZ ** 2 * b0z0 - 2 * MH ** 2 * b0h0 \
-        - (MZ ** 2 - MH ** 2) ** 2 / k2 * (b0zh - b0zh0) - (2.0 / 3.0) * k2
+        - (MZ ** 2 - MH ** 2) ** 2 * _B0_difference_quotient(k2, MZ, MH, mu) \
+        - (2.0 / 3.0) * k2
     res += brace_h / (12.0 * s2c2)
-    return -(alpha / (4.0 * math.pi)) * (2.0 / 3.0) * res
+    return -(alpha / (4.0 * math.pi)) * res
 
 
 def _sigma_W(k2: complex, ferm, MW, MZ, MH, s2, c2, alpha, mu, lam=1e-6) -> complex:
@@ -280,57 +395,47 @@ def _sigma_W(k2: complex, ferm, MW, MZ, MH, s2, c2, alpha, mu, lam=1e-6) -> comp
     loop; only the finite combinations enter Delta r (eq. 8.14), so the
     result is insensitive to lam once it is small."""
     s2v = s2
-    res = 0.0 + 0.0j
+    lepton_res = 0.0 + 0.0j
     # charged leptons (each with a massless neutrino partner)
     for _name, q, i3, _nc, ml in [f for f in ferm if f[0] in ("e", "mu", "tau")]:
-        b0 = _B0(k2, 0.0, ml, mu)
-        b00 = _B0(0.0, ml, ml, mu)
-        b0_00 = _B0(0.0, 0.0, ml, mu)
-        res += -(k2 - ml * ml / 2.0) * b0 + k2 / 3.0 \
-            + ml * ml * b00 + ml ** 4 / (2.0 * k2) * (b0 - b0_00)
+        lepton_res += _charged_doublet_bracket(k2, 0., ml, mu)
     # quark doublets (diagonal CKM, |V_ii|^2 = 1, colour factor 3)
-    up = {"u": 0.0, "c": 0.0, "t": 0.0}
-    dn = {"d": 0.0, "s": 0.0, "b": 0.0}
+    quark_res = 0.0 + 0.0j
+    up, dn = {}, {}
     for _n, _q, _i3, _nc, m in ferm:
-        if _n in up:
+        if _n in ("u", "c", "t"):
             up[_n] = m
-        if _n in dn:
+        if _n in ("d", "s", "b"):
             dn[_n] = m
     for u, d in (("u", "d"), ("c", "s"), ("t", "b")):
+        if u not in up and d not in dn:
+            continue
+        if u not in up or d not in dn:
+            raise ValueError("W self-energy requires both members of a quark doublet")
         muq, mdq = up[u], dn[d]
-        b0 = _B0(k2, muq, mdq, mu)
-        b00 = _B0(0.0, muq, mdq, mu)
-        b0uu0 = _B0(0.0, muq, muq, mu)
-        b0dd0 = _B0(0.0, mdq, mdq, mu)
-        res += -(k2 - (muq ** 2 + mdq ** 2) / 2.0) * b0 + k2 / 3.0 \
-            + muq ** 2 * b0uu0 + mdq ** 2 * b0dd0 \
-            + (muq ** 2 - mdq ** 2) ** 2 / (2.0 * k2) * (b0 - b00)
-    res *= 3.0  # N_c
-    termA = (2.0 / 3.0) * (1.0 / (2.0 * s2v)) * res
+        quark_res += _charged_doublet_bracket(k2, muq, mdq, mu)
+    termA = (2.0 / 3.0) * (1.0 / (2.0 * s2v)) * (lepton_res + 3.0 * quark_res)
     # W-gamma (lambda) loop
     b0wg = _B0(k2, MW, lam, mu)
-    b0wg0 = _B0(0.0, MW, lam, mu)
     b0w0 = _B0(0.0, MW, MW, mu)
     termB = (2.0 / 3.0) * ((2 * MW ** 2 + 5 * k2) * b0wg
                            - 2 * MW ** 2 * b0w0
-                           - MW ** 4 / k2 * (b0wg - b0wg0) + k2 / 3.0)
+                           - MW ** 4 * _B0_difference_quotient(k2, MW, lam, mu) + k2 / 3.0)
     # W-Z loop
     b0wz = _B0(k2, MW, MZ, mu)
-    b0wz0 = _B0(0.0, MW, MZ, mu)
     b0z0 = _B0(0.0, MZ, MZ, mu)
     termC = (1.0 / (12.0 * s2v)) * (
-        ((40 * c2 - 1) * k2 + (16 * c2 + 54 - 10 / c2 ** 2) * MW * MW) * b0wz
+        ((40 * c2 - 1) * k2 + (16 * c2 + 54 - 10 / c2) * MW * MW) * b0wz
         - (16 * c2 + 2) * (MW ** 2 * b0w0 + MZ ** 2 * b0z0)
         + (4 * c2 - 1) * (2.0 / 3.0) * k2
-        - (8 * c2 + 1) * (MW ** 2 - MZ ** 2) ** 2 / k2 * (b0wz - b0wz0))
+        - (8 * c2 + 1) * (MW ** 2 - MZ ** 2) ** 2 * _B0_difference_quotient(k2, MW, MZ, mu))
     # W-H loop
     b0wh = _B0(k2, MW, MH, mu)
-    b0wh0 = _B0(0.0, MW, MH, mu)
     b0h0 = _B0(0.0, MH, MH, mu)
     termD = (1.0 / (12.0 * s2v)) * (
         (2 * MH ** 2 - 10 * MW ** 2 - k2) * b0wh
         - 2 * MW ** 2 * b0w0 - 2 * MH ** 2 * b0h0
-        - (MW ** 2 - MH ** 2) ** 2 / k2 * (b0wh - b0wh0)
+        - (MW ** 2 - MH ** 2) ** 2 * _B0_difference_quotient(k2, MW, MH, mu)
         - (2.0 / 3.0) * k2)
     return -(alpha / (4.0 * math.pi)) * (termA + termB + termC + termD)
 
@@ -347,11 +452,12 @@ def _PiAA0(ferm, MW, s2, alpha, mu) -> complex:
             continue
         b0_0 = _B0(0.0, mf, mf, mu)
         b0p = _dB0dp2_at0(mf, mf)
-        res += nc * q * q * (-b0_0 - 2 * mf * mf * b0p + 1.0 / 3.0)
+        res += nc * 2 * q * q * (-b0_0 - 2 * mf * mf * b0p + 1.0 / 3.0)
+    res *= 2.0 / 3.0
     b0w0 = _B0(0.0, MW, MW, mu)
     b0wp = _dB0dp2_at0(MW, MW)
     res += 3.0 * b0w0 + 4.0 * MW * MW * b0wp
-    return -(alpha / (4.0 * math.pi)) * (2.0 / 3.0) * res
+    return -(alpha / (4.0 * math.pi)) * res
 
 
 # =========================================================================
@@ -390,10 +496,9 @@ def solve_MW(alpha, G_F, MZ, MH, mt, mb, *, mu=None, verbose=False,
 
         M_W^2 (1 - M_W^2/M_Z^2) = (pi alpha)/(sqrt(2) G_F) [1 + Delta r]
 
-    The two-point representation requires analytic zero-momentum and
-    massless finite limits before it supplies a complete observable
-    calculation. Production uses the separately defined common effective
-    neutral-current amplitude. This diagnostic iterates M_W through
+    The two-point representation includes the analytic zero-momentum and
+    massless finite limits. Production uses the separately defined common
+    effective neutral-current amplitude. This diagnostic iterates M_W through
     s^2=1-M_W^2/M_Z^2 and the two-point arguments.
     """
     MZ = float(MZ)

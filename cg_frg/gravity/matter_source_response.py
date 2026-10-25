@@ -855,7 +855,7 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
     is computed separately from the exactly solved spatial field equation.
     """
     from scipy.integrate import solve_ivp
-    from cg_frg.gravity.local_response import primitive
+    from cg_frg.gravity.local_response import _rms_energy_terms
     values = (omega_m, omega_vacuum, acceleration_ratio, initial_displacement,
               wavenumber, duration)
     if (not all(math.isfinite(v) for v in values) or min(values) <= 0
@@ -867,7 +867,9 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
     mass, vacuum, k, a0 = 3*omega_m, 3*omega_vacuum, wavenumber, acceleration_ratio
     work = {'exact_field_reconstructions': 0, 'potential_quadratures': 0,
             'quadrature_node_evaluations': 0, 'rhs_evaluations': 0,
-            'diagnostic_phase_points': 0}
+            'diagnostic_phase_points': 0, 'canonical_diagnostic_evaluations': 0,
+            'material_readout_evaluations': 0, 'material_readout_square_roots': 0,
+            'material_readout_hypotenuse_evaluations': 0}
 
     def realization(order, rtol, atol):
         nodes, weights = np.polynomial.legendre.leggauss(order)
@@ -882,10 +884,10 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
             work['quadrature_node_evaluations'] += order
             flux = mass*D*sine/(2*a*a*k)
             gradient = np.sqrt((flux*flux+flux*np.hypot(flux, 2*a0))/2)
-            F = primitive(np.c_[gradient, np.zeros((order, 2))], a0=a0)
+            F, legendre, scale_response = _rms_energy_terms(gradient, a0)
             U = 2*a**3*float(weights@F)
-            W = 2*a**3*float(weights@(F-gradient*flux))
-            Wa = 2*a*a*float(weights@(3*F-gradient*flux))
+            W = -2*a**3*float(weights@legendre)
+            Wa = 2*a*a*float(weights@scale_response)
             mean_force_sine = -float(weights@(gradient*sine))
             WD = mass*a*mean_force_sine/k
             R = vacuum*a**3+mass+W
@@ -896,14 +898,15 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
 
         data0 = potential(1., initial_displacement)
         y0 = np.array([1., initial_displacement, 0., -math.sqrt(12*data0['R'])])
-        def rhs(t, y):
-            work['rhs_evaluations'] += 1
+        def canonical_velocity(y, data):
             a, D, pD, pa = y
-            data = potential(a, D)
             kinetic = k*k*pD*pD/(mass*a*a)
             return np.array([-pa/(6*a), 2*k*k*pD/(mass*a*a),
                 -data['WD'],
                 -pa*pa/(12*a*a)+2*kinetic/a-3*vacuum*a*a-data['Wa']])
+        def rhs(t, y):
+            work['rhs_evaluations'] += 1
+            return canonical_velocity(y, potential(y[0], y[1]))
         times = np.linspace(0., duration, samples)
         sol = solve_ivp(rhs, (0., duration), y0, method='DOP853',
                         rtol=rtol, atol=atol, t_eval=times)
@@ -914,7 +917,8 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
         for time, y in zip(times, sol.y.T):
             a, D, pD, pa = y
             data = potential(a, D)
-            adot, Ddot, _, _ = rhs(time, y)
+            adot, Ddot, pDdot, padot = canonical_velocity(y, data)
+            work['canonical_diagnostic_evaluations'] += 1
             H = adot/a
             kinetic = k*k*pD*pD/(mass*a*a)
             constraint = -pa*pa/(12*a)+kinetic+data['R']
@@ -937,7 +941,25 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
             force_projection = float(np.mean(acceleration_defect*np.sin(theta)))
             energy_rate = -2*H*kinetic+a*H*data['Wa']
             pressure = (2*kinetic-a*data['Wa'])/(3*a**3)
-            density_rate = energy_rate/a**3-3*H*(mass+kinetic+data['W'])/a**3
+            density = (mass+kinetic+data['W'])/a**3
+            density_rate = energy_rate/a**3-3*H*density
+            canonical_energy_rate = (2*k*k*pD*pDdot/(mass*a*a)
+                -2*kinetic*adot/a+data['WD']*Ddot+data['Wa']*adot)
+            Hdot = -padot/(6*a*a)+pa*adot/(3*a**3)
+            speed_upper = 2*k*abs(pD)/(mass*a)
+            flux_upper = mass*D/(2*a*a*k)
+            force_upper = math.sqrt((flux_upper**2
+                +flux_upper*math.hypot(flux_upper, 2*a0))/2)
+            potential_upper = 2*math.pi*a*force_upper/k
+            clock_argument = 2*potential_upper+speed_upper**2
+            clock_defined = clock_argument < 1
+            clock_rates = ([math.sqrt(1-clock_argument), math.sqrt(1+clock_argument)]
+                           if clock_defined else None)
+            clock_remainder = (clock_argument**2/(8*(1-clock_argument)*clock_rates[0])
+                               if clock_defined else None)
+            work['material_readout_evaluations'] += 1
+            work['material_readout_square_roots'] += 1+2*int(clock_defined)
+            work['material_readout_hypotenuse_evaluations'] += 1
             rows.append({'time': float(time), 'state': y.tolist(),
                 'expansion': H, 'displacement_velocity': Ddot,
                 'maximum_flux_reconstruction_residual': float(np.max(np.abs(flux_residual))),
@@ -948,8 +970,19 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
                 'maximum_physical_acceleration': float(np.max(abs_g)),
                 'potential_energy': data['W'], 'field_energy': data['U'],
                 'background_energy_exchange': energy_rate,
-                'background_pressure': pressure,
-                'continuity_residual': density_rate+3*H*((mass+kinetic+data['W'])/a**3+pressure),
+                'background_density': density, 'background_pressure': pressure,
+                'expansion_derivative': Hdot,
+                'friedmann_residual': 3*H*H-vacuum-density,
+                'background_acceleration_residual': Hdot+(density+pressure)/2,
+                'canonical_energy_exchange_residual': canonical_energy_rate-energy_rate,
+                'continuity_residual': density_rate+3*H*(density+pressure),
+                'density_contrast_range': [-D/(1+D), D/(1-D)],
+                'maximum_physical_acceleration_bound': force_upper,
+                'potential_absolute_bound': potential_upper,
+                'material_clock_argument_absolute_bound': clock_argument,
+                'material_clock_domain': bool(clock_defined),
+                'material_clock_rate_enclosure': clock_rates,
+                'material_clock_taylor_remainder_bound': clock_remainder,
                 'full_poisson_defect_L2': poisson_l2, 'full_flow_acceleration_defect_L2': force_l2,
                 'retained_flow_projection_residual': force_projection})
         return {'rows': rows, 'initial_state': y0.tolist(), 'quadrature_order': order,
@@ -992,9 +1025,36 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
     hamiltonian_hessian_lower = (I.point(12).sqrt()*ik**2*R_lower
         /(im*au**2*(kinetic_upper+R_upper)*(kinetic_upper+R_upper).sqrt()))
     flow_defect_upper = 3*gradient_upper
+    # Postprocess the existing exit box; no force reconstruction or evolution.
+    speed_upper = 2*ik*pu/im
+    expansion_lower = pam/(6*au**2)
+    potential_upper = 2*I.point('22/7')*au*gradient_upper/ik
+    clock_argument = 2*potential_upper+speed_upper**2
+    # Use the published upper endpoint in every dependent clock bound.
+    clock_argument = I.point(clock_argument.decimal_bounds(20)[1])
+    clock_domain = clock_argument.hi < I.point(1).lo
+    if clock_domain:
+        clock_lower, clock_upper = (1-clock_argument).sqrt(), (1+clock_argument).sqrt()
+        clock_rate_bounds = [clock_lower.decimal_bounds(20)[0],
+                             clock_upper.decimal_bounds(20)[1]]
+        clock_remainder = clock_argument**2/(8*(1-clock_argument)*clock_lower)
+        clock_remainder_bound = clock_remainder.decimal_bounds(20)[1]
+    else:
+        clock_rate_bounds = clock_remainder_bound = None
+    material_bounds = {
+        'density_contrast': [(-du/(1+du)).decimal_bounds(20)[0],
+                             (du/(1-du)).decimal_bounds(20)[1]],
+        'peculiar_speed_upper': speed_upper.decimal_bounds(20)[1],
+        'expansion_lower': expansion_lower.decimal_bounds(20)[0],
+        'potential_absolute_upper': potential_upper.decimal_bounds(20)[1],
+        'clock_argument_absolute_upper': clock_argument.decimal_bounds(20)[1],
+        'clock_domain': bool(clock_domain), 'clock_rate': clock_rate_bounds,
+        'clock_taylor_remainder_upper': clock_remainder_bound,
+        'scope': 'uniform readings of the retained weak-field material metric; the clock remainder bounds its square-root expansion',
+    }
     certificate_passed = (id0.lo > 0 and id0.hi < du.lo and du.hi < I.point('.1').lo
         and all(value.lo > 0 for value in exit_margins.values())
-        and R_lower.lo > 0 and hamiltonian_hessian_lower.lo > 0)
+        and R_lower.lo > 0 and hamiltonian_hessian_lower.lo > 0 and clock_domain)
     certificate = {
         'scope': 'uniform existence, noncrossing and constrained kinetic positivity for the exact decimal inputs on the stated time interval',
         'method': 'outward rational exit inequalities and analytic inverse RMS flux bounds; no trajectory integration',
@@ -1007,9 +1067,12 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
         'potential_plus_rest_lower': R_lower.decimal_bounds(20)[0],
         'full_flow_acceleration_defect_uniform_upper': flow_defect_upper.decimal_bounds(20)[1],
         'full_poisson_defect_uniform_upper': '0',
+        'material_readings': material_bounds,
         'passed': bool(certificate_passed),
     }
     work['rational_exit_certificate_evaluations'] = 1
+    work['material_readout_certificate_evaluations'] = 1
+    work['material_readout_interval_square_roots'] = 2*int(clock_domain)
     checks = {'positive_physical_hamiltonian_hessian': min(r['reduced_kinetic_hessian'] for r in rows) > 0,
         'noncrossing_flow': min(r['minimum_flow_jacobian'] for r in rows) > 0,
         'lapse_constraint': max(abs(r['constraint_residual']) for r in rows) < 2e-9,
@@ -1017,6 +1080,10 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
         'full_poisson_equation': max(r['full_poisson_defect_L2'] for r in rows) < 2e-14,
         'retained_force_projection': max(abs(r['retained_flow_projection_residual']) for r in rows) < 2e-10,
         'background_continuity': max(abs(r['continuity_residual']) for r in rows) < 2e-12,
+        'background_friedmann': max(abs(r['friedmann_residual']) for r in rows) < 2e-9,
+        'background_acceleration': max(abs(r['background_acceleration_residual']) for r in rows) < 2e-9,
+        'canonical_energy_exchange': max(abs(r['canonical_energy_exchange_residual']) for r in rows) < 2e-12,
+        'material_clock_domain': all(r['material_clock_domain'] for r in rows) and clock_domain,
         'numerical_refinement': state_difference < 2e-8 and field_difference < 2e-10,
         'uniform_exit_certificate': certificate_passed}
     return {'scope': 'autonomous finite displacement window of the existing nonrelativistic RMS source action and homogeneous Einstein lapse action, with the complete periodic field solved exactly',
@@ -1029,6 +1096,8 @@ def evaluate_expanding_rms_window(*, omega_m, omega_vacuum, acceleration_ratio,
         'clock': 'the homogeneous lapse is varied before choosing unit proper-time lapse; a is a monotone relational chart',
         'homogeneous_limit': 'D=p_D=0 gives 3H^2=rho_vac+M/a^3',
         'local_limit': 'at fixed a the exact periodic field solves the full RMS Poisson equation for the noncrossing cold displacement',
+        'material_reading_convention': 'density m/(a^3 J_X), speed 2k|p_D|/(ma), H=-p_a/(6a^2); clock rate sqrt(1+2Phi-u^2) in the retained weak-field metric',
+        'readout_work_scope': 'saved-state algebra and existing exit-box postprocessing; the clock enclosures require no additional field solves or evolution steps',
         'production_background_updated': False, 'full_spatial_pde_solution_claimed': False,
         'main': main, 'refined': refined, 'uniform_certificate': certificate,
         'maximum_state_refinement_difference': state_difference,
