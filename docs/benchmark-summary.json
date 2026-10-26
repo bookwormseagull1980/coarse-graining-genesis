@@ -1,0 +1,595 @@
+{
+  "run_id": "20261025T021453Z-a4c66902",
+  "parameter_records": 262,
+  "provenance_counts": {
+    "DERIVED": 261,
+    "OBSERVED": 1
+  },
+  "role_counts": {
+    "comparison": 51,
+    "internal": 166,
+    "anchor": 1,
+    "informational": 20,
+    "cg": 24
+  },
+  "comparison_rows": 57,
+  "central_value_rows": 56,
+  "upper_bound_rows": 1,
+  "absolute_residual_below_1_percent": 51,
+  "absolute_residual_below_0_5_percent": 40,
+  "absolute_residual_below_0_1_percent": 13,
+  "at_or_above_1_percent": [
+    {
+      "label": "m_b (GeV)",
+      "key": "m_b_pred",
+      "reference_key": "m_b_obs",
+      "predicted": 4.237792000302189,
+      "reference": 4.18,
+      "kind": "central_value",
+      "residual_percent": 1.3825837392868356
+    },
+    {
+      "label": "Delta m21^2 rest",
+      "key": "Delta_m21_sq_raw",
+      "reference_key": "Delta_m21_sq_obs",
+      "predicted": 6.874155305644093e-05,
+      "reference": 7.41e-05,
+      "kind": "central_value",
+      "residual_percent": -7.231372393467028
+    },
+    {
+      "label": "Jarlskog J",
+      "key": "cp_jarlskog_magnitude",
+      "reference_key": "jarlskog_J_obs",
+      "predicted": 3.150264912189696e-05,
+      "reference": 3.06e-05,
+      "kind": "central_value",
+      "residual_percent": 2.949833731689422
+    },
+    {
+      "label": "m_glueball (GeV)",
+      "key": "m_glueball",
+      "reference_key": "m_glueball_obs",
+      "predicted": 1.6642238631694293,
+      "reference": 1.7,
+      "kind": "central_value",
+      "residual_percent": -2.1044786370923885
+    },
+    {
+      "label": "tau_n (s)",
+      "key": "bbn_tau_n",
+      "reference_key": "tau_n_obs",
+      "predicted": 915.5435125712529,
+      "reference": 878.4,
+      "kind": "central_value",
+      "residual_percent": 4.228541959386711
+    }
+  ],
+  "counting_note": "Counts are named benchmark rows, including alternatives, inverse ratios and geometric-mass diagnostics; they are not counts of statistically independent successful predictions.",
+  "future_test_groups_in_paper": 7,
+  "rows": [
+    {
+      "label": "g2(M_G)",
+      "key": "g2_MG",
+      "reference_key": "g2_MG",
+      "predicted": 0.5088477031823813,
+      "reference": 0.5088449671322702,
+      "kind": "central_value",
+      "residual_percent": 0.0005376981768057121
+    },
+    {
+      "label": "g2(M_G) geometric",
+      "key": "g2_MG_geo",
+      "reference_key": "g2_MG",
+      "predicted": 0.5106008686060399,
+      "reference": 0.5088449671322702,
+      "kind": "central_value",
+      "residual_percent": 0.34507592433614676
+    },
+    {
+      "label": "g1(M_G)",
+      "key": "g1_MG_geo",
+      "reference_key": "g1_MG",
+      "predicted": 0.6049900729523598,
+      "reference": 0.6050009139816364,
+      "kind": "central_value",
+      "residual_percent": -0.0017919029584922974
+    },
+    {
+      "label": "g3(M_G)",
+      "key": "g3_MG_geo",
+      "reference_key": "g3_MG",
+      "predicted": 0.4977601563548794,
+      "reference": 0.4977651062181578,
+      "kind": "central_value",
+      "residual_percent": -0.0009944174906073577
+    },
+    {
+      "label": "g3 GUT (common origin)",
+      "key": "g3_common_origin_pred",
+      "reference_key": "g3_sm_GUT",
+      "predicted": 0.5184195497773931,
+      "reference": 0.5184800043329293,
+      "kind": "central_value",
+      "residual_percent": -0.011659958924348235
+    },
+    {
+      "label": "alpha_s(M_Z)",
+      "key": "alpha_s_MZ_pred",
+      "reference_key": "alpha_s_MZ_obs",
+      "predicted": 0.11804137738139295,
+      "reference": 0.1179,
+      "kind": "central_value",
+      "residual_percent": 0.11991296131717011
+    },
+    {
+      "label": "alpha_em(M_Z) inv",
+      "key": "alpha_inv_MZ_pred",
+      "reference_key": "alpha_inv_MZ_obs",
+      "predicted": 128.20705760852235,
+      "reference": 127.952,
+      "kind": "central_value",
+      "residual_percent": 0.19933850859881197
+    },
+    {
+      "label": "m_t/m_c",
+      "key": "m_t_over_m_c",
+      "reference_key": "m_t_over_m_c_obs",
+      "predicted": 135.24239203885273,
+      "reference": 136.0,
+      "kind": "central_value",
+      "residual_percent": -0.5570646773141674
+    },
+    {
+      "label": "m_b/m_s",
+      "key": "m_b_over_m_s",
+      "reference_key": "m_b_over_m_s_obs",
+      "predicted": 44.86794977784708,
+      "reference": 45.0,
+      "kind": "central_value",
+      "residual_percent": -0.2934449381176041
+    },
+    {
+      "label": "m_t/m_u",
+      "key": "m_t_over_m_u",
+      "reference_key": "m_t_over_m_u_obs",
+      "predicted": 77303.6419446479,
+      "reference": 78000.0,
+      "kind": "central_value",
+      "residual_percent": -0.8927667376309012
+    },
+    {
+      "label": "m_t (GeV)",
+      "key": "m_t_pred",
+      "reference_key": "m_t_obs",
+      "predicted": 174.08240381974227,
+      "reference": 172.69,
+      "kind": "central_value",
+      "residual_percent": 0.8063025188153716
+    },
+    {
+      "label": "m_b (GeV)",
+      "key": "m_b_pred",
+      "reference_key": "m_b_obs",
+      "predicted": 4.237792000302189,
+      "reference": 4.18,
+      "kind": "central_value",
+      "residual_percent": 1.3825837392868356
+    },
+    {
+      "label": "m_e geom (MeV)",
+      "key": "m_e_pred",
+      "reference_key": "m_e_obs",
+      "predicted": 0.5103542513564916,
+      "reference": 0.511,
+      "kind": "central_value",
+      "residual_percent": -0.12636959755546462
+    },
+    {
+      "label": "m_mu/m_e geom",
+      "key": "m_mu_over_m_e",
+      "reference_key": "m_mu_over_m_e_obs",
+      "predicted": 206.3556103933899,
+      "reference": 206.8,
+      "kind": "central_value",
+      "residual_percent": -0.21488859120412096
+    },
+    {
+      "label": "m_d/m_s",
+      "key": "m_s_over_m_d",
+      "reference_key": "m_d_over_m_s_obs",
+      "predicted": 0.05096065033293054,
+      "reference": 0.0505,
+      "kind": "central_value",
+      "residual_percent": 0.912178877090164
+    },
+    {
+      "label": "m_s/m_d",
+      "key": "m_s_over_m_d",
+      "reference_key": "m_d_over_m_s_obs",
+      "predicted": 19.622983487591103,
+      "reference": 19.801980198019802,
+      "kind": "central_value",
+      "residual_percent": -0.9039333876649236
+    },
+    {
+      "label": "m_p (GeV)",
+      "key": "m_p",
+      "reference_key": "m_p_obs",
+      "predicted": 0.9410862059273102,
+      "reference": 0.938272,
+      "kind": "central_value",
+      "residual_percent": 0.29993497912228495
+    },
+    {
+      "label": "epsilon (dilaton)",
+      "key": "epsilon_dilaton",
+      "reference_key": "epsilon_obs",
+      "predicted": 1.4221768734404969e-16,
+      "reference": 1.4243e-16,
+      "kind": "central_value",
+      "residual_percent": -0.14906456220621367
+    },
+    {
+      "label": "v_HIGGS (GeV)",
+      "key": "v_HIGGS",
+      "reference_key": "v_HIGGS_obs",
+      "predicted": 246.18969645238943,
+      "reference": 246.22,
+      "kind": "central_value",
+      "residual_percent": -0.012307508573861092
+    },
+    {
+      "label": "M_Z (GeV)",
+      "key": "M_Z_pred",
+      "reference_key": "M_Z",
+      "predicted": 91.12483998892053,
+      "reference": 91.1876,
+      "kind": "central_value",
+      "residual_percent": -0.06882515942899792
+    },
+    {
+      "label": "M_W lead-univ (GeV)",
+      "key": "M_W_pred_lead1loop",
+      "reference_key": "m_W_obs",
+      "predicted": 80.33739698310173,
+      "reference": 80.369,
+      "kind": "central_value",
+      "residual_percent": -0.039322396568663986
+    },
+    {
+      "label": "Gamma_Z effective (GeV)",
+      "key": "Gamma_Z_pred_lead1loop",
+      "reference_key": "Gamma_Z_obs",
+      "predicted": 2.506355962124566,
+      "reference": 2.4952,
+      "kind": "central_value",
+      "residual_percent": 0.44709691105184746
+    },
+    {
+      "label": "Gamma_b effective (GeV)",
+      "key": "Gamma_b_pred_1loop",
+      "reference_key": "Gamma_b_obs",
+      "predicted": 0.38040730308009596,
+      "reference": 0.37705,
+      "kind": "central_value",
+      "residual_percent": 0.8904132290401767
+    },
+    {
+      "label": "Gamma_had effective (GeV)",
+      "key": "Gamma_had_pred_lead1loop",
+      "reference_key": "Gamma_had_obs",
+      "predicted": 1.7520580283558576,
+      "reference": 1.7444,
+      "kind": "central_value",
+      "residual_percent": 0.4390064409457439
+    },
+    {
+      "label": "Gamma_l per flavour (GeV)",
+      "key": "Gamma_l_pred_lead1loop",
+      "reference_key": "Gamma_l_obs",
+      "predicted": 0.0842678770163923,
+      "reference": 0.083966,
+      "kind": "central_value",
+      "residual_percent": 0.3595229216496021
+    },
+    {
+      "label": "Gamma_inv effective (GeV)",
+      "key": "Gamma_inv_pred_lead1loop",
+      "reference_key": "Gamma_inv_obs",
+      "predicted": 0.5014943027195317,
+      "reference": 0.499,
+      "kind": "central_value",
+      "residual_percent": 0.4998602644352035
+    },
+    {
+      "label": "R_b effective",
+      "key": "R_b_pred_lead1loop",
+      "reference_key": "R_b_obs",
+      "predicted": 0.2171202648105626,
+      "reference": 0.21629,
+      "kind": "central_value",
+      "residual_percent": 0.3838664804487468
+    },
+    {
+      "label": "R_l effective",
+      "key": "R_l_pred_lead1loop",
+      "reference_key": "R_l_obs",
+      "predicted": 20.791529232604688,
+      "reference": 20.767,
+      "kind": "central_value",
+      "residual_percent": 0.11811639911729621
+    },
+    {
+      "label": "sigma_had effective (nb)",
+      "key": "sigma_had_pred_lead1loop",
+      "reference_key": "sigma_had_obs",
+      "predicted": 41.54847835413315,
+      "reference": 41.481,
+      "kind": "central_value",
+      "residual_percent": 0.16267292045311077
+    },
+    {
+      "label": "m_H (GeV)",
+      "key": "m_H_pred",
+      "reference_key": "m_H_obs",
+      "predicted": 124.98344026878286,
+      "reference": 125.2,
+      "kind": "central_value",
+      "residual_percent": -0.1729710313235988
+    },
+    {
+      "label": "sin^2 thetaW(M_Z)",
+      "key": "s2_thetaW_MZ",
+      "reference_key": "sin2thetaW_MSbar_obs",
+      "predicted": 0.23327430154635154,
+      "reference": 0.23122,
+      "kind": "central_value",
+      "residual_percent": 0.8884618745573558
+    },
+    {
+      "label": "sin^2 theta_eff^l",
+      "key": "sin2_theta_eff_l_pred",
+      "reference_key": "sin2thetaW_eff_obs",
+      "predicted": 0.23011353985028046,
+      "reference": 0.23153,
+      "kind": "central_value",
+      "residual_percent": -0.6117825550553069
+    },
+    {
+      "label": "Delta m21^2 rest",
+      "key": "Delta_m21_sq_raw",
+      "reference_key": "Delta_m21_sq_obs",
+      "predicted": 6.874155305644093e-05,
+      "reference": 7.41e-05,
+      "kind": "central_value",
+      "residual_percent": -7.231372393467028
+    },
+    {
+      "label": "Delta m21^2 tilt",
+      "key": "Delta_m21_sq_osc",
+      "reference_key": "Delta_m21_sq_obs",
+      "predicted": 7.412190153605081e-05,
+      "reference": 7.41e-05,
+      "kind": "central_value",
+      "residual_percent": 0.029556728813506794
+    },
+    {
+      "label": "Delta m31^2",
+      "key": "Delta_m31_sq",
+      "reference_key": "Delta_m31_sq_obs",
+      "predicted": 0.0025112069913255865,
+      "reference": 0.002511,
+      "kind": "central_value",
+      "residual_percent": 0.008243382142025801
+    },
+    {
+      "label": "delta_CKM (deg)",
+      "key": "ckm_delta_direction",
+      "reference_key": "ckm_delta_deg_obs",
+      "predicted": 68.57142857142857,
+      "reference": 68.5,
+      "kind": "central_value",
+      "residual_percent": 0.10427528675702735
+    },
+    {
+      "label": "Jarlskog J",
+      "key": "cp_jarlskog_magnitude",
+      "reference_key": "jarlskog_J_obs",
+      "predicted": 3.150264912189696e-05,
+      "reference": 3.06e-05,
+      "kind": "central_value",
+      "residual_percent": 2.949833731689422
+    },
+    {
+      "label": "V_us",
+      "key": "V_us_geo",
+      "reference_key": "V_us_obs",
+      "predicted": 0.22393560298858664,
+      "reference": 0.2245,
+      "kind": "central_value",
+      "residual_percent": -0.2514017868210927
+    },
+    {
+      "label": "eta_B propagation",
+      "key": "eta_B_propagation",
+      "reference_key": "eta_b_obs",
+      "predicted": 6.12822961082076e-10,
+      "reference": 6.1e-10,
+      "kind": "central_value",
+      "residual_percent": 0.46278050525836445
+    },
+    {
+      "label": "1 - n_s",
+      "key": "ns_tilt",
+      "reference_key": "one_minus_ns_obs",
+      "predicted": 0.035,
+      "reference": 0.0351,
+      "kind": "central_value",
+      "residual_percent": -0.2849002849002691
+    },
+    {
+      "label": "Delta2_R",
+      "key": "perturbation_amplitude",
+      "reference_key": "Delta2_R_obs",
+      "predicted": 2.1011107979433257e-09,
+      "reference": 2.105e-09,
+      "kind": "central_value",
+      "residual_percent": -0.18476019271612687
+    },
+    {
+      "label": "Lambda (GeV^2)",
+      "key": "Lambda",
+      "reference_key": "Lambda_obs",
+      "predicted": 4.254718579276526e-84,
+      "reference": 4.2791148e-84,
+      "kind": "central_value",
+      "residual_percent": -0.5701230713294869
+    },
+    {
+      "label": "H0 (GeV)",
+      "key": "H0_GEV",
+      "reference_key": "H0_GeV_obs",
+      "predicted": 1.4388498142964775e-42,
+      "reference": 1.44e-42,
+      "kind": "central_value",
+      "residual_percent": -0.07987400718906246
+    },
+    {
+      "label": "Omega_Lambda",
+      "key": "Omega_Lambda",
+      "reference_key": "Omega_Lambda_obs",
+      "predicted": 0.6850442965140158,
+      "reference": 0.6847,
+      "kind": "central_value",
+      "residual_percent": 0.05028428713536037
+    },
+    {
+      "label": "Omega_b",
+      "key": "Omega_b",
+      "reference_key": "Omega_b_obs",
+      "predicted": 0.04940819203836579,
+      "reference": 0.0493,
+      "kind": "central_value",
+      "residual_percent": 0.2194564672734156
+    },
+    {
+      "label": "Omega_Sigma cold",
+      "key": "Omega_Sigma_cold",
+      "reference_key": "Omega_DM_obs",
+      "predicted": 0.26403880323055423,
+      "reference": 0.2645,
+      "kind": "central_value",
+      "residual_percent": -0.17436550829708075
+    },
+    {
+      "label": "T_CMB corrected (K)",
+      "key": "T_CMB_corrected_K",
+      "reference_key": "T_CMB_K",
+      "predicted": 2.725473977921092,
+      "reference": 2.72548,
+      "kind": "central_value",
+      "residual_percent": -0.00022095480091133268
+    },
+    {
+      "label": "a0 MOND (m/s^2)",
+      "key": "a0_MOND",
+      "reference_key": "a0_MOND_obs",
+      "predicted": 1.204369920558342e-10,
+      "reference": 1.2e-10,
+      "kind": "central_value",
+      "residual_percent": 0.36416004652850553
+    },
+    {
+      "label": "gw ratio r",
+      "key": "gw_ratio",
+      "reference_key": "r_bound_obs",
+      "predicted": 0.025330295910584444,
+      "reference": 0.036,
+      "kind": "upper_bound",
+      "satisfies": true
+    },
+    {
+      "label": "Lambda_QCD (GeV)",
+      "key": "qcd_Lambda_QCD",
+      "reference_key": "Lambda_QCD_obs",
+      "predicted": 0.20802798289617866,
+      "reference": 0.21,
+      "kind": "central_value",
+      "residual_percent": -0.939055763724439
+    },
+    {
+      "label": "string tension (GeV^2)",
+      "key": "qcd_string_tension",
+      "reference_key": "string_tension_obs",
+      "predicted": 0.1928509040335463,
+      "reference": 0.1936,
+      "kind": "central_value",
+      "residual_percent": -0.3869297347384837
+    },
+    {
+      "label": "T_deconf (MeV)",
+      "key": "qcd_deconfinement_T",
+      "reference_key": "T_deconf_obs",
+      "predicted": 271.0919056499185,
+      "reference": 270.0,
+      "kind": "central_value",
+      "residual_percent": 0.40440949996980446
+    },
+    {
+      "label": "m_glueball (GeV)",
+      "key": "m_glueball",
+      "reference_key": "m_glueball_obs",
+      "predicted": 1.6642238631694293,
+      "reference": 1.7,
+      "kind": "central_value",
+      "residual_percent": -2.1044786370923885
+    },
+    {
+      "label": "Delta_np (GeV)",
+      "key": "bbn_dm_np",
+      "reference_key": "dm_np_obs_GeV",
+      "predicted": 0.0012849675512388067,
+      "reference": 0.00129333236,
+      "kind": "central_value",
+      "residual_percent": -0.6467640507497485
+    },
+    {
+      "label": "tau_n (s)",
+      "key": "bbn_tau_n",
+      "reference_key": "tau_n_obs",
+      "predicted": 915.5435125712529,
+      "reference": 878.4,
+      "kind": "central_value",
+      "residual_percent": 4.228541959386711
+    },
+    {
+      "label": "Y_p (BBN)",
+      "key": "bbn_Yp",
+      "reference_key": "Y_p_obs",
+      "predicted": 0.24608237865481353,
+      "reference": 0.245,
+      "kind": "central_value",
+      "residual_percent": 0.44178720604632904
+    },
+    {
+      "label": "N_eff (BBN)",
+      "key": "bbn_Neff",
+      "reference_key": "N_eff_obs",
+      "predicted": 3.043873359487886,
+      "reference": 3.044,
+      "kind": "central_value",
+      "residual_percent": -0.004160332198221983
+    }
+  ],
+  "neutrino_mass_sum_eV": 0.06147853314927416,
+  "tensor_ratio": 0.025330295910584444,
+  "paper_main_table_rows": 41,
+  "paper_main_table_rows_with_explicit_percentage": 37,
+  "paper_main_table_rows_without_reference": 1,
+  "source_sha256": {
+    "cg_params.json": "799e7370d1103bf2aea12a4f5067d7aa9b3584d139a407071eceb8351041d982",
+    "comparison/reference_inputs.json": "951331446ced83e3bb469909cff34367c93ba52035a90a0c0f0e0339c0fc0399"
+  },
+  "comparison_method": "comparison/param_audit_full.py; absolute percentage residuals from the adopted central reference values"
+}

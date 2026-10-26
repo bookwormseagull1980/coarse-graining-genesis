@@ -15,6 +15,8 @@ starting from minimal unbiased compositional change. It follows one source
 record through compact spectral geometry, gauge-matter response, effective
 couplings, mass scales, emergent gravity and cosmological observables.
 
+The current record contains **261 derived records** and **57 named benchmark comparisons**. Of the 56 central-value comparisons, **51 are within 1%** of the adopted references. Results include three fermion generations, linked mass relations, gauge couplings, neutrino masses and cosmological abundances. [Explore the numerical results](#numerical-results-across-particle-physics-and-cosmology).
+
 The distinctive feature is the common input structure. Several outputs depend
 on the same finite spectral response and normalization, so a source change
 propagates across sectors in a reproducible way. The code retains those
@@ -63,6 +65,28 @@ The Gaussian IR edge and the TT endpoint are different radius realizations.
 The generated gap and the low-energy glueball catalogue are also different
 readouts. Their source definitions, dimensions and comparison roles are
 specified in [the correspondence document](docs/LEAN_CORRESPONDENCE.md).
+
+## Numerical results across particle physics and cosmology
+
+V5 computes a linked set of particle and cosmological quantities from the programme's common spectral construction. The current numerical record contains **262 parameter records: 261 derived records and one measured dimensional anchor, Newton's constant**. The records preserve the generating dependencies and the readout prescriptions used to obtain each quantity.
+
+The benchmark programme contains **57 named comparisons**, comprising **56 central-value comparisons and one upper-limit test**. Among the 56 central-value rows:
+
+| Absolute relative difference from the adopted reference | Number of comparison rows |
+| --- | ---: |
+| Below 1% | **51 / 56** |
+| Below 0.5% | **40 / 56** |
+| Below 0.1% | **13 / 56** |
+
+The counts follow the named comparison rows, including alternative approximations, reciprocal mass ratios and geometric-mass diagnostics. Each comparison retains its reference, scale and mass convention. The percentage measures the difference between central values; experimental and theoretical uncertainties are reported with the individual observables.
+
+The common calculation selects **three fermion generations**, **R = 5**, and a tensor endpoint **kL ≈ 2.49353433**. The three matched high-energy gauge couplings agree with the adopted Standard Model extrapolations to within **0.003%**. Representative low-energy outputs include **αₛ(MZ) = 0.118041**, an electroweak scale of **246.190 GeV**, a Z mass of **91.12484 GeV**, and a tree-level Higgs mass of **124.98344 GeV**. The corresponding central-value residuals are approximately **+0.120%, −0.012%, −0.069% and −0.173%**.
+
+The neutrino branch gives normal ordering with a summed mass of **0.0614785 eV**. Cosmological outputs include **ΩΛ = 0.685044**, **Ωb = 0.0494082**, a cold-component fraction of **0.264039**, **T₍CMB₎ = 2.725474 K**, and a baryon-to-photon ratio of **6.12823 × 10⁻¹⁰**. Structure readouts give **σ₈ = 0.81233** and **S₈ = 0.83226**. The tensor ratio is **r = 0.0253303**, below the adopted bound of **0.036**.
+
+Seven groups of observable tests in the companion mass-and-coupling paper connect these calculations to neutrino ordering and mixing, primordial tensors, glueball spectroscopy and low-acceleration gravity. The repository also retains the full comparison record, including the **−7.23%** solar rest-splitting residual, the **+4.23%** neutron-lifetime residual, and the DESI DR2 result **χ² ≈ 29.51 for 13 components**. The breadth of the calculation makes both agreement and disagreement constrain a common construction.
+
+[The full benchmark record](docs/benchmark-summary.json) gives the named rows, references and residuals. The comparison can be reproduced with the repository's [parameter audit](comparison/param_audit_full.py).
 
 ## Run a first calculation
 

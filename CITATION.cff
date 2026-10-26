@@ -20,6 +20,14 @@ abstract: V5 is the executable numerical branch of a mathematical-physics progra
   geometry, gauge-matter response, effective couplings, mass scales, emergent gravity and cosmological
   observables.
 keywords:
+- "Three fermion generations"
+- "Fermion mass relations"
+- "Higgs boson mass"
+- "Neutrino masses"
+- "Cosmological parameters"
+- "Baryon asymmetry"
+- "Primordial abundances"
+- "Particle physics predictions"
 - "Computational physics"
 - "Standard Model"
 - "Yang-Mills theory"
@@ -46,7 +54,6 @@ keywords:
 - "Cosmic expansion"
 - "Matter power spectrum"
 - "Structure growth"
-- "Primordial abundances"
 - "Scientific computing"
 - "Numerical analysis"
 - "Interval arithmetic"
