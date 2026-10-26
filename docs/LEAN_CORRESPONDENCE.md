@@ -126,6 +126,32 @@ These additions are development checks. They do not replace the release
 run identified above or supply an interacting source state or new lepton
 pole conversion factors.
 
+## Matter energies and their common normalization
+
+`SourceMatterPoleResponse` proves full block eigenvector reconstruction,
+equivalence with the reduced eigenvalue equation, the exact two-energy
+resolvent identity and the complementary resolvent derivative. The norm
+of the same lifted vector is `I+(R V)* (R V)`; it is strictly positive
+and equals the inverse-response slope at a real complementary resolvent.
+The common-state trace Gram retains both CAR orderings and fixes their
+equal-time normalization. These operations enter the existing physical
+root through `matter.spectralResponse`.
+
+V5's `compressed_matter_poles` resolves the entire finite spectrum and
+its readout residues. `joint_matter_response` evaluates the interacting
+CAR two-point function from one complete Hamiltonian and its stationary
+joint density matrix, preserving stationary degenerate coherences.
+Its transition representation feeds the same complement-return engine.
+`precise_matter_response` independently solves the complete finite pencil
+at increasing arbitrary precision, including its derivative and actual
+readout Gram. Decimal inputs retain their supplied digits; refinement
+checks describe arithmetic accuracy, separately from source accuracy and
+spectral truncation.
+
+The Hamiltonian and state in these V5 interfaces are supplied evaluated
+configurations. The structural Lean bundle does not assign them physical
+values or select the three lepton excitations.
+
 ## Exact TT bridge
 
 At the endpoint fixed point, `L=c`, `cutoff=pi/c^2`, `R=5`.  For each retained

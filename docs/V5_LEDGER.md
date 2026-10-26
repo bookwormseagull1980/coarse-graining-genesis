@@ -835,6 +835,34 @@ connection and their two interference terms enter together. A passive
 change of source frame transports all three. In a pure frame change,
 the nonzero separate terms cancel in the complete response.
 
+The same module now also evaluates the full finite spectrum with
+`compressed_matter_poles`. Each residue belongs to the actual full
+eigenvector. Its complementary amplitude determines both the reduced
+energy equation and the normalization `I-Sigma'`; these are independent
+checks of the same vector. Degenerate and numerically unresolved levels
+are returned with their complete residue and energy interval. At an
+energy where a complementary inverse fails, the full spectral result is
+retained and the unavailable Schur diagnostic is identified explicitly.
+
+`joint_matter_response` takes the complete interacting Hamiltonian,
+its stationary joint state and the CAR insertions on that same space.
+Two Hilbert-Schmidt copies retain both source-weighted CAR orderings.
+The resulting real transition generator and embedding determine the
+response, its energy derivative, force correlations and irreducible
+return together. No factorization of the state or separate source
+normalization is performed. Closed interacting examples check all
+addition energies and weights, including coherent stationary states.
+
+`precise_matter_response` solves the complete finite inverse problem
+with arbitrary precision, using 80 output digits by default. It keeps
+decimal and complex-pair inputs without a float64 conversion. Increasing
+working precisions must agree at the requested accuracy; close levels
+automatically trigger more protection digits. The actual readout Gram
+is retained, including for rounded nonorthogonal readouts. Refinement
+changes and residual estimates describe arithmetic consistency; they
+are not outward-rounded error certificates or physical truncation bounds.
+These development interfaces leave production mass records unchanged.
+
 `compressed_matter_response` uses one complete finite Hermitian operator
 `H` and a retarded parameter `Im(z)>0`. With the orthogonal complement
 constructed from `R`, it evaluates the same response by full inversion,

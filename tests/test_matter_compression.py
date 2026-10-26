@@ -10,7 +10,11 @@ from scipy.linalg import expm, null_space
 
 from cg_core import modal_algebra as modes
 from cg_core.finite_connector import matter_generators, source_response
-from cg_core.matter_compression import covariant_matter_pullback, compressed_matter_response
+from cg_core.matter_compression import (
+    covariant_matter_pullback, compressed_matter_response, compressed_matter_poles,
+    joint_matter_response,
+    precise_matter_response,
+)
 from cg_core.native_matter_matching import (
     covariant_spinor_matrix, radial_spinor_family, spinor_vertex,
 )
@@ -213,3 +217,213 @@ def test_original_connection_rejects_inconsistent_matrix_and_adjoint_conventions
         covariant_spinor_matrix(({(0, 0, 0): np.eye(16)}, {}, {}), labels)
     with pytest.raises(ValueError, match="radius"):
         covariant_spinor_matrix(({}, {}, {}), labels, L=0.)
+
+
+def test_same_operator_fixes_poles_and_kinetic_residues():
+    # Three different tree energies couple to the same two complementary
+    # states. All shifts, mixing and normalization follow from this H.
+    A = np.diag([.4, 1.3, 2.7])
+    C = np.array([[4.1, .2j], [-.2j, 5.4]])
+    B = np.array([[.12, .08j, .25], [.04j, .17, -.11j]])
+    H = np.block([[A, B.conj().T], [B, C]])
+    R = np.eye(5, dtype=complex)[:, :3]
+    result = compressed_matter_poles(H, R)
+    assert max(result["residuals"].values()) < 4e-15
+    assert len(result["pole_diagnostics"]) == 5
+    for diagnostic in result["pole_diagnostics"]:
+        assert diagnostic["schur_available"]
+        assert max(diagnostic["residuals"].values()) < 2e-12
+        metric = diagnostic["inverse_response_derivative"]
+        assert np.min(np.linalg.eigvalsh(metric)) >= 1-2e-14
+        assert diagnostic["normalized_slope"] >= 1-2e-14
+    E = result["energy_eigenvalues"]
+    shifts = E[:3]/np.diag(A)
+    assert np.ptp(shifts) > 1e-3
+    z = 1.4+.6j
+    amplitudes = result["readout_amplitudes"]
+    spectral = (amplitudes/(z-E)) @ amplitudes.conj().T
+    direct = compressed_matter_response(H, R, z)
+    np.testing.assert_allclose(spectral, direct["response"], atol=2e-15)
+
+
+def test_degenerate_and_dark_poles_preserve_the_complete_spectral_response():
+    H = np.diag([1., 1., 3., 4.]).astype(complex)
+    R = np.eye(4, dtype=complex)[:, :2]
+    result = compressed_matter_poles(H, R)
+    block = result["pole_blocks"][0]
+    assert block["multiplicity"] == 2
+    assert block["unresolved_cluster"]
+    np.testing.assert_allclose(block["residue"], np.eye(2), atol=1e-15)
+    assert not any(b["visible"] for b in result["pole_blocks"][1:])
+    # A readout may share an eigenvalue with its complement. The full
+    # response is regular to calculate even where Schur elimination fails.
+    overlap = compressed_matter_poles(H, np.eye(4, dtype=complex)[:, :1])
+    assert any(not d["schur_available"] for d in overlap["pole_diagnostics"])
+    assert max(overlap["residuals"].values()) == 0
+    full = compressed_matter_poles(H, np.eye(4))
+    assert full["complement_eigenvalues"].size == 0
+    assert all(d["schur_available"] for d in full["pole_diagnostics"])
+
+
+def test_pole_cluster_keeps_close_distinct_energies_and_unitary_covariance():
+    H = np.diag([1., 1.+2e-6, 1.+4e-6, 3.]).astype(complex)
+    R = np.eye(4, dtype=complex)[:, :3]
+    result = compressed_matter_poles(H, R, resolution=1e-6)
+    assert result["pole_blocks"][0]["multiplicity"] == 2
+    assert result["pole_blocks"][1]["multiplicity"] == 1
+    assert np.ptp(result["pole_blocks"][0]["energy_eigenvalues"]) > 0
+    K = np.array([[0, .2, 0, .3j], [-.2, 0, .1j, 0],
+                  [0, .1j, 0, .4], [.3j, 0, -.4, 0]], complex)
+    U = expm(K)
+    transformed = compressed_matter_poles(U @ H @ U.conj().T, U @ R, resolution=1e-6)
+    np.testing.assert_allclose(transformed["energy_eigenvalues"], result["energy_eigenvalues"], atol=2e-15)
+    for before, after in zip(result["pole_blocks"], transformed["pole_blocks"]):
+        np.testing.assert_allclose(before["residue"], after["residue"], atol=1e-8)
+    # Within a nearly degenerate cluster, only its full projector is stable.
+    assert max(transformed["residuals"].values()) < 3e-15
+
+
+def test_poles_reject_invalid_resolution_and_nonhermitian_operator():
+    R = np.eye(2, dtype=complex)[:, :1]
+    for resolution in (0, -1, float("nan")):
+        with pytest.raises(ValueError, match="resolution"):
+            compressed_matter_poles(np.eye(2), R, resolution=resolution)
+    with pytest.raises(ValueError, match="Hermitian"):
+        compressed_matter_poles([[1, 1], [0, 2]], R)
+
+
+def car_annihilators(count):
+    result = []
+    for mode in range(count):
+        c = np.zeros((2**count, 2**count), complex)
+        for occupation in range(2**count):
+            if occupation & (1 << mode):
+                sign = (-1)**(occupation & ((1 << mode)-1)).bit_count()
+                c[occupation ^ (1 << mode), occupation] = sign
+        result.append(c)
+    return result
+
+
+def test_joint_response_preserves_correlated_occupations_and_both_addition_energies():
+    c1, c2 = car_annihilators(2)
+    n1, n2 = c1.conj().T @ c1, c2.conj().T @ c2
+    H = .7*n1+1.8*n2+.4*n1 @ n2
+    # A correlated stationary state, with no factorization assumption.
+    rho = np.diag([.31, .17, .13, .39])
+    z = .9+.35j
+    result = joint_matter_response(H, rho, [c1, c2], z)
+    occupation2, occupation1 = np.trace(rho @ n2), np.trace(rho @ n1)
+    expected = np.diag([(1-occupation2)/(z-.7)+occupation2/(z-1.1),
+                        (1-occupation1)/(z-1.8)+occupation1/(z-2.2)])
+    derivative = -np.diag([(1-occupation2)/(z-.7)**2+occupation2/(z-1.1)**2,
+                           (1-occupation1)/(z-1.8)**2+occupation1/(z-2.2)**2])
+    np.testing.assert_allclose(result["response"], expected, atol=2e-15)
+    np.testing.assert_allclose(result["response_derivative"], derivative, atol=5e-15)
+    assert max(result["residuals"].values()) < 5e-15
+    assert np.linalg.norm(result["self_energy"]) > .03
+
+
+def test_joint_source_matter_state_and_common_force_response():
+    c1, c2 = car_annihilators(2)
+    n1, n2 = c1.conj().T @ c1, c2.conj().T @ c2
+    sx = np.array([[0, 1], [1, 0]], complex)
+    sz = np.diag([1., -1.])
+    H = np.kron(.9*sz, np.eye(4))+np.kron(np.eye(2), .6*n1+1.7*n2)
+    H += np.kron(.23*sx, n1-.4*n2)
+    values, states = np.linalg.eigh(H)
+    probabilities = np.exp(-.7*(values-values.min()))
+    rho = (states*(probabilities/probabilities.sum())) @ states.conj().T
+    operators = [np.kron(np.eye(2), c) for c in (c1, c2)]
+    z = .8+.4j
+    result = joint_matter_response(H, rho, operators, z)
+    assert max(result["residuals"].values()) < 8e-15
+    # Independent Lehmann sum: here the actual stationary state happens
+    # to be a spectral function of H, so no degenerate coherence is lost.
+    amplitudes = [states.conj().T @ c @ states for c in operators]
+    expected = np.zeros((2, 2), complex)
+    probabilities /= probabilities.sum()
+    for a in range(8):
+        for b in range(8):
+            v = np.array([c[a, b] for c in amplitudes])
+            expected += ((probabilities[a]+probabilities[b])/(z-(values[b]-values[a]))
+                         * np.outer(v, v.conj()))
+    np.testing.assert_allclose(result["response"], expected, atol=3e-15)
+    # The exact transition representation enters the existing complement
+    # engine unchanged, including source/matter correlations.
+    compressed = compressed_matter_response(
+        np.diag(result["transition_energies"]), result["transition_embedding"], z)
+    np.testing.assert_allclose(compressed["response"], result["response"], atol=3e-15)
+    np.testing.assert_allclose(compressed["self_energy"], result["self_energy"], atol=3e-14)
+
+
+def test_joint_response_keeps_stationary_degenerate_coherence():
+    c1, c2 = car_annihilators(2)
+    H = c1.conj().T @ c1+c2.conj().T @ c2
+    rho = np.diag([.2, .3, .3, .2]).astype(complex)
+    rho[1, 2] = .08j
+    rho[2, 1] = -.08j
+    z = 1.2+.3j
+    result = joint_matter_response(H, rho, [c1, c2], z)
+    np.testing.assert_allclose(result["response"], np.eye(2)/(z-1), atol=3e-15)
+    assert max(result["residuals"].values()) < 5e-15
+    # Simultaneous Hilbert-space transport preserves the full answer.
+    K = np.array([[0, .2, 0, .3j], [-.2, 0, .1j, 0],
+                  [0, .1j, 0, .4], [.3j, 0, -.4, 0]], complex)
+    U = expm(K)
+    transformed = joint_matter_response(U @ H @ U.conj().T, U @ rho @ U.conj().T,
+                                      [U @ c @ U.conj().T for c in (c1, c2)], z)
+    np.testing.assert_allclose(transformed["response"], result["response"], atol=1e-14)
+
+
+def test_joint_response_rejects_invalid_joint_state_and_car():
+    c = car_annihilators(1)[0]
+    H, rho = np.diag([0., 1.]), np.eye(2)/2
+    with pytest.raises(ValueError, match="CAR"):
+        joint_matter_response(H, rho, [2*c], 1j)
+    with pytest.raises(ValueError, match="stationary"):
+        joint_matter_response(H, [[.5, .2], [.2, .5]], [c], 1j)
+    with pytest.raises(ValueError, match="positive"):
+        joint_matter_response(H, np.diag([-1., 2.]), [c], 1j)
+
+
+def test_arbitrary_precision_response_retains_finite_return_and_same_derivative():
+    import mpmath
+
+    ctx = mpmath.mp.clone()
+    ctx.dps = 110
+    H = [["1", "0.1"], ["0.1", "2"]]
+    result = precise_matter_response(H, [["1"], ["0"]], ("1.3", "0.7"))
+    value = lambda name: ctx.mpc(*result[name][0][0])
+    z = ctx.mpc("1.3", "0.7")
+    sigma = ctx.mpf("0.01")/(z-2)
+    dsigma = -ctx.mpf("0.01")/(z-2)**2
+    G = 1/(z-1-sigma)
+    assert abs(value("response")-G) < ctx.mpf("1e-79")
+    assert abs(value("response_derivative")+G**2*(1-dsigma)) < ctx.mpf("1e-79")
+    assert abs(value("self_energy")-sigma) < ctx.mpf("1e-80")
+    assert abs(value("self_energy_derivative")-dsigma) < ctx.mpf("1e-80")
+    assert max(ctx.mpf(v) for v in result["arithmetic_refinement_changes"].values()) < ctx.mpf("1e-98")
+    assert result["working_precisions"] == [100, 120]
+    assert not result["interval_certificate"]
+    # Actual nonunit readout Gram is kept, rather than rounded to identity.
+    scaled = precise_matter_response(H, [["2"], ["0"]], ("1.3", "0.7"))
+    assert abs(ctx.mpc(*scaled["response"][0][0])-4*G) < ctx.mpf("1e-78")
+    assert abs(ctx.mpc(*scaled["self_energy"][0][0])-sigma/4) < ctx.mpf("1e-80")
+
+
+def test_arbitrary_precision_inputs_are_not_rounded_through_float64():
+    import mpmath
+
+    ctx = mpmath.mp.clone()
+    ctx.dps = 200
+    levels = ["1.000000000000000000000000000000000000000000001",
+              "1.000000000000000000000000000000000000000000002"]
+    result = precise_matter_response([[levels[0], "0"], ["0", levels[1]]],
+                                    [["1", "0"], ["0", "1"]], ("1", "1e-46"))
+    actual = [ctx.mpc(*result["response"][i][i]) for i in range(2)]
+    for i in range(2):
+        expected = 1/(ctx.mpc(1, "1e-46")-ctx.mpf(levels[i]))
+        assert abs(actual[i]/expected-1) < ctx.mpf("1e-79")
+    assert abs(actual[0]-actual[1]) > ctx.mpf("1e44")
+    assert result["response"][0][1] == ("0.0", "0.0")
+    assert result["working_precisions"][0] > 100
