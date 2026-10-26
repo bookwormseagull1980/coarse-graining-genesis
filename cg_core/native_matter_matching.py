@@ -79,6 +79,72 @@ def spinor_vertex(profile, left_labels, right_labels):
     return np.array([[modal_inner(a, b) for b in outputs] for a in left])
 
 
+def covariant_spinor_matrix(connection, inputs, outputs=None, *, L=1.0):
+    """Original internal Dirac connection on spinor x complete matter modes.
+
+    The three skew-adjoint matrix fields already act on the generated
+    sixteen-dimensional matter representation. With the existing spin frame,
+    D_A=D_0+i sigma_a rho(A_a). Multiplication uses the complete Haar product
+    before any output projection. Default outputs include its entire support.
+
+    Explicit outputs define a finite compression. The omitted block is
+    returned with its Gram, including both intrinsic Dirac signs. Radius is
+    the same spatial radius as in spinor_dirac_value; it supplies no event
+    clock, joint quantum state or finite mass matching.
+    """
+    if len(connection) != 3 or not np.isfinite(L) or L <= 0:
+        raise ValueError("three connection fields and one positive finite radius required")
+    inputs = tuple(inputs)
+    incoming = spinor_fields(inputs)
+    prepared = []
+    for component in connection:
+        field = {}
+        for label, value in component.items():
+            modes.eigenvalue(label, L=L)
+            value = np.asarray(value, complex)
+            if value.shape != (16, 16) or not np.isfinite(value).all():
+                raise ValueError("connection must act on the complete sixteen-dimensional matter carrier")
+            field[label] = value
+        skew = modes.mode_norm(modes.add(field, modes.adjoint(field)))
+        if skew > 2e-11*max(1., modes.mode_norm(field)):
+            raise ValueError("connection field must be pointwise skew-adjoint")
+        prepared.append(field)
+    degree = max((label[0] for field in prepared for label in field), default=0)
+    complete_labels = modes.spinor_basis(max(label[0] for label in inputs)+degree)
+    outputs = complete_labels if outputs is None else tuple(outputs)
+    spinor_fields(outputs)
+    if not set(outputs).issubset(complete_labels):
+        raise ValueError("output labels must belong to the complete product support window")
+    outgoing = spinor_fields(complete_labels)
+    sigma = 2*np.asarray(modes.spin_matrices(.5))
+    full = np.zeros((16*len(complete_labels), 16*len(inputs)), complex)
+    for axis, field in enumerate(prepared):
+        for label, coefficient in field.items():
+            products = [modes.multiply({label: 1.}, psi) for psi in incoming]
+            acted = [{key: sigma[axis] @ value for key, value in psi.items()}
+                     for psi in products]
+            clifford = np.array([[modal_inner(left, right) for right in acted] for left in outgoing])
+            full += 1j*np.kron(clifford, coefficient)
+    coupling = full.copy()
+    positions = {label: i for i, label in enumerate(complete_labels)}
+    for col, label in enumerate(inputs):
+        row = positions[label]
+        full[16*row:16*(row+1), 16*col:16*(col+1)] += (
+            modes.spinor_dirac_value(label, L=L)*np.eye(16))
+    retained_rows = np.array([16*positions[label]+a for label in outputs for a in range(16)], int)
+    omitted_labels = tuple(label for label in complete_labels if label not in set(outputs))
+    omitted_rows = np.array([16*positions[label]+a for label in omitted_labels for a in range(16)], int)
+    omitted = full[omitted_rows]
+    return {
+        "matrix": full[retained_rows], "connection_matrix": coupling[retained_rows],
+        "input_labels": inputs, "output_labels": outputs,
+        "complete_output_labels": complete_labels, "omitted_output_labels": omitted_labels,
+        "omitted_matrix": omitted, "omitted_gram": omitted.conj().T @ omitted,
+        "product_support_complete": not omitted_labels,
+        "matter_dimension": 16, "radius": float(L),
+    }
+
+
 def lowest_signed_spatial_kernel(*, basepoint=(0., 0., 0.)):
     """Generated finite source kernel between the lowest opposite Dirac signs.
 

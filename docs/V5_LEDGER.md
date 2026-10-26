@@ -813,6 +813,45 @@ canonical Yukawa and divides the quartic by sixteen. The action vertices,
 external kinetic coefficients and finite MSbar matching specify the
 canonical input alongside the computed internal integrals.
 
+### Complete covariant matter compression
+
+The development function `covariant_spinor_matrix` assembles the existing
+spatial operator `D_A=D_0+i sigma_a rho(A_a)` on Haar spinors tensor the
+complete sixteen-dimensional matter representation. The connection is
+expressed in the same orthonormal spatial frame as the original Dirac
+operator. All product output modes are formed before compression, with
+both intrinsic signs retained. An explicit output window returns the
+omitted matrix and its quadratic Gram as well as the retained matrix.
+
+`cg_core.matter_compression.covariant_matter_pullback` evaluates
+
+```text
+Y = dR+A R,    a = R* Y,    b = Y-R a,
+Y*Y = a*a+b*b.
+```
+
+The readout has orthonormal columns. Its actual derivative, the original
+connection and their two interference terms enter together. A passive
+change of source frame transports all three. In a pure frame change,
+the nonzero separate terms cancel in the complete response.
+
+`compressed_matter_response` uses one complete finite Hermitian operator
+`H` and a retarded parameter `Im(z)>0`. With the orthogonal complement
+constructed from `R`, it evaluates the same response by full inversion,
+complement elimination and ordinary force propagation. The energy
+derivative of the same self-energy supplies the corresponding kinetic
+response; it is checked against the derivative of the full inverse.
+The source example has 44 ambient, six retained and 38 complementary
+spinor coordinates. These are internal operator coordinates, with no
+separate propagation rates assigned to the three families.
+
+Lean proves the covariant decomposition, orthogonality, uniqueness and
+frame transport, using the actual generated matter projector for the
+carrier statements. V5 evaluates the matrices and finite resolvents.
+The development checks use declared field configurations and complex
+probe energies; they add no production mass or matching coefficient.
+Floating-point residuals are consistency diagnostics, not interval bounds.
+
 ### Threshold transfer and quantity definitions
 
 `canonical_flavour_pair` normalizes the up and down vertices using one

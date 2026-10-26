@@ -99,6 +99,33 @@ second-order class and unit TT normalization. Euclidean momentum
 contractions and the Lorentzian event carrier retain their respective
 metric conventions.
 
+## Complete matter connection and complement return
+
+The development interface `SourceMatterCompression.generated` constructs
+the complete lepton projector on the existing sixteen-dimensional matter
+carrier, proves its compatibility with the scalar connector, and proves
+that responses supported on the coloured summand annihilate it on both
+sides. The neutral lepton direction remains in this projector.
+
+The shared `Operations.CovariantCompression` module proves the unique
+orthogonal decomposition of `dR+A R`, its complete Gram identity, both
+interference terms and simultaneous passive frame transport. These
+statements are included in `SourcePhysicalInterface.generatedCore.matter`.
+Their numerical counterpart is `cg_core.matter_compression`.
+
+`native_matter_matching.covariant_spinor_matrix` evaluates the spatial
+Dirac connection on actual Haar spinors and the complete matter
+representation. Mode multiplication precedes output projection; omitted
+output rows and their Gram are returned explicitly. For a complete finite
+Hermitian operator, `compressed_matter_response` calculates the full
+resolvent, complement self-energy, ordinary force response and their
+energy derivatives from the same operator. Tests compare the independent
+full, Schur and force formulas and the existing full-pencil solver.
+
+These additions are development checks. They do not replace the release
+run identified above or supply an interacting source state or new lepton
+pole conversion factors.
+
 ## Exact TT bridge
 
 At the endpoint fixed point, `L=c`, `cutoff=pi/c^2`, `R=5`.  For each retained
