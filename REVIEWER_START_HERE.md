@@ -6,7 +6,7 @@ ORCID: 0009-0000-6600-6171
 References:
 DOI: 10.2139/ssrn.7421398  A Spectral Construction of Natural-Number Arithmetic
 DOI: 10.5281/zenodo.22067118  The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap
-DOI: 10.5281/zenodo.22067469  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
+DOI: 10.48550/arXiv.2607.24329  The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales
 DOI: 10.48550/arXiv.2607.21621  A Spectral Criterion for Emergent Gravity
 DOI: 10.48550/arXiv.2608.01989  Coarse-Graining and Long-Range Response in Generated Systems
 DOI: 10.5281/zenodo.22512592  The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation
@@ -20,7 +20,9 @@ Genesis Framework V5, version 5.0.2. The software citation is in
 `CITATION.cff`; the V5 version-series DOI is
 [10.5281/zenodo.22067005](https://doi.org/10.5281/zenodo.22067005), and
 [REFERENCES.md](REFERENCES.md) provides the full author–year
-bibliography for the cited manuscripts.
+bibliography for the cited manuscripts. The companion paper on effective
+couplings and mass scales is [arXiv:2607.24329](https://arxiv.org/abs/2607.24329),
+[DOI 10.48550/arXiv.2607.24329](https://doi.org/10.48550/arXiv.2607.24329).
 
 Current verified calculation: run `20261024T084548Z-d52375b5`, `262` records, `261`
 derived, `0` pending, `759` passing tests. The canonical numbers and the

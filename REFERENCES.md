@@ -10,7 +10,7 @@ Guo, J. (2026c). Dynamics of Generated Spectra from Minimal Change: Certified Fu
 Guo, J. (2026d). The Spectrum of a Compact Internal Space I: Gauge Structure and a Scalar Mass Gap. Unpublished manuscript.
 Guo, J. (2026e). A Spectral Construction of Natural-Number Arithmetic. Unpublished manuscript.
 Guo, J. (2026f). A Spectral Criterion for Emergent Gravity. Unpublished manuscript.
-Guo, J. (2026g). The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales. Unpublished manuscript.
+Guo, J. (2026g). The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales. arXiv:2607.24329. https://doi.org/10.48550/arXiv.2607.24329.
 Guo, J. (2026h). The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation. Unpublished manuscript.
 Full bibliography: REFERENCES.md and CITATION.cff.
 -->
@@ -19,7 +19,7 @@ Full bibliography: REFERENCES.md and CITATION.cff.
 
 References use the author–year convention. Letters distinguish works by the
 same author in the same year and are used consistently throughout the
-documentation. The companion works by Guo are cited as unpublished manuscripts.
+documentation. Public preprint and archival records are linked where available.
 
 Ali-Haïmoud, Y., and Hirata, C. M. (2011). HyRec: A fast and highly accurate primordial hydrogen and helium recombination code. *Physical Review D*, **83**, 043513. [doi:10.1103/PhysRevD.83.043513](https://doi.org/10.1103/PhysRevD.83.043513).
 
@@ -49,7 +49,7 @@ Guo, J. (2026e). *A Spectral Construction of Natural-Number Arithmetic*. Unpubli
 
 Guo, J. (2026f). *A Spectral Criterion for Emergent Gravity*. Unpublished manuscript.
 
-Guo, J. (2026g). *The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales*. Unpublished manuscript.
+Guo, J. (2026g). *The Spectrum of a Compact Internal Space II: Effective Couplings and Mass Scales*. [arXiv:2607.24329](https://arxiv.org/abs/2607.24329). [doi:10.48550/arXiv.2607.24329](https://doi.org/10.48550/arXiv.2607.24329). [SSRN](https://ssrn.com/abstract=7351999). [Zenodo](https://doi.org/10.5281/zenodo.22067468).
 
 Guo, J. (2026h). *The Spectrum of a Compact Internal Space III: Finite-Window Dynamics of Cosmic Structure Formation*. Unpublished manuscript.
 

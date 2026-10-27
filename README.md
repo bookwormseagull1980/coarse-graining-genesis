@@ -15,6 +15,9 @@ starting from minimal unbiased compositional change. It follows one source
 record through compact spectral geometry, gauge-matter response, effective
 couplings, mass scales, emergent gravity and cosmological observables.
 
+The companion paper on [effective couplings and mass scales](https://arxiv.org/abs/2607.24329)
+is available as **arXiv:2607.24329**, [DOI 10.48550/arXiv.2607.24329](https://doi.org/10.48550/arXiv.2607.24329).
+
 The current record contains **261 derived records** and **57 named benchmark comparisons**. Of the 56 central-value comparisons, **51 are within 1%** of the adopted references. Results include three fermion generations, linked mass relations, gauge couplings, neutrino masses and cosmological abundances. [Explore the numerical results](#numerical-results-across-particle-physics-and-cosmology).
 
 The distinctive feature is the common input structure. Several outputs depend
