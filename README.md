@@ -140,6 +140,11 @@ including comparisons that reveal tensions and their physical remainder.
 
 ## Documentation and companion work
 
+The philosophical basis and common research programme are developed in
+[The Logical Starting Point of Mathematical Logic and Natural Generation](https://github.com/bookwormseagull1980/Book-and-Articles/tree/main/articles/the-logical-starting-point-of-mathematical-logic-and-natural-generation). The article connects the account of change and
+multi-level order to the arithmetic, physical and computational constructions
+and explains how the book and technical papers fit together.
+
 - [Scientific graphical overview](docs/papers_overview.pdf) introduces the common
   source, geometry, response, matching and macroscopic layers.
 - [Papers index](docs/PAPERS.md) links the companion manuscripts.
