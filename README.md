@@ -30,6 +30,21 @@ theorems.
 
 ![From minimal unbiased change to internal structure and shared quantitative physical response](.github/physical-derivation.png)
 
+## Results to inspect first
+
+The calculation is organized around shared constraints. A spectral endpoint used in a mass transfer is the same endpoint used in the coupling and response records that depend on it. The benchmark programme therefore tests several consequences of one calculation at once.
+
+| Result or test | Recorded output | Route to the details |
+| --- | --- | --- |
+| Matter and finite-domain selection | Three fermion generations and R = 5 | [Main calculations](#main-calculations-and-results) |
+| Tensor endpoint | kL near 2.49353433 with rational bracket width 6.43002 × 10⁻⁷ | [Release facts](docs/RELEASE_FACTS.md) |
+| Electroweak and neutrino examples | Tree-level Higgs mass 124.98344 GeV and neutrino mass sum 0.0614785 eV | [Numerical results](#numerical-results-across-particle-physics-and-cosmology) |
+| Breadth of the generating calculation | 261 derived records retaining their upstream dependencies | [Reading a numerical record](#reading-a-numerical-record) |
+| Agreement with reference data | 57 named comparisons; 51 of the 56 central-value rows have residual below 1% | [Named rows and definitions](docs/benchmark-summary.json) |
+| Information beyond a radial replacement | Complete curvature-variance and integrated-memory responses differ from the radial reduction | [Release facts and response definitions](docs/RELEASE_FACTS.md) |
+
+The benchmark rows include the documented alternative readouts and geometric-mass diagnostics. Their definitions and references stay attached to the comparison; the seven observable-test groups are identified separately in the companion mass-and-coupling paper. The full result and discrepancy record is retained below.
+
 ## Main calculations and results
 
 | Sector | Result or construction | Where to examine it |
